@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+    <item parent="/extras/"
+          name="blocks"
+          icon="icon-th"
+          require="package/quiqqer/blocks/bin/Manager"
+    >
+        <locale group="quiqqer/blocks" var="menu.blocks.text" />
+    </item>
+</menu>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locales>
+
+    <groups name="quiqqer/blocks" type="php,js">
+        <locale name="menu.blocks.text">
+            <de><![CDATA[Blockverwaltung]]></de>
+            <en><![CDATA[Blocks-Manager]]></en>
+        </locale>
+    </groups>
+
+    <groups name="quiqqer/blocks" type="php">
+
+    </groups>
+
+    <groups name="quiqqer/blocks" type="js">
+
+    </groups>
+
+</locales>

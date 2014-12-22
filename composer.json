@@ -19,5 +19,11 @@
 
     "require": {
         "quiqqer/quiqqer" : "*@dev"
+    },
+
+    "autoload": {
+        "psr-0" : {
+            "QUI" : "lib/"
+        }
     }
 }
