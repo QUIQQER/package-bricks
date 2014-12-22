@@ -1,0 +1,23 @@
+{
+    "name" : "quiqqer/blocks",
+    "type" : "quiqqer-plugin",
+    "description" : "QUI Block Plugin",
+
+    "version" : "dev-master",
+    "license" : "MIT",
+
+    "authors" : [{
+        "name": "Henning Leutz",
+        "email": "leutz@pcsg.de",
+        "homepage": "http://www.pcsg.de",
+        "role": "Developer"
+    }],
+
+    "support" : {
+        "email" : "support@pcsg.de"
+    },
+
+    "require": {
+        "quiqqer/quiqqer" : "~1"
+    }
+}
