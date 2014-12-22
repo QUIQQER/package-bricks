@@ -3,7 +3,7 @@
     "type" : "quiqqer-plugin",
     "description" : "QUI Block Plugin",
 
-    "version" : "dev-master",
+    "version" : "dev-dev",
     "license" : "MIT",
 
     "authors" : [{
@@ -18,6 +18,6 @@
     },
 
     "require": {
-        "quiqqer/quiqqer" : "~1"
+        "quiqqer/quiqqer" : "~1@dev"
     }
 }
