@@ -1,0 +1,43 @@
+
+.quiqqer-blocks-blockedit {
+    float: left;
+    height: 100%;
+    padding: 20px;
+    width: 100%;
+}
+
+
+.quiqqer-blocks-blockedit label {
+    clear: both;
+    float: left;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.quiqqer-blocks-blockedit input,
+.quiqqer-blocks-blockedit select,
+.quiqqer-blocks-blockedit-label-text,
+.quiqqer-blocks-blockedit-label-editor{
+    clear: both;
+    float: left;
+    max-width: 300px;
+    width: 100%;
+}
+
+.quiqqer-blocks-blockedit-label-text {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.quiqqer-blocks-blockedit-label-editor {
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.quiqqer-blocks-areas {
+    margin-bottom: 0 !important;
+}
+
+.quiqqer-blocks-blockareas {
+    margin-bottom: 20px;
+}

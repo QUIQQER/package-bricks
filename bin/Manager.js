@@ -13,12 +13,15 @@ define('package/quiqqer/blocks/bin/Manager', [
     'qui/controls/buttons/Select',
     'qui/controls/buttons/Button',
     'qui/controls/buttons/Seperator',
+    'qui/controls/windows/Confirm',
     'controls/grid/Grid',
     'Locale',
     'Projects',
-    'Ajax'
+    'Ajax',
 
-], function(QUI, QUIPanel, QUISelect, QUIButton, QUISeperator, Grid, QUILocale, Projects, Ajax)
+    'css!package/quiqqer/blocks/bin/Manager.css'
+
+], function(QUI, QUIPanel, QUISelect, QUIButton, QUISeperator, QUIConfirm, Grid, QUILocale, Projects, Ajax)
 {
     "use strict";
 
@@ -33,7 +36,9 @@ define('package/quiqqer/blocks/bin/Manager', [
             'loadBlocksFromProject',
             'refresh',
             '$onCreate',
-            '$onResize'
+            '$onResize',
+            '$openCreateDialog',
+            '$onDblClick'
         ],
 
         options : {
@@ -54,8 +59,10 @@ define('package/quiqqer/blocks/bin/Manager', [
 
         /**
          * Refresh the panel data
+         *
+         * @param {Function} [callback] - callback function
          */
-        refresh : function()
+        refresh : function(callback)
         {
             if ( !this.$Elm ) {
                 return;
@@ -67,14 +74,17 @@ define('package/quiqqer/blocks/bin/Manager', [
 
             this.getBlocksFromProject(this.$ProjectSelect.getValue(), function(result)
             {
+                if ( typeof callback === 'function' ) {
+                    callback();
+                }
 
-                console.log( result );
+                self.$Grid.setData({
+                    data : result
+                });
 
                 self.Loader.hide();
-
             });
         },
-
 
         /**
          * event : on create
@@ -96,7 +106,10 @@ define('package/quiqqer/blocks/bin/Manager', [
 
             this.addButton(
                 new QUIButton({
-                    text : 'Block hinzufügen'
+                    text   : 'Block hinzufügen',
+                    events : {
+                        onClick : this.$openCreateDialog
+                    }
                 })
             );
 
@@ -127,6 +140,11 @@ define('package/quiqqer/blocks/bin/Manager', [
                     dataType  : 'string',
                     width     : 200
                 }]
+            });
+
+            this.$Grid.addEvents({
+                onRefresh  : this.refresh,
+                onDblClick : this.$onDblClick
             });
 
             this.Loader.show();
@@ -173,6 +191,184 @@ define('package/quiqqer/blocks/bin/Manager', [
         },
 
         /**
+         * event : dbl click
+         */
+        $onDblClick : function()
+        {
+            this.editBlock(
+                this.$Grid.getSelectedData()[0].id
+            );
+        },
+
+        /**
+         *
+         */
+        $openCreateDialog : function()
+        {
+            var self = this;
+
+            new QUIConfirm({
+                title     : 'Neuen Block hinzufügen',
+                icon      : 'icon-th',
+                maxHeight : 300,
+                maxWidth  : 400,
+                autoclose : false,
+                events    :
+                {
+                    onOpen : function(Win)
+                    {
+                        var Body = Win.getContent();
+
+                        Win.Loader.show();
+                        Body.addClass( 'quiqqer-blocks-create' );
+
+                        Body.set(
+                            'html',
+
+                            '<label>' +
+                            '   <span class="quiqqer-blocks-create-label-text">' +
+                            '       Title' +
+                            '   </span>' +
+                            '   <input type="text" name="title" />' +
+                            '</label>' +
+                            '<label>' +
+                            '   <span class="quiqqer-blocks-create-label-text">' +
+                            '       Block Typ' +
+                            '   </span>' +
+                            '   <select name="type"></select>' +
+                            '</label>'
+                        );
+
+                        self.getAvailableBlocks(function(blocklist)
+                        {
+                            if ( !Body ) {
+                                return;
+                            }
+
+                            var i, len, title;
+                            var Select = Body.getElement( 'select'),
+                                Title  = Body.getElement( '[name="title"]');
+
+                            for ( i = 0, len = blocklist.length; i < len; i++ )
+                            {
+                                title = blocklist[ i ].title;
+
+                                new Element('option', {
+                                    value : blocklist[ i ].control,
+                                    html  : QUILocale.get( title[ 0 ], title[ 1 ] )
+                                }).inject( Select );
+                            }
+
+                            Title.focus.delay( 500, Title );
+
+                            Win.Loader.hide();
+                        });
+                    },
+
+                    onSubmit : function(Win)
+                    {
+                        Win.Loader.show();
+
+                        var Body  = Win.getContent(),
+                            Title = Body.getElement( '[name="title"]' ),
+                            Type  = Body.getElement( '[name="type"]' );
+
+                        if ( Title.value === '' ) {
+                            return;
+                        }
+
+                        self.createBlock(self.$ProjectSelect.getValue(), {
+                            title : Title.value,
+                            type  : Type.value
+                        }, function(blockId)
+                        {
+                            Win.close();
+
+
+                            self.refresh(function() {
+                                self.editBlock( blockId );
+                            });
+                        });
+                    }
+                }
+            }).open();
+        },
+
+        /**
+         *
+         * @param {integer} blockId
+         */
+        editBlock : function(blockId)
+        {
+            this.Loader.show();
+
+            var Block;
+            var self  = this,
+                Sheet = this.createSheet({
+                    title : 'Block editieren'
+                });
+
+            Sheet.addEvents({
+                onOpen : function(Sheet)
+                {
+                    require(['package/quiqqer/blocks/bin/BlockEdit'], function(BlockEdit)
+                    {
+                        Block = new BlockEdit({
+                            id      : blockId,
+                            project : self.$ProjectSelect.getValue(),
+                            events  :
+                            {
+                                onLoaded : function() {
+                                    self.Loader.hide();
+                                }
+                            }
+                        }).inject( Sheet.getContent() );
+                    });
+
+                    Sheet.getContent().setStyle( 'overflow', 'auto' );
+                }
+            });
+
+            Sheet.addButton({
+                textimage : 'icon-save',
+                text : 'Speichern',
+                styles : {
+                    width : 200
+                },
+                events :
+                {
+                    onClick : function()
+                    {
+                        self.Loader.show();
+
+                        Block.save(function()
+                        {
+                            self.Loader.hide();
+                            Sheet.hide();
+                        });
+                    }
+                }
+            });
+
+            Sheet.show();
+        },
+
+        /**
+         * Methods / Model
+         */
+
+        /**
+         * Return the available blocks
+         * @param callback
+         */
+        getAvailableBlocks : function(callback)
+        {
+            Ajax.get('package_quiqqer_blocks_ajax_getAvailableBlocks', callback, {
+                'package' : 'quiqqer/blocks'
+            });
+        },
+
+        /**
          * Return the blocksf from a project
          *
          * @param {String} project - name of the project
@@ -185,6 +381,24 @@ define('package/quiqqer/blocks/bin/Manager', [
                 project   : JSON.encode({
                     name : project
                 })
+            });
+        },
+
+        /**
+         * Create a new block
+         *
+         * @param {String} project
+         * @param {Object} data
+         * @param {Function} callback
+         */
+        createBlock : function(project, data, callback)
+        {
+            Ajax.post('package_quiqqer_blocks_ajax_project_createBlock', callback, {
+                'package' : 'quiqqer/blocks',
+                project : JSON.encode({
+                    name : project
+                }),
+                data : JSON.encode( data )
             });
         }
     });
