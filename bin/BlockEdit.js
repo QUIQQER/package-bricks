@@ -131,7 +131,7 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
                          '</label>'
             }).inject( this.$Elm );
 
-            var i, len, title;
+            var i, len, title, group, val;
 
             var Type  = this.$Elm.getElement( '[name="type"]'),
                 Title = this.$Elm.getElement( '[name="title"]' );
@@ -140,19 +140,35 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
             {
                 title = this.$availableBlocks[ i ].title;
 
+                if ( 'group' in title )
+                {
+                    group = title.group;
+                    val   = title.var;
+                } else
+                {
+                    group = title[ 0 ];
+                    val   = title[ 1 ];
+                }
+
+
                 new Element('option', {
                     value : this.$availableBlocks[ i ].control,
-                    html  : QUILocale.get( title[ 0 ], title[ 1 ] )
+                    html  : QUILocale.get( group, val )
                 }).inject( Type );
             }
 
             Title.value = this.getAttribute( 'title' );
             Type.value  = this.getAttribute( 'type' );
 
-            var areas = this.getAttribute( 'areas' )
-                            .replace( /^,*/, '' )
-                            .replace( /,*$/, '' )
-                            .split( ',' );
+            var areas = [];
+
+            if ( this.getAttribute( 'areas' ) )
+            {
+                areas = this.getAttribute('areas')
+                    .replace(/^,*/, '')
+                    .replace(/,*$/, '')
+                    .split(',');
+            }
 
             // areas
             this.$Areas = new BlockAreas({
@@ -207,6 +223,10 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
             }
 
             // plugin / package blocks
+
+            if ( typeof callback === 'function' ) {
+                callback();
+            }
 
         },
 

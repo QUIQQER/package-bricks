@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <locales>
 
-    <groups name="quiqqer/blocks" type="php,js">
+    <groups name="quiqqer/blocks" datatype="php,js">
         <locale name="menu.blocks.text">
             <de><![CDATA[Blockverwaltung]]></de>
             <en><![CDATA[Blocks-Manager]]></en>
         </locale>
+
+
+        <!-- Blocks -->
+        <locale name="block.control.breadcrumb.title">
+            <de><![CDATA[Block:Bradcrumb]]></de>
+            <en><![CDATA[Block:Bradcrumb]]></en>
+        </locale>
+        <locale name="block.control.breadcrumb.description">
+            <de><![CDATA[]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="block.control.contact.title">
+            <de><![CDATA[Block:Kontakt]]></de>
+            <en><![CDATA[Block:Contact]]></en>
+        </locale>
+        <locale name="block.control.contact.description">
+            <de><![CDATA[]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
     </groups>
 
-    <groups name="quiqqer/blocks" type="php">
-
+    <groups name="quiqqer/blocks" datatype="php">
+        <locale name="site.panel.blocks.category.title">
+            <de><![CDATA[Blöcke]]></de>
+            <en><![CDATA[Blocks]]></en>
+        </locale>
     </groups>
 
-    <groups name="quiqqer/blocks" type="js">
+    <groups name="quiqqer/blocks" datatype="js">
 
     </groups>
 

@@ -1,0 +1,40 @@
+
+.quiqqer-blocks-site-category-area {
+    float: left;
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+}
+
+.quiqqer-blocks-site-category-area-title {
+    background: #dedede;
+    color: #212527;
+    padding: 10px;
+}
+
+.quiqqer-blocks-site-category-area-block {
+    border-bottom: 1px solid #dedede;
+    clear: both;
+    float: left;
+    width: 100%;
+}
+
+.quiqqer-blocks-site-category-area-buttons {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+}
+
+.quiqqer-blocks-site-category-area-block select {
+    margin: 2px;
+    padding: 2px;
+    width: calc( 100% - 40px );
+}
+
+.quiqqer-blocks-site-category-area-block button {
+    float: right;
+    line-height: 14px;
+    margin: 2px;
+    padding: 5px;
+    width: 30px;
+}

@@ -245,7 +245,7 @@ define('package/quiqqer/blocks/bin/Manager', [
                                 return;
                             }
 
-                            var i, len, title;
+                            var i, len, group, title, val;
                             var Select = Body.getElement( 'select'),
                                 Title  = Body.getElement( '[name="title"]');
 
@@ -253,9 +253,19 @@ define('package/quiqqer/blocks/bin/Manager', [
                             {
                                 title = blocklist[ i ].title;
 
+                                if ( 'group' in title )
+                                {
+                                    group = title.group;
+                                    val   = title.var;
+                                } else
+                                {
+                                    group = title[ 0 ];
+                                    val   = title[ 1 ];
+                                }
+
                                 new Element('option', {
                                     value : blocklist[ i ].control,
-                                    html  : QUILocale.get( title[ 0 ], title[ 1 ] )
+                                    html  : QUILocale.get( group, val )
                                 }).inject( Select );
                             }
 
@@ -303,6 +313,7 @@ define('package/quiqqer/blocks/bin/Manager', [
             this.Loader.show();
 
             var Block;
+
             var self  = this,
                 Sheet = this.createSheet({
                     title : 'Block editieren'

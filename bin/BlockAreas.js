@@ -98,8 +98,11 @@ define('package/quiqqer/blocks/bin/BlockAreas', [
 
             if ( areas )
             {
-                areas.map(function(area) {
-                    self.addArea( area );
+                areas.map(function(area)
+                {
+                    if ( area !== '' ) {
+                        self.addArea( area );
+                    }
                 });
             }
 

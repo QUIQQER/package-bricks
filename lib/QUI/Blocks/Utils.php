@@ -52,9 +52,10 @@ class Utils
      * Return the template blocks from a xml file
      *
      * @param string $file - path to xm file
+     * @param string|bool $siteType - optional, return only the blocks for the specific site type
      * @return array
      */
-    static function getTemplateAreasFromXML($file)
+    static function getTemplateAreasFromXML($file, $siteType=false)
     {
         if ( !file_exists( $file ) ) {
             return array();
@@ -64,7 +65,18 @@ class Utils
         $Path = new \DOMXPath( $Dom );
 
         $globalBlocks = $Path->query( "//quiqqer/blocks/templateAreas/areas/area" );
-        $typeBlocks   = $Path->query( "//quiqqer/blocks/templateAreas/types/type/area" );
+
+        if ( $siteType )
+        {
+            $typeBlocks = $Path->query(
+                "//quiqqer/blocks/templateAreas/types/type[@type='{$siteType}']/area"
+            );
+
+        } else
+        {
+            $typeBlocks = $Path->query( "//quiqqer/blocks/templateAreas/types/type/area" );
+        }
+
 
         $list = array();
 

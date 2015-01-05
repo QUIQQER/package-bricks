@@ -74,7 +74,7 @@ class Block extends QUI\QDOM
 
         $Ctrl = $this->getAttribute( 'type' );
 
-        if ( !is_callable( $Ctrl ) ) {
+        if ( !is_callable( $Ctrl ) && !class_exists( $Ctrl ) ) {
             throw new QUI\Exception( 'Control not found. Block could not be create' );
         }
 

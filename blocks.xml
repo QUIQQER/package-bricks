@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiqqer>
+    <blocks>
+        <!-- available standard blocks -->
+        <block control="\QUI\Controls\Breadcrumb">
+            <title>
+                <locale group="quiqqer/blocks" var="block.control.breadcrumb.title" />
+            </title>
+            <description>
+                <locale group="quiqqer/blocks" var="block.control.breadcrumb.description" />
+            </description>
+        </block>
+
+        <block control="\QUI\Controls\Contact">
+            <title>
+                <locale group="quiqqer/blocks" var="block.control.contact.title" />
+            </title>
+            <description>
+                <locale group="quiqqer/blocks" var="block.control.contact.description" />
+            </description>
+        </block>
+    </blocks>
+
+</quiqqer>

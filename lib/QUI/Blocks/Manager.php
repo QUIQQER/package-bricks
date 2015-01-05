@@ -56,9 +56,10 @@ class Manager
      * Return the areas which are available in the project
      *
      * @param Project $Project
+     * @param string|bool $siteType - optional, returns only the areas for the specific site type (default = false)
      * @return array
      */
-    public function getAreasByProject(Project $Project)
+    public function getAreasByProject(Project $Project, $siteType=false)
     {
         $templates = array();
         $blocks    = array();
@@ -90,7 +91,10 @@ class Manager
                 continue;
             }
 
-            $blocks = array_merge( $blocks, Utils::getTemplateAreasFromXML( $blockXML ) );
+            $blocks = array_merge(
+                $blocks,
+                Utils::getTemplateAreasFromXML( $blockXML, $siteType )
+            );
         }
 
         return $blocks;
@@ -185,12 +189,31 @@ class Manager
         }
 
         $blockAreas = $Site->getAttribute( 'quiqqer.blocks.areas' );
+        $blockAreas = json_decode( $blockAreas, true );
+
+        if ( !isset( $blockAreas[ $blockArea ] ) ) {
+            return array();
+        }
+
+        $result = array();
+        $blocks = $blockAreas[ $blockArea ];
+
+        foreach ( $blocks as $blockId )
+        {
+            $blockId = (int)$blockId;
+
+            try
+            {
+                $result[] = $this->getBlockById( $blockId );
+
+            } catch ( QUI\Exception $Exception )
+            {
+
+            }
+        }
 
 
-
-
-
-        return array();
+        return $result;
     }
 
     /**

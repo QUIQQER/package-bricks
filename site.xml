@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+    <attributes>
+        <attribute>quiqqer.blocks.areas</attribute>
+    </attributes>
+
+    <!-- extend every panel -->
+    <window>
+        <tab name="quiqqer.blocks">
+            <text>
+                <locale group="quiqqer/blocks" var="site.panel.blocks.category.title" />
+            </text>
+            <image>icon-th</image>
+            <onload require="package/quiqqer/blocks/bin/Site/Category"></onload>
+        </tab>
+    </window>
+
+</site>
