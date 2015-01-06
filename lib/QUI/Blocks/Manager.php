@@ -53,6 +53,21 @@ class Manager
     }
 
     /**
+     * Delete the block
+     *
+     * @param Integer $blockId - Block-ID
+     */
+    public function deleteBlock($blockId)
+    {
+        // check if block exist
+        $this->getBlockById( $blockId );
+
+        QUI::getDataBase()->delete($this->_getTable(), array(
+            'id' => $blockId
+        ));
+    }
+
+    /**
      * Return the areas which are available in the project
      *
      * @param Project $Project

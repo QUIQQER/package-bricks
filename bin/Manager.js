@@ -38,7 +38,9 @@ define('package/quiqqer/blocks/bin/Manager', [
             '$onCreate',
             '$onResize',
             '$openCreateDialog',
-            '$onDblClick'
+            '$openDeleteDialog',
+            '$onDblClick',
+            '$onClick'
         ],
 
         options : {
@@ -82,8 +84,34 @@ define('package/quiqqer/blocks/bin/Manager', [
                     data : result
                 });
 
+                self.refreshButtons();
+
                 self.Loader.hide();
             });
+        },
+
+        /**
+         * Refresh the buttons status
+         */
+        refreshButtons : function()
+        {
+            var selected  = this.$Grid.getSelectedData(),
+                AddButton = this.getButtons('block-add'),
+                DelButton = this.getButtons('block-delete');
+
+            if ( !selected.length )
+            {
+                AddButton.enable();
+                DelButton.disable();
+                return;
+            }
+
+            AddButton.enable();
+            DelButton.enable();
+
+            if ( selected.length > 1 ) {
+                AddButton.disable();
+            }
         },
 
         /**
@@ -106,9 +134,22 @@ define('package/quiqqer/blocks/bin/Manager', [
 
             this.addButton(
                 new QUIButton({
-                    text   : 'Block hinzufügen',
-                    events : {
+                    text     : 'Block hinzufügen',
+                    name     : 'block-add',
+                    disabled : true,
+                    events   : {
                         onClick : this.$openCreateDialog
+                    }
+                })
+            );
+
+            this.addButton(
+                new QUIButton({
+                    text     : 'Markierte Blöcke löschen',
+                    name     : 'block-delete',
+                    disabled : true,
+                    events   : {
+                        onClick : this.$openDeleteDialog
                     }
                 })
             );
@@ -139,12 +180,14 @@ define('package/quiqqer/blocks/bin/Manager', [
                     dataIndex : 'type',
                     dataType  : 'string',
                     width     : 200
-                }]
+                }],
+                multipleSelection : true
             });
 
             this.$Grid.addEvents({
                 onRefresh  : this.refresh,
-                onDblClick : this.$onDblClick
+                onDblClick : this.$onDblClick,
+                onClick    : this.$onClick
             });
 
             this.Loader.show();
@@ -198,6 +241,14 @@ define('package/quiqqer/blocks/bin/Manager', [
             this.editBlock(
                 this.$Grid.getSelectedData()[0].id
             );
+        },
+
+        /**
+         * event : click
+         */
+        $onClick : function()
+        {
+            this.refreshButtons();
         },
 
         /**
@@ -305,6 +356,56 @@ define('package/quiqqer/blocks/bin/Manager', [
         },
 
         /**
+         * Opens the delete block dialog
+         */
+        $openDeleteDialog : function()
+        {
+            var self     = this,
+                blockIds = this.$Grid.getSelectedData().map(function(block) {
+                    return block.id;
+                });
+
+            new QUIConfirm({
+                maxHeight : 300,
+                maxWidth  : 600,
+                autoclose : false,
+                events    :
+                {
+                    onOpen : function(Win)
+                    {
+                        var Content = Win.getContent(),
+                            lists   = '<ul>';
+
+                        self.$Grid.getSelectedData().each(function(block) {
+                            lists = lists +'<li>'+ block.id +' - '+ block.title +'</li>';
+                        });
+
+                        lists = lists +'</ul>';
+
+                        Content.set(
+                            'html',
+
+                            '<h1>Möchten Sie folgende Block-IDs wirklich löschen</h1>' +
+                            lists
+                        );
+                    },
+
+                    onSubmit : function(Win)
+                    {
+                        Win.Loader.show();
+
+                        self.deleteBlocks(blockIds, function()
+                        {
+                            Win.close();
+                            self.refresh();
+                        });
+                    }
+                }
+            }).open();
+        },
+
+        /**
+         * Opens the edit sheet of a Block
          *
          * @param {integer} blockId
          */
@@ -410,6 +511,20 @@ define('package/quiqqer/blocks/bin/Manager', [
                     name : project
                 }),
                 data : JSON.encode( data )
+            });
+        },
+
+        /**
+         * Delete the Block-Ids
+         *
+         * @param {array} blockIds - Block IDs which should be deleted
+         * @param {Function} callback
+         */
+        deleteBlocks : function(blockIds, callback)
+        {
+            Ajax.post('package_quiqqer_blocks_ajax_block_delete', callback, {
+                'package' : 'quiqqer/blocks',
+                blockIds  : JSON.encode( blockIds )
             });
         }
     });
