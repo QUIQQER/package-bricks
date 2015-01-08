@@ -12,8 +12,7 @@
 function package_quiqqer_bricks_ajax_getAvailableBricks()
 {
     $BricksManager = new \QUI\Bricks\Manager();
-
-    return $BrickManager->getAvailableBricks();
+    return $BricksManager->getAvailableBricks();
 }
 
 \QUI::$Ajax->register(
