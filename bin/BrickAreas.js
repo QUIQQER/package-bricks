@@ -1,24 +1,24 @@
 
 /**
- * BlockAreas Control
- * Edit and change the areas for the block
+ * BrickAreas Control
+ * Edit and change the areas for the brick
  *
- * @module package/quiqqer/blocks/bin/BlockAreas
+ * @module package/quiqqer/bricks/bin/BrickAreas
  * @author www.pcsg.de (Henning Leutz)
  *
  * @event onLoaded [ this ]
  */
 
-define('package/quiqqer/blocks/bin/BlockAreas', [
+define('package/quiqqer/bricks/bin/BrickAreas', [
 
     'qui/QUI',
     'qui/controls/Control',
     'qui/controls/buttons/Button',
-    'package/quiqqer/blocks/bin/AreaWindow',
+    'package/quiqqer/bricks/bin/AreaWindow',
     'Ajax',
     'Locale',
 
-    'css!package/quiqqer/blocks/bin/BlockAreas.css'
+    'css!package/quiqqer/bricks/bin/BrickAreas.css'
 
 ], function(QUI, QUIControl, QUIButton, AreaWindow, Ajax, QUILocale)
 {
@@ -27,14 +27,14 @@ define('package/quiqqer/blocks/bin/BlockAreas', [
     return new Class({
 
         Extends : QUIControl,
-        Type    : 'package/quiqqer/blocks/bin/BlockAreas',
+        Type    : 'package/quiqqer/bricks/bin/BrickAreas',
 
         Binds : [
             '$onDestroy'
         ],
 
         options : {
-            blockId : false, // blockId
+            brickId : false, // brickId
             styles  : false,
             project : false,
             areas   : false
@@ -57,20 +57,20 @@ define('package/quiqqer/blocks/bin/BlockAreas', [
             var self = this;
 
             this.$Elm = new Element('div', {
-                'class' : 'quiqqer-blocks-blockareas',
-                html    : '<div class="quiqqer-blocks-blockareas-container"></div>' +
-                          '<div class="quiqqer-blocks-blockareas-buttons"></div>'
+                'class' : 'quiqqer-bricks-brickareas',
+                html    : '<div class="quiqqer-bricks-brickareas-container"></div>' +
+                          '<div class="quiqqer-bricks-brickareas-buttons"></div>'
             });
 
             if ( this.getAttribute( 'styles' ) ) {
                 this.$Elm.setStyles( this.getAttribute( 'styles' ) );
             }
 
-            this.$Container = this.$Elm.getElement( '.quiqqer-blocks-blockareas-container' );
-            this.$Buttons   = this.$Elm.getElement( '.quiqqer-blocks-blockareas-buttons' );
+            this.$Container = this.$Elm.getElement( '.quiqqer-bricks-brickareas-container' );
+            this.$Buttons   = this.$Elm.getElement( '.quiqqer-bricks-brickareas-buttons' );
 
             new QUIButton({
-                text   : 'Blockbereich hinzufügen',
+                text   : 'Brickbereich hinzufügen',
                 styles : {
                     width : '100%'
                 },
@@ -122,7 +122,7 @@ define('package/quiqqer/blocks/bin/BlockAreas', [
             this.$areas[ area ] = true;
 
             new Element('div', {
-                'class' : 'quiqqer-blocks-blockareas-area',
+                'class' : 'quiqqer-bricks-brickareas-area',
                 html    : area
             }).inject( this.$Container );
         },

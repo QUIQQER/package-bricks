@@ -1,5 +1,5 @@
 
-.quiqqer-blocks-blockedit {
+.quiqqer-bricks-brickedit {
     float: left;
     height: 100%;
     padding: 20px;
@@ -7,37 +7,37 @@
 }
 
 
-.quiqqer-blocks-blockedit label {
+.quiqqer-bricks-brickedit label {
     clear: both;
     float: left;
     margin-bottom: 20px;
     width: 100%;
 }
 
-.quiqqer-blocks-blockedit input,
-.quiqqer-blocks-blockedit select,
-.quiqqer-blocks-blockedit-label-text,
-.quiqqer-blocks-blockedit-label-editor{
+.quiqqer-bricks-brickedit input,
+.quiqqer-bricks-brickedit select,
+.quiqqer-bricks-brickedit-label-text,
+.quiqqer-bricks-brickedit-label-editor{
     clear: both;
     float: left;
     max-width: 300px;
     width: 100%;
 }
 
-.quiqqer-blocks-blockedit-label-text {
+.quiqqer-bricks-brickedit-label-text {
     cursor: pointer;
     margin-bottom: 10px;
 }
 
-.quiqqer-blocks-blockedit-label-editor {
+.quiqqer-bricks-brickedit-label-editor {
     cursor: pointer;
     margin-bottom: 0;
 }
 
-.quiqqer-blocks-areas {
+.quiqqer-bricks-areas {
     margin-bottom: 0 !important;
 }
 
-.quiqqer-blocks-blockareas {
+.quiqqer-bricks-brickareas {
     margin-bottom: 20px;
 }

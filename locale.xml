@@ -1,40 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <locales>
 
-    <groups name="quiqqer/blocks" datatype="php,js">
-        <locale name="menu.blocks.text">
-            <de><![CDATA[Blockverwaltung]]></de>
-            <en><![CDATA[Blocks-Manager]]></en>
+    <groups name="quiqqer/bricks" datatype="php,js">
+        <locale name="menu.bricks.text">
+            <de><![CDATA[Brickverwaltung]]></de>
+            <en><![CDATA[Bricks-Manager]]></en>
         </locale>
 
 
-        <!-- Blocks -->
-        <locale name="block.control.breadcrumb.title">
-            <de><![CDATA[Block:Bradcrumb]]></de>
-            <en><![CDATA[Block:Bradcrumb]]></en>
+        <!-- Standard Bricks -->
+        <locale name="brick.content.title">
+            <de><![CDATA[Brick:Inhalt]]></de>
+            <en><![CDATA[Brick:Content]]></en>
         </locale>
-        <locale name="block.control.breadcrumb.description">
+        <locale name="brick.content.description">
             <de><![CDATA[]]></de>
             <en><![CDATA[]]></en>
         </locale>
-        <locale name="block.control.contact.title">
-            <de><![CDATA[Block:Kontakt]]></de>
-            <en><![CDATA[Block:Contact]]></en>
+
+        <locale name="brick.control.breadcrumb.title">
+            <de><![CDATA[Brick:Bradcrumb]]></de>
+            <en><![CDATA[Brick:Bradcrumb]]></en>
         </locale>
-        <locale name="block.control.contact.description">
+        <locale name="brick.control.breadcrumb.description">
+            <de><![CDATA[]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+
+        <locale name="brick.control.contact.title">
+            <de><![CDATA[Brick:Kontakt]]></de>
+            <en><![CDATA[Brick:Contact]]></en>
+        </locale>
+        <locale name="brick.control.contact.description">
             <de><![CDATA[]]></de>
             <en><![CDATA[]]></en>
         </locale>
     </groups>
 
-    <groups name="quiqqer/blocks" datatype="php">
-        <locale name="site.panel.blocks.category.title">
+    <groups name="quiqqer/bricks" datatype="php">
+        <locale name="site.panel.bricks.category.title">
             <de><![CDATA[Blöcke]]></de>
-            <en><![CDATA[Blocks]]></en>
+            <en><![CDATA[Bricks]]></en>
         </locale>
     </groups>
 
-    <groups name="quiqqer/blocks" datatype="js">
+    <groups name="quiqqer/bricks" datatype="js">
 
     </groups>
 

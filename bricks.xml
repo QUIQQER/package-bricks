@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiqqer>
+    <bricks>
+        <!-- available standard bricks -->
+        <brick control="\QUI\Controls\Breadcrumb">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.breadcrumb.title" />
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.breadcrumb.description" />
+            </description>
+        </brick>
+
+        <brick control="\QUI\Controls\Contact">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.contact.title" />
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.contact.description" />
+            </description>
+        </brick>
+    </bricks>
+
+</quiqqer>

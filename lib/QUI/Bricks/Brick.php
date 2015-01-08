@@ -1,31 +1,31 @@
 <?php
 
 /**
- * This file contains \QUI\Blocks\Block
+ * This file contains \QUI\Bricks\Brick
  */
 
-namespace QUI\BLocks;
+namespace QUI\Bricks;
 
 use QUI;
 
 /**
- * Class Block
- * A Block from the Blockmanager
+ * Class Brick
+ * A Brick from the Brickmanager
  *
  * @author www.pcsg.de (Henning Leutz)
- * @package quiqqer/blocks
+ * @package quiqqer/bricks
  */
-class Block extends QUI\QDOM
+class Brick extends QUI\QDOM
 {
     /**
-     * Block settings
+     * Brick settings
      * @var array
      */
     protected $_settings = array();
 
     /**
      * Constructor
-     * @param array $params - block params
+     * @param array $params - brick params
      */
     public function __construct($params=array())
     {
@@ -61,7 +61,7 @@ class Block extends QUI\QDOM
     }
 
     /**
-     * Return the HTML of the Block
+     * Return the HTML of the Brick
      *
      * @throw QUI\Exception
      */
@@ -75,14 +75,14 @@ class Block extends QUI\QDOM
         $Ctrl = $this->getAttribute( 'type' );
 
         if ( !is_callable( $Ctrl ) && !class_exists( $Ctrl ) ) {
-            throw new QUI\Exception( 'Control not found. Block could not be create' );
+            throw new QUI\Exception( 'Control not found. Brick could not be create' );
         }
 
         /* @var $Control \QUI\Control */
         $Control = new $Ctrl();
 
         if ( !($Control instanceof QUI\Control) ) {
-            throw new QUI\Exception( 'Control not found. Block could not be create' );
+            throw new QUI\Exception( 'Control not found. Brick could not be create' );
         }
 
         $Control->setAttributes( $this->getSettings() );
@@ -91,7 +91,7 @@ class Block extends QUI\QDOM
     }
 
     /**
-     * Return the block settings
+     * Return the brick settings
      * @return array
      */
     public function getSettings()

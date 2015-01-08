@@ -1,12 +1,12 @@
 
 /**
- * Block manager
+ * Brick manager
  *
- * @module package/quiqqer/blocks/bin/Manager
+ * @module package/quiqqer/bricks/bin/Manager
  * @author www.pcsg.de (Henning Leutz)
  */
 
-define('package/quiqqer/blocks/bin/Manager', [
+define('package/quiqqer/bricks/bin/Manager', [
 
     'qui/QUI',
     'qui/controls/desktop/Panel',
@@ -19,21 +19,21 @@ define('package/quiqqer/blocks/bin/Manager', [
     'Projects',
     'Ajax',
 
-    'css!package/quiqqer/blocks/bin/Manager.css'
+    'css!package/quiqqer/bricks/bin/Manager.css'
 
 ], function(QUI, QUIPanel, QUISelect, QUIButton, QUISeperator, QUIConfirm, Grid, QUILocale, Projects, Ajax)
 {
     "use strict";
 
-    var lg = 'quiqqer/blocks';
+    var lg = 'quiqqer/bricks';
 
     return new Class({
 
         Extends : QUIPanel,
-        Type    : 'package/quiqqer/blocks/bin/Manager',
+        Type    : 'package/quiqqer/bricks/bin/Manager',
 
         Binds : [
-            'loadBlocksFromProject',
+            'loadBricksFromProject',
             'refresh',
             '$onCreate',
             '$onResize',
@@ -44,7 +44,7 @@ define('package/quiqqer/blocks/bin/Manager', [
         ],
 
         options : {
-            title : QUILocale.get( lg, 'menu.blocks.text' )
+            title : QUILocale.get( lg, 'menu.bricks.text' )
         },
 
         initialize : function(options)
@@ -74,7 +74,7 @@ define('package/quiqqer/blocks/bin/Manager', [
 
             this.Loader.show();
 
-            this.getBlocksFromProject(this.$ProjectSelect.getValue(), function(result)
+            this.getBricksFromProject(this.$ProjectSelect.getValue(), function(result)
             {
                 if ( typeof callback === 'function' ) {
                     callback();
@@ -96,8 +96,8 @@ define('package/quiqqer/blocks/bin/Manager', [
         refreshButtons : function()
         {
             var selected  = this.$Grid.getSelectedData(),
-                AddButton = this.getButtons('block-add'),
-                DelButton = this.getButtons('block-delete');
+                AddButton = this.getButtons('brick-add'),
+                DelButton = this.getButtons('brick-delete');
 
             if ( !selected.length )
             {
@@ -134,8 +134,8 @@ define('package/quiqqer/blocks/bin/Manager', [
 
             this.addButton(
                 new QUIButton({
-                    text     : 'Block hinzufügen',
-                    name     : 'block-add',
+                    text     : 'Brick hinzufügen',
+                    name     : 'brick-add',
                     disabled : true,
                     events   : {
                         onClick : this.$openCreateDialog
@@ -146,7 +146,7 @@ define('package/quiqqer/blocks/bin/Manager', [
             this.addButton(
                 new QUIButton({
                     text     : 'Markierte Blöcke löschen',
-                    name     : 'block-delete',
+                    name     : 'brick-delete',
                     disabled : true,
                     events   : {
                         onClick : this.$openDeleteDialog
@@ -176,7 +176,7 @@ define('package/quiqqer/blocks/bin/Manager', [
                     dataType  : 'string',
                     width     : 300
                 }, {
-                    header    : QUILocale.get( lg, 'block.type' ),
+                    header    : QUILocale.get( lg, 'brick.type' ),
                     dataIndex : 'type',
                     dataType  : 'string',
                     width     : 200
@@ -238,7 +238,7 @@ define('package/quiqqer/blocks/bin/Manager', [
          */
         $onDblClick : function()
         {
-            this.editBlock(
+            this.editBrick(
                 this.$Grid.getSelectedData()[0].id
             );
         },
@@ -259,7 +259,7 @@ define('package/quiqqer/blocks/bin/Manager', [
             var self = this;
 
             new QUIConfirm({
-                title     : 'Neuen Block hinzufügen',
+                title     : 'Neuen Brick hinzufügen',
                 icon      : 'icon-th',
                 maxHeight : 300,
                 maxWidth  : 400,
@@ -271,26 +271,26 @@ define('package/quiqqer/blocks/bin/Manager', [
                         var Body = Win.getContent();
 
                         Win.Loader.show();
-                        Body.addClass( 'quiqqer-blocks-create' );
+                        Body.addClass( 'quiqqer-bricks-create' );
 
                         Body.set(
                             'html',
 
                             '<label>' +
-                            '   <span class="quiqqer-blocks-create-label-text">' +
+                            '   <span class="quiqqer-bricks-create-label-text">' +
                             '       Title' +
                             '   </span>' +
                             '   <input type="text" name="title" />' +
                             '</label>' +
                             '<label>' +
-                            '   <span class="quiqqer-blocks-create-label-text">' +
-                            '       Block Typ' +
+                            '   <span class="quiqqer-bricks-create-label-text">' +
+                            '       Brick Typ' +
                             '   </span>' +
                             '   <select name="type"></select>' +
                             '</label>'
                         );
 
-                        self.getAvailableBlocks(function(blocklist)
+                        self.getAvailableBricks(function(bricklist)
                         {
                             if ( !Body ) {
                                 return;
@@ -300,9 +300,9 @@ define('package/quiqqer/blocks/bin/Manager', [
                             var Select = Body.getElement( 'select'),
                                 Title  = Body.getElement( '[name="title"]');
 
-                            for ( i = 0, len = blocklist.length; i < len; i++ )
+                            for ( i = 0, len = bricklist.length; i < len; i++ )
                             {
-                                title = blocklist[ i ].title;
+                                title = bricklist[ i ].title;
 
                                 if ( 'group' in title )
                                 {
@@ -315,7 +315,7 @@ define('package/quiqqer/blocks/bin/Manager', [
                                 }
 
                                 new Element('option', {
-                                    value : blocklist[ i ].control,
+                                    value : bricklist[ i ].control,
                                     html  : QUILocale.get( group, val )
                                 }).inject( Select );
                             }
@@ -338,16 +338,16 @@ define('package/quiqqer/blocks/bin/Manager', [
                             return;
                         }
 
-                        self.createBlock(self.$ProjectSelect.getValue(), {
+                        self.createBrick(self.$ProjectSelect.getValue(), {
                             title : Title.value,
                             type  : Type.value
-                        }, function(blockId)
+                        }, function(brickId)
                         {
                             Win.close();
 
 
                             self.refresh(function() {
-                                self.editBlock( blockId );
+                                self.editBrick( brickId );
                             });
                         });
                     }
@@ -356,13 +356,13 @@ define('package/quiqqer/blocks/bin/Manager', [
         },
 
         /**
-         * Opens the delete block dialog
+         * Opens the delete brick dialog
          */
         $openDeleteDialog : function()
         {
             var self     = this,
-                blockIds = this.$Grid.getSelectedData().map(function(block) {
-                    return block.id;
+                brickIds = this.$Grid.getSelectedData().map(function(brick) {
+                    return brick.id;
                 });
 
             new QUIConfirm({
@@ -376,8 +376,8 @@ define('package/quiqqer/blocks/bin/Manager', [
                         var Content = Win.getContent(),
                             lists   = '<ul>';
 
-                        self.$Grid.getSelectedData().each(function(block) {
-                            lists = lists +'<li>'+ block.id +' - '+ block.title +'</li>';
+                        self.$Grid.getSelectedData().each(function(brick) {
+                            lists = lists +'<li>'+ brick.id +' - '+ brick.title +'</li>';
                         });
 
                         lists = lists +'</ul>';
@@ -385,7 +385,7 @@ define('package/quiqqer/blocks/bin/Manager', [
                         Content.set(
                             'html',
 
-                            '<h1>Möchten Sie folgende Block-IDs wirklich löschen</h1>' +
+                            '<h1>Möchten Sie folgende Brick-IDs wirklich löschen</h1>' +
                             lists
                         );
                     },
@@ -394,7 +394,7 @@ define('package/quiqqer/blocks/bin/Manager', [
                     {
                         Win.Loader.show();
 
-                        self.deleteBlocks(blockIds, function()
+                        self.deleteBricks(brickIds, function()
                         {
                             Win.close();
                             self.refresh();
@@ -405,28 +405,28 @@ define('package/quiqqer/blocks/bin/Manager', [
         },
 
         /**
-         * Opens the edit sheet of a Block
+         * Opens the edit sheet of a Brick
          *
-         * @param {integer} blockId
+         * @param {integer} brickId
          */
-        editBlock : function(blockId)
+        editBrick : function(brickId)
         {
             this.Loader.show();
 
-            var Block;
+            var Brick;
 
             var self  = this,
                 Sheet = this.createSheet({
-                    title : 'Block editieren'
+                    title : 'Brick editieren'
                 });
 
             Sheet.addEvents({
                 onOpen : function(Sheet)
                 {
-                    require(['package/quiqqer/blocks/bin/BlockEdit'], function(BlockEdit)
+                    require(['package/quiqqer/bricks/bin/BrickEdit'], function(BrickEdit)
                     {
-                        Block = new BlockEdit({
-                            id      : blockId,
+                        Brick = new BrickEdit({
+                            id      : brickId,
                             project : self.$ProjectSelect.getValue(),
                             events  :
                             {
@@ -453,7 +453,7 @@ define('package/quiqqer/blocks/bin/Manager', [
                     {
                         self.Loader.show();
 
-                        Block.save(function()
+                        Brick.save(function()
                         {
                             self.Loader.hide();
                             Sheet.hide();
@@ -470,26 +470,26 @@ define('package/quiqqer/blocks/bin/Manager', [
          */
 
         /**
-         * Return the available blocks
+         * Return the available bricks
          * @param callback
          */
-        getAvailableBlocks : function(callback)
+        getAvailableBricks : function(callback)
         {
-            Ajax.get('package_quiqqer_blocks_ajax_getAvailableBlocks', callback, {
-                'package' : 'quiqqer/blocks'
+            Ajax.get('package_quiqqer_bricks_ajax_getAvailableBricks', callback, {
+                'package' : 'quiqqer/bricks'
             });
         },
 
         /**
-         * Return the blocksf from a project
+         * Return the bricksf from a project
          *
          * @param {String} project - name of the project
          * @param {Function} callback - callback function
          */
-        getBlocksFromProject : function(project, callback)
+        getBricksFromProject : function(project, callback)
         {
-            Ajax.get('package_quiqqer_blocks_ajax_project_getBlocks', callback, {
-                'package' : 'quiqqer/blocks',
+            Ajax.get('package_quiqqer_bricks_ajax_project_getBricks', callback, {
+                'package' : 'quiqqer/bricks',
                 project   : JSON.encode({
                     name : project
                 })
@@ -497,16 +497,16 @@ define('package/quiqqer/blocks/bin/Manager', [
         },
 
         /**
-         * Create a new block
+         * Create a new brick
          *
          * @param {String} project
          * @param {Object} data
          * @param {Function} callback
          */
-        createBlock : function(project, data, callback)
+        createBrick : function(project, data, callback)
         {
-            Ajax.post('package_quiqqer_blocks_ajax_project_createBlock', callback, {
-                'package' : 'quiqqer/blocks',
+            Ajax.post('package_quiqqer_bricks_ajax_project_createBrick', callback, {
+                'package' : 'quiqqer/bricks',
                 project : JSON.encode({
                     name : project
                 }),
@@ -515,16 +515,16 @@ define('package/quiqqer/blocks/bin/Manager', [
         },
 
         /**
-         * Delete the Block-Ids
+         * Delete the Brick-Ids
          *
-         * @param {array} blockIds - Block IDs which should be deleted
+         * @param {array} brickIds - Brick IDs which should be deleted
          * @param {Function} callback
          */
-        deleteBlocks : function(blockIds, callback)
+        deleteBricks : function(brickIds, callback)
         {
-            Ajax.post('package_quiqqer_blocks_ajax_block_delete', callback, {
-                'package' : 'quiqqer/blocks',
-                blockIds  : JSON.encode( blockIds )
+            Ajax.post('package_quiqqer_bricks_ajax_brick_delete', callback, {
+                'package' : 'quiqqer/bricks',
+                brickIds  : JSON.encode( brickIds )
             });
         }
     });

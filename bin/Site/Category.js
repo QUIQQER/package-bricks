@@ -2,22 +2,22 @@
 /**
  * Area manager for the site object
  *
- * @module package/quiqqer/blocks/bin/Site/Category
+ * @module package/quiqqer/bricks/bin/Site/Category
  * @author www.pcsg.de (Henning Leutz)
  *
  * @event onLoaded
  */
 
-define('package/quiqqer/blocks/bin/Site/Category', [
+define('package/quiqqer/bricks/bin/Site/Category', [
 
     'qui/QUI',
     'qui/controls/Control',
     'qui/controls/loader/Loader',
     'Ajax',
     'Locale',
-    'package/quiqqer/blocks/bin/Site/Area',
+    'package/quiqqer/bricks/bin/Site/Area',
 
-    'css!package/quiqqer/blocks/bin/Site/Category.css'
+    'css!package/quiqqer/bricks/bin/Site/Category.css'
 
 ], function (QUI, QUIControl, QUILoader, QUIAjax, QUILocale, Area)
 {
@@ -26,7 +26,7 @@ define('package/quiqqer/blocks/bin/Site/Category', [
     return new Class({
 
         Extends : QUIControl,
-        Type    : 'package/quiqqer/blocks/bin/Site/Category',
+        Type    : 'package/quiqqer/bricks/bin/Site/Category',
 
         Binds : [
             '$onInject',
@@ -53,7 +53,7 @@ define('package/quiqqer/blocks/bin/Site/Category', [
         create: function ()
         {
             this.$Elm = new Element('div', {
-                'class' : 'quiqqer-blocks-site-category'
+                'class' : 'quiqqer-bricks-site-category'
             });
 
             this.Loader.inject( this.$Elm );
@@ -71,20 +71,20 @@ define('package/quiqqer/blocks/bin/Site/Category', [
 
             this.Loader.show();
 
-            this.getBlockAreas(function(blocks)
+            this.getBrickAreas(function(bricks)
             {
                 var i, len, data, AC;
 
                 var Site  = self.getAttribute( 'Site'),
-                    areas = Site.getAttribute( 'quiqqer.blocks.areas' );
+                    areas = Site.getAttribute( 'quiqqer.bricks.areas' );
 
                 if ( areas ) {
                     areas = JSON.decode(areas);
                 }
 
-                for ( i = 0, len = blocks.length; i < len; i++ )
+                for ( i = 0, len = bricks.length; i < len; i++ )
                 {
-                    AC = self.$insertBlockAreaEdit( blocks[ i ] );
+                    AC = self.$insertBrickAreaEdit( bricks[ i ] );
 
                     if ( typeof areas[ AC.getAttribute('name') ] === 'undefined' ) {
                         continue;
@@ -92,8 +92,8 @@ define('package/quiqqer/blocks/bin/Site/Category', [
 
                     data = areas[ AC.getAttribute('name') ];
 
-                    data.each(function(blockId) {
-                        AC.addBlockById( blockId );
+                    data.each(function(brickId) {
+                        AC.addBrickById( brickId );
                     });
                 }
 
@@ -119,32 +119,32 @@ define('package/quiqqer/blocks/bin/Site/Category', [
                 areas[ AC.getAttribute( 'name' ) ] = AC.getData();
             }
 
-            Site.setAttribute( 'quiqqer.blocks.areas', JSON.encode( areas ) );
+            Site.setAttribute( 'quiqqer.bricks.areas', JSON.encode( areas ) );
         },
 
         /**
          * Return the available for the site
          * @param {Function} callback - callback function
          */
-        getBlockAreas : function(callback)
+        getBrickAreas : function(callback)
         {
             var Site    = this.getAttribute( 'Site'),
                 Project = Site.getProject();
 
-            QUIAjax.get('package_quiqqer_blocks_ajax_project_getAreas', callback, {
-                'package' : 'quiqqer/blocks',
+            QUIAjax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
+                'package' : 'quiqqer/bricks',
                 project   : Project.encode(),
                 siteType  : Site.getAttribute( 'type' )
             });
         },
 
         /**
-         * Create a block area edit container
+         * Create a brick area edit container
          *
          * @param {Object} area - Data of the area
          * @return Area
          */
-        $insertBlockAreaEdit : function(area)
+        $insertBrickAreaEdit : function(area)
         {
             var Site    = this.getAttribute( 'Site'),
                 Project = Site.getProject(),

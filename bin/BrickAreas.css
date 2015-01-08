@@ -1,5 +1,5 @@
 
-.quiqqer-blocks-blockareas {
+.quiqqer-bricks-brickareas {
     border: 2px solid #dedede;
     border-radius: 3px;
     float: left;
@@ -7,18 +7,18 @@
     width: 100%;
 }
 
-.quiqqer-blocks-blockareas-container {
+.quiqqer-bricks-brickareas-container {
     background: #fff;
     height: calc(100% - 30px);
     overflow: auto;
     padding: 10px;
 }
 
-.quiqqer-blocks-blockareas-buttons {
+.quiqqer-bricks-brickareas-buttons {
     height: 30px;
 }
 
-.quiqqer-blocks-blockareas-area {
+.quiqqer-bricks-brickareas-area {
     background-color: #eff0f0;
     border: 1px solid #d6d9d9;
     border-radius: 3px;

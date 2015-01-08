@@ -2,7 +2,7 @@
 <database>
 
     <global>
-        <table name="blocks">
+        <table name="bricks">
             <field type="INT( 3 ) NOT NULL AUTO_INCREMENT PRIMARY KEY">id</field>
             <field type="VARCHAR( 255 )">project</field>
             <field type="VARCHAR( 255 ) NOT NULL">title</field>

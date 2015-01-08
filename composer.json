@@ -1,7 +1,7 @@
 {
-    "name" : "quiqqer/blocks",
+    "name" : "quiqqer/bricks",
     "type" : "quiqqer-plugin",
-    "description" : "QUI Block Plugin",
+    "description" : "QUI Brick Plugin",
 
     "version" : "dev-dev",
     "license" : "MIT",

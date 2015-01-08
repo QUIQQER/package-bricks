@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains package_quiqqer_blocks_ajax_project_getBlocks
+ * This file contains package_quiqqer_bricks_ajax_project_getAreas
  */
 
 /**
@@ -11,16 +11,16 @@
  * @param string $siteType - siteType
  * @return array
  */
-function package_quiqqer_blocks_ajax_project_getAreas($project, $siteType)
+function package_quiqqer_bricks_ajax_project_getAreas($project, $siteType)
 {
     $Project      = QUI::getProjectManager()->decode( $project );
-    $BlockManager = new QUI\Blocks\Manager();
+    $BrickManager = new QUI\Bricks\Manager();
 
-    return $BlockManager->getAreasByProject( $Project, $siteType );
+    return $BrickManager->getAreasByProject( $Project, $siteType );
 }
 
 QUI::$Ajax->register(
-    'package_quiqqer_blocks_ajax_project_getAreas',
+    'package_quiqqer_bricks_ajax_project_getAreas',
     array( 'project', 'siteType' ),
     'Permission::checkAdminUser'
 );

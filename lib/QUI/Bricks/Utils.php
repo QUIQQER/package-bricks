@@ -1,31 +1,31 @@
 <?php
 
 /**
- * This file contains \QUI\Blocks\Utils
+ * This file contains \QUI\Bricks\Utils
  */
 
-namespace QUI\Blocks;
+namespace QUI\Bricks;
 
 use QUI;
 use QUI\Utils\XML;
 
 /**
  * Class Utils
- * Blocks helper class
+ * Bricks helper class
  *
- * @package quiqqer/blocks
+ * @package quiqqer/bricks
  * @author www.pcsg.de (Henning Leutz)
  */
 
 class Utils
 {
     /**
-     * Return the blocks from a xml file
+     * Return the bricks from a xml file
      *
      * @param String $file
      * @return array
      */
-    static function getBlocksFromXML($file)
+    static function getBricksFromXML($file)
     {
         if ( !file_exists( $file ) ) {
             return array();
@@ -34,25 +34,25 @@ class Utils
         $Dom  = XML::getDomFromXml( $file );
         $Path = new \DOMXPath( $Dom );
 
-        $blocks = $Path->query( "//quiqqer/blocks/block" );
+        $bricks = $Path->query( "//quiqqer/bricks/brick" );
         $list   = array();
 
-        if ( !$blocks->length ) {
+        if ( !$bricks->length ) {
             return $list;
         }
 
-        foreach ( $blocks as $Block ) {
-            $list[] = self::parseBlockToArray( $Block, $Path );
+        foreach ( $bricks as $Brick ) {
+            $list[] = self::parseBrickToArray( $Brick, $Path );
         }
 
         return $list;
     }
 
     /**
-     * Return the template blocks from a xml file
+     * Return the template bricks from a xml file
      *
      * @param string $file - path to xm file
-     * @param string|bool $siteType - optional, return only the blocks for the specific site type
+     * @param string|bool $siteType - optional, return only the bricks for the specific site type
      * @return array
      */
     static function getTemplateAreasFromXML($file, $siteType=false)
@@ -64,33 +64,33 @@ class Utils
         $Dom  = XML::getDomFromXml( $file );
         $Path = new \DOMXPath( $Dom );
 
-        $globalBlocks = $Path->query( "//quiqqer/blocks/templateAreas/areas/area" );
+        $globalBricks = $Path->query( "//quiqqer/bricks/templateAreas/areas/area" );
 
         if ( $siteType )
         {
-            $typeBlocks = $Path->query(
-                "//quiqqer/blocks/templateAreas/types/type[@type='{$siteType}']/area"
+            $typeBricks = $Path->query(
+                "//quiqqer/bricks/templateAreas/types/type[@type='{$siteType}']/area"
             );
 
         } else
         {
-            $typeBlocks = $Path->query( "//quiqqer/blocks/templateAreas/types/type/area" );
+            $typeBricks = $Path->query( "//quiqqer/bricks/templateAreas/types/type/area" );
         }
 
 
         $list = array();
 
-        if ( $globalBlocks->length )
+        if ( $globalBricks->length )
         {
-            foreach ( $globalBlocks as $Block ) {
-                $list[] = self::parseBlockToArray( $Block, $Path );
+            foreach ( $globalBricks as $Brick ) {
+                $list[] = self::parseBrickToArray( $Brick, $Path );
             }
         }
 
-        if ( $typeBlocks->length )
+        if ( $typeBricks->length )
         {
-            foreach ( $typeBlocks as $Block ) {
-                $list[] = self::parseBlockToArray( $Block, $Path );
+            foreach ( $typeBricks as $Brick ) {
+                $list[] = self::parseBrickToArray( $Brick, $Path );
             }
         }
 
@@ -109,21 +109,21 @@ class Utils
     }
 
     /**
-     * parse a <block> xml node to an array
+     * parse a <brick> xml node to an array
      *
-     * @param \DOMElement $Block
+     * @param \DOMElement $Brick
      * @param \DOMXPath $Path
      * @return array
      */
-    static function parseBlockToArray(\DOMElement $Block, \DOMXPath $Path)
+    static function parseBrickToArray(\DOMElement $Brick, \DOMXPath $Path)
     {
-        $control     = $Block->getAttribute( 'control' );
-        $name        = $Block->getAttribute( 'name' );
+        $control     = $Brick->getAttribute( 'control' );
+        $name        = $Brick->getAttribute( 'name' );
         $title       = array();
         $description = array();
 
-        $titleLocale = $Path->query( './title/locale', $Block );
-        $descLocale  = $Path->query( './description/locale', $Block );
+        $titleLocale = $Path->query( './title/locale', $Brick );
+        $descLocale  = $Path->query( './description/locale', $Brick );
 
         if ( $titleLocale->length )
         {

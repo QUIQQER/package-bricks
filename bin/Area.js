@@ -1,24 +1,24 @@
 
 /**
- * BlockAreas Control
- * Edit and change the areas for the block
+ * BrickAreas Control
+ * Edit and change the areas for the brick
  *
- * @module package/quiqqer/blocks/bin/BlockAreas
+ * @module package/quiqqer/bricks/bin/BrickAreas
  * @author www.pcsg.de (Henning Leutz)
  *
  * @event onLoaded [ this ]
  */
 
-define('package/quiqqer/blocks/bin/Area', [
+define('package/quiqqer/bricks/bin/Area', [
 
     'qui/QUI',
     'qui/controls/Control',
     'qui/controls/buttons/Button',
-    'package/quiqqer/blocks/bin/AreaWindow',
+    'package/quiqqer/bricks/bin/AreaWindow',
     'Ajax',
     'Locale',
 
-    'css!package/quiqqer/blocks/bin/Area.css'
+    'css!package/quiqqer/bricks/bin/Area.css'
 
 ], function(QUI, QUIControl)
 {
@@ -27,7 +27,7 @@ define('package/quiqqer/blocks/bin/Area', [
     return new Class({
 
         Extends : QUIControl,
-        Type    : 'package/quiqqer/blocks/bin/Area',
+        Type    : 'package/quiqqer/bricks/bin/Area',
 
         Binds : [
             'toggle'
@@ -56,21 +56,21 @@ define('package/quiqqer/blocks/bin/Area', [
         create : function()
         {
             this.$Elm = new Element('div', {
-                'class' : 'quiqqer-blocks-area smooth',
-                html    : '<div class="quiqqer-blocks-area-icon">' +
+                'class' : 'quiqqer-bricks-area smooth',
+                html    : '<div class="quiqqer-bricks-area-icon">' +
                               '<span class="icon-list-alt"></span>' +
                           '</div>' +
-                          '<div class="quiqqer-blocks-area-content">' +
-                              '<div class="quiqqer-blocks-area-content-title"></div>' +
-                              '<div class="quiqqer-blocks-area-content-description"></div>' +
+                          '<div class="quiqqer-bricks-area-content">' +
+                              '<div class="quiqqer-bricks-area-content-title"></div>' +
+                              '<div class="quiqqer-bricks-area-content-description"></div>' +
                           '</div>',
                 events : {
                     click : this.toggle
                 }
             });
 
-            this.$Title = this.$Elm.getElement( '.quiqqer-blocks-area-content-title' );
-            this.$Desc  = this.$Elm.getElement( '.quiqqer-blocks-area-content-description' );
+            this.$Title = this.$Elm.getElement( '.quiqqer-bricks-area-content-title' );
+            this.$Desc  = this.$Elm.getElement( '.quiqqer-bricks-area-content-description' );
 
             if ( this.getAttribute( 'area' ) ) {
                 this.$Elm.set( 'data-area', this.getAttribute( 'area' ) );
@@ -112,7 +112,7 @@ define('package/quiqqer/blocks/bin/Area', [
             }
 
             this.$selected = true;
-            this.$Elm.addClass( 'quiqqer-blocks-area-selected' );
+            this.$Elm.addClass( 'quiqqer-bricks-area-selected' );
         },
 
         /**
@@ -125,7 +125,7 @@ define('package/quiqqer/blocks/bin/Area', [
             }
 
             this.$selected = false;
-            this.$Elm.removeClass( 'quiqqer-blocks-area-selected' );
+            this.$Elm.removeClass( 'quiqqer-bricks-area-selected' );
         }
     });
 });

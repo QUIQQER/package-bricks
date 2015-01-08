@@ -1,11 +1,11 @@
 /**
  * Area edit control for the site object
  *
- * @module package/quiqqer/blocks/bin/Site/Area
+ * @module package/quiqqer/bricks/bin/Site/Area
  * @author www.pcsg.de (Henning Leutz)
  */
 
-define('package/quiqqer/blocks/bin/Site/Area', [
+define('package/quiqqer/bricks/bin/Site/Area', [
 
     'qui/QUI',
     'qui/controls/Control',
@@ -13,7 +13,7 @@ define('package/quiqqer/blocks/bin/Site/Area', [
     'Locale',
     'Ajax',
 
-    'css!package/quiqqer/blocks/bin/Site/Area'
+    'css!package/quiqqer/bricks/bin/Site/Area'
 
 ], function (QUI, QUIControl, QUIButton, QUILocale, QUIAjax)
 {
@@ -22,10 +22,10 @@ define('package/quiqqer/blocks/bin/Site/Area', [
     return new Class({
 
         Extends : QUIControl,
-        Type    : 'package/quiqqer/blocks/bin/Site/Area',
+        Type    : 'package/quiqqer/bricks/bin/Site/Area',
 
         Binds : [
-            'addBlock',
+            'addBrick',
             '$onInject'
         ],
 
@@ -41,9 +41,9 @@ define('package/quiqqer/blocks/bin/Site/Area', [
             this.parent( options );
 
             this.$AddButton       = false;
-            this.$availableBlocks = [];
+            this.$availableBricks = [];
             this.$loaded          = false;
-            this.$blockIds        = [];
+            this.$brickIds        = [];
 
             this.addEvents({
                 onInject : this.$onInject
@@ -59,24 +59,24 @@ define('package/quiqqer/blocks/bin/Site/Area', [
             var title = this.getAttribute( 'title' );
 
             this.$Elm = new Element('div', {
-                'class' : 'quiqqer-blocks-site-category-area',
-                html    : '<div class="quiqqer-blocks-site-category-area-title">'+
+                'class' : 'quiqqer-bricks-site-category-area',
+                html    : '<div class="quiqqer-bricks-site-category-area-title">'+
                               QUILocale.get( title.group, title.var ) +
-                          '   <div class="quiqqer-blocks-site-category-area-buttons"></div>' +
+                          '   <div class="quiqqer-bricks-site-category-area-buttons"></div>' +
                           '</div>',
                 'data-name' : this.getAttribute( 'name' )
             });
 
             var Buttons = this.$Elm.getElement(
-                '.quiqqer-blocks-site-category-area-buttons'
+                '.quiqqer-bricks-site-category-area-buttons'
             );
 
             this.$AddButton = new QUIButton({
-                text      : 'Block hinzufügen',
+                text      : 'Brick hinzufügen',
                 textimage : 'icon-plus',
                 disable   : true,
                 events    : {
-                    onClick : this.addBlock
+                    onClick : this.addBrick
                 }
             }).inject( Buttons );
 
@@ -92,25 +92,25 @@ define('package/quiqqer/blocks/bin/Site/Area', [
                 Site    = this.getAttribute( 'Site'),
                 Project = Site.getProject();
 
-            QUIAjax.get('package_quiqqer_blocks_ajax_project_getBlocks', function(blocks)
+            QUIAjax.get('package_quiqqer_bricks_ajax_project_getBricks', function(bricks)
             {
                 self.$AddButton.enable();
 
-                self.$availableBlocks = blocks;
+                self.$availableBricks = bricks;
                 self.$loaded = true;
 
-                self.$blockIds.each(function(blockId) {
-                    self.addBlockById( blockId );
+                self.$brickIds.each(function(brickId) {
+                    self.addBrickById( brickId );
                 });
 
             }, {
-                'package' : 'quiqqer/blocks',
+                'package' : 'quiqqer/bricks',
                 project   : Project.encode()
             });
         },
 
         /**
-         * Return the block list
+         * Return the brick list
          * @returns {array}
          */
         getData : function()
@@ -121,38 +121,38 @@ define('package/quiqqer/blocks/bin/Site/Area', [
         },
 
         /**
-         * Add a block by its ID
+         * Add a brick by its ID
          *
-         * @param blockId
+         * @param brickId
          */
-        addBlockById : function(blockId)
+        addBrickById : function(brickId)
         {
             if ( !this.$loaded )
             {
-                this.$blockIds.push( blockId );
+                this.$brickIds.push( brickId );
                 return;
             }
 
-            var found = this.$availableBlocks.filter(function(Item) {
-                return Item.id === blockId;
+            var found = this.$availableBricks.filter(function(Item) {
+                return Item.id === brickId;
             });
 
             if ( !found.length ) {
                 return;
             }
 
-            this.addBlock().getElement( 'select').set( 'value', blockId );
+            this.addBrick().getElement( 'select').set( 'value', brickId );
         },
 
         /**
-         * Add a block selection to the area
+         * Add a brick selection to the area
          */
-        addBlock : function()
+        addBrick : function()
         {
             var i, len, Select;
 
             var Elm = new Element('div', {
-                'class' : 'quiqqer-blocks-site-category-area-block',
+                'class' : 'quiqqer-bricks-site-category-area-brick',
                 html    : '<select></select>'
             });
 
@@ -160,7 +160,7 @@ define('package/quiqqer/blocks/bin/Site/Area', [
             Select = Elm.getElement( 'select' );
 
             new QUIButton({
-                title  : 'Block löschen',
+                title  : 'Brick löschen',
                 icon   : 'icon-remove-circle',
                 events :
                 {
@@ -171,11 +171,11 @@ define('package/quiqqer/blocks/bin/Site/Area', [
             }).inject( Elm );
 
 
-            for ( i = 0, len = this.$availableBlocks.length; i < len; i++ )
+            for ( i = 0, len = this.$availableBricks.length; i < len; i++ )
             {
                 new Element('option', {
-                    html  : this.$availableBlocks[ i ].title,
-                    value : this.$availableBlocks[ i ].id
+                    html  : this.$availableBricks[ i ].title,
+                    value : this.$availableBricks[ i ].id
                 }).inject( Select );
             }
 

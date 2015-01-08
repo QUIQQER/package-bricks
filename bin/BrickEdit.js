@@ -1,32 +1,32 @@
 
 /**
- * BlockEdit Control
- * Edit and change a Block
+ * BrickEdit Control
+ * Edit and change a Brick
  *
- * @module package/quiqqer/blocks/bin/BlockEdit
+ * @module package/quiqqer/bricks/bin/BrickEdit
  * @author www.pcsg.de (Henning Leutz)
  *
  * @event onLoaded [ this ]
  */
 
-define('package/quiqqer/blocks/bin/BlockEdit', [
+define('package/quiqqer/bricks/bin/BrickEdit', [
 
     'qui/QUI',
     'qui/controls/Control',
-    'package/quiqqer/blocks/bin/BlockAreas',
+    'package/quiqqer/bricks/bin/BrickAreas',
     'Ajax',
     'Locale',
 
-    'css!package/quiqqer/blocks/bin/BlockEdit.css'
+    'css!package/quiqqer/bricks/bin/BrickEdit.css'
 
-], function(QUI, QUIControl, BlockAreas, Ajax, QUILocale)
+], function(QUI, QUIControl, BrickAreas, Ajax, QUILocale)
 {
     "use strict";
 
     return new Class({
 
         Extends : QUIControl,
-        Type    : 'package/quiqqer/blocks/bin/BlockEdit',
+        Type    : 'package/quiqqer/bricks/bin/BrickEdit',
 
         Binds : [
             '$onInject',
@@ -42,7 +42,7 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
         {
             this.parent( options );
 
-            this.$availableBlocks = [];
+            this.$availableBricks = [];
 
             this.$Editor = false;
             this.$Areas  = false;
@@ -61,7 +61,7 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
         create : function()
         {
             this.$Elm = new Element('div', {
-                'class' : 'quiqqer-blocks-blockedit'
+                'class' : 'quiqqer-bricks-brickedit'
             });
 
             return this.$Elm;
@@ -75,11 +75,11 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
             var self = this;
 
             Ajax.get([
-                'package_quiqqer_blocks_ajax_getBlock',
-                'package_quiqqer_blocks_ajax_getAvailableBlocks'
-            ], function(data, blocks)
+                'package_quiqqer_bricks_ajax_getBrick',
+                'package_quiqqer_bricks_ajax_getAvailableBricks'
+            ], function(data, bricks)
             {
-                self.$availableBlocks = blocks;
+                self.$availableBricks = bricks;
 
                 self.setAttributes( data );
                 self.$createData(function() {
@@ -87,8 +87,8 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
                 });
 
             }, {
-                'package' : 'quiqqer/block',
-                blockId   : this.getAttribute( 'id' )
+                'package' : 'quiqqer/brick',
+                brickId   : this.getAttribute( 'id' )
             });
         },
 
@@ -113,20 +113,20 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
 
             new Element('div', {
                 'html' : '<label>' +
-                         '    <span class="quiqqer-blocks-blockedit-label-text">' +
+                         '    <span class="quiqqer-bricks-brickedit-label-text">' +
                          '        Title' +
                          '    </span>' +
                          '    <input type="text" name="title" />' +
                          '</label>' +
                          '<label>' +
-                         '    <span class="quiqqer-blocks-blockedit-label-text">' +
-                         '        Block Typ' +
+                         '    <span class="quiqqer-bricks-brickedit-label-text">' +
+                         '        Brick Typ' +
                          '    </span>' +
                          '    <select name="type"></select>' +
                          '</label>'+
-                         '<label class="quiqqer-blocks-areas">' +
-                         '    <span class="quiqqer-blocks-blockedit-label-text">' +
-                         '        Erlaubte Blockbereiche' +
+                         '<label class="quiqqer-bricks-areas">' +
+                         '    <span class="quiqqer-bricks-brickedit-label-text">' +
+                         '        Erlaubte Brickbereiche' +
                          '    </span>' +
                          '</label>'
             }).inject( this.$Elm );
@@ -136,9 +136,9 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
             var Type  = this.$Elm.getElement( '[name="type"]'),
                 Title = this.$Elm.getElement( '[name="title"]' );
 
-            for ( i = 0, len = this.$availableBlocks.length; i < len; i++ )
+            for ( i = 0, len = this.$availableBricks.length; i < len; i++ )
             {
-                title = this.$availableBlocks[ i ].title;
+                title = this.$availableBricks[ i ].title;
 
                 if ( 'group' in title )
                 {
@@ -152,7 +152,7 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
 
 
                 new Element('option', {
-                    value : this.$availableBlocks[ i ].control,
+                    value : this.$availableBricks[ i ].control,
                     html  : QUILocale.get( group, val )
                 }).inject( Type );
             }
@@ -171,22 +171,22 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
             }
 
             // areas
-            this.$Areas = new BlockAreas({
-                blockId : this.getAttribute( 'id' ),
+            this.$Areas = new BrickAreas({
+                brickId : this.getAttribute( 'id' ),
                 project : this.getAttribute( 'project' ),
                 areas   : areas,
                 styles  : {
                     height : 120
                 }
-            }).inject( this.$Elm.getElement( '.quiqqer-blocks-areas' ), 'after'  );
+            }).inject( this.$Elm.getElement( '.quiqqer-bricks-areas' ), 'after'  );
 
 
-            // block type
+            // brick type
             if ( this.getAttribute( 'type' ) == 'content' )
             {
                 new Element('label', {
-                    html : '<span class="quiqqer-blocks-blockedit-label-editor">' +
-                               'Block Inhalt' +
+                    html : '<span class="quiqqer-bricks-brickedit-label-editor">' +
+                               'Brick Inhalt' +
                            '</span>'
                 }).inject( this.$Elm );
 
@@ -222,7 +222,7 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
                 return;
             }
 
-            // plugin / package blocks
+            // plugin / package bricks
 
             if ( typeof callback === 'function' ) {
                 callback();
@@ -231,7 +231,7 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
         },
 
         /**
-         * Saves the block
+         * Saves the brick
          */
         save : function(callback)
         {
@@ -249,14 +249,14 @@ define('package/quiqqer/blocks/bin/BlockEdit', [
                 data.content = this.$Editor.getContent();
             }
 
-            Ajax.post('package_quiqqer_blocks_ajax_block_save', function()
+            Ajax.post('package_quiqqer_bricks_ajax_brick_save', function()
             {
                 if ( typeof callback === 'function'  ) {
                     callback();
                 }
             }, {
-                'package' : 'quiqqer/block',
-                blockId   : this.getAttribute( 'id' ),
+                'package' : 'quiqqer/brick',
+                brickId   : this.getAttribute( 'id' ),
                 data      : JSON.encode( data )
             });
         }

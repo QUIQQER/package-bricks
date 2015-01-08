@@ -1,37 +1,38 @@
 
-.quiqqer-blocks-site-category-area {
+.quiqqer-bricks-site-category-area {
     float: left;
     margin-bottom: 20px;
     position: relative;
     width: 100%;
 }
 
-.quiqqer-blocks-site-category-area-title {
+.quiqqer-bricks-site-category-area-title {
     background: #dedede;
     color: #212527;
     padding: 10px;
 }
 
-.quiqqer-blocks-site-category-area-block {
+.quiqqer-bricks-site-category-area-brick {
     border-bottom: 1px solid #dedede;
     clear: both;
     float: left;
     width: 100%;
 }
 
-.quiqqer-blocks-site-category-area-buttons {
+.quiqqer-bricks-site-category-area-buttons {
     position: absolute;
     right: 4px;
     top: 4px;
 }
 
-.quiqqer-blocks-site-category-area-block select {
+.quiqqer-bricks-site-category-area-brick select {
+    background: #fff;
     margin: 2px;
     padding: 2px;
     width: calc( 100% - 40px );
 }
 
-.quiqqer-blocks-site-category-area-block button {
+.quiqqer-bricks-site-category-area-brick button {
     float: right;
     line-height: 14px;
     margin: 2px;

@@ -3,17 +3,17 @@
  * AreaWindow Control
  * List of the areas which are available
  *
- * @module package/quiqqer/blocks/bin/AreaWindow
+ * @module package/quiqqer/bricks/bin/AreaWindow
  * @author www.pcsg.de (Henning Leutz)
  *
  * @event onSubmit [ this, areas ]
  */
 
-define('package/quiqqer/blocks/bin/AreaWindow', [
+define('package/quiqqer/bricks/bin/AreaWindow', [
 
     'qui/QUI',
     'qui/controls/windows/Confirm',
-    'package/quiqqer/blocks/bin/Area',
+    'package/quiqqer/bricks/bin/Area',
     'Ajax',
     'Locale'
 
@@ -24,14 +24,14 @@ define('package/quiqqer/blocks/bin/AreaWindow', [
     return new Class({
 
         Extends : QUIConfirm,
-        Type    : 'package/quiqqer/blocks/bin/AreaWindow',
+        Type    : 'package/quiqqer/bricks/bin/AreaWindow',
 
         Binds : [
             '$onOpen'
         ],
 
         options : {
-            title     : 'Projekt Blockbereiche',
+            title     : 'Projekt Brickbereiche',
             project   : false,
             maxHeight : 500,
             maxWidth  : 400
@@ -83,8 +83,8 @@ define('package/quiqqer/blocks/bin/AreaWindow', [
          */
         getList : function(callback)
         {
-            Ajax.get('package_quiqqer_blocks_ajax_project_getAreas', callback, {
-                'package' : 'quiqqer/block',
+            Ajax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
+                'package' : 'quiqqer/brick',
                 project   : JSON.encode({
                     name : this.getAttribute( 'project' )
                 })
@@ -99,7 +99,7 @@ define('package/quiqqer/blocks/bin/AreaWindow', [
             var Content = this.getContent();
 
             var areas = Content.getElements(
-                '.quiqqer-blocks-area-selected'
+                '.quiqqer-bricks-area-selected'
             ).map(function(Elm) {
                 return Elm.get( 'data-area' );
             });
