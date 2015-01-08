@@ -1,0 +1,41 @@
+
+.quiqqer-bricks-site-category-area {
+    float: left;
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+}
+
+.quiqqer-bricks-site-category-area-title {
+    background: #dedede;
+    color: #212527;
+    padding: 10px;
+}
+
+.quiqqer-bricks-site-category-area-brick {
+    border-bottom: 1px solid #dedede;
+    clear: both;
+    float: left;
+    width: 100%;
+}
+
+.quiqqer-bricks-site-category-area-buttons {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+}
+
+.quiqqer-bricks-site-category-area-brick select {
+    background: #fff;
+    margin: 2px;
+    padding: 2px;
+    width: calc( 100% - 40px );
+}
+
+.quiqqer-bricks-site-category-area-brick button {
+    float: right;
+    line-height: 14px;
+    margin: 2px;
+    padding: 5px;
+    width: 30px;
+}

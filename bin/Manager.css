@@ -1,0 +1,20 @@
+
+.quiqqer-bricks-create label {
+    clear: both;
+    float: left;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.quiqqer-bricks-create input,
+.quiqqer-bricks-create select,
+.quiqqer-bricks-create-label-text {
+    clear: both;
+    float: left;
+    width: 100%;
+}
+
+.quiqqer-bricks-create-label-text {
+    cursor: pointer;
+    margin-bottom: 10px;
+}

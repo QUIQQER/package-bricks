@@ -1,9 +1,9 @@
 {
-    "name" : "quiqqer/blocks",
+    "name" : "quiqqer/bricks",
     "type" : "quiqqer-plugin",
-    "description" : "QUI Block Plugin",
+    "description" : "QUI Brick Plugin",
 
-    "version" : "dev-master",
+    "version" : "dev-dev",
     "license" : "MIT",
 
     "authors" : [{
@@ -18,6 +18,12 @@
     },
 
     "require": {
-        "quiqqer/quiqqer" : "~1"
+        "quiqqer/quiqqer" : "*@dev"
+    },
+
+    "autoload": {
+        "psr-0" : {
+            "QUI" : "lib/"
+        }
     }
 }

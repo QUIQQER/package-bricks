@@ -1,0 +1,43 @@
+
+.quiqqer-bricks-brickedit {
+    float: left;
+    height: 100%;
+    padding: 20px;
+    width: 100%;
+}
+
+
+.quiqqer-bricks-brickedit label {
+    clear: both;
+    float: left;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.quiqqer-bricks-brickedit input,
+.quiqqer-bricks-brickedit select,
+.quiqqer-bricks-brickedit-label-text,
+.quiqqer-bricks-brickedit-label-editor{
+    clear: both;
+    float: left;
+    max-width: 300px;
+    width: 100%;
+}
+
+.quiqqer-bricks-brickedit-label-text {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.quiqqer-bricks-brickedit-label-editor {
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.quiqqer-bricks-areas {
+    margin-bottom: 0 !important;
+}
+
+.quiqqer-bricks-brickareas {
+    margin-bottom: 20px;
+}

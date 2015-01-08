@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+
+    <global>
+        <table name="bricks">
+            <field type="INT( 3 ) NOT NULL AUTO_INCREMENT PRIMARY KEY">id</field>
+            <field type="VARCHAR( 255 )">project</field>
+            <field type="VARCHAR( 255 ) NOT NULL">title</field>
+            <field type="TEXT NOT NULL">description</field>
+            <field type="TEXT">settings</field>
+            <field type="VARCHAR( 255 )">type</field>
+            <field type="TEXT">content</field>
+            <field type="TEXT">areas</field>
+        </table>
+    </global>
+
+</database>

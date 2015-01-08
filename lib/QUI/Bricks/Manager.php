@@ -1,0 +1,330 @@
+<?php
+
+/**
+ * This file contains \QUI\Bricks\Manager
+ */
+
+namespace QUI\Bricks;
+
+use QUI;
+use QUI\Projects\Project;
+use QUI\Projects\Site;
+
+/**
+ * Brick Manager
+ *
+ * @package quiqqer/bricks
+ */
+class Manager
+{
+    /**
+     * Bricks table name
+     */
+    const TABLE = 'bricks';
+
+    /**
+     * Brick temp collector
+     * @var array
+     */
+    protected $_bricks = array();
+
+    /**
+     * Creates a new brick for the project
+     *
+     * @param Project $Project
+     * @param Brick $Brick
+     * @return integer - Brick-ID
+     */
+    public function createBrickForProject(Project $Project, Brick $Brick)
+    {
+        QUI::getDataBase()->insert(
+            $this->_getTable(),
+            array(
+                'project'     => $Project->getName(),
+                'title'       => $Brick->getAttribute('title'),
+                'description' => $Brick->getAttribute('description'),
+                'type'        => $Brick->getAttribute('type')
+            )
+        );
+
+        $lastId = QUI::getPDO()->lastInsertId();
+
+        return $lastId;
+    }
+
+    /**
+     * Delete the brick
+     *
+     * @param Integer $brickId - Brick-ID
+     */
+    public function deleteBrick($brickId)
+    {
+        // check if brick exist
+        $this->getBrickById( $brickId );
+
+        QUI::getDataBase()->delete($this->_getTable(), array(
+            'id' => $brickId
+        ));
+    }
+
+    /**
+     * Return the areas which are available in the project
+     *
+     * @param Project $Project
+     * @param string|bool $siteType - optional, returns only the areas for the specific site type (default = false)
+     * @return array
+     */
+    public function getAreasByProject(Project $Project, $siteType=false)
+    {
+        $templates = array();
+        $bricks    = array();
+
+        $projectName = $Project->getName();
+
+        // get all vhosts, and the used templates of the project
+        $vhosts = QUI::getRewrite()->getVHosts();
+
+        foreach ( $vhosts as $vhost )
+        {
+            if ( !isset( $vhost['template'] ) ) {
+                continue;
+            }
+
+            if ( $vhost['project'] != $projectName ) {
+                continue;
+            }
+
+            $templates[] = $vhost['template'];
+        }
+
+        // get bricks
+        foreach ( $templates as $template )
+        {
+            $brickXML = realpath( OPT_DIR . $template .'/bricks.xml' );
+
+            if ( !$brickXML ) {
+                continue;
+            }
+
+            $bricks = array_merge(
+                $bricks,
+                Utils::getTemplateAreasFromXML( $brickXML, $siteType )
+            );
+        }
+
+        return $bricks;
+    }
+
+    /**
+     * Returns the available bricks
+     *
+     * @return array
+     */
+    public function getAvailableBricks()
+    {
+        $cache = 'quiqqer/bricks/availableBricks';
+
+        try
+        {
+            return QUI\Cache\Manager::get( $cache );
+
+        } catch ( QUI\Exception $Exception )
+        {
+
+        }
+
+        $PKM      = QUI::getPackageManager();
+        $packages = $PKM->getInstalled();
+        $result   = array();
+
+        $result[] = array(
+            'title'       => array( 'quiqqer/bricks', 'brick.content.title' ),
+            'description' => array( 'quiqqer/bricks', 'brick.content.description' ),
+            'control'     => 'content'
+        );
+
+        foreach ( $packages as $package )
+        {
+            $bricksXML = OPT_DIR . $package['name'] .'/bricks.xml';
+
+            if ( !file_exists( $bricksXML ) ) {
+                continue;
+            }
+
+            $result = array_merge( $result, Utils::getBricksFromXML( $bricksXML ) );
+        }
+
+        QUI\Cache\Manager::set( $cache, $result );
+
+
+        return $result;
+    }
+
+    /**
+     * Get a Brick by its Brick-ID
+     *
+     * @param Integer $id
+     * @return Brick
+     * @throws QUI\Exception
+     */
+    public function getBrickById($id)
+    {
+        if ( isset( $this->_bricks[ $id ] ) ) {
+            return $this->_bricks[ $id ];
+        }
+
+        $data = QUI::getDataBase()->fetch(array(
+            'from'  => $this->_getTable(),
+            'where' => array(
+                'id' => (int)$id
+            ),
+            'limit' => 1
+        ));
+
+        if ( !isset( $data[0] ) ) {
+            throw new QUI\Exception( 'Brick not found' );
+        }
+
+        $this->_bricks[ $id ] = new Brick( $data[0] );
+
+        return $this->_bricks[ $id ];
+    }
+
+    /**
+     * Return the bricks from the area
+     *
+     * @param string $brickArea - Name of the area
+     * @param Site $Site
+     * @return array
+     */
+    public function getBricksByArea($brickArea, Site $Site)
+    {
+        if ( empty( $brickArea ) ) {
+            return array();
+        }
+
+        $brickAreas = $Site->getAttribute( 'quiqqer.bricks.areas' );
+        $brickAreas = json_decode( $brickAreas, true );
+
+        if ( !isset( $brickAreas[ $brickArea ] ) ) {
+            return array();
+        }
+
+        $result = array();
+        $bricks = $brickAreas[ $brickArea ];
+
+        foreach ( $bricks as $brickId )
+        {
+            $brickId = (int)$brickId;
+
+            try
+            {
+                $result[] = $this->getBrickById( $brickId );
+
+            } catch ( QUI\Exception $Exception )
+            {
+
+            }
+        }
+
+
+        return $result;
+    }
+
+    /**
+     * Return a list with \QUI\Bricks\Brick which are assigned to a project
+     *
+     * @param Project $Project
+     * @return array
+     */
+    public function getBricksFromProject(Project $Project)
+    {
+        $result = array();
+
+        $list = QUI::getDataBase()->fetch(array(
+            'from'  => $this->_getTable(),
+            'where' => array(
+                'project' => $Project->getName()
+            )
+        ));
+
+        foreach ( $list as $entry )
+        {
+            $Brick = new Brick( $entry );
+            $Brick->setAttribute( 'id', $entry['id'] );
+
+            $result[] = $Brick;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param string|integer $brickId - Brick-ID
+     * @param array $brickData - Brick data
+     */
+    public function saveBrick($brickId, array $brickData)
+    {
+        $Brick      = $this->getBrickById( $brickId );
+        $areas      = array();
+        $areaString = '';
+
+        if ( isset( $brickData[ 'id' ] ) ) {
+            unset( $brickData[ 'id' ] );
+        }
+
+        // check areas
+        $Project = QUI::getProjectManager()->getProject(
+            $Brick->getAttribute( 'project' )
+        );
+
+        $availableAreas = array_map(function($data)
+        {
+            if ( isset( $data[ 'name' ] ) ) {
+                return $data[ 'name' ];
+            }
+
+            return '';
+        }, $this->getAreasByProject( $Project ));
+
+
+        if ( isset( $brickData[ 'areas' ] ) )
+        {
+            $parts = explode( ',', $brickData[ 'areas' ] );
+
+            foreach ( $parts as $area )
+            {
+                if ( in_array( $area, $availableAreas ) ) {
+                    $areas[] = $area;
+                }
+            }
+        }
+
+        if ( !empty( $areas ) ) {
+            $areaString = ','. implode( ',', $areas ) .',';
+        }
+
+
+        $Brick->setAttributes( $brickData );
+
+        QUI::getDataBase()->update($this->_getTable(), array(
+            'title'       => $Brick->getAttribute( 'title' ),
+            'description' => $Brick->getAttribute( 'description' ),
+            'content'     => $Brick->getAttribute( 'content' ),
+            'type'        => $Brick->getAttribute( 'type' ),
+            'settings'    => json_encode( $Brick->getAttribute( 'settings' ) ),
+            'areas'       => $areaString
+        ), array(
+            'id' => (int)$brickId
+        ));
+    }
+
+    /**
+     * Returns the bricks table name
+     * @return String
+     */
+    protected function _getTable()
+    {
+        return QUI::getDBTableName( self::TABLE );
+    }
+}
