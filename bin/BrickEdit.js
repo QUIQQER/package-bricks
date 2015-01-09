@@ -34,15 +34,17 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         ],
 
         options : {
-            id      : false,
-            project : false
+            id : false,
+            projectName : false,
+            projectLang : false
         },
 
         initialize : function(options)
         {
             this.parent( options );
 
-            this.$availableBricks = [];
+            this.$availableBricks   = [];
+            this.$availableSettings = [];
 
             this.$Editor = false;
             this.$Areas  = false;
@@ -79,9 +81,10 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 'package_quiqqer_bricks_ajax_getAvailableBricks'
             ], function(data, bricks)
             {
-                self.$availableBricks = bricks;
+                self.$availableBricks   = bricks;
+                self.$availableSettings = data.settings;
 
-                self.setAttributes( data );
+                self.setAttributes( data.attributes );
                 self.$createData(function() {
                     self.fireEvent( 'loaded', [ self ] );
                 });
@@ -111,7 +114,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         {
             var self = this;
 
-            new Element('div', {
+            var Container = new Element('div', {
                 'html' : '<label>' +
                          '    <span class="quiqqer-bricks-brickedit-label-text">' +
                          '        Title' +
@@ -132,6 +135,21 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             }).inject( this.$Elm );
 
             var i, len, title, group, val;
+
+            if ( this.$availableSettings )
+            {
+                console.log( this.$availableSettings );
+
+
+                var Setting;
+
+                for ( i = 0, len = this.$availableSettings.length; i < len; i++ )
+                {
+                    Setting = this.$availableSettings[ i ];
+
+                    console.log( Setting );
+                }
+            }
 
             var Type  = this.$Elm.getElement( '[name="type"]'),
                 Title = this.$Elm.getElement( '[name="title"]' );
@@ -173,9 +191,10 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             // areas
             this.$Areas = new BrickAreas({
                 brickId : this.getAttribute( 'id' ),
-                project : this.getAttribute( 'project' ),
-                areas   : areas,
-                styles  : {
+                projectName : this.getAttribute( 'projectName' ),
+                projectLang : this.getAttribute( 'projectLang' ),
+                areas  : areas,
+                styles : {
                     height : 120
                 }
             }).inject( this.$Elm.getElement( '.quiqqer-bricks-areas' ), 'after'  );

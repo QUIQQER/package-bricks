@@ -15,7 +15,12 @@ function package_quiqqer_bricks_ajax_getBrick($brickId)
     $BrickManager = new \QUI\Bricks\Manager();
     $Brick = $BrickManager->getBrickById( $brickId );
 
-    return $Brick->getAttributes();
+    return array(
+        'attributes' => $Brick->getAttributes(),
+        'settings'   => $BrickManager->getAvailableBrickSettingsByBrickType(
+            $Brick->getAttribute( 'type' )
+        )
+    );
 }
 
 \QUI::$Ajax->register(

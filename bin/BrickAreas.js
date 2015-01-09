@@ -36,7 +36,8 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
         options : {
             brickId : false, // brickId
             styles  : false,
-            project : false,
+            projectName : false,
+            projectLang : false,
             areas   : false
         },
 
@@ -79,7 +80,8 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
                     onClick : function()
                     {
                         new AreaWindow({
-                            project : self.getAttribute( 'project' ),
+                            projectName : self.getAttribute( 'projectName' ),
+                            projectLang : self.getAttribute( 'projectLang' ),
                             events  :
                             {
                                 onSubmit : function(Win, areas)

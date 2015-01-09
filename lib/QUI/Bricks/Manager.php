@@ -41,6 +41,7 @@ class Manager
             $this->_getTable(),
             array(
                 'project'     => $Project->getName(),
+                'lang'        => $Project->getLang(),
                 'title'       => $Brick->getAttribute('title'),
                 'description' => $Brick->getAttribute('description'),
                 'type'        => $Brick->getAttribute('type')
@@ -50,6 +51,14 @@ class Manager
         $lastId = QUI::getPDO()->lastInsertId();
 
         return $lastId;
+    }
+
+    /**
+     * CLears the bricks cache
+     */
+    public function clearCache()
+    {
+        QUI\Cache\Manager::clear( 'quiqqer/bricks' );
     }
 
     /**
@@ -133,8 +142,7 @@ class Manager
 
         }
 
-        $PKM      = QUI::getPackageManager();
-        $packages = $PKM->getInstalled();
+        $xmlFiles = $this->_getBricksXMLFiles();
         $result   = array();
 
         $result[] = array(
@@ -143,14 +151,7 @@ class Manager
             'control'     => 'content'
         );
 
-        foreach ( $packages as $package )
-        {
-            $bricksXML = OPT_DIR . $package['name'] .'/bricks.xml';
-
-            if ( !file_exists( $bricksXML ) ) {
-                continue;
-            }
-
+        foreach ( $xmlFiles as $bricksXML ) {
             $result = array_merge( $result, Utils::getBricksFromXML( $bricksXML ) );
         }
 
@@ -188,6 +189,61 @@ class Manager
         $this->_bricks[ $id ] = new Brick( $data[0] );
 
         return $this->_bricks[ $id ];
+    }
+
+    /**
+     * Return the available brick settings by the brick type
+     *
+     * @param $brickType
+     * @return array
+     */
+    public function getAvailableBrickSettingsByBrickType($brickType)
+    {
+        if ( $brickType == 'content' ) {
+            return array();
+        }
+
+        $cache = 'quiqqer/bricks/brickType/'. md5($brickType);
+
+        try
+        {
+            return QUI\Cache\Manager::get( $cache );
+
+        } catch ( QUI\Exception $Exception )
+        {
+
+        }
+
+
+        $settings = array();
+        $xmlFiles = $this->_getBricksXMLFiles();
+
+        foreach ( $xmlFiles as $brickXML )
+        {
+            $Dom  = QUI\Utils\XML::getDomFromXml( $brickXML );
+            $Path = new \DOMXPath( $Dom );
+
+            $Settings = $Path->query(
+                "//quiqqer/bricks/brick[@control='{$brickType}']/settings/setting"
+            );
+
+            if ( !$Settings->length ) {
+                continue;
+            }
+
+            foreach ( $Settings as $Setting )
+            {
+                $settings[] = array(
+                    'name' => $Setting->getAttribute( 'name' )
+                );
+            }
+
+            break;
+        }
+
+        QUI\Cache\Manager::set( $cache, $settings );
+
+        return $settings;
     }
 
     /**
@@ -244,7 +300,8 @@ class Manager
         $list = QUI::getDataBase()->fetch(array(
             'from'  => $this->_getTable(),
             'where' => array(
-                'project' => $Project->getName()
+                'project' => $Project->getName(),
+                'lang'    => $Project->getLang()
             )
         ));
 
@@ -326,5 +383,42 @@ class Manager
     protected function _getTable()
     {
         return QUI::getDBTableName( self::TABLE );
+    }
+
+    /**
+     * List of available bricks.xml files
+     * @return array
+     */
+    protected function _getBricksXMLFiles()
+    {
+        $cache = 'quiqqer/bricks/availableBrickFiles';
+
+        try
+        {
+            return QUI\Cache\Manager::get( $cache );
+
+        } catch ( QUI\Exception $Exception )
+        {
+
+        }
+
+        $PKM      = QUI::getPackageManager();
+        $packages = $PKM->getInstalled();
+        $result   = array();
+
+        foreach ( $packages as $package )
+        {
+            $bricksXML = OPT_DIR . $package['name'] .'/bricks.xml';
+
+            if ( !file_exists( $bricksXML ) ) {
+                continue;
+            }
+
+            $result[] = $bricksXML;
+        }
+
+        QUI\Cache\Manager::set( $cache, $result );
+
+        return $result;
     }
 }

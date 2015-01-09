@@ -32,7 +32,8 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
 
         options : {
             title     : 'Projekt Brickbereiche',
-            project   : false,
+            projectName : false,
+            projectLang : false,
             maxHeight : 500,
             maxWidth  : 400
         },
@@ -86,7 +87,8 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
             Ajax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
                 'package' : 'quiqqer/brick',
                 project   : JSON.encode({
-                    name : this.getAttribute( 'project' )
+                    name : this.getAttribute( 'projectName' ),
+                    lang : this.getAttribute( 'projectLang' )
                 })
             });
         },
