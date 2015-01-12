@@ -13,13 +13,15 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
     'qui/QUI',
     'qui/controls/Control',
+    'qui/utils/Form',
     'package/quiqqer/bricks/bin/BrickAreas',
     'Ajax',
     'Locale',
+    'utils/Controls',
 
     'css!package/quiqqer/bricks/bin/BrickEdit.css'
 
-], function(QUI, QUIControl, BrickAreas, Ajax, QUILocale)
+], function(QUI, QUIControl, QUIFormUtils, BrickAreas, Ajax, QUILocale, ControlUtils)
 {
     "use strict";
 
@@ -81,10 +83,17 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 'package_quiqqer_bricks_ajax_getAvailableBricks'
             ], function(data, bricks)
             {
+                /**
+                 * @param {{availableSettings:object}} data
+                 * @param {{attributes:object}} data
+                 * @param {{settings:object}} data
+                 */
                 self.$availableBricks   = bricks;
-                self.$availableSettings = data.settings;
+                self.$availableSettings = data.availableSettings;
 
                 self.setAttributes( data.attributes );
+                self.setAttribute( 'settings', data.settings );
+
                 self.$createData(function() {
                     self.fireEvent( 'loaded', [ self ] );
                 });
@@ -134,21 +143,68 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                          '</label>'
             }).inject( this.$Elm );
 
+
             var i, len, title, group, val;
 
             if ( this.$availableSettings )
             {
-                console.log( this.$availableSettings );
-
-
-                var Setting;
+                var setting, dataQui;
+                var SettingsElement = new Element('form', {
+                    'class' : 'quiqqer-bricks-brickedit-settings'
+                });
 
                 for ( i = 0, len = this.$availableSettings.length; i < len; i++ )
                 {
-                    Setting = this.$availableSettings[ i ];
+                    setting = this.$availableSettings[ i ];
+                    dataQui = '';
 
-                    console.log( Setting );
+                    if ( setting['data-qui'] !== '' ) {
+                        dataQui = ' data-qui="'+ setting['data-qui'] +'" ';
+                    }
+
+                    new Element('div', {
+                        html : '<label class="quiqqer-bricks-areas">' +
+                               '    <span class="quiqqer-bricks-brickedit-label-text">' +
+                                        setting.text +
+                               '    </span>' +
+                               '</label>' +
+                               '<input type="'+ setting.type +'" ' +
+                               '       name="'+ setting.name +'" ' +
+                               '       class="'+ setting.class +'" ' +
+                                       dataQui +
+                               '/>'
+                    }).inject( SettingsElement );
                 }
+
+                SettingsElement.inject( Container );
+
+                // set data
+                QUIFormUtils.setDataToForm(
+                    this.getAttribute( 'settings' ),
+                    SettingsElement
+                );
+
+                // parse controls
+                ControlUtils.parse( SettingsElement );
+
+                QUI.parse(SettingsElement, function()
+                {
+                    // set project to the controls
+                    SettingsElement.getElements( '[data-quiid]' ).each(function(Elm)
+                    {
+                        var Control = QUI.Controls.getById(
+                            Elm.get('data-quiid')
+                        );
+
+                        if ( 'setProject' in Control )
+                        {
+                            Control.setProject(
+                                self.getAttribute( 'projectName' ),
+                                self.getAttribute( 'projectLang' )
+                            );
+                        }
+                    });
+                });
             }
 
             var Type  = this.$Elm.getElement( '[name="type"]'),
@@ -190,7 +246,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
             // areas
             this.$Areas = new BrickAreas({
-                brickId : this.getAttribute( 'id' ),
+                brickId     : this.getAttribute( 'id' ),
                 projectName : this.getAttribute( 'projectName' ),
                 projectLang : this.getAttribute( 'projectLang' ),
                 areas  : areas,
@@ -254,7 +310,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          */
         save : function(callback)
         {
-            var Type  = this.$Elm.getElement( '[name="type"]'),
+            var Type  = this.$Elm.getElement( '[name="type"]' ),
                 Title = this.$Elm.getElement( '[name="title"]' );
 
             var data = {
@@ -267,6 +323,16 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             if ( this.$Editor ) {
                 data.content = this.$Editor.getContent();
             }
+
+            // settings
+            var SettingsForm = this.$Elm.getElement(
+                '.quiqqer-bricks-brickedit-settings'
+            );
+
+            if ( SettingsForm ) {
+                data.settings = QUIFormUtils.getFormData( SettingsForm );
+            }
+
 
             Ajax.post('package_quiqqer_bricks_ajax_brick_save', function()
             {

@@ -306,7 +306,7 @@ define('package/quiqqer/bricks/bin/Manager', [
         },
 
         /**
-         *
+         * Opens the brick creation dialog
          */
         $openCreateDialog : function()
         {
@@ -482,9 +482,10 @@ define('package/quiqqer/bricks/bin/Manager', [
                     require(['package/quiqqer/bricks/bin/BrickEdit'], function(BrickEdit)
                     {
                         Brick = new BrickEdit({
-                            id      : brickId,
-                            project : self.$ProjectSelect.getValue(),
-                            events  :
+                            id : brickId,
+                            projectName : self.$ProjectSelect.getValue(),
+                            projectLang : self.$ProjectLangs.getValue(),
+                            events :
                             {
                                 onLoaded : function() {
                                     self.Loader.hide();

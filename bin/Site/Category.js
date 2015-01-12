@@ -35,7 +35,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
 
         initialize: function (options)
         {
-            this.parent(options);
+            this.parent( options );
 
             this.Loader = new QUILoader();
             this.areas  = [];
@@ -75,11 +75,11 @@ define('package/quiqqer/bricks/bin/Site/Category', [
             {
                 var i, len, data, AC;
 
-                var Site  = self.getAttribute( 'Site'),
+                var Site  = self.getAttribute( 'Site' ),
                     areas = Site.getAttribute( 'quiqqer.bricks.areas' );
 
                 if ( areas ) {
-                    areas = JSON.decode(areas);
+                    areas = JSON.decode( areas );
                 }
 
                 for ( i = 0, len = bricks.length; i < len; i++ )
@@ -109,7 +109,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
         {
             var i, len, AC;
 
-            var Site  = this.getAttribute( 'Site'),
+            var Site  = this.getAttribute( 'Site' ),
                 areas = {};
 
             for ( i = 0, len = this.areas.length; i < len; i++ )
@@ -128,7 +128,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          */
         getBrickAreas : function(callback)
         {
-            var Site    = this.getAttribute( 'Site'),
+            var Site    = this.getAttribute( 'Site' ),
                 Project = Site.getProject();
 
             QUIAjax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
@@ -146,7 +146,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          */
         $insertBrickAreaEdit : function(area)
         {
-            var Site    = this.getAttribute( 'Site'),
+            var Site    = this.getAttribute( 'Site' ),
                 Project = Site.getProject(),
                 Control = new Area();
 
@@ -161,5 +161,4 @@ define('package/quiqqer/bricks/bin/Site/Category', [
             return Control;
         }
     });
-
 });

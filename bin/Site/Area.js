@@ -105,7 +105,8 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             }, {
                 'package' : 'quiqqer/bricks',
-                project   : Project.encode()
+                project   : Project.encode(),
+                area      : this.getAttribute( 'name' )
             });
         },
 

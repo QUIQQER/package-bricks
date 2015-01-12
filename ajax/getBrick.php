@@ -17,7 +17,8 @@ function package_quiqqer_bricks_ajax_getBrick($brickId)
 
     return array(
         'attributes' => $Brick->getAttributes(),
-        'settings'   => $BrickManager->getAvailableBrickSettingsByBrickType(
+        'settings'   => $Brick->getSettings(),
+        'availableSettings' => $BrickManager->getAvailableBrickSettingsByBrickType(
             $Brick->getAttribute( 'type' )
         )
     );

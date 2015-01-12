@@ -233,8 +233,13 @@ class Manager
 
             foreach ( $Settings as $Setting )
             {
+                /* @var $Setting \DOMElement */
                 $settings[] = array(
-                    'name' => $Setting->getAttribute( 'name' )
+                    'name'     => $Setting->getAttribute( 'name' ),
+                    'text'     => QUI\Utils\DOM::getTextFromNode( $Setting ),
+                    'type'     => $Setting->getAttribute( 'type' ),
+                    'class'    => $Setting->getAttribute( 'class' ),
+                    'data-qui' => $Setting->getAttribute( 'data-qui' )
                 );
             }
 
@@ -364,12 +369,16 @@ class Manager
 
         $Brick->setAttributes( $brickData );
 
+        if ( isset( $brickData['settings'] ) ) {
+            $Brick->setSettings( $brickData['settings'] );
+        }
+
         QUI::getDataBase()->update($this->_getTable(), array(
             'title'       => $Brick->getAttribute( 'title' ),
             'description' => $Brick->getAttribute( 'description' ),
             'content'     => $Brick->getAttribute( 'content' ),
             'type'        => $Brick->getAttribute( 'type' ),
-            'settings'    => json_encode( $Brick->getAttribute( 'settings' ) ),
+            'settings'    => json_encode( $Brick->getSettings() ),
             'areas'       => $areaString
         ), array(
             'id' => (int)$brickId

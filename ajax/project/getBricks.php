@@ -5,12 +5,13 @@
  */
 
 /**
- * Returns the feed list
+ * Returns the bricks of the project area
  *
  * @param string $project - json array, Project Data
+ * @param string|bool $area - (optional), Area name
  * @return array
  */
-function package_quiqqer_bricks_ajax_project_getBricks($project)
+function package_quiqqer_bricks_ajax_project_getBricks($project, $area=false)
 {
     $Project      = QUI::getProjectManager()->decode( $project );
     $BrickManager = new QUI\Bricks\Manager();
@@ -18,8 +19,20 @@ function package_quiqqer_bricks_ajax_project_getBricks($project)
     $bricks = $BrickManager->getBricksFromProject( $Project );
     $result = array();
 
-    foreach ( $bricks as $Brick ) {
-        $result[] = $Brick->getAttributes();
+    foreach ( $bricks as $Brick )
+    {
+        /* @var $Brick QUI\Bricks\Brick */
+        if ( !$area )
+        {
+            $result[] = $Brick->getAttributes();
+            continue;
+        }
+
+        $areas = $Brick->getAttribute('areas');
+
+        if ( strpos( $areas, ','.$area.',' ) !== false ) {
+            $result[] = $Brick->getAttributes();
+        }
     }
 
     return $result;
@@ -27,6 +40,6 @@ function package_quiqqer_bricks_ajax_project_getBricks($project)
 
 QUI::$Ajax->register(
     'package_quiqqer_bricks_ajax_project_getBricks',
-    array( 'project' ),
+    array( 'project', 'area' ),
     'Permission::checkAdminUser'
 );
