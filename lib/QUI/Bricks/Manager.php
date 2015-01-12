@@ -20,7 +20,8 @@ class Manager
     /**
      * Bricks table name
      */
-    const TABLE = 'bricks';
+    const TABLE       = 'bricks';
+    const TABLE_CACHE = 'bricksCache';
 
     /**
      * Brick temp collector
@@ -267,12 +268,17 @@ class Manager
         $brickAreas = $Site->getAttribute( 'quiqqer.bricks.areas' );
         $brickAreas = json_decode( $brickAreas, true );
 
-        if ( !isset( $brickAreas[ $brickArea ] ) ) {
-            return array();
+        if ( !isset( $brickAreas[ $brickArea ] ) || empty( $brickAreas[ $brickArea ] ) )
+        {
+            $bricks = $this->_getInheritedBricks( $brickArea, $Site );
+
+        } else
+        {
+            $bricks = $brickAreas[ $brickArea ];
         }
 
+
         $result = array();
-        $bricks = $brickAreas[ $brickArea ];
 
         foreach ( $bricks as $brickId )
         {
@@ -427,6 +433,77 @@ class Manager
         }
 
         QUI\Cache\Manager::set( $cache, $result );
+
+        return $result;
+    }
+
+    /**
+     * Return the bricks from an area which are inherited from its parents
+     *
+     * @param String $brickArea - Name of the area
+     * @param Site $Site - Site object
+     * @return array
+     */
+    protected function _getInheritedBricks($brickArea, Site $Site)
+    {
+
+        // inheritance ( vererbung )
+        $Project = $Site->getProject();
+        $areas   = $this->getAreasByProject( $Project );
+
+        foreach ( $areas as $area )
+        {
+            if ( $area['name'] != $brickArea ) {
+                continue;
+            }
+
+            if ( !$area['inheritance'] ) {
+                return array();
+            }
+
+            break;
+        }
+
+
+        if ( !isset( $area ) || !isset( $area['name'] ) ) {
+            return array();
+        }
+
+        if ( $area['name'] != $brickArea ) {
+            return array();
+        }
+
+        if ( !Utils::hasInheritance( $Project, $brickArea ) ) {
+            return array();
+        }
+
+
+        $result    = array();
+        $parentIds = $Site->getParentIdTree();
+        $parentIds = array_reverse( $parentIds );
+
+        $projectCacheTable = QUI::getDBProjectTableName( self::TABLE_CACHE, $Project );
+
+        foreach ( $parentIds as $parentId )
+        {
+            $bricks = QUI::getDataBase()->fetch(array(
+                'from'  => $projectCacheTable,
+                'where' => array(
+                    'id'   => $parentId,
+                    'area' => $brickArea
+                )
+            ));
+
+            if ( empty( $bricks ) ) {
+                continue;
+            }
+
+            foreach ( $bricks as $brick ) {
+                $result[] = $brick['brick'];
+            }
+
+            break;
+        }
 
         return $result;
     }

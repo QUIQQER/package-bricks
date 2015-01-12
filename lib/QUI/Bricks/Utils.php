@@ -8,6 +8,7 @@ namespace QUI\Bricks;
 
 use QUI;
 use QUI\Utils\XML;
+use QUI\Projects\Project;
 
 /**
  * Class Utils
@@ -42,7 +43,7 @@ class Utils
         }
 
         foreach ( $bricks as $Brick ) {
-            $list[] = self::parseBrickToArray( $Brick, $Path );
+            $list[] = self::parseAreaToArray( $Brick, $Path );
         }
 
         return $list;
@@ -64,33 +65,33 @@ class Utils
         $Dom  = XML::getDomFromXml( $file );
         $Path = new \DOMXPath( $Dom );
 
-        $globalBricks = $Path->query( "//quiqqer/bricks/templateAreas/areas/area" );
+        $globalAreas = $Path->query( "//quiqqer/bricks/templateAreas/areas/area" );
 
         if ( $siteType )
         {
-            $typeBricks = $Path->query(
+            $typeAreas = $Path->query(
                 "//quiqqer/bricks/templateAreas/types/type[@type='{$siteType}']/area"
             );
 
         } else
         {
-            $typeBricks = $Path->query( "//quiqqer/bricks/templateAreas/types/type/area" );
+            $typeAreas = $Path->query( "//quiqqer/bricks/templateAreas/types/type/area" );
         }
 
 
         $list = array();
 
-        if ( $globalBricks->length )
+        if ( $globalAreas->length )
         {
-            foreach ( $globalBricks as $Brick ) {
-                $list[] = self::parseBrickToArray( $Brick, $Path );
+            foreach ( $globalAreas as $Area ) {
+                $list[] = self::parseAreaToArray( $Area, $Path );
             }
         }
 
-        if ( $typeBricks->length )
+        if ( $typeAreas->length )
         {
-            foreach ( $typeBricks as $Brick ) {
-                $list[] = self::parseBrickToArray( $Brick, $Path );
+            foreach ( $typeAreas as $Area ) {
+                $list[] = self::parseAreaToArray( $Area, $Path );
             }
         }
 
@@ -103,19 +104,20 @@ class Utils
 
     }
 
+
     static function getTypeTemplateAreasFromXML($file, $siteType)
     {
 
     }
 
     /**
-     * parse a <brick> xml node to an array
+     * parse a <area> xml node to an array
      *
      * @param \DOMElement $Brick
      * @param \DOMXPath $Path
      * @return array
      */
-    static function parseBrickToArray(\DOMElement $Brick, \DOMXPath $Path)
+    static function parseAreaToArray(\DOMElement $Brick, \DOMXPath $Path)
     {
         $control     = $Brick->getAttribute( 'control' );
         $name        = $Brick->getAttribute( 'name' );
@@ -145,7 +147,30 @@ class Utils
             'control'     => $control,
             'name'        => $name,
             'title'       => $title,
-            'description' => $description
+            'description' => $description,
+            'inheritance' => $Brick->getAttribute( 'inheritance' )
         );
+    }
+
+    /**
+     *
+     * @param Project $Project
+     * @param String $areaName
+     * @return bool
+     */
+    static function hasInheritance(Project $Project, $areaName)
+    {
+        $template = $Project->getAttribute( 'template' );
+
+        // getAreasByProject
+        $brickXML = realpath( OPT_DIR . $template .'/bricks.xml' );
+        $bricks   = self::getTemplateAreasFromXML( $brickXML );
+
+        foreach ( $bricks as $brickData )
+        {
+            QUI\Log::writeRecursive( $brickData );
+        }
+
+        return true;
     }
 }

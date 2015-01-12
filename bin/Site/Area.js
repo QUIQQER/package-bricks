@@ -10,12 +10,14 @@ define('package/quiqqer/bricks/bin/Site/Area', [
     'qui/QUI',
     'qui/controls/Control',
     'qui/controls/buttons/Button',
+    'qui/controls/windows/Popup',
+    'qui/controls/elements/List',
     'Locale',
     'Ajax',
 
     'css!package/quiqqer/bricks/bin/Site/Area'
 
-], function (QUI, QUIControl, QUIButton, QUILocale, QUIAjax)
+], function (QUI, QUIControl, QUIButton, QUIPopup, QUIList, QUILocale, QUIAjax)
 {
     "use strict";
 
@@ -25,6 +27,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
         Type    : 'package/quiqqer/bricks/bin/Site/Area',
 
         Binds : [
+            'openBrickDialog',
             'addBrick',
             '$onInject'
         ],
@@ -76,7 +79,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 textimage : 'icon-plus',
                 disable   : true,
                 events    : {
-                    onClick : this.addBrick
+                    onClick : this.openBrickDialog
                 }
             }).inject( Buttons );
 
@@ -181,6 +184,59 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             }
 
             return Elm;
+        },
+
+        /**
+         * Opens the brick add dialog
+         */
+        openBrickDialog : function()
+        {
+            if ( !this.$availableBricks.length ) {
+                return;
+            }
+
+            var self = this;
+
+            new QUIPopup({
+                title     : 'Baustein hinzufügen',
+                icon      : 'icon-th',
+                maxWidth  : 500,
+                maxHeight : 600,
+                autoclose : false,
+                events    :
+                {
+                    onOpen : function(Win)
+                    {
+                        var items   = [],
+                            Content = Win.getContent(),
+
+                            List = new QUIList({
+                                events :
+                                {
+                                    onClick : function(List, data)
+                                    {
+                                        self.addBrickById( data.brickId );
+                                        Win.close();
+                                    }
+                                }
+                            });
+
+                        List.inject( Content );
+
+                        for ( var i = 0, len = self.$availableBricks.length; i < len; i++ )
+                        {
+                            items.push({
+                                brickId : self.$availableBricks[ i ].id,
+                                icon    : 'icon-th',
+                                title   : self.$availableBricks[ i ].title,
+                                text    : self.$availableBricks[ i ].description
+                            });
+                        }
+
+                        List.addItems( items );
+                    }
+                }
+            }).open();
         }
     });
 });
