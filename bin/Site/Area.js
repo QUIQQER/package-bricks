@@ -82,7 +82,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             );
 
             this.$AddButton = new QUIButton({
-                text      : 'Brick hinzufügen',
+                text      : QUILocale.get( lg, 'site.area.button.add' ),
                 textimage : 'icon-plus',
                 disable   : true,
                 events    : {
@@ -148,7 +148,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
         /**
          * Add a brick by its brick data
-         * @param {Array} brickData
+         * @param {Object} brickData - { brickId:1, inheritance:1 }
          */
         addBrick : function(brickData)
         {
@@ -220,7 +220,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             Select = Elm.getElement( 'select' );
 
             new QUIButton({
-                title  : 'Baustein löschen',
+                title  : QUILocale.get( lg, 'site.area.button.delete' ),
                 icon   : 'icon-remove',
                 events :
                 {
@@ -231,7 +231,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             }).inject( Elm );
 
             new QUIButton({
-                title  : 'Baustein-Einstellungen',
+                title  : QUILocale.get( lg, 'site.area.button.settings' ),
                 icon   : 'icon-gear',
                 events :
                 {
@@ -274,7 +274,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             var self = this;
 
             new QUIPopup({
-                title     : 'Baustein hinzufügen',
+                title     : QUILocale.get( lg, 'site.area.window.add' ),
                 icon      : 'icon-th',
                 maxWidth  : 500,
                 maxHeight : 600,
@@ -323,10 +323,10 @@ define('package/quiqqer/bricks/bin/Site/Area', [
         openBrickDeleteDialog : function(BrickElement)
         {
             new QUIConfirm({
-                title : 'Baustein löschen?',
+                title : QUILocale.get( lg, 'site.area.window.delete.title' ),
                 icon  : 'icon-remove',
-                text  : 'Baustein wirklich löschen?',
-                information : 'Möchten Sie den Baustein für diese Seite wirklich löschen?',
+                text  : QUILocale.get( lg, 'site.area.window.delete.text' ),
+                information : QUILocale.get( lg, 'site.area.window.delete.information' ),
                 maxHeight   : 300,
                 maxWidth    : 500,
                 events :
@@ -346,7 +346,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
         openBrickSettingDialog : function(Select)
         {
             new QUIConfirm({
-                title     : 'Baustein-Einstellungen',
+                title     : QUILocale.get( lg, 'site.area.window.settings.title' ),
                 icon      : 'icon-gear',
                 maxWidth  : 400,
                 maxHeight : 300,
@@ -363,7 +363,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                             '<form>' +
                             '    <label>' +
                             '        <input type="checkbox" name="inheritance" />' +
-                            '        Baustein wird vererbt' +
+                                     QUILocale.get( lg, 'site.area.window.settings.setting.inheritance' ) +
                             '    </label>' +
                             '</form>'
                         );

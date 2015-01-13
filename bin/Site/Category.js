@@ -120,7 +120,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
 
                 areas[ AC.getAttribute( 'name' ) ] = AC.getData();
             }
-console.log( areas );
+
             Site.setAttribute( 'quiqqer.bricks.areas', JSON.encode( areas ) );
         },
 

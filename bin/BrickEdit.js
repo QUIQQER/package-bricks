@@ -126,26 +126,25 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             var Container = new Element('div', {
                 'html' : '<label>' +
                          '    <span class="quiqqer-bricks-brickedit-label-text">' +
-                         '        Title' +
+                                  QUILocale.get( 'quiqqer/system', 'title' ) +
                          '    </span>' +
                          '    <input type="text" name="title" />' +
                          '</label>' +
                          '<label>' +
                          '    <span class="quiqqer-bricks-brickedit-label-text">' +
-                         '        Brick Beschreibung' +
+                                  QUILocale.get( 'quiqqer/bricks', 'brick.edit.description' ) +
                          '    </span>' +
                          '    <textarea name="description"></textarea>' +
                          '</label>'+
                          '<label>' +
                          '    <span class="quiqqer-bricks-brickedit-label-text">' +
-                         '        Brick Typ' +
+                                  QUILocale.get( 'quiqqer/bricks', 'brick.edit.type' ) +
                          '    </span>' +
                          '    <select name="type"></select>' +
                          '</label>'+
-
                          '<label class="quiqqer-bricks-areas">' +
                          '    <span class="quiqqer-bricks-brickedit-label-text">' +
-                         '        Erlaubte Brickbereiche' +
+                                  QUILocale.get( 'quiqqer/bricks', 'brick.edit.allowed.areas' ) +
                          '    </span>' +
                          '</label>'
             }).inject( this.$Elm );
@@ -270,7 +269,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             {
                 new Element('label', {
                     html : '<span class="quiqqer-bricks-brickedit-label-editor">' +
-                               'Brick Inhalt' +
+                                QUILocale.get( 'quiqqer/bricks', 'brick.edit.content' ) +
                            '</span>'
                 }).inject( this.$Elm );
 

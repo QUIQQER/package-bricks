@@ -110,7 +110,7 @@ class Brick extends QUI\QDOM
         $Control = $this->_getControl();
 
         if ( !$Control ) {
-            throw new QUI\Exception( 'Control not found. Brick could not be create' );
+            throw new QUI\Exception( 'Control not found. Brick could not be created' );
         }
 
         $Control->setAttributes( $this->getSettings() );

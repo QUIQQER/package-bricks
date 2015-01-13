@@ -71,7 +71,7 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
             this.$Buttons   = this.$Elm.getElement( '.quiqqer-bricks-brickareas-buttons' );
 
             new QUIButton({
-                text   : 'Brickbereich hinzufügen',
+                text   : QUILocale.get( 'quiqqer/bricks', 'brick.edit.area.add' ),
                 styles : {
                     width : '100%'
                 },

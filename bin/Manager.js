@@ -149,7 +149,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.addButton(
                 new QUIButton({
-                    text     : 'Brick hinzufügen',
+                    text     : QUILocale.get( lg, 'manager.button.add' ),
                     name     : 'brick-add',
                     disabled : true,
                     events   : {
@@ -160,7 +160,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.addButton(
                 new QUIButton({
-                    text     : 'Markierte Blöcke löschen',
+                    text     : QUILocale.get( lg, 'manager.button.delete' ),
                     name     : 'brick-delete',
                     disabled : true,
                     events   : {
@@ -313,7 +313,7 @@ define('package/quiqqer/bricks/bin/Manager', [
             var self = this;
 
             new QUIConfirm({
-                title     : 'Neuen Brick hinzufügen',
+                title     : QUILocale.get( lg, 'manager.window.create.title' ),
                 icon      : 'icon-th',
                 maxHeight : 300,
                 maxWidth  : 400,
@@ -332,13 +332,13 @@ define('package/quiqqer/bricks/bin/Manager', [
 
                             '<label>' +
                             '   <span class="quiqqer-bricks-create-label-text">' +
-                            '       Title' +
+                                    QUILocale.get( lg, 'manager.window.create.label.title' ) +
                             '   </span>' +
                             '   <input type="text" name="title" />' +
                             '</label>' +
                             '<label>' +
                             '   <span class="quiqqer-bricks-create-label-text">' +
-                            '       Brick Typ' +
+                                    QUILocale.get( lg, 'manager.window.create.label.type' ) +
                             '   </span>' +
                             '   <select name="type"></select>' +
                             '</label>'
@@ -425,6 +425,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                 maxHeight : 300,
                 maxWidth  : 600,
                 autoclose : false,
+                title     : QUILocale.get( lg, 'manager.window.delete.title' ),
                 events    :
                 {
                     onOpen : function(Win)
@@ -440,9 +441,9 @@ define('package/quiqqer/bricks/bin/Manager', [
 
                         Content.set(
                             'html',
-
-                            '<h1>Möchten Sie folgende Brick-IDs wirklich löschen</h1>' +
-                            lists
+                            QUILocale.get( lg, 'manager.window.delete.information', {
+                                list : lists
+                            })
                         );
                     },
 
@@ -473,7 +474,8 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             var self  = this,
                 Sheet = this.createSheet({
-                    title : 'Brick editieren'
+                    title : QUILocale.get( lg, 'brick.sheet.edit.title' ),
+                    icon  : 'icon-edit'
                 });
 
             Sheet.addEvents({
@@ -500,7 +502,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             Sheet.addButton({
                 textimage : 'icon-save',
-                text : 'Speichern',
+                text : QUILocale.get( 'quiqqer/system', 'save' ),
                 styles : {
                     width : 200
                 },

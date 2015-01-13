@@ -3,14 +3,14 @@
 
     <groups name="quiqqer/bricks" datatype="php,js">
         <locale name="menu.bricks.text">
-            <de><![CDATA[Brickverwaltung]]></de>
+            <de><![CDATA[Bausteine]]></de>
             <en><![CDATA[Bricks-Manager]]></en>
         </locale>
 
 
         <!-- Standard Bricks -->
         <locale name="brick.content.title">
-            <de><![CDATA[Brick:Inhalt]]></de>
+            <de><![CDATA[Baustein:Inhalt]]></de>
             <en><![CDATA[Brick:Content]]></en>
         </locale>
         <locale name="brick.content.description">
@@ -19,7 +19,7 @@
         </locale>
 
         <locale name="brick.control.breadcrumb.title">
-            <de><![CDATA[Brick:Bradcrumb]]></de>
+            <de><![CDATA[Baustein:Bradcrumb]]></de>
             <en><![CDATA[Brick:Bradcrumb]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.description">
@@ -28,7 +28,7 @@
         </locale>
 
         <locale name="brick.control.contact.title">
-            <de><![CDATA[Brick:Kontakt]]></de>
+            <de><![CDATA[Baustein:Kontakt]]></de>
             <en><![CDATA[Brick:Contact]]></en>
         </locale>
         <locale name="brick.control.contact.description">
@@ -39,13 +39,119 @@
 
     <groups name="quiqqer/bricks" datatype="php">
         <locale name="site.panel.bricks.category.title">
-            <de><![CDATA[Blöcke]]></de>
+            <de><![CDATA[Bausteine]]></de>
             <en><![CDATA[Bricks]]></en>
         </locale>
 
     </groups>
 
     <groups name="quiqqer/bricks" datatype="js">
+        <locale name="brick.type">
+            <de><![CDATA[Baustein-Typ]]></de>
+            <en><![CDATA[Brick type]]></en>
+        </locale>
+
+        <locale name="site.area.button.add">
+            <de><![CDATA[Baustein hinzufügen]]></de>
+            <en><![CDATA[Add a Brick]]></en>
+        </locale>
+        <locale name="site.area.button.delete">
+            <de><![CDATA[Baustein löschen]]></de>
+            <en><![CDATA[Delete the Brick]]></en>
+        </locale>
+        <locale name="site.area.button.settings">
+            <de><![CDATA[Baustein-Einstellungen]]></de>
+            <en><![CDATA[Brick settings]]></en>
+        </locale>
+        <locale name="site.area.window.add">
+            <de><![CDATA[Baustein hinzufügen]]></de>
+            <en><![CDATA[Add a Brick]]></en>
+        </locale>
+
+        <locale name="site.area.window.delete.title">
+            <de><![CDATA[Baustein löschen?]]></de>
+            <en><![CDATA[Delete the Brick?]]></en>
+        </locale>
+        <locale name="site.area.window.delete.text">
+            <de><![CDATA[Baustein wirklich löschen?]]></de>
+            <en><![CDATA[Really delete the Brick?]]></en>
+        </locale>
+        <locale name="site.area.window.delete.information">
+            <de><![CDATA[Möchten Sie den Baustein für diese Seite wirklich löschen?]]></de>
+            <en><![CDATA[Do you really want to delete the Brick for this page?]]></en>
+        </locale>
+
+        <locale name="site.area.window.settings.title">
+            <de><![CDATA[Baustein-Einstellungen]]></de>
+            <en><![CDATA[Brick settings]]></en>
+        </locale>
+        <locale name="site.area.window.settings.setting.inheritance">
+            <de><![CDATA[Baustein wird vererbt]]></de>
+            <en><![CDATA[Brick is inherited]]></en>
+        </locale>
+
+        <locale name="area.window.title">
+            <de><![CDATA[Baustein-Zonen]]></de>
+            <en><![CDATA[Brick areas]]></en>
+        </locale>
+        <locale name="brick.edit.area.add">
+            <de><![CDATA[Baustein-Zone hinzufügen]]></de>
+            <en><![CDATA[Add a Brick area]]></en>
+        </locale>
+
+        <locale name="brick.sheet.edit.title">
+            <de><![CDATA[Baustein bearbeiten]]></de>
+            <en><![CDATA[Edit Brick]]></en>
+        </locale>
+        <locale name="brick.edit.description">
+            <de><![CDATA[Baustein Beschreibung]]></de>
+            <en><![CDATA[Brick description]]></en>
+        </locale>
+        <locale name="brick.edit.type">
+            <de><![CDATA[Baustein-Typ]]></de>
+            <en><![CDATA[Brick type]]></en>
+        </locale>
+        <locale name="brick.edit.allowed.areas">
+            <de><![CDATA[Erlaubte Baustein-Zonen]]></de>
+            <en><![CDATA[Allowed Brick areas]]></en>
+        </locale>
+        <locale name="brick.edit.content">
+            <de><![CDATA[Baustein-Inhalt]]></de>
+            <en><![CDATA[Brick content]]></en>
+        </locale>
+
+        <locale name="manager.button.add">
+            <de><![CDATA[Baustein hinzufügen]]></de>
+            <en><![CDATA[Add a Brick]]></en>
+        </locale>
+        <locale name="manager.button.delete">
+            <de><![CDATA[Markierte Bausteine löschen]]></de>
+            <en><![CDATA[Delete marked Bricks]]></en>
+        </locale>
+        <locale name="manager.window.create.title">
+            <de><![CDATA[Neuen Baustein hinzufügen]]></de>
+            <en><![CDATA[Create a new Brick]]></en>
+        </locale>
+        <locale name="manager.window.create.label.title">
+            <de><![CDATA[Baustein Titel]]></de>
+            <en><![CDATA[Brick title]]></en>
+        </locale>
+        <locale name="manager.window.create.label.type">
+            <de><![CDATA[Baustein Typ]]></de>
+            <en><![CDATA[Brick type]]></en>
+        </locale>
+        <locale name="manager.window.delete.title">
+            <de><![CDATA[Bausteine löschen]]></de>
+            <en><![CDATA[Delete Bricks]]></en>
+        </locale>
+        <locale name="manager.window.delete.information">
+            <de><![CDATA[<h1>Möchten Sie folgende Baustein-IDs wirklich löschen?</h1>[list]]]></de>
+            <en><![CDATA[<h1>Do you really want to delete the following Brick-IDs?</h1>[list]]]></en>
+        </locale>
+        <locale name="manager.brick.edit.btn.save">
+            <de><![CDATA[]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
 
     </groups>
 
@@ -55,7 +161,6 @@
             <de><![CDATA[Bausteine]]></de>
             <en><![CDATA[Bricks]]></en>
         </locale>
-
         <locale name="quiqqer.blocks.edit._title">
             <de><![CDATA[Darf Bausteine bearbeiten / editieren.]]></de>
             <en><![CDATA[Can edit Bricks.]]></en>

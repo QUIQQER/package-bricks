@@ -31,7 +31,7 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
         ],
 
         options : {
-            title     : 'Projekt Brickbereiche',
+            title : QUILocale.get( 'quiqqer/bricks', 'area.window.title' ),
             projectName : false,
             projectLang : false,
             maxHeight : 500,
