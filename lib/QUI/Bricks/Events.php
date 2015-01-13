@@ -25,6 +25,9 @@ class Events
      */
     static function onSiteSave($Site)
     {
+        QUI\Rights\Permission::checkPermission('quiqqer.blocks.assign');
+
+
         $areas = $Site->getAttribute( 'quiqqer.bricks.areas' );
         $areas = json_decode( $areas, true );
 

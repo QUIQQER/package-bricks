@@ -42,10 +42,36 @@
             <de><![CDATA[Blöcke]]></de>
             <en><![CDATA[Bricks]]></en>
         </locale>
+
     </groups>
 
     <groups name="quiqqer/bricks" datatype="js">
 
+    </groups>
+
+    <!-- permissions locale -->
+    <groups name="locale/permissions" datatype="php,js">
+        <locale name="quiqqer.blocks._title">
+            <de><![CDATA[Bausteine]]></de>
+            <en><![CDATA[Bricks]]></en>
+        </locale>
+
+        <locale name="quiqqer.blocks.edit._title">
+            <de><![CDATA[Darf Bausteine bearbeiten / editieren.]]></de>
+            <en><![CDATA[Can edit Bricks.]]></en>
+        </locale>
+        <locale name="quiqqer.blocks.assign._title">
+            <de><![CDATA[Darf Bausteine Seiten zu weisen.]]></de>
+            <en><![CDATA[Can assign Bricks to Sites.]]></en>
+        </locale>
+        <locale name="quiqqer.blocks.delete._title">
+            <de><![CDATA[Darf Bausteine löschen.]]></de>
+            <en><![CDATA[Can delete Bricks.]]></en>
+        </locale>
+        <locale name="quiqqer.blocks.create._title">
+            <de><![CDATA[Darf neue Bausteine erstellen.]]></de>
+            <en><![CDATA[Can create new Bricks.]]></en>
+        </locale>
     </groups>
 
 </locales>

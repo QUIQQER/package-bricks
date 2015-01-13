@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permissions>
+
+    <permission name="quiqqer.blocks.create" type="bool">
+        <defaultvalue>1</defaultvalue>
+    </permission>
+    <permission name="quiqqer.blocks.edit" type="bool">
+        <defaultvalue>1</defaultvalue>
+    </permission>
+    <permission name="quiqqer.blocks.delete" type="bool">
+        <defaultvalue>1</defaultvalue>
+    </permission>
+    <permission name="quiqqer.blocks.assign" type="bool">
+        <defaultvalue>1</defaultvalue>
+    </permission>
+
+</permissions>

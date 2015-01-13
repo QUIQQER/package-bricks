@@ -225,7 +225,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 events :
                 {
                     onClick : function() {
-                        Elm.destroy();
+                        self.openBrickDeleteDialog( Elm );
                     }
                 }
             }).inject( Elm );
@@ -310,6 +310,29 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                         }
 
                         List.addItems( items );
+                    }
+                }
+            }).open();
+        },
+
+        /**
+         * Opens the brick deletion dialog
+         *
+         * @param {HTMLElement} BrickElement - Element of the Brick
+         */
+        openBrickDeleteDialog : function(BrickElement)
+        {
+            new QUIConfirm({
+                title : 'Baustein löschen?',
+                icon  : 'icon-remove',
+                text  : 'Baustein wirklich löschen?',
+                information : 'Möchten Sie den Baustein für diese Seite wirklich löschen?',
+                maxHeight   : 300,
+                maxWidth    : 500,
+                events :
+                {
+                    onSubmit : function() {
+                        BrickElement.destroy();
                     }
                 }
             }).open();
