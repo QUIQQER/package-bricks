@@ -1,3 +1,4 @@
+
 /**
  * Area edit control for the site object
  *
@@ -11,15 +12,19 @@ define('package/quiqqer/bricks/bin/Site/Area', [
     'qui/controls/Control',
     'qui/controls/buttons/Button',
     'qui/controls/windows/Popup',
+    'qui/controls/windows/Confirm',
     'qui/controls/elements/List',
     'Locale',
     'Ajax',
 
     'css!package/quiqqer/bricks/bin/Site/Area'
 
-], function (QUI, QUIControl, QUIButton, QUIPopup, QUIList, QUILocale, QUIAjax)
+], function (QUI, QUIControl, QUIButton, QUIPopup, QUIConfirm, QUIList, QUILocale, QUIAjax)
 {
     "use strict";
+
+    var lg = 'quiqqer/bricks';
+
 
     return new Class({
 
@@ -28,7 +33,8 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
         Binds : [
             'openBrickDialog',
-            'addBrick',
+            'openBrickSettingDialog',
+            'createNewBrick',
             '$onInject'
         ],
 
@@ -47,6 +53,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             this.$availableBricks = [];
             this.$loaded          = false;
             this.$brickIds        = [];
+            this.$brickData       = [];
 
             this.addEvents({
                 onInject : this.$onInject
@@ -106,6 +113,10 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                     self.addBrickById( brickId );
                 });
 
+                self.$brickData.each(function(brickData) {
+                    self.addBrick( brickData );
+                });
+
             }, {
                 'package' : 'quiqqer/bricks',
                 project   : Project.encode(),
@@ -115,26 +126,65 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
         /**
          * Return the brick list
-         * @returns {array}
+         * @returns {Array}
          */
         getData : function()
         {
-            return this.$Elm.getElements('select').map(function(Select) {
-                return Select.value;
-            });
+            var i, len;
+
+            var data   = [],
+                bricks = this.$Elm.getElements( 'select' );
+
+            for ( i = 0, len = bricks.length; i < len; i++ )
+            {
+                data.push({
+                    brickId     : bricks[ i ].value,
+                    inheritance : bricks[ i ].get( 'data-inheritance' ) == 1 ? 1 : 0
+                });
+            }
+
+            return data;
+        },
+
+        /**
+         * Add a brick by its brick data
+         * @param {Array} brickData
+         */
+        addBrick : function(brickData)
+        {
+            if ( !this.$loaded )
+            {
+                this.$brickData.push( brickData );
+                return;
+            }
+
+            var BrickNode = this.addBrickById( brickData.brickId );
+
+            if ( !BrickNode ) {
+                return;
+            }
+
+            var Select = BrickNode.getElement( 'select' );
+
+            Select.set( 'data-inheritance', 0 );
+
+            if ( "inheritance" in brickData ) {
+                Select.set( 'data-inheritance', brickData.inheritance );
+            }
         },
 
         /**
          * Add a brick by its ID
          *
-         * @param brickId
+         * @param {Number} brickId
+         * @return {HTMLElement|Boolean} Brick-Node
          */
         addBrickById : function(brickId)
         {
             if ( !this.$loaded )
             {
                 this.$brickIds.push( brickId );
-                return;
+                return false;
             }
 
             var found = this.$availableBricks.filter(function(Item) {
@@ -142,18 +192,24 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             });
 
             if ( !found.length ) {
-                return;
+                return false;
             }
 
-            this.addBrick().getElement( 'select').set( 'value', brickId );
+            var BrickNode = this.createNewBrick();
+
+            BrickNode.getElement( 'select' ).set( 'value', brickId );
+
+            return BrickNode;
         },
 
         /**
-         * Add a brick selection to the area
+         * Add a new brick to the area
          */
-        addBrick : function()
+        createNewBrick : function()
         {
             var i, len, Select;
+
+            var self = this;
 
             var Elm = new Element('div', {
                 'class' : 'quiqqer-bricks-site-category-area-brick',
@@ -164,12 +220,28 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             Select = Elm.getElement( 'select' );
 
             new QUIButton({
-                title  : 'Brick löschen',
-                icon   : 'icon-remove-circle',
+                title  : 'Baustein löschen',
+                icon   : 'icon-remove',
                 events :
                 {
                     onClick : function() {
                         Elm.destroy();
+                    }
+                }
+            }).inject( Elm );
+
+            new QUIButton({
+                title  : 'Baustein-Einstellungen',
+                icon   : 'icon-gear',
+                events :
+                {
+                    onClick : function(Btn)
+                    {
+                        var Elm    = Btn.getElm(),
+                            Parent = Elm.getParent( '.quiqqer-bricks-site-category-area-brick' ),
+                            Select = Parent.getElement( 'select' );
+
+                        self.openBrickSettingDialog( Select );
                     }
                 }
             }).inject( Elm );
@@ -185,6 +257,10 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             return Elm;
         },
+
+        /**
+         * dialogs
+         */
 
         /**
          * Opens the brick add dialog
@@ -234,6 +310,56 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                         }
 
                         List.addItems( items );
+                    }
+                }
+            }).open();
+        },
+
+        /**
+         * Opens the brick settings dialog
+         *
+         * @param {HTMLElement} Select
+         */
+        openBrickSettingDialog : function(Select)
+        {
+            new QUIConfirm({
+                title     : 'Baustein-Einstellungen',
+                icon      : 'icon-gear',
+                maxWidth  : 400,
+                maxHeight : 300,
+                autoclose : false,
+                events    :
+                {
+                    onOpen : function(Win)
+                    {
+                        var Content = Win.getContent();
+
+                        Content.set(
+                            'html',
+
+                            '<form>' +
+                            '    <label>' +
+                            '        <input type="checkbox" name="inheritance" />' +
+                            '        Baustein wird vererbt' +
+                            '    </label>' +
+                            '</form>'
+                        );
+
+                        var Form = Win.getContent().getElement( 'form'),
+                            elms = Form.elements;
+
+                        elms.inheritance.checked = Select.get( 'data-inheritance' ).toInt();
+                    },
+
+                    onSubmit : function(Win)
+                    {
+                        var Form = Win.getContent().getElement( 'form' );
+
+                        Select.set({
+                            'data-inheritance' : Form.elements.inheritance.checked ? 1 : 0
+                        });
+
+                        Win.close();
                     }
                 }
             }).open();

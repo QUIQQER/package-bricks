@@ -514,6 +514,8 @@ define('package/quiqqer/bricks/bin/Manager', [
                         {
                             self.Loader.hide();
                             Sheet.hide();
+
+                            self.refresh();
                         });
                     }
                 }

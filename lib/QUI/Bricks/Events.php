@@ -58,15 +58,19 @@ class Events
             // clear area and new data set
             QUI::getDataBase()->delete($projectTable, array(
                 'id'   => $Site->getId(),
-                'area' => $area
+                'area' => $area[ 'name' ]
             ));
 
-            foreach ( $bricks as $brickId )
+            foreach ( $bricks as $brick )
             {
+                if ( !(int)$brick['inheritance'] ) {
+                    continue;
+                }
+
                 QUI::getDataBase()->insert($projectTable, array(
                     'id'    => $Site->getId(),
                     'area'  => $area[ 'name' ],
-                    'brick' => $brickId
+                    'brick' => (int)$brick['brickId']
                 ));
             }
         }

@@ -132,10 +132,17 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                          '</label>' +
                          '<label>' +
                          '    <span class="quiqqer-bricks-brickedit-label-text">' +
+                         '        Brick Beschreibung' +
+                         '    </span>' +
+                         '    <textarea name="description"></textarea>' +
+                         '</label>'+
+                         '<label>' +
+                         '    <span class="quiqqer-bricks-brickedit-label-text">' +
                          '        Brick Typ' +
                          '    </span>' +
                          '    <select name="type"></select>' +
                          '</label>'+
+
                          '<label class="quiqqer-bricks-areas">' +
                          '    <span class="quiqqer-bricks-brickedit-label-text">' +
                          '        Erlaubte Brickbereiche' +
@@ -207,8 +214,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 });
             }
 
-            var Type  = this.$Elm.getElement( '[name="type"]'),
-                Title = this.$Elm.getElement( '[name="title"]' );
+            var Type  = this.$Elm.getElement( '[name="type"]' ),
+                Title = this.$Elm.getElement( '[name="title"]' ),
+                Desc  = this.$Elm.getElement( '[name="description"]' );
 
             for ( i = 0, len = this.$availableBricks.length; i < len; i++ )
             {
@@ -233,6 +241,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
             Title.value = this.getAttribute( 'title' );
             Type.value  = this.getAttribute( 'type' );
+            Desc.value  = this.getAttribute( 'description' );
 
             var areas = [];
 
@@ -311,13 +320,15 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         save : function(callback)
         {
             var Type  = this.$Elm.getElement( '[name="type"]' ),
-                Title = this.$Elm.getElement( '[name="title"]' );
+                Title = this.$Elm.getElement( '[name="title"]'),
+                Desc  = this.$Elm.getElement( '[name="description"]' );
 
             var data = {
-                title   : Title.value,
-                type    : Type.value,
-                content : '',
-                areas   : this.$Areas.getAreas().join(',')
+                title       : Title.value,
+                description : Desc.value,
+                type        : Type.value,
+                content     : '',
+                areas       : this.$Areas.getAreas().join(',')
             };
 
             if ( this.$Editor ) {
@@ -345,6 +356,5 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 data      : JSON.encode( data )
             });
         }
-
     });
 });

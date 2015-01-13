@@ -274,7 +274,12 @@ class Manager
 
         } else
         {
-            $bricks = $brickAreas[ $brickArea ];
+            $bricks    = array();
+            $brickData = $brickAreas[ $brickArea ];
+
+            foreach ( $brickData as $brick ) {
+                $bricks[] = $brick[ 'brickId' ];
+            }
         }
 
 
