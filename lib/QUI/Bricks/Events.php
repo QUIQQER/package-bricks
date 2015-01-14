@@ -25,7 +25,7 @@ class Events
      */
     static function onSiteSave($Site)
     {
-        QUI\Rights\Permission::checkPermission('quiqqer.blocks.assign');
+        QUI\Rights\Permission::checkPermission('quiqqer.bricks.assign');
 
 
         $areas = $Site->getAttribute( 'quiqqer.bricks.areas' );
@@ -63,6 +63,19 @@ class Events
                 'id'   => $Site->getId(),
                 'area' => $area[ 'name' ]
             ));
+
+            // check if deactivated
+            if ( isset( $bricks[ 0 ] ) && isset( $bricks[ 0 ][ 'deactivate' ] ) )
+            {
+                QUI::getDataBase()->insert($projectTable, array(
+                    'id'    => $Site->getId(),
+                    'area'  => $area[ 'name' ],
+                    'brick' => -1
+                ));
+
+                continue;
+            }
+
 
             foreach ( $bricks as $brick )
             {

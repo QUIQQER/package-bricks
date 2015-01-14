@@ -38,7 +38,7 @@ class Manager
      */
     public function createBrickForProject(Project $Project, Brick $Brick)
     {
-        QUI\Rights\Permission::checkPermission( 'quiqqer.blocks.create' );
+        QUI\Rights\Permission::checkPermission( 'quiqqer.bricks.create' );
 
 
         QUI::getDataBase()->insert(
@@ -72,7 +72,7 @@ class Manager
      */
     public function deleteBrick($brickId)
     {
-        QUI\Rights\Permission::checkPermission( 'quiqqer.blocks.delete' );
+        QUI\Rights\Permission::checkPermission( 'quiqqer.bricks.delete' );
 
         // check if brick exist
         $this->getBrickById( $brickId );
@@ -282,7 +282,12 @@ class Manager
             $bricks    = array();
             $brickData = $brickAreas[ $brickArea ];
 
-            foreach ( $brickData as $brick ) {
+            foreach ( $brickData as $brick )
+            {
+                if ( isset( $brick['deactivate'] ) ) {
+                    break;
+                }
+
                 $bricks[] = $brick[ 'brickId' ];
             }
         }
@@ -343,7 +348,7 @@ class Manager
      */
     public function saveBrick($brickId, array $brickData)
     {
-        QUI\Rights\Permission::checkPermission( 'quiqqer.blocks.edit' );
+        QUI\Rights\Permission::checkPermission( 'quiqqer.bricks.edit' );
 
         $Brick      = $this->getBrickById( $brickId );
         $areas      = array();

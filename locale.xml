@@ -51,6 +51,10 @@
             <en><![CDATA[Brick type]]></en>
         </locale>
 
+        <locale name="site.area.button.area.settings">
+            <de><![CDATA[Baustein-Zonen-Einstellungen]]></de>
+            <en><![CDATA[Brick area settings]]></en>
+        </locale>
         <locale name="site.area.button.add">
             <de><![CDATA[Baustein hinzufügen]]></de>
             <en><![CDATA[Add a Brick]]></en>
@@ -79,6 +83,38 @@
         <locale name="site.area.window.delete.information">
             <de><![CDATA[Möchten Sie den Baustein für diese Seite wirklich löschen?]]></de>
             <en><![CDATA[Do you really want to delete the Brick for this page?]]></en>
+        </locale>
+
+        <locale name="site.area.window.deactivate.title">
+            <de><![CDATA[Bausteine in der Baustein-Zone]]></de>
+            <en><![CDATA[Bricks in the area]]></en>
+        </locale>
+        <locale name="site.area.window.deactivate.text">
+            <de><![CDATA[Bausteine in der Baustein-Zone]]></de>
+            <en><![CDATA[Bricks in the area]]></en>
+        </locale>
+        <locale name="site.area.window.deactivate.information" html="true">
+            <de><![CDATA[
+                In der Baustein-Zone sind noch Bausteine enthalten<br />
+                Die Baustein-Zone kann nur deaktiviert werden wenn dieser keine Bausteine enthalten sind.<br />
+                Möchten Sie die Bausteine aus der Baustein-Zone entfernen?
+            ]]>
+            </de>
+            <en><![CDATA[
+                The Area still contains bricks<br />
+                The area can be disabled only if no bricks are included.<br />
+                Do you want to remove the bricks from the area?
+            ]]></en>
+        </locale>
+
+
+        <locale name="area.window.settings.title">
+            <de><![CDATA[Baustein-Zonen-Einstellungen]]></de>
+            <en><![CDATA[Brick area settings]]></en>
+        </locale>
+        <locale name="area.window.settings.deactivate">
+            <de><![CDATA[Baustein-Zonen deaktivieren]]></de>
+            <en><![CDATA[Deactivate Brick area]]></en>
         </locale>
 
         <locale name="site.area.window.settings.title">
@@ -157,23 +193,23 @@
 
     <!-- permissions locale -->
     <groups name="locale/permissions" datatype="php,js">
-        <locale name="quiqqer.blocks._title">
+        <locale name="quiqqer.bricks._title">
             <de><![CDATA[Bausteine]]></de>
             <en><![CDATA[Bricks]]></en>
         </locale>
-        <locale name="quiqqer.blocks.edit._title">
+        <locale name="quiqqer.bricks.edit._title">
             <de><![CDATA[Darf Bausteine bearbeiten / editieren.]]></de>
             <en><![CDATA[Can edit Bricks.]]></en>
         </locale>
-        <locale name="quiqqer.blocks.assign._title">
+        <locale name="quiqqer.bricks.assign._title">
             <de><![CDATA[Darf Bausteine Seiten zu weisen.]]></de>
             <en><![CDATA[Can assign Bricks to Sites.]]></en>
         </locale>
-        <locale name="quiqqer.blocks.delete._title">
+        <locale name="quiqqer.bricks.delete._title">
             <de><![CDATA[Darf Bausteine löschen.]]></de>
             <en><![CDATA[Can delete Bricks.]]></en>
         </locale>
-        <locale name="quiqqer.blocks.create._title">
+        <locale name="quiqqer.bricks.create._title">
             <de><![CDATA[Darf neue Bausteine erstellen.]]></de>
             <en><![CDATA[Can create new Bricks.]]></en>
         </locale>
