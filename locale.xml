@@ -35,6 +35,45 @@
             <de><![CDATA[]]></de>
             <en><![CDATA[]]></en>
         </locale>
+
+        <locale name="area.window.title">
+            <de><![CDATA[Baustein-Zonen]]></de>
+            <en><![CDATA[Brick areas]]></en>
+        </locale>
+        <locale name="brick.edit.area.add">
+            <de><![CDATA[Baustein-Zone hinzufügen]]></de>
+            <en><![CDATA[Add a Brick area]]></en>
+        </locale>
+
+        <locale name="brick.edit.header">
+            <de><![CDATA[Baustein Einstellungen]]></de>
+            <en><![CDATA[Brick settings]]></en>
+        </locale>
+        <locale name="brick.sheet.edit.title">
+            <de><![CDATA[Baustein bearbeiten]]></de>
+            <en><![CDATA[Edit Brick]]></en>
+        </locale>
+        <locale name="brick.edit.description">
+            <de><![CDATA[Baustein Beschreibung]]></de>
+            <en><![CDATA[Brick description]]></en>
+        </locale>
+        <locale name="brick.edit.type">
+            <de><![CDATA[Baustein-Typ]]></de>
+            <en><![CDATA[Brick type]]></en>
+        </locale>
+        <locale name="brick.edit.allowed.areas">
+            <de><![CDATA[Erlaubte Baustein-Zonen]]></de>
+            <en><![CDATA[Allowed Brick areas]]></en>
+        </locale>
+        <locale name="brick.edit.content">
+            <de><![CDATA[Baustein-Inhalt]]></de>
+            <en><![CDATA[Brick content]]></en>
+        </locale>
+        <locale name="brick.edit.extra.header">
+            <de><![CDATA[Zusäzliche Einstellungen]]></de>
+            <en><![CDATA[Extra settings]]></en>
+        </locale>
+
     </groups>
 
     <groups name="quiqqer/bricks" datatype="php">
@@ -124,36 +163,6 @@
         <locale name="site.area.window.settings.setting.inheritance">
             <de><![CDATA[Baustein wird vererbt]]></de>
             <en><![CDATA[Brick is inherited]]></en>
-        </locale>
-
-        <locale name="area.window.title">
-            <de><![CDATA[Baustein-Zonen]]></de>
-            <en><![CDATA[Brick areas]]></en>
-        </locale>
-        <locale name="brick.edit.area.add">
-            <de><![CDATA[Baustein-Zone hinzufügen]]></de>
-            <en><![CDATA[Add a Brick area]]></en>
-        </locale>
-
-        <locale name="brick.sheet.edit.title">
-            <de><![CDATA[Baustein bearbeiten]]></de>
-            <en><![CDATA[Edit Brick]]></en>
-        </locale>
-        <locale name="brick.edit.description">
-            <de><![CDATA[Baustein Beschreibung]]></de>
-            <en><![CDATA[Brick description]]></en>
-        </locale>
-        <locale name="brick.edit.type">
-            <de><![CDATA[Baustein-Typ]]></de>
-            <en><![CDATA[Brick type]]></en>
-        </locale>
-        <locale name="brick.edit.allowed.areas">
-            <de><![CDATA[Erlaubte Baustein-Zonen]]></de>
-            <en><![CDATA[Allowed Brick areas]]></en>
-        </locale>
-        <locale name="brick.edit.content">
-            <de><![CDATA[Baustein-Inhalt]]></de>
-            <en><![CDATA[Brick content]]></en>
         </locale>
 
         <locale name="manager.button.add">
