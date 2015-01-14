@@ -15,10 +15,11 @@ define('package/quiqqer/bricks/bin/Site/Area', [
     'qui/controls/elements/List',
     'Locale',
     'Ajax',
+    'package/quiqqer/bricks/bin/Sortables',
 
     'css!package/quiqqer/bricks/bin/Site/Area'
 
-], function (QUI, QUIControl, QUIButton, QUIPopup, QUIConfirm, QUIList, QUILocale, QUIAjax)
+], function (QUI, QUIControl, QUIButton, QUIPopup, QUIConfirm, QUIList, QUILocale, QUIAjax, Sortables)
 {
     "use strict";
 
@@ -50,12 +51,18 @@ define('package/quiqqer/bricks/bin/Site/Area', [
         {
             this.parent( options );
 
-            this.$AddButton       = false;
-            this.$SettingsButton  = false;
             this.$availableBricks = [];
             this.$loaded          = false;
             this.$brickIds        = [];
             this.$brickData       = [];
+
+            this.$AddButton      = false;
+            this.$SettingsButton = false;
+            this.$SortableButton = false;
+            this.$MoreButton     = false;
+
+            this.$List        = false;
+            this.$FXExtraBtns = false;
 
             this.addEvents({
                 onInject : this.$onInject
@@ -64,25 +71,39 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
         /**
          * Return the domnode element
-         * @return {Element}
+         * @return {HTMLElement}
          */
         create: function ()
         {
-            var title = this.getAttribute( 'title' );
+            var self  = this,
+                title = this.getAttribute( 'title' );
 
             this.$Elm = new Element('div', {
                 'class' : 'quiqqer-bricks-site-category-area',
                 html    : '<div class="quiqqer-bricks-site-category-area-title">'+
                               QUILocale.get( title.group, title.var ) +
                           '   <div class="quiqqer-bricks-site-category-area-buttons"></div>' +
-                          '</div>',
+                          '</div><ul class="quiqqer-bricks-site-category-area-list"></ul>',
                 'data-name' : this.getAttribute( 'name' )
             });
 
+            // Elements
             var Buttons = this.$Elm.getElement(
                 '.quiqqer-bricks-site-category-area-buttons'
             );
 
+            var ExtraButtons = new Element('div', {
+                'class' : 'quiqqer-bricks-site-category-area-extraButtons'
+            });
+
+
+            this.$FXExtraBtns = moofx( ExtraButtons );
+
+            this.$List = this.$Elm.getElement(
+                '.quiqqer-bricks-site-category-area-list'
+            );
+
+            // buttons
             this.$AddButton = new QUIButton({
                 text      : QUILocale.get( lg, 'site.area.button.add' ),
                 textimage : 'icon-plus',
@@ -92,6 +113,30 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 }
             }).inject( Buttons );
 
+            ExtraButtons.inject( Buttons );
+
+            this.$MoreButton = new QUIButton({
+                title  : QUILocale.get( lg, 'site.area.button.area.more.openIt' ),
+                icon   : 'icon-caret-left',
+                events :
+                {
+                    onClick : function(Btn)
+                    {
+                        if ( Btn.getAttribute( 'icon' ) == 'icon-caret-left' )
+                        {
+                            self.openButtons();
+                            return;
+                        }
+
+                        self.closeButtons();
+                    }
+                },
+                styles : {
+                    marginLeft : 5
+                }
+            }).inject( Buttons );
+
+            // extra buttons
             this.$SettingsButton = new QUIButton({
                 title  : QUILocale.get( lg, 'site.area.button.area.settings' ),
                 icon   : 'icon-gears',
@@ -101,7 +146,31 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 styles : {
                     marginLeft : 10
                 }
-            }).inject( Buttons );
+            }).inject( ExtraButtons );
+
+            this.$SortableButton = new QUIButton({
+                title  : QUILocale.get( lg, 'site.area.button.area.sort' ),
+                icon   : 'icon-sort',
+                events :
+                {
+                    onClick : function(Btn)
+                    {
+                        if ( Btn.isActive() )
+                        {
+                            Btn.setNormal();
+                            self.unsortable();
+                            return;
+                        }
+
+                        Btn.setActive();
+                        self.sortable();
+                    }
+                },
+                styles : {
+                    marginLeft : 5
+                }
+            }).inject( ExtraButtons );
+
 
             return this.$Elm;
         },
@@ -264,12 +333,12 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             var self = this;
 
-            var Elm = new Element('div', {
+            var Elm = new Element('li', {
                 'class' : 'quiqqer-bricks-site-category-area-brick',
                 html    : '<select></select>'
             });
 
-            Elm.inject( this.$Elm );
+            Elm.inject( this.$List );
             Select = Elm.getElement( 'select' );
 
             new QUIButton({
@@ -338,6 +407,201 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             }
 
             return data;
+        },
+
+        /**
+         * sort methods
+         */
+
+        /**
+         * Switch the sortable on
+         */
+        sortable : function()
+        {
+            var Elm      = this.getElm(),
+                elements = Elm.getElements(
+                    '.quiqqer-bricks-site-category-area-brick'
+                );
+
+            elements.each(function(Brick)
+            {
+                var i, len, buttons, Button;
+
+                buttons = Brick.getElements( '.qui-button' );
+
+                for ( i = 0, len = buttons.length; i < len; i++ )
+                {
+                    Button = QUI.Controls.getById( buttons[ i ].get( 'data-quiid' ) );
+
+                    if ( Button ) {
+                        Button.setDisable();
+                    }
+                }
+
+                var Select = Brick.getElement( 'select' ),
+                    Option = Select.getElement( 'option[value="'+ Select.value +'"]' );
+
+                new Element('div', {
+                    'class' : 'quiqqer-bricks-site-category-area-placeholder',
+                    html    : Option.get( 'html' )
+                }).inject( Brick );
+            });
+
+            Elm.getElements( 'select' ).set( 'disabled', true );
+
+
+            new Sortables( this.$List, {
+                revert: {
+                    duration: 500,
+                    transition: 'elastic:out'
+                },
+                clone : function(event)
+                {
+                    var Target = event.target;
+
+                    if ( Target.nodeName != 'LI' ) {
+                        Target = Target.getParent( 'li' );
+                    }
+
+                    var size = Target.getSize(),
+                        pos  = Target.getPosition( Target.getParent('ul') );
+
+                    return new Element('div', {
+                        styles : {
+                            background : 'rgba(0,0,0,0.5)',
+                            height     : size.y,
+                            top        : pos.y,
+                            width      : size.x,
+                            zIndex     : 1000
+                        }
+                    });
+                },
+
+                onStart : function(element)
+                {
+                    var Ul = element.getParent( 'ul' );
+
+                    element.addClass( 'quiqqer-bricks-site-category-area-dd-active' );
+
+                    Ul.setStyles({
+                        height   : Ul.getSize().y,
+                        overflow : 'hidden',
+                        width    : Ul.getSize().x
+                    });
+                },
+
+                onComplete : function(element)
+                {
+                    var Ul = element.getParent( 'ul' );
+
+                    element.removeClass( 'quiqqer-bricks-site-category-area-dd-active' );
+
+                    Ul.setStyles({
+                        height   : null,
+                        overflow : null,
+                        width    : null
+                    });
+                }
+            });
+        },
+
+        /**
+         * Switch the sortable off
+         */
+        unsortable : function()
+        {
+            var Elm      = this.getElm(),
+                elements = Elm.getElements(
+                    '.quiqqer-bricks-site-category-area-brick'
+                );
+
+            Elm.getElements( 'select' ).set( 'disabled', false );
+            Elm.getElements( '.quiqqer-bricks-site-category-area-placeholder').destroy();
+
+            elements.each(function(Brick)
+            {
+                var i, len, buttons, Button;
+
+                buttons = Brick.getElements( '.qui-button' );
+
+                for ( i = 0, len = buttons.length; i < len; i++ )
+                {
+                    Button = QUI.Controls.getById( buttons[ i ].get( 'data-quiid' ) );
+
+                    if ( Button ) {
+                        Button.setEnable();
+                    }
+                }
+            });
+        },
+
+        /**
+         * Opens the extra settings buttons
+         *
+         * @param {Function} callback
+         */
+        openButtons : function(callback)
+        {
+            var self = this;
+
+            this.$AddButton.hide();
+
+            self.$FXExtraBtns.style({
+                borderLeft : '2px solid #cccfd5',
+                height   : 30,
+                overflow : 'hidden'
+            });
+
+            this.$FXExtraBtns.animate({
+                opacity    : 1,
+                width      : 85,
+                marginLeft : 10
+            }, {
+                callback : function()
+                {
+                    self.$MoreButton.setAttribute( 'icon', 'icon-caret-right' );
+
+                    self.$FXExtraBtns.style({
+                        overflow : null
+                    });
+
+                    if ( typeof callback === 'function' ) {
+                        callback();
+                    }
+                }
+            });
+        },
+
+        /**
+         * Close the extra settings buttons
+         *
+         * * @param {Function} callback
+         */
+        closeButtons : function( callback )
+        {
+            var self = this;
+
+            this.$FXExtraBtns.style({
+                overflow   : 'hidden',
+                borderLeft : null,
+                marginLeft : 0
+            });
+
+            this.$FXExtraBtns.animate({
+                opacity  : 0,
+                width    : 0
+            }, {
+                callback : function()
+                {
+                    self.$MoreButton.setAttribute( 'icon', 'icon-caret-left' );
+                    self.$AddButton.show();
+
+
+                    if ( typeof callback === 'function' ) {
+                        callback();
+                    }
+                }
+            });
         },
 
         /**
