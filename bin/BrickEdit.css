@@ -22,6 +22,11 @@
     width: 100%;
 }
 
+.quiqqer-bricks-brickedit input[type="checkbox"],
+.quiqqer-bricks-brickedit input[type="radio"] {
+    width: 20px;
+}
+
 .quiqqer-bricks-brickedit-label-editor {
     cursor: pointer;
     margin-bottom: 0;

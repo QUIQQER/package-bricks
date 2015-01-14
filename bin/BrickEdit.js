@@ -262,16 +262,21 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
             TableExtra.setStyle( 'display', null );
 
-            var Form = new Element( 'form' ).wraps( TableExtra );
+            var Form = new Element('form', {
+                'class' : 'brick-edit-extra-header-form'
+            }).wraps( TableExtra );
 
-            var i, len, setting, dataQui;
-            var self = this;
+            var i, len, setting, dataQui, extraFieldId;
+
+            var self = this,
+                id   = this.getId();
 
             // extra settings
             for ( i = 0, len = this.$availableSettings.length; i < len; i++ )
             {
-                setting = this.$availableSettings[ i ];
-                dataQui = '';
+                setting      = this.$availableSettings[ i ];
+                dataQui      = '';
+                extraFieldId = 'extraField_'+ id +'_'+ i;
 
                 if ( setting['data-qui'] !== '' ) {
                     dataQui = ' data-qui="'+ setting['data-qui'] +'" ';
@@ -280,7 +285,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 new Element('tr', {
                     'class' : i % 2 ? 'even' : 'odd',
                     html : '<td>' +
-                           '    <label class="quiqqer-bricks-areas">' +
+                           '    <label class="quiqqer-bricks-areas" for="'+ extraFieldId +'">' +
                                      setting.text +
                            '    </label>' +
                            '</td>' +
@@ -288,6 +293,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                            '    <input type="'+ setting.type +'" ' +
                            '           name="'+ setting.name +'" ' +
                            '           class="'+ setting.class +'" ' +
+                           '           id="'+ extraFieldId +'"' +
                                        dataQui +
                            '    />' +
                            '</td>'
@@ -344,14 +350,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             }
 
             // settings
-            var SettingsForm = this.$Elm.getElement(
-                '.quiqqer-bricks-brickedit-settings'
-            );
+            var Form = this.$Elm.getElement( '.brick-edit-extra-header-form');
 
-            if ( SettingsForm ) {
-                data.settings = QUIFormUtils.getFormData( SettingsForm );
+            if ( Form ) {
+                data.settings = QUIFormUtils.getFormData( Form );
             }
-
 
             QUIAjax.post('package_quiqqer_bricks_ajax_brick_save', function()
             {

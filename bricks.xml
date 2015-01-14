@@ -19,6 +19,27 @@
                 <locale group="quiqqer/bricks" var="brick.control.contact.description" />
             </description>
         </brick>
+
+        <brick control="\QUI\Controls\Navigation">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.navigation.title" />
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.navigation.description" />
+            </description>
+
+            <settings>
+                <setting name="startId" class="project-site">
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.startId" />
+                </setting>
+                <setting name="homelink" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.homelink" />
+                </setting>
+                <setting name="levels" type="number">
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.levels" />
+                </setting>
+            </settings>
+        </brick>
     </bricks>
 
 </quiqqer>

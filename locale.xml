@@ -36,6 +36,27 @@
             <en><![CDATA[]]></en>
         </locale>
 
+        <locale name="brick.control.navigation.title">
+            <de><![CDATA[Baustein:Navigation]]></de>
+            <en><![CDATA[Brick:Navigation]]></en>
+        </locale>
+        <locale name="brick.control.navigation.description">
+            <de><![CDATA[]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.navigation.setting.startId">
+            <de><![CDATA[Start ID]]></de>
+            <en><![CDATA[Start ID]]></en>
+        </locale>
+        <locale name="brick.control.navigation.setting.homelink">
+            <de><![CDATA[Home Link anzeigen]]></de>
+            <en><![CDATA[Show the homelink]]></en>
+        </locale>
+        <locale name="brick.control.navigation.setting.levels">
+            <de><![CDATA[Navigationstiefe]]></de>
+            <en><![CDATA[Navigation levels]]></en>
+        </locale>
+
         <locale name="area.window.title">
             <de><![CDATA[Baustein-Zonen]]></de>
             <en><![CDATA[Brick areas]]></en>
