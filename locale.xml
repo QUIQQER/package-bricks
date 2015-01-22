@@ -57,6 +57,28 @@
             <en><![CDATA[Navigation levels]]></en>
         </locale>
 
+        <locale name="brick.control.langSwitch.title">
+            <de><![CDATA[Baustein:Sprachenwechsel]]></de>
+            <en><![CDATA[Brick:Lang switch]]></en>
+        </locale>
+        <locale name="brick.control.langSwitch.description">
+            <de><![CDATA[]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.navigation.setting.showFlags">
+            <de><![CDATA[Flaggen anzeigen]]></de>
+            <en><![CDATA[Show the flags]]></en>
+        </locale>
+        <locale name="brick.control.navigation.setting.showText">
+            <de><![CDATA[Text anzeigen]]></de>
+            <en><![CDATA[Show the text]]></en>
+        </locale>
+        <locale name="brick.control.navigation.setting.DropDown">
+            <de><![CDATA[Flaggen DropDown Anzeige]]></de>
+            <en><![CDATA[Flag DropDown view]]></en>
+        </locale>
+
+
         <locale name="area.window.title">
             <de><![CDATA[Baustein-Zonen]]></de>
             <en><![CDATA[Brick areas]]></en>

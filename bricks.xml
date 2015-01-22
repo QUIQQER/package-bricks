@@ -20,6 +20,27 @@
             </description>
         </brick>
 
+        <brick control="\QUI\Controls\LangSwitch">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.langSwitch.title" />
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.langSwitch.description" />
+            </description>
+
+            <settings>
+                <setting name="showFlags" class="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.showFlags" />
+                </setting>
+                <setting name="showText" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.showText" />
+                </setting>
+                <setting name="DropDown" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.DropDown" />
+                </setting>
+            </settings>
+        </brick>
+
         <brick control="\QUI\Controls\Navigation">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.navigation.title" />
@@ -41,5 +62,4 @@
             </settings>
         </brick>
     </bricks>
-
 </quiqqer>
