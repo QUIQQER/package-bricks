@@ -129,8 +129,6 @@ class Manager
             );
         }
 
-//        QUI\System\Log::writeRecursive( $bricks );
-
         return $bricks;
     }
 

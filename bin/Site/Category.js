@@ -82,9 +82,6 @@ define('package/quiqqer/bricks/bin/Site/Category', [
                     areas = JSON.decode( areas );
                 }
 
-                console.log( areas );
-                console.warn( bricks );
-
                 for ( i = 0, len = bricks.length; i < len; i++ )
                 {
                     AC = self.$insertBrickAreaEdit( bricks[ i ] );
