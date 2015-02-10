@@ -112,6 +112,8 @@ class Manager
             $templates[] = $vhost['template'];
         }
 
+        $templates = array_unique( $templates );
+
         // get bricks
         foreach ( $templates as $template )
         {
@@ -126,6 +128,8 @@ class Manager
                 Utils::getTemplateAreasFromXML( $brickXML, $siteType )
             );
         }
+
+//        QUI\System\Log::writeRecursive( $bricks );
 
         return $bricks;
     }
