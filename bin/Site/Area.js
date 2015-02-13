@@ -17,7 +17,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
     'Ajax',
     'package/quiqqer/bricks/bin/Sortables',
 
-    'css!package/quiqqer/bricks/bin/Site/Area'
+    'css!package/quiqqer/bricks/bin/Site/Area.css'
 
 ], function (QUI, QUIControl, QUIButton, QUIPopup, QUIConfirm, QUIList, QUILocale, QUIAjax, Sortables)
 {
