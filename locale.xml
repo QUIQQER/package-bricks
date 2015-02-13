@@ -258,6 +258,11 @@
             <en><![CDATA[]]></en>
         </locale>
 
+        <locale name="bricks.message.no.areas.found">
+            <de><![CDATA[Es wurden leider keine Baustein-Zonen gefunden.]]></de>
+            <en><![CDATA[Sorry, no block zones found.]]></en>
+        </locale>
+
     </groups>
 
     <!-- permissions locale -->

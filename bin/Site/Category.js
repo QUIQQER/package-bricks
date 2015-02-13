@@ -33,7 +33,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
             '$onDestroy'
         ],
 
-        initialize: function (options)
+        initialize: function(options)
         {
             this.parent( options );
 
@@ -73,6 +73,16 @@ define('package/quiqqer/bricks/bin/Site/Category', [
 
             this.getBrickAreas(function(bricks)
             {
+                if ( !bricks.length )
+                {
+                    self.$Elm.set(
+                        'html',
+                        QUILocale.get( 'quiqqer/bricks', 'bricks.message.no.areas.found' )
+                    );
+
+                    return;
+                }
+
                 var i, len, data, AC;
 
                 var Site  = self.getAttribute( 'Site' ),
@@ -106,6 +116,14 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          * event : on destroy
          */
         $onDestroy : function()
+        {
+            this.updateSite();
+        },
+
+        /**
+         * Update the internal site object
+         */
+        updateSite : function()
         {
             var i, len, AC;
 
