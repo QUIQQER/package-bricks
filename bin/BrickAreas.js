@@ -121,12 +121,36 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
                 return;
             }
 
+            var self = this;
+
             this.$areas[ area ] = true;
 
-            new Element('div', {
-                'class' : 'quiqqer-bricks-brickareas-area',
-                html    : area
+            var BrickNode = new Element('div', {
+                'class'     : 'quiqqer-bricks-brickareas-area',
+                html        : area,
+                'data-area' : area
             }).inject( this.$Container );
+
+            new Element('span', {
+                'class' : 'fa fa-times icon-remove',
+                styles  : {
+                    cursor: 'pointer',
+                    marginLeft: 10
+                },
+                events :
+                {
+                    click : function()
+                    {
+                        var area = BrickNode.get( 'data-area' );
+
+                        if ( self.$areas[ area ] ) {
+                            delete self.$areas[ area ];
+                        }
+
+                        BrickNode.destroy();
+                    }
+                }
+            }).inject( BrickNode );
         },
 
         /**
