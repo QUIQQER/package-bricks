@@ -129,6 +129,11 @@ class Manager
             );
         }
 
+        QUI::getEvents()->fireEvent(
+            'onBricksGetAreaByProject',
+            array( $this, $Project, &$bricks )
+        );
+
         return $bricks;
     }
 
