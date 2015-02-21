@@ -131,7 +131,7 @@ class Brick extends QUI\QDOM
         }
 
         /* @var $Control \QUI\Control */
-        $Control = new $Ctrl();
+        $Control = new $Ctrl( $this->getSettings() );
 
         if ( !($Control instanceof QUI\Control) ) {
             return false;
