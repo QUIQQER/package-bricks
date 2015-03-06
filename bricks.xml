@@ -61,5 +61,29 @@
                 </setting>
             </settings>
         </brick>
+
+
+        <brick control="\QUI\Bricks\Controls\SocialBox">
+            <title>
+                <locale group="quiqqer/bricks" var="bricks.SocialBox.title" />
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="bricks.SocialBox.description" />
+            </description>
+
+            <settings>
+
+                <setting name="title">
+                    <locale group="quiqqer/bricks" var="SocialBox.title" />
+                </setting>
+
+                <setting name="socialList" data-qui="package/quiqqer/bricks/bin/Controls/SocialBox">
+                    <locale group="quiqqer/bricks" var="SocialBox.socialList" />
+                </setting>
+
+            </settings>
+
+        </brick>
+
     </bricks>
 </quiqqer>

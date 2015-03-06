@@ -1,0 +1,29 @@
+.templateQUI-socialbox {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.templateQUI-socialbox li {
+    float: left;
+    margin: 0 0.75em 0 0;
+}
+
+.templateQUI-socialbox li a {
+    background-color: #888;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    height: 3em;
+    text-align: center;
+    width: 3em;
+}
+
+.templateQUI-socialbox li a:hover {
+    opacity: 0.5;
+}
+
+.templateQUI-socialbox .fa {
+    font-size: 2em;
+    line-height: 1.5;
+}

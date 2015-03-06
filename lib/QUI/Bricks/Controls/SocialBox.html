@@ -1,0 +1,18 @@
+<ul class="templateQUI-socialbox">
+
+    {foreach from=$socialList item=entry}
+    {if isset( $entry.url ) && isset( $entry.background ) && isset( $entry.icon ) }
+    <li>
+        <a href="{$entry.url}"
+           target="_blank"
+           rel="nofollow"
+           style="background-color: {$entry.background}"
+           class="smooth"
+        >
+            <span class="{$entry.icon}"></span>
+        </a>
+    </li>
+    {/if}
+    {/foreach}
+
+</ul>
