@@ -86,10 +86,10 @@ class Manager
      * Return the areas which are available in the project
      *
      * @param Project $Project
-     * @param string|bool $siteType - optional, returns only the areas for the specific site type (default = false)
+     * @param string|bool $layoutType - optional, returns only the areas for the specific layout type (default = false)
      * @return array
      */
-    public function getAreasByProject(Project $Project, $siteType=false)
+    public function getAreasByProject(Project $Project, $layoutType=false)
     {
         $templates = array();
         $bricks    = array();
@@ -125,7 +125,7 @@ class Manager
 
             $bricks = array_merge(
                 $bricks,
-                Utils::getTemplateAreasFromXML( $brickXML, $siteType )
+                Utils::getTemplateAreasFromXML( $brickXML, $layoutType )
             );
         }
 
@@ -308,11 +308,13 @@ class Manager
 
             try
             {
-                $result[] = $this->getBrickById( $brickId );
+                $result[] = $this->getBrickById( $brickId )->check();
 
             } catch ( QUI\Exception $Exception )
             {
-
+                QUI\System\Log::addWarning(
+                    $Exception->getMessage() .' Brick-ID:'. $brickId
+                );
             }
         }
 

@@ -152,7 +152,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
             QUIAjax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
                 'package' : 'quiqqer/bricks',
                 project   : Project.encode(),
-                siteType  : Site.getAttribute( 'type' )
+                layout    : Site.getAttribute( 'layout' )
             });
         },
 

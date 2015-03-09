@@ -97,6 +97,23 @@ class Brick extends QUI\QDOM
     }
 
     /**
+     * Check, if control canbe created
+     *
+     * @throws QUI\Exception
+     * @return QUI\Bricks\Brick
+     */
+    public function check()
+    {
+        $Control = $this->_getControl();
+
+        if ( !$Control ) {
+            throw new QUI\Exception( 'Control not found. Brick could not be created' );
+        }
+
+        return $Control;
+    }
+
+    /**
      * Return the HTML of the Brick
      *
      * @throw QUI\Exception
@@ -133,7 +150,7 @@ class Brick extends QUI\QDOM
         /* @var $Control \QUI\Control */
         $Control = new $Ctrl( $this->getSettings() );
 
-        if ( !($Control instanceof QUI\Control) ) {
+        if ( !($Control instanceof QUI\Control) || !$Control ) {
             return false;
         }
 

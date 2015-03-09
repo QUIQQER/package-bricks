@@ -53,10 +53,10 @@ class Utils
      * Return the template bricks from a xml file
      *
      * @param string $file - path to xm file
-     * @param string|bool $siteType - optional, return only the bricks for the specific site type
+     * @param string|bool $layoutType - optional, return only the bricks for the specific layout type
      * @return array
      */
-    static function getTemplateAreasFromXML($file, $siteType=false)
+    static function getTemplateAreasFromXML($file, $layoutType=false)
     {
         if ( !file_exists( $file ) ) {
             return array();
@@ -67,15 +67,15 @@ class Utils
 
         $globalAreas = $Path->query( "//quiqqer/bricks/templateAreas/areas/area" );
 
-        if ( $siteType )
+        if ( $layoutType )
         {
             $typeAreas = $Path->query(
-                "//quiqqer/bricks/templateAreas/types/type[@type='{$siteType}']/area"
+                "//quiqqer/bricks/templateAreas/layouts/layout[@layout='{$layoutType}']/area"
             );
 
         } else
         {
-            $typeAreas = $Path->query( "//quiqqer/bricks/templateAreas/types/type/area" );
+            $typeAreas = $Path->query( "//quiqqer/bricks/templateAreas/layouts/layout/area" );
         }
 
 
