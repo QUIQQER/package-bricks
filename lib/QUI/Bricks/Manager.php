@@ -96,6 +96,10 @@ class Manager
 
         $projectName = $Project->getName();
 
+        if ( !$layoutType ) {
+            $layoutType = $Project->getAttribute( 'layout' );
+        }
+
         // get all vhosts, and the used templates of the project
         $vhosts = QUI::getRewrite()->getVHosts();
 
