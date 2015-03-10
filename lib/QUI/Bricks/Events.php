@@ -91,4 +91,46 @@ class Events
             }
         }
     }
+
+    /**
+     * Event : on smarty init
+     * add new brickarea function
+     */
+    static function onSmartyInit($Smarty)
+    {
+        // {brickarea}
+        $Smarty->registerPlugin("function", "brickarea", "\QUI\Bricks\Events::brickarea");
+    }
+
+    /**
+     * Smarty brickarea function {brickarea}
+     *
+     * @param Array $params - function parameter
+     * @param \Smarty
+     */
+    static function brickarea($params, $smarty)
+    {
+        if ( !isset( $params['Site'] ) || !isset( $params['area'] ) )
+        {
+            if ( !isset( $params['assign'] ) ) {
+                return array();
+            }
+
+            $smarty->assign( $params['assign'], array() );
+            return;
+        }
+
+        $BricksManager = new \QUI\Bricks\Manager();
+
+        $Site = $params['Site'];
+        $area = $params['area'];
+
+        $result = $BricksManager->getBricksByArea( $area, $Site );
+
+        if ( !isset( $params['assign'] ) ) {
+            return $result;
+        }
+
+        $smarty->assign( $params['assign'], $result );
+    }
 }

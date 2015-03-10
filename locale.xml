@@ -137,9 +137,14 @@
     </groups>
 
     <groups name="quiqqer/bricks" datatype="php">
+
         <locale name="site.panel.bricks.category.title">
             <de><![CDATA[Bausteine]]></de>
             <en><![CDATA[Bricks]]></en>
+        </locale>
+        <locale name="continue.reading">
+            <de><![CDATA[weiterlesen]]></de>
+            <en><![CDATA[Continue reading]]></en>
         </locale>
 
     </groups>
