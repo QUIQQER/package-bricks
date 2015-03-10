@@ -11,7 +11,7 @@ use QUI;
 /**
  * Class SocialBox
  *
- * @package quiqqer/template-qui
+ * @package quiqqer/bricks
  */
 class SocialBox extends QUI\Control
 {
