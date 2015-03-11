@@ -476,7 +476,6 @@ class Manager
      */
     protected function _getInheritedBricks($brickArea, Site $Site)
     {
-
         // inheritance ( vererbung )
         $Project = $Site->getProject();
         $areas   = $this->getAreasByProject( $Project );
@@ -528,8 +527,30 @@ class Manager
                 continue;
             }
 
+            try
+            {
+                $Parent = $Project->get( $parentId );
+
+            } catch ( QUI\Exception $Exception )
+            {
+                continue;
+            }
+
+            $parentAreas = $Parent->getAttribute( 'quiqqer.bricks.areas' );
+            $parentAreas = json_decode( $parentAreas, true );
+
+            $brickIds = array();
+            $area     = $parentAreas[ $brickArea ];
+
             foreach ( $bricks as $brick ) {
-                $result[] = $brick['brick'];
+                $brickIds[ $brick['brick'] ] = true;
+            }
+
+            foreach ( $area as $brick )
+            {
+                if ( isset( $brickIds[ $brick[ 'brickId' ] ] ) ) {
+                    $result[] = $brick[ 'brickId' ];
+                }
             }
 
             break;
