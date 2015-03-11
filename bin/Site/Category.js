@@ -149,11 +149,19 @@ define('package/quiqqer/bricks/bin/Site/Category', [
             var Site    = this.getAttribute( 'Site' ),
                 Project = Site.getProject();
 
-            QUIAjax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
-                'package' : 'quiqqer/bricks',
-                project   : Project.encode(),
-                layout    : Site.getAttribute( 'layout' )
-            });
+            Project.getConfig(function(layout)
+            {
+                if ( Site.getAttribute( 'layout' ) ) {
+                    layout = Site.getAttribute( 'layout' );
+                }
+
+                QUIAjax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
+                    'package' : 'quiqqer/bricks',
+                    project   : Project.encode(),
+                    layout    : layout
+                });
+
+            }, 'layout');
         },
 
         /**

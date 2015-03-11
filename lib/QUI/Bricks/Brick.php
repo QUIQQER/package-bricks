@@ -19,12 +19,14 @@ class Brick extends QUI\QDOM
 {
     /**
      * Brick settings
+     *
      * @var array
      */
     protected $_settings = array();
 
     /**
      * Constructor
+     *
      * @param array $params - brick params
      */
     public function __construct($params=array())
@@ -62,7 +64,7 @@ class Brick extends QUI\QDOM
         }
 
         // control default settings
-        if ( $Control )
+        if ( is_object( $Control ) )
         {
             $controlSettings = $Control->getAttributes();
 
@@ -104,6 +106,10 @@ class Brick extends QUI\QDOM
      */
     public function check()
     {
+        if ( $this->getAttribute( 'type' ) == 'content' ) {
+            return $this;
+        }
+
         $Control = $this->_getControl();
 
         if ( !$Control ) {
@@ -137,11 +143,16 @@ class Brick extends QUI\QDOM
 
     /**
      * Return the internal control
+     *
      * @return QUI\Control|Bool
      */
     protected function _getControl()
     {
         $Ctrl = $this->getAttribute( 'type' );
+
+        if ( $Ctrl === 'content' ) {
+            return true;
+        }
 
         if ( !is_callable( $Ctrl ) && !class_exists( $Ctrl ) ) {
             return false;
