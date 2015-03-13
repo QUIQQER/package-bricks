@@ -20,7 +20,8 @@ class Manager
     /**
      * Bricks table name
      */
-    const TABLE = 'bricks';
+    const TABLE       = 'bricks';
+    const TABLE_CACHE = 'bricksCache';
 
     /**
      * Brick temp collector
@@ -37,10 +38,14 @@ class Manager
      */
     public function createBrickForProject(Project $Project, Brick $Brick)
     {
+        QUI\Rights\Permission::checkPermission( 'quiqqer.bricks.create' );
+
+
         QUI::getDataBase()->insert(
             $this->_getTable(),
             array(
                 'project'     => $Project->getName(),
+                'lang'        => $Project->getLang(),
                 'title'       => $Brick->getAttribute('title'),
                 'description' => $Brick->getAttribute('description'),
                 'type'        => $Brick->getAttribute('type')
@@ -53,12 +58,22 @@ class Manager
     }
 
     /**
+     * CLears the bricks cache
+     */
+    public function clearCache()
+    {
+        QUI\Cache\Manager::clear( 'quiqqer/bricks' );
+    }
+
+    /**
      * Delete the brick
      *
      * @param Integer $brickId - Brick-ID
      */
     public function deleteBrick($brickId)
     {
+        QUI\Rights\Permission::checkPermission( 'quiqqer.bricks.delete' );
+
         // check if brick exist
         $this->getBrickById( $brickId );
 
@@ -71,15 +86,19 @@ class Manager
      * Return the areas which are available in the project
      *
      * @param Project $Project
-     * @param string|bool $siteType - optional, returns only the areas for the specific site type (default = false)
+     * @param string|bool $layoutType - optional, returns only the areas for the specific layout type (default = false)
      * @return array
      */
-    public function getAreasByProject(Project $Project, $siteType=false)
+    public function getAreasByProject(Project $Project, $layoutType=false)
     {
         $templates = array();
         $bricks    = array();
 
         $projectName = $Project->getName();
+
+//        if ( !$layoutType ) {
+//            $layoutType = $Project->getAttribute( 'layout' );
+//        }
 
         // get all vhosts, and the used templates of the project
         $vhosts = QUI::getRewrite()->getVHosts();
@@ -97,6 +116,8 @@ class Manager
             $templates[] = $vhost['template'];
         }
 
+        $templates = array_unique( $templates );
+
         // get bricks
         foreach ( $templates as $template )
         {
@@ -108,9 +129,14 @@ class Manager
 
             $bricks = array_merge(
                 $bricks,
-                Utils::getTemplateAreasFromXML( $brickXML, $siteType )
+                Utils::getTemplateAreasFromXML( $brickXML, $layoutType )
             );
         }
+
+        QUI::getEvents()->fireEvent(
+            'onBricksGetAreaByProject',
+            array( $this, $Project, &$bricks )
+        );
 
         return $bricks;
     }
@@ -133,8 +159,7 @@ class Manager
 
         }
 
-        $PKM      = QUI::getPackageManager();
-        $packages = $PKM->getInstalled();
+        $xmlFiles = $this->_getBricksXMLFiles();
         $result   = array();
 
         $result[] = array(
@@ -143,14 +168,7 @@ class Manager
             'control'     => 'content'
         );
 
-        foreach ( $packages as $package )
-        {
-            $bricksXML = OPT_DIR . $package['name'] .'/bricks.xml';
-
-            if ( !file_exists( $bricksXML ) ) {
-                continue;
-            }
-
+        foreach ( $xmlFiles as $bricksXML ) {
             $result = array_merge( $result, Utils::getBricksFromXML( $bricksXML ) );
         }
 
@@ -191,6 +209,66 @@ class Manager
     }
 
     /**
+     * Return the available brick settings by the brick type
+     *
+     * @param $brickType
+     * @return array
+     */
+    public function getAvailableBrickSettingsByBrickType($brickType)
+    {
+        if ( $brickType == 'content' ) {
+            return array();
+        }
+
+        $cache = 'quiqqer/bricks/brickType/'. md5($brickType);
+
+        try
+        {
+            return QUI\Cache\Manager::get( $cache );
+
+        } catch ( QUI\Exception $Exception )
+        {
+
+        }
+
+
+        $settings = array();
+        $xmlFiles = $this->_getBricksXMLFiles();
+
+        foreach ( $xmlFiles as $brickXML )
+        {
+            $Dom  = QUI\Utils\XML::getDomFromXml( $brickXML );
+            $Path = new \DOMXPath( $Dom );
+
+            $Settings = $Path->query(
+                "//quiqqer/bricks/brick[@control='{$brickType}']/settings/setting"
+            );
+
+            if ( !$Settings->length ) {
+                continue;
+            }
+
+            foreach ( $Settings as $Setting )
+            {
+                /* @var $Setting \DOMElement */
+                $settings[] = array(
+                    'name'     => $Setting->getAttribute( 'name' ),
+                    'text'     => QUI\Utils\DOM::getTextFromNode( $Setting ),
+                    'type'     => $Setting->getAttribute( 'type' ),
+                    'class'    => $Setting->getAttribute( 'class' ),
+                    'data-qui' => $Setting->getAttribute( 'data-qui' )
+                );
+            }
+
+            break;
+        }
+
+        QUI\Cache\Manager::set( $cache, $settings );
+
+        return $settings;
+    }
+
+    /**
      * Return the bricks from the area
      *
      * @param string $brickArea - Name of the area
@@ -206,12 +284,27 @@ class Manager
         $brickAreas = $Site->getAttribute( 'quiqqer.bricks.areas' );
         $brickAreas = json_decode( $brickAreas, true );
 
-        if ( !isset( $brickAreas[ $brickArea ] ) ) {
-            return array();
+        if ( !isset( $brickAreas[ $brickArea ] ) || empty( $brickAreas[ $brickArea ] ) )
+        {
+            $bricks = $this->_getInheritedBricks( $brickArea, $Site );
+
+        } else
+        {
+            $bricks    = array();
+            $brickData = $brickAreas[ $brickArea ];
+
+            foreach ( $brickData as $brick )
+            {
+                if ( isset( $brick['deactivate'] ) ) {
+                    break;
+                }
+
+                $bricks[] = $brick[ 'brickId' ];
+            }
         }
 
+
         $result = array();
-        $bricks = $brickAreas[ $brickArea ];
 
         foreach ( $bricks as $brickId )
         {
@@ -219,11 +312,13 @@ class Manager
 
             try
             {
-                $result[] = $this->getBrickById( $brickId );
+                $result[] = $this->getBrickById( $brickId )->check();
 
             } catch ( QUI\Exception $Exception )
             {
-
+                QUI\System\Log::addWarning(
+                    $Exception->getMessage() .' Brick-ID:'. $brickId
+                );
             }
         }
 
@@ -244,7 +339,8 @@ class Manager
         $list = QUI::getDataBase()->fetch(array(
             'from'  => $this->_getTable(),
             'where' => array(
-                'project' => $Project->getName()
+                'project' => $Project->getName(),
+                'lang'    => $Project->getLang()
             )
         ));
 
@@ -265,6 +361,8 @@ class Manager
      */
     public function saveBrick($brickId, array $brickData)
     {
+        QUI\Rights\Permission::checkPermission( 'quiqqer.bricks.edit' );
+
         $Brick      = $this->getBrickById( $brickId );
         $areas      = array();
         $areaString = '';
@@ -307,12 +405,16 @@ class Manager
 
         $Brick->setAttributes( $brickData );
 
+        if ( isset( $brickData['settings'] ) ) {
+            $Brick->setSettings( $brickData['settings'] );
+        }
+
         QUI::getDataBase()->update($this->_getTable(), array(
             'title'       => $Brick->getAttribute( 'title' ),
             'description' => $Brick->getAttribute( 'description' ),
             'content'     => $Brick->getAttribute( 'content' ),
             'type'        => $Brick->getAttribute( 'type' ),
-            'settings'    => json_encode( $Brick->getAttribute( 'settings' ) ),
+            'settings'    => json_encode( $Brick->getSettings() ),
             'areas'       => $areaString
         ), array(
             'id' => (int)$brickId
@@ -326,5 +428,134 @@ class Manager
     protected function _getTable()
     {
         return QUI::getDBTableName( self::TABLE );
+    }
+
+    /**
+     * List of available bricks.xml files
+     * @return array
+     */
+    protected function _getBricksXMLFiles()
+    {
+        $cache = 'quiqqer/bricks/availableBrickFiles';
+
+        try
+        {
+            return QUI\Cache\Manager::get( $cache );
+
+        } catch ( QUI\Exception $Exception )
+        {
+
+        }
+
+        $PKM      = QUI::getPackageManager();
+        $packages = $PKM->getInstalled();
+        $result   = array();
+
+        foreach ( $packages as $package )
+        {
+            $bricksXML = OPT_DIR . $package['name'] .'/bricks.xml';
+
+            if ( !file_exists( $bricksXML ) ) {
+                continue;
+            }
+
+            $result[] = $bricksXML;
+        }
+
+        QUI\Cache\Manager::set( $cache, $result );
+
+        return $result;
+    }
+
+    /**
+     * Return the bricks from an area which are inherited from its parents
+     *
+     * @param String $brickArea - Name of the area
+     * @param Site $Site - Site object
+     * @return array
+     */
+    protected function _getInheritedBricks($brickArea, Site $Site)
+    {
+        // inheritance ( vererbung )
+        $Project = $Site->getProject();
+        $areas   = $this->getAreasByProject( $Project );
+
+        foreach ( $areas as $area )
+        {
+            if ( $area['name'] != $brickArea ) {
+                continue;
+            }
+
+            if ( !$area['inheritance'] ) {
+                return array();
+            }
+
+            break;
+        }
+
+
+        if ( !isset( $area ) || !isset( $area['name'] ) ) {
+            return array();
+        }
+
+        if ( $area['name'] != $brickArea ) {
+            return array();
+        }
+
+        if ( !Utils::hasInheritance( $Project, $brickArea ) ) {
+            return array();
+        }
+
+
+        $result    = array();
+        $parentIds = $Site->getParentIdTree();
+        $parentIds = array_reverse( $parentIds );
+
+        $projectCacheTable = QUI::getDBProjectTableName( self::TABLE_CACHE, $Project );
+
+        foreach ( $parentIds as $parentId )
+        {
+            $bricks = QUI::getDataBase()->fetch(array(
+                'from'  => $projectCacheTable,
+                'where' => array(
+                    'id'   => $parentId,
+                    'area' => $brickArea
+                )
+            ));
+
+            if ( empty( $bricks ) ) {
+                continue;
+            }
+
+            try
+            {
+                $Parent = $Project->get( $parentId );
+
+            } catch ( QUI\Exception $Exception )
+            {
+                continue;
+            }
+
+            $parentAreas = $Parent->getAttribute( 'quiqqer.bricks.areas' );
+            $parentAreas = json_decode( $parentAreas, true );
+
+            $brickIds = array();
+            $area     = $parentAreas[ $brickArea ];
+
+            foreach ( $bricks as $brick ) {
+                $brickIds[ $brick['brick'] ] = true;
+            }
+
+            foreach ( $area as $brick )
+            {
+                if ( isset( $brickIds[ $brick[ 'brickId' ] ] ) ) {
+                    $result[] = $brick[ 'brickId' ];
+                }
+            }
+
+            break;
+        }
+
+        return $result;
     }
 }

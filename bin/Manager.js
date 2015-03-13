@@ -35,6 +35,7 @@ define('package/quiqqer/bricks/bin/Manager', [
         Binds : [
             'loadBricksFromProject',
             'refresh',
+            '$refreshProjectLanguages',
             '$onCreate',
             '$onResize',
             '$openCreateDialog',
@@ -51,7 +52,9 @@ define('package/quiqqer/bricks/bin/Manager', [
         {
             this.parent( options );
 
-            this.$Grid = false;
+            this.$Grid          = false;
+            this.$ProjectSelect = false;
+            this.$ProjectLangs  = false;
 
             this.addEvents({
                 onCreate : this.$onCreate,
@@ -70,11 +73,13 @@ define('package/quiqqer/bricks/bin/Manager', [
                 return;
             }
 
-            var self = this;
+            var self    = this,
+                project = this.$ProjectSelect.getValue(),
+                lang    = this.$ProjectLangs.getValue();
 
             this.Loader.show();
 
-            this.getBricksFromProject(this.$ProjectSelect.getValue(), function(result)
+            this.getBricksFromProject( project, lang, function(result)
             {
                 if ( typeof callback === 'function' ) {
                     callback();
@@ -85,7 +90,6 @@ define('package/quiqqer/bricks/bin/Manager', [
                 });
 
                 self.refreshButtons();
-
                 self.Loader.hide();
             });
         },
@@ -123,18 +127,29 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             // Buttons
             this.$ProjectSelect = new QUISelect({
-                name   : 'projects',
+                name   : 'projects-name',
+                events : {
+                    onChange : this.$refreshProjectLanguages
+                }
+            });
+
+            this.$ProjectLangs = new QUISelect({
+                name   : 'projects-langs',
                 events : {
                     onChange : this.refresh
+                },
+                styles : {
+                    width : 80
                 }
             });
 
             this.addButton( this.$ProjectSelect );
+            this.addButton( this.$ProjectLangs );
             this.addButton( new QUISeperator() );
 
             this.addButton(
                 new QUIButton({
-                    text     : 'Brick hinzufügen',
+                    text     : QUILocale.get( lg, 'manager.button.add' ),
                     name     : 'brick-add',
                     disabled : true,
                     events   : {
@@ -145,7 +160,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.addButton(
                 new QUIButton({
-                    text     : 'Markierte Blöcke löschen',
+                    text     : QUILocale.get( lg, 'manager.button.delete' ),
                     name     : 'brick-delete',
                     disabled : true,
                     events   : {
@@ -252,14 +267,53 @@ define('package/quiqqer/bricks/bin/Manager', [
         },
 
         /**
-         *
+         * Refresh the project language dropdown
+         */
+        $refreshProjectLanguages : function()
+        {
+            var self          = this,
+                activeProject = this.$ProjectSelect.getValue();
+
+            Projects.getList(function(projects)
+            {
+                for ( var project in projects )
+                {
+                    if ( !projects.hasOwnProperty( project ) ) {
+                        continue;
+                    }
+
+                    if ( activeProject != project ) {
+                        continue;
+                    }
+
+                    var langs = projects[ project ].langs;
+                        langs = langs.split( ',' );
+
+                    self.$ProjectLangs.clear();
+
+                    for ( var i = 0, len = langs.length; i < len; i++ )
+                    {
+                        self.$ProjectLangs.appendChild(
+                            langs[ i ], langs[ i ], 'icon-home'
+                        );
+                    }
+
+                    self.$ProjectLangs.setValue(
+                        self.$ProjectLangs.firstChild().getAttribute( 'value' )
+                    );
+                }
+            });
+        },
+
+        /**
+         * Opens the brick creation dialog
          */
         $openCreateDialog : function()
         {
             var self = this;
 
             new QUIConfirm({
-                title     : 'Neuen Brick hinzufügen',
+                title     : QUILocale.get( lg, 'manager.window.create.title' ),
                 icon      : 'icon-th',
                 maxHeight : 300,
                 maxWidth  : 400,
@@ -278,13 +332,13 @@ define('package/quiqqer/bricks/bin/Manager', [
 
                             '<label>' +
                             '   <span class="quiqqer-bricks-create-label-text">' +
-                            '       Title' +
+                                    QUILocale.get( lg, 'manager.window.create.label.title' ) +
                             '   </span>' +
                             '   <input type="text" name="title" />' +
                             '</label>' +
                             '<label>' +
                             '   <span class="quiqqer-bricks-create-label-text">' +
-                            '       Brick Typ' +
+                                    QUILocale.get( lg, 'manager.window.create.label.type' ) +
                             '   </span>' +
                             '   <select name="type"></select>' +
                             '</label>'
@@ -338,13 +392,15 @@ define('package/quiqqer/bricks/bin/Manager', [
                             return;
                         }
 
-                        self.createBrick(self.$ProjectSelect.getValue(), {
+                        var project = self.$ProjectSelect.getValue(),
+                            lang    = self.$ProjectLangs.getValue();
+
+                        self.createBrick(project, lang, {
                             title : Title.value,
                             type  : Type.value
                         }, function(brickId)
                         {
                             Win.close();
-
 
                             self.refresh(function() {
                                 self.editBrick( brickId );
@@ -369,6 +425,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                 maxHeight : 300,
                 maxWidth  : 600,
                 autoclose : false,
+                title     : QUILocale.get( lg, 'manager.window.delete.title' ),
                 events    :
                 {
                     onOpen : function(Win)
@@ -384,9 +441,9 @@ define('package/quiqqer/bricks/bin/Manager', [
 
                         Content.set(
                             'html',
-
-                            '<h1>Möchten Sie folgende Brick-IDs wirklich löschen</h1>' +
-                            lists
+                            QUILocale.get( lg, 'manager.window.delete.information', {
+                                list : lists
+                            })
                         );
                     },
 
@@ -417,7 +474,8 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             var self  = this,
                 Sheet = this.createSheet({
-                    title : 'Brick editieren'
+                    title : QUILocale.get( lg, 'brick.sheet.edit.title' ),
+                    icon  : 'icon-edit'
                 });
 
             Sheet.addEvents({
@@ -426,9 +484,10 @@ define('package/quiqqer/bricks/bin/Manager', [
                     require(['package/quiqqer/bricks/bin/BrickEdit'], function(BrickEdit)
                     {
                         Brick = new BrickEdit({
-                            id      : brickId,
-                            project : self.$ProjectSelect.getValue(),
-                            events  :
+                            id : brickId,
+                            projectName : self.$ProjectSelect.getValue(),
+                            projectLang : self.$ProjectLangs.getValue(),
+                            events :
                             {
                                 onLoaded : function() {
                                     self.Loader.hide();
@@ -443,7 +502,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             Sheet.addButton({
                 textimage : 'icon-save',
-                text : 'Speichern',
+                text : QUILocale.get( 'quiqqer/system', 'save' ),
                 styles : {
                     width : 200
                 },
@@ -457,6 +516,8 @@ define('package/quiqqer/bricks/bin/Manager', [
                         {
                             self.Loader.hide();
                             Sheet.hide();
+
+                            self.refresh();
                         });
                     }
                 }
@@ -484,14 +545,16 @@ define('package/quiqqer/bricks/bin/Manager', [
          * Return the bricksf from a project
          *
          * @param {String} project - name of the project
+         * @param {String} lang - Language of the project
          * @param {Function} callback - callback function
          */
-        getBricksFromProject : function(project, callback)
+        getBricksFromProject : function(project, lang, callback)
         {
             Ajax.get('package_quiqqer_bricks_ajax_project_getBricks', callback, {
                 'package' : 'quiqqer/bricks',
                 project   : JSON.encode({
-                    name : project
+                    name : project,
+                    lang : lang
                 })
             });
         },
@@ -500,15 +563,17 @@ define('package/quiqqer/bricks/bin/Manager', [
          * Create a new brick
          *
          * @param {String} project
+         * @param {String} lang
          * @param {Object} data
          * @param {Function} callback
          */
-        createBrick : function(project, data, callback)
+        createBrick : function(project, lang, data, callback)
         {
             Ajax.post('package_quiqqer_bricks_ajax_project_createBrick', callback, {
                 'package' : 'quiqqer/bricks',
                 project : JSON.encode({
-                    name : project
+                    name : project,
+                    lang : lang
                 }),
                 data : JSON.encode( data )
             });

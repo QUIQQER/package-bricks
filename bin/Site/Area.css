@@ -2,6 +2,7 @@
 .quiqqer-bricks-site-category-area {
     float: left;
     margin-bottom: 20px;
+    overflow: hidden;
     position: relative;
     width: 100%;
 }
@@ -25,11 +26,23 @@
     top: 4px;
 }
 
+.quiqqer-bricks-site-category-area-list {
+    float: left;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+.quiqqer-bricks-site-category-area-brick {
+    list-style-type: none;
+    position: relative;
+}
+
 .quiqqer-bricks-site-category-area-brick select {
     background: #fff;
     margin: 2px;
     padding: 2px;
-    width: calc( 100% - 40px );
+    width: calc( 100% - 75px );
 }
 
 .quiqqer-bricks-site-category-area-brick button {
@@ -38,4 +51,32 @@
     margin: 2px;
     padding: 5px;
     width: 30px;
+}
+
+.quiqqer-bricks-site-category-area-deactivate {
+    opacity : 0.5;
+    text-decoration: line-through;
+}
+
+.quiqqer-bricks-site-category-area-placeholder {
+    background: #fff;
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.quiqqer-bricks-site-category-area-dd-active .quiqqer-bricks-site-category-area-placeholder {
+    background: #2f8fc6;
+    color: #fff;
+}
+
+.quiqqer-bricks-site-category-area-extraButtons {
+    float: right;
+    opacity: 0;
+    position: relative;
+    width: 0
 }

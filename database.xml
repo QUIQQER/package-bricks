@@ -5,6 +5,7 @@
         <table name="bricks">
             <field type="INT( 3 ) NOT NULL AUTO_INCREMENT PRIMARY KEY">id</field>
             <field type="VARCHAR( 255 )">project</field>
+            <field type="VARCHAR( 2 )">lang</field>
             <field type="VARCHAR( 255 ) NOT NULL">title</field>
             <field type="TEXT NOT NULL">description</field>
             <field type="TEXT">settings</field>
@@ -13,5 +14,13 @@
             <field type="TEXT">areas</field>
         </table>
     </global>
+
+    <projects>
+        <table name="bricksCache" no-auto-update="1" no-site-reference="1">
+            <field type="bigint( 20 ) NOT NULL">id</field>
+            <field type="VARCHAR( 255 )">area</field>
+            <field type="TEXT">brick</field>
+        </table>
+    </projects>
 
 </database>

@@ -6,7 +6,6 @@
     width: 100%;
 }
 
-
 .quiqqer-bricks-brickedit label {
     clear: both;
     float: left;
@@ -16,17 +15,16 @@
 
 .quiqqer-bricks-brickedit input,
 .quiqqer-bricks-brickedit select,
-.quiqqer-bricks-brickedit-label-text,
-.quiqqer-bricks-brickedit-label-editor{
+.quiqqer-bricks-brickedit textarea {
     clear: both;
     float: left;
     max-width: 300px;
     width: 100%;
 }
 
-.quiqqer-bricks-brickedit-label-text {
-    cursor: pointer;
-    margin-bottom: 10px;
+.quiqqer-bricks-brickedit input[type="checkbox"],
+.quiqqer-bricks-brickedit input[type="radio"] {
+    width: 20px;
 }
 
 .quiqqer-bricks-brickedit-label-editor {
@@ -40,4 +38,9 @@
 
 .quiqqer-bricks-brickareas {
     margin-bottom: 20px;
+}
+
+.brick-edit-extra-header tbody tr td:first-child,
+.quiqqer-bricks-brickedit .data-table tbody tr td:first-child {
+    width: 200px;
 }

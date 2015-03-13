@@ -36,7 +36,8 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
         options : {
             brickId : false, // brickId
             styles  : false,
-            project : false,
+            projectName : false,
+            projectLang : false,
             areas   : false
         },
 
@@ -70,7 +71,7 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
             this.$Buttons   = this.$Elm.getElement( '.quiqqer-bricks-brickareas-buttons' );
 
             new QUIButton({
-                text   : 'Brickbereich hinzufügen',
+                text   : QUILocale.get( 'quiqqer/bricks', 'brick.edit.area.add' ),
                 styles : {
                     width : '100%'
                 },
@@ -79,7 +80,8 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
                     onClick : function()
                     {
                         new AreaWindow({
-                            project : self.getAttribute( 'project' ),
+                            projectName : self.getAttribute( 'projectName' ),
+                            projectLang : self.getAttribute( 'projectLang' ),
                             events  :
                             {
                                 onSubmit : function(Win, areas)
@@ -119,12 +121,36 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
                 return;
             }
 
+            var self = this;
+
             this.$areas[ area ] = true;
 
-            new Element('div', {
-                'class' : 'quiqqer-bricks-brickareas-area',
-                html    : area
+            var BrickNode = new Element('div', {
+                'class'     : 'quiqqer-bricks-brickareas-area',
+                html        : area,
+                'data-area' : area
             }).inject( this.$Container );
+
+            new Element('span', {
+                'class' : 'fa fa-times icon-remove',
+                styles  : {
+                    cursor: 'pointer',
+                    marginLeft: 10
+                },
+                events :
+                {
+                    click : function()
+                    {
+                        var area = BrickNode.get( 'data-area' );
+
+                        if ( self.$areas[ area ] ) {
+                            delete self.$areas[ area ];
+                        }
+
+                        BrickNode.destroy();
+                    }
+                }
+            }).inject( BrickNode );
         },
 
         /**
