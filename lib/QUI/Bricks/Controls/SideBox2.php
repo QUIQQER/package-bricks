@@ -107,7 +107,7 @@ class SideBox2 extends QUI\Control
         return $Project->getSites(array(
             'where_or' => $where,
             'limit'    => $limit,
-            'order'    => 'release_from ASC'
+            'order'    => 'release_from DESC'
         ));
     }
 }
