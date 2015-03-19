@@ -1,6 +1,6 @@
 {
     "name" : "quiqqer/bricks",
-    "type" : "quiqqer-plugin",
+    "type" : "quiqqer-module",
     "description" : "Bricks Module",
 
     "version" : "dev-master",

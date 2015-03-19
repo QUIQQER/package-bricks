@@ -76,7 +76,6 @@ class Events
                 continue;
             }
 
-
             foreach ( $bricks as $brick )
             {
                 if ( !(int)$brick['inheritance'] ) {
@@ -99,7 +98,12 @@ class Events
     static function onSmartyInit($Smarty)
     {
         // {brickarea}
-        $Smarty->registerPlugin("function", "brickarea", "\QUI\Bricks\Events::brickarea");
+        if ( !isset( $Smarty->registered_plugins['function'] ) ||
+             !isset( $Smarty->registered_plugins['function']['brickarea'] )
+        )
+        {
+            $Smarty->registerPlugin("function", "brickarea", "\QUI\Bricks\Events::brickarea");
+        }
     }
 
     /**

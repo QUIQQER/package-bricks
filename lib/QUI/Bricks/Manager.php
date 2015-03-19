@@ -100,6 +100,10 @@ class Manager
 //            $layoutType = $Project->getAttribute( 'layout' );
 //        }
 
+        if ( $Project->getAttribute( 'template' ) ) {
+            $templates[] = $Project->getAttribute( 'template' );
+        }
+
         // get all vhosts, and the used templates of the project
         $vhosts = QUI::getRewrite()->getVHosts();
 
@@ -493,7 +497,6 @@ class Manager
             break;
         }
 
-
         if ( !isset( $area ) || !isset( $area['name'] ) ) {
             return array();
         }
@@ -523,7 +526,7 @@ class Manager
                 )
             ));
 
-            if ( empty( $bricks ) ) {
+            if ( empty( $bricks ) || !is_array( $bricks ) ) {
                 continue;
             }
 
@@ -539,6 +542,10 @@ class Manager
             $parentAreas = $Parent->getAttribute( 'quiqqer.bricks.areas' );
             $parentAreas = json_decode( $parentAreas, true );
 
+            if ( !isset( $parentAreas[ $brickArea ] ) ) {
+                continue;
+            }
+
             $brickIds = array();
             $area     = $parentAreas[ $brickArea ];
 
@@ -551,6 +558,10 @@ class Manager
                 if ( isset( $brickIds[ $brick[ 'brickId' ] ] ) ) {
                     $result[] = $brick[ 'brickId' ];
                 }
+            }
+
+            if ( empty( $result ) ) {
+                continue;
             }
 
             break;
