@@ -76,7 +76,6 @@ class Events
                 continue;
             }
 
-
             foreach ( $bricks as $brick )
             {
                 if ( !(int)$brick['inheritance'] ) {
