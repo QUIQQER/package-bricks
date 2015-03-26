@@ -4,7 +4,19 @@
  *
  * @module package/quiqqer/bricks/bin/Site/Area
  * @author www.pcsg.de (Henning Leutz)
+ *
+ * @require qui/QUI
+ * @require qui/controls/Control
+ * @require qui/controls/buttons/Button
+ * @require qui/controls/windows/Popup
+ * @require qui/controls/windows/Confirm
+ * @require qui/controls/elements/List
+ * @require Locale
+ * @require Ajax
+ * @require package/quiqqer/bricks/bin/Sortables
+ * @require css!package/quiqqer/bricks/bin/Site/Area.css
  */
+
 define('package/quiqqer/bricks/bin/Site/Area', [
 
     'qui/QUI',
@@ -19,7 +31,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
     'css!package/quiqqer/bricks/bin/Site/Area.css'
 
-], function (QUI, QUIControl, QUIButton, QUIPopup, QUIConfirm, QUIList, QUILocale, QUIAjax, Sortables)
+], function(QUI, QUIControl, QUIButton, QUIPopup, QUIConfirm, QUIList, QUILocale, QUIAjax, Sortables)
 {
     "use strict";
 
@@ -63,6 +75,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             this.$List        = false;
             this.$FXExtraBtns = false;
+            this.$ExtraBtns   = false;
 
             this.addEvents({
                 onInject : this.$onInject
@@ -92,12 +105,12 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 '.quiqqer-bricks-site-category-area-buttons'
             );
 
-            var ExtraButtons = new Element('div', {
+            this.$ExtraBtns = new Element('div', {
                 'class' : 'quiqqer-bricks-site-category-area-extraButtons'
             });
 
 
-            this.$FXExtraBtns = moofx( ExtraButtons );
+            this.$FXExtraBtns = moofx( this.$ExtraBtns );
 
             this.$List = this.$Elm.getElement(
                 '.quiqqer-bricks-site-category-area-list'
@@ -113,7 +126,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 }
             }).inject( Buttons );
 
-            ExtraButtons.inject( Buttons );
+            this.$ExtraBtns.inject( Buttons );
 
             this.$MoreButton = new QUIButton({
                 title  : QUILocale.get( lg, 'site.area.button.area.more.openIt' ),
@@ -146,7 +159,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 styles : {
                     marginLeft : 10
                 }
-            }).inject( ExtraButtons );
+            }).inject( this.$ExtraBtns );
 
             this.$SortableButton = new QUIButton({
                 title  : QUILocale.get( lg, 'site.area.button.area.sort' ),
@@ -169,7 +182,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 styles : {
                     marginLeft : 5
                 }
-            }).inject( ExtraButtons );
+            }).inject( this.$ExtraBtns );
 
 
             return this.$Elm;
@@ -538,7 +551,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
         /**
          * Opens the extra settings buttons
          *
-         * @param {Function} callback
+         * @param {Function} [callback]
          */
         openButtons : function(callback)
         {
@@ -548,15 +561,29 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             self.$FXExtraBtns.style({
                 borderLeft : '2px solid #cccfd5',
-                height   : 30,
-                overflow : 'hidden'
+                height     : 30,
+                overflow   : 'hidden'
             });
+
+            var width = this.$ExtraBtns.getChildren().map(function(Elm)
+            {
+                var width = Elm.getSize().x;
+
+                width = width + Elm.getStyle( 'margin-left' ).toInt();
+                width = width + Elm.getStyle( 'margin-right' ).toInt();
+
+                return width;
+            }).sum();
+
+            // i dont know why i need 2 px more -.-"
+            width = width + 2;
 
             this.$FXExtraBtns.animate({
                 opacity    : 1,
-                width      : 85,
+                width      : width,
                 marginLeft : 10
             }, {
+                equation : 'ease-in-out',
                 callback : function()
                 {
                     self.$MoreButton.setAttribute( 'icon', 'icon-caret-right' );
