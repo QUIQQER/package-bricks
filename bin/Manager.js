@@ -4,6 +4,18 @@
  *
  * @module package/quiqqer/bricks/bin/Manager
  * @author www.pcsg.de (Henning Leutz)
+ *
+ * @require qui/QUI
+ * @require qui/controls/desktop/Panel
+ * @require qui/controls/buttons/Select
+ * @require qui/controls/buttons/Button
+ * @require qui/controls/buttons/Seperator
+ * @require qui/controls/windows/Confirm
+ * @require controls/grid/Grid
+ * @require Locale
+ * @require Projects
+ * @require Ajax
+ * @require css!package/quiqqer/bricks/bin/Manager.css
  */
 
 define('package/quiqqer/bricks/bin/Manager', [
@@ -334,7 +346,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                             '   <span class="quiqqer-bricks-create-label-text">' +
                                     QUILocale.get( lg, 'manager.window.create.label.title' ) +
                             '   </span>' +
-                            '   <input type="text" name="title" />' +
+                            '   <input type="text" name="title" required="required" />' +
                             '</label>' +
                             '<label>' +
                             '   <span class="quiqqer-bricks-create-label-text">' +
@@ -388,7 +400,19 @@ define('package/quiqqer/bricks/bin/Manager', [
                             Title = Body.getElement( '[name="title"]' ),
                             Type  = Body.getElement( '[name="type"]' );
 
-                        if ( Title.value === '' ) {
+                        if ( Title.value === '' )
+                        {
+                            QUI.getMessageHandler(function(MH)
+                            {
+                                MH.addError(
+                                    QUILocale.get( lg, 'exception.brick.has.no.title' ),
+                                    Title
+                                );
+                            });
+
+                            Title.focus();
+
+                            Win.Loader.hide();
                             return;
                         }
 
