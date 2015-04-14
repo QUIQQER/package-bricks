@@ -10,7 +10,7 @@
             <en><![CDATA[Brick:Content]]></en>
         </locale>
         <locale name="brick.content.description">
-            <de><![CDATA[]]></de>
+            <de><![CDATA[Ein Baustein mit Text-Editor, in welchem neben Text auch z.B Bilder eingefügt werden können]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.title">
@@ -18,7 +18,7 @@
             <en><![CDATA[Brick:Bradcrumb]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.description">
-            <de><![CDATA[]]></de>
+            <de><![CDATA[Eine "Sie sind hier"-Anzeigenleiste über dem Inhalt]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.contact.title">
@@ -26,7 +26,7 @@
             <en><![CDATA[Brick:Contact]]></en>
         </locale>
         <locale name="brick.control.contact.description">
-            <de><![CDATA[]]></de>
+            <de><![CDATA[Ein vorgefertigtes Kontaktformular]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="package.title">
@@ -34,19 +34,16 @@
             <en><![CDATA[Bricks Module]]></en>
         </locale>
         <locale name="package.description">
-            <de><![CDATA[Platzieren Sie hiermit Grafiken, Texte, Videos etc.
-                innerhalb eines Tamplates (einer Seite Ihrer Homepage)
-                beliebig und immer wieder neu, bis Sie mit dem Ergebnis zufrieden sind.]]></de>
-            <en><![CDATA[
-
-            ]]></en>
+            <de><![CDATA[Platzieren Sie hiermit Grafiken, Texte, Videos, Formulare etc.
+innerhalb eines Tamplates (einer Seite Ihrer Homepage)beliebig.]]></de>
+            <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.navigation.title">
             <de><![CDATA[Baustein: Navigation]]></de>
             <en><![CDATA[Brick:Navigation]]></en>
         </locale>
         <locale name="brick.control.navigation.description">
-            <de><![CDATA[]]></de>
+            <de><![CDATA[Lassen Sie auf Ihrer Webseite in der rechten oder linken Sidebar eine Seiten-Navigation anzeigen]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.navigation.setting.startId">
@@ -117,18 +114,16 @@
             <de><![CDATA[Zusäzliche Einstellungen]]></de>
             <en><![CDATA[Extra settings]]></en>
         </locale>
-    </groups>
-    <groups name="quiqqer/bricks" datatype="php">
-        <locale name="site.panel.bricks.category.title">
-            <de><![CDATA[Bausteine]]></de>
-            <en><![CDATA[Bricks]]></en>
-        </locale>
-        <locale name="continue.reading">
-            <de><![CDATA[weiterlesen]]></de>
-            <en><![CDATA[Continue reading]]></en>
-        </locale>
         <locale name="bricks.SocialBox.title">
             <de><![CDATA[Baustein: Social Media]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="site.area.button.area.more.openIt">
+            <de><![CDATA[Einstellungen]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="site.area.button.area.sort">
+            <de><![CDATA[Bausteine sortieren]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.banner.title">
@@ -146,6 +141,16 @@
         <locale name="brick.control.sidebox3.title">
             <de><![CDATA[Baustein: 3er-Box]]></de>
             <en><![CDATA[]]></en>
+        </locale>
+    </groups>
+    <groups name="quiqqer/bricks" datatype="php">
+        <locale name="site.panel.bricks.category.title">
+            <de><![CDATA[Bausteine]]></de>
+            <en><![CDATA[Bricks]]></en>
+        </locale>
+        <locale name="continue.reading">
+            <de><![CDATA[weiterlesen]]></de>
+            <en><![CDATA[Continue reading]]></en>
         </locale>
     </groups>
     <groups name="quiqqer/bricks" datatype="js">
@@ -194,9 +199,9 @@
             <en><![CDATA[Bricks in the area]]></en>
         </locale>
         <locale name="site.area.window.deactivate.information" html="true">
-            <de><![CDATA[In der Baustein-Zone sind noch Bausteine enthalten<br />
-                Die Baustein-Zone kann nur deaktiviert werden wenn dieser keine Bausteine enthalten sind.<br />
-                Möchten Sie die Bausteine aus der Baustein-Zone entfernen?]]></de>
+            <de><![CDATA[<p>In der Baustein-Zone sind noch Bausteine enthalten.<br />
+Die Baustein-Zone kann nur deaktiviert werden, wenn in dieser keine Bausteine enthalten sind.<br />
+M&ouml;chten Sie die Bausteine aus der Baustein-Zone entfernen?</p>]]></de>
             <en><![CDATA[The Area still contains bricks<br />
                 The area can be disabled only if no bricks are included.<br />
                 Do you want to remove the bricks from the area?]]></en>
