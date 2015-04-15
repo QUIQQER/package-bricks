@@ -95,7 +95,7 @@ innerhalb eines Tamplates (einer Seite Ihrer Homepage)beliebig.]]></de>
             <en><![CDATA[Edit Brick]]></en>
         </locale>
         <locale name="brick.edit.description">
-            <de><![CDATA[Baustein Beschreibung]]></de>
+            <de><![CDATA[Baustein-Beschreibung]]></de>
             <en><![CDATA[Brick description]]></en>
         </locale>
         <locale name="brick.edit.type">
@@ -116,6 +116,14 @@ innerhalb eines Tamplates (einer Seite Ihrer Homepage)beliebig.]]></de>
         </locale>
         <locale name="bricks.SocialBox.title">
             <de><![CDATA[Baustein: Social Media]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.banner.setting.title">
+            <de><![CDATA[Baustein-Überschrift]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.banner.setting.text">
+            <de><![CDATA[Banner-Text]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="site.area.button.area.more.openIt">
@@ -257,6 +265,48 @@ M&ouml;chten Sie die Bausteine aus der Baustein-Zone entfernen?</p>]]></de>
         <locale name="bricks.message.no.areas.found">
             <de><![CDATA[Es wurden leider keine Baustein-Zonen gefunden.]]></de>
             <en><![CDATA[Sorry, no block zones found.]]></en>
+        </locale>
+    </groups>
+    <groups name="quiqqer/bricks" datatype="js,php">
+        <locale name="brick.control.sidebox1.setting.site">
+            <de><![CDATA[Seiten hinzufügen]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.setting.showTitle">
+            <de><![CDATA[Seiten-Titel anzeigen]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.setting.showImage">
+            <de><![CDATA[Seiten-Bilder anzeigen]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.setting.showShort">
+            <de><![CDATA[Seiten-Kurzbeschreibung anzeigen]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.setting.showContent">
+            <de><![CDATA[Seiten-Inhalt anzeigen]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.sidebox2.setting.site">
+            <de><![CDATA[Seiten hinzufügen]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.sidebox3.setting.site">
+            <de><![CDATA[Seiten hinzufügen]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="SocialBox.title">
+            <de><![CDATA[Baustein-Überschrift]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="SocialBox.socialList">
+            <de><![CDATA[Social Media Einträge]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="exception.brick.has.no.title">
+            <de><![CDATA[Fügen Sie einen Titel hinzu!]]></de>
+            <en><![CDATA[]]></en>
         </locale>
     </groups>
 </locales>
