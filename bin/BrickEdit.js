@@ -333,9 +333,13 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          */
         save : function(callback)
         {
+            var i, len, Control;
+
             var Type  = this.$Elm.getElement( '[name="type"]' ),
                 Title = this.$Elm.getElement( '[name="title"]'),
-                Desc  = this.$Elm.getElement( '[name="description"]' );
+                Desc  = this.$Elm.getElement( '[name="description"]'),
+
+                quiElements = this.$Elm.getElements( '[data-quiid]' );
 
             var data = {
                 title       : Title.value,
@@ -347,6 +351,15 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
             if ( this.$Editor ) {
                 data.content = this.$Editor.getContent();
+            }
+
+            for ( i = 0, len = quiElements.length; i < len; i++ )
+            {
+                Control = QUI.Controls.getById( quiElements[ i ].get( 'data-quiid' ) );
+
+                if ( Control && typeOf( Control ) == 'controls/editors/Editor' ) {
+                    Control.getContent();
+                }
             }
 
             // settings
