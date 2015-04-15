@@ -257,7 +257,7 @@ class Manager
                 /* @var $Setting \DOMElement */
                 $settings[] = array(
                     'name'     => $Setting->getAttribute( 'name' ),
-                    'text'     => QUI\Utils\DOM::getTextFromNode( $Setting ),
+                    'text'     => QUI\Utils\DOM::getTextFromNode( $Setting, false ),
                     'type'     => $Setting->getAttribute( 'type' ),
                     'class'    => $Setting->getAttribute( 'class' ),
                     'data-qui' => $Setting->getAttribute( 'data-qui' )

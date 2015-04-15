@@ -266,7 +266,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 'class' : 'brick-edit-extra-header-form'
             }).wraps( TableExtra );
 
-            var i, len, setting, dataQui, extraFieldId;
+            var i, len, text, setting, dataQui, extraFieldId;
 
             var self = this,
                 id   = this.getId();
@@ -282,11 +282,17 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     dataQui = ' data-qui="'+ setting['data-qui'] +'" ';
                 }
 
+                text = setting.text;
+
+                if ( typeOf( setting.text ) === 'array' ) {
+                    text = QUILocale.get( setting.text[ 0 ], setting.text[ 1 ] );
+                }
+
                 new Element('tr', {
                     'class' : i % 2 ? 'even' : 'odd',
                     html : '<td>' +
                            '    <label class="quiqqer-bricks-areas" for="'+ extraFieldId +'">' +
-                                     setting.text +
+                                    text +
                            '    </label>' +
                            '</td>' +
                            '<td>' +
