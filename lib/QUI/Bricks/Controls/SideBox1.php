@@ -17,6 +17,7 @@ class SideBox1 extends QUI\Control
 {
     /**
      * constructor
+     *
      * @param Array $attributes
      */
     public function __construct($attributes = array())
@@ -27,17 +28,17 @@ class SideBox1 extends QUI\Control
             'showTitle'       => true,
             'showDescription' => true,
             'showContent'     => true,
-
-            'class'    => 'quiqqer-bricks-sidebox1',
-            'nodeName' => 'article',
-            'site'     => false
+            'class'           => 'quiqqer-bricks-sidebox1',
+            'nodeName'        => 'article',
+            'site'            => false
         ));
 
-        parent::setAttributes( $attributes );
+        parent::setAttributes($attributes);
     }
 
     /**
      * (non-PHPdoc)
+     *
      * @see \QUI\Control::create()
      */
     public function getBody()
@@ -49,7 +50,7 @@ class SideBox1 extends QUI\Control
             'Site' => $this->_getSite()
         ));
 
-        return $Engine->fetch( dirname( __FILE__ ) .'/SideBox1.html' );
+        return $Engine->fetch(dirname(__FILE__).'/SideBox1.html');
     }
 
     /**
@@ -60,32 +61,27 @@ class SideBox1 extends QUI\Control
     protected function _getSite()
     {
         $Project = $this->_getProject();
-        $site    = $this->getAttribute( 'site' );
+        $site = $this->getAttribute('site');
 
-        if ( is_numeric( $site ) )
-        {
-            try
-            {
-                return $Project->get( (int)$site );
+        if (is_numeric($site)) {
+            try {
+                return $Project->get((int)$site);
 
-            } catch ( QUI\Exception $Exception )
-            {
-                QUI\System\Log::addWarning( $Exception->getMessage() );
+            } catch (QUI\Exception $Exception) {
+                QUI\System\Log::addWarning($Exception->getMessage());
 
                 return $Project->firstChild();
             }
         }
 
-        $sitetypes = explode( ';', $site );
+        $sitetypes = explode(';', $site);
 
-        $ids   = array();
+        $ids = array();
         $types = array();
         $where = array();
 
-        foreach ( $sitetypes as $sitetypeEntry )
-        {
-            if ( is_numeric( $sitetypeEntry ) )
-            {
+        foreach ($sitetypes as $sitetypeEntry) {
+            if (is_numeric($sitetypeEntry)) {
                 $ids[] = $sitetypeEntry;
                 continue;
             }
@@ -93,16 +89,14 @@ class SideBox1 extends QUI\Control
             $types[] = $sitetypeEntry;
         }
 
-        if ( !empty( $ids ) )
-        {
+        if (!empty($ids)) {
             $where['id'] = array(
                 'type'  => 'IN',
                 'value' => $ids
             );
         }
 
-        if ( !empty( $types ) )
-        {
+        if (!empty($types)) {
             $where['type'] = array(
                 'type'  => 'IN',
                 'value' => $types
@@ -115,8 +109,8 @@ class SideBox1 extends QUI\Control
             'order'    => 'release_from ASC'
         ));
 
-        if ( isset( $result[ 0 ] ) ) {
-            return $result[ 0 ];
+        if (isset($result[0])) {
+            return $result[0];
         }
 
         return $Project->firstChild();

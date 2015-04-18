@@ -12,7 +12,7 @@ use QUI;
  * Class Brick
  * A Brick from the Brickmanager
  *
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  * @package quiqqer/bricks
  */
 class Brick extends QUI\QDOM
@@ -29,7 +29,7 @@ class Brick extends QUI\QDOM
      *
      * @param array $params - brick params
      */
-    public function __construct($params=array())
+    public function __construct($params = array())
     {
         // default
         $default = array(
@@ -41,12 +41,11 @@ class Brick extends QUI\QDOM
             'areas'       => ''
         );
 
-        $this->setAttributes( $default );
+        $this->setAttributes($default);
 
-        foreach ( $default as $key => $value )
-        {
-            if ( isset( $params[ $key ] ) ) {
-                $this->setAttribute( $key, $params[ $key ] );
+        foreach ($default as $key => $value) {
+            if (isset($params[$key])) {
+                $this->setAttribute($key, $params[$key]);
             }
         }
 
@@ -56,43 +55,39 @@ class Brick extends QUI\QDOM
         $Manager = new Manager();
 
         $availableSettings = $Manager->getAvailableBrickSettingsByBrickType(
-            $this->getAttribute( 'type' )
+            $this->getAttribute('type')
         );
 
-        foreach ( $availableSettings as $entry ) {
-            $this->_settings[ $entry['name'] ] = false;
+        foreach ($availableSettings as $entry) {
+            $this->_settings[$entry['name']] = false;
         }
 
         // control default settings
-        if ( is_object( $Control ) )
-        {
+        if (is_object($Control)) {
             $controlSettings = $Control->getAttributes();
 
-            foreach ( $this->_settings as $key => $value )
-            {
-                if ( isset( $controlSettings[ $key ] ) ) {
-                    $this->_settings[ $key ] = $controlSettings[ $key ];
+            foreach ($this->_settings as $key => $value) {
+                if (isset($controlSettings[$key])) {
+                    $this->_settings[$key] = $controlSettings[$key];
                 }
             }
         }
 
         // settings from database
-        if ( isset( $params['settings'] ) )
-        {
+        if (isset($params['settings'])) {
             $settings = $params['settings'];
 
-            if ( is_string( $settings ) ) {
-                $settings = json_decode( $settings, true );
+            if (is_string($settings)) {
+                $settings = json_decode($settings, true);
             }
 
-            if ( !is_array( $settings ) ) {
+            if (!is_array($settings)) {
                 return;
             }
 
-            foreach ( $this->_settings as $key => $value )
-            {
-                if ( isset( $settings[ $key ] ) ) {
-                    $this->_settings[ $key ] = $settings[ $key ];
+            foreach ($this->_settings as $key => $value) {
+                if (isset($settings[$key])) {
+                    $this->_settings[$key] = $settings[$key];
                 }
             }
         }
@@ -106,14 +101,14 @@ class Brick extends QUI\QDOM
      */
     public function check()
     {
-        if ( $this->getAttribute( 'type' ) == 'content' ) {
+        if ($this->getAttribute('type') == 'content') {
             return $this;
         }
 
         $Control = $this->_getControl();
 
-        if ( !$Control ) {
-            throw new QUI\Exception( 'Control not found. Brick could not be created' );
+        if (!$Control) {
+            throw new QUI\Exception('Control not found. Brick could not be created');
         }
 
         return $Control;
@@ -126,17 +121,17 @@ class Brick extends QUI\QDOM
      */
     public function create()
     {
-        if ( $this->getAttribute( 'type' ) == 'content' ) {
-            return $this->getAttribute( 'content' );
+        if ($this->getAttribute('type') == 'content') {
+            return $this->getAttribute('content');
         }
 
         $Control = $this->_getControl();
 
-        if ( !$Control ) {
-            throw new QUI\Exception( 'Control not found. Brick could not be created' );
+        if (!$Control) {
+            throw new QUI\Exception('Control not found. Brick could not be created');
         }
 
-        $Control->setAttributes( $this->getSettings() );
+        $Control->setAttributes($this->getSettings());
 
         return $Control->create();
     }
@@ -148,20 +143,20 @@ class Brick extends QUI\QDOM
      */
     protected function _getControl()
     {
-        $Ctrl = $this->getAttribute( 'type' );
+        $Ctrl = $this->getAttribute('type');
 
-        if ( $Ctrl === 'content' ) {
+        if ($Ctrl === 'content') {
             return true;
         }
 
-        if ( !is_callable( $Ctrl ) && !class_exists( $Ctrl ) ) {
+        if (!is_callable($Ctrl) && !class_exists($Ctrl)) {
             return false;
         }
 
         /* @var $Control \QUI\Control */
-        $Control = new $Ctrl( $this->getSettings() );
+        $Control = new $Ctrl($this->getSettings());
 
-        if ( !($Control instanceof QUI\Control) || !$Control ) {
+        if (!($Control instanceof QUI\Control) || !$Control) {
             return false;
         }
 
@@ -185,8 +180,8 @@ class Brick extends QUI\QDOM
      */
     public function setSettings($settings)
     {
-        foreach ( $settings as $key => $value ) {
-            $this->setSetting( $key, $value );
+        foreach ($settings as $key => $value) {
+            $this->setSetting($key, $value);
         }
     }
 
@@ -194,12 +189,13 @@ class Brick extends QUI\QDOM
      * Return the setting of the brick
      *
      * @param String $name - Name of the setting
+     *
      * @return Bool|String
      */
     public function getSetting($name)
     {
-        if ( isset( $this->_settings[ $name ] ) ) {
-            return $this->_settings[ $name ];
+        if (isset($this->_settings[$name])) {
+            return $this->_settings[$name];
         }
 
         return false;
@@ -208,13 +204,13 @@ class Brick extends QUI\QDOM
     /**
      * Set a brick setting
      *
-     * @param String $name - name of the setting
+     * @param String $name  - name of the setting
      * @param String $value - value of the setting
      */
     public function setSetting($name, $value)
     {
-        if ( isset( $this->_settings[ $name ] ) ) {
-            $this->_settings[ $name ] = $value;
+        if (isset($this->_settings[$name])) {
+            $this->_settings[$name] = $value;
         }
     }
 }

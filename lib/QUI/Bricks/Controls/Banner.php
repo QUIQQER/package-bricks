@@ -17,6 +17,7 @@ class Banner extends QUI\Control
 {
     /**
      * constructor
+     *
      * @param Array $attributes
      */
     public function __construct($attributes = array())
@@ -29,11 +30,12 @@ class Banner extends QUI\Control
             'nodeName' => 'section'
         ));
 
-        parent::setAttributes( $attributes );
+        parent::setAttributes($attributes);
     }
 
     /**
      * (non-PHPdoc)
+     *
      * @see \QUI\Control::create()
      */
     public function getBody()
@@ -44,6 +46,6 @@ class Banner extends QUI\Control
             'this' => $this
         ));
 
-        return $Engine->fetch( dirname( __FILE__ ) .'/Banner.html' );
+        return $Engine->fetch(dirname(__FILE__).'/Banner.html');
     }
 }
