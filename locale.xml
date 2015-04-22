@@ -35,7 +35,7 @@
         </locale>
         <locale name="package.description">
             <de><![CDATA[Platzieren Sie hiermit Grafiken, Texte, Videos, Formulare etc.
-innerhalb eines Tamplates (einer Seite Ihrer Homepage)beliebig.]]></de>
+innerhalb eines Templates (einer Seite Ihrer Homepage)beliebig.]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.navigation.title">
@@ -47,7 +47,7 @@ innerhalb eines Tamplates (einer Seite Ihrer Homepage)beliebig.]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.navigation.setting.startId">
-            <de><![CDATA[Start ID]]></de>
+            <de><![CDATA[Start-ID]]></de>
             <en><![CDATA[Start ID]]></en>
         </locale>
         <locale name="brick.control.navigation.setting.homelink">
@@ -75,19 +75,19 @@ innerhalb eines Tamplates (einer Seite Ihrer Homepage)beliebig.]]></de>
             <en><![CDATA[Show the text]]></en>
         </locale>
         <locale name="brick.control.navigation.setting.DropDown">
-            <de><![CDATA[Flaggen DropDown Anzeige]]></de>
+            <de><![CDATA[Flaggen DropDown-Anzeige]]></de>
             <en><![CDATA[Flag DropDown view]]></en>
         </locale>
         <locale name="area.window.title">
-            <de><![CDATA[Baustein-Zonen]]></de>
+            <de><![CDATA[Bausteinzonen]]></de>
             <en><![CDATA[Brick areas]]></en>
         </locale>
         <locale name="brick.edit.area.add">
-            <de><![CDATA[Baustein-Zone hinzufügen]]></de>
+            <de><![CDATA[Bausteinzone hinzufügen]]></de>
             <en><![CDATA[Add a Brick area]]></en>
         </locale>
         <locale name="brick.edit.header">
-            <de><![CDATA[Baustein Einstellungen]]></de>
+            <de><![CDATA[Baustein-Einstellungen]]></de>
             <en><![CDATA[Brick settings]]></en>
         </locale>
         <locale name="brick.sheet.edit.title">
@@ -95,15 +95,15 @@ innerhalb eines Tamplates (einer Seite Ihrer Homepage)beliebig.]]></de>
             <en><![CDATA[Edit Brick]]></en>
         </locale>
         <locale name="brick.edit.description">
-            <de><![CDATA[Baustein-Beschreibung]]></de>
+            <de><![CDATA[Bausteinbeschreibung]]></de>
             <en><![CDATA[Brick description]]></en>
         </locale>
         <locale name="brick.edit.type">
-            <de><![CDATA[Baustein-Typ]]></de>
+            <de><![CDATA[Bausteintyp]]></de>
             <en><![CDATA[Brick type]]></en>
         </locale>
         <locale name="brick.edit.allowed.areas">
-            <de><![CDATA[Erlaubte Baustein-Zonen]]></de>
+            <de><![CDATA[Erlaubte Bausteinzonen]]></de>
             <en><![CDATA[Allowed Brick areas]]></en>
         </locale>
         <locale name="brick.edit.content">
@@ -123,7 +123,7 @@ innerhalb eines Tamplates (einer Seite Ihrer Homepage)beliebig.]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.banner.setting.text">
-            <de><![CDATA[Banner-Text]]></de>
+            <de><![CDATA[Bannertext]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="site.area.button.area.more.openIt">
@@ -135,11 +135,11 @@ innerhalb eines Tamplates (einer Seite Ihrer Homepage)beliebig.]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.banner.title">
-            <de><![CDATA[Baustein: Text-Banner]]></de>
+            <de><![CDATA[Baustein: Textbanner]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.sidebox1.title">
-            <de><![CDATA[Baustein: Einzel-Box]]></de>
+            <de><![CDATA[Baustein: Einzelbox]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.sidebox2.title">
@@ -163,11 +163,11 @@ innerhalb eines Tamplates (einer Seite Ihrer Homepage)beliebig.]]></de>
     </groups>
     <groups name="quiqqer/bricks" datatype="js">
         <locale name="brick.type">
-            <de><![CDATA[Baustein-Typ]]></de>
+            <de><![CDATA[Bausteintyp]]></de>
             <en><![CDATA[Brick type]]></en>
         </locale>
         <locale name="site.area.button.area.settings">
-            <de><![CDATA[Baustein-Zonen-Einstellungen]]></de>
+            <de><![CDATA[Bausteinzonen-Einstellungen]]></de>
             <en><![CDATA[Brick area settings]]></en>
         </locale>
         <locale name="site.area.button.add">
@@ -199,27 +199,27 @@ innerhalb eines Tamplates (einer Seite Ihrer Homepage)beliebig.]]></de>
             <en><![CDATA[Do you really want to delete the Brick for this page?]]></en>
         </locale>
         <locale name="site.area.window.deactivate.title">
-            <de><![CDATA[Bausteine in der Baustein-Zone]]></de>
+            <de><![CDATA[Bausteine in der Bausteinzone]]></de>
             <en><![CDATA[Bricks in the area]]></en>
         </locale>
         <locale name="site.area.window.deactivate.text">
-            <de><![CDATA[Bausteine in der Baustein-Zone]]></de>
+            <de><![CDATA[Bausteine in der Bausteinzone]]></de>
             <en><![CDATA[Bricks in the area]]></en>
         </locale>
         <locale name="site.area.window.deactivate.information" html="true">
-            <de><![CDATA[<p>In der Baustein-Zone sind noch Bausteine enthalten.<br />
-Die Baustein-Zone kann nur deaktiviert werden, wenn in dieser keine Bausteine enthalten sind.<br />
-M&ouml;chten Sie die Bausteine aus der Baustein-Zone entfernen?</p>]]></de>
+            <de><![CDATA[<p>In der Bausteinzone sind noch Bausteine enthalten.<br />
+Die Bausteinzone kann nur deaktiviert werden, wenn in dieser keine Bausteine enthalten sind.<br />
+M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[The Area still contains bricks<br />
                 The area can be disabled only if no bricks are included.<br />
                 Do you want to remove the bricks from the area?]]></en>
         </locale>
         <locale name="area.window.settings.title">
-            <de><![CDATA[Baustein-Zonen-Einstellungen]]></de>
+            <de><![CDATA[Bausteinzonen-Einstellungen]]></de>
             <en><![CDATA[Brick area settings]]></en>
         </locale>
         <locale name="area.window.settings.deactivate">
-            <de><![CDATA[Baustein-Zonen deaktivieren]]></de>
+            <de><![CDATA[Bausteinzonen deaktivieren]]></de>
             <en><![CDATA[Deactivate Brick area]]></en>
         </locale>
         <locale name="site.area.window.settings.title">
@@ -243,11 +243,11 @@ M&ouml;chten Sie die Bausteine aus der Baustein-Zone entfernen?</p>]]></de>
             <en><![CDATA[Create a new Brick]]></en>
         </locale>
         <locale name="manager.window.create.label.title">
-            <de><![CDATA[Baustein Titel]]></de>
+            <de><![CDATA[Bausteintitel]]></de>
             <en><![CDATA[Brick title]]></en>
         </locale>
         <locale name="manager.window.create.label.type">
-            <de><![CDATA[Baustein Typ]]></de>
+            <de><![CDATA[Bausteintyp]]></de>
             <en><![CDATA[Brick type]]></en>
         </locale>
         <locale name="manager.window.delete.title">
@@ -263,7 +263,7 @@ M&ouml;chten Sie die Bausteine aus der Baustein-Zone entfernen?</p>]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="bricks.message.no.areas.found">
-            <de><![CDATA[Es wurden leider keine Baustein-Zonen gefunden.]]></de>
+            <de><![CDATA[Es wurden leider keine Bausteinzonen gefunden.]]></de>
             <en><![CDATA[Sorry, no block zones found.]]></en>
         </locale>
     </groups>
@@ -273,19 +273,19 @@ M&ouml;chten Sie die Bausteine aus der Baustein-Zone entfernen?</p>]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.setting.showTitle">
-            <de><![CDATA[Seiten-Titel anzeigen]]></de>
+            <de><![CDATA[Seitentitel anzeigen]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.setting.showImage">
-            <de><![CDATA[Seiten-Bilder anzeigen]]></de>
+            <de><![CDATA[Seitenbilder anzeigen]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.setting.showShort">
-            <de><![CDATA[Seiten-Kurzbeschreibung anzeigen]]></de>
+            <de><![CDATA[Kurzbeschreibung der Seiten anzeigen]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.setting.showContent">
-            <de><![CDATA[Seiten-Inhalt anzeigen]]></de>
+            <de><![CDATA[Seiteninhalt anzeigen]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.sidebox2.setting.site">
