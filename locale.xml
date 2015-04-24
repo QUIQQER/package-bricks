@@ -160,6 +160,10 @@ innerhalb eines Templates (einer Seite Ihrer Homepage)beliebig.]]></de>
             <de><![CDATA[weiterlesen]]></de>
             <en><![CDATA[Continue reading]]></en>
         </locale>
+        <locale name="brick.control.navigation.setting.co">
+            <de><![CDATA[]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
     </groups>
     <groups name="quiqqer/bricks" datatype="js">
         <locale name="brick.type">
@@ -258,13 +262,15 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[<h1>Möchten Sie folgende Baustein-IDs wirklich löschen?</h1>[list]]]></de>
             <en><![CDATA[<h1>Do you really want to delete the following Brick-IDs?</h1>[list]]]></en>
         </locale>
-        <locale name="manager.brick.edit.btn.save">
-            <de><![CDATA[]]></de>
-            <en><![CDATA[]]></en>
-        </locale>
         <locale name="bricks.message.no.areas.found">
             <de><![CDATA[Es wurden leider keine Bausteinzonen gefunden.]]></de>
             <en><![CDATA[Sorry, no block zones found.]]></en>
+        </locale>
+    </groups>
+    <groups name="quiqqer/bricks" datatype="js,php ">
+        <locale name="brick.control.navigation.setting.content">
+            <de><![CDATA[Text über dem Kontaktformular]]></de>
+            <en><![CDATA[]]></en>
         </locale>
     </groups>
     <groups name="quiqqer/bricks" datatype="js,php">
