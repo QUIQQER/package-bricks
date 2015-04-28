@@ -47,63 +47,26 @@ class SideBox2 extends QUI\Control
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
-
-        $Engine->assign(array(
-            'this'     => $this,
-            'children' => $this->_getSites()
-        ));
-
-        return $Engine->fetch(dirname(__FILE__).'/SideBox2.html');
-    }
-
-    /**
-     * Return the site objects
-     *
-     * @return array
-     */
-    protected function _getSites()
-    {
-        $Project = $this->_getProject();
-        $site = $this->getAttribute('site');
         $limit = $this->getAttribute('limit');
 
         if (!$limit) {
             $limit = 2;
         }
 
-        $sitetypes = explode(';', $site);
+        $children = QUI\Projects\Site\Utils::getSitesByInputList(
+            $this->_getProject(),
+            $this->getAttribute('site'),
+            array(
+                'limit' => $limit,
+                'order' => 'release_from DESC'
+            )
+        );
 
-        $ids = array();
-        $types = array();
-        $where = array();
-
-        foreach ($sitetypes as $sitetypeEntry) {
-            if (is_numeric($sitetypeEntry)) {
-                $ids[] = $sitetypeEntry;
-                continue;
-            }
-
-            $types[] = $sitetypeEntry;
-        }
-
-        if (!empty($ids)) {
-            $where['id'] = array(
-                'type'  => 'IN',
-                'value' => $ids
-            );
-        }
-
-        if (!empty($types)) {
-            $where['type'] = array(
-                'type'  => 'IN',
-                'value' => $types
-            );
-        }
-
-        return $Project->getSites(array(
-            'where_or' => $where,
-            'limit'    => $limit,
-            'order'    => 'release_from DESC'
+        $Engine->assign(array(
+            'this'     => $this,
+            'children' => $children
         ));
+
+        return $Engine->fetch(dirname(__FILE__).'/SideBox2.html');
     }
 }

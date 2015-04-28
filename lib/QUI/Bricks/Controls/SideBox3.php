@@ -47,10 +47,24 @@ class SideBox3 extends QUI\Bricks\Controls\SideBox2
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
+        $limit = $this->getAttribute('limit');
+
+        if (!$limit) {
+            $limit = 2;
+        }
+
+        $children = QUI\Projects\Site\Utils::getSitesByInputList(
+            $this->_getProject(),
+            $this->getAttribute('site'),
+            array(
+                'limit' => $limit,
+                'order' => 'release_from DESC'
+            )
+        );
 
         $Engine->assign(array(
             'this'     => $this,
-            'children' => $this->_getSites()
+            'children' => $children
         ));
 
         return $Engine->fetch(dirname(__FILE__).'/SideBox3.html');
