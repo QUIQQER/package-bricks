@@ -18,6 +18,13 @@ use QUI;
 class Brick extends QUI\QDOM
 {
     /**
+     * internal brick id
+     *
+     * @var
+     */
+    protected $_id = false;
+
+    /**
      * Brick settings
      *
      * @var array
@@ -49,6 +56,9 @@ class Brick extends QUI\QDOM
             }
         }
 
+        if (isset($params['id'])) {
+            $this->_id = $params['id'];
+        }
 
         // default settings from control
         $Control = $this->_getControl();
@@ -155,6 +165,10 @@ class Brick extends QUI\QDOM
 
         /* @var $Control \QUI\Control */
         $Control = new $Ctrl($this->getSettings());
+
+        if ($this->_id) {
+            $Control->addCSSClass('brick-'.$this->_id);
+        }
 
         if (!($Control instanceof QUI\Control) || !$Control) {
             return false;
