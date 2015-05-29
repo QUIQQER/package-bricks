@@ -30,6 +30,10 @@ class Banner extends QUI\Control
             'nodeName' => 'section'
         ));
 
+        $this->addCSSFile(
+            dirname(__FILE__).'/Banner.css'
+        );
+
         parent::setAttributes($attributes);
     }
 
