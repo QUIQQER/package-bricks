@@ -68,7 +68,6 @@
             </settings>
         </brick>
 
-
         <brick control="\QUI\Bricks\Controls\SocialBox">
             <title>
                 <locale group="quiqqer/bricks" var="bricks.SocialBox.title" />
@@ -88,7 +87,6 @@
             </settings>
         </brick>
 
-
         <brick control="\QUI\Bricks\Controls\Banner">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.banner.title" />
@@ -106,7 +104,6 @@
                 </setting>
             </settings>
         </brick>
-
 
         <brick control="\QUI\Bricks\Controls\SideBox1">
             <title>
@@ -135,7 +132,6 @@
             </settings>
         </brick>
 
-
         <brick control="\QUI\Bricks\Controls\SideBox2">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox2.title" />
@@ -160,13 +156,36 @@
             </settings>
         </brick>
 
-
         <brick control="\QUI\Bricks\Controls\SideBox3">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox3.title" />
             </title>
             <description>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox3.description" />
+            </description>
+
+            <settings>
+                <setting name="site" data-qui="controls/projects/project/site/Select">
+                    <locale group="quiqqer/bricks" var="brick.control.sidebox3.setting.site" />
+                </setting>
+                <setting name="showImage" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showImage" />
+                </setting>
+                <setting name="showTitle" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showTitle" />
+                </setting>
+                <setting name="showShort" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showShort" />
+                </setting>
+            </settings>
+        </brick>
+
+        <brick control="\QUI\Bricks\Controls\SideBox3TitleTop">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.sidebox3TitleTop.title" />
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.sidebox3TitleTop.description" />
             </description>
 
             <settings>
