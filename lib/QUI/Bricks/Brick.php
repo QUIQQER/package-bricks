@@ -159,9 +159,12 @@ class Brick extends QUI\QDOM
             return true;
         }
 
+        QUI\System\Log::addDebug($Ctrl);
+
         if (!is_callable($Ctrl) && !class_exists($Ctrl)) {
             return false;
         }
+
 
         /* @var $Control \QUI\Control */
         $Control = new $Ctrl($this->getSettings());

@@ -91,11 +91,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 self.$availableBricks   = bricks;
                 self.$availableSettings = data.availableSettings;
 
-                self.setAttributes( data.attributes );
-                self.setAttribute( 'settings', data.settings );
+                self.setAttributes(data.attributes);
+                self.setAttribute('settings', data.settings);
 
-                self.$createData(function() {
-                    self.fireEvent( 'loaded', [ self ] );
+                self.$createData().then(function() {
+                    self.fireEvent('loaded', [self]);
                 });
 
             }, {
@@ -124,62 +124,69 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             var self = this,
                 id   = this.getId();
 
-            QUIAjax.get('package_quiqqer_bricks_ajax_brick_settingTemplate', function(result)
-            {
-                self.$Elm.set( 'html', result );
+            return new Promise(function(resolve, reject) {
 
-                self.$createExtraData();
-
-                // id and for attributes
-                self.$Elm.getElements( '[for]').each(function(Label)
+                QUIAjax.get('package_quiqqer_bricks_ajax_brick_settingTemplate', function(result)
                 {
-                    var forAttr = Label.get( 'for'),
-                        Sibling = self.$Elm.getElement( '[id="'+ forAttr +'"]' );
+                    self.$Elm.set( 'html', result );
 
-                    if ( Sibling )
-                    {
-                        Sibling.set( 'id', Sibling.id + id );
-                        Label.set( 'for', forAttr + id );
-                    }
-                });
+                    self.$createExtraData().then(function() {
 
-                // values
-                var Type  = self.$Elm.getElement( '[name="type"]' ),
-                    Title = self.$Elm.getElement( '[name="title"]' ),
-                    Desc  = self.$Elm.getElement( '[name="description"]' );
+                        // id and for attributes
+                        self.$Elm.getElements( '[for]').each(function(Label)
+                        {
+                            var forAttr = Label.get( 'for'),
+                                Sibling = self.$Elm.getElement( '[id="'+ forAttr +'"]' );
 
-                Title.value = self.getAttribute( 'title' );
-                Type.value  = self.getAttribute( 'type' );
-                Desc.value  = self.getAttribute( 'description' );
+                            if ( Sibling )
+                            {
+                                Sibling.set( 'id', Sibling.id + id );
+                                Label.set( 'for', forAttr + id );
+                            }
+                        });
 
-                // areas
-                var areas = [];
+                        // values
+                        var Type  = self.$Elm.getElement( '[name="type"]' ),
+                            Title = self.$Elm.getElement( '[name="title"]' ),
+                            Desc  = self.$Elm.getElement( '[name="description"]' );
 
-                if ( self.getAttribute( 'areas' ) )
-                {
-                    areas = self.getAttribute('areas')
+                        Title.value = self.getAttribute( 'title' );
+                        Type.value  = self.getAttribute( 'type' );
+                        Desc.value  = self.getAttribute( 'description' );
+
+                        // areas
+                        var areas = [];
+
+                        if ( self.getAttribute( 'areas' ) )
+                        {
+                            areas = self.getAttribute('areas')
                                 .replace(/^,*/, '')
                                 .replace(/,*$/, '')
                                 .split(',');
-                }
+                        }
 
-                // areas
-                self.$Areas = new BrickAreas({
-                    brickId     : self.getAttribute( 'id' ),
-                    projectName : self.getAttribute( 'projectName' ),
-                    projectLang : self.getAttribute( 'projectLang' ),
-                    areas  : areas,
-                    styles : {
-                        height : 120
-                    }
-                }).inject( self.$Elm.getElement( '.quiqqer-bricks-areas' )  );
+                        // areas
+                        self.$Areas = new BrickAreas({
+                            brickId     : self.getAttribute( 'id' ),
+                            projectName : self.getAttribute( 'projectName' ),
+                            projectLang : self.getAttribute( 'projectLang' ),
+                            areas  : areas,
+                            styles : {
+                                height : 120
+                            }
+                        }).inject( self.$Elm.getElement( '.quiqqer-bricks-areas' )  );
 
+                        return self.$createContentEditor( callback );
 
-                // editor
-                self.$createContentEditor( callback );
+                    }).then(function() {
 
-            }, {
-                'package' : 'quiqqer/bricks'
+                        resolve();
+                    });
+
+                }, {
+                    'package' : 'quiqqer/bricks',
+                    onError : reject
+                });
             });
         },
 
@@ -187,151 +194,199 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          * Create the editor, if the brick type is a content type
          *
          * @param {Function} callback
+         * @return Promise
          */
         $createContentEditor : function(callback)
         {
-            if ( this.getAttribute( 'type' ) != 'content' )
-            {
-                this.$Elm
-                    .getElement( 'table.brick-edit-content')
-                    .setStyle( 'display', 'none' );
+            return new Promise(function(resolve) {
 
-                if ( typeof callback === 'function' ) {
-                    callback();
+                if (this.getAttribute('type') != 'content')
+                {
+                    this.$Elm
+                        .getElement( 'table.brick-edit-content')
+                        .setStyle( 'display', 'none' );
+
+                    if ( typeof callback === 'function' ) {
+                        callback();
+                    }
+
+                    resolve();
+                    return;
                 }
 
-                return;
-            }
+                var self      = this,
+                    TableBody = this.$Elm.getElement( 'table.brick-edit-content tbody' ),
 
-            var self      = this,
-                TableBody = this.$Elm.getElement( 'table.brick-edit-content tbody' ),
-
-                TD = new Element('td'),
-                TR = new Element('tr', {
-                    'class' : 'odd'
-                });
-
-            TD.inject( TR );
-            TR.inject( TableBody );
-
-
-            // load ckeditor
-            require(['classes/editor/Manager'], function(EditorManager)
-            {
-                new EditorManager().getEditor(null, function(Editor)
-                {
-                    self.$Editor = Editor;
-
-                    var EditorContainer = new Element('div', {
-                        styles : {
-                            clear   : 'both',
-                            'float' : 'left',
-                            height  : 300,
-                            width   : '100%'
-                        }
-                    }).inject( TD );
-
-                    self.$Editor.addEvent('onLoaded', function()
-                    {
-                        if ( typeof callback === 'function' ) {
-                            callback();
-                        }
+                    TD = new Element('td'),
+                    TR = new Element('tr', {
+                        'class' : 'odd'
                     });
 
-                    self.$Editor.inject( EditorContainer );
-                    self.$Editor.setHeight( EditorContainer.getSize().y );
-                    self.$Editor.setWidth( EditorContainer.getSize().x );
-                    self.$Editor.setContent( self.getAttribute( 'content' ) );
+                TD.inject( TR );
+                TR.inject( TableBody );
+
+
+                // load ckeditor
+                require(['classes/editor/Manager'], function(EditorManager)
+                {
+                    new EditorManager().getEditor(null, function(Editor)
+                    {
+                        self.$Editor = Editor;
+
+                        var EditorContainer = new Element('div', {
+                            styles : {
+                                clear   : 'both',
+                                'float' : 'left',
+                                height  : 300,
+                                width   : '100%'
+                            }
+                        }).inject( TD );
+
+                        self.$Editor.addEvent('onLoaded', function()
+                        {
+                            if ( typeof callback === 'function' ) {
+                                callback();
+                            }
+
+                            resolve();
+                        });
+
+                        self.$Editor.inject( EditorContainer );
+                        self.$Editor.setHeight( EditorContainer.getSize().y );
+                        self.$Editor.setWidth( EditorContainer.getSize().x );
+                        self.$Editor.setContent( self.getAttribute( 'content' ) );
+                    });
                 });
-            });
+
+            }.bind(this));
         },
 
         /**
          * Create the extra settings table
+         *
+         * @return Promise
          */
         $createExtraData : function()
         {
-            var TableExtra = this.$Elm.getElement( 'table.brick-edit-extra-header'),
-                TableBody  = TableExtra.getElement( 'tbody' );
-
-            if ( !this.$availableSettings || !this.$availableSettings.length )
+            return new Promise(function(resolve, reject)
             {
-                TableExtra.setStyle( 'display', 'none' );
-                return;
-            }
+                var TableExtra = this.$Elm.getElement( 'table.brick-edit-extra-header'),
+                    TableBody  = TableExtra.getElement( 'tbody' );
 
-            TableExtra.setStyle( 'display', null );
-
-            var Form = new Element('form', {
-                'class' : 'brick-edit-extra-header-form'
-            }).wraps( TableExtra );
-
-            var i, len, text, setting, dataQui, extraFieldId;
-
-            var self = this,
-                id   = this.getId();
-
-            // extra settings
-            for ( i = 0, len = this.$availableSettings.length; i < len; i++ )
-            {
-                setting      = this.$availableSettings[ i ];
-                dataQui      = '';
-                extraFieldId = 'extraField_'+ id +'_'+ i;
-
-                if ( setting['data-qui'] !== '' ) {
-                    dataQui = ' data-qui="'+ setting['data-qui'] +'" ';
-                }
-
-                text = setting.text;
-
-                if ( typeOf( setting.text ) === 'array' ) {
-                    text = QUILocale.get( setting.text[ 0 ], setting.text[ 1 ] );
-                }
-
-                new Element('tr', {
-                    'class' : i % 2 ? 'even' : 'odd',
-                    html : '<td>' +
-                           '    <label class="quiqqer-bricks-areas" for="'+ extraFieldId +'">' +
-                                    text +
-                           '    </label>' +
-                           '</td>' +
-                           '<td>' +
-                           '    <input type="'+ setting.type +'" ' +
-                           '           name="'+ setting.name +'" ' +
-                           '           class="'+ setting.class +'" ' +
-                           '           id="'+ extraFieldId +'"' +
-                                       dataQui +
-                           '    />' +
-                           '</td>'
-                }).inject( TableBody );
-            }
-
-            TableExtra.setStyle( 'display', null );
-
-            // set data
-            QUIFormUtils.setDataToForm( this.getAttribute( 'settings' ), Form );
-
-            // parse controls
-            ControlUtils.parse( TableExtra );
-
-            QUI.parse(TableExtra, function()
-            {
-                // set project to the controls
-                TableExtra.getElements( '[data-quiid]' ).each(function(Elm)
+                if (!this.$availableSettings || !this.$availableSettings.length)
                 {
-                    var Control = QUI.Controls.getById(
-                        Elm.get('data-quiid')
-                    );
+                    TableExtra.setStyle( 'display', 'none' );
+                    resolve();
+                    return;
+                }
 
-                    if ( 'setProject' in Control )
-                    {
-                        Control.setProject(
-                            self.getAttribute( 'projectName' ),
-                            self.getAttribute( 'projectLang' )
-                        );
+                TableExtra.setStyle( 'display', null );
+
+                var Form = new Element('form', {
+                    'class' : 'brick-edit-extra-header-form'
+                }).wraps( TableExtra );
+
+                var i, len, Row, text, Value, setting, extraFieldId;
+
+                var self = this,
+                    id   = this.getId();
+
+                // extra settings
+                for (i = 0, len = this.$availableSettings.length; i < len; i++)
+                {
+                    setting      = this.$availableSettings[ i ];
+                    extraFieldId = 'extraField_'+ id +'_'+ i;
+
+                    text = setting.text;
+
+                    if (typeOf(setting.text) === 'array') {
+                        text = QUILocale.get(setting.text[ 0 ], setting.text[ 1 ]);
                     }
-                });
-            });
+
+
+                    Row = new Element('tr', {
+                        'class' : i % 2 ? 'even' : 'odd',
+                        html : '<td>' +
+                               '    <label class="quiqqer-bricks-areas" for="'+ extraFieldId +'">' +
+                                        text +
+                               '    </label>' +
+                               '</td>' +
+                               '<td></td>'
+                    }).inject(TableBody);
+
+                    if (setting.type != 'select')
+                    {
+                        Value = new Element('input', {
+                            type    : setting.type,
+                            name    : setting.name,
+                            'class' : setting.class,
+                            id      : extraFieldId
+                        }).inject(Row.getElement('td:last-child'));
+
+                        if (setting['data-qui'] !== '') {
+                            Value.set('data-qui', setting['data-qui']);
+                        }
+
+                        continue;
+                    }
+
+                    Value = new Element('select', {
+                        name    : setting.name,
+                        'class' : setting.class,
+                        id      : extraFieldId
+                    }).inject(Row.getElement('td:last-child'));
+
+
+                    for (var c = 0, clen = setting.options.length; c < clen; c++)
+                    {
+                        text = setting.options[c].text;
+
+                        if (typeOf(setting.options[c].text) === 'array') {
+                            text = QUILocale.get(
+                                setting.options[c].text[ 0 ],
+                                setting.options[c].text[ 1 ]
+                            );
+                        }
+
+                        new Element('option', {
+                            html  : text,
+                            value : setting.options[c].value
+                        }).inject(Value);
+                    }
+                }
+
+                TableExtra.setStyle( 'display', null );
+
+                // set data
+                QUIFormUtils.setDataToForm( this.getAttribute( 'settings' ), Form );
+
+                // parse controls
+                QUI.parse(TableExtra).then(function() {
+                    return ControlUtils.parse(TableExtra);
+
+                }).then(function()
+                {
+                    // set project to the controls
+                    TableExtra.getElements( '[data-quiid]' ).each(function(Elm)
+                    {
+                        var Control = QUI.Controls.getById(
+                            Elm.get('data-quiid')
+                        );
+
+                        if ( 'setProject' in Control )
+                        {
+                            Control.setProject(
+                                self.getAttribute( 'projectName' ),
+                                self.getAttribute( 'projectLang' )
+                            );
+                        }
+                    });
+
+                    resolve();
+
+                }).catch(reject);
+
+            }.bind(this));
         },
 
         /**

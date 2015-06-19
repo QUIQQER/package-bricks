@@ -21,6 +21,10 @@ class Manager
      * Bricks table name
      */
     const TABLE = 'bricks';
+
+    /**
+     * Brick Cache table name
+     */
     const TABLE_CACHE = 'bricksCache';
 
     /**
@@ -255,13 +259,32 @@ class Manager
 
             foreach ($Settings as $Setting) {
                 /* @var $Setting \DOMElement */
+                /* @var $Option \DOMElement */
+
+                $options = false;
+
+                if ($Setting->getAttribute('type') == 'select') {
+                    $optionElements = $Setting->getElementsByTagName('option');
+
+                    foreach ($optionElements as $Option) {
+                        $options[] = array(
+                            'value' => $Option->getAttribute('value'),
+                            'text'  => QUI\Utils\DOM::getTextFromNode(
+                                $Option, false
+                            )
+                        );
+                    }
+                }
+
                 $settings[] = array(
                     'name'     => $Setting->getAttribute('name'),
-                    'text'     => QUI\Utils\DOM::getTextFromNode($Setting,
-                        false),
+                    'text'     => QUI\Utils\DOM::getTextFromNode(
+                        $Setting, false
+                    ),
                     'type'     => $Setting->getAttribute('type'),
                     'class'    => $Setting->getAttribute('class'),
-                    'data-qui' => $Setting->getAttribute('data-qui')
+                    'data-qui' => $Setting->getAttribute('data-qui'),
+                    'options'  => $options
                 );
             }
 
