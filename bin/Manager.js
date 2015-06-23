@@ -81,7 +81,7 @@ define('package/quiqqer/bricks/bin/Manager', [
          */
         refresh : function(callback)
         {
-            if ( !this.$Elm ) {
+            if (!this.$Elm) {
                 return;
             }
 
@@ -91,9 +91,9 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.Loader.show();
 
-            this.getBricksFromProject( project, lang, function(result)
+            this.getBricksFromProject(project, lang, function(result)
             {
-                if ( typeof callback === 'function' ) {
+                if (typeof callback === 'function') {
                     callback();
                 }
 
@@ -115,7 +115,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                 AddButton = this.getButtons('brick-add'),
                 DelButton = this.getButtons('brick-delete');
 
-            if ( !selected.length )
+            if (!selected.length)
             {
                 AddButton.enable();
                 DelButton.disable();
@@ -125,7 +125,7 @@ define('package/quiqqer/bricks/bin/Manager', [
             AddButton.enable();
             DelButton.enable();
 
-            if ( selected.length > 1 ) {
+            if (selected.length > 1) {
                 AddButton.disable();
             }
         },
@@ -155,13 +155,13 @@ define('package/quiqqer/bricks/bin/Manager', [
                 }
             });
 
-            this.addButton( this.$ProjectSelect );
-            this.addButton( this.$ProjectLangs );
-            this.addButton( new QUISeperator() );
+            this.addButton(this.$ProjectSelect);
+            this.addButton(this.$ProjectLangs);
+            this.addButton(new QUISeperator());
 
             this.addButton(
                 new QUIButton({
-                    text     : QUILocale.get( lg, 'manager.button.add' ),
+                    text     : QUILocale.get(lg, 'manager.button.add'),
                     name     : 'brick-add',
                     disabled : true,
                     events   : {
@@ -172,7 +172,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.addButton(
                 new QUIButton({
-                    text     : QUILocale.get( lg, 'manager.button.delete' ),
+                    text     : QUILocale.get(lg, 'manager.button.delete'),
                     name     : 'brick-delete',
                     disabled : true,
                     events   : {
@@ -188,22 +188,22 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.$Grid = new Grid( Container, {
                 columnModel : [{
-                    header    : QUILocale.get( 'quiqqer/system', 'id' ),
+                    header    : QUILocale.get('quiqqer/system', 'id'),
                     dataIndex : 'id',
                     dataType  : 'integer',
                     width     : 40
                 }, {
-                    header    : QUILocale.get( 'quiqqer/system', 'title' ),
+                    header    : QUILocale.get('quiqqer/system', 'title'),
                     dataIndex : 'title',
                     dataType  : 'string',
                     width     : 140
                 }, {
-                    header    : QUILocale.get( 'quiqqer/system', 'description' ),
+                    header    : QUILocale.get('quiqqer/system', 'description'),
                     dataIndex : 'description',
                     dataType  : 'string',
                     width     : 300
                 }, {
-                    header    : QUILocale.get( lg, 'brick.type' ),
+                    header    : QUILocale.get(lg, 'brick.type'),
                     dataIndex : 'type',
                     dataType  : 'string',
                     width     : 200
@@ -221,9 +221,9 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             Projects.getList(function(projects)
             {
-                for ( var project in projects )
+                for (var project in projects)
                 {
-                    if ( !projects.hasOwnProperty( project ) ) {
+                    if (!projects.hasOwnProperty(project)) {
                         continue;
                     }
 
@@ -249,15 +249,15 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             var Body = this.getContent();
 
-            if ( !Body ) {
+            if (!Body) {
                 return;
             }
 
 
             var size = Body.getSize();
 
-            this.$Grid.setHeight( size.y - 40 );
-            this.$Grid.setWidth( size.x - 40 );
+            this.$Grid.setHeight(size.y - 40);
+            this.$Grid.setWidth(size.x - 40);
         },
 
         /**
@@ -501,7 +501,10 @@ define('package/quiqqer/bricks/bin/Manager', [
                     new BrickEdit({
                         id : brickId,
                         projectName : this.$ProjectSelect.getValue(),
-                        projectLang : this.$ProjectLangs.getValue()
+                        projectLang : this.$ProjectLangs.getValue(),
+                        events : {
+                            onDelete : this.refresh
+                        }
                     })
                 );
             }.bind(this));
@@ -613,6 +616,10 @@ define('package/quiqqer/bricks/bin/Manager', [
          */
         deleteBricks : function(brickIds, callback)
         {
+            var panels = QUI.Controls.getByType(
+                'package/quiqqer/bricks/bin/BrickEdit'
+            );
+
             return new Promise(function(resolve, reject) {
 
                 Ajax.post('package_quiqqer_bricks_ajax_brick_delete', function() {
@@ -622,6 +629,20 @@ define('package/quiqqer/bricks/bin/Manager', [
                     }
 
                     resolve();
+
+                    // exist brick panels?
+                    var c, i, len, clen, brickId;
+
+                    for (i = 0, len = brickIds.length; i < len; i++) {
+                        brickId = brickIds[i];
+
+                        for (c = 0, clen = panels.length; c < clen; c++) {
+                            if (panels[c].getAttribute('id') == brickId) {
+                                panels[c].destroy();
+                            }
+                        }
+                    }
+
                 }, {
                     'package' : 'quiqqer/bricks',
                     brickIds  : JSON.encode(brickIds),

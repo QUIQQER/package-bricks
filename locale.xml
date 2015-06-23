@@ -192,6 +192,18 @@
             <en><![CDATA[Brick: #[brickId] - [brickTitle]]]></en>
         </locale>
 
+        <locale name="window.brick.delete.title">
+            <de><![CDATA[Baustein wirklich löschen?]]></de>
+            <en><![CDATA[Do you want to delete this brick?]]></en>
+        </locale>
+        <locale name="window.brick.delete.text">
+            <de><![CDATA[Möchten Sie den Baustein #[brickId] - [brickTitle] wirklich löschen?]]></de>
+            <en><![CDATA[Do you realy want to delete the brick #[brickId] - [brickTitle] ?]]></en>
+        </locale>
+        <locale name="window.brick.delete.information">
+            <de><![CDATA[Der Baustein wird unwiderruflich gelöscht.]]></de>
+            <en><![CDATA[The block is deleted irrevocably.]]></en>
+        </locale>
 
         <locale name="site.area.button.area.settings">
             <de><![CDATA[Bausteinzonen-Einstellungen]]></de>

@@ -1,6 +1,6 @@
 
 /**
- * BrickEdit Control
+ * BrickEdit Panel
  * Edit and change a Brick
  *
  * @module package/quiqqer/bricks/bin/BrickEdit
@@ -18,12 +18,14 @@
  *
  * @event onLoaded [ this ]
  * @event onSave [ this ]
+ * @event onDelete [ this ]
  */
 
 define('package/quiqqer/bricks/bin/BrickEdit', [
 
     'qui/QUI',
     'qui/controls/desktop/Panel',
+    'qui/controls/windows/Confirm',
     'package/quiqqer/bricks/bin/BrickAreas',
     'Ajax',
     'Locale',
@@ -33,9 +35,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
     'css!package/quiqqer/bricks/bin/BrickEdit.css'
 
-], function(QUI, QUIPanel, BrickAreas, QUIAjax, QUILocale, QUIFormUtils, ControlUtils, Template)
+], function(QUI, QUIPanel, QUIConfirm, BrickAreas, QUIAjax, QUILocale, QUIFormUtils, ControlUtils, Template)
 {
     "use strict";
+
+    var lg = 'quiqqer/bricks';
 
     return new Class({
 
@@ -48,7 +52,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             '$onDestroy',
             '$load',
             '$unload',
-            'save'
+            'save',
+            'del'
         ],
 
         options : {
@@ -81,7 +86,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         $onCreate : function()
         {
             this.setAttributes({
-                icon : 'icon-spinner icon-spin fa fa-spinner fa-spin',
+                icon  : 'icon-spinner icon-spin fa fa-spinner fa-spin',
                 title : '...'
             });
 
@@ -99,7 +104,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 icon : 'fa fa-trash-o icon-trash',
                 title : QUILocale.get('quiqqer/system', 'delete'),
                 events : {
-                    click : this.delete
+                    click : this.del
                 },
                 styles : {
                     'float' : 'right'
@@ -235,6 +240,39 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 }.bind(this));
 
             }.bind(this));
+        },
+
+        /**
+         * Delete the brick
+         */
+        del : function()
+        {
+            var self = this;
+
+            new QUIConfirm({
+                title : QUILocale.get(lg, 'window.brick.delete.title'),
+                text  : QUILocale.get(lg, 'window.brick.delete.text'),
+                information : QUILocale.get(lg, 'window.brick.delete.information'),
+                maxHeight : 300,
+                maxWidth  : 600,
+                autoclose : false,
+                events : {
+                    onSubmit : function(Win) {
+                        Win.Loader.show();
+
+                        QUIAjax.post('package_quiqqer_bricks_ajax_brick_delete', function()
+                        {
+                            Win.close();
+
+                            self.fireEvent('delete');
+                            self.destroy();
+                        }, {
+                            'package' : 'quiqqer/bricks',
+                            brickIds  : JSON.encode([self.getAttribute('id')])
+                        });
+                    }
+                }
+            }).open();
         },
 
         /**
