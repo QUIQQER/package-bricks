@@ -171,6 +171,9 @@ class Brick extends QUI\QDOM
         /* @var $Control \QUI\Control */
         $Control = new $Ctrl($this->getSettings());
 
+        $Control->setAttribute('height', $this->getAttribute('height'));
+        $Control->setAttribute('width', $this->getAttribute('width'));
+
         if ($this->_id) {
             $Control->addCSSClass('brick-'.$this->_id);
         }
