@@ -12,6 +12,8 @@
             <field type="VARCHAR( 255 )">type</field>
             <field type="TEXT">content</field>
             <field type="TEXT">areas</field>
+            <field type="TEXT">width</field>
+            <field type="TEXT">height</field>
         </table>
     </global>
 

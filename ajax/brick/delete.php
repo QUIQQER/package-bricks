@@ -11,17 +11,14 @@
  */
 function package_quiqqer_bricks_ajax_brick_delete($brickIds)
 {
-    $BrickManager = new \QUI\Bricks\Manager();
-    $brickIds     = json_decode( $brickIds, true );
+    $BrickManager = new QUI\Bricks\Manager();
+    $brickIds = json_decode($brickIds, true);
 
-    foreach ( $brickIds as $brickId )
-    {
-        try
-        {
-            $BrickManager->deleteBrick( $brickId );
+    foreach ($brickIds as $brickId) {
+        try {
+            $BrickManager->deleteBrick($brickId);
 
-        } catch ( QUI\Exception $Exception )
-        {
+        } catch (QUI\Exception $Exception) {
             QUI::getMessagesHandler()->addAttention(
                 $Exception->getMessage()
             );
@@ -29,7 +26,7 @@ function package_quiqqer_bricks_ajax_brick_delete($brickIds)
     }
 }
 
-\QUI::$Ajax->register(
+QUI::$Ajax->register(
     'package_quiqqer_bricks_ajax_brick_delete',
     array('brickIds'),
     'Permission::checkAdminUser'

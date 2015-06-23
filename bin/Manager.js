@@ -486,68 +486,25 @@ define('package/quiqqer/bricks/bin/Manager', [
         },
 
         /**
-         * Opens the edit sheet of a Brick
+         * Opens the brick panel
          *
-         * @param {integer} brickId
+         * @param {Number} brickId
          */
         editBrick : function(brickId)
         {
-            this.Loader.show();
-
-            var Brick;
-
-            var self  = this,
-                Sheet = this.createSheet({
-                    title : QUILocale.get( lg, 'brick.sheet.edit.title' ),
-                    icon  : 'icon-edit'
-                });
-
-            Sheet.addEvents({
-                onOpen : function(Sheet)
-                {
-                    require(['package/quiqqer/bricks/bin/BrickEdit'], function(BrickEdit)
-                    {
-                        Brick = new BrickEdit({
-                            id : brickId,
-                            projectName : self.$ProjectSelect.getValue(),
-                            projectLang : self.$ProjectLangs.getValue(),
-                            events :
-                            {
-                                onLoaded : function() {
-                                    self.Loader.hide();
-                                }
-                            }
-                        }).inject( Sheet.getContent() );
-                    });
-
-                    Sheet.getContent().setStyle( 'overflow', 'auto' );
-                }
-            });
-
-            Sheet.addButton({
-                textimage : 'icon-save',
-                text : QUILocale.get( 'quiqqer/system', 'save' ),
-                styles : {
-                    width : 200
-                },
-                events :
-                {
-                    onClick : function()
-                    {
-                        self.Loader.show();
-
-                        Brick.save(function()
-                        {
-                            self.Loader.hide();
-                            Sheet.hide();
-
-                            self.refresh();
-                        });
-                    }
-                }
-            });
-
-            Sheet.show();
+            require([
+                'package/quiqqer/bricks/bin/BrickEdit',
+                'utils/Panels'
+            ], function(BrickEdit, PanelUtils)
+            {
+                PanelUtils.openPanelInTasks(
+                    new BrickEdit({
+                        id : brickId,
+                        projectName : this.$ProjectSelect.getValue(),
+                        projectLang : this.$ProjectLangs.getValue()
+                    })
+                );
+            }.bind(this));
         },
 
         /**
@@ -556,12 +513,27 @@ define('package/quiqqer/bricks/bin/Manager', [
 
         /**
          * Return the available bricks
-         * @param callback
+         *
+         * @param {Function} [callback] - callback function
+         *
+         * @return Promise
          */
         getAvailableBricks : function(callback)
         {
-            Ajax.get('package_quiqqer_bricks_ajax_getAvailableBricks', callback, {
-                'package' : 'quiqqer/bricks'
+            return new Promise(function(resolve, reject) {
+
+                Ajax.get('package_quiqqer_bricks_ajax_getAvailableBricks', function(result) {
+
+                    if (typeof callback === 'function') {
+                        callback(result);
+                    }
+
+                    resolve(result);
+                }, {
+                    'package' : 'quiqqer/bricks',
+                    onError   : reject
+                });
+
             });
         },
 
@@ -570,50 +542,92 @@ define('package/quiqqer/bricks/bin/Manager', [
          *
          * @param {String} project - name of the project
          * @param {String} lang - Language of the project
-         * @param {Function} callback - callback function
+         * @param {Function} [callback] - callback function
+         *
+         * @return Promise
          */
         getBricksFromProject : function(project, lang, callback)
         {
-            Ajax.get('package_quiqqer_bricks_ajax_project_getBricks', callback, {
-                'package' : 'quiqqer/bricks',
-                project   : JSON.encode({
-                    name : project,
-                    lang : lang
-                })
+            return new Promise(function(resolve, reject) {
+
+                Ajax.get('package_quiqqer_bricks_ajax_project_getBricks', function(result) {
+
+                    if (typeof callback === 'function') {
+                        callback(result);
+                    }
+
+                    resolve(result);
+                }, {
+                    'package' : 'quiqqer/bricks',
+                    project   : JSON.encode({
+                        name : project,
+                        lang : lang
+                    }),
+                    onError   : reject
+                });
+
             });
         },
 
         /**
          * Create a new brick
          *
-         * @param {String} project
-         * @param {String} lang
-         * @param {Object} data
-         * @param {Function} callback
+         * @param {String} project - name of the project
+         * @param {String} lang - Language of the project
+         * @param {Object} data - Data of the brick
+         * @param {Function} [callback] - callback function
+         *
+         * @return Promise
          */
         createBrick : function(project, lang, data, callback)
         {
-            Ajax.post('package_quiqqer_bricks_ajax_project_createBrick', callback, {
-                'package' : 'quiqqer/bricks',
-                project : JSON.encode({
-                    name : project,
-                    lang : lang
-                }),
-                data : JSON.encode( data )
+            return new Promise(function(resolve, reject) {
+
+                Ajax.post('package_quiqqer_bricks_ajax_project_createBrick', function(brickId) {
+
+                    if (typeof callback === 'function') {
+                        callback(brickId);
+                    }
+
+                    resolve(brickId);
+                }, {
+                    'package' : 'quiqqer/bricks',
+                    project : JSON.encode({
+                        name : project,
+                        lang : lang
+                    }),
+                    data : JSON.encode(data),
+                    onError   : reject
+                });
+
             });
         },
 
         /**
          * Delete the Brick-Ids
          *
-         * @param {array} brickIds - Brick IDs which should be deleted
-         * @param {Function} callback
+         * @param {Array} brickIds - Brick IDs which should be deleted
+         * @param {Function} [callback] - callback function
+         *
+         * @return Promise
          */
         deleteBricks : function(brickIds, callback)
         {
-            Ajax.post('package_quiqqer_bricks_ajax_brick_delete', callback, {
-                'package' : 'quiqqer/bricks',
-                brickIds  : JSON.encode( brickIds )
+            return new Promise(function(resolve, reject) {
+
+                Ajax.post('package_quiqqer_bricks_ajax_brick_delete', function() {
+
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+
+                    resolve();
+                }, {
+                    'package' : 'quiqqer/bricks',
+                    brickIds  : JSON.encode(brickIds),
+                    onError   : reject
+                });
+
             });
         }
     });

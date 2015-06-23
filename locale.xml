@@ -34,9 +34,13 @@
             <en><![CDATA[Bricks Module]]></en>
         </locale>
         <locale name="package.description">
-            <de><![CDATA[Platzieren Sie hiermit Grafiken, Texte, Videos, Formulare etc.
-innerhalb eines Templates (einer Seite Ihrer Homepage)beliebig.]]></de>
-            <en><![CDATA[]]></en>
+            <de><![CDATA[
+                Platzieren Sie hiermit Grafiken, Texte, Videos, Formulare etc.
+                innerhalb eines Templates (einer Seite Ihrer Homepage) beliebig.
+            ]]></de>
+            <en><![CDATA[
+
+            ]]></en>
         </locale>
         <locale name="brick.control.navigation.title">
             <de><![CDATA[Baustein: Navigation]]></de>
@@ -164,12 +168,31 @@ innerhalb eines Templates (einer Seite Ihrer Homepage)beliebig.]]></de>
             <de><![CDATA[]]></de>
             <en><![CDATA[]]></en>
         </locale>
+        <locale name="brick.edit.settings.proportion.header">
+            <de><![CDATA[Baustein Eigenschaften]]></de>
+            <en><![CDATA[Brick properties]]></en>
+        </locale>
+        <locale name="brick.edit.height">
+            <de><![CDATA[Baustein Höhe]]></de>
+            <en><![CDATA[Brick height]]></en>
+        </locale>
+        <locale name="brick.edit.width">
+            <de><![CDATA[Baustein Breite]]></de>
+            <en><![CDATA[Brick width]]></en>
+        </locale>
     </groups>
     <groups name="quiqqer/bricks" datatype="js">
         <locale name="brick.type">
             <de><![CDATA[Bausteintyp]]></de>
             <en><![CDATA[Brick type]]></en>
         </locale>
+
+        <locale name="panel.title">
+            <de><![CDATA[Baustein: #[brickId] - [brickTitle]]]></de>
+            <en><![CDATA[Brick: #[brickId] - [brickTitle]]]></en>
+        </locale>
+
+
         <locale name="site.area.button.area.settings">
             <de><![CDATA[Bausteinzonen-Einstellungen]]></de>
             <en><![CDATA[Brick area settings]]></en>

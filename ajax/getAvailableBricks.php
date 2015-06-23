@@ -11,11 +11,12 @@
  */
 function package_quiqqer_bricks_ajax_getAvailableBricks()
 {
-    $BricksManager = new \QUI\Bricks\Manager();
+    $BricksManager = new QUI\Bricks\Manager();
+
     return $BricksManager->getAvailableBricks();
 }
 
-\QUI::$Ajax->register(
+QUI::$Ajax->register(
     'package_quiqqer_bricks_ajax_getAvailableBricks',
     false,
     'Permission::checkAdminUser'

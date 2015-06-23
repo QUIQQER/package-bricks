@@ -435,7 +435,9 @@ class Manager
             'content'     => $Brick->getAttribute('content'),
             'type'        => $Brick->getAttribute('type'),
             'settings'    => json_encode($Brick->getSettings()),
-            'areas'       => $areaString
+            'areas'       => $areaString,
+            'height'      => $Brick->getAttribute('height'),
+            'width'       => $Brick->getAttribute('width')
         ), array(
             'id' => (int)$brickId
         ));

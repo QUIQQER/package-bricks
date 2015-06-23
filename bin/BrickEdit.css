@@ -2,7 +2,6 @@
 .quiqqer-bricks-brickedit {
     float: left;
     height: 100%;
-    padding: 20px;
     width: 100%;
 }
 
@@ -34,10 +33,6 @@
 
 .quiqqer-bricks-areas {
     margin-bottom: 0 !important;
-}
-
-.quiqqer-bricks-brickareas {
-    margin-bottom: 20px;
 }
 
 .brick-edit-extra-header tbody tr td:first-child,
