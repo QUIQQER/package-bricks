@@ -39,3 +39,8 @@
 .quiqqer-bricks-brickedit .data-table tbody tr td:first-child {
     width: 200px;
 }
+
+.brick-table-flexible label {
+    margin-bottom: 0;
+    width: 100% !important;
+}

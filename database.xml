@@ -9,6 +9,7 @@
             <field type="VARCHAR( 255 ) NOT NULL">title</field>
             <field type="TEXT NOT NULL">description</field>
             <field type="TEXT">settings</field>
+            <field type="TEXT">customfields</field>
             <field type="VARCHAR( 255 )">type</field>
             <field type="TEXT">content</field>
             <field type="TEXT">areas</field>

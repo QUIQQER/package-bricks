@@ -180,6 +180,15 @@
             <de><![CDATA[Baustein Breite]]></de>
             <en><![CDATA[Brick width]]></en>
         </locale>
+        <locale name="brick.edit.settings.flexible.header">
+            <de><![CDATA[Flexible Einstellungen]]></de>
+            <en><![CDATA[Flexible settings]]></en>
+        </locale>
+        <locale name="brick.edit.settings.flexible.header.description">
+            <de><![CDATA[Bestimmen Sie welche Einstellung flexibel von anderen Benutzern verändert werden können.]]></de>
+            <en><![CDATA[Determine which setting can be flexibly changed by others.]]></en>
+        </locale>
+
     </groups>
     <groups name="quiqqer/bricks" datatype="js">
         <locale name="brick.type">

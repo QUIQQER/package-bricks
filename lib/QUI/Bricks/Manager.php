@@ -407,7 +407,6 @@ class Manager
             return '';
         }, $this->getAreasByProject($Project));
 
-
         if (isset($brickData['areas'])) {
             $parts = explode(',', $brickData['areas']);
 
@@ -422,22 +421,44 @@ class Manager
             $areaString = ','.implode(',', $areas).',';
         }
 
-
         $Brick->setAttributes($brickData);
 
+
+        // brick settings
         if (isset($brickData['settings'])) {
             $Brick->setSettings($brickData['settings']);
         }
 
+
+        // custom fields
+        $customfields = array();
+
+        if (isset($brickData['customfields'])) {
+            $availableSettings = $Brick->getSettings();
+            $availableSettings['width']  = true;
+            $availableSettings['height'] = true;
+
+            foreach ($brickData['customfields'] as $customfield) {
+                $customfield = str_replace('flexible-', '', $customfield);
+
+                if (isset($availableSettings[$customfield])) {
+                    $customfields[] = $customfield;
+                }
+            }
+        }
+
+
+        // update
         QUI::getDataBase()->update($this->_getTable(), array(
-            'title'       => $Brick->getAttribute('title'),
-            'description' => $Brick->getAttribute('description'),
-            'content'     => $Brick->getAttribute('content'),
-            'type'        => $Brick->getAttribute('type'),
-            'settings'    => json_encode($Brick->getSettings()),
-            'areas'       => $areaString,
-            'height'      => $Brick->getAttribute('height'),
-            'width'       => $Brick->getAttribute('width')
+            'title'        => $Brick->getAttribute('title'),
+            'description'  => $Brick->getAttribute('description'),
+            'content'      => $Brick->getAttribute('content'),
+            'type'         => $Brick->getAttribute('type'),
+            'settings'     => json_encode($Brick->getSettings()),
+            'customfields' => json_encode($customfields),
+            'areas'        => $areaString,
+            'height'       => $Brick->getAttribute('height'),
+            'width'        => $Brick->getAttribute('width')
         ), array(
             'id' => (int)$brickId
         ));

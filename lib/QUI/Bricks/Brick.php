@@ -32,6 +32,13 @@ class Brick extends QUI\QDOM
     protected $_settings = array();
 
     /**
+     * Fields can be overwritten by another user
+     *
+     * @var array
+     */
+    protected $_customfields = array();
+
+    /**
      * Constructor
      *
      * @param array $params - brick params
@@ -93,14 +100,25 @@ class Brick extends QUI\QDOM
                 $settings = json_decode($settings, true);
             }
 
-            if (!is_array($settings)) {
-                return;
+            if (is_array($settings)) {
+                foreach ($this->_settings as $key => $value) {
+                    if (isset($settings[$key])) {
+                        $this->_settings[$key] = $settings[$key];
+                    }
+                }
+            }
+        }
+
+        // customfields
+        if (isset($params['customfields'])) {
+            $customfields = $params['customfields'];
+
+            if (is_string($customfields)) {
+                $customfields = json_decode($customfields, true);
             }
 
-            foreach ($this->_settings as $key => $value) {
-                if (isset($settings[$key])) {
-                    $this->_settings[$key] = $settings[$key];
-                }
+            if (is_array($customfields)) {
+                $this->_customfields = $customfields;
             }
         }
     }
@@ -234,5 +252,15 @@ class Brick extends QUI\QDOM
         if (isset($this->_settings[$name])) {
             $this->_settings[$name] = $value;
         }
+    }
+
+    /**
+     * This fields can be overwritten by another user
+     *
+     * @return array
+     */
+    public function getCustomFields()
+    {
+        return $this->_customfields;
     }
 }

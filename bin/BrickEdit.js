@@ -68,6 +68,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
             this.$availableBricks   = [];
             this.$availableSettings = [];
+            this.$customfields      = [];
 
             this.$Editor = false;
             this.$Areas  = false;
@@ -121,15 +122,6 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             });
 
             this.addCategory({
-                name : 'content',
-                icon : 'icon-file-text-alt',
-                text : QUILocale.get('quiqqer/system', 'content'),
-                events : {
-                    onActive : this.$load
-                }
-            });
-
-            this.addCategory({
                 name : 'settings',
                 icon : 'icon-magic',
                 text : QUILocale.get('quiqqer/system', 'properties'),
@@ -142,6 +134,15 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 name : 'extra',
                 icon : 'fa fa-gears icon-gears',
                 text : QUILocale.get('quiqqer/system', 'settings'),
+                events : {
+                    onActive : this.$load
+                }
+            });
+
+            this.addCategory({
+                name : 'content',
+                icon : 'icon-file-text-alt',
+                text : QUILocale.get('quiqqer/system', 'content'),
                 events : {
                     onActive : this.$load
                 }
@@ -167,6 +168,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                  */
                 this.$availableBricks   = bricks;
                 this.$availableSettings = brick.availableSettings;
+                this.$customfields      = brick.customfields;
 
                 this.setAttribute('data', brick);
 
@@ -219,6 +221,10 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                 return new Promise(function(resolve, reject)
                 {
+                    var data = this.getAttribute('data').attributes;
+
+                    data.customfields = this.$customfields;
+
                     QUIAjax.post('package_quiqqer_bricks_ajax_brick_save', function ()
                     {
                         if (typeof callback === 'function') {
@@ -233,7 +239,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     }.bind(this), {
                         'package': 'quiqqer/brick',
                         brickId  : this.getAttribute('id'),
-                        data     : JSON.encode(this.getAttribute('data').attributes),
+                        data     : JSON.encode(data),
                         onError  : reject
                     });
 
@@ -360,7 +366,6 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 data   = this.getAttribute('data');
 
             if (unload == 'information') {
-
                 data.attributes = Object.merge(
                     data.attributes,
                     QUIFormUtils.getFormData(Form)
@@ -372,12 +377,35 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 data.attributes.width = Form.elements.width.value;
                 data.attributes.height = Form.elements.height.value;
 
+                var flexibleList = [],
+                    fieldData = QUIFormUtils.getFormData(Form);
+
+                for (var key in fieldData) {
+
+                    if (!fieldData.hasOwnProperty(key)) {
+                        continue;
+                    }
+
+                    if (!key.match('flexible')) {
+                        continue;
+                    }
+
+                    if (fieldData[key]) {
+                        flexibleList.push(key);
+                    }
+                }
+
+                this.$customfields = flexibleList;
+
                 this.$Areas.destroy();
                 this.$Areas = false;
             }
 
             if (unload == 'extra') {
-                data.settings = QUIFormUtils.getFormData(Form);
+                data.settings = Object.merge(
+                    data.settings,
+                    QUIFormUtils.getFormData(Form)
+                );
             }
 
             if (unload == 'content') {
@@ -436,7 +464,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     // areas
                     var Content = this.getContent(),
                         areas = [],
-                        attributes = this.getAttribute('data').attributes;
+                        attributes   = this.getAttribute('data').attributes,
+                        customfields = this.$customfields;
 
                     if (attributes.areas)
                     {
@@ -463,6 +492,44 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                     if ("height" in attributes) {
                         Content.getElement('[name="height"]').value = attributes.height;
+                    }
+
+                    // flexble settings
+                    var i, len, data;
+                    var TBody = Content.getElement('.brick-table-flexible tbody');
+
+                    for (i = 0, len = this.$availableSettings.length; i < len; i++) {
+
+                        data = this.$availableSettings[i];
+
+                        new Element('tr', {
+                            'class' : i % 2 ? 'even' : 'odd',
+                            html : '<td>' +
+                                       '<label>'+
+                                           '<input type="checkbox" name="flexible-'+ data.name +'" />'+
+                                           '<span>'+ QUILocale.get(data.text[0], data.text[1]) +'</span>'+
+                                       '</label>'+
+                                   '</td>'
+                        }).inject(TBody);
+                    }
+
+                    if (customfields) {
+
+                        var name;
+                        var Form = Content.getElement('form');
+
+                        for (i = 0, len = customfields.length; i < len; i++) {
+
+                            name = customfields[i];
+
+                            if (typeof Form.elements[name] !== 'undefined') {
+                                Form.elements[name].checked = true;
+                            }
+
+                            if (typeof Form.elements['flexible-'+name] !== 'undefined') {
+                                Form.elements['flexible-'+name].checked = true;
+                            }
+                        }
                     }
 
                     resolve();

@@ -49,4 +49,37 @@
     </tr>
     </tbody>
     </table>
+
+
+    <table class="data-table brick-table-flexible">
+    <thead>
+    <tr>
+        <th>
+            {locale group="quiqqer/bricks" var="brick.edit.settings.flexible.header"}
+            <div class="description">
+                {locale group="quiqqer/bricks" var="brick.edit.settings.flexible.header.description"}
+            </div>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr class="{cycle values="odd,even" reset=true}">
+            <td>
+                <label>
+                    <input type="checkbox" name="flexible-height">
+                    <span>{locale group="quiqqer/bricks" var="brick.edit.height"}</span>
+                </label>
+            </td>
+        </tr>
+        <tr class="{cycle values="odd,even"}">
+            <td>
+                <label>
+                    <input type="checkbox" name="flexible-width">
+                    <span>{locale group="quiqqer/bricks" var="brick.edit.width"}</span>
+                </label>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+
 </form>
