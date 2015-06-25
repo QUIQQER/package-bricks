@@ -5,6 +5,14 @@
  * @module package/quiqqer/bricks/bin/Site/Category
  * @author www.pcsg.de (Henning Leutz)
  *
+ * qui/QUI
+ * qui/controls/Control
+ * qui/controls/loader/Loader
+ * Ajax
+ * Locale
+ * package/quiqqer/bricks/bin/Site/Area
+ * css!package/quiqqer/bricks/bin/Site/Category.css
+ *
  * @event onLoaded
  */
 
@@ -73,7 +81,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
 
             this.getBrickAreas(function(bricks)
             {
-                if ( !bricks.length )
+                if (!bricks.length)
                 {
                     self.$Elm.set(
                         'html',
@@ -88,15 +96,15 @@ define('package/quiqqer/bricks/bin/Site/Category', [
                 var Site  = self.getAttribute( 'Site' ),
                     areas = Site.getAttribute( 'quiqqer.bricks.areas' );
 
-                if ( areas ) {
+                if (areas) {
                     areas = JSON.decode( areas );
                 }
 
-                for ( i = 0, len = bricks.length; i < len; i++ )
+                for (i = 0, len = bricks.length; i < len; i++)
                 {
-                    AC = self.$insertBrickAreaEdit( bricks[ i ] );
+                    AC = self.$insertBrickAreaEdit(bricks[ i ]);
 
-                    if ( typeof areas[ AC.getAttribute('name') ] === 'undefined' ) {
+                    if (typeof areas[ AC.getAttribute('name') ] === 'undefined') {
                         continue;
                     }
 
@@ -130,14 +138,14 @@ define('package/quiqqer/bricks/bin/Site/Category', [
             var Site  = this.getAttribute( 'Site' ),
                 areas = {};
 
-            for ( i = 0, len = this.areas.length; i < len; i++ )
+            for (i = 0, len = this.areas.length; i < len; i++)
             {
                 AC = this.areas[ i ];
 
                 areas[ AC.getAttribute( 'name' ) ] = AC.getData();
             }
 
-            Site.setAttribute( 'quiqqer.bricks.areas', JSON.encode( areas ) );
+            Site.setAttribute('quiqqer.bricks.areas', JSON.encode(areas));
         },
 
         /**
@@ -151,8 +159,8 @@ define('package/quiqqer/bricks/bin/Site/Category', [
 
             Project.getConfig(function(layout)
             {
-                if ( Site.getAttribute( 'layout' ) ) {
-                    layout = Site.getAttribute( 'layout' );
+                if (Site.getAttribute('layout')) {
+                    layout = Site.getAttribute('layout');
                 }
 
                 QUIAjax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {

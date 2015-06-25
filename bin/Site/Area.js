@@ -73,6 +73,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             this.$SortableButton = false;
             this.$MoreButton     = false;
 
+            this.$Title       = false;
             this.$List        = false;
             this.$FXExtraBtns = false;
             this.$ExtraBtns   = false;
@@ -109,6 +110,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 'class' : 'quiqqer-bricks-site-category-area-extraButtons'
             });
 
+            this.$Title = this.$Elm.getElement(
+                '.quiqqer-bricks-site-category-area-title'
+            );
 
             this.$FXExtraBtns = moofx( this.$ExtraBtns );
 
@@ -197,6 +201,19 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 Site    = this.getAttribute( 'Site' ),
                 Project = Site.getProject();
 
+            var Loader = new Element('div', {
+                'class' : 'quiqqer-bricks-site-category-area-loader',
+                html : '<span class="icon-spinner icon-spin fa fa-spinner fa-spin"></span>',
+                styles : {
+                    margin : 5
+                }
+            }).inject(this.$Elm);
+
+            this.$List.setStyles({
+                position : 'absolute',
+                opacity  : 0
+            });
+
             QUIAjax.get('package_quiqqer_bricks_ajax_project_getBricks', function(bricks)
             {
                 self.$AddButton.enable();
@@ -205,12 +222,46 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 self.$loaded = true;
 
                 self.$brickIds.each(function(brickId) {
-                    self.addBrickById( brickId );
+                    self.addBrickById(brickId);
                 });
 
+                var promises = [];
+
                 self.$brickData.each(function(brickData) {
-                    self.addBrick( brickData );
+                    promises.push(self.addBrick(brickData));
                 });
+
+                if (promises.length) {
+
+                    Promise.resolve(promises).then(function() {
+
+                        var size      = self.$List.getComputedSize(),
+                            titleSize = self.$Title.getComputedSize();
+
+                        moofx(self.$Elm).animate({
+                            height : size.height + titleSize.height
+                        }, {
+                            duration : 250,
+                            equation : 'cubic-bezier(.42,.4,.46,1.29)',
+                            callback : function() {
+                                self.$List.setStyle('position', null);
+
+                                moofx(self.$List).animate({
+                                    opacity : 1
+                                }, {
+                                    duration : 250,
+                                    equation : 'ease-out'
+                                });
+                            }
+                        });
+
+                        Loader.destroy();
+                    });
+
+                    return;
+                }
+
+                Loader.destroy();
 
             }, {
                 'package' : 'quiqqer/bricks',
@@ -238,7 +289,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             var self = this,
                 data = this.getData();
 
-            if ( data.length && !("deactivate" in data[ 0 ]) )
+            if (data.length && !("deactivate" in data[ 0 ]))
             {
                 new QUIConfirm({
                     title : QUILocale.get( lg, 'site.area.window.deactivate.title' ),
@@ -266,38 +317,48 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
         /**
          * Add a brick by its brick data
+         *
          * @param {Object} brickData - { brickId:1, inheritance:1 }
+         * @return Promise
          */
         addBrick : function(brickData)
         {
-            if ( "deactivate" in brickData )
-            {
-                this.clear();
-                this.setAttribute( 'deactivate', true );
-                this.deactivate();
-                return;
-            }
+            return new Promise(function(reslove, reject) {
+
+                if ("deactivate" in brickData)
+                {
+                    this.clear();
+                    this.setAttribute( 'deactivate', true );
+                    this.deactivate();
+
+                    reslove();
+                    return;
+                }
 
 
-            if ( !this.$loaded )
-            {
-                this.$brickData.push( brickData );
-                return;
-            }
+                if (!this.$loaded)
+                {
+                    this.$brickData.push( brickData );
+                    reslove();
+                    return;
+                }
 
-            var BrickNode = this.addBrickById( brickData.brickId );
+                var BrickNode = this.addBrickById( brickData.brickId );
 
-            if ( !BrickNode ) {
-                return;
-            }
+                if (!BrickNode) {
+                    reject();
+                    return;
+                }
 
-            var Select = BrickNode.getElement( 'select' );
+                var Select = BrickNode.getElement( 'select' );
 
-            Select.set( 'data-inheritance', 0 );
+                Select.set('data-inheritance', 0);
 
-            if ( "inheritance" in brickData ) {
-                Select.set( 'data-inheritance', brickData.inheritance );
-            }
+                if ("inheritance" in brickData) {
+                    Select.set( 'data-inheritance', brickData.inheritance );
+                }
+
+            }.bind(this));
         },
 
         /**
@@ -308,9 +369,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          */
         addBrickById : function(brickId)
         {
-            if ( !this.$loaded )
+            if (!this.$loaded)
             {
-                this.$brickIds.push( brickId );
+                this.$brickIds.push(brickId);
                 return false;
             }
 
@@ -318,13 +379,13 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 return Item.id === brickId;
             });
 
-            if ( !found.length ) {
+            if (!found.length) {
                 return false;
             }
 
             var BrickNode = this.createNewBrick();
 
-            BrickNode.getElement( 'select' ).set( 'value', brickId );
+            BrickNode.getElement('select').set('value', brickId);
 
             return BrickNode;
         },
@@ -382,7 +443,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             }).inject( Elm );
 
 
-            for ( i = 0, len = this.$availableBricks.length; i < len; i++ )
+            for (i = 0, len = this.$availableBricks.length; i < len; i++)
             {
                 new Element('option', {
                     html  : this.$availableBricks[ i ].title,
@@ -399,19 +460,17 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          */
         getData : function()
         {
-            if ( this.getAttribute( 'deactivate' ) )
+            if (this.getAttribute('deactivate'))
             {
                 return [{
                     deactivate : 1
                 }];
             }
 
-            var i, len;
-
             var data   = [],
                 bricks = this.$Elm.getElements( 'select' );
 
-            for ( i = 0, len = bricks.length; i < len; i++ )
+            for (var i = 0, len = bricks.length; i < len; i++)
             {
                 data.push({
                     brickId     : bricks[ i ].value,
@@ -701,7 +760,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 text  : QUILocale.get( lg, 'site.area.window.delete.text' ),
                 information : QUILocale.get( lg, 'site.area.window.delete.information' ),
                 maxHeight   : 300,
-                maxWidth    : 500,
+                maxWidth    : 450,
                 events :
                 {
                     onSubmit : function() {
@@ -719,15 +778,27 @@ define('package/quiqqer/bricks/bin/Site/Area', [
         openBrickSettingDialog : function(Select)
         {
             new QUIConfirm({
-                title     : QUILocale.get( lg, 'site.area.window.settings.title' ),
+                title     : QUILocale.get(lg, 'site.area.window.settings.title'),
                 icon      : 'icon-gear',
-                maxWidth  : 400,
-                maxHeight : 300,
+                maxWidth  : 600,
+                maxHeight : 400,
                 autoclose : false,
                 events    :
                 {
                     onOpen : function(Win)
                     {
+                        Win.Loader.show();
+
+                        require([
+                            'package/quiqqer/bricks/bin/Site/BrickEdit'
+                        ], function(BrickEdit) {
+
+                            new BrickEdit({
+                                brickId : Select.value
+                            }).inject(Win.getContent());
+                        });
+
+                        /*
                         var Content = Win.getContent();
 
                         Content.set(
@@ -745,6 +816,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                             elms = Form.elements;
 
                         elms.inheritance.checked = Select.get( 'data-inheritance' ).toInt();
+                        */
                     },
 
                     onSubmit : function(Win)
@@ -771,7 +843,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             new QUIConfirm({
                 title     : QUILocale.get(lg, 'area.window.settings.title'),
                 icon      : 'icon-gear',
-                maxWidth  : 400,
+                maxWidth  : 450,
                 maxHeight : 300,
                 autoclose : false,
                 events    :

@@ -28,6 +28,7 @@
 
 .quiqqer-bricks-site-category-area-list {
     float: left;
+    margin: 0;
     padding: 0;
     position: relative;
     width: 100%;
