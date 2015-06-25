@@ -78,7 +78,10 @@ class Events
 
             foreach ( $bricks as $brick )
             {
-                if ( !(int)$brick['inheritance'] ) {
+                if (!isset($brick['customfields'])
+                    || !isset($brick['customfields']['inheritance'])
+                    || !(int)$brick['customfields']['inheritance']
+                ) {
                     continue;
                 }
 

@@ -325,18 +325,31 @@ class Manager
                     break;
                 }
 
-                $bricks[] = $brick['brickId'];
+                $bricks[] = $brick;
             }
         }
 
 
         $result = array();
 
-        foreach ($bricks as $brickId) {
-            $brickId = (int)$brickId;
+        foreach ($bricks as $brickData) {
+
+            $brickId = (int)$brickData['brickId'];
 
             try {
-                $result[] = $this->getBrickById($brickId)->check();
+                $Brick = $this->getBrickById($brickId);
+
+                if (isset($brickData['customfields'])
+                    && !empty($brickData['customfields'])
+                ) {
+                    $custom = json_decode($brickData['customfields'], true);
+
+                    if ($custom) {
+                        $Brick->setSettings($custom);
+                    }
+                }
+
+                $result[] = $Brick->check();
 
             } catch (QUI\Exception $Exception) {
                 QUI\System\Log::addWarning(
@@ -435,7 +448,7 @@ class Manager
 
         if (isset($brickData['customfields'])) {
             $availableSettings = $Brick->getSettings();
-            $availableSettings['width']  = true;
+            $availableSettings['width'] = true;
             $availableSettings['height'] = true;
 
             foreach ($brickData['customfields'] as $customfield) {
@@ -591,7 +604,7 @@ class Manager
 
             foreach ($area as $brick) {
                 if (isset($brickIds[$brick['brickId']])) {
-                    $result[] = $brick['brickId'];
+                    $result[] = $brick;
                 }
             }
 

@@ -354,8 +354,8 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                 Select.set('data-inheritance', 0);
 
-                if ("inheritance" in brickData) {
-                    Select.set( 'data-inheritance', brickData.inheritance );
+                if ("customfields" in brickData) {
+                    Select.set( 'data-customfields', brickData.customfields );
                 }
 
             }.bind(this));
@@ -473,8 +473,8 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             for (var i = 0, len = bricks.length; i < len; i++)
             {
                 data.push({
-                    brickId     : bricks[ i ].value,
-                    inheritance : bricks[ i ].get( 'data-inheritance' ) == 1 ? 1 : 0
+                    brickId : bricks[i].value,
+                    customfields : bricks[i].get('data-customfields')
                 });
             }
 
@@ -777,6 +777,8 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          */
         openBrickSettingDialog : function(Select)
         {
+            var self = this;
+
             new QUIConfirm({
                 title     : QUILocale.get(lg, 'site.area.window.settings.title'),
                 icon      : 'icon-gear',
@@ -800,54 +802,43 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                             'package/quiqqer/bricks/bin/Site/BrickEdit'
                         ], function(BrickEdit) {
 
-                            Win.Edit = new BrickEdit({
+                            var customfields = Select.get('data-customfields');
+
+                            if (customfields) {
+                                customfields = JSON.decode(customfields);
+                            }
+
+                            new BrickEdit({
                                 brickId : Select.value,
-                                styles : {
+                                Site    : self.getAttribute('Site'),
+                                customfields : customfields,
+                                styles  : {
                                     height : Win.getContent().getSize().y
                                 }
                             }).inject(Win.getContent());
                         });
-
-                        /*
-                        var Content = Win.getContent();
-
-                        Content.set(
-                            'html',
-
-                            '<form>' +
-                            '    <label>' +
-                            '        <input type="checkbox" name="inheritance" />' +
-                                     QUILocale.get( lg, 'site.area.window.settings.setting.inheritance' ) +
-                            '    </label>' +
-                            '</form>'
-                        );
-
-                        var Form = Win.getContent().getElement( 'form' ),
-                            elms = Form.elements;
-
-                        elms.inheritance.checked = Select.get( 'data-inheritance' ).toInt();
-                        */
                     },
 
                     onSubmit : function(Win)
                     {
-                        console.log(Win.Edit);
+                        Win.Loader.show();
 
+                        require(['qui/utils/Form'], function(QUIFormUtils) {
 
-//                        var Form = Win.getContent().getElement( 'form' );
-//
-//                        Select.set({
-//                            'data-inheritance' : Form.elements.inheritance.checked ? 1 : 0
-//                        });
-//
-//                        Win.close();
+                            var Form = Win.getContent().getElement('form'),
+                                data = QUIFormUtils.getFormData(Form);
+
+                            Select.set('data-customfields', JSON.encode(data));
+
+                            Win.close();
+                        });
                     }
                 }
             }).open();
         },
 
         /**
-         * Opens the
+         * Opens the settings dialog of the area
          */
         openSettingsDialog : function()
         {

@@ -12,17 +12,16 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
     'qui/QUI',
     'qui/controls/Control',
     'qui/controls/loader/Loader',
+    'qui/utils/Form',
     'utils/Template',
     'utils/Controls',
     'Ajax',
 
     'css!package/quiqqer/bricks/bin/Site/BrickEdit.css'
 
-], function(QUI, QUIControl, QUILoader, Template, ControlUtils, QUIAjax)
+], function(QUI, QUIControl, QUILoader, QUIFormUtils, Template, ControlUtils, QUIAjax)
 {
     "use strict";
-
-    var lg = 'quiqqer/bricks';
 
     return new Class({
 
@@ -33,9 +32,10 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
             '$onInject'
         ],
 
-        options :{
+        options : {
             brickId : false,
-            Site    : false
+            Site    : false,
+            customfields : false
         },
 
         initialize : function(options)
@@ -44,6 +44,8 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
 
             this.Loader = new QUILoader();
             this.$Form = null;
+
+            this.$globalBrickSettings = {};
 
             this.addEvents({
                 onInject : this.$onInject
@@ -73,10 +75,12 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
         $onInject : function()
         {
             if (!this.getAttribute('brickId')) {
+                console.error('Missing brick-ID');
                 return;
             }
 
             if (!this.getAttribute('Site')) {
+                console.error('Missing Site');
                 return;
             }
 
@@ -84,9 +88,8 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
 
             this.Loader.show();
 
-            this.getSettings().then(function(result) {
-
-                console.log(result);
+            this.getBrickSettings().then(function(result) {
+                self.$globalBrickSettings = result.settings;
 
                 return Template.get('bin/Site/BrickEdit', false, {
                     'package' : 'quiqqer/bricks',
@@ -100,6 +103,18 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
 
                 self.getElm().set('html', html);
 
+                QUIFormUtils.setDataToForm(
+                    self.$globalBrickSettings,
+                    self.getElm().getElement('form')
+                );
+
+                if (self.getAttribute('customfields')) {
+                    QUIFormUtils.setDataToForm(
+                        self.getAttribute('customfields'),
+                        self.getElm().getElement('form')
+                    );
+                }
+
                 return QUI.parse(self.getElm());
 
             }).then(function() {
@@ -108,13 +123,12 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
             }).then(function() {
 
                 var i, len, Control;
-                var Project  = self.getAttribute('Site'),
-                    controls = self.getElm().getElements(['data-quiid']);
+
+                var Project  = self.getAttribute('Site').getProject(),
+                    controls = self.getElm().getElements('[data-quiid]');
 
                 for (i = 0, len = controls.length; i < len; i++)
                 {
-                    console.log( controls[i] );
-
                     Control = QUI.Controls.getById(controls[i].get('data-quiid'));
 
                     if (Control && "setProject" in Control) {
@@ -134,7 +148,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
          *
          * @returns {Promise}
          */
-        getSettings : function()
+        getBrickSettings : function()
         {
             return new Promise(function(resolve, reject) {
 

@@ -1,60 +1,65 @@
+<form>
+    {assign var=dataQuiKey value="data-qui"}
 
-{assign var=dataQuiKey value="data-qui"}
-
-<table class="data-table brick-site-edit">
-    <tbody>
-    <tr class="odd">
-        <td>
-            <label for="inheritance">
-                {locale group="quiqqer/bricks" var="site.area.window.settings.setting.inheritance"}
-            </label>
-        </td>
-        <td>
-            <input type="checkbox" name="inheritance" id="inheritance" />
-        </td>
-    </tr>
-
-    {if isset($params.customfields)}
-    {foreach $params.customfields as $key => $field}
-
-        {if isset($params.availableSettings.$key)}
-        {assign var=setting value=$params.availableSettings.$key}
-        <tr class="{cycle values="even,odd"}">
+    <table class="data-table brick-site-edit">
+        <tbody>
+        <tr class="odd">
             <td>
-                <label for="{$setting.name}">
-                    {assign var=group value=$setting.text.0}
-                    {assign var=val value=$setting.text.1}
-                    {locale group=$group var=$val}
+                <label for="inheritance">
+                    {locale group="quiqqer/bricks" var="site.area.window.settings.setting.inheritance"}
                 </label>
             </td>
             <td>
-                {if $setting.type == 'select'}
-                <select>
-                    {foreach $setting.options as $option}
-                    <option value="">
-                        {locale group=$option.text.0 value=$option.text.1}
-                    </option>
-                    {/foreach}
-                </select>
-                {else if $setting.type == 'checkbox'}
-                <input type="checkbox"
-                       id="{$setting.name}"
-                       class="{$setting.class}"
-                       data-qui="{$setting.$dataQuiKey}"
-                />
-                {else}
-                <input type="text"
-                       id="{$setting.name}"
-                       class="{$setting.class}"
-                       data-qui="{$setting.$dataQuiKey}"
-                />
-                {/if}
+                <input type="checkbox" name="inheritance" id="inheritance" />
             </td>
         </tr>
+
+        {if isset($params.customfields)}
+        {foreach $params.customfields as $key => $field}
+
+            {if isset($params.availableSettings.$key)}
+            {assign var=setting value=$params.availableSettings.$key}
+            <tr class="{cycle values="even,odd"}">
+                <td>
+                    <label for="{$setting.name}">
+                        {assign var=group value=$setting.text.0}
+                        {assign var=val value=$setting.text.1}
+                        {locale group=$group var=$val}
+                    </label>
+                </td>
+                <td>
+                    {if $setting.type == 'select'}
+                    <select id="{$setting.name}"
+                            name="{$setting.name}"
+                    >
+                        {foreach $setting.options as $option}
+                        <option value="">
+                            {locale group=$option.text.0 value=$option.text.1}
+                        </option>
+                        {/foreach}
+                    </select>
+                    {else if $setting.type == 'checkbox'}
+                    <input type="checkbox"
+                           id="{$setting.name}"
+                           name="{$setting.name}"
+                           class="{$setting.class}"
+                           data-qui="{$setting.$dataQuiKey}"
+                    />
+                    {else}
+                    <input type="text"
+                           id="{$setting.name}"
+                           name="{$setting.name}"
+                           class="{$setting.class}"
+                           data-qui="{$setting.$dataQuiKey}"
+                    />
+                    {/if}
+                </td>
+            </tr>
+            {/if}
+
+        {/foreach}
         {/if}
 
-    {/foreach}
-    {/if}
-
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</form>
