@@ -780,21 +780,31 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             new QUIConfirm({
                 title     : QUILocale.get(lg, 'site.area.window.settings.title'),
                 icon      : 'icon-gear',
+                texticon  : false,
                 maxWidth  : 600,
                 maxHeight : 400,
                 autoclose : false,
-                events    :
+                ok_button : {
+                    text      : QUILocale.get('quiqqer/system', 'save'),
+                    textimage : 'icon-save fa fa-save'
+                },
+                cancel_button : {
+                    text      : QUILocale.get('quiqqer/system', 'cancel'),
+                    textimage : 'icon-remove fa fa-remove'
+                },
+                events :
                 {
                     onOpen : function(Win)
                     {
-                        Win.Loader.show();
-
                         require([
                             'package/quiqqer/bricks/bin/Site/BrickEdit'
                         ], function(BrickEdit) {
 
-                            new BrickEdit({
-                                brickId : Select.value
+                            Win.Edit = new BrickEdit({
+                                brickId : Select.value,
+                                styles : {
+                                    height : Win.getContent().getSize().y
+                                }
                             }).inject(Win.getContent());
                         });
 
@@ -821,13 +831,16 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                     onSubmit : function(Win)
                     {
-                        var Form = Win.getContent().getElement( 'form' );
+                        console.log(Win.Edit);
 
-                        Select.set({
-                            'data-inheritance' : Form.elements.inheritance.checked ? 1 : 0
-                        });
 
-                        Win.close();
+//                        var Form = Win.getContent().getElement( 'form' );
+//
+//                        Select.set({
+//                            'data-inheritance' : Form.elements.inheritance.checked ? 1 : 0
+//                        });
+//
+//                        Win.close();
                     }
                 }
             }).open();
