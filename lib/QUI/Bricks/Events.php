@@ -35,7 +35,7 @@ class Events
             return;
         }
 
-        $Manager = new Manager();
+        $Manager = Manager::init();
 
         // get inharitance areas
         $Project      = $Site->getProject();
@@ -127,7 +127,8 @@ class Events
             return;
         }
 
-        $BricksManager = new \QUI\Bricks\Manager();
+
+        $BricksManager = \QUI\Bricks\Manager::init();
 
         $Site = $params['Site'];
         $area = $params['area'];

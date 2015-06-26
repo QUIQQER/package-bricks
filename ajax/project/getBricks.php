@@ -15,7 +15,7 @@
 function package_quiqqer_bricks_ajax_project_getBricks($project, $area = false)
 {
     $Project = QUI::getProjectManager()->decode($project);
-    $BrickManager = new QUI\Bricks\Manager();
+    $BrickManager = QUI\Bricks\Manager::init();
 
     $bricks = $BrickManager->getBricksFromProject($Project);
     $result = array();

@@ -176,6 +176,11 @@
             <de><![CDATA[Baustein Höhe]]></de>
             <en><![CDATA[Brick height]]></en>
         </locale>
+        <locale name="brick.edit.classes">
+            <de><![CDATA[Zusätzliche CSS Klassen]]></de>
+            <en><![CDATA[Additional CSS classes]]></en>
+        </locale>
+
         <locale name="brick.edit.width">
             <de><![CDATA[Baustein Breite]]></de>
             <en><![CDATA[Brick width]]></en>

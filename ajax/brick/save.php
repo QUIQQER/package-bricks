@@ -14,7 +14,7 @@
  */
 function package_quiqqer_bricks_ajax_brick_save($brickId, $data)
 {
-    $BrickManager = new QUI\Bricks\Manager();
+    $BrickManager = QUI\Bricks\Manager::init();
     $BrickManager->saveBrick($brickId, json_decode($data, true));
 
     $Brick = $BrickManager->getBrickById($brickId);

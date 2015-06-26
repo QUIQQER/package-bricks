@@ -11,7 +11,7 @@
  */
 function package_quiqqer_bricks_ajax_brick_delete($brickIds)
 {
-    $BrickManager = new QUI\Bricks\Manager();
+    $BrickManager = QUI\Bricks\Manager::init();
     $brickIds = json_decode($brickIds, true);
 
     foreach ($brickIds as $brickId) {

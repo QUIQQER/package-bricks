@@ -35,6 +35,38 @@ class Manager
     protected $_bricks = array();
 
     /**
+     * initialized brick manager
+     *
+     * @var null
+     */
+    static $_BrickManager = null;
+
+    /**
+     * @return Manager
+     */
+    static function init()
+    {
+        if (is_null(self::$_BrickManager)) {
+            self::$_BrickManager = new QUI\Bricks\Manager(true);
+        }
+
+        return self::$_BrickManager;
+    }
+
+    /**
+     * Constructor
+     * Please use \QUI\Bricks\Manager::init()
+     *
+     * @param bool $init
+     */
+    public function __construct($init=false)
+    {
+        if ($init === false) {
+            QUI\System\Log::addWarning('Please use \QUI\Bricks\Manager::init()');
+        }
+    }
+
+    /**
      * Creates a new brick for the project
      *
      * @param Project $Project
@@ -382,10 +414,7 @@ class Manager
         ));
 
         foreach ($list as $entry) {
-            $Brick = new Brick($entry);
-            $Brick->setAttribute('id', $entry['id']);
-
-            $result[] = $Brick;
+            $result[] = $this->getBrickById($entry['id']);
         }
 
         return $result;
@@ -471,7 +500,8 @@ class Manager
             'customfields' => json_encode($customfields),
             'areas'        => $areaString,
             'height'       => $Brick->getAttribute('height'),
-            'width'        => $Brick->getAttribute('width')
+            'width'        => $Brick->getAttribute('width'),
+            'classes'      => $Brick->getAttribute('classes')
         ), array(
             'id' => (int)$brickId
         ));

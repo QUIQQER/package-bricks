@@ -13,7 +13,7 @@
  */
 function package_quiqqer_bricks_ajax_getBrick($brickId)
 {
-    $BrickManager = new QUI\Bricks\Manager();
+    $BrickManager = QUI\Bricks\Manager::init();
     $Brick = $BrickManager->getBrickById($brickId);
 
     return array(

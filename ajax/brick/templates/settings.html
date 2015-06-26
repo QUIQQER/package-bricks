@@ -47,6 +47,16 @@
             <input type="text" name="width" id="width" />
         </td>
     </tr>
+    <tr class="{cycle values="odd,even"}">
+    <td>
+        <label for="classes">
+            {locale group="quiqqer/bricks" var="brick.edit.classes"}
+        </label>
+    </td>
+    <td>
+        <input type="text" name="classes" id="classes" />
+    </td>
+    </tr>
     </tbody>
     </table>
 
@@ -78,6 +88,14 @@
                     <span>{locale group="quiqqer/bricks" var="brick.edit.width"}</span>
                 </label>
             </td>
+        </tr>
+        <tr class="{cycle values="odd,even"}">
+        <td>
+            <label>
+                <input type="checkbox" name="flexible-classes">
+                <span>{locale group="quiqqer/bricks" var="brick.edit.classes"}</span>
+            </label>
+        </td>
         </tr>
     </tbody>
     </table>

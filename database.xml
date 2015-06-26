@@ -15,6 +15,7 @@
             <field type="TEXT">areas</field>
             <field type="TEXT">width</field>
             <field type="TEXT">height</field>
+            <field type="TEXT">classes</field>
         </table>
     </global>
 

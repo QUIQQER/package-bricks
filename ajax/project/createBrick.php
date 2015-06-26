@@ -17,7 +17,7 @@ function package_quiqqer_bricks_ajax_project_createBrick($project, $data)
     $Project = QUI::getProjectManager()->decode($project);
     $Brick = new QUI\Bricks\Brick(json_decode($data, true));
 
-    $BrickManager = new QUI\Bricks\Manager();
+    $BrickManager = QUI\Bricks\Manager::init();
 
     return $BrickManager->createBrickForProject($Project, $Brick);
 }

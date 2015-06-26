@@ -64,3 +64,10 @@ class Baustein extends QUI\Control
 
 ?>
 ```
+
+
+Template Area
+
+```html
+{brickarea assign="bricks" area="footer" Site=$Site}
+```

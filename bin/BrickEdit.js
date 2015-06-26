@@ -373,9 +373,10 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             }
 
             if (unload == 'settings') {
-                data.attributes.areas = this.$Areas.getAreas().join(',');
-                data.attributes.width = Form.elements.width.value;
-                data.attributes.height = Form.elements.height.value;
+                data.attributes.areas   = this.$Areas.getAreas().join(',');
+                data.attributes.width   = Form.elements.width.value;
+                data.attributes.height  = Form.elements.height.value;
+                data.attributes.classes = Form.elements.classes.value;
 
                 var flexibleList = [],
                     fieldData = QUIFormUtils.getFormData(Form);
@@ -494,6 +495,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         Content.getElement('[name="height"]').value = attributes.height;
                     }
 
+                    if ("classes" in attributes) {
+                        Content.getElement('[name="classes"]').value = attributes.classes;
+                    }
+
+
                     // flexble settings
                     var i, len, data;
                     var TBody = Content.getElement('.brick-table-flexible tbody');
@@ -503,7 +509,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         data = this.$availableSettings[i];
 
                         new Element('tr', {
-                            'class' : i % 2 ? 'even' : 'odd',
+                            'class' : i % 2 ? 'odd' : 'even',
                             html : '<td>' +
                                        '<label>'+
                                            '<input type="checkbox" name="flexible-'+ data.name +'" />'+

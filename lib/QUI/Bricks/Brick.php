@@ -39,6 +39,13 @@ class Brick extends QUI\QDOM
     protected $_customfields = array();
 
     /**
+     * Internal control
+     *
+     * @var null
+     */
+    protected $_Control = null;
+
+    /**
      * Constructor
      *
      * @param array $params - brick params
@@ -54,7 +61,8 @@ class Brick extends QUI\QDOM
             'project'     => '',
             'areas'       => '',
             'height'      => '',
-            'width'       => ''
+            'width'       => '',
+            'classes'     => ''
         );
 
         $this->setAttributes($default);
@@ -71,7 +79,7 @@ class Brick extends QUI\QDOM
 
         // default settings from control
         $Control = $this->_getControl();
-        $Manager = new Manager();
+        $Manager = Manager::init();
 
         $availableSettings = $Manager->getAvailableBrickSettingsByBrickType(
             $this->getAttribute('type')
@@ -141,7 +149,7 @@ class Brick extends QUI\QDOM
             throw new QUI\Exception('Control not found. Brick could not be created');
         }
 
-        return $Control;
+        return $this;
     }
 
     /**
@@ -163,6 +171,7 @@ class Brick extends QUI\QDOM
 
         $Control->setAttributes($this->getSettings());
 
+
         return $Control->create();
     }
 
@@ -173,24 +182,41 @@ class Brick extends QUI\QDOM
      */
     protected function _getControl()
     {
+        if ($this->_Control) {
+            return $this->_Control;
+        }
+
         $Ctrl = $this->getAttribute('type');
 
         if ($Ctrl === 'content') {
             return true;
         }
 
-        QUI\System\Log::addDebug($Ctrl);
+        QUI\System\Log::addDebug('call :: '. $Ctrl);
 
         if (!is_callable($Ctrl) && !class_exists($Ctrl)) {
             return false;
         }
 
+        QUI\System\Log::addDebug('callable :: '. $Ctrl);
+        
 
         /* @var $Control \QUI\Control */
         $Control = new $Ctrl($this->getSettings());
 
         $Control->setAttribute('height', $this->getAttribute('height'));
         $Control->setAttribute('width', $this->getAttribute('width'));
+
+        if ($this->getAttribute('classes')) {
+            $classes = explode(' ', $this->getAttribute('classes'));
+
+            foreach ($classes as $class) {
+                $class = trim($class);
+                $class = preg_replace('/[^a-zA-Z0-9\-]/', '', $class);
+
+                $Control->addCSSClass($class);
+            }
+        }
 
         if ($this->_id) {
             $Control->addCSSClass('brick-'.$this->_id);
@@ -199,6 +225,8 @@ class Brick extends QUI\QDOM
         if (!($Control instanceof QUI\Control) || !$Control) {
             return false;
         }
+
+        $this->_Control = $Control;
 
         return $Control;
     }
