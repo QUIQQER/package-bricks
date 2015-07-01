@@ -247,6 +247,7 @@ class Manager
         }
 
         $this->_bricks[$id] = new Brick($data[0]);
+        $this->_bricks[$id]->setAttribute('id', $id);
 
         return $this->_bricks[$id];
     }
