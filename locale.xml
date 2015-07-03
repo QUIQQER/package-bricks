@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <locales>
     <groups name="quiqqer/bricks" datatype="php,js">
+        <locale name="permission.quiqqer.bricks._header">
+            <de><![CDATA[Bausteine]]></de>
+            <en><![CDATA[Bricks]]></en>
+        </locale>
+        <locale name="permission.quiqqer.bricks.assign">
+            <de><![CDATA[Darf Bausteine Seiten zuweisen.]]></de>
+            <en><![CDATA[Can assign blocks to pages.]]></en>
+        </locale>
+        <locale name="permission.quiqqer.bricks.delete">
+            <de><![CDATA[Darf Bausteine löschen.]]></de>
+            <en><![CDATA[Can delete blocks.]]></en>
+        </locale>
+        <locale name="permission.quiqqer.bricks.edit">
+            <de><![CDATA[Darf Bausteine bearbeiten.]]></de>
+            <en><![CDATA[Can edit blocks.]]></en>
+        </locale>
+        <locale name="permission.quiqqer.bricks.create">
+            <de><![CDATA[Darf Bausteine erstellen.]]></de>
+            <en><![CDATA[Can create blocks.]]></en>
+        </locale>
+
         <locale name="menu.bricks.text">
             <de><![CDATA[Bausteine]]></de>
             <en><![CDATA[Bricks-Manager]]></en>
