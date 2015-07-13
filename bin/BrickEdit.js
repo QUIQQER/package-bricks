@@ -221,7 +221,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                 return new Promise(function(resolve, reject)
                 {
-                    var data = this.getAttribute('data').attributes;
+                    var data = this.getAttribute('data');
 
                     data.customfields = this.$customfields;
 
@@ -684,11 +684,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     return;
                 }
 
-                TableExtra.setStyle( 'display', null );
+                TableExtra.setStyle('display', null);
 
-                var Form = new Element('form', {
-                    'class' : 'brick-edit-extra-header-form'
-                }).wraps( TableExtra );
+                var Form = this.getContent().getElement('form');
 
                 var i, len, Row, text, Value, setting, extraFieldId;
 
