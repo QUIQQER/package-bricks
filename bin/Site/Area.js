@@ -195,6 +195,33 @@ define('package/quiqqer/bricks/bin/Site/Area', [
         },
 
         /**
+         * Refresh the area display
+         */
+        refresh : function()
+        {
+            var self      = this,
+                size      = this.$List.getComputedSize(),
+                titleSize = this.$Title.getComputedSize();
+
+            moofx(this.$Elm).animate({
+                height : size.height + titleSize.height
+            }, {
+                duration : 250,
+                equation : 'cubic-bezier(.42,.4,.46,1.29)',
+                callback : function() {
+                    self.$List.setStyle('position', null);
+
+                    moofx(self.$List).animate({
+                        opacity : 1
+                    }, {
+                        duration : 250,
+                        equation : 'ease-out'
+                    });
+                }
+            });
+        },
+
+        /**
          * event : on inject
          */
         $onInject : function()
@@ -237,26 +264,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                     Promise.resolve(promises).then(function() {
 
-                        var size      = self.$List.getComputedSize(),
-                            titleSize = self.$Title.getComputedSize();
-
-                        moofx(self.$Elm).animate({
-                            height : size.height + titleSize.height
-                        }, {
-                            duration : 250,
-                            equation : 'cubic-bezier(.42,.4,.46,1.29)',
-                            callback : function() {
-                                self.$List.setStyle('position', null);
-
-                                moofx(self.$List).animate({
-                                    opacity : 1
-                                }, {
-                                    duration : 250,
-                                    equation : 'ease-out'
-                                });
-                            }
-                        });
-
+                        self.refresh();
                         Loader.destroy();
                     });
 
@@ -382,6 +390,8 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             var BrickNode = this.createNewBrick();
 
             BrickNode.getElement('select').set('value', brickId);
+
+            this.refresh();
 
             return BrickNode;
         },
@@ -779,6 +789,8 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                         }
 
                         BrickElement.destroy();
+                        this.refresh();
+
                     }.bind(this)
                 }
             }).open();
