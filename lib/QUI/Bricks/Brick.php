@@ -192,13 +192,13 @@ class Brick extends QUI\QDOM
             return true;
         }
 
-        QUI\System\Log::addDebug('call :: '. $Ctrl);
+//        QUI\System\Log::addDebug('call :: '. $Ctrl);
 
         if (!is_callable($Ctrl) && !class_exists($Ctrl)) {
             return false;
         }
 
-        QUI\System\Log::addDebug('callable :: '. $Ctrl);
+//        QUI\System\Log::addDebug('callable :: '. $Ctrl);
         
 
         /* @var $Control \QUI\Control */

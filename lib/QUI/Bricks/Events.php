@@ -42,6 +42,7 @@ class Events
         $projectAreas = $Manager->getAreasByProject( $Project );
         $projectTable = QUI::getDBProjectTableName( Manager::TABLE_CACHE, $Project );
 
+
         foreach ( $projectAreas as $area )
         {
             if ( !$area[ 'inheritance' ] ) {
@@ -76,12 +77,20 @@ class Events
                 continue;
             }
 
+
             foreach ( $bricks as $brick )
             {
-                if (!isset($brick['customfields'])
-                    || !isset($brick['customfields']['inheritance'])
-                    || !(int)$brick['customfields']['inheritance']
-                ) {
+                $customFields = array();
+
+                if (isset($brick['customfields']) && is_string($brick['customfields'])) {
+                    $customFields = json_decode($brick['customfields'], true);
+                }
+
+                if (isset($brick['customfields']) && is_array($brick['customfields'])) {
+                    $customFields = $brick['customfields'];
+                }
+
+                if (!isset($customFields['inheritance']) || !(int)$customFields['inheritance']) {
                     continue;
                 }
 

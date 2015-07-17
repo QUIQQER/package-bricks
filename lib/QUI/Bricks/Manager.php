@@ -591,6 +591,7 @@ class Manager
         $Project = $Site->getProject();
         $areas = $this->getAreasByProject($Project);
 
+
         foreach ($areas as $area) {
             if ($area['name'] != $brickArea) {
                 continue;
@@ -620,8 +621,10 @@ class Manager
         $parentIds = $Site->getParentIdTree();
         $parentIds = array_reverse($parentIds);
 
-        $projectCacheTable = QUI::getDBProjectTableName(self::TABLE_CACHE,
-            $Project);
+        $projectCacheTable = QUI::getDBProjectTableName(
+            self::TABLE_CACHE,
+            $Project
+        );
 
         foreach ($parentIds as $parentId) {
             $bricks = QUI::getDataBase()->fetch(array(
