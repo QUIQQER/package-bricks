@@ -223,7 +223,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     var data = this.getAttribute('data');
 
                     data.customfields = this.$customfields;
-console.log(data);
+
                     QUIAjax.post('package_quiqqer_bricks_ajax_brick_save', function ()
                     {
                         if (typeof callback === 'function') {
