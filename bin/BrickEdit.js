@@ -20,7 +20,6 @@
  * @event onSave [ this ]
  * @event onDelete [ this ]
  */
-
 define('package/quiqqer/bricks/bin/BrickEdit', [
 
     'qui/QUI',
@@ -224,7 +223,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     var data = this.getAttribute('data');
 
                     data.customfields = this.$customfields;
-
+console.log(data);
                     QUIAjax.post('package_quiqqer_bricks_ajax_brick_save', function ()
                     {
                         if (typeof callback === 'function') {
@@ -232,6 +231,12 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         }
 
                         resolve();
+
+                        QUI.getMessageHandler().then(function(MH) {
+                            MH.addSuccess(
+                                QUILocale.get(lg, 'message.brick.save.success')
+                            );
+                        });
 
                         this.fireEvent('save', [this]);
                         this.Loader.hide();

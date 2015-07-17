@@ -247,8 +247,6 @@
             <en><![CDATA[The brick has no additional settings.]]></en>
         </locale>
 
-
-
         <locale name="site.area.button.area.settings">
             <de><![CDATA[Bausteinzonen-Einstellungen]]></de>
             <en><![CDATA[Brick area settings]]></en>
@@ -341,14 +339,17 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Es wurden leider keine Bausteinzonen gefunden.]]></de>
             <en><![CDATA[Sorry, no block zones found.]]></en>
         </locale>
+        <locale name="message.brick.save.success">
+            <de><![CDATA[Baustein wurde erfolgreich gespeichert.]]></de>
+            <en><![CDATA[Brick successfully saved.]]></en>
+        </locale>
+
     </groups>
-    <groups name="quiqqer/bricks" datatype="js,php ">
+    <groups name="quiqqer/bricks" datatype="js,php">
         <locale name="brick.control.navigation.setting.content">
             <de><![CDATA[Text über dem Kontaktformular]]></de>
             <en><![CDATA[]]></en>
         </locale>
-    </groups>
-    <groups name="quiqqer/bricks" datatype="js,php">
         <locale name="brick.control.sidebox1.setting.site">
             <de><![CDATA[Seiten hinzufügen]]></de>
             <en><![CDATA[]]></en>

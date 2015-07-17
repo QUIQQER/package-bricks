@@ -472,6 +472,11 @@ class Manager
             $Brick->setSettings($brickData['settings']);
         }
 
+        // fields
+        if (isset($brickData['attributes'])) {
+            $Brick->setAttributes($brickData['attributes']);
+        }
+
 
         // custom fields
         $customfields = array();
@@ -483,6 +488,11 @@ class Manager
 
             foreach ($brickData['customfields'] as $customfield) {
                 $customfield = str_replace('flexible-', '', $customfield);
+
+                if ($customfield == 'classes') {
+                    $customfields[] = $customfield;
+                    continue;
+                }
 
                 if (isset($availableSettings[$customfield])) {
                     $customfields[] = $customfield;
