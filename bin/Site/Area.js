@@ -828,7 +828,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                             'package/quiqqer/bricks/bin/Site/BrickEdit'
                         ], function(BrickEdit) {
 
-                            var brickId = Select.get('id');
+                            var brickId = Select.getParent().get('id');
                             var custom = '';
 
                             if (brickId in self.$brickCustomData) {
