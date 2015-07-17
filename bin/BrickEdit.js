@@ -680,6 +680,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 if (!this.$availableSettings || !this.$availableSettings.length)
                 {
                     TableExtra.setStyle('display', 'none');
+
+                    new Element('div', {
+                        html : QUILocale.get(lg, 'window.brick.no.extra.settings')
+                    }).inject(TableExtra, 'before');
+
                     resolve();
                     return;
                 }

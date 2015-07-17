@@ -242,6 +242,12 @@
             <de><![CDATA[Der Baustein wird unwiderruflich gelöscht.]]></de>
             <en><![CDATA[The block is deleted irrevocably.]]></en>
         </locale>
+        <locale name="window.brick.no.extra.settings">
+            <de><![CDATA[Der Baustein besitzt keine zusätzlichen Einstellungen.]]></de>
+            <en><![CDATA[The brick has no additional settings.]]></en>
+        </locale>
+
+
 
         <locale name="site.area.button.area.settings">
             <de><![CDATA[Bausteinzonen-Einstellungen]]></de>
