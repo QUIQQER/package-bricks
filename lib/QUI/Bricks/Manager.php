@@ -59,7 +59,7 @@ class Manager
      *
      * @param bool $init
      */
-    public function __construct($init=false)
+    public function __construct($init = false)
     {
         if ($init === false) {
             QUI\System\Log::addWarning('Please use \QUI\Bricks\Manager::init()');
@@ -450,6 +450,13 @@ class Manager
             return '';
         }, $this->getAreasByProject($Project));
 
+        if (isset($brickData['attributes'])
+            && isset($brickData['attributes']['areas'])
+        ) {
+            $brickData['areas'] = $brickData['attributes']['areas'];
+        }
+
+
         if (isset($brickData['areas'])) {
             $parts = explode(',', $brickData['areas']);
 
@@ -466,15 +473,22 @@ class Manager
 
         $Brick->setAttributes($brickData);
 
+        // fields
+        if (isset($brickData['attributes'])) {
+
+            foreach ($brickData['attributes'] as $key => $value) {
+
+                if ($key == 'areas') {
+                    continue;
+                }
+
+                $Brick->setAttribute($key, $value);
+            }
+        }
 
         // brick settings
         if (isset($brickData['settings'])) {
             $Brick->setSettings($brickData['settings']);
-        }
-
-        // fields
-        if (isset($brickData['attributes'])) {
-            $Brick->setAttributes($brickData['attributes']);
         }
 
 
