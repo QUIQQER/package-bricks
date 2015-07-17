@@ -21,6 +21,10 @@
     width: 100%;
 }
 
+.quiqqer-bricks-brickedit .cke_source {
+    max-width: 100%;
+}
+
 .quiqqer-bricks-brickedit input[type="checkbox"],
 .quiqqer-bricks-brickedit input[type="radio"] {
     width: 20px;
