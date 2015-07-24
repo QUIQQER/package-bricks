@@ -18,12 +18,6 @@
             <description>
                 <locale group="quiqqer/bricks" var="brick.control.contact.description" />
             </description>
-
-            <settings>
-                <setting name="content" data-qui="controls/editors/Editor">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.content" />
-                </setting>
-            </settings>
         </brick>
 
         <brick control="\QUI\Controls\LangSwitch">

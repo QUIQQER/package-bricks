@@ -171,7 +171,6 @@ class Brick extends QUI\QDOM
 
         $Control->setAttributes($this->getSettings());
 
-
         return $Control->create();
     }
 
@@ -192,20 +191,16 @@ class Brick extends QUI\QDOM
             return true;
         }
 
-//        QUI\System\Log::addDebug('call :: '. $Ctrl);
-
         if (!is_callable($Ctrl) && !class_exists($Ctrl)) {
             return false;
         }
-
-//        QUI\System\Log::addDebug('callable :: '. $Ctrl);
-        
 
         /* @var $Control \QUI\Control */
         $Control = new $Ctrl($this->getSettings());
 
         $Control->setAttribute('height', $this->getAttribute('height'));
         $Control->setAttribute('width', $this->getAttribute('width'));
+        $Control->setAttribute('content', $this->getAttribute('content'));
 
         if ($this->getAttribute('classes')) {
             $classes = explode(' ', $this->getAttribute('classes'));
