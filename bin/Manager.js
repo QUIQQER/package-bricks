@@ -17,7 +17,6 @@
  * @require Ajax
  * @require css!package/quiqqer/bricks/bin/Manager.css
  */
-
 define('package/quiqqer/bricks/bin/Manager', [
 
     'qui/QUI',
@@ -57,7 +56,7 @@ define('package/quiqqer/bricks/bin/Manager', [
         ],
 
         options : {
-            title : QUILocale.get( lg, 'menu.bricks.text' )
+            title : QUILocale.get(lg, 'menu.bricks.text')
         },
 
         initialize : function(options)
@@ -97,8 +96,15 @@ define('package/quiqqer/bricks/bin/Manager', [
                     callback();
                 }
 
+                var options = self.$Grid.options,
+                    page    = parseInt(options.page),
+                    perPage = parseInt(options.perPage),
+                    start = (page-1) * perPage;
+
                 self.$Grid.setData({
-                    data : result
+                    data  : result.slice(start, start+perPage),
+                    page  : page,
+                    total : result.length
                 });
 
                 self.refreshButtons();
@@ -186,7 +192,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                 this.getContent()
             );
 
-            this.$Grid = new Grid( Container, {
+            this.$Grid = new Grid(Container, {
                 columnModel : [{
                     header    : QUILocale.get('quiqqer/system', 'id'),
                     dataIndex : 'id',
@@ -208,7 +214,8 @@ define('package/quiqqer/bricks/bin/Manager', [
                     dataType  : 'string',
                     width     : 200
                 }],
-                multipleSelection : true
+                multipleSelection : true,
+                pagination: true
             });
 
             this.$Grid.addEvents({
