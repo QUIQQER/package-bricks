@@ -412,10 +412,6 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     data.settings,
                     QUIFormUtils.getFormData(Form)
                 );
-
-
-                console.log(data.settings);
-
             }
 
             if (unload == 'content') {

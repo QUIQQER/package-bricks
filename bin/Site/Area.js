@@ -484,7 +484,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             for (i = 0, len = bricks.length; i < len; i++)
             {
                 custom  = '';
-                brickId = bricks[i].get('id');
+                brickId = bricks[i].getParent().get('id');
 
                 if (brickId in this.$brickCustomData) {
                     custom = this.$brickCustomData[brickId];
@@ -813,7 +813,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 maxHeight : 400,
                 autoclose : false,
                 ok_button : {
-                    text      : QUILocale.get('quiqqer/system', 'save'),
+                    text      : QUILocale.get('quiqqer/system', 'accept'),
                     textimage : 'icon-save fa fa-save'
                 },
                 cancel_button : {
@@ -856,7 +856,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                             var Form    = Win.getContent().getElement('form'),
                                 data    = QUIFormUtils.getFormData(Form),
-                                brickId = Select.get('id');
+                                brickId = Select.getParent().get('id');
 
                             self.$brickCustomData[brickId] = JSON.encode(data);
 

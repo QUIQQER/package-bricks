@@ -6,9 +6,16 @@
  * @module package/quiqqer/bricks/bin/BrickAreas
  * @author www.pcsg.de (Henning Leutz)
  *
+ * @require qui/QUI
+ * @require qui/controls/Control
+ * @require qui/controls/buttons/Button
+ * @require package/quiqqer/bricks/bin/AreaWindow
+ * @require Ajax
+ * @require Locale
+ * @require css!package/quiqqer/bricks/bin/Area.css
+ *
  * @event onLoaded [ this ]
  */
-
 define('package/quiqqer/bricks/bin/Area', [
 
     'qui/QUI',
@@ -41,7 +48,7 @@ define('package/quiqqer/bricks/bin/Area', [
 
         initialize : function(options)
         {
-            this.parent( options );
+            this.parent(options);
 
             this.$Title    = false;
             this.$Desc     = false;
@@ -69,19 +76,19 @@ define('package/quiqqer/bricks/bin/Area', [
                 }
             });
 
-            this.$Title = this.$Elm.getElement( '.quiqqer-bricks-area-content-title' );
-            this.$Desc  = this.$Elm.getElement( '.quiqqer-bricks-area-content-description' );
+            this.$Title = this.$Elm.getElement('.quiqqer-bricks-area-content-title');
+            this.$Desc  = this.$Elm.getElement('.quiqqer-bricks-area-content-description');
 
-            if ( this.getAttribute( 'area' ) ) {
-                this.$Elm.set( 'data-area', this.getAttribute( 'area' ) );
+            if (this.getAttribute('area')) {
+                this.$Elm.set('data-area', this.getAttribute('area'));
             }
 
-            if ( this.getAttribute( 'title' ) ) {
-                this.$Title.set( 'html', this.getAttribute( 'title' ) );
+            if (this.getAttribute('title')) {
+                this.$Title.set('html', this.getAttribute('title'));
             }
 
-            if ( this.getAttribute( 'description' ) ) {
-                this.$Desc.set( 'html', this.getAttribute( 'description' ) );
+            if (this.getAttribute('description')) {
+                this.$Desc.set('html', this.getAttribute('description'));
             }
 
 
@@ -93,7 +100,7 @@ define('package/quiqqer/bricks/bin/Area', [
          */
         toggle : function()
         {
-            if ( this.$selected )
+            if (this.$selected)
             {
                 this.unselect();
                 return;
@@ -107,12 +114,12 @@ define('package/quiqqer/bricks/bin/Area', [
          */
         select : function()
         {
-            if ( this.$selected ) {
+            if (this.$selected) {
                 return;
             }
 
             this.$selected = true;
-            this.$Elm.addClass( 'quiqqer-bricks-area-selected' );
+            this.$Elm.addClass('quiqqer-bricks-area-selected');
         },
 
         /**
@@ -120,12 +127,12 @@ define('package/quiqqer/bricks/bin/Area', [
          */
         unselect : function()
         {
-            if ( this.$selected === false ) {
+            if (this.$selected === false) {
                 return;
             }
 
             this.$selected = false;
-            this.$Elm.removeClass( 'quiqqer-bricks-area-selected' );
+            this.$Elm.removeClass('quiqqer-bricks-area-selected');
         }
     });
 });
