@@ -14,10 +14,10 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
     return new Class({
 
         Extends : QUIControl,
-        Type : '',
+        Type : 'package/quiqqer/bricks/bin/Controls/Pagination',
 
         Binds : [
-            '$onInsert'
+            '$onImport'
         ],
 
         initialize : function(options)
@@ -25,14 +25,16 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             this.parent(options);
 
             this.addEvents({
-                onInsert : this.$onInsert
+                onInsert : this.$onImport
             });
         },
 
-
-        $onInsert : function()
+        /**
+         * event : on import
+         */
+        $onImport : function()
         {
-
+console.log(this.$Elm);
         }
 
     });

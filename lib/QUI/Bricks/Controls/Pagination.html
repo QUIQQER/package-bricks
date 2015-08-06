@@ -1,8 +1,8 @@
 
-<div class="quiqqer-pagination-mobile hide-on-desktop">
+<div class="quiqqer-sheets-mobile hide-on-desktop">
     <select name="select-sheet" class="hide-on-desktop" onchange="window.location = this.value">
         {section name=sheets start=0 loop=$count}
-            {assign var=num value=$smarty.section.pagination.index+1}
+            {assign var=num value=$smarty.section.sheets.index+1}
 
             {$getParams['limit'] = $limit}
             {$getParams['sheet'] = $num}
@@ -19,9 +19,9 @@
     </select>
 </div>
 
-<div class="quiqqer-pagination-desktop hide-on-mobile">
+<div class="quiqqer-sheets-desktop hide-on-mobile">
     {if !isset($smarty.request.sheet) || $active == 1}
-        <span class="quiqqer-pagination-desktop-disabled fa fa-angle-double-left"
+        <span class="quiqqer-sheets-desktop-disabled fa fa-angle-double-left"
             title="{t}quiqqer/bricks controls.pagination.first.page{/t}">
         </span>
     {else}
@@ -34,7 +34,7 @@
     {/if}
 
     {if !isset($smarty.request.sheet) || $active <= 1}
-        <span class="quiqqer-pagination-desktop-disabled fa fa-angle-left"
+        <span class="quiqqer-sheets-desktop-disabled fa fa-angle-left"
             title="{t}quiqqer/bricks controls.pagination.back{/t}">
         </span>
     {else}
@@ -60,9 +60,9 @@
 
 
     {section name=sheets start=$start loop=$end+1}
-        {assign var=num value=$smarty.section.pagination.index}
+        {assign var=num value=$smarty.section.sheets.index}
         {if $num == $active}
-            <span class="quiqqer-pagination-desktop-current">{$num}</span>
+            <span class="quiqqer-sheets-desktop-current">{$num}</span>
         {else}
             {$getParams['limit'] = $limit}
             {if $num == 1}
@@ -81,7 +81,7 @@
     {/if}
 
     {if $active >= $count}
-        <span class="quiqqer-pagination-desktop-disabled fa fa-angle-right"
+        <span class="quiqqer-sheets-desktop-disabled fa fa-angle-right"
             title="{t}quiqqer/bricks controls.pagination.next{/t}"
         >
         </span>
@@ -96,7 +96,7 @@
     {/if}
 
     {if $active >= $count}
-        <span class="quiqqer-pagination-desktop-disabled fa fa-angle-double-right"
+        <span class="quiqqer-sheets-desktop-disabled fa fa-angle-double-right"
             title="{t}quiqqer/bricks controls.pagination.last.page{/t}"
         ></span>
     {else}
@@ -109,7 +109,7 @@
 </div>
 
 {if $this->getAttribute('showLimit') && $limits}
-<div class="quiqqer-pagination-desktop-limits">
+<div class="quiqqer-sheets-desktop-limits">
     {foreach from=$limits item=limitEntry name=limits}
     {$getParams['limit'] = $limitEntry}
     {$getParams['sheet'] = false}

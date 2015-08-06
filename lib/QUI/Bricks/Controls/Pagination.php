@@ -51,7 +51,8 @@ class Pagination extends QUI\Control
             dirname(__FILE__).'/Pagination.css'
         );
 
-        $this->setAttribute('class', 'quiqqer-sheets grid-100 grid-parent');
+        $this->setAttribute('class', 'quiqqer-pagination grid-100 grid-parent');
+        $this->setAttribute('data-qui', 'package/quiqqer/bricks/bin/Controls/Pagination');
     }
 
     /**
