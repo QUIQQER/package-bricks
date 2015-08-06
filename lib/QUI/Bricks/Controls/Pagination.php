@@ -42,7 +42,8 @@ class Pagination extends QUI\Control
             'limits'    => '[10,20,50]',
             'limit'     => 10,
             'order'     => false,
-            'sheet'     => 1
+            'sheet'     => 1,
+            'useAjax'   => false
         ));
 
         parent::__construct($attributes);
@@ -51,8 +52,17 @@ class Pagination extends QUI\Control
             dirname(__FILE__).'/Pagination.css'
         );
 
+
+        if ($this->getAttribute('useAjax')) {
+            $this->setAttribute(
+                'data-qui',
+                'package/quiqqer/bricks/bin/Controls/Pagination'
+            );
+        } else {
+            $this->setAttribute('data-qui', false);
+        }
+
         $this->setAttribute('class', 'quiqqer-pagination grid-100 grid-parent');
-        $this->setAttribute('data-qui', 'package/quiqqer/bricks/bin/Controls/Pagination');
     }
 
     /**
@@ -68,11 +78,15 @@ class Pagination extends QUI\Control
 
         $count = $this->getAttribute('sheets');
         $showmax = $this->getAttribute('showmax');
-        $limit = $this->getAttribute('limit');
         $limits = $this->getAttribute('limits');
 
-        if ($this->getAttribute('showLimit') === false) {
-            $limit = false;
+        if ($this->getAttribute('useAjax')) {
+            $this->setAttribute(
+                'data-qui',
+                'package/quiqqer/bricks/bin/Controls/Pagination'
+            );
+        } else {
+            $this->setAttribute('data-qui', false);
         }
 
         if ($limits && is_string($limits)) {
