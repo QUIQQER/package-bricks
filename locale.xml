@@ -175,6 +175,27 @@
             <de><![CDATA[Baustein: 3er-Box]]></de>
             <en><![CDATA[]]></en>
         </locale>
+
+        <locale name="controls.pagination.mobile.option">
+            <de><![CDATA[Seite [from] von [max]]]></de>
+            <en><![CDATA[Page [from] of [max]]]></en>
+        </locale>
+        <locale name="controls.pagination.first.page">
+            <de><![CDATA[Erste Seite]]></de>
+            <en><![CDATA[First page]]></en>
+        </locale>
+        <locale name="controls.pagination.back">
+            <de><![CDATA[zurück]]></de>
+            <en><![CDATA[back]]></en>
+        </locale>
+        <locale name="controls.pagination.next">
+            <de><![CDATA[vor]]></de>
+            <en><![CDATA[next]]></en>
+        </locale>
+        <locale name="controls.pagination.last.page">
+            <de><![CDATA[Letzte Seite]]></de>
+            <en><![CDATA[Last page]]></en>
+        </locale>
     </groups>
     <groups name="quiqqer/bricks" datatype="php">
         <locale name="site.panel.bricks.category.title">
