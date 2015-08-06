@@ -127,7 +127,7 @@
     {foreach from=$limits item=limitEntry name=limits}
     {$getParams['limit'] = $limitEntry}
     {$getParams['sheet'] = false}
-    <a href="{$Site->getUrl($pathParams, $getParams)}">
+    <a href="{$Site->getUrl($pathParams, $getParams)}" data-limit="{$limitEntry}">
         {$limitEntry}
     </a>
     {if not $smarty.foreach.limits.last} | {/if}

@@ -77,6 +77,19 @@ class Pagination extends QUI\Control
         $Project = $Site->getProject();
 
         $count = $this->getAttribute('sheets');
+
+        if ($count === false) {
+            if ($this->getAttribute('limit') &&
+                $this->getAttribute('count')) {
+                $count = ceil(
+                    (int)$this->getAttribute('count') /
+                    (int)$this->getAttribute('limit')
+                );
+
+                $this->setAttribute('sheets', $count);
+            }
+        }
+
         $showmax = $this->getAttribute('showmax');
         $limits = $this->getAttribute('limits');
 
@@ -135,7 +148,8 @@ class Pagination extends QUI\Control
         $this->_getParams['limit'] = $limit;
 
 
-        if (!$count || $count == 1) {
+        if ((!$count || $count == 1)
+            && $this->getAttribute('limit') === false) {
             return '';
         }
 

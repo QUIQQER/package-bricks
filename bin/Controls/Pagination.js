@@ -68,8 +68,9 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
          */
         $registerEvents : function()
         {
-            var self = this,
-                aElms = this.$Elm.getElements('a');
+            var self      = this,
+                aElms     = this.$Elm.getElements('a'),
+                limitElms = this.$Elm.getElements('.quiqqer-sheets-desktop-limits a');
 
             aElms.addEvent('click', function(event) {
 
@@ -90,6 +91,18 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 } else {
                     self.openPage(parseInt(this.get('data-page')-1));
                 }
+            });
+
+            limitElms.addEvent('click', function(event)
+            {
+                event.stop();
+
+                var Sheet = self.$Current,
+                    Query = QUIStringUtils.getUrlParams(Sheet.search);
+
+                Query.limit = event.target.getProperty('data-limit');
+
+                self.fireEvent('change', [self, Sheet, Query]);
             });
         },
 
