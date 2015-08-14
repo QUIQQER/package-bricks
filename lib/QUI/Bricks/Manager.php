@@ -135,10 +135,6 @@ class Manager
 
         $projectName = $Project->getName();
 
-//        if ( !$layoutType ) {
-//            $layoutType = $Project->getAttribute( 'layout' );
-//        }
-
         if ($Project->getAttribute('template')) {
             $templates[] = $Project->getAttribute('template');
         }
@@ -173,6 +169,32 @@ class Manager
                 Utils::getTemplateAreasFromXML($brickXML, $layoutType)
             );
         }
+
+        // unque values
+        $cleaned = array();
+        foreach ($bricks as $val) {
+            if (!isset($cleaned[$val['name']])) {
+                $cleaned[$val['name']] = $val;
+            }
+        }
+
+        $bricks = array_values($cleaned);
+
+        usort($bricks, function($a, $b) {
+
+            $transA = QUI::getLocale()->get(
+                $a['title']['group'],
+                $a['title']['var']
+            );
+
+            $transB = QUI::getLocale()->get(
+                $b['title']['group'],
+                $b['title']['var']
+            );
+
+            return $transA > $transB ? 1 : -1;
+        });
+
 
         QUI::getEvents()->fireEvent(
             'onBricksGetAreaByProject',
