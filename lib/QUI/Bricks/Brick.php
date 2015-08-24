@@ -46,6 +46,13 @@ class Brick extends QUI\QDOM
     protected $_Control = null;
 
     /**
+     * List of extra css classes
+     *
+     * @var array
+     */
+    protected $_cssClasses = array();
+
+    /**
      * Constructor
      *
      * @param array $params - brick params
@@ -171,6 +178,25 @@ class Brick extends QUI\QDOM
 
         $Control->setAttributes($this->getSettings());
 
+        if ($this->getAttribute('classes')) {
+            $classes = explode(' ', $this->getAttribute('classes'));
+
+            foreach ($classes as $class) {
+                $class = trim($class);
+                $class = preg_replace('/[^a-zA-Z0-9\-]/', '', $class);
+
+                $Control->addCSSClass($class);
+            }
+        }
+
+        if ($this->_id) {
+            $Control->addCSSClass('brick-' . $this->_id);
+        }
+
+        foreach ($this->_cssClasses as $cssClass) {
+            $Control->addCSSClass($cssClass);
+        }
+
         return $Control->create();
     }
 
@@ -202,20 +228,6 @@ class Brick extends QUI\QDOM
         $Control->setAttribute('width', $this->getAttribute('width'));
         $Control->setAttribute('content', $this->getAttribute('content'));
 
-        if ($this->getAttribute('classes')) {
-            $classes = explode(' ', $this->getAttribute('classes'));
-
-            foreach ($classes as $class) {
-                $class = trim($class);
-                $class = preg_replace('/[^a-zA-Z0-9\-]/', '', $class);
-
-                $Control->addCSSClass($class);
-            }
-        }
-
-        if ($this->_id) {
-            $Control->addCSSClass('brick-'.$this->_id);
-        }
 
         if (!($Control instanceof QUI\Control) || !$Control) {
             return false;
@@ -267,7 +279,7 @@ class Brick extends QUI\QDOM
     /**
      * Set a brick setting
      *
-     * @param String $name  - name of the setting
+     * @param String $name - name of the setting
      * @param String $value - value of the setting
      */
     public function setSetting($name, $value)
@@ -285,5 +297,15 @@ class Brick extends QUI\QDOM
     public function getCustomFields()
     {
         return $this->_customfields;
+    }
+
+    /**
+     * Add an exxtra CSS Class to the control
+     *
+     * @param String $cssClass
+     */
+    public function addCSSClass($cssClass)
+    {
+        $this->_cssClasses[] = $cssClass;
     }
 }
