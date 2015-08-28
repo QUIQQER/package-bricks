@@ -113,6 +113,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 Query.limit = event.target.getProperty('data-limit');
 
                 self.fireEvent('change', [self, Sheet, Query]);
+                self.fireEvent('changeLimit', [Query.limit]);
             });
         },
 
