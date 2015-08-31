@@ -70,7 +70,7 @@ class Manager
      * Creates a new brick for the project
      *
      * @param Project $Project
-     * @param Brick   $Brick
+     * @param Brick $Brick
      *
      * @return integer - Brick-ID
      */
@@ -123,7 +123,7 @@ class Manager
     /**
      * Return the areas which are available in the project
      *
-     * @param Project     $Project
+     * @param Project $Project
      * @param string|bool $layoutType - optional, returns only the areas for the specific layout type (default = false)
      *
      * @return array
@@ -131,7 +131,7 @@ class Manager
     public function getAreasByProject(Project $Project, $layoutType = false)
     {
         $templates = array();
-        $bricks = array();
+        $bricks    = array();
 
         $projectName = $Project->getName();
 
@@ -158,7 +158,7 @@ class Manager
 
         // get bricks
         foreach ($templates as $template) {
-            $brickXML = realpath(OPT_DIR.$template.'/bricks.xml');
+            $brickXML = realpath(OPT_DIR . $template . '/bricks.xml');
 
             if (!$brickXML) {
                 continue;
@@ -180,7 +180,7 @@ class Manager
 
         $bricks = array_values($cleaned);
 
-        usort($bricks, function($a, $b) {
+        usort($bricks, function ($a, $b) {
 
             $transA = QUI::getLocale()->get(
                 $a['title']['group'],
@@ -221,7 +221,7 @@ class Manager
         }
 
         $xmlFiles = $this->_getBricksXMLFiles();
-        $result = array();
+        $result   = array();
 
         $result[] = array(
             'title'       => array('quiqqer/bricks', 'brick.content.title'),
@@ -287,7 +287,7 @@ class Manager
             return array();
         }
 
-        $cache = 'quiqqer/bricks/brickType/'.md5($brickType);
+        $cache = 'quiqqer/bricks/brickType/' . md5($brickType);
 
         try {
             return QUI\Cache\Manager::get($cache);
@@ -301,7 +301,7 @@ class Manager
         $xmlFiles = $this->_getBricksXMLFiles();
 
         foreach ($xmlFiles as $brickXML) {
-            $Dom = QUI\Utils\XML::getDomFromXml($brickXML);
+            $Dom  = QUI\Utils\XML::getDomFromXml($brickXML);
             $Path = new \DOMXPath($Dom);
 
             $Settings = $Path->query(
@@ -355,7 +355,7 @@ class Manager
      * Return the bricks from the area
      *
      * @param string $brickArea - Name of the area
-     * @param Site   $Site
+     * @param Site $Site
      *
      * @return array
      */
@@ -372,7 +372,7 @@ class Manager
             $bricks = $this->_getInheritedBricks($brickArea, $Site);
 
         } else {
-            $bricks = array();
+            $bricks    = array();
             $brickData = $brickAreas[$brickArea];
 
             foreach ($brickData as $brick) {
@@ -408,7 +408,7 @@ class Manager
 
             } catch (QUI\Exception $Exception) {
                 QUI\System\Log::addWarning(
-                    $Exception->getMessage().' Brick-ID:'.$brickId
+                    $Exception->getMessage() . ' Brick-ID:' . $brickId
                 );
             }
         }
@@ -444,15 +444,15 @@ class Manager
     }
 
     /**
-     * @param string|integer $brickId   - Brick-ID
-     * @param array          $brickData - Brick data
+     * @param string|integer $brickId - Brick-ID
+     * @param array $brickData - Brick data
      */
     public function saveBrick($brickId, array $brickData)
     {
         QUI\Rights\Permission::checkPermission('quiqqer.bricks.edit');
 
-        $Brick = $this->getBrickById($brickId);
-        $areas = array();
+        $Brick      = $this->getBrickById($brickId);
+        $areas      = array();
         $areaString = '';
 
         if (isset($brickData['id'])) {
@@ -490,7 +490,7 @@ class Manager
         }
 
         if (!empty($areas)) {
-            $areaString = ','.implode(',', $areas).',';
+            $areaString = ',' . implode(',', $areas) . ',';
         }
 
         $Brick->setAttributes($brickData);
@@ -518,8 +518,8 @@ class Manager
         $customfields = array();
 
         if (isset($brickData['customfields'])) {
-            $availableSettings = $Brick->getSettings();
-            $availableSettings['width'] = true;
+            $availableSettings           = $Brick->getSettings();
+            $availableSettings['width']  = true;
             $availableSettings['height'] = true;
 
             foreach ($brickData['customfields'] as $customfield) {
@@ -580,12 +580,12 @@ class Manager
 
         }
 
-        $PKM = QUI::getPackageManager();
+        $PKM      = QUI::getPackageManager();
         $packages = $PKM->getInstalled();
-        $result = array();
+        $result   = array();
 
         foreach ($packages as $package) {
-            $bricksXML = OPT_DIR.$package['name'].'/bricks.xml';
+            $bricksXML = OPT_DIR . $package['name'] . '/bricks.xml';
 
             if (!file_exists($bricksXML)) {
                 continue;
@@ -603,7 +603,7 @@ class Manager
      * Return the bricks from an area which are inherited from its parents
      *
      * @param String $brickArea - Name of the area
-     * @param Site   $Site      - Site object
+     * @param Site $Site - Site object
      *
      * @return array
      */
@@ -611,7 +611,7 @@ class Manager
     {
         // inheritance ( vererbung )
         $Project = $Site->getProject();
-        $areas = $this->getAreasByProject($Project);
+        $areas   = $this->getAreasByProject($Project);
 
 
         foreach ($areas as $area) {
@@ -639,7 +639,7 @@ class Manager
         }
 
 
-        $result = array();
+        $result    = array();
         $parentIds = $Site->getParentIdTree();
         $parentIds = array_reverse($parentIds);
 
@@ -649,6 +649,7 @@ class Manager
         );
 
         foreach ($parentIds as $parentId) {
+
             $bricks = QUI::getDataBase()->fetch(array(
                 'from'  => $projectCacheTable,
                 'where' => array(
@@ -671,12 +672,14 @@ class Manager
             $parentAreas = $Parent->getAttribute('quiqqer.bricks.areas');
             $parentAreas = json_decode($parentAreas, true);
 
+
             if (!isset($parentAreas[$brickArea])) {
                 continue;
             }
 
+
             $brickIds = array();
-            $area = $parentAreas[$brickArea];
+            $area     = $parentAreas[$brickArea];
 
             foreach ($bricks as $brick) {
                 $brickIds[$brick['brick']] = true;
