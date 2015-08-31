@@ -114,6 +114,19 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
                 self.fireEvent('change', [self, Sheet, Query]);
             });
+
+            // mobile select
+            var Select = this.$Elm.getElement('.quiqqer-sheets-mobile select');
+
+            Select.set('onchange', null);
+
+            Select.addEvent('change', function (event) {
+                event.stop();
+
+                var Query = QUIStringUtils.getUrlParams(this.value);
+
+                self.fireEvent('change', [self, this, Query]);
+            });
         },
 
         /**
