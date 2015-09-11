@@ -166,7 +166,15 @@ class Utils
         $bricks = self::getTemplateAreasFromXML($brickXML);
 
         foreach ($bricks as $brickData) {
-            QUI\Log::writeRecursive($brickData);
+            if ($brickData['name'] != $areaName) {
+                continue;
+            }
+
+            if (isset($brickData['inheritance']) && $brickData['inheritance']) {
+                return true;
+            }
+
+            return false;
         }
 
         return true;
