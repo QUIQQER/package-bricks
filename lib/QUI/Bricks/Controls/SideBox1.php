@@ -30,10 +30,11 @@ class SideBox1 extends QUI\Control
             'showContent'     => true,
             'class'           => 'quiqqer-bricks-sidebox1',
             'nodeName'        => 'article',
-            'site'            => false
+            'site'            => false,
+            'order'           => 'release_from DESC'
         ));
 
-        parent::setAttributes($attributes);
+        parent::__construct($attributes);
     }
 
     /**
@@ -50,7 +51,7 @@ class SideBox1 extends QUI\Control
             'Site' => $this->_getSite()
         ));
 
-        return $Engine->fetch(dirname(__FILE__).'/SideBox1.html');
+        return $Engine->fetch(dirname(__FILE__) . '/SideBox1.html');
     }
 
     /**
@@ -61,7 +62,7 @@ class SideBox1 extends QUI\Control
     protected function _getSite()
     {
         $Project = $this->_getProject();
-        $site = $this->getAttribute('site');
+        $site    = $this->getAttribute('site');
 
         if (is_numeric($site)) {
             try {
@@ -74,43 +75,38 @@ class SideBox1 extends QUI\Control
             }
         }
 
-        $sitetypes = explode(';', $site);
 
-        $ids = array();
-        $types = array();
-        $where = array();
+        // order
+        switch ($this->getAttribute('order')) {
+            case 'name ASC':
+            case 'name DESC':
+            case 'title ASC':
+            case 'title DESC':
+            case 'c_date ASC':
+            case 'c_date DESC':
+            case 'd_date ASC':
+            case 'd_date DESC':
+            case 'release_from ASC':
+            case 'release_from DESC':
+                $order = $this->getAttribute('order');
+                break;
 
-        foreach ($sitetypes as $sitetypeEntry) {
-            if (is_numeric($sitetypeEntry)) {
-                $ids[] = $sitetypeEntry;
-                continue;
-            }
-
-            $types[] = $sitetypeEntry;
+            default:
+                $order = 'release_from DESC';
+                break;
         }
 
-        if (!empty($ids)) {
-            $where['id'] = array(
-                'type'  => 'IN',
-                'value' => $ids
-            );
-        }
+        $children = QUI\Projects\Site\Utils::getSitesByInputList(
+            $this->_getProject(),
+            $this->getAttribute('site'),
+            array(
+                'limit' => 1,
+                'order' => $order
+            )
+        );
 
-        if (!empty($types)) {
-            $where['type'] = array(
-                'type'  => 'IN',
-                'value' => $types
-            );
-        }
-
-        $result = $Project->getSites(array(
-            'where_or' => $where,
-            'limit'    => 1,
-            'order'    => 'release_from ASC'
-        ));
-
-        if (isset($result[0])) {
-            return $result[0];
+        if (isset($children[0])) {
+            return $children[0];
         }
 
         return $Project->firstChild();

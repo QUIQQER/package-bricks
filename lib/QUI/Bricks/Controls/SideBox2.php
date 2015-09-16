@@ -32,11 +32,12 @@ class SideBox2 extends QUI\Control
             'nodeName'           => 'section',
             'site'               => false,
             'limit'              => 2,
+            'order'              => 'release_from DESC',
             'grid-class-row'     => 'row',
             'grid-class-article' => '6u'
         ));
 
-        parent::setAttributes($attributes);
+        parent::__construct($attributes);
     }
 
     /**
@@ -47,10 +48,30 @@ class SideBox2 extends QUI\Control
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
-        $limit = $this->getAttribute('limit');
+        $limit  = $this->getAttribute('limit');
 
         if (!$limit) {
             $limit = 2;
+        }
+
+        // order
+        switch ($this->getAttribute('order')) {
+            case 'name ASC':
+            case 'name DESC':
+            case 'title ASC':
+            case 'title DESC':
+            case 'c_date ASC':
+            case 'c_date DESC':
+            case 'd_date ASC':
+            case 'd_date DESC':
+            case 'release_from ASC':
+            case 'release_from DESC':
+                $order = $this->getAttribute('order');
+                break;
+
+            default:
+                $order = 'release_from DESC';
+                break;
         }
 
         $children = QUI\Projects\Site\Utils::getSitesByInputList(
@@ -58,7 +79,7 @@ class SideBox2 extends QUI\Control
             $this->getAttribute('site'),
             array(
                 'limit' => $limit,
-                'order' => 'release_from DESC'
+                'order' => $order
             )
         );
 
@@ -67,6 +88,6 @@ class SideBox2 extends QUI\Control
             'children' => $children
         ));
 
-        return $Engine->fetch(dirname(__FILE__).'/SideBox2.html');
+        return $Engine->fetch(dirname(__FILE__) . '/SideBox2.html');
     }
 }

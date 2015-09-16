@@ -32,11 +32,12 @@ class SideBox3 extends QUI\Bricks\Controls\SideBox2
             'nodeName'           => 'section',
             'site'               => false,
             'limit'              => 3,
+            'order'              => 'release_from DESC',
             'grid-class-row'     => 'row',
             'grid-class-article' => '4u'
         ));
 
-        parent::setAttributes($attributes);
+        parent::__construct($attributes);
     }
 
     /**
@@ -47,10 +48,30 @@ class SideBox3 extends QUI\Bricks\Controls\SideBox2
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
-        $limit = $this->getAttribute('limit');
+        $limit  = $this->getAttribute('limit');
 
         if (!$limit) {
             $limit = 2;
+        }
+
+        // order
+        switch ($this->getAttribute('order')) {
+            case 'name ASC':
+            case 'name DESC':
+            case 'title ASC':
+            case 'title DESC':
+            case 'c_date ASC':
+            case 'c_date DESC':
+            case 'd_date ASC':
+            case 'd_date DESC':
+            case 'release_from ASC':
+            case 'release_from DESC':
+                $order = $this->getAttribute('order');
+                break;
+
+            default:
+                $order = 'release_from DESC';
+                break;
         }
 
         $children = QUI\Projects\Site\Utils::getSitesByInputList(
@@ -58,7 +79,7 @@ class SideBox3 extends QUI\Bricks\Controls\SideBox2
             $this->getAttribute('site'),
             array(
                 'limit' => $limit,
-                'order' => 'release_from DESC'
+                'order' => $order
             )
         );
 
@@ -67,6 +88,6 @@ class SideBox3 extends QUI\Bricks\Controls\SideBox2
             'children' => $children
         ));
 
-        return $Engine->fetch(dirname(__FILE__).'/SideBox3.html');
+        return $Engine->fetch(dirname(__FILE__) . '/SideBox3.html');
     }
 }
