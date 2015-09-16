@@ -167,7 +167,31 @@ class Brick extends QUI\QDOM
     public function create()
     {
         if ($this->getAttribute('type') == 'content') {
-            return $this->getAttribute('content');
+
+            $classesStr = '';
+            $_classes   = array(
+                'brick-' . $this->_id
+            );
+
+            foreach ($this->_cssClasses as $cssClass) {
+                $_classes[] = $cssClass;
+            }
+
+            if ($this->getAttribute('classes')) {
+                $classes = explode(' ', $this->getAttribute('classes'));
+
+                foreach ($classes as $class) {
+                    $class = trim($class);
+                    $class = preg_replace('/[^a-zA-Z0-9\-]/', '', $class);
+
+                    $_classes[] = $class;
+                }
+            }
+
+            $_classes   = array_unique($_classes);
+            $classesStr = implode($_classes, ' ');
+
+            return "<div {$classesStr}>{$this->getAttribute('content')}</div>";
         }
 
         $Control = $this->_getControl();

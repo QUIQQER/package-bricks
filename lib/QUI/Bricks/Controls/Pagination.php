@@ -50,7 +50,7 @@ class Pagination extends QUI\Control
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/Pagination.css'
+            dirname(__FILE__) . '/Pagination.css'
         );
 
 
@@ -73,15 +73,16 @@ class Pagination extends QUI\Control
      */
     public function getBody()
     {
-        $Engine = QUI::getTemplateManager()->getEngine();
-        $Site = $this->getAttribute('Site');
+        $Engine  = QUI::getTemplateManager()->getEngine();
+        $Site    = $this->getAttribute('Site');
         $Project = $Site->getProject();
 
         $count = $this->getAttribute('sheets');
 
         if ($count === false) {
             if ($this->getAttribute('limit') &&
-                $this->getAttribute('count')) {
+                $this->getAttribute('count')
+            ) {
                 $count = ceil(
                     (int)$this->getAttribute('count') /
                     (int)$this->getAttribute('limit')
@@ -92,7 +93,7 @@ class Pagination extends QUI\Control
         }
 
         $showmax = $this->getAttribute('showmax');
-        $limits = $this->getAttribute('limits');
+        $limits  = $this->getAttribute('limits');
 
         if ($this->getAttribute('useAjax')) {
             $this->setAttribute(
@@ -129,7 +130,7 @@ class Pagination extends QUI\Control
         $gap = floor($showmax / 2);
 
         $start = $active - $gap;
-        $end = $active + $gap;
+        $end   = $active + $gap;
 
         if ($start <= 0) {
             $start = 1;
@@ -150,7 +151,8 @@ class Pagination extends QUI\Control
 
 
         if ((!$count || $count == 1)
-            && $this->getAttribute('limit') === false) {
+            && $this->getAttribute('limit') === false
+        ) {
             return '';
         }
 
@@ -169,7 +171,7 @@ class Pagination extends QUI\Control
             'Project'    => $Project
         ));
 
-        return $Engine->fetch(dirname(__FILE__).'/Pagination.html');
+        return $Engine->fetch(dirname(__FILE__) . '/Pagination.html');
     }
 
     /**
@@ -213,7 +215,7 @@ class Pagination extends QUI\Control
         $limit = false;
 
         if ($this->getAttribute('limit')) {
-            $limit = $this->getStart().','.$this->getAttribute('limit');
+            $limit = $this->getStart() . ',' . $this->getAttribute('limit');
         }
 
         return array(
@@ -243,7 +245,7 @@ class Pagination extends QUI\Control
      */
     public function setGetParams($name, $value)
     {
-        $name = QUI\Utils\Security\Orthos::clear($name);
+        $name  = QUI\Utils\Security\Orthos::clear($name);
         $value = QUI\Utils\Security\Orthos::clear($value);
 
         if (empty($value)) {
@@ -266,7 +268,7 @@ class Pagination extends QUI\Control
      */
     public function setUrlParams($name, $value)
     {
-        $name = QUI\Utils\Security\Orthos::clear($name);
+        $name  = QUI\Utils\Security\Orthos::clear($name);
         $value = QUI\Utils\Security\Orthos::clear($value);
 
         if (empty($value)) {
