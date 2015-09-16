@@ -196,6 +196,12 @@
             <de><![CDATA[Letzte Seite]]></de>
             <en><![CDATA[Last page]]></en>
         </locale>
+
+        <locale name="brick.control.setting.order">
+            <de><![CDATA[Sortierung]]></de>
+            <en><![CDATA[Sort]]></en>
+        </locale>
+
     </groups>
     <groups name="quiqqer/bricks" datatype="php">
         <locale name="site.panel.bricks.category.title">

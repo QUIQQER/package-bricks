@@ -4,196 +4,332 @@
         <!-- available standard bricks -->
         <brick control="\QUI\Controls\Breadcrumb">
             <title>
-                <locale group="quiqqer/bricks" var="brick.control.breadcrumb.title" />
+                <locale group="quiqqer/bricks" var="brick.control.breadcrumb.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="brick.control.breadcrumb.description" />
+                <locale group="quiqqer/bricks" var="brick.control.breadcrumb.description"/>
             </description>
         </brick>
 
         <brick control="\QUI\Controls\Contact">
             <title>
-                <locale group="quiqqer/bricks" var="brick.control.contact.title" />
+                <locale group="quiqqer/bricks" var="brick.control.contact.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="brick.control.contact.description" />
+                <locale group="quiqqer/bricks" var="brick.control.contact.description"/>
             </description>
         </brick>
 
         <brick control="\QUI\Controls\LangSwitch">
             <title>
-                <locale group="quiqqer/bricks" var="brick.control.langSwitch.title" />
+                <locale group="quiqqer/bricks" var="brick.control.langSwitch.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="brick.control.langSwitch.description" />
+                <locale group="quiqqer/bricks" var="brick.control.langSwitch.description"/>
             </description>
 
             <settings>
                 <setting name="showFlags" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.showFlags" />
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.showFlags"/>
                 </setting>
                 <setting name="showText" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.showText" />
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.showText"/>
                 </setting>
                 <setting name="DropDown" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.DropDown" />
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.DropDown"/>
                 </setting>
             </settings>
         </brick>
 
         <brick control="\QUI\Controls\Navigation">
             <title>
-                <locale group="quiqqer/bricks" var="brick.control.navigation.title" />
+                <locale group="quiqqer/bricks" var="brick.control.navigation.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="brick.control.navigation.description" />
+                <locale group="quiqqer/bricks" var="brick.control.navigation.description"/>
             </description>
 
             <settings>
                 <setting name="startId" class="project-site">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.startId" />
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.startId"/>
                 </setting>
                 <setting name="homelink" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.homelink" />
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.homelink"/>
                 </setting>
                 <setting name="levels" type="number">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.levels" />
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.levels"/>
                 </setting>
             </settings>
         </brick>
 
         <brick control="\QUI\Bricks\Controls\SocialBox">
             <title>
-                <locale group="quiqqer/bricks" var="bricks.SocialBox.title" />
+                <locale group="quiqqer/bricks" var="bricks.SocialBox.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="bricks.SocialBox.description" />
+                <locale group="quiqqer/bricks" var="bricks.SocialBox.description"/>
             </description>
 
             <settings>
                 <setting name="title">
-                    <locale group="quiqqer/bricks" var="SocialBox.title" />
+                    <locale group="quiqqer/bricks" var="SocialBox.title"/>
                 </setting>
 
                 <setting name="socialList" data-qui="package/quiqqer/bricks/bin/Controls/SocialBox">
-                    <locale group="quiqqer/bricks" var="SocialBox.socialList" />
+                    <locale group="quiqqer/bricks" var="SocialBox.socialList"/>
                 </setting>
             </settings>
         </brick>
 
         <brick control="\QUI\Bricks\Controls\Banner">
             <title>
-                <locale group="quiqqer/bricks" var="brick.control.banner.title" />
+                <locale group="quiqqer/bricks" var="brick.control.banner.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="brick.control.banner.description" />
+                <locale group="quiqqer/bricks" var="brick.control.banner.description"/>
             </description>
 
             <settings>
                 <setting name="title">
-                    <locale group="quiqqer/bricks" var="brick.control.banner.setting.title" />
+                    <locale group="quiqqer/bricks" var="brick.control.banner.setting.title"/>
                 </setting>
                 <setting name="text">
-                    <locale group="quiqqer/bricks" var="brick.control.banner.setting.text" />
+                    <locale group="quiqqer/bricks" var="brick.control.banner.setting.text"/>
                 </setting>
             </settings>
         </brick>
 
         <brick control="\QUI\Bricks\Controls\SideBox1">
             <title>
-                <locale group="quiqqer/bricks" var="brick.control.sidebox1.title" />
+                <locale group="quiqqer/bricks" var="brick.control.sidebox1.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="brick.control.sidebox1.description" />
+                <locale group="quiqqer/bricks" var="brick.control.sidebox1.description"/>
             </description>
 
             <settings>
                 <setting name="site" data-qui="controls/projects/project/site/Select">
-                    <locale group="quiqqer/bricks" var="brick.control.sidebox1.setting.site" />
+                    <locale group="quiqqer/bricks" var="brick.control.sidebox1.setting.site"/>
+                </setting>
+                <setting name="order" type="select">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
+
+                    <option value="name ASC">
+                        <locale group="quiqqer/system" var="name_asc"/>
+                    </option>
+                    <option value="name DESC">
+                        <locale group="quiqqer/system" var="name_desc"/>
+                    </option>
+                    <option value="title ASC">
+                        <locale group="quiqqer/system" var="title_asc"/>
+                    </option>
+                    <option value="title DESC">
+                        <locale group="quiqqer/system" var="title_desc"/>
+                    </option>
+                    <option value="c_date ASC">
+                        <locale group="quiqqer/system" var="c_date_asc"/>
+                    </option>
+                    <option value="c_date DESC">
+                        <locale group="quiqqer/system" var="c_date_desc"/>
+                    </option>
+                    <option value="e_date ASC">
+                        <locale group="quiqqer/system" var="e_date_asc"/>
+                    </option>
+                    <option value="e_date DESC">
+                        <locale group="quiqqer/system" var="e_date_desc"/>
+                    </option>
+                    <option value="release_from ASC">
+                        <locale group="quiqqer/system" var="release_from_asc"/>
+                    </option>
+                    <option value="release_from DESC">
+                        <locale group="quiqqer/system" var="release_from_desc"/>
+                    </option>
                 </setting>
                 <setting name="showImage" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showImage" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showImage"/>
                 </setting>
                 <setting name="showTitle" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showTitle" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showTitle"/>
                 </setting>
                 <setting name="showShort" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showShort" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showShort"/>
                 </setting>
                 <setting name="showContent" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showContent" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showContent"/>
                 </setting>
             </settings>
         </brick>
 
         <brick control="\QUI\Bricks\Controls\SideBox2">
             <title>
-                <locale group="quiqqer/bricks" var="brick.control.sidebox2.title" />
+                <locale group="quiqqer/bricks" var="brick.control.sidebox2.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="brick.control.sidebox2.description" />
+                <locale group="quiqqer/bricks" var="brick.control.sidebox2.description"/>
             </description>
 
             <settings>
                 <setting name="site" data-qui="controls/projects/project/site/Select">
-                    <locale group="quiqqer/bricks" var="brick.control.sidebox2.setting.site" />
+                    <locale group="quiqqer/bricks" var="brick.control.sidebox2.setting.site"/>
+                </setting>
+                <setting name="order" type="select">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
+
+                    <option value="name ASC">
+                        <locale group="quiqqer/system" var="name_asc"/>
+                    </option>
+                    <option value="name DESC">
+                        <locale group="quiqqer/system" var="name_desc"/>
+                    </option>
+                    <option value="title ASC">
+                        <locale group="quiqqer/system" var="title_asc"/>
+                    </option>
+                    <option value="title DESC">
+                        <locale group="quiqqer/system" var="title_desc"/>
+                    </option>
+                    <option value="c_date ASC">
+                        <locale group="quiqqer/system" var="c_date_asc"/>
+                    </option>
+                    <option value="c_date DESC">
+                        <locale group="quiqqer/system" var="c_date_desc"/>
+                    </option>
+                    <option value="e_date ASC">
+                        <locale group="quiqqer/system" var="e_date_asc"/>
+                    </option>
+                    <option value="e_date DESC">
+                        <locale group="quiqqer/system" var="e_date_desc"/>
+                    </option>
+                    <option value="release_from ASC">
+                        <locale group="quiqqer/system" var="release_from_asc"/>
+                    </option>
+                    <option value="release_from DESC">
+                        <locale group="quiqqer/system" var="release_from_desc"/>
+                    </option>
                 </setting>
                 <setting name="showImage" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showImage" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showImage"/>
                 </setting>
                 <setting name="showTitle" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showTitle" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showTitle"/>
                 </setting>
                 <setting name="showShort" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showShort" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showShort"/>
                 </setting>
             </settings>
         </brick>
 
         <brick control="\QUI\Bricks\Controls\SideBox3">
             <title>
-                <locale group="quiqqer/bricks" var="brick.control.sidebox3.title" />
+                <locale group="quiqqer/bricks" var="brick.control.sidebox3.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="brick.control.sidebox3.description" />
+                <locale group="quiqqer/bricks" var="brick.control.sidebox3.description"/>
             </description>
 
             <settings>
                 <setting name="site" data-qui="controls/projects/project/site/Select">
-                    <locale group="quiqqer/bricks" var="brick.control.sidebox3.setting.site" />
+                    <locale group="quiqqer/bricks" var="brick.control.sidebox3.setting.site"/>
+                </setting>
+                <setting name="order" type="select">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
+
+                    <option value="name ASC">
+                        <locale group="quiqqer/system" var="name_asc"/>
+                    </option>
+                    <option value="name DESC">
+                        <locale group="quiqqer/system" var="name_desc"/>
+                    </option>
+                    <option value="title ASC">
+                        <locale group="quiqqer/system" var="title_asc"/>
+                    </option>
+                    <option value="title DESC">
+                        <locale group="quiqqer/system" var="title_desc"/>
+                    </option>
+                    <option value="c_date ASC">
+                        <locale group="quiqqer/system" var="c_date_asc"/>
+                    </option>
+                    <option value="c_date DESC">
+                        <locale group="quiqqer/system" var="c_date_desc"/>
+                    </option>
+                    <option value="e_date ASC">
+                        <locale group="quiqqer/system" var="e_date_asc"/>
+                    </option>
+                    <option value="e_date DESC">
+                        <locale group="quiqqer/system" var="e_date_desc"/>
+                    </option>
+                    <option value="release_from ASC">
+                        <locale group="quiqqer/system" var="release_from_asc"/>
+                    </option>
+                    <option value="release_from DESC">
+                        <locale group="quiqqer/system" var="release_from_desc"/>
+                    </option>
                 </setting>
                 <setting name="showImage" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showImage" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showImage"/>
                 </setting>
                 <setting name="showTitle" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showTitle" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showTitle"/>
                 </setting>
                 <setting name="showShort" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showShort" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showShort"/>
                 </setting>
             </settings>
         </brick>
 
         <brick control="\QUI\Bricks\Controls\SideBox3TitleTop">
             <title>
-                <locale group="quiqqer/bricks" var="brick.control.sidebox3TitleTop.title" />
+                <locale group="quiqqer/bricks" var="brick.control.sidebox3TitleTop.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="brick.control.sidebox3TitleTop.description" />
+                <locale group="quiqqer/bricks" var="brick.control.sidebox3TitleTop.description"/>
             </description>
 
             <settings>
                 <setting name="site" data-qui="controls/projects/project/site/Select">
-                    <locale group="quiqqer/bricks" var="brick.control.sidebox3.setting.site" />
+                    <locale group="quiqqer/bricks" var="brick.control.sidebox3.setting.site"/>
+                </setting>
+                <setting name="order" type="select">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
+
+                    <option value="name ASC">
+                        <locale group="quiqqer/system" var="name_asc"/>
+                    </option>
+                    <option value="name DESC">
+                        <locale group="quiqqer/system" var="name_desc"/>
+                    </option>
+                    <option value="title ASC">
+                        <locale group="quiqqer/system" var="title_asc"/>
+                    </option>
+                    <option value="title DESC">
+                        <locale group="quiqqer/system" var="title_desc"/>
+                    </option>
+                    <option value="c_date ASC">
+                        <locale group="quiqqer/system" var="c_date_asc"/>
+                    </option>
+                    <option value="c_date DESC">
+                        <locale group="quiqqer/system" var="c_date_desc"/>
+                    </option>
+                    <option value="e_date ASC">
+                        <locale group="quiqqer/system" var="e_date_asc"/>
+                    </option>
+                    <option value="e_date DESC">
+                        <locale group="quiqqer/system" var="e_date_desc"/>
+                    </option>
+                    <option value="release_from ASC">
+                        <locale group="quiqqer/system" var="release_from_asc"/>
+                    </option>
+                    <option value="release_from DESC">
+                        <locale group="quiqqer/system" var="release_from_desc"/>
+                    </option>
                 </setting>
                 <setting name="showImage" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showImage" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showImage"/>
                 </setting>
                 <setting name="showTitle" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showTitle" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showTitle"/>
                 </setting>
                 <setting name="showShort" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.setting.showShort" />
+                    <locale group="quiqqer/bricks" var="brick.control.setting.showShort"/>
                 </setting>
             </settings>
         </brick>
