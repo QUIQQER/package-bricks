@@ -190,7 +190,8 @@ class Brick extends QUI\QDOM
 
             $_classes   = array_unique($_classes);
             $classesStr = implode($_classes, ' ');
-
+            $classesStr = 'class="'. $classesStr .'"';
+            
             return "<div {$classesStr}>{$this->getAttribute('content')}</div>";
         }
 
