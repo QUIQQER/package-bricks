@@ -130,7 +130,11 @@ class Pagination extends QUI\Control
         $gap = floor($showmax / 2);
 
         $start = $active - $gap;
-        $end   = $active + $gap - 1; // -1, weil aktuelle seite nicht mit berechnet werden soll
+        $end   = $active + $gap; // -1, weil aktuelle seite nicht mit berechnet werden soll
+
+        if ($showmax % 2 === 0) {
+            $end--;
+        }
 
         if ($start <= 0) {
             $start = 1;
@@ -139,7 +143,7 @@ class Pagination extends QUI\Control
 
         if ($end >= $count) {
             $end   = $count;
-            $start = $end - $showmax;
+            $start = $end - $showmax + 1;
 
             if ($start <= 0) {
                 $start = 1;
