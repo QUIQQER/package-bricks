@@ -13,7 +13,7 @@ use QUI;
  *
  * @package quiqqer/bricks
  */
-class SideBox3 extends QUI\Bricks\Controls\SideBox2
+class SideBox3 extends QUI\Control
 {
     /**
      * constructor
@@ -51,7 +51,7 @@ class SideBox3 extends QUI\Bricks\Controls\SideBox2
         $limit  = $this->getAttribute('limit');
 
         if (!$limit) {
-            $limit = 2;
+            $limit = 3;
         }
 
         // order

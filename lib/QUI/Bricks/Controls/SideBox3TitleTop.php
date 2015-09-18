@@ -26,7 +26,27 @@ class SideBox3TitleTop extends QUI\Bricks\Controls\SideBox3
         $limit = $this->getAttribute('limit');
 
         if (!$limit) {
-            $limit = 2;
+            $limit = 3;
+        }
+
+        // order
+        switch ($this->getAttribute('order')) {
+            case 'name ASC':
+            case 'name DESC':
+            case 'title ASC':
+            case 'title DESC':
+            case 'c_date ASC':
+            case 'c_date DESC':
+            case 'd_date ASC':
+            case 'd_date DESC':
+            case 'release_from ASC':
+            case 'release_from DESC':
+                $order = $this->getAttribute('order');
+                break;
+
+            default:
+                $order = 'release_from DESC';
+                break;
         }
 
         $children = QUI\Projects\Site\Utils::getSitesByInputList(
@@ -34,9 +54,10 @@ class SideBox3TitleTop extends QUI\Bricks\Controls\SideBox3
             $this->getAttribute('site'),
             array(
                 'limit' => $limit,
-                'order' => 'release_from DESC'
+                'order' => $order
             )
         );
+
 
         $Engine->assign(array(
             'this'     => $this,
