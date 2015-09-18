@@ -51,7 +51,7 @@ class SideBox3 extends QUI\Control
         $limit  = $this->getAttribute('limit');
 
         if (!$limit) {
-            $limit = 2;
+            $limit = 3;
         }
 
         // order
