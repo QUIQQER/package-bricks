@@ -1,12 +1,11 @@
 
-{if $this->getAttribute('header-title') && $this->getAttribute('header-short')}
-<header>
-    <h2>{$this->getAttribute('header-title')}</h2>
-    <p>{$this->getAttribute('header-short')}</p>
-</header>
-{/if}
-
 <div class="{$this->getAttribute('grid-class-row')}">
+
+    {if $this->getAttribute('content')}
+    <div class="quiqqer-bricks-sidebox3-content">
+        {$this->getAttribute('content')}
+    </div>
+    {/if}
 
     {foreach from=$children item=Site key=key}
     <article class="{$this->getAttribute('grid-class-article')}">
