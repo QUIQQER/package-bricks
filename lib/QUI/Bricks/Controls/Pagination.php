@@ -132,12 +132,22 @@ class Pagination extends QUI\Control
         $start = $active - $gap;
         $end   = $active + $gap;
 
+        if ($showmax % 2 === 0) {
+            $end--; // -1, weil aktuelle seite nicht mit berechnet werden soll
+        }
+
         if ($start <= 0) {
             $start = 1;
+            $end   = $showmax;
         }
 
         if ($end >= $count) {
-            $end = $count;
+            $end   = $count;
+            $start = $end - $showmax + 1;
+
+            if ($start <= 0) {
+                $start = 1;
+            }
         }
 
         // get params
@@ -198,6 +208,8 @@ class Pagination extends QUI\Control
         $this->setAttribute('limit', $limit);
         $this->setAttribute('order', $order);
         $this->setAttribute('sheet', $sheet);
+
+        $this->_urlParams = QUI::getRewrite()->getUrlParamsList();
     }
 
     /**
