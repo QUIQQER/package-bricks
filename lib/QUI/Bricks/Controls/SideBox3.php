@@ -13,7 +13,7 @@ use QUI;
  *
  * @package quiqqer/bricks
  */
-class SideBox3 extends QUI\Bricks\Controls\SideBox2
+class SideBox3 extends QUI\Control
 {
     /**
      * constructor
@@ -38,10 +38,6 @@ class SideBox3 extends QUI\Bricks\Controls\SideBox2
         ));
 
         parent::__construct($attributes);
-
-        $this->setAttribute('class', 'quiqqer-bricks-sidebox3');
-        $this->setAttribute('grid-class-row', 'row');
-        $this->setAttribute('grid-class-article', '4u');
     }
 
     /**
