@@ -7,48 +7,51 @@
     </div>
     {/if}
 
-    {foreach from=$children item=Site key=key}
-    <article class="{$this->getAttribute('grid-class-article')}">
-        {if $this->getAttribute( 'showImage' )}
-        <a href="{url site=$Site}" class="image">
-            {image src=$Site->getAttribute('image_site') width=640}
-        </a>
-        {/if}
+    <div class="row" style="display: flex;">
 
-        {if $this->getAttribute( 'showTitle' ) || $this->getAttribute( 'showShort' )}
-        <header>
-            {if $this->getAttribute( 'showTitle' )}
-            <h3>
-                <a href="{url site=$Site}">
-                    {$Site->getAttribute('title')}
-                </a>
-            </h3>
-            {/if}
-        </header>
-        {/if}
-
-        {if $this->getAttribute( 'showShort' )}
-        <p>
-            {text_passage text=$Site->getAttribute('short') start=0 end=120 striphtml=true append="..."}
-        </p>
-        {/if}
-
-        {if $this->getAttribute( 'showContent' )}
-            {$Site->getAttribute('content')}
-        {/if}
-
-        <footer>
-            <a href="{url site=$Site}" class="button">
-                {locale group="quiqqer/bricks" var="continue.reading"}
+        {foreach from=$children item=Child key=key}
+        <article class="{$this->getAttribute('grid-class-article')} quiqqer-bricks-sidebox-article">
+            {if $this->getAttribute( 'showImage' )}
+            <a href="{url site=$Child}" class="image">
+                {image src=$Child->getAttribute('image_site') width=640}
             </a>
-        </footer>
-    </article>
+            {/if}
 
-    {assign var=modKey value=$key+1}
-    {if $modKey && $modKey % 3 === 0}
-        </div>
-        <div class="{$this->getAttribute('grid-class-row')}">
-    {/if}
+            {if $this->getAttribute( 'showTitle' ) || $this->getAttribute( 'showShort' )}
+            <header>
+                {if $this->getAttribute( 'showTitle' )}
+                <h3>
+                    <a href="{url site=$Child}">
+                        {$Child->getAttribute('title')}
+                    </a>
+                </h3>
+                {/if}
+            </header>
+            {/if}
 
-    {/foreach}
+            {if $this->getAttribute( 'showShort' )}
+            <p>
+                {text_passage text=$Child->getAttribute('short') start=0 end=120 striphtml=true append="..."}
+            </p>
+            {/if}
+
+            {if $this->getAttribute( 'showContent' )}
+                {$Child->getAttribute('content')}
+            {/if}
+
+            <footer class="article-button">
+                <a href="{url site=$Child}" class="button">
+                    {locale group="quiqqer/bricks" var="continue.reading"}
+                </a>
+            </footer>
+        </article>
+
+        {assign var=modKey value=$key+1}
+        {if $modKey && $modKey % 3 === 0 && $Child@last}
+            </div>
+            <div class="{$this->getAttribute('grid-class-row')}">
+        {/if}
+
+        {/foreach}
+    </div>
 </div>
