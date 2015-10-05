@@ -44,7 +44,8 @@ class Pagination extends QUI\Control
             'order'     => false,
             'sheet'     => 1,
             'useAjax'   => false,
-            'showmax'   => 10
+            'showmax'   => 10,
+            'anchor'    => false
         ));
 
         parent::__construct($attributes);
