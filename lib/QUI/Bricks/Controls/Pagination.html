@@ -65,8 +65,18 @@
 
     {section name=sheets start=$start loop=$end+1}
         {assign var=num value=$smarty.section.sheets.index}
-        {if $num == $active && $this->getAttribute('useAjax') === false}
+        {if $num == $active}
+            {if $this->getAttribute('useAjax') === false}
             <span class="quiqqer-sheets-desktop-current">{$num}</span>
+            {else}
+            {$getParams['limit'] = $limit}
+            <a href="{$Site->getUrl($pathParams, $getParams)}{$anchor}"
+               class="quiqqer-sheets-sheet quiqqer-sheets-desktop-current"
+               data-page="{$num}"
+                    >
+                {$num}
+            </a>
+            {/if}
         {else}
             {$getParams['limit'] = $limit}
             {if $num == 1}

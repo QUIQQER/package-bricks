@@ -26,7 +26,8 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
         Binds: [
             '$onImport',
             '$onMouseOver',
-            '$linkclick'
+            '$linkclick',
+            '$redraw'
         ],
 
         initialize: function (options) {
@@ -34,31 +35,108 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
             this.$Current = null;
 
-            this.$Prev   = null;
-            this.$Next   = null;
-            this.$First  = null;
-            this.$Last   = null;
-            this.$sheets = [];
+            this.$Prev    = null;
+            this.$Next    = null;
+            this.$First   = null;
+            this.$Last    = null;
+            this.$sheets  = [];
+            this.$showMax = 10;
+
+            this.$MorePrev = null;
+            this.$MoreNext = null;
+
+            this.$lastSheetNumber = 0;
 
             this.addEvents({
                 onImport: this.$onImport
             });
+
+            QUI.addEvent('resize', this.$redraw);
         },
 
         /**
          * event : on import
          */
         $onImport: function () {
-            this.$First = this.$Elm.getElement('.quiqqer-sheets-first');
-            this.$Prev  = this.$Elm.getElement('.quiqqer-sheets-prev');
-            this.$Last  = this.$Elm.getElement('.quiqqer-sheets-last');
-            this.$Next  = this.$Elm.getElement('.quiqqer-sheets-next');
+            var i;
 
-            this.$Current = this.$Elm.getElement('.quiqqer-sheets-desktop-current');
-            this.$sheets  = this.$Elm.getElements('.quiqqer-sheets-sheet');
+            this.$Container = this.$Elm.getElement('.quiqqer-sheets-desktop');
+            this.$First     = this.$Elm.getElement('.quiqqer-sheets-first');
+            this.$Prev      = this.$Elm.getElement('.quiqqer-sheets-prev');
+            this.$Last      = this.$Elm.getElement('.quiqqer-sheets-last');
+            this.$Next      = this.$Elm.getElement('.quiqqer-sheets-next');
 
+            this.$Current = this.$Elm.getElement(
+                '.quiqqer-sheets-desktop-current'
+            );
+
+            this.$sheets = this.$Elm.getElements('.quiqqer-sheets-sheet');
+
+            var params = QUIStringUtils.getUrlParams(this.$Last.get('href'));
+
+            if (this.$sheets[0]) {
+                var Start    = this.$sheets[0],
+                    dataPage = Start.get('data-page').toInt();
+
+                for (i = 1; i < dataPage; i++) {
+                    new Element('a', {
+                        html       : i,
+                        href       : '?sheet=' + i + '&limit=' + params.limit,
+                        'class'    : 'quiqqer-sheets-sheet',
+                        'data-page': i,
+                        styles     : {
+                            display: 'none'
+                        }
+                    }).inject(Start, 'before');
+                }
+            }
+
+            if ("sheet" in params) {
+                this.$lastSheetNumber = params.sheet;
+            }
+
+            this.$MorePrev = this.$Prev.getNext();
+            this.$MoreNext = this.$Next.getPrevious();
+
+            if (!this.$MorePrev.hasClass('more')) {
+                this.$MorePrev = new Element('span', {
+                    html   : '...',
+                    'class': 'more',
+                    styles : {
+                        display: 'none'
+                    }
+                }).inject(this.$Prev, 'after');
+            }
+
+            if (!this.$MoreNext.hasClass('more')) {
+                this.$MoreNext = new Element('span', {
+                    html   : '...',
+                    'class': 'more',
+                    styles : {
+                        display: 'none'
+                    }
+                }).inject(this.$Next, 'before');
+            }
+
+            var LastSheet = this.$sheets[this.$sheets.length-1],
+                last      = LastSheet.get('data-page').toInt();
+
+            for (i = last; i < this.$lastSheetNumber; i++) {
+                new Element('a', {
+                    html       : i,
+                    href       : '?sheet=' + i + '&limit=' + params.limit,
+                    'class'    : 'quiqqer-sheets-sheet',
+                    'data-page': i,
+                    styles     : {
+                        display: 'none'
+                    }
+                }).inject(this.$MoreNext, 'before');
+            }
+
+            this.$sheets = this.$Elm.getElements('.quiqqer-sheets-sheet');
+
+            this.$redraw();
             this.$registerEvents();
-            this.first();
         },
 
         /**
@@ -165,6 +243,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
          * @fire change [this, Sheet, query]
          */
         openPage: function (no) {
+
             if (typeof this.$sheets[no] === 'undefined') {
                 return;
             }
@@ -188,6 +267,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
          * @param {Number} no - page number
          */
         setPage: function (no) {
+
             if (typeof this.$sheets[no] === 'undefined') {
                 return;
             }
@@ -210,17 +290,8 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             this.$Last.removeClass('quiqqer-sheets-desktop-disabled');
             this.$Next.removeClass('quiqqer-sheets-desktop-disabled');
 
-
-            if (no === 0) {
-                // disable first and prev
-                this.$First.addClass('quiqqer-sheets-desktop-disabled');
-                this.$Prev.addClass('quiqqer-sheets-desktop-disabled');
-
-            } else if (no >= this.$sheets.length - 1) {
-                // disable last and next
-                this.$Last.addClass('quiqqer-sheets-desktop-disabled');
-                this.$Next.addClass('quiqqer-sheets-desktop-disabled');
-            }
+            // repaint if next sheet is in the hidden last
+            this.$redraw();
         },
 
         /**
@@ -270,6 +341,91 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
          */
         last: function () {
             this.openPage(this.$sheets.length - 1);
+        },
+
+        /**
+         * new draw aff the pagination
+         */
+        $redraw: function () {
+            var elmSize   = this.$Container.getSize(),
+                sheetSize = this.$First.getSize();
+
+            if (!this.$sheets.length) {
+                return;
+            }
+
+            var len     = this.$sheets.length,
+                current = this.$Current.get('data-page').toInt();
+
+            // we must calc the max sheets
+            if (elmSize.y != sheetSize.y) {
+                // calc with last sheets, its the longest
+                var LastSheet     = this.$sheets[len - 1],
+                    lastSheetSize = LastSheet.getComputedSize();
+
+                this.$showMax = (elmSize.x / lastSheetSize.totalWidth).floor();
+                this.$showMax = this.$showMax - 2;
+            }
+
+            var leftRight = (this.$showMax / 2).floor(),
+                start     = current - leftRight,
+                end       = current + leftRight - 1;
+
+            if (start <= 0) {
+                start = 0;
+                end   = this.$showMax;
+            }
+
+            if (end >= len) {
+                end = len;
+            }
+
+            if (end >= len && (len - this.$showMax) > 0) {
+                start = len - this.$showMax;
+            }
+
+
+            for (var i = 0; i < len; i++) {
+
+                if (start > i) {
+                    this.$sheets[i].setStyle('display', 'none');
+                    continue;
+                }
+
+                if (end <= i) {
+                    this.$sheets[i].setStyle('display', 'none');
+                    continue;
+                }
+
+                this.$sheets[i].setStyle('display', null);
+            }
+
+            if (this.$sheets[0].getStyle('display') == 'none') {
+                this.$MorePrev.setStyle('display', null);
+            } else {
+                this.$MorePrev.setStyle('display', 'none');
+            }
+
+            if (end >= len) {
+                this.$MoreNext.setStyle('display', 'none');
+            } else {
+                this.$MoreNext.setStyle('display', null);
+            }
+
+            //
+            //return;
+            //
+            //if (no === 0) {
+            //    // disable first and prev
+            //    this.$First.addClass('quiqqer-sheets-desktop-disabled');
+            //    this.$Prev.addClass('quiqqer-sheets-desktop-disabled');
+            //
+            //} else if (no >= this.$sheets.length - 1) {
+            //    // disable last and next
+            //    this.$Last.addClass('quiqqer-sheets-desktop-disabled');
+            //    this.$Next.addClass('quiqqer-sheets-desktop-disabled');
+            //}
+            //this.$showMax;
         }
     });
 });
