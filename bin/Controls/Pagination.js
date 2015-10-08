@@ -355,7 +355,11 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             }
 
             var len     = this.$sheets.length,
-                current = this.$Current.get('data-page').toInt();
+                current = 0;
+
+            if (this.$Current) {
+                this.$Current.get('data-page').toInt();
+            }
 
             // we must calc the max sheets
             if (elmSize.y != sheetSize.y) {
