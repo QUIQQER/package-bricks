@@ -121,7 +121,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             var LastSheet = this.$sheets[this.$sheets.length-1],
                 last      = LastSheet.get('data-page').toInt();
 
-            for (i = last; i < this.$lastSheetNumber; i++) {
+            for (i = last+1; i < this.$lastSheetNumber; i++) {
                 new Element('a', {
                     html       : i,
                     href       : '?sheet=' + i + '&limit=' + params.limit,
@@ -358,7 +358,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 current = 0;
 
             if (this.$Current) {
-                this.$Current.get('data-page').toInt();
+                current = this.$Current.get('data-page').toInt();
             }
 
             // we must calc the max sheets
@@ -372,11 +372,11 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             }
 
             var leftRight = (this.$showMax / 2).floor(),
-                start     = current - leftRight,
-                end       = current + leftRight - 1;
+                start     = current - leftRight - 1,
+                end       = current + leftRight;
 
             if (start <= 0) {
-                start = 0;
+                start = -1;
                 end   = this.$showMax;
             }
 
@@ -387,7 +387,6 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             if (end >= len && (len - this.$showMax) > 0) {
                 start = len - this.$showMax;
             }
-
 
             for (var i = 0; i < len; i++) {
 

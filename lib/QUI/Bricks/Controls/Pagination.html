@@ -19,7 +19,7 @@
     </select>
 </div>
 
-<div class="quiqqer-sheets-desktop hide-on-mobile{if $this->getAttribute('showLimit')} quiqqer-sheets-desktop__100{/if}">
+<div class="quiqqer-sheets-desktop hide-on-mobile{if !$this->getAttribute('showLimit')} quiqqer-sheets-desktop__100{/if}">
     {if (!isset($smarty.request.sheet) || $active == 1)
         && $this->getAttribute('useAjax') === false
     }
