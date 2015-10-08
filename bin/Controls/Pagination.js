@@ -51,7 +51,9 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 onImport: this.$onImport
             });
 
-            QUI.addEvent('resize', this.$redraw);
+            QUI.addEvent('resize', function() {
+                this.$redraw(true);
+            }.bind(this));
         },
 
         /**
@@ -135,8 +137,27 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
             this.$sheets = this.$Elm.getElements('.quiqqer-sheets-sheet');
 
+            var lastSize = LastSheet.getSize().x;
+
+            this.$sheets.each(function(Sheet) {
+                Sheet.setStyle('width', lastSize);
+            });
+
+            this.$MorePrev.setStyle('width', lastSize);
+            this.$MoreNext.setStyle('width', lastSize);
+            this.$Prev.setStyle('width', lastSize);
+            this.$Next.setStyle('width', lastSize);
+            this.$First.setStyle('width', lastSize);
+            this.$Last.setStyle('width', lastSize);
+
             this.$redraw();
             this.$registerEvents();
+
+            moofx(this.$Container).animate({
+                opacity : 1
+            }, {
+                duration: 200
+            })
         },
 
         /**
@@ -345,10 +366,14 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
         /**
          * new draw aff the pagination
+         *
+         * @param {Boolean} [force] - force redraw
          */
-        $redraw: function () {
+        $redraw: function (force) {
             var elmSize   = this.$Container.getSize(),
                 sheetSize = this.$First.getSize();
+
+            force = force || false;
 
             if (!this.$sheets.length) {
                 return;
@@ -362,18 +387,24 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             }
 
             // we must calc the max sheets
-            if (elmSize.y != sheetSize.y) {
                 // calc with last sheets, its the longest
-                var LastSheet     = this.$sheets[len - 1],
-                    lastSheetSize = LastSheet.getComputedSize();
+                var lastSize = this.$Last.getSize().x;
 
-                this.$showMax = (elmSize.x / lastSheetSize.totalWidth).floor();
-                this.$showMax = this.$showMax - 2;
-            }
+                this.$showMax = (elmSize.x / lastSize).floor();
+                if (current == 1) {
+                    this.$showMax = this.$showMax - 5;
+                } else {
+                    this.$showMax = this.$showMax - 6;
+                }
 
             var leftRight = (this.$showMax / 2).floor(),
-                start     = current - leftRight - 1,
+                start     = current - leftRight,
                 end       = current + leftRight;
+
+            if (this.$showMax != end-start) {
+                start = start - (this.$showMax-(end-start));
+            }
+
 
             if (start <= 0) {
                 start = -1;
