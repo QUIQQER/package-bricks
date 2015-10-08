@@ -99,6 +99,26 @@
             </settings>
         </brick>
 
+        /* Maps */
+
+        <brick control="\QUI\Bricks\Controls\GoogleMaps">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.googlemaps.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.googlemaps.description"/>
+            </description>
+
+            <settings>
+                <setting name="title">
+                    <locale group="quiqqer/bricks" var="brick.control.googlemaps.setting.title"/>
+                </setting>
+                <setting name="text">
+                    <locale group="quiqqer/bricks" var="brick.control.googlemaps.setting.text"/>
+                </setting>
+            </settings>
+        </brick>
+
         <brick control="\QUI\Bricks\Controls\SideBox1">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox1.title"/>
