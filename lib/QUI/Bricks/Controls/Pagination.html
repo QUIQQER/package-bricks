@@ -19,7 +19,9 @@
     </select>
 </div>
 
-<div class="quiqqer-sheets-desktop hide-on-mobile{if !$this->getAttribute('showLimit')} quiqqer-sheets-desktop__100{/if}">
+<div class="quiqqer-sheets-desktop hide-on-mobile{if !$this->getAttribute('showLimit')} quiqqer-sheets-desktop__100{/if}"
+        {if $this->getAttribute('useAjax')}style="opacity:0"{/if}
+>
     {if (!isset($smarty.request.sheet) || $active == 1)
         && $this->getAttribute('useAjax') === false
     }
@@ -35,7 +37,7 @@
         </a>
     {/if}
 
-    {if !isset($smarty.request.sheet) || $active <= 1
+    {if (!isset($smarty.request.sheet) || $active <= 1)
         && $this->getAttribute('useAjax') === false
     }
         <span class="quiqqer-sheets-desktop-disabled fa fa-angle-left quiqqer-sheets-prev"
