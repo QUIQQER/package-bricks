@@ -166,12 +166,12 @@
 
         <!-- Google Maps -->
         <locale name="brick.control.googlemaps.title">
-            <de><[!CDATA[Baustein: Maps]]></de>
-            <en><[!CDATA[Brick: maps]]></en>
+            <de><![CDATA[Baustein: Maps]]></de>
+            <en><![CDATA[Brick: maps]]></en>
         </locale>
         <locale name="brick.control.googlemaps.description">
-            <de><[!CDATA[Einstellungen für Karten]]></de>
-            <en><[!CDATA[Maps settings]]></en>
+            <de><![CDATA[Einstellungen für Karten]]></de>
+            <en><![CDATA[Maps settings]]></en>
         </locale>
 
         <locale name="brick.control.sidebox1.title">
