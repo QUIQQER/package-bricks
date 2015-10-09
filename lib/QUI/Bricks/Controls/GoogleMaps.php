@@ -34,7 +34,7 @@ class GoogleMaps extends QUI\Control
             dirname(__FILE__).'/GoogleMaps.css'
         );
 
-        parent::setAttributes($attributes);
+        parent::__construct($attributes);
     }
 
     /**

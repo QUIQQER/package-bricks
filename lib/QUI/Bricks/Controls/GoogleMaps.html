@@ -5,10 +5,12 @@
     function initialize()
     {
         var eigenschaften = {
-            center:             myCenter,
-            zoom:               13,
+            scrollwheel     :   false,
+            zoomControl     :   true,
+            center          :   myCenter,
+            zoom            :   12,
             disableDefaultUI:   true,
-            mypTypeId:          google.maps.MapTypeId.ROADMAP
+            mypTypeId       :   google.maps.MapTypeId.ROADMAP
         };
 
         var map = new google.maps.Map(document.getElementById("GoogleMaps"), eigenschaften);

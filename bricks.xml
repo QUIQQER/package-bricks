@@ -81,6 +81,36 @@
             </settings>
         </brick>
 
+
+
+
+        <!-- Content Switcher -->
+        <brick control="\QUI\Bricks\Controls\ContentSwitcher">
+            <title>
+                <locale group="quiqqer/bricks" var="bricks.ContentSwitcher.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="bricks.ContentSwitcher.description"/>
+            </description>
+
+            <settings>
+                <setting name="title">
+                    <locale group="quiqqer/bricks" var="ContentSwitcher.title"/>
+                </setting>
+
+                <setting name="entries" data-qui="package/quiqqer/bricks/bin/Controls/ContentSwitcher">
+                    <locale group="quiqqer/bricks" var="ContentSwitcher.entries"/>
+                </setting>
+            </settings>
+        </brick>
+
+
+
+
+
+
+
+
         <brick control="\QUI\Bricks\Controls\Banner">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.banner.title"/>
