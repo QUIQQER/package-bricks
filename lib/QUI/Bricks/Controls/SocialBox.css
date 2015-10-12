@@ -27,3 +27,43 @@
     font-size: 2em;
     line-height: 1.5;
 }
+
+/** styling for footer
+ * ========================================================== */
+
+footer .quiqqer-bricks-socialbox li a{
+    float: left;
+    margin: 0 0.2em 0em 0.2em;
+    opacity: 0.5;
+}
+
+footer .quiqqer-bricks-socialbox li a:hover {
+    opacity: 1;
+}
+
+footer .quiqqer-bricks-socialbox ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer .quiqqer-bricks-socialbox li a {
+    background-color: #dd151b;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    height: 2.5em;
+    text-align: center;
+    width: 2.5em;
+}
+
+footer .quiqqer-bricks-socialbox .fa {
+    font-size: 1.5em;
+    line-height: 1.7;
+    transition: all .3s ease .15s;
+}
+
+footer .quiqqer-bricks-socialbox li a:hover {
+    box-shadow: none !important;
+
+}

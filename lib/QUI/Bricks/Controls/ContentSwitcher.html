@@ -1,0 +1,34 @@
+
+{foreach from=$entries item=entry key=key}
+{assign var=img value=$entry.img}
+
+<div class="content-switcher">
+    {assign var=modKey value=$key+1}
+    {if $modKey && $modKey % 2 !== 0 }
+        <div class="content-switcher-image">
+            {if $img != ""}
+                <img width=300 height=auto src="{$entry.img}"/>
+            {else}
+                <img style="display: none;">
+            {/if}
+        </div>
+        <div class="content-switcher-content">
+            <h1>{$entry.title}</h1>
+            <p>{$entry.content}</p>
+        </div>
+     {else}
+        <div class="content-switcher-content">
+            <h1>{$entry.title}</h1>
+            <p>{$entry.content}</p>
+        </div>
+
+        <div class="content-switcher-image">
+            {if $img != ""}
+            <img width=300 height=auto src="{$entry.img}"/>
+            {else}
+            <img style="display: none;">
+            {/if}
+        </div>
+    {/if}
+</div>
+{/foreach}

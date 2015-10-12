@@ -4,7 +4,19 @@
  *
  * @module package/quiqqer/bricks/bin/Site/Area
  * @author www.pcsg.de (Henning Leutz)
+ *
+ * @require qui/QUI
+ * @require qui/controls/Control
+ * @require qui/controls/buttons/Button
+ * @require qui/controls/windows/Popup
+ * @require qui/controls/windows/Confirm
+ * @require qui/controls/elements/List
+ * @require Locale
+ * @require Ajax
+ * @require package/quiqqer/bricks/bin/Sortables
+ * @require css!package/quiqqer/bricks/bin/Site/Area.css
  */
+
 define('package/quiqqer/bricks/bin/Site/Area', [
 
     'qui/QUI',
@@ -19,7 +31,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
     'css!package/quiqqer/bricks/bin/Site/Area.css'
 
-], function (QUI, QUIControl, QUIButton, QUIPopup, QUIConfirm, QUIList, QUILocale, QUIAjax, Sortables)
+], function(QUI, QUIControl, QUIButton, QUIPopup, QUIConfirm, QUIList, QUILocale, QUIAjax, Sortables)
 {
     "use strict";
 
@@ -54,15 +66,19 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             this.$availableBricks = [];
             this.$loaded          = false;
             this.$brickIds        = [];
-            this.$brickData       = [];
+            this.$onLoadBrickData = [];
+            this.$brickCustomData = {};
+
 
             this.$AddButton      = false;
             this.$SettingsButton = false;
             this.$SortableButton = false;
             this.$MoreButton     = false;
 
+            this.$Title       = false;
             this.$List        = false;
             this.$FXExtraBtns = false;
+            this.$ExtraBtns   = false;
 
             this.addEvents({
                 onInject : this.$onInject
@@ -92,12 +108,15 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 '.quiqqer-bricks-site-category-area-buttons'
             );
 
-            var ExtraButtons = new Element('div', {
+            this.$ExtraBtns = new Element('div', {
                 'class' : 'quiqqer-bricks-site-category-area-extraButtons'
             });
 
+            this.$Title = this.$Elm.getElement(
+                '.quiqqer-bricks-site-category-area-title'
+            );
 
-            this.$FXExtraBtns = moofx( ExtraButtons );
+            this.$FXExtraBtns = moofx( this.$ExtraBtns );
 
             this.$List = this.$Elm.getElement(
                 '.quiqqer-bricks-site-category-area-list'
@@ -105,7 +124,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             // buttons
             this.$AddButton = new QUIButton({
-                text      : QUILocale.get( lg, 'site.area.button.add' ),
+                text      : QUILocale.get(lg, 'site.area.button.add'),
                 textimage : 'icon-plus',
                 disable   : true,
                 events    : {
@@ -113,16 +132,16 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 }
             }).inject( Buttons );
 
-            ExtraButtons.inject( Buttons );
+            this.$ExtraBtns.inject( Buttons );
 
             this.$MoreButton = new QUIButton({
-                title  : QUILocale.get( lg, 'site.area.button.area.more.openIt' ),
+                title  : QUILocale.get(lg, 'site.area.button.area.more.openIt'),
                 icon   : 'icon-caret-left',
                 events :
                 {
                     onClick : function(Btn)
                     {
-                        if ( Btn.getAttribute( 'icon' ) == 'icon-caret-left' )
+                        if (Btn.getAttribute( 'icon' ) == 'icon-caret-left')
                         {
                             self.openButtons();
                             return;
@@ -134,11 +153,11 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 styles : {
                     marginLeft : 5
                 }
-            }).inject( Buttons );
+            }).inject(Buttons);
 
             // extra buttons
             this.$SettingsButton = new QUIButton({
-                title  : QUILocale.get( lg, 'site.area.button.area.settings' ),
+                title  : QUILocale.get(lg, 'site.area.button.area.settings'),
                 icon   : 'icon-gears',
                 events : {
                     onClick : this.openSettingsDialog
@@ -146,7 +165,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 styles : {
                     marginLeft : 10
                 }
-            }).inject( ExtraButtons );
+            }).inject(this.$ExtraBtns);
 
             this.$SortableButton = new QUIButton({
                 title  : QUILocale.get( lg, 'site.area.button.area.sort' ),
@@ -155,7 +174,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 {
                     onClick : function(Btn)
                     {
-                        if ( Btn.isActive() )
+                        if (Btn.isActive())
                         {
                             Btn.setNormal();
                             self.unsortable();
@@ -169,10 +188,37 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 styles : {
                     marginLeft : 5
                 }
-            }).inject( ExtraButtons );
+            }).inject(this.$ExtraBtns);
 
 
             return this.$Elm;
+        },
+
+        /**
+         * Refresh the area display
+         */
+        refresh : function()
+        {
+            var self      = this,
+                size      = this.$List.getComputedSize(),
+                titleSize = this.$Title.getComputedSize();
+
+            moofx(this.$Elm).animate({
+                height : size.height + titleSize.height
+            }, {
+                duration : 250,
+                equation : 'cubic-bezier(.42,.4,.46,1.29)',
+                callback : function() {
+                    self.$List.setStyle('position', null);
+
+                    moofx(self.$List).animate({
+                        opacity : 1
+                    }, {
+                        duration : 250,
+                        equation : 'ease-out'
+                    });
+                }
+            });
         },
 
         /**
@@ -184,6 +230,19 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 Site    = this.getAttribute( 'Site' ),
                 Project = Site.getProject();
 
+            var Loader = new Element('div', {
+                'class' : 'quiqqer-bricks-site-category-area-loader',
+                html : '<span class="icon-spinner icon-spin fa fa-spinner fa-spin"></span>',
+                styles : {
+                    margin : 5
+                }
+            }).inject(this.$Elm);
+
+            this.$List.setStyles({
+                position : 'absolute',
+                opacity  : 0
+            });
+
             QUIAjax.get('package_quiqqer_bricks_ajax_project_getBricks', function(bricks)
             {
                 self.$AddButton.enable();
@@ -192,12 +251,27 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 self.$loaded = true;
 
                 self.$brickIds.each(function(brickId) {
-                    self.addBrickById( brickId );
+                    self.addBrickById(brickId);
                 });
 
-                self.$brickData.each(function(brickData) {
-                    self.addBrick( brickData );
+                var promises = [];
+
+                self.$onLoadBrickData.each(function(brickData) {
+                    promises.push(self.addBrick(brickData));
                 });
+
+                if (promises.length) {
+
+                    Promise.resolve(promises).then(function() {
+
+                        self.refresh();
+                        Loader.destroy();
+                    });
+
+                    return;
+                }
+
+                Loader.destroy();
 
             }, {
                 'package' : 'quiqqer/bricks',
@@ -225,7 +299,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             var self = this,
                 data = this.getData();
 
-            if ( data.length && !("deactivate" in data[ 0 ]) )
+            if (data.length && !("deactivate" in data[ 0 ]))
             {
                 new QUIConfirm({
                     title : QUILocale.get( lg, 'site.area.window.deactivate.title' ),
@@ -253,38 +327,42 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
         /**
          * Add a brick by its brick data
+         *
          * @param {Object} brickData - { brickId:1, inheritance:1 }
+         * @return Promise
          */
         addBrick : function(brickData)
         {
-            if ( "deactivate" in brickData )
-            {
-                this.clear();
-                this.setAttribute( 'deactivate', true );
-                this.deactivate();
-                return;
-            }
+            return new Promise(function(reslove, reject) {
+
+                if ("deactivate" in brickData)
+                {
+                    this.clear();
+                    this.setAttribute('deactivate', true);
+                    this.deactivate();
+
+                    reslove();
+                    return;
+                }
 
 
-            if ( !this.$loaded )
-            {
-                this.$brickData.push( brickData );
-                return;
-            }
+                if (!this.$loaded)
+                {
+                    this.$onLoadBrickData.push(brickData);
+                    reslove();
+                    return;
+                }
 
-            var BrickNode = this.addBrickById( brickData.brickId );
+                var BrickNode = this.addBrickById(brickData.brickId);
 
-            if ( !BrickNode ) {
-                return;
-            }
+                if (!BrickNode) {
+                    reject();
+                    return;
+                }
 
-            var Select = BrickNode.getElement( 'select' );
+                this.$brickCustomData[BrickNode.get('id')] = brickData.customfields;
 
-            Select.set( 'data-inheritance', 0 );
-
-            if ( "inheritance" in brickData ) {
-                Select.set( 'data-inheritance', brickData.inheritance );
-            }
+            }.bind(this));
         },
 
         /**
@@ -295,9 +373,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          */
         addBrickById : function(brickId)
         {
-            if ( !this.$loaded )
+            if (!this.$loaded)
             {
-                this.$brickIds.push( brickId );
+                this.$brickIds.push(brickId);
                 return false;
             }
 
@@ -305,13 +383,15 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 return Item.id === brickId;
             });
 
-            if ( !found.length ) {
+            if (!found.length) {
                 return false;
             }
 
             var BrickNode = this.createNewBrick();
 
-            BrickNode.getElement( 'select' ).set( 'value', brickId );
+            BrickNode.getElement('select').set('value', brickId);
+
+            this.refresh();
 
             return BrickNode;
         },
@@ -321,7 +401,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          */
         clear : function()
         {
-            this.getElm().getElements( '.quiqqer-bricks-site-category-area-brick' ).destroy();
+            this.getElm().getElements(
+                '.quiqqer-bricks-site-category-area-brick'
+            ).destroy();
         },
 
         /**
@@ -335,46 +417,47 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             var Elm = new Element('li', {
                 'class' : 'quiqqer-bricks-site-category-area-brick',
-                html    : '<select></select>'
+                html    : '<select></select>',
+                id      : String.uniqueID()
             });
 
-            Elm.inject( this.$List );
-            Select = Elm.getElement( 'select' );
+            Elm.inject(this.$List);
+            Select = Elm.getElement('select');
 
             new QUIButton({
-                title  : QUILocale.get( lg, 'site.area.button.delete' ),
+                title  : QUILocale.get(lg, 'site.area.button.delete'),
                 icon   : 'icon-remove',
                 events :
                 {
                     onClick : function() {
-                        self.openBrickDeleteDialog( Elm );
+                        self.openBrickDeleteDialog(Elm);
                     }
                 }
-            }).inject( Elm );
+            }).inject(Elm);
 
             new QUIButton({
-                title  : QUILocale.get( lg, 'site.area.button.settings' ),
+                title  : QUILocale.get(lg, 'site.area.button.settings'),
                 icon   : 'icon-gear',
                 events :
                 {
                     onClick : function(Btn)
                     {
                         var Elm    = Btn.getElm(),
-                            Parent = Elm.getParent( '.quiqqer-bricks-site-category-area-brick' ),
-                            Select = Parent.getElement( 'select' );
+                            Parent = Elm.getParent('.quiqqer-bricks-site-category-area-brick'),
+                            Select = Parent.getElement('select');
 
-                        self.openBrickSettingDialog( Select );
+                        self.openBrickSettingDialog(Select);
                     }
                 }
-            }).inject( Elm );
+            }).inject(Elm);
 
 
-            for ( i = 0, len = this.$availableBricks.length; i < len; i++ )
+            for (i = 0, len = this.$availableBricks.length; i < len; i++)
             {
                 new Element('option', {
-                    html  : this.$availableBricks[ i ].title,
-                    value : this.$availableBricks[ i ].id
-                }).inject( Select );
+                    html  : this.$availableBricks[i].title,
+                    value : this.$availableBricks[i].id
+                }).inject(Select);
             }
 
             return Elm;
@@ -386,23 +469,30 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          */
         getData : function()
         {
-            if ( this.getAttribute( 'deactivate' ) )
+            if (this.getAttribute('deactivate'))
             {
                 return [{
                     deactivate : 1
                 }];
             }
 
-            var i, len;
+            var i, len, custom, brickId;
 
             var data   = [],
-                bricks = this.$Elm.getElements( 'select' );
+                bricks = this.$Elm.getElements('select');
 
-            for ( i = 0, len = bricks.length; i < len; i++ )
+            for (i = 0, len = bricks.length; i < len; i++)
             {
+                custom  = '';
+                brickId = bricks[i].getParent().get('id');
+
+                if (brickId in this.$brickCustomData) {
+                    custom = this.$brickCustomData[brickId];
+                }
+
                 data.push({
-                    brickId     : bricks[ i ].value,
-                    inheritance : bricks[ i ].get( 'data-inheritance' ) == 1 ? 1 : 0
+                    brickId : bricks[i].value,
+                    customfields : custom
                 });
             }
 
@@ -427,27 +517,27 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             {
                 var i, len, buttons, Button;
 
-                buttons = Brick.getElements( '.qui-button' );
+                buttons = Brick.getElements('.qui-button');
 
-                for ( i = 0, len = buttons.length; i < len; i++ )
+                for (i = 0, len = buttons.length; i < len; i++)
                 {
-                    Button = QUI.Controls.getById( buttons[ i ].get( 'data-quiid' ) );
+                    Button = QUI.Controls.getById(buttons[i].get('data-quiid'));
 
-                    if ( Button ) {
+                    if (Button) {
                         Button.setDisable();
                     }
                 }
 
-                var Select = Brick.getElement( 'select' ),
-                    Option = Select.getElement( 'option[value="'+ Select.value +'"]' );
+                var Select = Brick.getElement('select'),
+                    Option = Select.getElement('option[value="'+ Select.value +'"]');
 
                 new Element('div', {
                     'class' : 'quiqqer-bricks-site-category-area-placeholder',
-                    html    : Option.get( 'html' )
+                    html    : Option.get('html')
                 }).inject( Brick );
             });
 
-            Elm.getElements( 'select' ).set( 'disabled', true );
+            Elm.getElements('select').set('disabled', true);
 
 
             new Sortables( this.$List, {
@@ -459,12 +549,12 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 {
                     var Target = event.target;
 
-                    if ( Target.nodeName != 'LI' ) {
-                        Target = Target.getParent( 'li' );
+                    if (Target.nodeName != 'LI') {
+                        Target = Target.getParent('li');
                     }
 
                     var size = Target.getSize(),
-                        pos  = Target.getPosition( Target.getParent('ul') );
+                        pos  = Target.getPosition(Target.getParent('ul'));
 
                     return new Element('div', {
                         styles : {
@@ -479,9 +569,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                 onStart : function(element)
                 {
-                    var Ul = element.getParent( 'ul' );
+                    var Ul = element.getParent('ul');
 
-                    element.addClass( 'quiqqer-bricks-site-category-area-dd-active' );
+                    element.addClass('quiqqer-bricks-site-category-area-dd-active');
 
                     Ul.setStyles({
                         height   : Ul.getSize().y,
@@ -492,9 +582,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                 onComplete : function(element)
                 {
-                    var Ul = element.getParent( 'ul' );
+                    var Ul = element.getParent('ul');
 
-                    element.removeClass( 'quiqqer-bricks-site-category-area-dd-active' );
+                    element.removeClass('quiqqer-bricks-site-category-area-dd-active');
 
                     Ul.setStyles({
                         height   : null,
@@ -515,20 +605,20 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                     '.quiqqer-bricks-site-category-area-brick'
                 );
 
-            Elm.getElements( 'select' ).set( 'disabled', false );
-            Elm.getElements( '.quiqqer-bricks-site-category-area-placeholder').destroy();
+            Elm.getElements('select').set('disabled', false);
+            Elm.getElements('.quiqqer-bricks-site-category-area-placeholder').destroy();
 
             elements.each(function(Brick)
             {
                 var i, len, buttons, Button;
 
-                buttons = Brick.getElements( '.qui-button' );
+                buttons = Brick.getElements('.qui-button');
 
-                for ( i = 0, len = buttons.length; i < len; i++ )
+                for (i = 0, len = buttons.length; i < len; i++)
                 {
-                    Button = QUI.Controls.getById( buttons[ i ].get( 'data-quiid' ) );
+                    Button = QUI.Controls.getById(buttons[ i ].get('data-quiid'));
 
-                    if ( Button ) {
+                    if (Button) {
                         Button.setEnable();
                     }
                 }
@@ -538,7 +628,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
         /**
          * Opens the extra settings buttons
          *
-         * @param {Function} callback
+         * @param {Function} [callback]
          */
         openButtons : function(callback)
         {
@@ -548,24 +638,38 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             self.$FXExtraBtns.style({
                 borderLeft : '2px solid #cccfd5',
-                height   : 30,
-                overflow : 'hidden'
+                height     : 30,
+                overflow   : 'hidden'
             });
+
+            var width = this.$ExtraBtns.getChildren().map(function(Elm)
+            {
+                var width = Elm.getSize().x;
+
+                width = width + Elm.getStyle('margin-left').toInt();
+                width = width + Elm.getStyle('margin-right').toInt();
+
+                return width;
+            }).sum();
+
+            // i dont know why i need 2 px more -.-"
+            width = width + 2;
 
             this.$FXExtraBtns.animate({
                 opacity    : 1,
-                width      : 85,
+                width      : width,
                 marginLeft : 10
             }, {
+                equation : 'ease-in-out',
                 callback : function()
                 {
-                    self.$MoreButton.setAttribute( 'icon', 'icon-caret-right' );
+                    self.$MoreButton.setAttribute('icon', 'icon-caret-right');
 
                     self.$FXExtraBtns.style({
                         overflow : null
                     });
 
-                    if ( typeof callback === 'function' ) {
+                    if (typeof callback === 'function') {
                         callback();
                     }
                 }
@@ -593,11 +697,11 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             }, {
                 callback : function()
                 {
-                    self.$MoreButton.setAttribute( 'icon', 'icon-caret-left' );
+                    self.$MoreButton.setAttribute('icon', 'icon-caret-left');
                     self.$AddButton.show();
 
 
-                    if ( typeof callback === 'function' ) {
+                    if (typeof callback === 'function') {
                         callback();
                     }
                 }
@@ -613,14 +717,14 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          */
         openBrickDialog : function()
         {
-            if ( !this.$availableBricks.length ) {
+            if (!this.$availableBricks.length) {
                 return;
             }
 
             var self = this;
 
             new QUIPopup({
-                title     : QUILocale.get( lg, 'site.area.window.add' ),
+                title     : QUILocale.get(lg, 'site.area.window.add'),
                 icon      : 'icon-th',
                 maxWidth  : 500,
                 maxHeight : 600,
@@ -637,15 +741,15 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                                 {
                                     onClick : function(List, data)
                                     {
-                                        self.addBrickById( data.brickId );
+                                        self.addBrickById(data.brickId);
                                         Win.close();
                                     }
                                 }
                             });
 
-                        List.inject( Content );
+                        List.inject(Content);
 
-                        for ( var i = 0, len = self.$availableBricks.length; i < len; i++ )
+                        for (var i = 0, len = self.$availableBricks.length; i < len; i++)
                         {
                             items.push({
                                 brickId : self.$availableBricks[ i ].id,
@@ -655,7 +759,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                             });
                         }
 
-                        List.addItems( items );
+                        List.addItems(items);
                     }
                 }
             }).open();
@@ -669,17 +773,25 @@ define('package/quiqqer/bricks/bin/Site/Area', [
         openBrickDeleteDialog : function(BrickElement)
         {
             new QUIConfirm({
-                title : QUILocale.get( lg, 'site.area.window.delete.title' ),
+                title : QUILocale.get(lg, 'site.area.window.delete.title'),
                 icon  : 'icon-remove',
-                text  : QUILocale.get( lg, 'site.area.window.delete.text' ),
-                information : QUILocale.get( lg, 'site.area.window.delete.information' ),
+                text  : QUILocale.get(lg, 'site.area.window.delete.text'),
+                information : QUILocale.get(lg, 'site.area.window.delete.information'),
                 maxHeight   : 300,
-                maxWidth    : 500,
+                maxWidth    : 450,
                 events :
                 {
                     onSubmit : function() {
+                        var brickId = BrickElement.get('id');
+
+                        if (brickId in this.$brickCustomData) {
+                            delete this.$brickCustomData[brickId];
+                        }
+
                         BrickElement.destroy();
-                    }
+                        this.refresh();
+
+                    }.bind(this)
                 }
             }).open();
         },
@@ -691,51 +803,72 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          */
         openBrickSettingDialog : function(Select)
         {
+            var self = this;
+
             new QUIConfirm({
-                title     : QUILocale.get( lg, 'site.area.window.settings.title' ),
+                title     : QUILocale.get(lg, 'site.area.window.settings.title'),
                 icon      : 'icon-gear',
-                maxWidth  : 400,
-                maxHeight : 300,
+                texticon  : false,
+                maxWidth  : 600,
+                maxHeight : 400,
                 autoclose : false,
-                events    :
+                ok_button : {
+                    text      : QUILocale.get('quiqqer/system', 'accept'),
+                    textimage : 'icon-save fa fa-save'
+                },
+                cancel_button : {
+                    text      : QUILocale.get('quiqqer/system', 'cancel'),
+                    textimage : 'icon-remove fa fa-remove'
+                },
+                events :
                 {
                     onOpen : function(Win)
                     {
-                        var Content = Win.getContent();
+                        require([
+                            'package/quiqqer/bricks/bin/Site/BrickEdit'
+                        ], function(BrickEdit) {
 
-                        Content.set(
-                            'html',
+                            var brickId = Select.getParent().get('id');
+                            var custom = '';
 
-                            '<form>' +
-                            '    <label>' +
-                            '        <input type="checkbox" name="inheritance" />' +
-                                     QUILocale.get( lg, 'site.area.window.settings.setting.inheritance' ) +
-                            '    </label>' +
-                            '</form>'
-                        );
+                            if (brickId in self.$brickCustomData) {
+                                custom = self.$brickCustomData[brickId];
+                            }
 
-                        var Form = Win.getContent().getElement( 'form' ),
-                            elms = Form.elements;
+                            custom = JSON.decode(custom);
 
-                        elms.inheritance.checked = Select.get( 'data-inheritance' ).toInt();
+                            new BrickEdit({
+                                brickId : Select.value,
+                                Site    : self.getAttribute('Site'),
+                                customfields : custom,
+                                styles  : {
+                                    height : Win.getContent().getSize().y
+                                }
+                            }).inject(Win.getContent());
+                        });
                     },
 
                     onSubmit : function(Win)
                     {
-                        var Form = Win.getContent().getElement( 'form' );
+                        Win.Loader.show();
 
-                        Select.set({
-                            'data-inheritance' : Form.elements.inheritance.checked ? 1 : 0
+                        require(['qui/utils/Form'], function(QUIFormUtils) {
+
+                            var Form    = Win.getContent().getElement('form'),
+                                data    = QUIFormUtils.getFormData(Form),
+                                brickId = Select.getParent().get('id');
+
+                            self.$brickCustomData[brickId] = JSON.encode(data);
+
+                            Win.close();
                         });
-
-                        Win.close();
                     }
                 }
             }).open();
         },
 
         /**
-         * Opens the
+         * Opens the settings dialog of the area
          */
         openSettingsDialog : function()
         {
@@ -744,7 +877,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             new QUIConfirm({
                 title     : QUILocale.get(lg, 'area.window.settings.title'),
                 icon      : 'icon-gear',
-                maxWidth  : 400,
+                maxWidth  : 450,
                 maxHeight : 300,
                 autoclose : false,
                 events    :
@@ -764,19 +897,19 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                             '</form>'
                         );
 
-                        var Form = Win.getContent().getElement( 'form' ),
+                        var Form = Win.getContent().getElement('form'),
                             elms = Form.elements;
 
-                        elms.deactivate.checked = self.getAttribute( 'deactivate' );
+                        elms.deactivate.checked = self.getAttribute('deactivate');
                     },
 
                     onSubmit : function(Win)
                     {
-                        var Form = Win.getContent().getElement( 'form' );
+                        var Form = Win.getContent().getElement('form');
 
                         Win.close();
 
-                        if ( Form.elements.deactivate.checked )
+                        if (Form.elements.deactivate.checked)
                         {
                             self.deactivate();
                         } else

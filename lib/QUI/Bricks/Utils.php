@@ -15,35 +15,35 @@ use QUI\Projects\Project;
  * Bricks helper class
  *
  * @package quiqqer/bricks
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  */
-
 class Utils
 {
     /**
      * Return the bricks from a xml file
      *
      * @param String $file
+     *
      * @return array
      */
     static function getBricksFromXML($file)
     {
-        if ( !file_exists( $file ) ) {
+        if (!file_exists($file)) {
             return array();
         }
 
-        $Dom  = XML::getDomFromXml( $file );
-        $Path = new \DOMXPath( $Dom );
+        $Dom = XML::getDomFromXml($file);
+        $Path = new \DOMXPath($Dom);
 
-        $bricks = $Path->query( "//quiqqer/bricks/brick" );
-        $list   = array();
+        $bricks = $Path->query("//quiqqer/bricks/brick");
+        $list = array();
 
-        if ( !$bricks->length ) {
+        if (!$bricks->length) {
             return $list;
         }
 
-        foreach ( $bricks as $Brick ) {
-            $list[] = self::parseAreaToArray( $Brick, $Path );
+        foreach ($bricks as $Brick) {
+            $list[] = self::parseAreaToArray($Brick, $Path);
         }
 
         return $list;
@@ -52,46 +52,45 @@ class Utils
     /**
      * Return the template bricks from a xml file
      *
-     * @param string $file - path to xm file
+     * @param string      $file       - path to xm file
      * @param string|bool $layoutType - optional, return only the bricks for the specific layout type
+     *
      * @return array
      */
-    static function getTemplateAreasFromXML($file, $layoutType=false)
+    static function getTemplateAreasFromXML($file, $layoutType = false)
     {
-        if ( !file_exists( $file ) ) {
+        if (!file_exists($file)) {
             return array();
         }
 
-        $Dom  = XML::getDomFromXml( $file );
-        $Path = new \DOMXPath( $Dom );
+        $Dom = XML::getDomFromXml($file);
+        $Path = new \DOMXPath($Dom);
 
-        $globalAreas = $Path->query( "//quiqqer/bricks/templateAreas/areas/area" );
+        $globalAreas
+            = $Path->query("//quiqqer/bricks/templateAreas/areas/area");
 
-        if ( $layoutType )
-        {
+        if ($layoutType) {
             $typeAreas = $Path->query(
                 "//quiqqer/bricks/templateAreas/layouts/layout[@layout='{$layoutType}']/area"
             );
 
-        } else
-        {
-            $typeAreas = $Path->query( "//quiqqer/bricks/templateAreas/layouts/layout/area" );
+        } else {
+            $typeAreas
+                = $Path->query("//quiqqer/bricks/templateAreas/layouts/layout/area");
         }
 
 
         $list = array();
 
-        if ( $globalAreas->length )
-        {
-            foreach ( $globalAreas as $Area ) {
-                $list[] = self::parseAreaToArray( $Area, $Path );
+        if ($globalAreas->length) {
+            foreach ($globalAreas as $Area) {
+                $list[] = self::parseAreaToArray($Area, $Path);
             }
         }
 
-        if ( $typeAreas->length )
-        {
-            foreach ( $typeAreas as $Area ) {
-                $list[] = self::parseAreaToArray( $Area, $Path );
+        if ($typeAreas->length) {
+            foreach ($typeAreas as $Area) {
+                $list[] = self::parseAreaToArray($Area, $Path);
             }
         }
 
@@ -114,32 +113,31 @@ class Utils
      * parse a <area> xml node to an array
      *
      * @param \DOMElement $Brick
-     * @param \DOMXPath $Path
+     * @param \DOMXPath   $Path
+     *
      * @return array
      */
     static function parseAreaToArray(\DOMElement $Brick, \DOMXPath $Path)
     {
-        $control     = $Brick->getAttribute( 'control' );
-        $name        = $Brick->getAttribute( 'name' );
-        $title       = array();
+        $control = $Brick->getAttribute('control');
+        $name = $Brick->getAttribute('name');
+        $title = array();
         $description = array();
 
-        $titleLocale = $Path->query( './title/locale', $Brick );
-        $descLocale  = $Path->query( './description/locale', $Brick );
+        $titleLocale = $Path->query('./title/locale', $Brick);
+        $descLocale = $Path->query('./description/locale', $Brick);
 
-        if ( $titleLocale->length )
-        {
+        if ($titleLocale->length) {
             $title = array(
-                'group' => $titleLocale->item( 0 )->getAttribute( 'group' ),
-                'var'   => $titleLocale->item( 0 )->getAttribute( 'var' )
+                'group' => $titleLocale->item(0)->getAttribute('group'),
+                'var'   => $titleLocale->item(0)->getAttribute('var')
             );
         }
 
-        if ( $descLocale->length )
-        {
+        if ($descLocale->length) {
             $description = array(
-                'group' => $descLocale->item( 0 )->getAttribute( 'group' ),
-                'var'   => $descLocale->item( 0 )->getAttribute( 'var' )
+                'group' => $descLocale->item(0)->getAttribute('group'),
+                'var'   => $descLocale->item(0)->getAttribute('var')
             );
         }
 
@@ -148,27 +146,35 @@ class Utils
             'name'        => $name,
             'title'       => $title,
             'description' => $description,
-            'inheritance' => $Brick->getAttribute( 'inheritance' )
+            'inheritance' => $Brick->getAttribute('inheritance')
         );
     }
 
     /**
      *
      * @param Project $Project
-     * @param String $areaName
+     * @param String  $areaName
+     *
      * @return bool
      */
     static function hasInheritance(Project $Project, $areaName)
     {
-        $template = $Project->getAttribute( 'template' );
+        $template = $Project->getAttribute('template');
 
         // getAreasByProject
-        $brickXML = realpath( OPT_DIR . $template .'/bricks.xml' );
-        $bricks   = self::getTemplateAreasFromXML( $brickXML );
+        $brickXML = realpath(OPT_DIR.$template.'/bricks.xml');
+        $bricks = self::getTemplateAreasFromXML($brickXML);
 
-        foreach ( $bricks as $brickData )
-        {
-            QUI\Log::writeRecursive( $brickData );
+        foreach ($bricks as $brickData) {
+            if ($brickData['name'] != $areaName) {
+                continue;
+            }
+
+            if (isset($brickData['inheritance']) && $brickData['inheritance']) {
+                return true;
+            }
+
+            return false;
         }
 
         return true;

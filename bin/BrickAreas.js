@@ -6,9 +6,16 @@
  * @module package/quiqqer/bricks/bin/BrickAreas
  * @author www.pcsg.de (Henning Leutz)
  *
+ * @require qui/QUI
+ * @require qui/controls/Control
+ * @require qui/controls/buttons/Button
+ * @require package/quiqqer/bricks/bin/AreaWindow
+ * @require Ajax
+ * @require Locale
+ * @require css!package/quiqqer/bricks/bin/BrickAreas.css
+ *
  * @event onLoaded [ this ]
  */
-
 define('package/quiqqer/bricks/bin/BrickAreas', [
 
     'qui/QUI',

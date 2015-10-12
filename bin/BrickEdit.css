@@ -2,7 +2,6 @@
 .quiqqer-bricks-brickedit {
     float: left;
     height: 100%;
-    padding: 20px;
     width: 100%;
 }
 
@@ -22,6 +21,10 @@
     width: 100%;
 }
 
+.quiqqer-bricks-brickedit .cke_source {
+    max-width: 100%;
+}
+
 .quiqqer-bricks-brickedit input[type="checkbox"],
 .quiqqer-bricks-brickedit input[type="radio"] {
     width: 20px;
@@ -36,11 +39,12 @@
     margin-bottom: 0 !important;
 }
 
-.quiqqer-bricks-brickareas {
-    margin-bottom: 20px;
-}
-
 .brick-edit-extra-header tbody tr td:first-child,
 .quiqqer-bricks-brickedit .data-table tbody tr td:first-child {
     width: 200px;
+}
+
+.brick-table-flexible label {
+    margin-bottom: 0;
+    width: 100% !important;
 }

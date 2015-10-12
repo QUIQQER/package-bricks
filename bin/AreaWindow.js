@@ -6,9 +6,14 @@
  * @module package/quiqqer/bricks/bin/AreaWindow
  * @author www.pcsg.de (Henning Leutz)
  *
+ * @require qui/QUI
+ * @require qui/controls/windows/Confirm
+ * @require package/quiqqer/bricks/bin/Area
+ * @require Ajax
+ * @require Locale
+ *
  * @event onSubmit [ this, areas ]
  */
-
 define('package/quiqqer/bricks/bin/AreaWindow', [
 
     'qui/QUI',
@@ -31,16 +36,27 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
         ],
 
         options : {
-            title : QUILocale.get( 'quiqqer/bricks', 'area.window.title' ),
+            icon  : 'icon-th',
+            title : QUILocale.get('quiqqer/bricks', 'area.window.title'),
             projectName : false,
             projectLang : false,
-            maxHeight : 500,
-            maxWidth  : 400
+            maxHeight : 600,
+            maxWidth  : 400,
+            texticon  : false,
+
+            cancel_button : {
+                text      : QUILocale.get('quiqqer/system', 'cancel'),
+                textimage : 'icon-remove fa fa-remove'
+            },
+            ok_button : {
+                text      : QUILocale.get('quiqqer/system', 'accept'),
+                textimage : 'icon-ok fa fa-check'
+            }
         },
 
         initialize : function(options)
         {
-            this.parent( options );
+            this.parent(options);
 
             this.addEvents({
                 onOpen : this.$onOpen
@@ -61,15 +77,15 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
                 var i, len, desc, title;
                 var Content = self.getContent();
 
-                for ( i = 0, len = result.length; i < len; i++ )
+                for (i = 0, len = result.length; i < len; i++)
                 {
-                    title = result[ i ].title;
-                    desc  = result[ i ].description;
+                    title = result[i].title;
+                    desc  = result[i].description;
 
                     new Area({
-                        title       : QUILocale.get( title.group, title['var'] ),
-                        description : QUILocale.get( desc.group, desc['var'] ),
-                        area        : result[ i ].name
+                        title       : QUILocale.get(title.group, title['var']),
+                        description : QUILocale.get(desc.group, desc['var']),
+                        area        : result[i].name
                     }).inject( Content );
                 }
 
@@ -87,8 +103,8 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
             Ajax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
                 'package' : 'quiqqer/brick',
                 project   : JSON.encode({
-                    name : this.getAttribute( 'projectName' ),
-                    lang : this.getAttribute( 'projectLang' )
+                    name : this.getAttribute('projectName'),
+                    lang : this.getAttribute('projectLang')
                 })
             });
         },
@@ -106,9 +122,9 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
                 return Elm.get( 'data-area' );
             });
 
-            this.fireEvent( 'submit', [ this, areas ] );
+            this.fireEvent('submit', [this, areas]);
 
-            if ( this.getAttribute( 'autoclose' ) ) {
+            if (this.getAttribute('autoclose')) {
                 this.close();
             }
         }

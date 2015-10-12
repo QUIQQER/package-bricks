@@ -35,12 +35,13 @@ class Events
             return;
         }
 
-        $Manager = new Manager();
+        $Manager = Manager::init();
 
         // get inharitance areas
         $Project      = $Site->getProject();
         $projectAreas = $Manager->getAreasByProject( $Project );
         $projectTable = QUI::getDBProjectTableName( Manager::TABLE_CACHE, $Project );
+
 
         foreach ( $projectAreas as $area )
         {
@@ -76,9 +77,20 @@ class Events
                 continue;
             }
 
+
             foreach ( $bricks as $brick )
             {
-                if ( !(int)$brick['inheritance'] ) {
+                $customFields = array();
+
+                if (isset($brick['customfields']) && is_string($brick['customfields'])) {
+                    $customFields = json_decode($brick['customfields'], true);
+                }
+
+                if (isset($brick['customfields']) && is_array($brick['customfields'])) {
+                    $customFields = $brick['customfields'];
+                }
+
+                if (!isset($customFields['inheritance']) || !(int)$customFields['inheritance']) {
                     continue;
                 }
 
@@ -124,7 +136,8 @@ class Events
             return;
         }
 
-        $BricksManager = new \QUI\Bricks\Manager();
+
+        $BricksManager = \QUI\Bricks\Manager::init();
 
         $Site = $params['Site'];
         $area = $params['area'];

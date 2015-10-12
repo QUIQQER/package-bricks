@@ -12,11 +12,18 @@ use QUI;
  * Class Brick
  * A Brick from the Brickmanager
  *
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  * @package quiqqer/bricks
  */
 class Brick extends QUI\QDOM
 {
+    /**
+     * internal brick id
+     *
+     * @var
+     */
+    protected $_id = false;
+
     /**
      * Brick settings
      *
@@ -25,11 +32,32 @@ class Brick extends QUI\QDOM
     protected $_settings = array();
 
     /**
+     * Fields can be overwritten by another user
+     *
+     * @var array
+     */
+    protected $_customfields = array();
+
+    /**
+     * Internal control
+     *
+     * @var null
+     */
+    protected $_Control = null;
+
+    /**
+     * List of extra css classes
+     *
+     * @var array
+     */
+    protected $_cssClasses = array();
+
+    /**
      * Constructor
      *
      * @param array $params - brick params
      */
-    public function __construct($params=array())
+    public function __construct($params = array())
     {
         // default
         $default = array(
@@ -38,62 +66,74 @@ class Brick extends QUI\QDOM
             'title'       => '',
             'description' => '',
             'project'     => '',
-            'areas'       => ''
+            'areas'       => '',
+            'height'      => '',
+            'width'       => '',
+            'classes'     => ''
         );
 
-        $this->setAttributes( $default );
+        $this->setAttributes($default);
 
-        foreach ( $default as $key => $value )
-        {
-            if ( isset( $params[ $key ] ) ) {
-                $this->setAttribute( $key, $params[ $key ] );
+        foreach ($default as $key => $value) {
+            if (isset($params[$key])) {
+                $this->setAttribute($key, $params[$key]);
             }
         }
 
+        if (isset($params['id'])) {
+            $this->_id = $params['id'];
+        }
 
         // default settings from control
         $Control = $this->_getControl();
-        $Manager = new Manager();
+        $Manager = Manager::init();
 
         $availableSettings = $Manager->getAvailableBrickSettingsByBrickType(
-            $this->getAttribute( 'type' )
+            $this->getAttribute('type')
         );
 
-        foreach ( $availableSettings as $entry ) {
-            $this->_settings[ $entry['name'] ] = false;
+        foreach ($availableSettings as $entry) {
+            $this->_settings[$entry['name']] = false;
         }
 
         // control default settings
-        if ( is_object( $Control ) )
-        {
+        if (is_object($Control)) {
             $controlSettings = $Control->getAttributes();
 
-            foreach ( $this->_settings as $key => $value )
-            {
-                if ( isset( $controlSettings[ $key ] ) ) {
-                    $this->_settings[ $key ] = $controlSettings[ $key ];
+            foreach ($this->_settings as $key => $value) {
+                if (isset($controlSettings[$key])) {
+                    $this->_settings[$key] = $controlSettings[$key];
                 }
             }
         }
 
         // settings from database
-        if ( isset( $params['settings'] ) )
-        {
+        if (isset($params['settings'])) {
             $settings = $params['settings'];
 
-            if ( is_string( $settings ) ) {
-                $settings = json_decode( $settings, true );
+            if (is_string($settings)) {
+                $settings = json_decode($settings, true);
             }
 
-            if ( !is_array( $settings ) ) {
-                return;
-            }
-
-            foreach ( $this->_settings as $key => $value )
-            {
-                if ( isset( $settings[ $key ] ) ) {
-                    $this->_settings[ $key ] = $settings[ $key ];
+            if (is_array($settings)) {
+                foreach ($this->_settings as $key => $value) {
+                    if (isset($settings[$key])) {
+                        $this->_settings[$key] = $settings[$key];
+                    }
                 }
+            }
+        }
+
+        // customfields
+        if (isset($params['customfields'])) {
+            $customfields = $params['customfields'];
+
+            if (is_string($customfields)) {
+                $customfields = json_decode($customfields, true);
+            }
+
+            if (is_array($customfields)) {
+                $this->_customfields = $customfields;
             }
         }
     }
@@ -106,17 +146,17 @@ class Brick extends QUI\QDOM
      */
     public function check()
     {
-        if ( $this->getAttribute( 'type' ) == 'content' ) {
+        if ($this->getAttribute('type') == 'content') {
             return $this;
         }
 
         $Control = $this->_getControl();
 
-        if ( !$Control ) {
-            throw new QUI\Exception( 'Control not found. Brick could not be created' );
+        if (!$Control) {
+            throw new QUI\Exception('Control not found. Brick could not be created');
         }
 
-        return $Control;
+        return $this;
     }
 
     /**
@@ -126,17 +166,61 @@ class Brick extends QUI\QDOM
      */
     public function create()
     {
-        if ( $this->getAttribute( 'type' ) == 'content' ) {
-            return $this->getAttribute( 'content' );
+        if ($this->getAttribute('type') == 'content') {
+
+            $classesStr = '';
+            $_classes   = array(
+                'brick-' . $this->_id
+            );
+
+            foreach ($this->_cssClasses as $cssClass) {
+                $_classes[] = $cssClass;
+            }
+
+            if ($this->getAttribute('classes')) {
+                $classes = explode(' ', $this->getAttribute('classes'));
+
+                foreach ($classes as $class) {
+                    $class = trim($class);
+                    $class = preg_replace('/[^a-zA-Z0-9\-]/', '', $class);
+
+                    $_classes[] = $class;
+                }
+            }
+
+            $_classes   = array_unique($_classes);
+            $classesStr = implode($_classes, ' ');
+            $classesStr = 'class="'. $classesStr .'"';
+            
+            return "<div {$classesStr}>{$this->getAttribute('content')}</div>";
         }
 
         $Control = $this->_getControl();
 
-        if ( !$Control ) {
-            throw new QUI\Exception( 'Control not found. Brick could not be created' );
+        if (!$Control) {
+            throw new QUI\Exception('Control not found. Brick could not be created');
         }
 
-        $Control->setAttributes( $this->getSettings() );
+        $Control->setAttributes($this->getSettings());
+
+        if ($this->getAttribute('classes')) {
+            $classes = explode(' ', $this->getAttribute('classes'));
+
+            foreach ($classes as $class) {
+                $class = trim($class);
+                $class = preg_replace('/[^a-zA-Z0-9\-]/', '', $class);
+
+                $Control->addCSSClass($class);
+            }
+        }
+
+        if ($this->_id) {
+            $Control->addCSSClass('brick-' . $this->_id);
+        }
+
+        foreach ($this->_cssClasses as $cssClass) {
+            $Control->addCSSClass($cssClass);
+        }
 
         return $Control->create();
     }
@@ -148,22 +232,33 @@ class Brick extends QUI\QDOM
      */
     protected function _getControl()
     {
-        $Ctrl = $this->getAttribute( 'type' );
+        if ($this->_Control) {
+            return $this->_Control;
+        }
 
-        if ( $Ctrl === 'content' ) {
+        $Ctrl = $this->getAttribute('type');
+
+        if ($Ctrl === 'content') {
             return true;
         }
 
-        if ( !is_callable( $Ctrl ) && !class_exists( $Ctrl ) ) {
+        if (!is_callable($Ctrl) && !class_exists($Ctrl)) {
             return false;
         }
 
         /* @var $Control \QUI\Control */
-        $Control = new $Ctrl( $this->getSettings() );
+        $Control = new $Ctrl($this->getSettings());
 
-        if ( !($Control instanceof QUI\Control) || !$Control ) {
+        $Control->setAttribute('height', $this->getAttribute('height'));
+        $Control->setAttribute('width', $this->getAttribute('width'));
+        $Control->setAttribute('content', $this->getAttribute('content'));
+
+
+        if (!($Control instanceof QUI\Control) || !$Control) {
             return false;
         }
+
+        $this->_Control = $Control;
 
         return $Control;
     }
@@ -185,8 +280,8 @@ class Brick extends QUI\QDOM
      */
     public function setSettings($settings)
     {
-        foreach ( $settings as $key => $value ) {
-            $this->setSetting( $key, $value );
+        foreach ($settings as $key => $value) {
+            $this->setSetting($key, $value);
         }
     }
 
@@ -194,12 +289,13 @@ class Brick extends QUI\QDOM
      * Return the setting of the brick
      *
      * @param String $name - Name of the setting
+     *
      * @return Bool|String
      */
     public function getSetting($name)
     {
-        if ( isset( $this->_settings[ $name ] ) ) {
-            return $this->_settings[ $name ];
+        if (isset($this->_settings[$name])) {
+            return $this->_settings[$name];
         }
 
         return false;
@@ -213,8 +309,28 @@ class Brick extends QUI\QDOM
      */
     public function setSetting($name, $value)
     {
-        if ( isset( $this->_settings[ $name ] ) ) {
-            $this->_settings[ $name ] = $value;
+        if (isset($this->_settings[$name])) {
+            $this->_settings[$name] = $value;
         }
+    }
+
+    /**
+     * This fields can be overwritten by another user
+     *
+     * @return array
+     */
+    public function getCustomFields()
+    {
+        return $this->_customfields;
+    }
+
+    /**
+     * Add an exxtra CSS Class to the control
+     *
+     * @param String $cssClass
+     */
+    public function addCSSClass($cssClass)
+    {
+        $this->_cssClasses[] = $cssClass;
     }
 }

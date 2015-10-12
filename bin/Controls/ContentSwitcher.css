@@ -1,22 +1,22 @@
 
-.quiqqer-bricks-socialBox-entry {
+.quiqqer-bricks-contentSwitcher-entry {
     float: left;
 }
 
-.quiqqer-bricks-socialBox-entry label {
+.quiqqer-bricks-contentSwitcher-entry label {
     clear: both !important;
     float: left !important;
     margin: 0 0 10px 0 !important;
     width: 100% !important;
 }
 
-.quiqqer-bricks-socialBox-entry span {
+.quiqqer-bricks-contentSwitcher-entry span {
     float: left;
     line-height: 30px;
     width: 140px;
 }
 
-.quiqqer-bricks-socialBox-entry input {
+.quiqqer-bricks-contentSwitcher-entry input {
     clear: none;
     float: left;
     width: calc( 100% - 140px );

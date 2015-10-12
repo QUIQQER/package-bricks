@@ -1,0 +1,38 @@
+<script>
+
+    var myCenter = new google.maps.LatLng(51.149168, 7.106579);
+
+    function initialize()
+    {
+        var eigenschaften = {
+            scrollwheel     :   false,
+            zoomControl     :   true,
+            center          :   myCenter,
+            zoom            :   12,
+            disableDefaultUI:   true,
+            mypTypeId       :   google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById("GoogleMaps"), eigenschaften);
+
+        var marker = new google.maps.Marker({
+            position:   myCenter,
+        });
+
+        /* Mapmarker */
+
+         var marker=new google.maps.Marker({
+         position:myCenter,
+         });
+
+         marker.setMap(map);
+
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+
+<div class="{$this->getAttribute('grid-class-row')}">
+    <div id="GoogleMaps"></div>
+</div>

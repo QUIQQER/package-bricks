@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains QUI\Bricks\Controls\Banner
+ * This file contains QUI\Bricks\Controls\GoogleMaps
  */
 
 namespace QUI\Bricks\Controls;
@@ -9,11 +9,11 @@ namespace QUI\Bricks\Controls;
 use QUI;
 
 /**
- * Class Banner
+ * Class GoogleMaps
  *
  * @package quiqqer/bricks
  */
-class Banner extends QUI\Control
+class GoogleMaps extends QUI\Control
 {
     /**
      * constructor
@@ -26,15 +26,15 @@ class Banner extends QUI\Control
         $this->setAttributes(array(
             'title'    => '',
             'text'     => '',
-            'class'    => 'quiqqer-bricks-banner',
+            'class'    => 'quiqqer-bricks-googlemaps',
             'nodeName' => 'section'
         ));
 
         $this->addCSSFile(
-            dirname(__FILE__).'/Banner.css'
+            dirname(__FILE__).'/GoogleMaps.css'
         );
 
-        parent::setAttributes($attributes);
+        parent::__construct($attributes);
     }
 
     /**
@@ -50,6 +50,6 @@ class Banner extends QUI\Control
             'this' => $this
         ));
 
-        return $Engine->fetch(dirname(__FILE__).'/Banner.html');
+        return $Engine->fetch(dirname(__FILE__).'/GoogleMaps.html');
     }
 }

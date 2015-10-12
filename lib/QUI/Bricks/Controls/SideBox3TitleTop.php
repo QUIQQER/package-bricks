@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains QUI\Bricks\Controls\SideBox2
+ * This file contains QUI\Bricks\Controls\SideBox3TitleTop
  */
 
 namespace QUI\Bricks\Controls;
@@ -13,33 +13,8 @@ use QUI;
  *
  * @package quiqqer/bricks
  */
-class SideBox2 extends QUI\Control
+class SideBox3TitleTop extends QUI\Bricks\Controls\SideBox3
 {
-    /**
-     * constructor
-     *
-     * @param Array $attributes
-     */
-    public function __construct($attributes = array())
-    {
-        // default options
-        $this->setAttributes(array(
-            'showImage'          => true,
-            'showTitle'          => true,
-            'showDescription'    => true,
-            'showContent'        => false,
-            'class'              => 'quiqqer-bricks-sidebox2',
-            'nodeName'           => 'section',
-            'site'               => false,
-            'limit'              => 2,
-            'order'              => 'release_from DESC',
-            'grid-class-row'     => 'row',
-            'grid-class-article' => '6u'
-        ));
-
-        parent::__construct($attributes);
-    }
-
     /**
      * (non-PHPdoc)
      *
@@ -48,10 +23,10 @@ class SideBox2 extends QUI\Control
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
-        $limit  = $this->getAttribute('limit');
+        $limit = $this->getAttribute('limit');
 
         if (!$limit) {
-            $limit = 2;
+            $limit = 3;
         }
 
         // order
@@ -83,11 +58,12 @@ class SideBox2 extends QUI\Control
             )
         );
 
+
         $Engine->assign(array(
             'this'     => $this,
             'children' => $children
         ));
 
-        return $Engine->fetch(dirname(__FILE__) . '/SideBox2.html');
+        return $Engine->fetch(dirname(__FILE__).'/SideBox3TitleTop.html');
     }
 }

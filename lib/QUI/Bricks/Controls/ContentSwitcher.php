@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains QUI\Bricks\Controls\SocialBox
+ * This file contains QUI\Bricks\Controls\ContentSwitcher
  */
 
 namespace QUI\Bricks\Controls;
@@ -9,11 +9,11 @@ namespace QUI\Bricks\Controls;
 use QUI;
 
 /**
- * Class SocialBox
+ * Class ContentSwitcher
  *
  * @package quiqqer/bricks
  */
-class SocialBox extends QUI\Control
+class ContentSwitcher extends QUI\Control
 {
     /**
      * constructor
@@ -24,14 +24,15 @@ class SocialBox extends QUI\Control
     {
         // default options
         $this->setAttributes(array(
-            'title'      => 'Social',
-            'socialList' => false
+            'title'      => 'Content Switcher',
+            'contentList' => false,
+            'entries' => array()
         ));
 
-        parent::setAttributes($attributes);
+        parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/SocialBox.css'
+            dirname(__FILE__).'/ContentSwitcher.css'
         );
     }
 
@@ -43,19 +44,18 @@ class SocialBox extends QUI\Control
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
-        $socialList = $this->getAttribute('socialList');
+        $entries = $this->getAttribute('entries');
 
-        if ($socialList) {
-            $socialList = json_decode($socialList, true);
+        if (is_string($entries)) {
+            $entries = json_decode($entries, true);
         }
-
 
         $Engine->assign(array(
             'this'       => $this,
-            'socialList' => $socialList
+            'entries' => $entries
         ));
 
 
-        return $Engine->fetch(dirname(__FILE__).'/SocialBox.html');
+        return $Engine->fetch(dirname(__FILE__).'/ContentSwitcher.html');
     }
 }
