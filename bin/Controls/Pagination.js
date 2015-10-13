@@ -386,7 +386,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             var lastSize = this.$Last.getSize().x,
                 comSize  = this.$Last.getComputedSize();
 
-            lastSize = lastSize + comSize['padding-right'] + comSize['padding-left'];
+            lastSize = lastSize + (comSize['padding-right'] || comSize['padding-left']);
 
             this.$showMax = (elmSize.x / lastSize).floor();
 
