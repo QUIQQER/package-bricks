@@ -383,10 +383,11 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
             // we must calc the max sheets
             // calc with last sheets, its the longest
-            var lastSize = this.$Last.getSize().x,
-                comSize  = this.$Last.getComputedSize();
+            var lastSize = this.$Last.getSize().x;
 
-            lastSize = lastSize + comSize['margin-right'] + comSize['margin-left'];
+            lastSize = lastSize +
+                       this.$Last.getStyle('marginRight').toInt() +
+                       this.$Last.getStyle('marginLeft').toInt();
 
             this.$showMax = (elmSize.x / lastSize).floor();
 
