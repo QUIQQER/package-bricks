@@ -51,7 +51,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 onImport: this.$onImport
             });
 
-            QUI.addEvent('resize', function() {
+            QUI.addEvent('resize', function () {
                 this.$redraw(true);
             }.bind(this));
         },
@@ -120,10 +120,10 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 }).inject(this.$Next, 'before');
             }
 
-            var LastSheet = this.$sheets[this.$sheets.length-1],
+            var LastSheet = this.$sheets[this.$sheets.length - 1],
                 last      = LastSheet.get('data-page').toInt();
 
-            for (i = last+1; i < this.$lastSheetNumber; i++) {
+            for (i = last + 1; i < this.$lastSheetNumber; i++) {
                 new Element('a', {
                     html       : i,
                     href       : '?sheet=' + i + '&limit=' + params.limit,
@@ -139,7 +139,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
             var lastSize = LastSheet.getSize().x;
 
-            this.$sheets.each(function(Sheet) {
+            this.$sheets.each(function (Sheet) {
                 Sheet.setStyle('width', lastSize);
             });
 
@@ -154,10 +154,10 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             this.$registerEvents();
 
             moofx(this.$Container).animate({
-                opacity : 1
+                opacity: 1
             }, {
                 duration: 200
-            })
+            });
         },
 
         /**
@@ -366,14 +366,9 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
         /**
          * new draw aff the pagination
-         *
-         * @param {Boolean} [force] - force redraw
          */
-        $redraw: function (force) {
-            var elmSize   = this.$Container.getSize(),
-                sheetSize = this.$First.getSize();
-
-            force = force || false;
+        $redraw: function () {
+            var elmSize   = this.$Container.getSize();
 
             if (!this.$sheets.length) {
                 return;
@@ -387,22 +382,26 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             }
 
             // we must calc the max sheets
-                // calc with last sheets, its the longest
-                var lastSize = this.$Last.getSize().x;
+            // calc with last sheets, its the longest
+            var lastSize = this.$Last.getSize().x,
+                comSize  = this.$Last.getComputedSize();
 
-                this.$showMax = (elmSize.x / lastSize).floor();
-                if (current == 1) {
-                    this.$showMax = this.$showMax - 5;
-                } else {
-                    this.$showMax = this.$showMax - 6;
-                }
+            lastSize = lastSize + comSize['padding-right'] + comSize['padding-left'];
+
+            this.$showMax = (elmSize.x / lastSize).floor();
+
+            if (current == 1) {
+                this.$showMax = this.$showMax - 5;
+            } else {
+                this.$showMax = this.$showMax - 6;
+            }
 
             var leftRight = (this.$showMax / 2).floor(),
                 start     = current - leftRight,
                 end       = current + leftRight;
 
-            if (this.$showMax != end-start) {
-                start = start - (this.$showMax-(end-start));
+            if (this.$showMax != end - start) {
+                start = start - (this.$showMax - (end - start));
             }
 
 
@@ -445,21 +444,6 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             } else {
                 this.$MoreNext.setStyle('display', null);
             }
-
-            //
-            //return;
-            //
-            //if (no === 0) {
-            //    // disable first and prev
-            //    this.$First.addClass('quiqqer-sheets-desktop-disabled');
-            //    this.$Prev.addClass('quiqqer-sheets-desktop-disabled');
-            //
-            //} else if (no >= this.$sheets.length - 1) {
-            //    // disable last and next
-            //    this.$Last.addClass('quiqqer-sheets-desktop-disabled');
-            //    this.$Next.addClass('quiqqer-sheets-desktop-disabled');
-            //}
-            //this.$showMax;
         }
     });
 });
