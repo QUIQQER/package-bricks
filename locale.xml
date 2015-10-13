@@ -356,6 +356,22 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Baustein-Einstellungen]]></de>
             <en><![CDATA[Brick settings]]></en>
         </locale>
+
+        <locale name="site.area.window.noBricksInArea.title">
+            <de><![CDATA[Dieser Zone ist kein Baustein zugeordnet]]></de>
+            <en><![CDATA[No brick is assigned to this area]]></en>
+        </locale>
+        <locale name="site.area.window.noBricksInArea.content" html="true">
+            <de><![CDATA[
+            Dieser Zone ist kein Baustein zugeordnet.<br />
+            Bausteine können Sie unter <b>Verwaltung -> Bausteine</b> verwalten und zuordnen.
+            ]]></de>
+            <en><![CDATA[
+            No brick is assigned to this area<br />
+            Bricks can be under <b> Settings -> Blocks </ b> managed and assigned.
+            ]]></en>
+        </locale>
+
         <locale name="manager.button.add">
             <de><![CDATA[Baustein hinzufügen]]></de>
             <en><![CDATA[Add a Brick]]></en>
