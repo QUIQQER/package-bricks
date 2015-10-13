@@ -1,4 +1,3 @@
-
 /**
  * Brick manager
  *
@@ -32,18 +31,17 @@ define('package/quiqqer/bricks/bin/Manager', [
 
     'css!package/quiqqer/bricks/bin/Manager.css'
 
-], function(QUI, QUIPanel, QUISelect, QUIButton, QUISeperator, QUIConfirm, Grid, QUILocale, Projects, Ajax)
-{
+], function (QUI, QUIPanel, QUISelect, QUIButton, QUISeperator, QUIConfirm, Grid, QUILocale, Projects, Ajax) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
 
     return new Class({
 
-        Extends : QUIPanel,
-        Type    : 'package/quiqqer/bricks/bin/Manager',
+        Extends: QUIPanel,
+        Type   : 'package/quiqqer/bricks/bin/Manager',
 
-        Binds : [
+        Binds: [
             'loadBricksFromProject',
             'refresh',
             '$refreshProjectLanguages',
@@ -55,21 +53,20 @@ define('package/quiqqer/bricks/bin/Manager', [
             '$onClick'
         ],
 
-        options : {
-            title : QUILocale.get(lg, 'menu.bricks.text')
+        options: {
+            title: QUILocale.get(lg, 'menu.bricks.text')
         },
 
-        initialize : function(options)
-        {
-            this.parent( options );
+        initialize: function (options) {
+            this.parent(options);
 
             this.$Grid          = false;
             this.$ProjectSelect = false;
             this.$ProjectLangs  = false;
 
             this.addEvents({
-                onCreate : this.$onCreate,
-                onResize : this.$onResize
+                onCreate: this.$onCreate,
+                onResize: this.$onResize
             });
         },
 
@@ -78,8 +75,7 @@ define('package/quiqqer/bricks/bin/Manager', [
          *
          * @param {Function} [callback] - callback function
          */
-        refresh : function(callback)
-        {
+        refresh: function (callback) {
             if (!this.$Elm) {
                 return;
             }
@@ -90,8 +86,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.Loader.show();
 
-            this.getBricksFromProject(project, lang, function(result)
-            {
+            this.getBricksFromProject(project, lang, function (result) {
                 if (typeof callback === 'function') {
                     callback();
                 }
@@ -99,12 +94,12 @@ define('package/quiqqer/bricks/bin/Manager', [
                 var options = self.$Grid.options,
                     page    = parseInt(options.page),
                     perPage = parseInt(options.perPage),
-                    start = (page-1) * perPage;
+                    start   = (page - 1) * perPage;
 
                 self.$Grid.setData({
-                    data  : result.slice(start, start+perPage),
-                    page  : page,
-                    total : result.length
+                    data : result.slice(start, start + perPage),
+                    page : page,
+                    total: result.length
                 });
 
                 self.refreshButtons();
@@ -115,14 +110,12 @@ define('package/quiqqer/bricks/bin/Manager', [
         /**
          * Refresh the buttons status
          */
-        refreshButtons : function()
-        {
+        refreshButtons: function () {
             var selected  = this.$Grid.getSelectedData(),
                 AddButton = this.getButtons('brick-add'),
                 DelButton = this.getButtons('brick-delete');
 
-            if (!selected.length)
-            {
+            if (!selected.length) {
                 AddButton.enable();
                 DelButton.disable();
                 return;
@@ -139,25 +132,24 @@ define('package/quiqqer/bricks/bin/Manager', [
         /**
          * event : on create
          */
-        $onCreate : function()
-        {
+        $onCreate: function () {
             var self = this;
 
             // Buttons
             this.$ProjectSelect = new QUISelect({
-                name   : 'projects-name',
-                events : {
-                    onChange : this.$refreshProjectLanguages
+                name  : 'projects-name',
+                events: {
+                    onChange: this.$refreshProjectLanguages
                 }
             });
 
             this.$ProjectLangs = new QUISelect({
-                name   : 'projects-langs',
-                events : {
-                    onChange : this.refresh
+                name  : 'projects-langs',
+                events: {
+                    onChange: this.refresh
                 },
-                styles : {
-                    width : 80
+                styles: {
+                    width: 80
                 }
             });
 
@@ -167,22 +159,22 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.addButton(
                 new QUIButton({
-                    text     : QUILocale.get(lg, 'manager.button.add'),
-                    name     : 'brick-add',
-                    disabled : true,
-                    events   : {
-                        onClick : this.$openCreateDialog
+                    text    : QUILocale.get(lg, 'manager.button.add'),
+                    name    : 'brick-add',
+                    disabled: true,
+                    events  : {
+                        onClick: this.$openCreateDialog
                     }
                 })
             );
 
             this.addButton(
                 new QUIButton({
-                    text     : QUILocale.get(lg, 'manager.button.delete'),
-                    name     : 'brick-delete',
-                    disabled : true,
-                    events   : {
-                        onClick : this.$openDeleteDialog
+                    text    : QUILocale.get(lg, 'manager.button.delete'),
+                    name    : 'brick-delete',
+                    disabled: true,
+                    events  : {
+                        onClick: this.$openDeleteDialog
                     }
                 })
             );
@@ -193,43 +185,41 @@ define('package/quiqqer/bricks/bin/Manager', [
             );
 
             this.$Grid = new Grid(Container, {
-                columnModel : [{
-                    header    : QUILocale.get('quiqqer/system', 'id'),
-                    dataIndex : 'id',
-                    dataType  : 'integer',
-                    width     : 40
+                columnModel      : [{
+                    header   : QUILocale.get('quiqqer/system', 'id'),
+                    dataIndex: 'id',
+                    dataType : 'integer',
+                    width    : 40
                 }, {
-                    header    : QUILocale.get('quiqqer/system', 'title'),
-                    dataIndex : 'title',
-                    dataType  : 'string',
-                    width     : 140
+                    header   : QUILocale.get('quiqqer/system', 'title'),
+                    dataIndex: 'title',
+                    dataType : 'string',
+                    width    : 140
                 }, {
-                    header    : QUILocale.get('quiqqer/system', 'description'),
-                    dataIndex : 'description',
-                    dataType  : 'string',
-                    width     : 300
+                    header   : QUILocale.get('quiqqer/system', 'description'),
+                    dataIndex: 'description',
+                    dataType : 'string',
+                    width    : 300
                 }, {
-                    header    : QUILocale.get(lg, 'brick.type'),
-                    dataIndex : 'type',
-                    dataType  : 'string',
-                    width     : 200
+                    header   : QUILocale.get(lg, 'brick.type'),
+                    dataIndex: 'type',
+                    dataType : 'string',
+                    width    : 200
                 }],
-                multipleSelection : true,
-                pagination: true
+                multipleSelection: true,
+                pagination       : true
             });
 
             this.$Grid.addEvents({
-                onRefresh  : this.refresh,
-                onDblClick : this.$onDblClick,
-                onClick    : this.$onClick
+                onRefresh : this.refresh,
+                onDblClick: this.$onDblClick,
+                onClick   : this.$onClick
             });
 
             this.Loader.show();
 
-            Projects.getList(function(projects)
-            {
-                for (var project in projects)
-                {
+            Projects.getList(function (projects) {
+                for (var project in projects) {
                     if (!projects.hasOwnProperty(project)) {
                         continue;
                     }
@@ -240,7 +230,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                 }
 
                 self.$ProjectSelect.setValue(
-                    self.$ProjectSelect.firstChild().getAttribute( 'value' )
+                    self.$ProjectSelect.firstChild().getAttribute('value')
                 );
             });
         },
@@ -248,9 +238,8 @@ define('package/quiqqer/bricks/bin/Manager', [
         /**
          * event : on resize
          */
-        $onResize : function()
-        {
-            if ( !this.$Grid ) {
+        $onResize: function () {
+            if (!this.$Grid) {
                 return;
             }
 
@@ -270,8 +259,7 @@ define('package/quiqqer/bricks/bin/Manager', [
         /**
          * event : dbl click
          */
-        $onDblClick : function()
-        {
+        $onDblClick: function () {
             this.editBrick(
                 this.$Grid.getSelectedData()[0].id
             );
@@ -280,45 +268,40 @@ define('package/quiqqer/bricks/bin/Manager', [
         /**
          * event : click
          */
-        $onClick : function()
-        {
+        $onClick: function () {
             this.refreshButtons();
         },
 
         /**
          * Refresh the project language dropdown
          */
-        $refreshProjectLanguages : function()
-        {
+        $refreshProjectLanguages: function () {
             var self          = this,
                 activeProject = this.$ProjectSelect.getValue();
 
-            Projects.getList(function(projects)
-            {
-                for ( var project in projects )
-                {
-                    if ( !projects.hasOwnProperty( project ) ) {
+            Projects.getList(function (projects) {
+                for (var project in projects) {
+                    if (!projects.hasOwnProperty(project)) {
                         continue;
                     }
 
-                    if ( activeProject != project ) {
+                    if (activeProject != project) {
                         continue;
                     }
 
-                    var langs = projects[ project ].langs;
-                        langs = langs.split( ',' );
+                    var langs = projects[project].langs;
+                    langs     = langs.split(',');
 
                     self.$ProjectLangs.clear();
 
-                    for ( var i = 0, len = langs.length; i < len; i++ )
-                    {
+                    for (var i = 0, len = langs.length; i < len; i++) {
                         self.$ProjectLangs.appendChild(
-                            langs[ i ], langs[ i ], 'icon-home'
+                            langs[i], langs[i], 'icon-home'
                         );
                     }
 
                     self.$ProjectLangs.setValue(
-                        self.$ProjectLangs.firstChild().getAttribute( 'value' )
+                        self.$ProjectLangs.firstChild().getAttribute('value')
                     );
                 }
             });
@@ -327,92 +310,82 @@ define('package/quiqqer/bricks/bin/Manager', [
         /**
          * Opens the brick creation dialog
          */
-        $openCreateDialog : function()
-        {
+        $openCreateDialog: function () {
             var self = this;
 
             new QUIConfirm({
-                title     : QUILocale.get( lg, 'manager.window.create.title' ),
-                icon      : 'icon-th',
-                maxHeight : 300,
-                maxWidth  : 400,
-                autoclose : false,
-                events    :
-                {
-                    onOpen : function(Win)
-                    {
+                title    : QUILocale.get(lg, 'manager.window.create.title'),
+                icon     : 'icon-th',
+                maxHeight: 300,
+                maxWidth : 400,
+                autoclose: false,
+                events   : {
+                    onOpen: function (Win) {
                         var Body = Win.getContent();
 
                         Win.Loader.show();
-                        Body.addClass( 'quiqqer-bricks-create' );
+                        Body.addClass('quiqqer-bricks-create');
 
                         Body.set(
                             'html',
 
                             '<label>' +
                             '   <span class="quiqqer-bricks-create-label-text">' +
-                                    QUILocale.get( lg, 'manager.window.create.label.title' ) +
+                            QUILocale.get(lg, 'manager.window.create.label.title') +
                             '   </span>' +
                             '   <input type="text" name="title" required="required" />' +
                             '</label>' +
                             '<label>' +
                             '   <span class="quiqqer-bricks-create-label-text">' +
-                                    QUILocale.get( lg, 'manager.window.create.label.type' ) +
+                            QUILocale.get(lg, 'manager.window.create.label.type') +
                             '   </span>' +
                             '   <select name="type"></select>' +
                             '</label>'
                         );
 
-                        self.getAvailableBricks(function(bricklist)
-                        {
-                            if ( !Body ) {
+                        self.getAvailableBricks(function (bricklist) {
+                            if (!Body) {
                                 return;
                             }
 
                             var i, len, group, title, val;
-                            var Select = Body.getElement( 'select'),
-                                Title  = Body.getElement( '[name="title"]');
+                            var Select = Body.getElement('select'),
+                                Title  = Body.getElement('[name="title"]');
 
-                            for ( i = 0, len = bricklist.length; i < len; i++ )
-                            {
-                                title = bricklist[ i ].title;
+                            for (i = 0, len = bricklist.length; i < len; i++) {
+                                title = bricklist[i].title;
 
-                                if ( 'group' in title )
-                                {
+                                if ('group' in title) {
                                     group = title.group;
                                     val   = title.var;
-                                } else
-                                {
-                                    group = title[ 0 ];
-                                    val   = title[ 1 ];
+                                } else {
+                                    group = title[0];
+                                    val   = title[1];
                                 }
 
                                 new Element('option', {
-                                    value : bricklist[ i ].control,
-                                    html  : QUILocale.get( group, val )
-                                }).inject( Select );
+                                    value: bricklist[i].control,
+                                    html : QUILocale.get(group, val)
+                                }).inject(Select);
                             }
 
-                            Title.focus.delay( 500, Title );
+                            Title.focus.delay(500, Title);
 
                             Win.Loader.hide();
                         });
                     },
 
-                    onSubmit : function(Win)
-                    {
+                    onSubmit: function (Win) {
                         Win.Loader.show();
 
                         var Body  = Win.getContent(),
-                            Title = Body.getElement( '[name="title"]' ),
-                            Type  = Body.getElement( '[name="type"]' );
+                            Title = Body.getElement('[name="title"]'),
+                            Type  = Body.getElement('[name="type"]');
 
-                        if ( Title.value === '' )
-                        {
-                            QUI.getMessageHandler(function(MH)
-                            {
+                        if (Title.value === '') {
+                            QUI.getMessageHandler(function (MH) {
                                 MH.addError(
-                                    QUILocale.get( lg, 'exception.brick.has.no.title' ),
+                                    QUILocale.get(lg, 'exception.brick.has.no.title'),
                                     Title
                                 );
                             });
@@ -427,14 +400,13 @@ define('package/quiqqer/bricks/bin/Manager', [
                             lang    = self.$ProjectLangs.getValue();
 
                         self.createBrick(project, lang, {
-                            title : Title.value,
-                            type  : Type.value
-                        }, function(brickId)
-                        {
+                            title: Title.value,
+                            type : Type.value
+                        }, function (brickId) {
                             Win.close();
 
-                            self.refresh(function() {
-                                self.editBrick( brickId );
+                            self.refresh(function () {
+                                self.editBrick(brickId);
                             });
                         });
                     }
@@ -445,45 +417,40 @@ define('package/quiqqer/bricks/bin/Manager', [
         /**
          * Opens the delete brick dialog
          */
-        $openDeleteDialog : function()
-        {
+        $openDeleteDialog: function () {
             var self     = this,
-                brickIds = this.$Grid.getSelectedData().map(function(brick) {
+                brickIds = this.$Grid.getSelectedData().map(function (brick) {
                     return brick.id;
                 });
 
             new QUIConfirm({
-                maxHeight : 300,
-                maxWidth  : 600,
-                autoclose : false,
-                title     : QUILocale.get( lg, 'manager.window.delete.title' ),
-                events    :
-                {
-                    onOpen : function(Win)
-                    {
+                maxHeight: 300,
+                maxWidth : 600,
+                autoclose: false,
+                title    : QUILocale.get(lg, 'manager.window.delete.title'),
+                events   : {
+                    onOpen: function (Win) {
                         var Content = Win.getContent(),
                             lists   = '<ul>';
 
-                        self.$Grid.getSelectedData().each(function(brick) {
-                            lists = lists +'<li>'+ brick.id +' - '+ brick.title +'</li>';
+                        self.$Grid.getSelectedData().each(function (brick) {
+                            lists = lists + '<li>' + brick.id + ' - ' + brick.title + '</li>';
                         });
 
-                        lists = lists +'</ul>';
+                        lists = lists + '</ul>';
 
                         Content.set(
                             'html',
-                            QUILocale.get( lg, 'manager.window.delete.information', {
-                                list : lists
+                            QUILocale.get(lg, 'manager.window.delete.information', {
+                                list: lists
                             })
                         );
                     },
 
-                    onSubmit : function(Win)
-                    {
+                    onSubmit: function (Win) {
                         Win.Loader.show();
 
-                        self.deleteBricks(brickIds, function()
-                        {
+                        self.deleteBricks(brickIds, function () {
                             Win.close();
                             self.refresh();
                         });
@@ -497,20 +464,19 @@ define('package/quiqqer/bricks/bin/Manager', [
          *
          * @param {Number} brickId
          */
-        editBrick : function(brickId)
-        {
+        editBrick: function (brickId) {
             require([
                 'package/quiqqer/bricks/bin/BrickEdit',
                 'utils/Panels'
-            ], function(BrickEdit, PanelUtils)
-            {
+            ], function (BrickEdit, PanelUtils) {
                 PanelUtils.openPanelInTasks(
                     new BrickEdit({
-                        id : brickId,
-                        projectName : this.$ProjectSelect.getValue(),
-                        projectLang : this.$ProjectLangs.getValue(),
-                        events : {
-                            onDelete : this.refresh
+                        '#id'      : 'brick-edit-'+ brickId,
+                        id         : brickId,
+                        projectName: this.$ProjectSelect.getValue(),
+                        projectLang: this.$ProjectLangs.getValue(),
+                        events     : {
+                            onDelete: this.refresh
                         }
                     })
                 );
@@ -528,11 +494,10 @@ define('package/quiqqer/bricks/bin/Manager', [
          *
          * @return Promise
          */
-        getAvailableBricks : function(callback)
-        {
-            return new Promise(function(resolve, reject) {
+        getAvailableBricks: function (callback) {
+            return new Promise(function (resolve, reject) {
 
-                Ajax.get('package_quiqqer_bricks_ajax_getAvailableBricks', function(result) {
+                Ajax.get('package_quiqqer_bricks_ajax_getAvailableBricks', function (result) {
 
                     if (typeof callback === 'function') {
                         callback(result);
@@ -540,8 +505,8 @@ define('package/quiqqer/bricks/bin/Manager', [
 
                     resolve(result);
                 }, {
-                    'package' : 'quiqqer/bricks',
-                    onError   : reject
+                    'package': 'quiqqer/bricks',
+                    onError  : reject
                 });
 
             });
@@ -556,11 +521,10 @@ define('package/quiqqer/bricks/bin/Manager', [
          *
          * @return Promise
          */
-        getBricksFromProject : function(project, lang, callback)
-        {
-            return new Promise(function(resolve, reject) {
+        getBricksFromProject: function (project, lang, callback) {
+            return new Promise(function (resolve, reject) {
 
-                Ajax.get('package_quiqqer_bricks_ajax_project_getBricks', function(result) {
+                Ajax.get('package_quiqqer_bricks_ajax_project_getBricks', function (result) {
 
                     if (typeof callback === 'function') {
                         callback(result);
@@ -568,12 +532,12 @@ define('package/quiqqer/bricks/bin/Manager', [
 
                     resolve(result);
                 }, {
-                    'package' : 'quiqqer/bricks',
-                    project   : JSON.encode({
-                        name : project,
-                        lang : lang
+                    'package': 'quiqqer/bricks',
+                    project  : JSON.encode({
+                        name: project,
+                        lang: lang
                     }),
-                    onError   : reject
+                    onError  : reject
                 });
 
             });
@@ -589,11 +553,10 @@ define('package/quiqqer/bricks/bin/Manager', [
          *
          * @return Promise
          */
-        createBrick : function(project, lang, data, callback)
-        {
-            return new Promise(function(resolve, reject) {
+        createBrick: function (project, lang, data, callback) {
+            return new Promise(function (resolve, reject) {
 
-                Ajax.post('package_quiqqer_bricks_ajax_project_createBrick', function(brickId) {
+                Ajax.post('package_quiqqer_bricks_ajax_project_createBrick', function (brickId) {
 
                     if (typeof callback === 'function') {
                         callback(brickId);
@@ -601,13 +564,13 @@ define('package/quiqqer/bricks/bin/Manager', [
 
                     resolve(brickId);
                 }, {
-                    'package' : 'quiqqer/bricks',
-                    project : JSON.encode({
-                        name : project,
-                        lang : lang
+                    'package': 'quiqqer/bricks',
+                    project  : JSON.encode({
+                        name: project,
+                        lang: lang
                     }),
-                    data : JSON.encode(data),
-                    onError   : reject
+                    data     : JSON.encode(data),
+                    onError  : reject
                 });
 
             });
@@ -621,15 +584,14 @@ define('package/quiqqer/bricks/bin/Manager', [
          *
          * @return Promise
          */
-        deleteBricks : function(brickIds, callback)
-        {
+        deleteBricks: function (brickIds, callback) {
             var panels = QUI.Controls.getByType(
                 'package/quiqqer/bricks/bin/BrickEdit'
             );
 
-            return new Promise(function(resolve, reject) {
+            return new Promise(function (resolve, reject) {
 
-                Ajax.post('package_quiqqer_bricks_ajax_brick_delete', function() {
+                Ajax.post('package_quiqqer_bricks_ajax_brick_delete', function () {
 
                     if (typeof callback === 'function') {
                         callback();
@@ -651,9 +613,9 @@ define('package/quiqqer/bricks/bin/Manager', [
                     }
 
                 }, {
-                    'package' : 'quiqqer/bricks',
-                    brickIds  : JSON.encode(brickIds),
-                    onError   : reject
+                    'package': 'quiqqer/bricks',
+                    brickIds : JSON.encode(brickIds),
+                    onError  : reject
                 });
 
             });
