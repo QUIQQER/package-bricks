@@ -259,7 +259,7 @@ class Pagination extends QUI\Control
     public function setGetParams($name, $value)
     {
         $name  = QUI\Utils\Security\Orthos::clear($name);
-        $value = QUI\Utils\Security\Orthos::clear($value);
+        $value = QUI\Utils\Security\Orthos::clearFormRequest($value);
 
         if (empty($value)) {
 
@@ -270,7 +270,7 @@ class Pagination extends QUI\Control
             return;
         }
 
-        $this->_getParams[$name] = $value;
+        $this->_getParams[$name] = urlencode($value);
     }
 
     /**
