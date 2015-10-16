@@ -228,7 +228,6 @@ class Pagination extends QUI\Control
     public function getSQLParams()
     {
         $result = array();
-        $limit = false;
 
         if ($this->getAttribute('limit')) {
             $result['limit'] = $this->getStart()
