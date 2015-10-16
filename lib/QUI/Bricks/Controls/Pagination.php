@@ -157,9 +157,11 @@ class Pagination extends QUI\Control
         $sheet = $this->getAttribute('sheet');
 
         $this->_getParams['sheet'] = $sheet;
-        $this->_getParams['order'] = $order;
         $this->_getParams['limit'] = $limit;
 
+        if (!empty($order)) {
+            $this->_getParams['order'] = $order;
+        }
 
         if ((!$count || $count == 1)
             && $this->getAttribute('limit') === false
@@ -225,16 +227,19 @@ class Pagination extends QUI\Control
      */
     public function getSQLParams()
     {
+        $result = array();
         $limit = false;
 
         if ($this->getAttribute('limit')) {
-            $limit = $this->getStart() . ',' . $this->getAttribute('limit');
+            $result['limit'] = $this->getStart()
+                               . ',' . $this->getAttribute('limit');
         }
 
-        return array(
-            'limit' => $limit,
-            'order' => $this->getAttribute('order')
-        );
+        if ($this->getAttribute('order')) {
+            $result['order'] = $this->getAttribute('order');
+        }
+        
+        return $result;
     }
 
     /**
