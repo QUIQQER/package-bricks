@@ -457,12 +457,34 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
 
         <!-- Content Switcher -->
+        <locale name="brick.ContentSwitcher.title">
+            <de><![CDATA[Baustein: Content Switcher]]></de>
+            <en><![CDATA[Brick: Content Switcher]]></en>
+        </locale>
         <locale name="ContentSwitcher.title">
             <de><![CDATA[Baustein-Überschrift]]></de>
             <en><![CDATA[]]></en>
         </locale>
-        <locale name="ContentSwitcher.socialList">
+        <locale name="ContentSwitcher.entries">
             <de><![CDATA[Einträge]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+
+        <!-- Image Brick -->
+        <locale name="bricks.Image.link">
+            <de><![CDATA[Baustein: Bild]]></de>
+            <en><![CDATA[Brick: Image]]></en>
+        </locale>
+        <locale name="Image.link">
+            <de><![CDATA[Link]]></de>
+            <en><![CDATA[Hyperlink]]></en>
+        </locale>
+        <locale name="Image.title">
+            <de><![CDATA[Baustein-Überschrift]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="Image.picture">
+            <de><![CDATA[Bild auswählen]]></de>
             <en><![CDATA[]]></en>
         </locale>
     </groups>

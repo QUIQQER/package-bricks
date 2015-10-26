@@ -82,8 +82,6 @@
         </brick>
 
 
-
-
         <!-- Content Switcher -->
         <brick control="\QUI\Bricks\Controls\ContentSwitcher">
             <title>
@@ -105,9 +103,25 @@
         </brick>
 
 
+        <!-- Image Brick -->
+        <brick control="\QUI\Bricks\Controls\Image">
+            <title>
+                <locale group="quiqqer/bricks" var="bricks.Image.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="bricks.Image.description"/>
+            </description>
 
+            <settings>
+                <setting name="link" class="project-site">
+                    <locale group="quiqqer/bricks" var="Image.link"/>
+                </setting>
 
-
+                <setting name="picture" class="media-image">
+                    <locale group="quiqqer/bricks" var="Image.picture"/>
+                </setting>
+            </settings>
+        </brick>
 
 
 
@@ -129,7 +143,7 @@
             </settings>
         </brick>
 
-        /* Maps */
+        <!-- Maps -->
 
         <brick control="\QUI\Bricks\Controls\GoogleMaps">
             <title>
