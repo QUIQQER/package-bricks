@@ -139,6 +139,22 @@ class Brick extends QUI\QDOM
     }
 
     /**
+     * Return the class type
+     *
+     * @return String
+     */
+    public function getType()
+    {
+        $Control = $this->_getControl();
+
+        if ($Control) {
+            return get_class($Control);
+        }
+
+        return get_class($this);
+    }
+
+    /**
      * Check, if control canbe created
      *
      * @throws QUI\Exception
@@ -168,8 +184,7 @@ class Brick extends QUI\QDOM
     {
         if ($this->getAttribute('type') == 'content') {
 
-            $classesStr = '';
-            $_classes   = array(
+            $_classes = array(
                 'brick-' . $this->_id
             );
 
