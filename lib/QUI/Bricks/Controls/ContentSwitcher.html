@@ -2,16 +2,13 @@
 {foreach from=$entries item=entry key=key}
 {assign var=img value=$entry.img}
 
-
 <!-- display on desktops, replace text and image position by adding a new entry  -->
-<div class="content-switcher hide-on-mobile">
+<section class="content-switcher hide-on-mobile">
     {assign var=modKey value=$key+1}
     {if $modKey && $modKey % 2 !== 0 }
         <div class="content-switcher-image">
             {if $img != ""}
-                <img width=300 height=auto src="{$entry.img}"/>
-            {else}
-                <img style="display: none;">
+                {image src=$entry.img width=300}
             {/if}
         </div>
         <div class="content-switcher-content">
@@ -26,27 +23,23 @@
 
         <div class="content-switcher-image">
             {if $img != ""}
-            <img width=300 height=auto src="{$entry.img}"/>
-            {else}
-            <img style="display: none;">
+                {image src=$entry.img width=300}
             {/if}
         </div>
     {/if}
-</div>
+</section>
 
 <!-- for small screens: image always comes above the text -->
-<div class="content-switcher hide-on-desktop">
+<section class="content-switcher hide-on-desktop">
     <div class="content-switcher-image">
         {if $img != ""}
-        <img width=300 height=auto src="{$entry.img}"/>
-        {else}
-        <img style="display: none;">
+            {image src=$entry.img width=300}
         {/if}
     </div>
     <div class="content-switcher-content">
         <h1>{$entry.title}</h1>
         <p>{$entry.content}</p>
     </div>
-</div>
+</section>
 
 {/foreach}
