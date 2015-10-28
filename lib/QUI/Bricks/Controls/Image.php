@@ -27,8 +27,7 @@ class Image extends QUI\Control
         // default options
         $this->setAttributes(array(
             'title'       => 'Image Brick',
-            'contentList' => false,
-            'entries'     => array()
+            'contentList' => false
         ));
 
         parent::__construct($attributes);
@@ -46,14 +45,14 @@ class Image extends QUI\Control
      */
     public function getBody()
     {
-        $Engine = QUI::getTemplateManager()->getEngine();
-        $entries = $this->getAttribute('entries');
+        $Engine     = QUI::getTemplateManager()->getEngine();
         $brickImage = $this->getAttribute('picture');
+        $brickLink  = $this->getAttribute('link');
 
         $Engine->assign(array(
-            'this'      => $this,
-            'entries'   => $entries,
-            'brickImag' => $brickImage
+            'this'          => $this,
+            'brickImage'    => $brickImage,
+            'brickLink'     => $brickLink
         ));
 
 
