@@ -12,3 +12,7 @@ a.brick-image-link:hover {
 a.brick-image-link {
     display: block;
 }
+
+img.brick-image {
+    max-width: 100%;
+}
