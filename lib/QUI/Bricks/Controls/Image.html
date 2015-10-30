@@ -1,6 +1,17 @@
 {assign var=img value=$brickImage}
-<section>
+{assign var=link value=$brickLink}
+<section class="content-body grid-100 mobile-grid-100 grid-parent brick-image">
 
-    {image src=$brickImage}
+    {$this->getAttribute('content')}
+
+    {if $link != ""}
+    <a class="brick-image-link" href="{$link}">
+    {/if}
+
+        {image src=$img}
+
+    {if $link != ""}
+    </a>
+    {/if}
 
 </section>
