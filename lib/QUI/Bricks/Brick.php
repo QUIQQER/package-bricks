@@ -147,7 +147,7 @@ class Brick extends QUI\QDOM
     {
         $Control = $this->_getControl();
 
-        if ($Control) {
+        if (is_object($Control)) {
             return get_class($Control);
         }
 
