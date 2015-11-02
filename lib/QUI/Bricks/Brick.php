@@ -348,4 +348,21 @@ class Brick extends QUI\QDOM
     {
         $this->_cssClasses[] = $cssClass;
     }
+
+    /**
+     * Match pattern agains the css classes
+     *
+     * @param string $pattern - The shell wildcard pattern.
+     * @return bool
+     */
+    public function hasCSSClass($pattern)
+    {
+        foreach ($this->_cssClasses as $cssClass) {
+            if (fnmatch($pattern, $cssClass)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
