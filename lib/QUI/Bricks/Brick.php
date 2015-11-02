@@ -357,6 +357,15 @@ class Brick extends QUI\QDOM
      */
     public function hasCSSClass($pattern)
     {
+        if ($this->getAttribute('classes')
+            && fnmatch($pattern, $this->getAttribute('classes'))) {
+            return true;
+        }
+
+        if (empty($this->_cssClasses)) {
+            return false;
+        }
+
         foreach ($this->_cssClasses as $cssClass) {
             if (fnmatch($pattern, $cssClass)) {
                 return true;
