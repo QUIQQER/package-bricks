@@ -24,18 +24,18 @@ class SideBox3 extends QUI\Control
     {
         // default options
         $this->setAttributes(array(
-            'showImage'          => true,
-            'showTitle'          => true,
-            'showDescription'    => true,
-            'showContent'        => false,
-            'class'              => 'quiqqer-bricks-sidebox3',
-            'nodeName'           => 'section',
-            'site'               => false,
-            'limit'              => 3,
-            'order'              => 'release_from DESC',
-            'grid-class-row'     => 'row',
-            'grid-class-article' => '4u'
+            'showImage'       => true,
+            'showTitle'       => true,
+            'showDescription' => true,
+            'showContent'     => false,
+            'class'           => 'quiqqer-bricks-sidebox3',
+            'nodeName'        => 'section',
+            'site'            => false,
+            'limit'           => 3,
+            'order'           => 'release_from DESC'
         ));
+
+        $this->addCSSFile(dirname(__FILE__) . '/SideBox3.css');
 
         parent::__construct($attributes);
     }

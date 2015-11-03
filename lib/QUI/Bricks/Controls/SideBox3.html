@@ -1,5 +1,5 @@
 
-<div class="{$this->getAttribute('grid-class-row')}">
+<div class="quiqqer-bricks-sidebox3">
 
     {if $this->getAttribute('content')}
     <div class="quiqqer-bricks-sidebox3-content">
@@ -7,10 +7,10 @@
     </div>
     {/if}
 
-    <div class="row" style="display: flex;">
+    <div class="quiqqer-bricks-sidebox3-row">
 
         {foreach from=$children item=Child key=key}
-        <article class="{$this->getAttribute('grid-class-article')} quiqqer-bricks-sidebox-article">
+        <article class="quiqqer-bricks-sidebox3-article">
             {if $this->getAttribute( 'showImage' )}
             <a href="{url site=$Child}" class="image">
                 {image src=$Child->getAttribute('image_site') width=640}
@@ -47,9 +47,9 @@
         </article>
 
         {assign var=modKey value=$key+1}
-        {if $modKey && $modKey % 3 === 0 && $Child@last}
+        {if $modKey && $modKey % 3 === 0 && !$Child@last}
             </div>
-            <div class="{$this->getAttribute('grid-class-row')}">
+            <div class="quiqqer-bricks-sidebox3-row">
         {/if}
 
         {/foreach}

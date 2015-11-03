@@ -1,0 +1,22 @@
+.quiqqer-bricks-sidebox3,
+.quiqqer-bricks-sidebox3-row {
+    float: left;
+    width: 100%;
+}
+
+.quiqqer-bricks-sidebox3-row {
+    display: flex;
+}
+
+.quiqqer-bricks-sidebox3-article {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    padding: 20px 10px 0 10px;
+    width: 33.3333%;
+}
+
+.quiqqer-bricks-sidebox3-content {
+    margin-bottom: 20px;
+}

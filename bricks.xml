@@ -337,6 +337,9 @@
                 <setting name="showShort" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.setting.showShort"/>
                 </setting>
+                <setting name="limit">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.limit"/>
+                </setting>
             </settings>
         </brick>
 
