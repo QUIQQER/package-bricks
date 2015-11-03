@@ -20,3 +20,18 @@
 .quiqqer-bricks-sidebox3-content {
     margin-bottom: 20px;
 }
+
+@media screen and (max-width: 736px) {
+    .quiqqer-bricks-sidebox3-row {
+        display: block;
+        flex: none;
+    }
+
+    .quiqqer-bricks-sidebox3-article {
+        display: block;
+        clear: both;
+        flex: none;
+        padding: 10px;
+        width: 100% !important;
+    }
+}
