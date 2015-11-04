@@ -123,6 +123,22 @@
             </settings>
         </brick>
 
+        <!-- Box Content -->
+        <brick control="\QUI\Bricks\Controls\BoxContent">
+            <title>
+                <locale group="quiqqer/bricks" var="bricks.BoxContent.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="bricks.BoxContent.description"/>
+            </description>
+
+            <settings>
+                <setting name="entries" data-qui="package/quiqqer/bricks/bin/Controls/BoxContent">
+                    <locale group="quiqqer/bricks" var="BoxContent.entries"/>
+                </setting>
+            </settings>
+        </brick>
+
 
 
         <brick control="\QUI\Bricks\Controls\Banner">

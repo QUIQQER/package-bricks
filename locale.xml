@@ -164,27 +164,6 @@
             <en><![CDATA[]]></en>
         </locale>
 
-        <!-- Google Maps -->
-        <locale name="brick.control.googlemaps.title">
-            <de><![CDATA[Baustein: Maps]]></de>
-            <en><![CDATA[Brick: maps]]></en>
-        </locale>
-        <locale name="brick.control.googlemaps.description">
-            <de><![CDATA[Einstellungen für Karten]]></de>
-            <en><![CDATA[Maps settings]]></en>
-        </locale>
-
-        <!-- Content Switcher -->
-        <locale name="bricks.ContentSwitcher.title">
-            <de><![CDATA[Baustein: Content Switcher]]></de>
-            <en><![CDATA[Content with image]]></en>
-        </locale>
-        <locale name="bricks.ContentSwitcher.description">
-            <de><![CDATA[Inhalt und Bild werden links und rechts abwechslend angezeigt]]></de>
-            <en><![CDATA[]]></en>
-        </locale>
-
-
         <locale name="brick.control.sidebox1.title">
             <de><![CDATA[Baustein: Einzelbox]]></de>
             <en><![CDATA[]]></en>
@@ -457,15 +436,43 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
 
         <!-- Content Switcher -->
-        <locale name="brick.ContentSwitcher.title">
+        <locale name="bricks.ContentSwitcher.title">
             <de><![CDATA[Baustein: Content Switcher]]></de>
-            <en><![CDATA[Brick: Content Switcher]]></en>
+            <en><![CDATA[Content with image]]></en>
+        </locale>
+        <locale name="bricks.ContentSwitcher.description">
+            <de><![CDATA[Inhalt und Bild werden links und rechts abwechslend angezeigt]]></de>
+            <en><![CDATA[]]></en>
         </locale>
         <locale name="ContentSwitcher.title">
             <de><![CDATA[Baustein-Überschrift]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="ContentSwitcher.entries">
+            <de><![CDATA[Einträge]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+
+        <!-- Google Maps -->
+        <locale name="brick.control.googlemaps.title">
+            <de><![CDATA[Baustein: Maps]]></de>
+            <en><![CDATA[Brick: maps]]></en>
+        </locale>
+        <locale name="brick.control.googlemaps.description">
+            <de><![CDATA[Einstellungen für Karten]]></de>
+            <en><![CDATA[Maps settings]]></en>
+        </locale>
+
+        <!-- Box Content -->
+        <locale name="bricks.BoxContent.title">
+            <de><![CDATA[Inhalt in Boxen]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="bricks.BoxContent.description">
+            <de><![CDATA[Inhalte werden in Boxen nebeneinander gestellt und zentriert]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="BoxContent.entries">
             <de><![CDATA[Einträge]]></de>
             <en><![CDATA[]]></en>
         </locale>

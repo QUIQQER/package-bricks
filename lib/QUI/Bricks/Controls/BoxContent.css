@@ -1,0 +1,8 @@
+.box-content {
+    display: flex;
+    align-content: center;
+}
+
+.box-content-entry {
+    padding-bottom: 40px;
+}
