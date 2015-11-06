@@ -176,6 +176,18 @@
             <de><![CDATA[Baustein: 3er-Box]]></de>
             <en><![CDATA[]]></en>
         </locale>
+        <locale name="brick.control.sidebox4.title">
+            <de><![CDATA[Baustein: 4er-Box]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.sidebox4.setting.site">
+            <de><![CDATA[Seiten hinzufügen]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.setting.limit">
+            <de><![CDATA[Limit]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
 
         <locale name="controls.pagination.mobile.option">
             <de><![CDATA[Seite [from] von [max]]]></de>
@@ -453,14 +465,34 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[]]></en>
         </locale>
 
-        <!-- Google Maps -->
-        <locale name="brick.control.googlemaps.title">
+        <!-- Simple Google Maps -->
+        <locale name="brick.control.simplegooglemaps.title">
             <de><![CDATA[Baustein: Maps]]></de>
             <en><![CDATA[Brick: maps]]></en>
         </locale>
-        <locale name="brick.control.googlemaps.description">
+        <locale name="brick.control.simplegooglemaps.description">
             <de><![CDATA[Einstellungen für Karten]]></de>
             <en><![CDATA[Maps settings]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.title">
+            <de><![CDATA[Title]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.street">
+            <de><![CDATA[Straße]]></de>
+            <en><![CDATA[Street]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.zip">
+            <de><![CDATA[PLZ]]></de>
+            <en><![CDATA[ZIP code]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.city">
+            <de><![CDATA[Stadt]]></de>
+            <en><![CDATA[City]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.api">
+            <de><![CDATA[API Key]]></de>
+            <en><![CDATA[API Key]]></en>
         </locale>
 
         <!-- Box Content -->

@@ -19,5 +19,4 @@
 .quiqqer-bricks-BoxContent-entry input {
     clear: none;
     float: left;
-    width: calc( 100% - 140px );
 }

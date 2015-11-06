@@ -1,0 +1,57 @@
+
+<div class="quiqqer-bricks-sidebox4">
+
+    {if $this->getAttribute('content')}
+    <div class="quiqqer-bricks-sidebox4-content">
+        {$this->getAttribute('content')}
+    </div>
+    {/if}
+
+    <div class="quiqqer-bricks-sidebox4-row">
+
+        {foreach from=$children item=Child key=key}
+        <article class="quiqqer-bricks-sidebox4-article">
+
+
+            {if $this->getAttribute( 'showImage' )}
+            <div href="{url site=$Child}" class="sidebox4-container">
+                {image src=$Child->getAttribute('image_site') width=650 class="sidebox4-container-image"}
+            </div>
+            {/if}
+
+            {if $this->getAttribute( 'showTitle' ) || $this->getAttribute( 'showShort' )}
+            <header>
+                {if $this->getAttribute( 'showTitle' )}
+                <h3 class="sidebox4-header">
+                    {$Child->getAttribute('title')}
+                </h3>
+                {/if}
+            </header>
+            {/if}
+
+            {if $this->getAttribute( 'showShort' )}
+            <p>
+                {text_passage text=$Child->getAttribute('short') start=0 end=120 striphtml=true append="..."}
+            </p>
+            {/if}
+
+            {if $this->getAttribute( 'showContent' )}
+            {$Child->getAttribute('content')}
+            {/if}
+
+            <footer class="article-button">
+                <a href="{url site=$Child}" class="sidebox-button">
+                    {locale group="quiqqer/bricks" var="continue.reading"}
+                </a>
+            </footer>
+        </article>
+
+        {assign var=modKey value=$key+1}
+        {if $modKey && $modKey % 4 === 0 && !$Child@last}
+    </div>
+    <div class="quiqqer-bricks-sidebox4-row">
+        {/if}
+
+        {/foreach}
+    </div>
+</div>

@@ -26,22 +26,22 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
             this.parent( options );
 
             this.setAttribute(
-                'entry',
+            'entry',
 
-                '<div class="quiqqer-bricks-ContentSwitcher-entry">' +
-                    '<label>' +
-                        '<span>Bild</span>' +
-                        '<input type="text" name="img" />' +
-                    '</label>' +
-                    '<label>' +
-                        '<span>Überschrift</span>' +
-                        '<input type="text" name="title" />' +
-                    '</label>' +
-                    '<label>' +
-                        '<span>Text</span>' +
-                        '<textarea name="content"></textarea>' +
-                    '</label>' +
-                '</div>'
+            '<div class="quiqqer-bricks-ContentSwitcher-entry">' +
+                '<label>' +
+                    '<span>Bild</span>' +
+                    '<input type="text" name="img" />' +
+                '</label>' +
+                '<label>' +
+                    '<span>Überschrift</span>' +
+                    '<input type="text" name="title" />' +
+                '</label>' +
+                '<label>' +
+                    '<span>Text</span>' +
+                    '<textarea name="content"></textarea>' +
+                '</label>' +
+            '</div>'
             );
         }
     });
