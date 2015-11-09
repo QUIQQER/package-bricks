@@ -49,12 +49,10 @@ class SimpleGoogleMaps extends QUI\Control
 
         $query = http_build_query(array(
             'key' => $this->getAttribute('api'),
-            'q'   => "{$brickCity}"
+            'q'   => "{$brickTitle},{$brickZip},{$brickStreet},{$brickCity}"
         ));
 
         $url = 'https://www.google.com/maps/embed/v1/place?'. $query;
-
-        echo $url;
 
         $Engine->assign(array(
             'url' => $url

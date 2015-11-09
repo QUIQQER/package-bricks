@@ -14,9 +14,7 @@
 
 
             {if $this->getAttribute( 'showImage' )}
-            <div href="{url site=$Child}" class="sidebox4-container">
                 {image src=$Child->getAttribute('image_site') width=650 class="sidebox4-container-image"}
-            </div>
             {/if}
 
             {if $this->getAttribute( 'showTitle' ) || $this->getAttribute( 'showShort' )}

@@ -36,8 +36,11 @@
 
 
 .sidebox4-container-image {
-    width: auto;
-    height: 250px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    width: 100%;
+    height: auto;
 }
 
 header {
@@ -79,7 +82,7 @@ h3.sidebox4-header {
         width: 100% !important;
     }
 
-    img {
+    .sidebox4-container-image {
         width: auto;
         height: 300px;
     }

@@ -1,25 +1,10 @@
-
-<section class="mobile-grid-100 grid-100 box-content grid-parent">
-
-    <div class="row obile-grid-100 grid-100 grid-parent">
-    {foreach from=$entries item=entry key=key}
-    {assign var=modKey value=$key+1}
-
-        <div class="box-content-entry
-            {if {count($entries)} == 1 }grid-100{/if}
-            {if {count($entries)} == 2 }grid-50{/if}
-            {if {count($entries)} == 3 }grid-33{/if}
-            {if {count($entries)} > 3 }grid-25{/if}
-            ">
-            <h4>{$entry.title}</h4>
-            <p>{$entry.text}</p>
-        </div>
-
-    {/foreach}
-    {if $modKey && $modKey % 4 == 0 && !$entries|end}
-        </div>
-        <div class="row">
-    {/if}
+<div class="quiqqer-box-content">
+{foreach from=$entries item=entry}
+    <div class="box-content-entry{$extraClass}">
+        <h4 title="{$entry.title|escape:"html"}">
+            {$entry.title}
+        </h4>
+        <p>{$entry.text}</p>
     </div>
-
-</section>
+{/foreach}
+</div>
