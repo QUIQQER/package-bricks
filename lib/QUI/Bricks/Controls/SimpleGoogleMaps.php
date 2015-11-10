@@ -48,17 +48,16 @@ class SimpleGoogleMaps extends QUI\Control
         $brickCity   = $this->getAttribute('city');
 
         $query = http_build_query(array(
-            'key' => $this->getAttribute('api'),
+            'key' => trim($this->getAttribute('api')),
             'q'   => "{$brickTitle},{$brickZip},{$brickStreet},{$brickCity}"
         ));
 
-        $url = 'https://www.google.com/maps/embed/v1/place?'. $query;
+        $url = 'https://www.google.com/maps/embed/v1/place?' . $query;
 
         $Engine->assign(array(
             'url' => $url
         ));
 
-
-        return $Engine->fetch(dirname(__FILE__).'/SimpleGoogleMaps.html');
+        return $Engine->fetch(dirname(__FILE__) . '/SimpleGoogleMaps.html');
     }
 }

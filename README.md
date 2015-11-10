@@ -20,6 +20,10 @@ Installation
 
 Der Paketname ist: quiqqer/bricks
 
+Nutzung des Simple Google Maps Baustein:
+- GoogleMap Key: https://console.developers.google.com/apis/library
+- Benötigtte APIS:  Google Maps Embed API, Google Maps JavaScript API, Google Static Maps API 
+
 
 Mitwirken
 ----------
