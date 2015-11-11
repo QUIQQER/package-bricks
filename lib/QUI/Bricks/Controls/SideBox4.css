@@ -30,7 +30,7 @@
     -moz-border-radius: 15px;
     border-radius: 15px;
     overflow: hidden;
-    width: 100%;
+    max-width: 100%;
     height: 180px;
 }
 
@@ -82,8 +82,4 @@ h3.sidebox4-header {
         width: 100% !important;
     }
 
-    .sidebox4-container-image {
-        width: auto;
-        height: 300px;
-    }
 }
