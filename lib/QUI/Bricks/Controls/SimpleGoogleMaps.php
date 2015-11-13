@@ -46,16 +46,17 @@ class SimpleGoogleMaps extends QUI\Control
         $brickStreet = $this->getAttribute('street');
         $brickZip    = $this->getAttribute('zip');
         $brickCity   = $this->getAttribute('city');
+        $zoom        = $this->getAttribute('zoom');
 
         $query = http_build_query(array(
             'key' => trim($this->getAttribute('api')),
             'q'   => "{$brickTitle},{$brickZip},{$brickStreet},{$brickCity}"
         ));
 
-        $url = 'https://www.google.com/maps/embed/v1/place?' . $query;
+        $url = 'https://www.google.com/maps/embed/v1/place?' . $query . "&zoom=" . $zoom . "&";
 
         $Engine->assign(array(
-            'url' => $url
+            'url'  => $url
         ));
 
         return $Engine->fetch(dirname(__FILE__) . '/SimpleGoogleMaps.html');

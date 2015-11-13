@@ -1,6 +1,7 @@
 #SimpleGoogleMaps {
     background: none;
     border: none;
+    display: block;
     height: 300px;
     width: 100%;
 }

@@ -490,6 +490,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Stadt]]></de>
             <en><![CDATA[City]]></en>
         </locale>
+        <locale name="brick.control.simplegooglemaps.settings.zoom">
+            <de><![CDATA[Zoom]]></de>
+            <en><![CDATA[Zoom]]></en>
+        </locale>
         <locale name="brick.control.simplegooglemaps.settings.api">
             <de><![CDATA[API Key]]></de>
             <en><![CDATA[API Key]]></en>

@@ -182,6 +182,10 @@
                 <setting name="city">
                     <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.city"/>
                 </setting>
+                <setting name="zoom" type="number">
+                    <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.zoom"/>
+                </setting>
+
                 <setting name="api">
                     <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.api"/>
                 </setting>
