@@ -1,5 +1,9 @@
-.brick-image > p {
-    margin-bottom: 20px;
+.brick-image-text {
+    margin-bottom: 40px;
+}
+
+.brick-image-picture-container {
+    text-align: center;
 }
 
 a.brick-image-link:hover {
@@ -13,6 +17,6 @@ a.brick-image-link {
     display: block;
 }
 
-img.brick-image {
+.brick-image-picture {
     max-width: 100%;
 }

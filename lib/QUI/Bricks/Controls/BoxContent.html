@@ -1,10 +1,15 @@
 <div class="quiqqer-box-content">
-{foreach from=$entries item=entry}
+    {if $this->getAttribute('content')}
+    <div class="grid-100 grid-parent">
+        {$this->getAttribute('content')}
+    </div>
+    {/if}
+    {foreach from=$entries item=entry}
     <div class="box-content-entry{$extraClass}">
         <h4 title="{$entry.title|escape:"html"}">
-            {$entry.title}
+        {$entry.title}
         </h4>
         <p>{$entry.text}</p>
     </div>
-{/foreach}
+    {/foreach}
 </div>

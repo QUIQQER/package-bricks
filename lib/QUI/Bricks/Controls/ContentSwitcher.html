@@ -1,9 +1,15 @@
 
+{if !$this->getAttribute('content') == ""}
+<div class="grid-100 grid-parent">
+    {$this->getAttribute('content')}
+</div>
+{/if}
+
 {foreach from=$entries item=entry key=key}
 {assign var=img value=$entry.img}
 
 <!-- display on desktops, replace text and image position by adding a new entry  -->
-<section class="content-switcher hide-on-mobile">
+<div class="content-switcher hide-on-mobile">
     {assign var=modKey value=$key+1}
     {if $modKey && $modKey % 2 !== 0 }
         <div class="content-switcher-image">
@@ -27,10 +33,10 @@
             {/if}
         </div>
     {/if}
-</section>
+</div>
 
 <!-- for small screens: image always comes above the text -->
-<section class="content-switcher hide-on-desktop">
+<div class="content-switcher hide-on-desktop">
     <div class="content-switcher-image">
         {if $img != ""}
             {image src=$entry.img width=300}
@@ -40,6 +46,6 @@
         <h1>{$entry.title}</h1>
         <p>{$entry.content}</p>
     </div>
-</section>
+</div>
 
 {/foreach}

@@ -2,16 +2,20 @@
 {assign var=link value=$brickLink}
 <dev class="content-body brick-image">
 
+    {if !$this->getAttribute('content') == ""}
+    <div class="grid-100 grid-parent brick-image-text">
     {$this->getAttribute('content')}
-
-    {if $link != ""}
-    <a class="brick-image-link" href="{$link}">
+    </div>
     {/if}
 
-        {image src=$img class="brick-image"}
-
-    {if $link != ""}
-    </a>
-    {/if}
+    <div class="grid-100 grid-parent brick-image-picture-container">
+        {if $link != ""}
+        <a class="brick-image-link" href="{$link}">
+        {/if}
+        {image src=$img class="brick-image-picture"}
+        {if $link != ""}
+        </a>
+        {/if}
+    </div>
 
 </dev>
