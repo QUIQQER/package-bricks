@@ -71,6 +71,8 @@
             <de><![CDATA[Lassen Sie auf Ihrer Webseite in der rechten oder linken Sidebar eine Seiten-Navigation anzeigen]]></de>
             <en><![CDATA[]]></en>
         </locale>
+
+        <!-- Nav (QUI) -->
         <locale name="brick.control.navigation.setting.startId">
             <de><![CDATA[Start-ID]]></de>
             <en><![CDATA[Start ID]]></en>
@@ -83,6 +85,22 @@
             <de><![CDATA[Navigationstiefe]]></de>
             <en><![CDATA[Navigation levels]]></en>
         </locale>
+        <locale name="brick.control.navigation.setting.homeIcon">
+            <de><![CDATA[Home Icon]]></de>
+            <en><![CDATA[Home Icon]]></en>
+        </locale>
+        <locale name="brick.control.navigation.setting.listIcon">
+            <de><![CDATA[List Icon]]></de>
+            <en><![CDATA[List Icon]]></en>
+        </locale>
+        <locale name="brick.control.navigation.setting.levelIcon">
+            <de><![CDATA[Weitere Ebenen Icon (recht)]]></de>
+            <en><![CDATA[Navigation levels icon (right)]]></en>
+        </locale>
+
+
+
+
         <locale name="brick.control.langSwitch.title">
             <de><![CDATA[Baustein: Sprachenwechsel]]></de>
             <en><![CDATA[Brick:Lang switch]]></en>
