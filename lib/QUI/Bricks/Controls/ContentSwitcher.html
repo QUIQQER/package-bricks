@@ -8,44 +8,16 @@
 {foreach from=$entries item=entry key=key}
 {assign var=img value=$entry.img}
 
-<!-- display on desktops, replace text and image position by adding a new entry  -->
-<div class="content-switcher hide-on-mobile">
-    {assign var=modKey value=$key+1}
-    {if $modKey && $modKey % 2 !== 0 }
-        <div class="content-switcher-image">
-            {if $img != ""}
-                {image src=$entry.img width=300}
-            {/if}
-        </div>
-        <div class="content-switcher-content">
-            <h1>{$entry.title}</h1>
-            <p>{$entry.content}</p>
-        </div>
-     {else}
-        <div class="content-switcher-content">
-            <h1>{$entry.title}</h1>
-            <p>{$entry.content}</p>
-        </div>
-
-        <div class="content-switcher-image">
-            {if $img != ""}
-                {image src=$entry.img width=300}
-            {/if}
-        </div>
-    {/if}
-</div>
-
-<!-- for small screens: image always comes above the text -->
-<div class="content-switcher hide-on-desktop">
-    <div class="content-switcher-image">
+<div class="content-switcher">
+{assign var=modKey value=$key+1}
+    <div class="content-switcher-image {if $modKey && $modKey % 2 !== 0 }push-50 mobile-pull-100{/if}">
         {if $img != ""}
-            {image src=$entry.img width=300}
+            {image src=$entry.img width=300 class="content-switcher-image-img"}
         {/if}
     </div>
-    <div class="content-switcher-content">
+    <div class="content-switcher-content {if $modKey && $modKey % 2 !== 0 }pull-50 mobile-pull-100{/if}">
         <h1>{$entry.title}</h1>
         <p>{$entry.content}</p>
     </div>
 </div>
-
 {/foreach}
