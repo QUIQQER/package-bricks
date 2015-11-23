@@ -64,6 +64,10 @@
                 <setting name="homeIcon" type="text">
                     <locale group="quiqqer/bricks" var="brick.control.navigation.setting.homeIcon"/>
                 </setting>
+                <description name="homeIconDescription">
+                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.homeIcon.description"/>
+                </description>
+
                 <setting name="listIcon" type="text">
                     <locale group="quiqqer/bricks" var="brick.control.navigation.setting.listIcon"/>
                 </setting>

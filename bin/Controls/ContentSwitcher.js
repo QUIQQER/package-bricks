@@ -39,7 +39,7 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
                 '</label>' +
                 '<label>' +
                     '<span>Text</span>' +
-                    '<textarea name="content"></textarea>' +
+                    '<textarea name="content" rows="10"></textarea>' +
                 '</label>' +
             '</div>'
             );

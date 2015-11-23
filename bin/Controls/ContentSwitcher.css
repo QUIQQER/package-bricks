@@ -1,22 +1,19 @@
 
-.quiqqer-bricks-contentSwitcher-entry {
-    float: left;
-}
-
-.quiqqer-bricks-contentSwitcher-entry label {
+.quiqqer-bricks-ContentSwitcher-entry label {
     clear: both !important;
     float: left !important;
     margin: 0 0 10px 0 !important;
     width: 100% !important;
 }
 
-.quiqqer-bricks-contentSwitcher-entry span {
-    float: left;
-    line-height: 30px;
-    width: 140px;
+.quiqqer-bricks-ContentSwitcher-entry span {
+    float: left !important;
+    line-height: 30px !important;
+    width: 140px !important;
 }
 
-.quiqqer-bricks-contentSwitcher-entry input {
+.quiqqer-bricks-ContentSwitcher-entry input,
+.quiqqer-bricks-ContentSwitcher-entry textarea {
     clear: none;
     float: left;
     width: calc( 100% - 140px );

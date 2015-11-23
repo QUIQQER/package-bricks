@@ -86,16 +86,20 @@
             <en><![CDATA[Navigation levels]]></en>
         </locale>
         <locale name="brick.control.navigation.setting.homeIcon">
-            <de><![CDATA[Home Icon]]></de>
-            <en><![CDATA[Home Icon]]></en>
+            <de><![CDATA[Home Icon<br/>Standard: fa-home]]></de>
+            <en><![CDATA[Home Icon<br/>Default: fa-home]]></en>
+        </locale>
+        <locale name="brick.control.navigation.setting.homeIcon.description">
+            <de><![CDATA[Sandart: fa-home]]></de>
+            <en><![CDATA[Default: fa-home]]></en>
         </locale>
         <locale name="brick.control.navigation.setting.listIcon">
-            <de><![CDATA[List Icon]]></de>
-            <en><![CDATA[List Icon]]></en>
+            <de><![CDATA[List Icon<br/>Standard: fa-angle-right]]></de>
+            <en><![CDATA[List Icon</br>Default: fa-angle-right]]></en>
         </locale>
         <locale name="brick.control.navigation.setting.levelIcon">
-            <de><![CDATA[Weitere Ebenen Icon (recht)]]></de>
-            <en><![CDATA[Navigation levels icon (right)]]></en>
+            <de><![CDATA[Weitere Ebenen Icon</br>Standard: angle-double-right]]></de>
+            <en><![CDATA[Navigation levels icon<br/>Default: angle-double-right]]></en>
         </locale>
 
 
