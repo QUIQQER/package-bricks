@@ -35,13 +35,15 @@ class Manager
     protected $_bricks = array();
 
     /**
-     * initialized brick manager
+     * Initialized brick manager
      *
      * @var null
      */
     static $_BrickManager = null;
 
     /**
+     * Return the global QUI\Bricks\Manager
+     *
      * @return Manager
      */
     static function init()
@@ -57,7 +59,7 @@ class Manager
      * Constructor
      * Please use \QUI\Bricks\Manager::init()
      *
-     * @param bool $init
+     * @param boolean $init - please use \QUI\Bricks\Manager::init()
      */
     public function __construct($init = false)
     {
@@ -80,13 +82,13 @@ class Manager
 
 
         QUI::getDataBase()->insert(
-            $this->_getTable(),
+            $this->getTable(),
             array(
-                'project'     => $Project->getName(),
-                'lang'        => $Project->getLang(),
-                'title'       => $Brick->getAttribute('title'),
+                'project' => $Project->getName(),
+                'lang' => $Project->getLang(),
+                'title' => $Brick->getAttribute('title'),
                 'description' => $Brick->getAttribute('description'),
-                'type'        => $Brick->getAttribute('type')
+                'type' => $Brick->getAttribute('type')
             )
         );
 
@@ -115,7 +117,7 @@ class Manager
         // check if brick exist
         $this->getBrickById($brickId);
 
-        QUI::getDataBase()->delete($this->_getTable(), array(
+        QUI::getDataBase()->delete($this->getTable(), array(
             'id' => $brickId
         ));
     }
@@ -124,8 +126,9 @@ class Manager
      * Return the areas which are available in the project
      *
      * @param Project $Project
-     * @param string|bool $layoutType - optional, returns only the areas for the specific layout type (default = false)
-     *
+     * @param string|boolean $layoutType - optional, returns only the areas
+     *                                     for the specific layout type
+     *                                     (default = false)
      * @return array
      */
     public function getAreasByProject(Project $Project, $layoutType = false)
@@ -220,16 +223,16 @@ class Manager
 
         }
 
-        $xmlFiles = $this->_getBricksXMLFiles();
+        $xmlFiles = $this->getBricksXMLFiles();
         $result   = array();
 
         $result[] = array(
-            'title'       => array('quiqqer/bricks', 'brick.content.title'),
+            'title' => array('quiqqer/bricks', 'brick.content.title'),
             'description' => array(
                 'quiqqer/bricks',
                 'brick.content.description'
             ),
-            'control'     => 'content'
+            'control' => 'content'
         );
 
         foreach ($xmlFiles as $bricksXML) {
@@ -257,7 +260,7 @@ class Manager
         }
 
         $data = QUI::getDataBase()->fetch(array(
-            'from'  => $this->_getTable(),
+            'from' => $this->getTable(),
             'where' => array(
                 'id' => (int)$id
             ),
@@ -298,7 +301,7 @@ class Manager
 
 
         $settings = array();
-        $xmlFiles = $this->_getBricksXMLFiles();
+        $xmlFiles = $this->getBricksXMLFiles();
 
         foreach ($xmlFiles as $brickXML) {
             $Dom  = QUI\Utils\XML::getDomFromXml($brickXML);
@@ -324,7 +327,7 @@ class Manager
                     foreach ($optionElements as $Option) {
                         $options[] = array(
                             'value' => $Option->getAttribute('value'),
-                            'text'  => QUI\Utils\DOM::getTextFromNode(
+                            'text' => QUI\Utils\DOM::getTextFromNode(
                                 $Option, false
                             )
                         );
@@ -332,14 +335,14 @@ class Manager
                 }
 
                 $settings[] = array(
-                    'name'     => $Setting->getAttribute('name'),
-                    'text'     => QUI\Utils\DOM::getTextFromNode(
+                    'name' => $Setting->getAttribute('name'),
+                    'text' => QUI\Utils\DOM::getTextFromNode(
                         $Setting, false
                     ),
-                    'type'     => $Setting->getAttribute('type'),
-                    'class'    => $Setting->getAttribute('class'),
+                    'type' => $Setting->getAttribute('type'),
+                    'class' => $Setting->getAttribute('class'),
                     'data-qui' => $Setting->getAttribute('data-qui'),
-                    'options'  => $options
+                    'options' => $options
                 );
             }
 
@@ -369,7 +372,7 @@ class Manager
         $brickAreas = json_decode($brickAreas, true);
 
         if (!isset($brickAreas[$brickArea]) || empty($brickAreas[$brickArea])) {
-            $bricks = $this->_getInheritedBricks($brickArea, $Site);
+            $bricks = $this->getInheritedBricks($brickArea, $Site);
 
         } else {
             $bricks    = array();
@@ -429,10 +432,10 @@ class Manager
         $result = array();
 
         $list = QUI::getDataBase()->fetch(array(
-            'from'  => $this->_getTable(),
+            'from' => $this->getTable(),
             'where' => array(
                 'project' => $Project->getName(),
-                'lang'    => $Project->getLang()
+                'lang' => $Project->getLang()
             )
         ));
 
@@ -538,17 +541,17 @@ class Manager
 
 
         // update
-        QUI::getDataBase()->update($this->_getTable(), array(
-            'title'        => $Brick->getAttribute('title'),
-            'description'  => $Brick->getAttribute('description'),
-            'content'      => $Brick->getAttribute('content'),
-            'type'         => $Brick->getAttribute('type'),
-            'settings'     => json_encode($Brick->getSettings()),
+        QUI::getDataBase()->update($this->getTable(), array(
+            'title' => $Brick->getAttribute('title'),
+            'description' => $Brick->getAttribute('description'),
+            'content' => $Brick->getAttribute('content'),
+            'type' => $Brick->getAttribute('type'),
+            'settings' => json_encode($Brick->getSettings()),
             'customfields' => json_encode($customfields),
-            'areas'        => $areaString,
-            'height'       => $Brick->getAttribute('height'),
-            'width'        => $Brick->getAttribute('width'),
-            'classes'      => $Brick->getAttribute('classes')
+            'areas' => $areaString,
+            'height' => $Brick->getAttribute('height'),
+            'width' => $Brick->getAttribute('width'),
+            'classes' => $Brick->getAttribute('classes')
         ), array(
             'id' => (int)$brickId
         ));
@@ -559,7 +562,7 @@ class Manager
      *
      * @return String
      */
-    protected function _getTable()
+    protected function getTable()
     {
         return QUI::getDBTableName(self::TABLE);
     }
@@ -569,7 +572,7 @@ class Manager
      *
      * @return array
      */
-    protected function _getBricksXMLFiles()
+    protected function getBricksXMLFiles()
     {
         $cache = 'quiqqer/bricks/availableBrickFiles';
 
@@ -581,19 +584,31 @@ class Manager
         }
 
         $PKM      = QUI::getPackageManager();
+        $Projects = QUI::getProjectManager();
         $packages = $PKM->getInstalled();
         $result   = array();
 
+        // package bricks
         foreach ($packages as $package) {
             $bricksXML = OPT_DIR . $package['name'] . '/bricks.xml';
 
-            if (!file_exists($bricksXML)) {
-                continue;
+            if (file_exists($bricksXML)) {
+                $result[] = $bricksXML;
             }
-
-            $result[] = $bricksXML;
         }
 
+        // project bricks
+        $projects = $Projects->getProjects();
+
+        foreach ($projects as $project) {
+            $bricksXML = USR_DIR . $project . '/bricks.xml';
+
+            if (file_exists($bricksXML)) {
+                $result[] = $bricksXML;
+            }
+        }
+
+        
         QUI\Cache\Manager::set($cache, $result);
 
         return $result;
@@ -607,7 +622,7 @@ class Manager
      *
      * @return array
      */
-    protected function _getInheritedBricks($brickArea, Site $Site)
+    protected function getInheritedBricks($brickArea, Site $Site)
     {
         // inheritance ( vererbung )
         $Project = $Site->getProject();
@@ -651,9 +666,9 @@ class Manager
         foreach ($parentIds as $parentId) {
 
             $bricks = QUI::getDataBase()->fetch(array(
-                'from'  => $projectCacheTable,
+                'from' => $projectCacheTable,
                 'where' => array(
-                    'id'   => $parentId,
+                    'id' => $parentId,
                     'area' => $brickArea
                 )
             ));

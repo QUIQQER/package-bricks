@@ -14,15 +14,15 @@ use QUI\Projects\Project;
  * Class Utils
  * Bricks helper class
  *
- * @package quiqqer/bricks
- * @author  www.pcsg.de (Henning Leutz)
+ * @package QUI\Bricks
+ * @author  www.pcsg.de (Henning Leutz) <support@pcsg.de>
  */
 class Utils
 {
     /**
      * Return the bricks from a xml file
      *
-     * @param String $file
+     * @param String $file - path to file
      *
      * @return array
      */
@@ -32,11 +32,11 @@ class Utils
             return array();
         }
 
-        $Dom = XML::getDomFromXml($file);
+        $Dom  = XML::getDomFromXml($file);
         $Path = new \DOMXPath($Dom);
 
         $bricks = $Path->query("//quiqqer/bricks/brick");
-        $list = array();
+        $list   = array();
 
         if (!$bricks->length) {
             return $list;
@@ -52,7 +52,7 @@ class Utils
     /**
      * Return the template bricks from a xml file
      *
-     * @param string      $file       - path to xm file
+     * @param string $file - path to xm file
      * @param string|bool $layoutType - optional, return only the bricks for the specific layout type
      *
      * @return array
@@ -63,7 +63,7 @@ class Utils
             return array();
         }
 
-        $Dom = XML::getDomFromXml($file);
+        $Dom  = XML::getDomFromXml($file);
         $Path = new \DOMXPath($Dom);
 
         $globalAreas
@@ -113,38 +113,38 @@ class Utils
      * parse a <area> xml node to an array
      *
      * @param \DOMElement $Brick
-     * @param \DOMXPath   $Path
+     * @param \DOMXPath $Path
      *
      * @return array
      */
     static function parseAreaToArray(\DOMElement $Brick, \DOMXPath $Path)
     {
-        $control = $Brick->getAttribute('control');
-        $name = $Brick->getAttribute('name');
-        $title = array();
+        $control     = $Brick->getAttribute('control');
+        $name        = $Brick->getAttribute('name');
+        $title       = array();
         $description = array();
 
         $titleLocale = $Path->query('./title/locale', $Brick);
-        $descLocale = $Path->query('./description/locale', $Brick);
+        $descLocale  = $Path->query('./description/locale', $Brick);
 
         if ($titleLocale->length) {
             $title = array(
                 'group' => $titleLocale->item(0)->getAttribute('group'),
-                'var'   => $titleLocale->item(0)->getAttribute('var')
+                'var' => $titleLocale->item(0)->getAttribute('var')
             );
         }
 
         if ($descLocale->length) {
             $description = array(
                 'group' => $descLocale->item(0)->getAttribute('group'),
-                'var'   => $descLocale->item(0)->getAttribute('var')
+                'var' => $descLocale->item(0)->getAttribute('var')
             );
         }
 
         return array(
-            'control'     => $control,
-            'name'        => $name,
-            'title'       => $title,
+            'control' => $control,
+            'name' => $name,
+            'title' => $title,
             'description' => $description,
             'inheritance' => $Brick->getAttribute('inheritance')
         );
@@ -153,7 +153,7 @@ class Utils
     /**
      *
      * @param Project $Project
-     * @param String  $areaName
+     * @param String $areaName
      *
      * @return bool
      */
@@ -162,8 +162,8 @@ class Utils
         $template = $Project->getAttribute('template');
 
         // getAreasByProject
-        $brickXML = realpath(OPT_DIR.$template.'/bricks.xml');
-        $bricks = self::getTemplateAreasFromXML($brickXML);
+        $brickXML = realpath(OPT_DIR . $template . '/bricks.xml');
+        $bricks   = self::getTemplateAreasFromXML($brickXML);
 
         foreach ($bricks as $brickData) {
             if ($brickData['name'] != $areaName) {
