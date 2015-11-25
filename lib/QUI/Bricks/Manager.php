@@ -608,7 +608,7 @@ class Manager
             }
         }
 
-        
+
         QUI\Cache\Manager::set($cache, $result);
 
         return $result;

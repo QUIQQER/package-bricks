@@ -61,15 +61,15 @@ class Brick extends QUI\QDOM
     {
         // default
         $default = array(
-            'type'        => 'content',
-            'content'     => '',
-            'title'       => '',
+            'type' => 'content',
+            'content' => '',
+            'title' => '',
             'description' => '',
-            'project'     => '',
-            'areas'       => '',
-            'height'      => '',
-            'width'       => '',
-            'classes'     => ''
+            'project' => '',
+            'areas' => '',
+            'height' => '',
+            'width' => '',
+            'classes' => ''
         );
 
         $this->setAttributes($default);
@@ -85,7 +85,7 @@ class Brick extends QUI\QDOM
         }
 
         // default settings from control
-        $Control = $this->_getControl();
+        $Control = $this->getControl();
         $Manager = Manager::init();
 
         $availableSettings = $Manager->getAvailableBrickSettingsByBrickType(
@@ -145,7 +145,7 @@ class Brick extends QUI\QDOM
      */
     public function getType()
     {
-        $Control = $this->_getControl();
+        $Control = $this->getControl();
 
         if (is_object($Control)) {
             return get_class($Control);
@@ -166,7 +166,7 @@ class Brick extends QUI\QDOM
             return $this;
         }
 
-        $Control = $this->_getControl();
+        $Control = $this->getControl();
 
         if (!$Control) {
             throw new QUI\Exception('Control not found. Brick could not be created');
@@ -178,7 +178,9 @@ class Brick extends QUI\QDOM
     /**
      * Return the HTML of the Brick
      *
-     * @throw QUI\Exception
+     * @return string
+     *
+     * @throws QUI\Exception
      */
     public function create()
     {
@@ -205,12 +207,12 @@ class Brick extends QUI\QDOM
 
             $_classes   = array_unique($_classes);
             $classesStr = implode($_classes, ' ');
-            $classesStr = 'class="'. $classesStr .'"';
-            
+            $classesStr = 'class="' . $classesStr . '"';
+
             return "<div {$classesStr}>{$this->getAttribute('content')}</div>";
         }
 
-        $Control = $this->_getControl();
+        $Control = $this->getControl();
 
         if (!$Control) {
             throw new QUI\Exception('Control not found. Brick could not be created');
@@ -245,7 +247,7 @@ class Brick extends QUI\QDOM
      *
      * @return QUI\Control|Bool
      */
-    protected function _getControl()
+    protected function getControl()
     {
         if ($this->_Control) {
             return $this->_Control;
@@ -281,7 +283,7 @@ class Brick extends QUI\QDOM
     /**
      * Return the brick settings
      *
-     * @return Array
+     * @return array
      */
     public function getSettings()
     {
@@ -291,7 +293,9 @@ class Brick extends QUI\QDOM
     /**
      * Set brick settings
      *
-     * @param Array $settings
+     * @param array $settings - list of settings
+     *
+     * @return void
      */
     public function setSettings($settings)
     {
@@ -305,7 +309,7 @@ class Brick extends QUI\QDOM
      *
      * @param String $name - Name of the setting
      *
-     * @return Bool|String
+     * @return boolean|string
      */
     public function getSetting($name)
     {
@@ -319,8 +323,10 @@ class Brick extends QUI\QDOM
     /**
      * Set a brick setting
      *
-     * @param String $name - name of the setting
-     * @param String $value - value of the setting
+     * @param string $name  - name of the setting
+     * @param string $value - value of the setting
+     *
+     * @return void
      */
     public function setSetting($name, $value)
     {
@@ -342,7 +348,9 @@ class Brick extends QUI\QDOM
     /**
      * Add an exxtra CSS Class to the control
      *
-     * @param String $cssClass
+     * @param string $cssClass - Name of the CSS Class
+     *
+     * @return void
      */
     public function addCSSClass($cssClass)
     {
@@ -353,12 +361,14 @@ class Brick extends QUI\QDOM
      * Match pattern agains the css classes
      *
      * @param string $pattern - The shell wildcard pattern.
-     * @return bool
+     *
+     * @return boolean
      */
     public function hasCSSClass($pattern)
     {
         if ($this->getAttribute('classes')
-            && fnmatch($pattern, $this->getAttribute('classes'))) {
+            && fnmatch($pattern, $this->getAttribute('classes'))
+        ) {
             return true;
         }
 
