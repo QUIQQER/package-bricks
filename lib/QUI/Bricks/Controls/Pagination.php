@@ -21,14 +21,14 @@ class Pagination extends QUI\Control
      *
      * @var array
      */
-    protected $_getParams = array();
+    protected $getParams = array();
 
     /**
      * URL Params
      *
      * @var array
      */
-    protected $_urlParams = array();
+    protected $urlParams = array();
 
     /**
      * constructor
@@ -156,11 +156,11 @@ class Pagination extends QUI\Control
         $order = $this->getAttribute('order');
         $sheet = $this->getAttribute('sheet');
 
-        $this->_getParams['sheet'] = $sheet;
-        $this->_getParams['limit'] = $limit;
+        $this->getParams['sheet'] = $sheet;
+        $this->getParams['limit'] = $limit;
 
         if (!empty($order)) {
-            $this->_getParams['order'] = $order;
+            $this->getParams['order'] = $order;
         }
 
         if ((!$count || $count == 1)
@@ -175,8 +175,8 @@ class Pagination extends QUI\Control
             'start'      => $start,
             'end'        => $end,
             'active'     => $active,
-            'pathParams' => $this->_urlParams,
-            'getParams'  => $this->_getParams,
+            'pathParams' => $this->urlParams,
+            'getParams'  => $this->getParams,
             'anchor'     => $anchor,
             'limit'      => $limit,
             'limits'     => $limits,
@@ -212,7 +212,7 @@ class Pagination extends QUI\Control
         $this->setAttribute('order', $order);
         $this->setAttribute('sheet', $sheet);
 
-        $this->_urlParams = QUI::getRewrite()->getUrlParamsList();
+        $this->urlParams = QUI::getRewrite()->getUrlParamsList();
     }
 
     /**
@@ -266,14 +266,14 @@ class Pagination extends QUI\Control
         $value = QUI\Utils\Security\Orthos::clearFormRequest($value);
 
         if (empty($value)) {
-            if (isset($this->_getParams[$name])) {
-                unset($this->_getParams[$name]);
+            if (isset($this->getParams[$name])) {
+                unset($this->getParams[$name]);
             }
 
             return;
         }
 
-        $this->_getParams[$name] = urlencode($value);
+        $this->getParams[$name] = urlencode($value);
     }
 
     /**
@@ -288,13 +288,13 @@ class Pagination extends QUI\Control
         $value = QUI\Utils\Security\Orthos::clear($value);
 
         if (empty($value)) {
-            if (isset($this->_urlParams[$name])) {
-                unset($this->_urlParams[$name]);
+            if (isset($this->urlParams[$name])) {
+                unset($this->urlParams[$name]);
             }
 
             return;
         }
 
-        $this->_urlParams[$name] = $value;
+        $this->urlParams[$name] = $value;
     }
 }
