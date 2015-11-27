@@ -28,7 +28,7 @@ class SocialBox extends QUI\Control
             'socialList' => false
         ));
 
-        parent::setAttributes($attributes);
+        parent::__construct($attributes);
 
         $this->addCSSFile(
             dirname(__FILE__) . '/SocialBox.css'
