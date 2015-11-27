@@ -18,7 +18,7 @@ class SocialBox extends QUI\Control
     /**
      * constructor
      *
-     * @param Array $attributes
+     * @param array $attributes
      */
     public function __construct($attributes = array())
     {
@@ -31,7 +31,7 @@ class SocialBox extends QUI\Control
         parent::setAttributes($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/SocialBox.css'
+            dirname(__FILE__) . '/SocialBox.css'
         );
     }
 
@@ -42,20 +42,18 @@ class SocialBox extends QUI\Control
      */
     public function getBody()
     {
-        $Engine = QUI::getTemplateManager()->getEngine();
+        $Engine     = QUI::getTemplateManager()->getEngine();
         $socialList = $this->getAttribute('socialList');
 
         if ($socialList) {
             $socialList = json_decode($socialList, true);
         }
 
-
         $Engine->assign(array(
             'this'       => $this,
             'socialList' => $socialList
         ));
 
-
-        return $Engine->fetch(dirname(__FILE__).'/SocialBox.html');
+        return $Engine->fetch(dirname(__FILE__) . '/SocialBox.html');
     }
 }

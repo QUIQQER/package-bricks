@@ -33,7 +33,7 @@ class Pagination extends QUI\Control
     /**
      * constructor
      *
-     * @param Array $attributes
+     * @param array $attributes
      */
     public function __construct($attributes = array())
     {
@@ -237,7 +237,7 @@ class Pagination extends QUI\Control
         if ($this->getAttribute('order')) {
             $result['order'] = $this->getAttribute('order');
         }
-        
+
         return $result;
     }
 
@@ -266,7 +266,6 @@ class Pagination extends QUI\Control
         $value = QUI\Utils\Security\Orthos::clearFormRequest($value);
 
         if (empty($value)) {
-
             if (isset($this->_getParams[$name])) {
                 unset($this->_getParams[$name]);
             }
@@ -289,7 +288,6 @@ class Pagination extends QUI\Control
         $value = QUI\Utils\Security\Orthos::clear($value);
 
         if (empty($value)) {
-
             if (isset($this->_urlParams[$name])) {
                 unset($this->_urlParams[$name]);
             }

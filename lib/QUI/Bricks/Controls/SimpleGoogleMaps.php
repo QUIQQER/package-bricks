@@ -18,7 +18,7 @@ class SimpleGoogleMaps extends QUI\Control
     /**
      * constructor
      *
-     * @param Array $attributes
+     * @param array $attributes
      */
     public function __construct($attributes = array())
     {
@@ -56,7 +56,7 @@ class SimpleGoogleMaps extends QUI\Control
         $url = 'https://www.google.com/maps/embed/v1/place?' . $query . "&zoom=" . $zoom . "&";
 
         $Engine->assign(array(
-            'url'  => $url
+            'url' => $url
         ));
 
         return $Engine->fetch(dirname(__FILE__) . '/SimpleGoogleMaps.html');

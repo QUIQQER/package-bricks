@@ -23,7 +23,7 @@ class SideBox3TitleTop extends QUI\Bricks\Controls\SideBox3
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
-        $limit = $this->getAttribute('limit');
+        $limit  = $this->getAttribute('limit');
 
         if (!$limit) {
             $limit = 3;
@@ -50,7 +50,7 @@ class SideBox3TitleTop extends QUI\Bricks\Controls\SideBox3
         }
 
         $children = QUI\Projects\Site\Utils::getSitesByInputList(
-            $this->_getProject(),
+            $this->getProject(),
             $this->getAttribute('site'),
             array(
                 'limit' => $limit,
@@ -58,12 +58,11 @@ class SideBox3TitleTop extends QUI\Bricks\Controls\SideBox3
             )
         );
 
-
         $Engine->assign(array(
             'this'     => $this,
             'children' => $children
         ));
 
-        return $Engine->fetch(dirname(__FILE__).'/SideBox3TitleTop.html');
+        return $Engine->fetch(dirname(__FILE__) . '/SideBox3TitleTop.html');
     }
 }

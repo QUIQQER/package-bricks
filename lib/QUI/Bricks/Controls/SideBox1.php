@@ -18,7 +18,7 @@ class SideBox1 extends QUI\Control
     /**
      * constructor
      *
-     * @param Array $attributes
+     * @param array $attributes
      */
     public function __construct($attributes = array())
     {
@@ -48,7 +48,7 @@ class SideBox1 extends QUI\Control
 
         $Engine->assign(array(
             'this' => $this,
-            'Site' => $this->_getSite()
+            'Site' => $this->getSite()
         ));
 
         return $Engine->fetch(dirname(__FILE__) . '/SideBox1.html');
@@ -59,7 +59,7 @@ class SideBox1 extends QUI\Control
      *
      * @return QUI\Projects\Site
      */
-    protected function _getSite()
+    protected function getSite()
     {
         $Project = $this->_getProject();
         $site    = $this->getAttribute('site');
@@ -97,7 +97,7 @@ class SideBox1 extends QUI\Control
         }
 
         $children = QUI\Projects\Site\Utils::getSitesByInputList(
-            $this->_getProject(),
+            $this->getProject(),
             $this->getAttribute('site'),
             array(
                 'limit' => 1,

@@ -26,7 +26,7 @@ class Utils
      *
      * @return array
      */
-    static function getBricksFromXML($file)
+    public static function getBricksFromXML($file)
     {
         if (!file_exists($file)) {
             return array();
@@ -57,7 +57,7 @@ class Utils
      *
      * @return array
      */
-    static function getTemplateAreasFromXML($file, $layoutType = false)
+    public static function getTemplateAreasFromXML($file, $layoutType = false)
     {
         if (!file_exists($file)) {
             return array();
@@ -97,14 +97,16 @@ class Utils
         return $list;
     }
 
-
-    static function getGlobalTemplateAreasFromXML()
+    public static function getGlobalTemplateAreasFromXML()
     {
 
     }
 
-
-    static function getTypeTemplateAreasFromXML($file, $siteType)
+    /**
+     * @param $file
+     * @param $siteType
+     */
+    public static function getTypeTemplateAreasFromXML($file, $siteType)
     {
 
     }
@@ -117,7 +119,7 @@ class Utils
      *
      * @return array
      */
-    static function parseAreaToArray(\DOMElement $Brick, \DOMXPath $Path)
+    public static function parseAreaToArray(\DOMElement $Brick, \DOMXPath $Path)
     {
         $control     = $Brick->getAttribute('control');
         $name        = $Brick->getAttribute('name');
@@ -130,21 +132,21 @@ class Utils
         if ($titleLocale->length) {
             $title = array(
                 'group' => $titleLocale->item(0)->getAttribute('group'),
-                'var' => $titleLocale->item(0)->getAttribute('var')
+                'var'   => $titleLocale->item(0)->getAttribute('var')
             );
         }
 
         if ($descLocale->length) {
             $description = array(
                 'group' => $descLocale->item(0)->getAttribute('group'),
-                'var' => $descLocale->item(0)->getAttribute('var')
+                'var'   => $descLocale->item(0)->getAttribute('var')
             );
         }
 
         return array(
-            'control' => $control,
-            'name' => $name,
-            'title' => $title,
+            'control'     => $control,
+            'name'        => $name,
+            'title'       => $title,
             'description' => $description,
             'inheritance' => $Brick->getAttribute('inheritance')
         );
@@ -157,7 +159,7 @@ class Utils
      *
      * @return bool
      */
-    static function hasInheritance(Project $Project, $areaName)
+    public static function hasInheritance(Project $Project, $areaName)
     {
         $template = $Project->getAttribute('template');
 

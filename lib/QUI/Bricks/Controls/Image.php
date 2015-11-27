@@ -13,14 +13,12 @@ use QUI;
  *
  * @package quiqqer/bricks
  */
-
-
 class Image extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param Array $attributes
+     * @param array $attributes
      */
     public function __construct($attributes = array())
     {
@@ -37,7 +35,6 @@ class Image extends QUI\Control
         );
     }
 
-
     /**
      * (non-PHPdoc)
      *
@@ -50,16 +47,12 @@ class Image extends QUI\Control
         $brickLink  = $this->getAttribute('link');
 
         $Engine->assign(array(
-            'this'          => $this,
-            'brickImage'    => $brickImage,
-            'brickLink'     => $brickLink
+            'this'       => $this,
+            'brickImage' => $brickImage,
+            'brickLink'  => $brickLink
         ));
 
 
-        return $Engine->fetch(dirname(__FILE__).'/Image.html');
+        return $Engine->fetch(dirname(__FILE__) . '/Image.html');
     }
 }
-
-
-
-
