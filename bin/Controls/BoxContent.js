@@ -11,34 +11,32 @@ define('package/quiqqer/bricks/bin/Controls/BoxContent', [
 
     'css!package/quiqqer/bricks/bin/Controls/BoxContent.css'
 
-], function(QUIFormList)
-{
-   "use strict";
+], function (QUIFormList) {
+    "use strict";
 
-   return new Class({
+    return new Class({
 
-       Extends : QUIFormList,
-       Type    : 'package/quiqqer/bricks/bin/Controls/BoxContent',
+        Extends : QUIFormList,
+        Type    : 'package/quiqqer/bricks/bin/Controls/BoxContent',
 
-       initialize : function(options)
-       {
-           this.parent( options );
+        initialize : function (options) {
+            this.parent(options);
 
-           this.setAttribute(
-               'entry',
+            this.setAttribute(
+                'entry',
 
-               '<div class="quiqqer-bricks-BoxContent-entry">' +
-                   '<label>' +
-                       '<span>Überschrift</span>' +
-                       '<input type="text" name="title" />' +
-                   '</label>' +
-                   '<label>' +
-                       '<span>Text</span>' +
-                       '<textarea name="text"></textarea>' +
-                   '<label>' +
-               '</div>'
-           );
-       }
-   });
+                '<div class="quiqqer-bricks-BoxContent-entry">' +
+                    '<label>' +
+                        '<span>Überschrift</span>' +
+                        '<input type="text" name="title" />' +
+                    '</label>' +
+                    '<label>' +
+                        '<span>Text</span>' +
+                        '<textarea name="text"></textarea>' +
+                    '<label>' +
+                '</div>'
+            );
+        }
+    });
 });
 

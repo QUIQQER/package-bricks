@@ -471,7 +471,7 @@ define('package/quiqqer/bricks/bin/Manager', [
             ], function (BrickEdit, PanelUtils) {
                 PanelUtils.openPanelInTasks(
                     new BrickEdit({
-                        '#id'      : 'brick-edit-'+ brickId,
+                        '#id'      : 'brick-edit-' + brickId,
                         id         : brickId,
                         projectName: this.$ProjectSelect.getValue(),
                         projectLang: this.$ProjectLangs.getValue(),

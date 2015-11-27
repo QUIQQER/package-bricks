@@ -12,8 +12,7 @@ define('package/quiqqer/bricks/bin/Controls/SocialBox', [
 
     'css!package/quiqqer/bricks/bin/Controls/SocialBox.css'
 
-], function(QUIFormList)
-{
+], function (QUIFormList) {
     "use strict";
 
     return new Class({
@@ -21,9 +20,8 @@ define('package/quiqqer/bricks/bin/Controls/SocialBox', [
         Extends : QUIFormList,
         Type    : 'package/quiqqer/bricks/bin/Controls/SocialBox',
 
-        initialize : function(options)
-        {
-            this.parent( options );
+        initialize : function (options) {
+            this.parent(options);
 
             this.setAttribute(
                 'entry',
