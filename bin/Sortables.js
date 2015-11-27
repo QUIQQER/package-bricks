@@ -22,13 +22,12 @@
  ...
  */
 
-define('package/quiqqer/bricks/bin/Sortables', function()
-{
+define('package/quiqqer/bricks/bin/Sortables', function () {
     "use strict";
 
     return new Class({
 
-        Implements: [ Events, Options ],
+        Implements: [Events, Options],
 
         options: {
             /*

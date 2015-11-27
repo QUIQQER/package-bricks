@@ -22,8 +22,7 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
     'Ajax',
     'Locale'
 
-], function(QUI, QUIConfirm, Area, Ajax, QUILocale)
-{
+], function (QUI, QUIConfirm, Area, Ajax, QUILocale) {
     "use strict";
 
     return new Class({
@@ -54,8 +53,7 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
             }
         },
 
-        initialize : function(options)
-        {
+        initialize : function (options) {
             this.parent(options);
 
             this.addEvents({
@@ -66,19 +64,16 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
         /**
          * event : on open
          */
-        $onOpen : function()
-        {
+        $onOpen : function () {
             var self = this;
 
             this.Loader.show();
 
-            this.getList(function(result)
-            {
+            this.getList(function (result) {
                 var i, len, desc, title;
                 var Content = self.getContent();
 
-                for (i = 0, len = result.length; i < len; i++)
-                {
+                for (i = 0, len = result.length; i < len; i++) {
                     title = result[i].title;
                     desc  = result[i].description;
 
@@ -86,7 +81,7 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
                         title       : QUILocale.get(title.group, title['var']),
                         description : QUILocale.get(desc.group, desc['var']),
                         area        : result[i].name
-                    }).inject( Content );
+                    }).inject(Content);
                 }
 
                 self.Loader.hide();
@@ -98,8 +93,7 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
          *
          * @param {Function} callback
          */
-        getList : function(callback)
-        {
+        getList : function (callback) {
             Ajax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
                 'package' : 'quiqqer/brick',
                 project   : JSON.encode({
@@ -112,14 +106,13 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
         /**
          * Submit the window
          */
-        submit : function()
-        {
+        submit : function () {
             var Content = this.getContent();
 
             var areas = Content.getElements(
                 '.quiqqer-bricks-area-selected'
-            ).map(function(Elm) {
-                return Elm.get( 'data-area' );
+            ).map(function (Elm) {
+                return Elm.get('data-area');
             });
 
             this.fireEvent('submit', [this, areas]);

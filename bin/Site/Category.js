@@ -27,8 +27,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
 
     'css!package/quiqqer/bricks/bin/Site/Category.css'
 
-], function (QUI, QUIControl, QUILoader, QUIAjax, QUILocale, Area)
-{
+], function (QUI, QUIControl, QUILoader, QUIAjax, QUILocale, Area) {
     "use strict";
 
     return new Class({
@@ -41,9 +40,8 @@ define('package/quiqqer/bricks/bin/Site/Category', [
             '$onDestroy'
         ],
 
-        initialize: function(options)
-        {
-            this.parent( options );
+        initialize: function (options) {
+            this.parent(options);
 
             this.Loader = new QUILoader();
             this.areas  = [];
@@ -58,13 +56,12 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          * Return the domnode element
          * @return {HTMLElement}
          */
-        create: function ()
-        {
+        create: function () {
             this.$Elm = new Element('div', {
                 'class' : 'quiqqer-bricks-site-category'
             });
 
-            this.Loader.inject( this.$Elm );
+            this.Loader.inject(this.$Elm);
 
 
             return this.$Elm;
@@ -73,19 +70,16 @@ define('package/quiqqer/bricks/bin/Site/Category', [
         /**
          * event : on inject
          */
-        $onInject : function()
-        {
+        $onInject : function () {
             var self = this;
 
             this.Loader.show();
 
-            this.getBrickAreas(function(bricks)
-            {
-                if (!bricks.length)
-                {
+            this.getBrickAreas(function (bricks) {
+                if (!bricks.length) {
                     self.$Elm.set(
                         'html',
-                        QUILocale.get( 'quiqqer/bricks', 'bricks.message.no.areas.found' )
+                        QUILocale.get('quiqqer/bricks', 'bricks.message.no.areas.found')
                     );
 
                     return;
@@ -93,15 +87,14 @@ define('package/quiqqer/bricks/bin/Site/Category', [
 
                 var i, len, data, AC;
 
-                var Site  = self.getAttribute( 'Site' ),
-                    areas = Site.getAttribute( 'quiqqer.bricks.areas' );
+                var Site  = self.getAttribute('Site'),
+                    areas = Site.getAttribute('quiqqer.bricks.areas');
 
                 if (areas) {
-                    areas = JSON.decode( areas );
+                    areas = JSON.decode(areas);
                 }
 
-                for (i = 0, len = bricks.length; i < len; i++)
-                {
+                for (i = 0, len = bricks.length; i < len; i++) {
                     AC = self.$insertBrickAreaEdit(bricks[ i ]);
 
                     if (typeof areas[ AC.getAttribute('name') ] === 'undefined') {
@@ -110,39 +103,36 @@ define('package/quiqqer/bricks/bin/Site/Category', [
 
                     data = areas[ AC.getAttribute('name') ];
 
-                    data.each(function(brickData) {
-                        AC.addBrick( brickData );
+                    data.each(function (brickData) {
+                        AC.addBrick(brickData);
                     });
                 }
 
                 self.Loader.hide();
-                self.fireEvent( 'loaded' );
+                self.fireEvent('loaded');
             });
         },
 
         /**
          * event : on destroy
          */
-        $onDestroy : function()
-        {
+        $onDestroy : function () {
             this.updateSite();
         },
 
         /**
          * Update the internal site object
          */
-        updateSite : function()
-        {
+        updateSite : function () {
             var i, len, AC;
 
-            var Site  = this.getAttribute( 'Site' ),
+            var Site  = this.getAttribute('Site'),
                 areas = {};
 
-            for (i = 0, len = this.areas.length; i < len; i++)
-            {
+            for (i = 0, len = this.areas.length; i < len; i++) {
                 AC = this.areas[ i ];
 
-                areas[ AC.getAttribute( 'name' ) ] = AC.getData();
+                areas[ AC.getAttribute('name') ] = AC.getData();
             }
 
             Site.setAttribute('quiqqer.bricks.areas', JSON.encode(areas));
@@ -152,13 +142,11 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          * Return the available areas for the site
          * @param {Function} callback - callback function
          */
-        getBrickAreas : function(callback)
-        {
-            var Site    = this.getAttribute( 'Site' ),
+        getBrickAreas : function (callback) {
+            var Site    = this.getAttribute('Site'),
                 Project = Site.getProject();
 
-            Project.getConfig(function(layout)
-            {
+            Project.getConfig(function (layout) {
                 if (Site.getAttribute('layout')) {
                     layout = Site.getAttribute('layout');
                 }
@@ -178,19 +166,18 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          * @param {Object} area - Data of the area
          * @return Area
          */
-        $insertBrickAreaEdit : function(area)
-        {
-            var Site    = this.getAttribute( 'Site' ),
+        $insertBrickAreaEdit : function (area) {
+            var Site    = this.getAttribute('Site'),
                 Project = Site.getProject(),
                 Control = new Area();
 
-            Control.setAttribute( 'Project', Project );
-            Control.setAttribute( 'Site', Site );
-            Control.setAttributes( area );
+            Control.setAttribute('Project', Project);
+            Control.setAttribute('Site', Site);
+            Control.setAttributes(area);
 
-            Control.inject( this.$Elm );
+            Control.inject(this.$Elm);
 
-            this.areas.push( Control );
+            this.areas.push(Control);
 
             return Control;
         }
