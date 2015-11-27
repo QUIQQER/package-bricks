@@ -1,0 +1,22 @@
+.brick-image-text {
+    margin-bottom: 40px;
+}
+
+.brick-image-picture-container {
+    text-align: center;
+}
+
+a.brick-image-link:hover {
+    outline: none;
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+a.brick-image-link {
+    display: block;
+}
+
+.brick-image-picture {
+    max-width: 100%;
+}
