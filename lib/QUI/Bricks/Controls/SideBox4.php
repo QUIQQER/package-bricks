@@ -18,7 +18,7 @@ class SideBox4 extends QUI\Control
     /**
      * constructor
      *
-     * @param Array $attributes
+     * @param array $attributes
      */
     public function __construct($attributes = array())
     {
@@ -73,7 +73,7 @@ class SideBox4 extends QUI\Control
         }
 
         $children = QUI\Projects\Site\Utils::getSitesByInputList(
-            $this->_getProject(),
+            $this->getProject(),
             $this->getAttribute('site'),
             array(
                 'limit' => $limit,

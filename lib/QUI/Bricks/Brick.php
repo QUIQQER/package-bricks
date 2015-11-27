@@ -22,35 +22,35 @@ class Brick extends QUI\QDOM
      *
      * @var
      */
-    protected $_id = false;
+    protected $id = false;
 
     /**
      * Brick settings
      *
      * @var array
      */
-    protected $_settings = array();
+    protected $settings = array();
 
     /**
      * Fields can be overwritten by another user
      *
      * @var array
      */
-    protected $_customfields = array();
+    protected $customfields = array();
 
     /**
      * Internal control
      *
      * @var null
      */
-    protected $_Control = null;
+    protected $Control = null;
 
     /**
      * List of extra css classes
      *
      * @var array
      */
-    protected $_cssClasses = array();
+    protected $cssClasses = array();
 
     /**
      * Constructor
@@ -61,15 +61,15 @@ class Brick extends QUI\QDOM
     {
         // default
         $default = array(
-            'type' => 'content',
-            'content' => '',
-            'title' => '',
+            'type'        => 'content',
+            'content'     => '',
+            'title'       => '',
             'description' => '',
-            'project' => '',
-            'areas' => '',
-            'height' => '',
-            'width' => '',
-            'classes' => ''
+            'project'     => '',
+            'areas'       => '',
+            'height'      => '',
+            'width'       => '',
+            'classes'     => ''
         );
 
         $this->setAttributes($default);
@@ -81,7 +81,7 @@ class Brick extends QUI\QDOM
         }
 
         if (isset($params['id'])) {
-            $this->_id = $params['id'];
+            $this->id = $params['id'];
         }
 
         // default settings from control
@@ -93,16 +93,16 @@ class Brick extends QUI\QDOM
         );
 
         foreach ($availableSettings as $entry) {
-            $this->_settings[$entry['name']] = false;
+            $this->settings[$entry['name']] = false;
         }
 
         // control default settings
         if (is_object($Control)) {
             $controlSettings = $Control->getAttributes();
 
-            foreach ($this->_settings as $key => $value) {
+            foreach ($this->settings as $key => $value) {
                 if (isset($controlSettings[$key])) {
-                    $this->_settings[$key] = $controlSettings[$key];
+                    $this->settings[$key] = $controlSettings[$key];
                 }
             }
         }
@@ -116,9 +116,9 @@ class Brick extends QUI\QDOM
             }
 
             if (is_array($settings)) {
-                foreach ($this->_settings as $key => $value) {
+                foreach ($this->settings as $key => $value) {
                     if (isset($settings[$key])) {
-                        $this->_settings[$key] = $settings[$key];
+                        $this->settings[$key] = $settings[$key];
                     }
                 }
             }
@@ -133,7 +133,7 @@ class Brick extends QUI\QDOM
             }
 
             if (is_array($customfields)) {
-                $this->_customfields = $customfields;
+                $this->customfields = $customfields;
             }
         }
     }
@@ -185,12 +185,11 @@ class Brick extends QUI\QDOM
     public function create()
     {
         if ($this->getAttribute('type') == 'content') {
-
             $_classes = array(
-                'brick-' . $this->_id
+                'brick-' . $this->id
             );
 
-            foreach ($this->_cssClasses as $cssClass) {
+            foreach ($this->cssClasses as $cssClass) {
                 $_classes[] = $cssClass;
             }
 
@@ -231,11 +230,11 @@ class Brick extends QUI\QDOM
             }
         }
 
-        if ($this->_id) {
-            $Control->addCSSClass('brick-' . $this->_id);
+        if ($this->id) {
+            $Control->addCSSClass('brick-' . $this->id);
         }
 
-        foreach ($this->_cssClasses as $cssClass) {
+        foreach ($this->cssClasses as $cssClass) {
             $Control->addCSSClass($cssClass);
         }
 
@@ -249,8 +248,8 @@ class Brick extends QUI\QDOM
      */
     protected function getControl()
     {
-        if ($this->_Control) {
-            return $this->_Control;
+        if ($this->Control) {
+            return $this->Control;
         }
 
         $Ctrl = $this->getAttribute('type');
@@ -275,7 +274,7 @@ class Brick extends QUI\QDOM
             return false;
         }
 
-        $this->_Control = $Control;
+        $this->Control = $Control;
 
         return $Control;
     }
@@ -287,7 +286,7 @@ class Brick extends QUI\QDOM
      */
     public function getSettings()
     {
-        return $this->_settings;
+        return $this->settings;
     }
 
     /**
@@ -313,8 +312,8 @@ class Brick extends QUI\QDOM
      */
     public function getSetting($name)
     {
-        if (isset($this->_settings[$name])) {
-            return $this->_settings[$name];
+        if (isset($this->settings[$name])) {
+            return $this->settings[$name];
         }
 
         return false;
@@ -323,15 +322,15 @@ class Brick extends QUI\QDOM
     /**
      * Set a brick setting
      *
-     * @param string $name  - name of the setting
+     * @param string $name - name of the setting
      * @param string $value - value of the setting
      *
      * @return void
      */
     public function setSetting($name, $value)
     {
-        if (isset($this->_settings[$name])) {
-            $this->_settings[$name] = $value;
+        if (isset($this->settings[$name])) {
+            $this->settings[$name] = $value;
         }
     }
 
@@ -342,7 +341,7 @@ class Brick extends QUI\QDOM
      */
     public function getCustomFields()
     {
-        return $this->_customfields;
+        return $this->customfields;
     }
 
     /**
@@ -354,7 +353,7 @@ class Brick extends QUI\QDOM
      */
     public function addCSSClass($cssClass)
     {
-        $this->_cssClasses[] = $cssClass;
+        $this->cssClasses[] = $cssClass;
     }
 
     /**
@@ -372,11 +371,11 @@ class Brick extends QUI\QDOM
             return true;
         }
 
-        if (empty($this->_cssClasses)) {
+        if (empty($this->cssClasses)) {
             return false;
         }
 
-        foreach ($this->_cssClasses as $cssClass) {
+        foreach ($this->cssClasses as $cssClass) {
             if (fnmatch($pattern, $cssClass)) {
                 return true;
             }
