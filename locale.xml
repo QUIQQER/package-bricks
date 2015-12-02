@@ -72,39 +72,6 @@
             <en><![CDATA[]]></en>
         </locale>
 
-        <!-- Nav (QUI) -->
-        <locale name="brick.control.navigation.setting.startId">
-            <de><![CDATA[Start-ID]]></de>
-            <en><![CDATA[Start ID]]></en>
-        </locale>
-        <locale name="brick.control.navigation.setting.homelink">
-            <de><![CDATA[Home Link anzeigen]]></de>
-            <en><![CDATA[Show the homelink]]></en>
-        </locale>
-        <locale name="brick.control.navigation.setting.levels">
-            <de><![CDATA[Navigationstiefe]]></de>
-            <en><![CDATA[Navigation levels]]></en>
-        </locale>
-        <locale name="brick.control.navigation.setting.homeIcon">
-            <de><![CDATA[Home Icon<br/>Standard: fa-home]]></de>
-            <en><![CDATA[Home Icon<br/>Default: fa-home]]></en>
-        </locale>
-        <locale name="brick.control.navigation.setting.homeIcon.description">
-            <de><![CDATA[Sandart: fa-home]]></de>
-            <en><![CDATA[Default: fa-home]]></en>
-        </locale>
-        <locale name="brick.control.navigation.setting.listIcon">
-            <de><![CDATA[List Icon<br/>Standard: fa-angle-right]]></de>
-            <en><![CDATA[List Icon</br>Default: fa-angle-right]]></en>
-        </locale>
-        <locale name="brick.control.navigation.setting.levelIcon">
-            <de><![CDATA[Weitere Ebenen Icon</br>Standard: angle-double-right]]></de>
-            <en><![CDATA[Navigation levels icon<br/>Default: angle-double-right]]></en>
-        </locale>
-
-
-
-
         <locale name="brick.control.langSwitch.title">
             <de><![CDATA[Baustein: Sprachenwechsel]]></de>
             <en><![CDATA[Brick:Lang switch]]></en>

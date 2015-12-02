@@ -41,42 +41,6 @@
             </settings>
         </brick>
 
-
-        <!-- Nav (QUI) -->
-        <brick control="\QUI\Controls\Navigation">
-            <title>
-                <locale group="quiqqer/bricks" var="brick.control.navigation.title"/>
-            </title>
-            <description>
-                <locale group="quiqqer/bricks" var="brick.control.navigation.description"/>
-            </description>
-
-            <settings>
-                <setting name="startId" class="project-site">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.startId"/>
-                </setting>
-                <setting name="homeLink" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.homelink"/>
-                </setting>
-                <setting name="levels" type="number">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.levels"/>
-                </setting>
-                <setting name="homeIcon" type="text">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.homeIcon"/>
-                </setting>
-                <description name="homeIconDescription">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.homeIcon.description"/>
-                </description>
-
-                <setting name="listIcon" type="text">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.listIcon"/>
-                </setting>
-                <setting name="levelIcon" type="text">
-                    <locale group="quiqqer/bricks" var="brick.control.navigation.setting.levelIcon"/>
-                </setting>
-            </settings>
-        </brick>
-
         <brick control="\QUI\Bricks\Controls\SocialBox">
             <title>
                 <locale group="quiqqer/bricks" var="bricks.SocialBox.title"/>
