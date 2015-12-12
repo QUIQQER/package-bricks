@@ -34,7 +34,7 @@ class Banner extends QUI\Control
             dirname(__FILE__).'/Banner.css'
         );
 
-        parent::setAttributes($attributes);
+        parent::__construct($attributes);
     }
 
     /**

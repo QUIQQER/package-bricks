@@ -23,15 +23,14 @@ class Events
      *
      * @param Site|Edit $Site
      */
-    static function onSiteSave($Site)
+    public static function onSiteSave($Site)
     {
         QUI\Rights\Permission::checkPermission('quiqqer.bricks.assign');
 
+        $areas = $Site->getAttribute('quiqqer.bricks.areas');
+        $areas = json_decode($areas, true);
 
-        $areas = $Site->getAttribute( 'quiqqer.bricks.areas' );
-        $areas = json_decode( $areas, true );
-
-        if ( !$areas || empty( $areas ) ) {
+        if (!$areas ||empty($areas)) {
             return;
         }
 
@@ -39,25 +38,24 @@ class Events
 
         // get inharitance areas
         $Project      = $Site->getProject();
-        $projectAreas = $Manager->getAreasByProject( $Project );
-        $projectTable = QUI::getDBProjectTableName( Manager::TABLE_CACHE, $Project );
+        $projectAreas = $Manager->getAreasByProject($Project);
+        $projectTable = QUI::getDBProjectTableName(Manager::TABLE_CACHE, $Project);
 
 
-        foreach ( $projectAreas as $area )
-        {
-            if ( !$area[ 'inheritance' ] ) {
+        foreach ($projectAreas as $area) {
+            if (!$area['inheritance']) {
                 continue;
             }
 
-            if ( !isset( $areas[ $area[ 'name' ] ] ) ) {
+            if (!isset($areas[$area['name']])) {
                 continue;
             }
 
-            if ( empty( $areas[ $area[ 'name' ] ] ) ) {
+            if (empty($areas[$area['name']])) {
                 continue;
             }
 
-            $bricks = $areas[ $area[ 'name' ] ];
+            $bricks = $areas[$area['name']];
 
             // clear area and new data set
             QUI::getDataBase()->delete($projectTable, array(
@@ -66,8 +64,7 @@ class Events
             ));
 
             // check if deactivated
-            if ( isset( $bricks[ 0 ] ) && isset( $bricks[ 0 ][ 'deactivate' ] ) )
-            {
+            if (isset($bricks[0]) && isset($bricks[0]['deactivate'])) {
                 QUI::getDataBase()->insert($projectTable, array(
                     'id'    => $Site->getId(),
                     'area'  => $area[ 'name' ],
@@ -78,19 +75,21 @@ class Events
             }
 
 
-            foreach ( $bricks as $brick )
-            {
+            foreach ($bricks as $brick) {
                 $customFields = array();
 
-                if (isset($brick['customfields']) && is_string($brick['customfields'])) {
+                if (isset($brick['customfields'])
+                    && is_string($brick['customfields'])) {
                     $customFields = json_decode($brick['customfields'], true);
                 }
 
-                if (isset($brick['customfields']) && is_array($brick['customfields'])) {
+                if (isset($brick['customfields'])
+                    && is_array($brick['customfields'])) {
                     $customFields = $brick['customfields'];
                 }
 
-                if (!isset($customFields['inheritance']) || !(int)$customFields['inheritance']) {
+                if (!isset($customFields['inheritance'])
+                    || !(int)$customFields['inheritance']) {
                     continue;
                 }
 
@@ -107,13 +106,12 @@ class Events
      * Event : on smarty init
      * add new brickarea function
      */
-    static function onSmartyInit($Smarty)
+    public static function onSmartyInit($Smarty)
     {
         // {brickarea}
-        if ( !isset( $Smarty->registered_plugins['function'] ) ||
-             !isset( $Smarty->registered_plugins['function']['brickarea'] )
-        )
-        {
+        if (!isset($Smarty->registered_plugins['function'])
+            || !isset($Smarty->registered_plugins['function']['brickarea'])
+        ) {
             $Smarty->registerPlugin("function", "brickarea", "\QUI\Bricks\Events::brickarea");
         }
     }
@@ -124,15 +122,14 @@ class Events
      * @param Array $params - function parameter
      * @param \Smarty
      */
-    static function brickarea($params, $smarty)
+    public static function brickarea($params, $smarty)
     {
-        if ( !isset( $params['Site'] ) || !isset( $params['area'] ) )
-        {
-            if ( !isset( $params['assign'] ) ) {
+        if (!isset($params['Site']) || !isset($params['area'])) {
+            if (!isset($params['assign'])) {
                 return array();
             }
 
-            $smarty->assign( $params['assign'], array() );
+            $smarty->assign($params['assign'], array());
             return;
         }
 
@@ -142,12 +139,12 @@ class Events
         $Site = $params['Site'];
         $area = $params['area'];
 
-        $result = $BricksManager->getBricksByArea( $area, $Site );
+        $result = $BricksManager->getBricksByArea($area, $Site);
 
-        if ( !isset( $params['assign'] ) ) {
+        if (!isset($params['assign'])) {
             return $result;
         }
 
-        $smarty->assign( $params['assign'], $result );
+        $smarty->assign($params['assign'], $result);
     }
 }

@@ -32,27 +32,27 @@ class Manager
      *
      * @var array
      */
-    protected $_bricks = array();
+    protected $bricks = array();
 
     /**
      * Initialized brick manager
      *
      * @var null
      */
-    static $_BrickManager = null;
+    public static $BrickManager = null;
 
     /**
      * Return the global QUI\Bricks\Manager
      *
      * @return Manager
      */
-    static function init()
+    public static function init()
     {
-        if (is_null(self::$_BrickManager)) {
-            self::$_BrickManager = new QUI\Bricks\Manager(true);
+        if (is_null(self::$BrickManager)) {
+            self::$BrickManager = new QUI\Bricks\Manager(true);
         }
 
-        return self::$_BrickManager;
+        return self::$BrickManager;
     }
 
     /**
@@ -254,8 +254,8 @@ class Manager
      */
     public function getBrickById($id)
     {
-        if (isset($this->_bricks[$id])) {
-            return $this->_bricks[$id];
+        if (isset($this->bricks[$id])) {
+            return $this->bricks[$id];
         }
 
         $data = QUI::getDataBase()->fetch(array(
@@ -270,10 +270,10 @@ class Manager
             throw new QUI\Exception('Brick not found');
         }
 
-        $this->_bricks[$id] = new Brick($data[0]);
-        $this->_bricks[$id]->setAttribute('id', $id);
+        $this->bricks[$id] = new Brick($data[0]);
+        $this->bricks[$id]->setAttribute('id', $id);
 
-        return $this->_bricks[$id];
+        return $this->bricks[$id];
     }
 
     /**

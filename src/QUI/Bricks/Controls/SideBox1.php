@@ -61,7 +61,7 @@ class SideBox1 extends QUI\Control
      */
     protected function getSite()
     {
-        $Project = $this->_getProject();
+        $Project = $this->getProject();
         $site    = $this->getAttribute('site');
 
         if (is_numeric($site)) {
