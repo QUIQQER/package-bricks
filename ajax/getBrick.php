@@ -12,6 +12,7 @@
  * @return array
  */
 QUI::$Ajax->registerFunction(
+    'package_quiqqer_bricks_ajax_getBrick',
     function ($brickId) {
         $BrickManager = QUI\Bricks\Manager::init();
         $Brick        = $BrickManager->getBrickById($brickId);
@@ -25,7 +26,6 @@ QUI::$Ajax->registerFunction(
             )
         );
     },
-    'package_quiqqer_bricks_ajax_getBrick',
     array('brickId'),
     'Permission::checkAdminUser'
 );
