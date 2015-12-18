@@ -48,7 +48,7 @@ class Manager
      */
     public static function init()
     {
-        if (is_null(self::$BrickManager)) {
+        if (self::$BrickManager === null) {
             self::$BrickManager = new QUI\Bricks\Manager(true);
         }
 
