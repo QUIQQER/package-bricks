@@ -13,13 +13,13 @@
  * @return array
  */
 QUI::$Ajax->registerFunction(
+    'package_quiqqer_bricks_ajax_project_getAreas',
     function ($project, $layout) {
         $Project      = QUI::getProjectManager()->decode($project);
         $BrickManager = QUI\Bricks\Manager::init();
 
         return $BrickManager->getAreasByProject($Project, $layout);
     },
-    'package_quiqqer_bricks_ajax_project_getAreas',
     array('project', 'layout'),
     'Permission::checkAdminUser'
 );

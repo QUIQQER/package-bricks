@@ -10,6 +10,7 @@
  * @param {String} $brickId - Brick-IDs; JSON Array
  */
 QUI::$Ajax->registerFunction(
+    'package_quiqqer_bricks_ajax_brick_delete',
     function ($brickIds) {
         $BrickManager = QUI\Bricks\Manager::init();
         $brickIds     = json_decode($brickIds, true);
@@ -25,7 +26,6 @@ QUI::$Ajax->registerFunction(
             }
         }
     },
-    'package_quiqqer_bricks_ajax_brick_delete',
     array('brickIds'),
     'Permission::checkAdminUser'
 );
