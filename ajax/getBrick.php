@@ -11,22 +11,20 @@
  *
  * @return array
  */
-function package_quiqqer_bricks_ajax_getBrick($brickId)
-{
-    $BrickManager = QUI\Bricks\Manager::init();
-    $Brick = $BrickManager->getBrickById($brickId);
+QUI::$Ajax->registerFunction(
+    function ($brickId) {
+        $BrickManager = QUI\Bricks\Manager::init();
+        $Brick        = $BrickManager->getBrickById($brickId);
 
-    return array(
-        'attributes'        => $Brick->getAttributes(),
-        'settings'          => $Brick->getSettings(),
-        'customfields'      => $Brick->getCustomFields(),
-        'availableSettings' => $BrickManager->getAvailableBrickSettingsByBrickType(
-            $Brick->getAttribute('type')
-        )
-    );
-}
-
-QUI::$Ajax->register(
+        return array(
+            'attributes' => $Brick->getAttributes(),
+            'settings' => $Brick->getSettings(),
+            'customfields' => $Brick->getCustomFields(),
+            'availableSettings' => $BrickManager->getAvailableBrickSettingsByBrickType(
+                $Brick->getAttribute('type')
+            )
+        );
+    },
     'package_quiqqer_bricks_ajax_getBrick',
     array('brickId'),
     'Permission::checkAdminUser'

@@ -7,37 +7,35 @@
 /**
  * Returns the bricks of the project area
  *
- * @param string      $project - json array, Project Data
- * @param string|bool $area    - (optional), Area name
+ * @param string $project - json array, Project Data
+ * @param string|bool $area - (optional), Area name
  *
  * @return array
  */
-function package_quiqqer_bricks_ajax_project_getBricks($project, $area = false)
-{
-    $Project = QUI::getProjectManager()->decode($project);
-    $BrickManager = QUI\Bricks\Manager::init();
+QUI::$Ajax->registerFunction(
+    function ($project, $area = false) {
+        $Project      = QUI::getProjectManager()->decode($project);
+        $BrickManager = QUI\Bricks\Manager::init();
 
-    $bricks = $BrickManager->getBricksFromProject($Project);
-    $result = array();
+        $bricks = $BrickManager->getBricksFromProject($Project);
+        $result = array();
 
-    foreach ($bricks as $Brick) {
-        /* @var $Brick QUI\Bricks\Brick */
-        if (!$area) {
-            $result[] = $Brick->getAttributes();
-            continue;
+        foreach ($bricks as $Brick) {
+            /* @var $Brick QUI\Bricks\Brick */
+            if (!$area) {
+                $result[] = $Brick->getAttributes();
+                continue;
+            }
+
+            $areas = $Brick->getAttribute('areas');
+
+            if (strpos($areas, ',' . $area . ',') !== false) {
+                $result[] = $Brick->getAttributes();
+            }
         }
 
-        $areas = $Brick->getAttribute('areas');
-
-        if (strpos($areas, ','.$area.',') !== false) {
-            $result[] = $Brick->getAttributes();
-        }
-    }
-
-    return $result;
-}
-
-QUI::$Ajax->register(
+        return $result;
+    },
     'package_quiqqer_bricks_ajax_project_getBricks',
     array('project', 'area'),
     'Permission::checkAdminUser'

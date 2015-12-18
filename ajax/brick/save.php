@@ -8,21 +8,19 @@
  * saves the brick
  *
  * @param string|Integer $brickId - Brick-ID
- * @param string         $data    - JSON Data
+ * @param string $data - JSON Data
  *
  * @return array
  */
-function package_quiqqer_bricks_ajax_brick_save($brickId, $data)
-{
-    $BrickManager = QUI\Bricks\Manager::init();
-    $BrickManager->saveBrick($brickId, json_decode($data, true));
+QUI::$Ajax->registerFunction(
+    function ($brickId, $data) {
+        $BrickManager = QUI\Bricks\Manager::init();
+        $BrickManager->saveBrick($brickId, json_decode($data, true));
 
-    $Brick = $BrickManager->getBrickById($brickId);
+        $Brick = $BrickManager->getBrickById($brickId);
 
-    return $Brick->getAttributes();
-}
-
-QUI::$Ajax->register(
+        return $Brick->getAttributes();
+    },
     'package_quiqqer_bricks_ajax_brick_save',
     array('brickId', 'data'),
     'Permission::checkAdminUser'
