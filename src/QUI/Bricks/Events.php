@@ -119,7 +119,7 @@ class Events
     /**
      * Smarty brickarea function {brickarea}
      *
-     * @param Array $params - function parameter
+     * @param array $params - function parameter
      * @param \Smarty
      */
     public static function brickarea($params, $smarty)

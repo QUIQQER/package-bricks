@@ -108,7 +108,7 @@ class Manager
     /**
      * Delete the brick
      *
-     * @param Integer $brickId - Brick-ID
+     * @param integer $brickId - Brick-ID
      */
     public function deleteBrick($brickId)
     {
@@ -247,7 +247,7 @@ class Manager
     /**
      * Get a Brick by its Brick-ID
      *
-     * @param Integer $id
+     * @param integer $id
      *
      * @return Brick
      * @throws QUI\Exception
@@ -607,7 +607,7 @@ class Manager
     /**
      * Return the bricks from an area which are inherited from its parents
      *
-     * @param String $brickArea - Name of the area
+     * @param string $brickArea - Name of the area
      * @param Site $Site - Site object
      *
      * @return array
