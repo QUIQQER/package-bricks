@@ -285,10 +285,6 @@ class Manager
      */
     public function getAvailableBrickSettingsByBrickType($brickType)
     {
-        if ($brickType == 'content') {
-            return array();
-        }
-
         $cache = 'quiqqer/bricks/brickType/' . md5($brickType);
 
         try {
@@ -299,6 +295,34 @@ class Manager
 
 
         $settings = array();
+
+        $settings[] = array(
+            'name'     => 'width',
+            'text'     => array('quiqqer/bricks', 'site.area.window.settings.setting.width'),
+            'type'     => '',
+            'class'    => '',
+            'data-qui' => '',
+            'options'  => false
+        );
+
+        $settings[] = array(
+            'name'     => 'height',
+            'text'     => array('quiqqer/bricks', 'site.area.window.settings.setting.height'),
+            'type'     => '',
+            'class'    => '',
+            'data-qui' => '',
+            'options'  => false
+        );
+
+        $settings[] = array(
+            'name'     => 'classes',
+            'text'     => array('quiqqer/bricks', 'site.area.window.settings.setting.classes'),
+            'type'     => '',
+            'class'    => '',
+            'data-qui' => '',
+            'options'  => false
+        );
+
         $xmlFiles = $this->getBricksXMLFiles();
 
         foreach ($xmlFiles as $brickXML) {

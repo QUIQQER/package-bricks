@@ -247,6 +247,18 @@
             <de><![CDATA[Baustein wird vererbt]]></de>
             <en><![CDATA[Brick is inherited]]></en>
         </locale>
+        <locale name="site.area.window.settings.setting.width">
+            <de><![CDATA[Breite]]></de>
+            <en><![CDATA[Width]]></en>
+        </locale>
+        <locale name="site.area.window.settings.setting.height">
+            <de><![CDATA[Höhe]]></de>
+            <en><![CDATA[Height]]></en>
+        </locale>
+        <locale name="site.area.window.settings.setting.classes">
+            <de><![CDATA[CSS Klassen]]></de>
+            <en><![CDATA[CSS classes]]></en>
+        </locale>
     </groups>
     <groups name="quiqqer/bricks" datatype="js">
         <locale name="brick.type">
