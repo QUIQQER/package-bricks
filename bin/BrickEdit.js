@@ -366,9 +366,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
             if (unload == 'settings') {
                 data.attributes.areas   = this.$Areas.getAreas().join(',');
-                data.attributes.width   = Form.elements.width.value;
-                data.attributes.height  = Form.elements.height.value;
-                data.attributes.classes = Form.elements.classes.value;
+                //data.attributes.width   = Form.elements.width.value;
+                //data.attributes.height  = Form.elements.height.value;
+                //data.attributes.classes = Form.elements.classes.value;
 
                 var flexibleList = [],
                     fieldData = QUIFormUtils.getFormData(Form);
@@ -474,17 +474,17 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         }
                     }).inject(Content.getElement('.quiqqer-bricks-areas'));
 
-                    if ("width" in attributes) {
-                        Content.getElement('[name="width"]').value = attributes.width;
-                    }
-
-                    if ("height" in attributes) {
-                        Content.getElement('[name="height"]').value = attributes.height;
-                    }
-
-                    if ("classes" in attributes) {
-                        Content.getElement('[name="classes"]').value = attributes.classes;
-                    }
+                    //if ("width" in attributes) {
+                    //    Content.getElement('[name="width"]').value = attributes.width;
+                    //}
+                    //
+                    //if ("height" in attributes) {
+                    //    Content.getElement('[name="height"]').value = attributes.height;
+                    //}
+                    //
+                    //if ("classes" in attributes) {
+                    //    Content.getElement('[name="classes"]').value = attributes.classes;
+                    //}
 
 
                     // flexble settings
