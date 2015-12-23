@@ -31,7 +31,8 @@
             <en><![CDATA[Brick:Content]]></en>
         </locale>
         <locale name="brick.content.description">
-            <de><![CDATA[Ein Baustein mit Text-Editor, in welchem neben Text auch z.B Bilder eingefügt werden können]]></de>
+            <de>
+                <![CDATA[Ein Baustein mit Text-Editor, in welchem neben Text auch z.B Bilder eingefügt werden können]]></de>
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.title">
@@ -68,7 +69,8 @@
             <en><![CDATA[Brick:Navigation]]></en>
         </locale>
         <locale name="brick.control.navigation.description">
-            <de><![CDATA[Lassen Sie auf Ihrer Webseite in der rechten oder linken Sidebar eine Seiten-Navigation anzeigen]]></de>
+            <de>
+                <![CDATA[Lassen Sie auf Ihrer Webseite in der rechten oder linken Sidebar eine Seiten-Navigation anzeigen]]></de>
             <en><![CDATA[]]></en>
         </locale>
 
@@ -203,8 +205,20 @@
             <de><![CDATA[Sortierung]]></de>
             <en><![CDATA[Sort]]></en>
         </locale>
-
+        <locale name="site.area.window.settings.setting.width">
+            <de><![CDATA[Breite]]></de>
+            <en><![CDATA[Width]]></en>
+        </locale>
+        <locale name="site.area.window.settings.setting.height">
+            <de><![CDATA[Höhe]]></de>
+            <en><![CDATA[Height]]></en>
+        </locale>
+        <locale name="site.area.window.settings.setting.classes">
+            <de><![CDATA[CSS Klassen]]></de>
+            <en><![CDATA[CSS classes]]></en>
+        </locale>
     </groups>
+    
     <groups name="quiqqer/bricks" datatype="php">
         <locale name="site.panel.bricks.category.title">
             <de><![CDATA[Bausteine]]></de>
@@ -240,24 +254,13 @@
             <en><![CDATA[Flexible settings]]></en>
         </locale>
         <locale name="brick.edit.settings.flexible.header.description">
-            <de><![CDATA[Bestimmen Sie welche Einstellung flexibel von anderen Benutzern verändert werden können.]]></de>
+            <de>
+                <![CDATA[Bestimmen Sie welche Einstellung flexibel von anderen Benutzern verändert werden können.]]></de>
             <en><![CDATA[Determine which setting can be flexibly changed by others.]]></en>
         </locale>
         <locale name="site.area.window.settings.setting.inheritance">
             <de><![CDATA[Baustein wird vererbt]]></de>
             <en><![CDATA[Brick is inherited]]></en>
-        </locale>
-        <locale name="site.area.window.settings.setting.width">
-            <de><![CDATA[Breite]]></de>
-            <en><![CDATA[Width]]></en>
-        </locale>
-        <locale name="site.area.window.settings.setting.height">
-            <de><![CDATA[Höhe]]></de>
-            <en><![CDATA[Height]]></en>
-        </locale>
-        <locale name="site.area.window.settings.setting.classes">
-            <de><![CDATA[CSS Klassen]]></de>
-            <en><![CDATA[CSS classes]]></en>
         </locale>
     </groups>
     <groups name="quiqqer/bricks" datatype="js">
