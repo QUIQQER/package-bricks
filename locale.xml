@@ -218,7 +218,7 @@
             <en><![CDATA[CSS classes]]></en>
         </locale>
     </groups>
-    
+
     <groups name="quiqqer/bricks" datatype="php">
         <locale name="site.panel.bricks.category.title">
             <de><![CDATA[Bausteine]]></de>
