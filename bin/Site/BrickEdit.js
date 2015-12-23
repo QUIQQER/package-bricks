@@ -92,8 +92,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
 
             this.getBrickSettings().then(function (result) {
                 self.$globalBrickSettings = result.settings;
-console.warn(result.customfields);
-console.warn(result.availableSettings);
+
                 return Template.get('bin/Site/BrickEdit', false, {
                     'package': 'quiqqer/bricks',
                     params   : JSON.encode({
@@ -110,7 +109,7 @@ console.warn(result.availableSettings);
                     self.$globalBrickSettings,
                     self.getElm().getElement('form')
                 );
-console.log(self.getAttribute('customfields'));
+
                 if (self.getAttribute('customfields')) {
                     QUIFormUtils.setDataToForm(
                         self.getAttribute('customfields'),
