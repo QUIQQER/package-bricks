@@ -17,8 +17,8 @@
         {if isset($params.customfields)}
         {foreach $params.customfields as $key => $field}
 
-            {if isset($params.availableSettings.$key)}
-            {assign var=setting value=$params.availableSettings.$key}
+        {foreach $params.availableSettings as $setting}
+            {if $setting.name == $field}
             <tr class="{cycle values="even,odd"}">
                 <td>
                     <label for="{$setting.name}">
@@ -57,6 +57,7 @@
             </tr>
             {/if}
 
+            {/foreach}
         {/foreach}
         {/if}
 

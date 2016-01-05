@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <locales>
     <groups name="quiqqer/bricks" datatype="php,js">
+
         <locale name="permission.quiqqer.bricks._header">
             <de><![CDATA[Bausteine]]></de>
             <en><![CDATA[Bricks]]></en>
