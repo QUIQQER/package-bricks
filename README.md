@@ -3,7 +3,7 @@ QUIQQER Bausteine
 ========
 
 
-Packetname:
+Paketname:
 
     quiqqer/bricks
 
