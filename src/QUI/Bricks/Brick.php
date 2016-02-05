@@ -61,15 +61,15 @@ class Brick extends QUI\QDOM
     {
         // default
         $default = array(
-            'type'        => 'content',
-            'content'     => '',
-            'title'       => '',
+            'type' => 'content',
+            'content' => '',
+            'title' => '',
             'description' => '',
-            'project'     => '',
-            'areas'       => '',
-            'height'      => '',
-            'width'       => '',
-            'classes'     => ''
+            'project' => '',
+            'areas' => '',
+            'height' => '',
+            'width' => '',
+            'classes' => ''
         );
 
         $this->setAttributes($default);
@@ -152,6 +152,23 @@ class Brick extends QUI\QDOM
         }
 
         return get_class($this);
+    }
+
+    /**
+     * Checks if the internal control is of this class or has this class as one of its parents
+     *
+     * @param string $className
+     * @return bool
+     */
+    public function isInstanceOf($className)
+    {
+        $Control = $this->getControl();
+
+        if (is_object($Control)) {
+            return $Control instanceof $className;
+        }
+
+        return $this instanceof $className;
     }
 
     /**
