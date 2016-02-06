@@ -426,6 +426,7 @@ class Manager
 
             try {
                 $Brick = $this->getBrickById($brickId);
+                $Clone = clone $Brick;
 
                 if (isset($brickData['customfields'])
                     && !empty($brickData['customfields'])
@@ -433,11 +434,11 @@ class Manager
                     $custom = json_decode($brickData['customfields'], true);
 
                     if ($custom) {
-                        $Brick->setSettings($custom);
+                        $Clone->setSettings($custom);
                     }
                 }
 
-                $result[] = $Brick->check();
+                $result[] = $Clone->check();
 
             } catch (QUI\Exception $Exception) {
                 QUI\System\Log::addWarning(
