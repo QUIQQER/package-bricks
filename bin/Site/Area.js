@@ -15,7 +15,6 @@
  * @require package/quiqqer/bricks/bin/Sortables
  * @require css!package/quiqqer/bricks/bin/Site/Area.css
  */
-
 define('package/quiqqer/bricks/bin/Site/Area', [
 
     'qui/QUI',
@@ -398,7 +397,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             });
 
             Elm.inject(this.$List);
-            Select  = Elm.getElement('select');
+            Select = Elm.getElement('select');
 
             new QUIButton({
                 title : QUILocale.get(lg, 'site.area.button.delete'),
@@ -673,11 +672,11 @@ define('package/quiqqer/bricks/bin/Site/Area', [
         openBrickDialog: function () {
             if (!this.$availableBricks.length) {
                 new QUIAlert({
-                    title    : QUILocale.get(lg, 'site.area.window.noBricksInArea.title'),
-                    content  : QUILocale.get(lg, 'site.area.window.noBricksInArea.content'),
-                    maxHeight: 300,
-                    maxWidth : 450,
-                    closeButtonText : QUILocale.get('quiqqer/system', 'ok')
+                    title          : QUILocale.get(lg, 'site.area.window.noBricksInArea.title'),
+                    content        : QUILocale.get(lg, 'site.area.window.noBricksInArea.content'),
+                    maxHeight      : 300,
+                    maxWidth       : 450,
+                    closeButtonText: QUILocale.get('quiqqer/system', 'ok')
                 }).open();
 
                 return;

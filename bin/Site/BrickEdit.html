@@ -33,7 +33,7 @@
                             name="{$setting.name}"
                     >
                         {foreach $setting.options as $option}
-                        <option value="">
+                        <option value="{$option.value}">
                             {locale group=$option.text.0 value=$option.text.1}
                         </option>
                         {/foreach}
