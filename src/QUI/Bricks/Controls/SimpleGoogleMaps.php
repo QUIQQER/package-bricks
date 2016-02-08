@@ -42,7 +42,7 @@ class SimpleGoogleMaps extends QUI\Control
     public function getBody()
     {
         $Engine      = QUI::getTemplateManager()->getEngine();
-        $brickTitle  = $this->getAttribute('title');
+        $brickTitle  = $this->getAttribute('place');
         $brickStreet = $this->getAttribute('street');
         $brickZip    = $this->getAttribute('zip');
         $brickCity   = $this->getAttribute('city');

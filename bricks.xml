@@ -148,8 +148,8 @@
             </description>
 
             <settings>
-                <setting name="title">
-                    <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.title"/>
+                <setting name="place">
+                    <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.place"/>
                 </setting>
                 <setting name="street">
                     <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.street"/>
