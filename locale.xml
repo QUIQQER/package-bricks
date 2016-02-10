@@ -472,8 +472,8 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
 
         <!-- Simple Google Maps -->
         <locale name="brick.control.simplegooglemaps.title">
-            <de><![CDATA[Baustein: Maps]]></de>
-            <en><![CDATA[Brick: maps]]></en>
+            <de><![CDATA[Baustein: Simple Google Maps]]></de>
+            <en><![CDATA[Brick: Simple Google Maps]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.description">
             <de><![CDATA[Einstellungen für Karten]]></de>
