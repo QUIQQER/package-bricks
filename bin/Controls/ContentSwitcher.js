@@ -28,15 +28,15 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
 
             '<div class="quiqqer-bricks-ContentSwitcher-entry">' +
                 '<label>' +
-                    '<span>Bild</span>' +
-                    '<input type="text" name="img" />' +
+                    '<span class="entry-title">Bild</span>' +
+                    '<input type="text" class="media-image" name="img" />' +
                 '</label>' +
                 '<label>' +
-                    '<span>Überschrift</span>' +
+                    '<span class="entry-title">Überschrift</span>' +
                     '<input type="text" name="title" />' +
                 '</label>' +
                 '<label>' +
-                    '<span>Text</span>' +
+                    '<span class="entry-title">Text</span>' +
                     '<textarea name="content" rows="10"></textarea>' +
                 '</label>' +
             '</div>'
