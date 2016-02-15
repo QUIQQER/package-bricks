@@ -39,8 +39,23 @@
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     border-radius: 15px;
-    width: 100%;
     height: auto;
+    width: 100%;
+    display: flex;
+}
+
+.content-switcher-extra-div {
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 180px;
+    overflow: hidden;
+
+    width: 100%;
 }
 
 header {
@@ -80,6 +95,13 @@ h3.sidebox4-header {
         flex: none;
         padding: 10px;
         width: 100% !important;
+    }
+
+    .content-switcher-extra-div {
+        width: 100%;
+        height: 100%;
+        background: none;
+        overflow: hidden;
     }
 
 }
