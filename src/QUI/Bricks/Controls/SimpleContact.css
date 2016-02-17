@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+
+.quiqqer-simple-contact {
+    position: relative;
+}
+
+.quiqqer-simple-contact .simple-contact-content {
+    margin-bottom: 1em;
+}
+
+.quiqqer-simple-contact label,
+.quiqqer-simple-contact input,
+.quiqqer-simple-contact textarea {
+    float: left;
+    clear: both;
+    width: 100%;
+}
+
+.quiqqer-simple-contact label {
+    cursor: pointer;
+}
+
+.quiqqer-simple-contact input,
+.quiqqer-simple-contact textarea {
+    margin-bottom: 10px;
+}
+
+
+/* Message & Message color
+ ================================================================= */
+
+.quiqqer-simple-contact-message {
+    border: 1px solid #555;
+    clear: both;
+    float: left;
+    margin: 1em 0;
+    padding: 0.8em;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.quiqqer-simple-contact-message-error {
+    background: #F2D4CE;
+    border-color: #AE432E;
+}
+
+.quiqqer-simple-contact-message-success {
+    background: #D9E6C3;
+    border-color: #77AB13;
+}
