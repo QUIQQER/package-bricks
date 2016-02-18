@@ -2,7 +2,7 @@
 <menu>
     <item parent="/extras/"
           name="bricks"
-          icon="icon-th"
+          icon="fa fa-th"
           require="package/quiqqer/bricks/bin/Manager"
     >
         <locale group="quiqqer/bricks" var="menu.bricks.text" />

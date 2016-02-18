@@ -1,4 +1,3 @@
-
 /**
  * BrickAreas Control
  * Edit and change the areas for the brick
@@ -27,27 +26,25 @@ define('package/quiqqer/bricks/bin/Area', [
 
     'css!package/quiqqer/bricks/bin/Area.css'
 
-], function(QUI, QUIControl)
-{
+], function (QUI, QUIControl) {
     "use strict";
 
     return new Class({
 
-        Extends : QUIControl,
-        Type    : 'package/quiqqer/bricks/bin/Area',
+        Extends: QUIControl,
+        Type   : 'package/quiqqer/bricks/bin/Area',
 
-        Binds : [
+        Binds: [
             'toggle'
         ],
 
-        options : {
-            area        : false,
-            title       : false,
-            description : false
+        options: {
+            area       : false,
+            title      : false,
+            description: false
         },
 
-        initialize : function(options)
-        {
+        initialize: function (options) {
             this.parent(options);
 
             this.$Title    = false;
@@ -60,19 +57,18 @@ define('package/quiqqer/bricks/bin/Area', [
          *
          * @return {HTMLElement}
          */
-        create : function()
-        {
+        create: function () {
             this.$Elm = new Element('div', {
-                'class' : 'quiqqer-bricks-area smooth',
-                html    : '<div class="quiqqer-bricks-area-icon">' +
-                              '<span class="icon-list-alt"></span>' +
-                          '</div>' +
-                          '<div class="quiqqer-bricks-area-content">' +
-                              '<div class="quiqqer-bricks-area-content-title"></div>' +
-                              '<div class="quiqqer-bricks-area-content-description"></div>' +
-                          '</div>',
+                'class': 'quiqqer-bricks-area smooth',
+                html   : '<div class="quiqqer-bricks-area-icon">' +
+                         '<span class="fa fa-list-alt"></span>' +
+                         '</div>' +
+                         '<div class="quiqqer-bricks-area-content">' +
+                         '<div class="quiqqer-bricks-area-content-title"></div>' +
+                         '<div class="quiqqer-bricks-area-content-description"></div>' +
+                         '</div>',
                 events : {
-                    click : this.toggle
+                    click: this.toggle
                 }
             });
 
@@ -98,10 +94,8 @@ define('package/quiqqer/bricks/bin/Area', [
         /**
          * toggle the select status
          */
-        toggle : function()
-        {
-            if (this.$selected)
-            {
+        toggle: function () {
+            if (this.$selected) {
                 this.unselect();
                 return;
             }
@@ -112,8 +106,7 @@ define('package/quiqqer/bricks/bin/Area', [
         /**
          * Select the area
          */
-        select : function()
-        {
+        select: function () {
             if (this.$selected) {
                 return;
             }
@@ -125,8 +118,7 @@ define('package/quiqqer/bricks/bin/Area', [
         /**
          * Unselect the area
          */
-        unselect : function()
-        {
+        unselect: function () {
             if (this.$selected === false) {
                 return;
             }

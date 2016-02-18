@@ -121,7 +121,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             // buttons
             this.$AddButton = new QUIButton({
                 text     : QUILocale.get(lg, 'site.area.button.add'),
-                textimage: 'icon-plus',
+                textimage: 'fa fa-plus',
                 disable  : true,
                 events   : {
                     onClick: this.openBrickDialog
@@ -132,10 +132,10 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             this.$MoreButton = new QUIButton({
                 title : QUILocale.get(lg, 'site.area.button.area.more.openIt'),
-                icon  : 'icon-caret-left',
+                icon  : 'fa fa-caret-left',
                 events: {
                     onClick: function (Btn) {
-                        if (Btn.getAttribute('icon') == 'icon-caret-left') {
+                        if (Btn.getAttribute('icon') == 'fa fa-caret-left') {
                             self.openButtons();
                             return;
                         }
@@ -151,7 +151,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             // extra buttons
             this.$SettingsButton = new QUIButton({
                 title : QUILocale.get(lg, 'site.area.button.area.settings'),
-                icon  : 'icon-gears',
+                icon  : 'fa fa-gears',
                 events: {
                     onClick: this.openSettingsDialog
                 },
@@ -162,7 +162,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             this.$SortableButton = new QUIButton({
                 title : QUILocale.get(lg, 'site.area.button.area.sort'),
-                icon  : 'icon-sort',
+                icon  : 'fa fa-sort',
                 events: {
                     onClick: function (Btn) {
                         if (Btn.isActive()) {
@@ -220,7 +220,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             var Loader = new Element('div', {
                 'class': 'quiqqer-bricks-site-category-area-loader',
-                html   : '<span class="icon-spinner icon-spin fa fa-spinner fa-spin"></span>',
+                html   : '<span class="fa fa-spinner fa-spin"></span>',
                 styles : {
                     margin: 5
                 }
@@ -401,7 +401,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             new QUIButton({
                 title : QUILocale.get(lg, 'site.area.button.delete'),
-                icon  : 'icon-remove',
+                icon  : 'fa fa-remove',
                 events: {
                     onClick: function () {
                         self.openBrickDeleteDialog(Elm);
@@ -411,7 +411,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             new QUIButton({
                 title : QUILocale.get(lg, 'site.area.button.settings'),
-                icon  : 'icon-gear',
+                icon  : 'fa fa-gear',
                 events: {
                     onClick: function (Btn) {
                         var Elm    = Btn.getElm(),
@@ -619,7 +619,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             }, {
                 equation: 'ease-in-out',
                 callback: function () {
-                    self.$MoreButton.setAttribute('icon', 'icon-caret-right');
+                    self.$MoreButton.setAttribute('icon', 'fa fa-caret-right');
 
                     self.$FXExtraBtns.style({
                         overflow: null
@@ -651,7 +651,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 width  : 0
             }, {
                 callback: function () {
-                    self.$MoreButton.setAttribute('icon', 'icon-caret-left');
+                    self.$MoreButton.setAttribute('icon', 'fa fa-caret-left');
                     self.$AddButton.show();
 
 
@@ -686,7 +686,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             new QUIPopup({
                 title    : QUILocale.get(lg, 'site.area.window.add'),
-                icon     : 'icon-th',
+                icon     : 'fa fa-th',
                 maxWidth : 500,
                 maxHeight: 600,
                 autoclose: false,
@@ -709,7 +709,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                         for (var i = 0, len = self.$availableBricks.length; i < len; i++) {
                             items.push({
                                 brickId: self.$availableBricks[i].id,
-                                icon   : 'icon-th',
+                                icon   : 'fa fa-th',
                                 title  : self.$availableBricks[i].title,
                                 text   : self.$availableBricks[i].description
                             });
@@ -729,7 +729,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
         openBrickDeleteDialog: function (BrickElement) {
             new QUIConfirm({
                 title      : QUILocale.get(lg, 'site.area.window.delete.title'),
-                icon       : 'icon-remove',
+                icon       : 'fa fa-remove',
                 text       : QUILocale.get(lg, 'site.area.window.delete.text'),
                 information: QUILocale.get(lg, 'site.area.window.delete.information'),
                 maxHeight  : 300,
@@ -760,18 +760,18 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             new QUIConfirm({
                 title        : QUILocale.get(lg, 'site.area.window.settings.title'),
-                icon         : 'icon-gear',
+                icon         : 'fa fa-gear',
                 texticon     : false,
                 maxWidth     : 600,
                 maxHeight    : 400,
                 autoclose    : false,
                 ok_button    : {
                     text     : QUILocale.get('quiqqer/system', 'accept'),
-                    textimage: 'icon-save fa fa-save'
+                    textimage: 'fa fa-save'
                 },
                 cancel_button: {
                     text     : QUILocale.get('quiqqer/system', 'cancel'),
-                    textimage: 'icon-remove fa fa-remove'
+                    textimage: 'fa fa-remove'
                 },
                 events       : {
                     onOpen: function (Win) {
@@ -825,7 +825,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             new QUIConfirm({
                 title    : QUILocale.get(lg, 'area.window.settings.title'),
-                icon     : 'icon-gear',
+                icon     : 'fa fa-gear',
                 maxWidth : 450,
                 maxHeight: 300,
                 autoclose: false,

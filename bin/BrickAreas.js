@@ -131,7 +131,7 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
             }).inject(this.$Container);
 
             new Element('span', {
-                'class' : 'fa fa-times icon-remove',
+                'class' : 'fa fa-times',
                 styles  : {
                     cursor: 'pointer',
                     marginLeft: 10

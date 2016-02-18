@@ -225,7 +225,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                     }
 
                     self.$ProjectSelect.appendChild(
-                        project, project, 'icon-home'
+                        project, project, 'fa fa-home'
                     );
                 }
 
@@ -296,7 +296,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
                     for (var i = 0, len = langs.length; i < len; i++) {
                         self.$ProjectLangs.appendChild(
-                            langs[i], langs[i], 'icon-home'
+                            langs[i], langs[i], 'fa fa-home'
                         );
                     }
 
@@ -315,7 +315,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             new QUIConfirm({
                 title    : QUILocale.get(lg, 'manager.window.create.title'),
-                icon     : 'icon-th',
+                icon     : 'fa fa-th',
                 maxHeight: 300,
                 maxWidth : 400,
                 autoclose: false,
