@@ -20,6 +20,17 @@
             </description>
         </brick>
 
+        <!-- simple contact form (new) -->
+
+        <brick control="\QUI\Bricks\Controls\SimpleContact">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.simpleContact.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.simpleContact.description"/>
+            </description>
+        </brick>
+
         <brick control="\QUI\Controls\LangSwitch">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.langSwitch.title"/>
