@@ -88,6 +88,10 @@
             <de><![CDATA[Ihre Nachricht an uns...]]></de>
             <en><![CDATA[Your message to us]]></en>
         </locale>
+        <locale name="control.simpleContact.sentButton">
+            <de><![CDATA[Senden]]></de>
+            <en><![CDATA[Sent]]></en>
+        </locale>
 
 
 
