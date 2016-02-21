@@ -183,7 +183,8 @@ class Manager
 
         $bricks = array_values($cleaned);
 
-        usort($bricks, function ($a, $b) {
+        // use @ because: https://bugs.php.net/bug.php?id=50688
+        @usort($bricks, function ($a, $b) {
 
             $transA = QUI::getLocale()->get(
                 $a['title']['group'],
