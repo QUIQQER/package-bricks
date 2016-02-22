@@ -1,0 +1,43 @@
+
+.quiqqer-bricks-children-infinite-child-display {
+    border: 1px solid #dfe4e4;
+    height: 180px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+
+.quiqqer-bricks-children-infinite-child-display header {
+    background: #dfe4e4;
+    bottom: 0;
+    float: left;
+    line-height: 30px;
+    overflow: hidden;
+    padding: 0 10px;
+    position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    z-index: 2;
+}
+
+.quiqqer-bricks-children-infinite-child-display img {
+    float: left;
+    transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+    z-index: 1;
+}
+
+.quiqqer-bricks-children-infinite-child-display img:hover {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transition: all 2s ease;
+    -webkit-transition: all 2s ease;
+}
+
+.quiqqer-bricks-children-infinite button {
+    clear: both;
+    display: block;
+    margin: 0 auto;
+}
