@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * This file contains QUI\Bricks\Controls\Children\Infinite
+ */
 namespace QUI\Bricks\Controls\Children;
 
 use QUI;
@@ -42,11 +45,26 @@ class Infinite extends QUI\Control
      */
     public function getBody()
     {
-        $Engine = QUI::getTemplateManager()->getEngine();
+        $Engine   = QUI::getTemplateManager()->getEngine();
+        $children = '';
+
+        $this->setAttribute(
+            'data-qui-options-childrenperrow',
+            $this->getAttribute('childrenPerRow')
+        );
+
+        for ($i = 0, $len = (int)$this->getAttribute('rows'); $i < $len; $i++) {
+            $Engine->assign(array(
+                'children' => $this->getRow($i),
+                'row' => $i
+            ));
+
+            $children .= $Engine->fetch($this->getRowTemplate());
+        }
 
         $Engine->assign(array(
             'this' => $this,
-            'children' => $this->getChildren()
+            'children' => $children
         ));
 
         return $Engine->fetch(dirname(__FILE__) . '/Infinite.html');
@@ -57,19 +75,30 @@ class Infinite extends QUI\Control
      *
      * @return string
      */
-    protected function getTemplate()
+    public function getTemplate()
     {
         return dirname(__FILE__) . '/Infinite.html';
     }
 
     /**
+     * Return the row template
+     *
+     * @return string
+     */
+    public function getRowTemplate()
+    {
+        return dirname(__FILE__) . '/InfiniteRow.html';
+    }
+
+    /**
+     * Return the children
      *
      * @param int $start
      * @return array
      */
     protected function getChildren($start = 0)
     {
-        $max = $this->getAttribute('childrenPerRow') * $this->getAttribute('rows');
+        $max = $this->getAttribute('childrenPerRow');
 
         $children = QUI\Projects\Site\Utils::getSitesByInputList(
             $this->getProject(),
@@ -81,5 +110,19 @@ class Infinite extends QUI\Control
         );
 
         return $children;
+    }
+
+    /**
+     * Return the children of the row
+     *
+     * @param integer $row
+     * @return array
+     */
+    public function getRow($row)
+    {
+        $perRow = $this->getAttribute('childrenPerRow');
+        $start  = (int)$row * $perRow;
+
+        return $this->getChildren($start);
     }
 }

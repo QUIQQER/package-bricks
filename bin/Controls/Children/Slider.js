@@ -6,6 +6,7 @@
  *
  * @require qui/QUI
  * @require qui/controls/Control
+ * @require qui/utils/Functions
  */
 define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
 
@@ -221,7 +222,8 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
         },
 
         /**
-         *
+         * event : on scroll
+         * look for the prev and next button
          */
         $onScroll: function () {
             var left = this.$Inner.getScroll().x;
