@@ -82,6 +82,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
 
                         self.$More.set('html', '<span class="fa fa-spinner fa-spin"></span>');
                         self.$More.setStyle('color', null);
+                        self.$More.addClass('loading');
 
                         self.$getNextChildren().then(function (result) {
                             var Container = new Element('div', {
@@ -137,7 +138,13 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
                                         }
                                     });
 
-                                    new Fx.Scroll(window.document).toElement(Row).chain(function () {
+                                    self.$More.removeClass('loading');
+
+                                    new Fx.Scroll(window.document).start(
+                                        0,
+                                        Row.getPosition().y - 200
+                                    ).chain(function () {
+                                        self.$More.focus();
                                         resolve();
                                     });
                                 }
