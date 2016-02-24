@@ -121,6 +121,15 @@
             </settings>
         </brick>
 
+        <brick control="\QUI\Bricks\Controls\Slider\Promoslider">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.promoslider.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.promoslider.description"/>
+            </description>
+        </brick>
+
         <!-- Children Listing Infnite -->
         <brick control="\QUI\Bricks\Controls\Children\Infinite">
             <title>

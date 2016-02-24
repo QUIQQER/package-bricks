@@ -25,6 +25,14 @@ class Brick extends QUI\QDOM
     protected $id = false;
 
     /**
+     * internal unique ID
+     * This ID is unique for the complete system
+     *
+     * @var string
+     */
+    protected $uniqueId = false;
+
+    /**
      * Brick settings
      *
      * @var array
@@ -82,6 +90,10 @@ class Brick extends QUI\QDOM
 
         if (isset($params['id'])) {
             $this->id = $params['id'];
+        }
+
+        if (isset($params['uniqueId'])) {
+            $this->uniqueId = $params['uniqueId'];
         }
 
         // default settings from control
@@ -249,6 +261,11 @@ class Brick extends QUI\QDOM
 
         if ($this->id) {
             $Control->addCSSClass('brick-' . $this->id);
+            $Control->setAttribute('data-brickid', $this->id);
+        }
+
+        if ($this->uniqueId) {
+            $Control->setAttribute('data-brickuid', $this->uniqueId);
         }
 
         foreach ($this->cssClasses as $cssClass) {

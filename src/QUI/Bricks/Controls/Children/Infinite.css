@@ -36,8 +36,10 @@
     -webkit-transition: all 2s ease;
 }
 
-.quiqqer-bricks-children-infinite button {
+.quiqqer-bricks-children-infinite .button {
     clear: both;
     display: block;
     margin: 0 auto;
+    text-align: center;
+    width: 160px;
 }

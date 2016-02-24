@@ -1,0 +1,122 @@
+.quiqqer-bricks-promoslider {
+    float: left;
+    height: 540px;
+    position: relative;
+    width: 100%;
+}
+
+.quiqqer-bricks-promoslider-slide {
+    float: left;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.quiqqer-bricks-promoslider-slide-image {
+    height: 100%;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    width: auto;
+}
+
+.quiqqer-bricks-promoslider-slide-image img {
+    height: auto;
+    margin: 20px 0 40px;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.quiqqer-bricks-promoslider-slide-display {
+    font-size: 16px;
+    line-height: 32px;
+    padding: 20px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 50%;
+}
+
+.quiqqer-bricks-promoslider-slide-left .quiqqer-bricks-promoslider-slide-display {
+    left: 0;
+}
+
+.quiqqer-bricks-promoslider-slide-right .quiqqer-bricks-promoslider-slide-display {
+    left: 50%;
+}
+
+/** slide dots
+ =============================================== */
+
+.quiqqer-bricks-promoslider-dots {
+    bottom: 0;
+    position: absolute;
+    left: 50%;
+}
+
+.quiqqer-bricks-promoslider-dot {
+    background: #cdd4d5;
+    border-radius: 10px;
+    cursor: pointer;
+    float: left;
+    height: 20px;
+    margin: 0 10px 0 0;
+    transition: all 2s ease;
+    -webkit-transition: all 0.3s ease;
+    width: 20px;
+}
+
+.quiqqer-bricks-promoslider-dot:hover {
+    background: #d9232b;
+    opacity: 0.5;
+    transition: all 2s ease;
+    -webkit-transition: all 0.3s ease;
+}
+
+.quiqqer-bricks-promoslider-dot-active {
+    background: #d9232b;
+    transition: all 2s ease;
+    -webkit-transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 960px) {
+    .quiqqer-bricks-promoslider {
+        height: 500px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .quiqqer-bricks-promoslider {
+        height: 450px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .quiqqer-bricks-promoslider {
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .quiqqer-bricks-promoslider-slide-image {
+        display: none;
+    }
+
+    .quiqqer-bricks-promoslider-slide-display {
+        left: 0 !important;
+        width: 100%;
+    }
+
+    .quiqqer-bricks-promoslider-dots {
+        left: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .quiqqer-bricks-promoslider-dot {
+        display: inline-block;
+        float: none;
+    }
+}

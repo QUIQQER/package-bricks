@@ -48,9 +48,9 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
         $onImport: function () {
             var Elm = this.getElm();
 
-            this.$More = Elm.getElement('button');
+            this.$More = Elm.getElement('.button');
             this.$More.addEvent('click', this.next);
-            this.$More.disabled = false;
+            this.$More.removeClass('disabled');
 
             this.$MoreFX = moofx(this.$More);
         },
@@ -65,7 +65,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
                 var self = this,
                     size = this.$More.getSize();
 
-                this.$More.set('disabled', true);
+                this.$More.addClass('disabled');
 
                 this.$MoreFX.animate({
                     color: 'transparent'
@@ -131,13 +131,13 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
                                 equation: 'cubic-bezier(.17,.67,.25,1.25)',
                                 callback: function () {
                                     self.$More.set({
-                                        html    : oldButtonText,
-                                        disabled: false,
-                                        styles  : {
+                                        html  : oldButtonText,
+                                        styles: {
                                             width: null
                                         }
                                     });
 
+                                    self.$More.removeClass('disabled');
                                     self.$More.removeClass('loading');
 
                                     new Fx.Scroll(window.document).start(

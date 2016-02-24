@@ -26,40 +26,46 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
             '$onImport',
             '$onScroll',
             'prev',
-            'next'
+            'next',
+            'resize'
         ],
 
         initialize: function (options) {
             this.parent(options);
 
-            this.$Slide   = null;
             this.$SlideFX = null;
+            this.$Prev    = null;
+            this.$Next    = null;
+            this.$Inner   = null;
 
             this.$scrollLength = null;
             this.$scrollMax    = 0;
+            this.$mobile       = false;
 
             this.addEvents({
                 onImport: this.$onImport
             });
+
+            QUI.addEvent('resize', this.resize);
         },
 
         /**
          * resize the control and recalc all slide vars
          */
         resize: function () {
-            var size = this.getElm().getSize();
+            var size    = this.getElm().getSize(),
+                winSize = QUI.getWindowSize();
 
-            var articles = this.getElm().getElements('article'),
-                width    = articles.map(function (Elm) {
-                    var Parent = Elm.getParent();
-                    var w      = Parent.getSize().x;
-
-                    Parent.setStyle('width', w);
-
-                    return w;
-                }).sum();
-
-            this.$Slide.setStyle('width', width);
+            // display the buttons? if mobile, dont display it
+            if (winSize.x < size.x + 100) {
+                this.$mobile = true;
+                this.hideNextButton();
+                this.hidePrevButton();
+            } else {
+                this.$mobile = false;
+                this.showNextButton();
+                this.showNextButton();
+            }
 
             this.$scrollLength = (size.x / 1.2).round();
             this.$scrollMax    = this.$Inner.getScrollSize().x - size.x;
@@ -97,8 +103,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
                 }
             }).inject(Elm);
 
-            this.$Inner   = Elm.getElement('.quiqqer-bricks-children-slider-container-inner');
-            this.$Slide   = Elm.getElement('.quiqqer-bricks-children-slider-container-slide');
+            this.$Inner = Elm.getElement(
+                '.quiqqer-bricks-children-slider-container-inner'
+            );
+
             this.$SlideFX = new Fx.Scroll(this.$Inner);
 
             var scrollSpy = QUIFunctionUtils.debounce(this.$onScroll, 200);
@@ -152,6 +160,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          * @returns {Promise}
          */
         showNextButton: function () {
+            if (this.$mobile) {
+                return Promise.resolve();
+            }
+
             return new Promise(function (resolve) {
                 this.$Next.setStyle('display', null);
 
@@ -170,6 +182,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          * @returns {Promise}
          */
         showPrevButton: function () {
+            if (this.$mobile) {
+                return Promise.resolve();
+            }
+
             return new Promise(function (resolve) {
                 this.$Prev.setStyle('display', null);
 
@@ -188,6 +204,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          * @returns {Promise}
          */
         hideNextButton: function () {
+            if (this.$mobile) {
+                return Promise.resolve();
+            }
+
             return new Promise(function (resolve) {
                 this.$NextFX.animate({
                     right  : 0,
@@ -207,6 +227,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          * @returns {Promise}
          */
         hidePrevButton: function () {
+            if (this.$mobile) {
+                return Promise.resolve();
+            }
+
             return new Promise(function (resolve) {
                 this.$PrevFX.animate({
                     left   : 0,
