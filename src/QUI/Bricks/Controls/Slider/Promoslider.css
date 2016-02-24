@@ -16,17 +16,15 @@
 .quiqqer-bricks-promoslider-slide-image {
     height: 100%;
     left: 0;
-    padding: 10px;
+    padding: 10px 0 0 10px;
     position: absolute;
     top: 0;
     width: auto;
 }
 
 .quiqqer-bricks-promoslider-slide-image img {
-    height: auto;
-    margin: 20px 0 40px;
     max-height: 100%;
-    max-width: 100%;
+    width: auto;
 }
 
 .quiqqer-bricks-promoslider-slide-display {
@@ -37,6 +35,12 @@
     text-align: center;
     top: 0;
     width: 50%;
+}
+
+.quiqqer-bricks-promoslider-slide-display img {
+    height: auto;
+    margin: 20px 0 40px;
+    max-width: 100%;
 }
 
 .quiqqer-bricks-promoslider-slide-left .quiqqer-bricks-promoslider-slide-display {
@@ -51,7 +55,7 @@
  =============================================== */
 
 .quiqqer-bricks-promoslider-dots {
-    bottom: 0;
+    bottom: 10px;
     position: absolute;
     left: 50%;
 }
