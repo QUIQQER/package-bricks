@@ -26,7 +26,8 @@ class Slider extends QUI\Control
             'nodeName' => 'section',
             'site' => '',
             'order' => false,
-            'data-qui' => 'package/quiqqer/bricks/bin/Controls/Children/Slider'
+            'data-qui' => 'package/quiqqer/bricks/bin/Controls/Children/Slider',
+            'height' => 200
         ));
 
         $this->addCSSFile(
@@ -44,6 +45,10 @@ class Slider extends QUI\Control
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
+
+        if (!$this->getAttribute('height')) {
+            $this->setAttribute('height', 200);
+        }
 
         $Engine->assign(array(
             'this' => $this,

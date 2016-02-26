@@ -34,7 +34,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
         options: {
             delay         : 5000,
-            effectduration: 200,
+            effectduration: 400,
             autostart     : true,
             touch         : true
         },
@@ -203,10 +203,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                     '.quiqqer-bricks-promoslider-slide:display(inline)'
                 );
 
-                self.$hideSheetToLeft(Current).then(function () {
-                    return self.$showSheetFromRight(Slide);
-
-                }).then(function () {
+                Promise.all([
+                    self.$hideSheetToLeft(Current),
+                    self.$showSheetFromRight(Slide)
+                ]).then(function () {
 
                     resolve();
                     this.$running = false;

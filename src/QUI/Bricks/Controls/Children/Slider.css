@@ -1,6 +1,5 @@
 .quiqqer-bricks-children-slider {
     float: left;
-    height: 180px;
     position: relative;
     width: 100%;
 }
@@ -25,7 +24,7 @@
 
 .quiqqer-bricks-children-slider-container-slide {
     display: inline-block;
-    float: none;
+
     height: calc(100% - 22px);
     position: relative;
     white-space: nowrap;
@@ -39,14 +38,15 @@
 
 .quiqqer-bricks-children-slider-child-display {
     border: 1px solid #dfe4e4;
+    display: block;
     height: 100%;
     overflow: hidden;
     margin: 0 10px;
+    padding: 0;
     text-align: center;
 }
 
 .quiqqer-bricks-children-slider-child-display img {
-    height: 100%;
     transition: all 1s ease;
     -webkit-transition: all 1s ease;
     width: auto;

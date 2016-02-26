@@ -15,7 +15,7 @@
                         </header>
                         {$Child->getAttribute('short')}
                     {else}
-                        {image src=$Child->getAttribute('image_site') maxwidth="280"}
+                        {image src=$Child->getAttribute('image_site') height=$this->getAttribute('height')}
                     {/if}
                     </a>
                 </article>
