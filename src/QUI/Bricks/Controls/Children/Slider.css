@@ -24,8 +24,6 @@
 
 .quiqqer-bricks-children-slider-container-slide {
     display: inline-block;
-
-    height: calc(100% - 22px);
     position: relative;
     white-space: nowrap;
 }
@@ -65,7 +63,6 @@
     cursor: pointer;
     font-size: 50px;
     height: 100%;
-    line-height: 180px;
     position: absolute;
     text-align: center;
     top: 0;
@@ -79,4 +76,31 @@
 
 .quiqqer-bricks-children-slider-prev {
     left: -50px;
+}
+
+.quiqqer-bricks-children-slider-mobile .quiqqer-bricks-children-slider-next {
+    background: #fff;
+    border: 1px solid #f1f1f1;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    right: 20px;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+}
+
+.quiqqer-bricks-children-slider-mobile .quiqqer-bricks-children-slider-prev {
+    background: #fff;
+    border: 1px solid #f1f1f1;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    left: 20px;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+}
+
+.quiqqer-bricks-children-slider-mobile .quiqqer-bricks-children-slider-prev:hover,
+.quiqqer-bricks-children-slider-mobile .quiqqer-bricks-children-slider-next:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
 }
