@@ -13,9 +13,15 @@
                     {$Child->getAttribute('title')}
                 </header>
 
-                {image src=$Child->getAttribute('image_site')
-                    style="width: 100%; height: auto;"
-                    maxwidth="280"}
+                {if $Child->getAttribute('image_site')}
+                    {image src=$Child->getAttribute('image_site')
+                        style="width: 100%; height: auto;"
+                        maxwidth="280"}
+                {else}
+                    {image src=$Child->getProject()->getMedia()->getPlaceholder()
+                        style="width: 100%; height: auto;"
+                        maxwidth="280"}
+                {/if}
             </a>
         </article>
     </div>
