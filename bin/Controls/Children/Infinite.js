@@ -164,13 +164,15 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
         $getNextChildren: function () {
             return new Promise(function (resolve) {
 
-                var Rows = this.getElm().getElements('.quiqqer-bricks-children-infinite-row');
+                var Rows = this.getElm().getElements(
+                    '.quiqqer-bricks-children-infinite-row'
+                );
 
                 Ajax.get('package_quiqqer_bricks_ajax_brick_infinite_row', resolve, {
                     'package': 'quiqqer/bricks',
                     brickId  : this.getElm().get('data-brickid'),
                     brickUID : this.getElm().get('data-brickuid'),
-                    row      : Rows.length + 1
+                    row      : Rows.length
                 });
 
             }.bind(this));
