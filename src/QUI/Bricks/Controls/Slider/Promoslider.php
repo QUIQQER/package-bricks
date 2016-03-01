@@ -54,9 +54,8 @@ class Promoslider extends QUI\Control
 
 
         $this->addSlide(
-            'image.php?project=pbischop&id=19',
-
-            'image.php?project=pbischop&id=18',
+            'image.php?project=pbisschop&id=28',
+            'image.php?project=pbisschop&id=24',
 
             "<p>
                 You lived before you met me?! Maybe I love you so much I love you no matter who you are pretending to
@@ -74,8 +73,8 @@ class Promoslider extends QUI\Control
         );
 
         $this->addSlide(
-            'image.php?project=pbischop&id=21',
-            'image.php?project=pbischop&id=20',
+            'image.php?project=pbisschop&id=27',
+            'image.php?project=pbisschop&id=23',
 
             "<p>
                 You lived before you met me?! Maybe I love you so much I love you no matter who you are pretending to
@@ -84,8 +83,8 @@ class Promoslider extends QUI\Control
         );
 
         $this->addSlide(
-            'image.php?project=pbischop&id=23',
-            'image.php?project=pbischop&id=22',
+            'image.php?project=pbisschop&id=26',
+            'image.php?project=pbisschop&id=25',
 
             "<p>
                 You lived before you met me?! Maybe I love you so much I love you no matter who you are pretending to

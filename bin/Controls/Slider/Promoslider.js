@@ -10,7 +10,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
     'qui/QUI',
     'qui/controls/Control',
-    URL_OPT_DIR + 'bin/hammerjs/hammer.min'
+    URL_OPT_DIR + 'bin/hammerjs/hammer.min.js'
 
 ], function (QUI, QUIControl, Hammer) {
     "use strict";
