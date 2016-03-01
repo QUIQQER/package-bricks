@@ -18,9 +18,7 @@
                         style="width: 100%; height: auto;"
                         maxwidth="280"}
                 {else}
-                    {image src=$Child->getProject()->getMedia()->getPlaceholder()
-                        style="width: 100%; height: auto;"
-                        maxwidth="280"}
+                    <img src="{$Child->getProject()->getMedia()->getPlaceholder()}" style="width: 100%; height: auto;" />
                 {/if}
             </a>
         </article>
