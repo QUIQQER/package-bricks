@@ -23,8 +23,13 @@ QUI::$Ajax->registerFunction(
             $Brick = $BrickManager->getBrickById($brickId);
         }
 
+        $settings = array_merge(
+            $Brick->getAttributes(),
+            $Brick->getSettings()
+        );
+
         $Engine   = QUI::getTemplateManager()->getEngine();
-        $Infinite = new Infinite($Brick->getAttributes());
+        $Infinite = new Infinite($settings);
 
         $Engine->assign(array(
             'children' => $Infinite->getRow((int)$row),
