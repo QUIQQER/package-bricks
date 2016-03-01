@@ -1,4 +1,8 @@
 
+.quiqqer-bricks-children-infinite-row {
+    width: 100%;
+}
+
 .quiqqer-bricks-children-infinite-child-display {
     border: 1px solid #dfe4e4;
     height: 180px;
