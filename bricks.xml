@@ -29,6 +29,12 @@
             <description>
                 <locale group="quiqqer/bricks" var="brick.control.simpleContact.description"/>
             </description>
+
+            <settings>
+                <setting name="mailTo">
+                    <locale group="quiqqer/bricks" var="brick.control.simpleContact.mailTo"/>
+                </setting>
+            </settings>
         </brick>
 
         <brick control="\QUI\Controls\LangSwitch">
