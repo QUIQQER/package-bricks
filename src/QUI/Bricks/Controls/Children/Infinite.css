@@ -34,8 +34,8 @@
 }
 
 .quiqqer-bricks-children-infinite-child-display img:hover {
-    transform: scale(1.2);
-    -webkit-transform: scale(1.2);
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
     transition: all 2s ease;
     -webkit-transition: all 2s ease;
 }
