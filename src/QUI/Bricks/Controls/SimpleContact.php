@@ -41,6 +41,7 @@ class SimpleContact extends QUI\Control
         $this->setAttribute('class', 'quiqqer-simple-contact');
         $this->setAttribute('qui-class', "package/quiqqer/bricks/bin/Controls/SimpleContact");
         $this->setAttribute('labels', true);
+        $this->setAttribute('data-brickid', true);
     }
 
     /**

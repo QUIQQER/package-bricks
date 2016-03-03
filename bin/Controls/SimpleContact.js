@@ -73,6 +73,13 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
             Button.set('disabled', false);
             Button.set('html', QUILocale.get('quiqqer/bricks', 'control.simpleContact.sentButton'));
 
+            Button.addEvents({
+                 click: function () {
+                     self.$Elm.getElement('form').fireEvent('submit');
+                 }
+             });
+
+
             this.$Elm.getElement('form').addEvent('submit', function (event) {
                 var sendViaAjax = self.getElm().get('data-ajax').toInt();
 
@@ -97,6 +104,7 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
          * Send contact message
          */
         send: function () {
+
             if (this.$Text.value === '') {
                 this.$Text.focus();
                 return;
@@ -112,12 +120,13 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                 return;
             }
 
+
             var self = this;
 
             this.Loader.show();
 
+            Ajax.post('package_quiqqer_bricks_ajax_contact', function (result) {
 
-            Ajax.post('ajax_contact', function (result) {
                 if (result) {
                     self.$Elm.set('html', QUILocale.get('quiqqer/system', 'message.contact.successful'));
                 }
@@ -125,18 +134,22 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                 self.Loader.hide();
 
             }, {
-                          message  : this.$Text.value,
-                          email    : this.$Email.value,
-                          name     : this.$Name.value,
-                          showError: false,
-                          onError  : function (Exception) {
-                              self.Loader.hide();
+                'package': 'quiqqer/bricks',
+                brickId  : this.$Elm.get('data-brickid'),
+                message  : this.$Text.value,
+                email    : this.$Email.value,
+                name     : this.$Name.value,
+                showError: false,
+                project  : JSON.encode(QUIQQER_PROJECT),
+                siteId   : QUIQQER_SITE.id,
+                onError  : function (Exception) {
+                    self.Loader.hide();
 
-                              QUI.getMessageHandler(function (MH) {
-                                  MH.addError(Exception.getMessage(), self.$Elm);
-                              });
-                          }
-                      });
+                    QUI.getMessageHandler(function (MH) {
+                        MH.addError(Exception.getMessage(), self.$Elm);
+                    });
+                }
+            });
         }
     });
 });

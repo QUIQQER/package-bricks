@@ -92,6 +92,10 @@
             <de><![CDATA[Senden]]></de>
             <en><![CDATA[Sent]]></en>
         </locale>
+        <locale name="brick.control.simpleContact.mailTo">
+            <de><![CDATA[Ihre E-Mail Adresse]]></de>
+            <en><![CDATA[Your email]]></en>
+        </locale>
 
 
 
