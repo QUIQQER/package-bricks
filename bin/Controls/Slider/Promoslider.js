@@ -261,9 +261,17 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             var Header = Sheet.getElement('.quiqqer-bricks-promoslider-slide-title');
             var Text   = Sheet.getElement('.quiqqer-bricks-promoslider-slide-text');
 
-            Image.setStyle('opacity', 0);
-            Header.setStyle('opacity', 0);
-            Text.setStyle('opacity', 0);
+            if (Image) {
+                Image.setStyle('opacity', 0);
+            }
+
+            if (Header) {
+                Header.setStyle('opacity', 0);
+            }
+
+            if (Text) {
+                Text.setStyle('opacity', 0);
+            }
 
             Sheet.setStyle('display', 'inline');
 
