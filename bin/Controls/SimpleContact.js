@@ -2,9 +2,16 @@
  * QUIQQER Contact Control
  *
  * @author www.pcsg.de (Henning Leutz)
+ * @author www.pcsg.de (Michael Danielczok)
  * @module Bricks\Controls\SimpleContact
+ *
+ * @require qui/QUI
+ * @require qui/controls/Control
+ * @require qui/controls/buttons/Button
+ * @require qui/controls/loader/Loader
+ * @require Ajax
+ * @require Locale
  */
-
 define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
 
     'qui/QUI',
@@ -22,20 +29,22 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
         Extends: QUIControl,
         Type   : 'Controls/SimpleContact',
 
-        Binds: ['$onImport'],
+        Binds: [
+            '$onImport'
+        ],
 
         initialize: function (options) {
             this.parent(options);
 
             this.Loader = new QUILoader();
 
-            this.$Text = null;
+            this.$Text  = null;
             this.$Email = null;
-            this.$Name = null;
+            this.$Name  = null;
 
             this.addEvents({
-                               onImport: this.$onImport
-                           });
+                onImport: this.$onImport
+            });
         },
 
         /**
@@ -46,48 +55,19 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
 
             this.Loader.inject(this.$Elm);
 
-            /*
-            var Send = new QUIButton({
-                text     : 'senden',
-                textimage: 'fa fa-envelope-o icon-envelope-alt',
-                events   : {
-                    onClick: function () {
-                        self.$Elm.getElement('form').fireEvent('submit');
-                    }
-                }
-            }).inject(this.$Elm);
-            */
-
-            //new Element('button', {
-            //    html : 'sendenNNnN',
-            //    'class' : 'button qui-button',
-            //    events : {
-            //        click : function() {
-            //            self.$Elm.getElement('form').fireEvent('submit');
-            //        }
-            //    }
-            //}).inject(this.$Elm);
-
             var Button = this.$Elm.getElement('.quiqqer-simple-contact-button');
 
             Button.set('disabled', false);
             Button.set('html', QUILocale.get('quiqqer/bricks', 'control.simpleContact.sentButton'));
 
             Button.addEvents({
-                 click: function () {
-                     self.$Elm.getElement('form').fireEvent('submit');
-                 }
-             });
+                click: function () {
+                    self.$Elm.getElement('form').fireEvent('submit');
+                }
+            });
 
 
             this.$Elm.getElement('form').addEvent('submit', function (event) {
-                var sendViaAjax = self.getElm().get('data-ajax').toInt();
-
-                if (sendViaAjax === 0) {
-                    self.getElm().getElement('form').submit();
-                    return;
-                }
-
                 if (typeof event !== 'undefined') {
                     event.stop();
                 }
@@ -95,9 +75,9 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                 self.send();
             });
 
-            this.$Text = this.$Elm.getElement('[name="message"]');
+            this.$Text  = this.$Elm.getElement('[name="message"]');
             this.$Email = this.$Elm.getElement('[name="email"]');
-            this.$Name = this.$Elm.getElement('[name="name"]');
+            this.$Name  = this.$Elm.getElement('[name="name"]');
         },
 
         /**

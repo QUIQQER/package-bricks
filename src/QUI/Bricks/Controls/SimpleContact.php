@@ -7,7 +7,6 @@
 namespace QUI\Bricks\Controls;
 
 use QUI;
-use QUI\Utils\Security\Orthos;
 
 /**
  * Mini contact control
@@ -25,13 +24,6 @@ class SimpleContact extends QUI\Control
      */
     public function __construct($attributes = array())
     {
-        $this->setAttributes(array(
-            'data-ajax' => 1,
-            'POST_NAME' => '',
-            'POST_EMAIL' => '',
-            'POST_MESSAGE' => ''
-        ));
-
         parent::__construct($attributes);
 
         $this->addCSSFile(
@@ -52,13 +44,6 @@ class SimpleContact extends QUI\Control
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
-
-        // filter POST vars if exist
-        $this->setAttributes(array(
-            'POST_NAME' => Orthos::clearFormRequest($this->getAttribute('POST_NAME')),
-            'POST_EMAIL' => Orthos::clearFormRequest($this->getAttribute('POST_EMAIL')),
-            'POST_MESSAGE' => Orthos::clearFormRequest($this->getAttribute('POST_MESSAGE')),
-        ));
 
         $Engine->assign(array(
             'this' => $this

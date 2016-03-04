@@ -1,4 +1,3 @@
-
 <form class="quiqqer-simple-contact" method="POST" action="">
 
     {if $this->getAttribute('showBrickTitle')}
@@ -17,11 +16,11 @@
     </label>
     {/if}
     <input type="text"
-        name="name"
-        id="qui-contact-name"
-        required="required"
-        value="{$this->getAttribute('POST_NAME')}"
-        placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.name.placeholder"}"
+           name="name"
+           id="qui-contact-name"
+           required="required"
+           value=""
+           placeholder="{locale group=" quiqqer/bricks" value="control.simpleContact.name.placeholder"}"
     />
 
     {if $this->getAttribute('labels')}
@@ -30,11 +29,11 @@
     </label>
     {/if}
     <input type="email"
-        name="email"
-        id="qui-contact-email"
-        required="required"
-        value="{$this->getAttribute('POST_EMAIL')}"
-        placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.email.placeholder"}"
+           name="email"
+           id="qui-contact-email"
+           required="required"
+           value=""
+           placeholder="{locale group=" quiqqer/bricks" value="control.simpleContact.email.placeholder"}"
     />
 
     {if $this->getAttribute('labels')}
@@ -43,11 +42,13 @@
     </label>
     {/if}
     <textarea name="message"
-        id="qui-contact-message"
-        required="required"
-        placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.message.placeholder"}"
-    >{$this->getAttribute('POST_MESSAGE')}</textarea>
+              id="qui-contact-message"
+              required="required"
+              placeholder="{locale group=" quiqqer/bricks" value="control.simpleContact.message.placeholder"}"
+    ></textarea>
 
-    <button class="quiqqer-simple-contact-button" type="button" disabled="disabled"><span class="fa fa-spinner fa-spin"></span></button>
+    <button class="quiqqer-simple-contact-button" type="button" disabled="disabled">
+        <span class="fa fa-spinner fa-spin"></span>
+    </button>
 
 </form>
