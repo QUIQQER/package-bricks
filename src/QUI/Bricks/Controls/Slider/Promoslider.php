@@ -92,6 +92,12 @@ class Promoslider extends QUI\Control
             </p>"
         );
 
+
+        $this->addSlide(
+            'image.php?project=pbischop&id=30',
+            false,
+            false
+        );
     }
 
     /**

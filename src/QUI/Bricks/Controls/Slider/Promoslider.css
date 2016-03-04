@@ -56,15 +56,18 @@
 
 .quiqqer-bricks-promoslider-dots {
     bottom: 10px;
+    left: 0;
     position: absolute;
-    left: 50%;
+    text-align: center;
+    width: 100%;
 }
 
 .quiqqer-bricks-promoslider-dot {
     background: #cdd4d5;
     border-radius: 10px;
     cursor: pointer;
-    float: left;
+    display: inline-block;
+    /*float: left;*/
     height: 20px;
     margin: 0 10px 0 0;
     transition: all 2s ease;
