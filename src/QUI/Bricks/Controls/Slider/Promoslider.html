@@ -1,0 +1,34 @@
+{foreach $desktopSlides as $key => $slide}
+<div class="quiqqer-bricks-promoslider-slide {$slide.pos} quiqqer-bricks-promoslider-sl{$key}"
+     {if $key == 0}
+     style="display: inline"
+     {else}
+     style="display: none"
+     {/if}
+    data-no="{$key}"
+>
+    {if $slide.image}
+    <div class="quiqqer-bricks-promoslider-slide-image">
+        {image image=$slide.image}
+    </div>
+    {/if}
+
+    <div class="quiqqer-bricks-promoslider-slide-display">
+        {if $Utils->isImage($slide.title)}
+        <header class="quiqqer-bricks-promoslider-slide-title">
+            {if $Utils->isImage($slide.title)}
+            {image image=$slide.title}
+            {else}
+            {$slide.title}
+            {/if}
+        </header>
+        {/if}
+
+        {if $slide.text}
+        <div class="quiqqer-bricks-promoslider-slide-text">
+            {$slide.text}
+        </div>
+        {/if}
+    </div>
+</div>
+{/foreach}

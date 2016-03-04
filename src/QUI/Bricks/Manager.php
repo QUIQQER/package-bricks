@@ -23,6 +23,11 @@ class Manager
     const TABLE = 'bricks';
 
     /**
+     * Bricks uid table name
+     */
+    const TABLE_UID = 'bricksUID';
+
+    /**
      * Brick Cache table name
      */
     const TABLE_CACHE = 'bricksCache';
@@ -33,6 +38,13 @@ class Manager
      * @var array
      */
     protected $bricks = array();
+
+    /**
+     * Brick UID temp collector
+     *
+     * @var array
+     */
+    protected $brickUIDs = array();
 
     /**
      * Initialized brick manager
@@ -183,7 +195,8 @@ class Manager
 
         $bricks = array_values($cleaned);
 
-        usort($bricks, function ($a, $b) {
+        // use @ because: https://bugs.php.net/bug.php?id=50688
+        @usort($bricks, function ($a, $b) {
 
             $transA = QUI::getLocale()->get(
                 $a['title']['group'],
@@ -262,6 +275,40 @@ class Manager
             'from' => $this->getTable(),
             'where' => array(
                 'id' => (int)$id
+            ),
+            'limit' => 1
+        ));
+
+        if (!isset($data[0])) {
+            throw new QUI\Exception('Brick not found');
+        }
+
+        $Brick = new Brick($data[0]);
+        $Brick->setAttribute('id', $id);
+
+        $this->bricks[$id] = $Brick;
+
+        return $this->bricks[$id];
+    }
+
+    /**
+     * Get a Brick by its unique ID
+     *
+     * @param string $uid
+     *
+     * @return Brick
+     * @throws QUI\Exception
+     */
+    public function getBrickByUID($uid)
+    {
+        if (isset($this->brickUIDs[$uid])) {
+            return $this->brickUIDs[$uid];
+        }
+
+        $data = QUI::getDataBase()->fetch(array(
+            'from' => $this->getTable(),
+            'where' => array(
+                'id' => (int)$uid
             ),
             'limit' => 1
         ));
@@ -426,6 +473,7 @@ class Manager
 
             try {
                 $Brick = $this->getBrickById($brickId);
+                $Clone = clone $Brick;
 
                 if (isset($brickData['customfields'])
                     && !empty($brickData['customfields'])
@@ -433,11 +481,11 @@ class Manager
                     $custom = json_decode($brickData['customfields'], true);
 
                     if ($custom) {
-                        $Brick->setSettings($custom);
+                        $Clone->setSettings($custom);
                     }
                 }
 
-                $result[] = $Brick->check();
+                $result[] = $Clone->check();
 
             } catch (QUI\Exception $Exception) {
                 QUI\System\Log::addWarning(
@@ -591,6 +639,14 @@ class Manager
      * @return String
      */
     protected function getTable()
+    {
+        return QUI::getDBTableName(self::TABLE);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUIDTable()
     {
         return QUI::getDBTableName(self::TABLE);
     }

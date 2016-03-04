@@ -1,4 +1,3 @@
-
 /**
  * BrickEdit Panel
  * Edit and change a Brick
@@ -41,10 +40,10 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
     return new Class({
 
-        Extends : QUIPanel,
-        Type    : 'package/quiqqer/bricks/bin/BrickEdit',
+        Extends: QUIPanel,
+        Type   : 'package/quiqqer/bricks/bin/BrickEdit',
 
-        Binds : [
+        Binds: [
             '$onInject',
             '$onCreate',
             '$onDestroy',
@@ -54,13 +53,13 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             'del'
         ],
 
-        options : {
-            id : false,
-            projectName : false,
-            projectLang : false
+        options: {
+            id         : false,
+            projectName: false,
+            projectLang: false
         },
 
-        initialize : function (options) {
+        initialize: function (options) {
             this.parent(options);
 
             this.$availableBricks   = [];
@@ -74,73 +73,73 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             this.addEvents({
                 onInject : this.$onInject,
                 onCreate : this.$onCreate,
-                onDestroy : this.$onDestroy
+                onDestroy: this.$onDestroy
             });
         },
 
         /**
          * event : on create
          */
-        $onCreate : function () {
+        $onCreate: function () {
             this.setAttributes({
-                icon  : 'icon-spinner icon-spin fa fa-spinner fa-spin',
-                title : '...'
+                icon : 'fa fa-spinner fa-spin',
+                title: '...'
             });
 
             this.addButton({
-                name : 'save',
-                textimage : 'fa fa-save icon-save',
-                text : QUILocale.get('quiqqer/system', 'save'),
-                events : {
-                    click : this.save
+                name     : 'save',
+                textimage: 'fa fa-save',
+                text     : QUILocale.get('quiqqer/system', 'save'),
+                events   : {
+                    click: this.save
                 }
             });
 
             this.addButton({
-                name : 'delete',
-                icon : 'fa fa-trash-o icon-trash',
+                name  : 'delete',
+                icon  : 'fa fa-trash-o',
                 title : QUILocale.get('quiqqer/system', 'delete'),
-                events : {
-                    click : this.del
+                events: {
+                    click: this.del
                 },
-                styles : {
-                    'float' : 'right'
+                styles: {
+                    'float': 'right'
                 }
             });
 
             this.addCategory({
-                name : 'information',
-                icon : 'fa fa-file-o icon-file-alt',
-                text : QUILocale.get('quiqqer/system', 'information'),
-                events : {
-                    onActive : this.$load
+                name  : 'information',
+                icon  : 'fa fa-file-o',
+                text  : QUILocale.get('quiqqer/system', 'information'),
+                events: {
+                    onActive: this.$load
                 }
             });
 
             this.addCategory({
-                name : 'settings',
-                icon : 'icon-magic',
-                text : QUILocale.get('quiqqer/system', 'properties'),
-                events : {
-                    onActive : this.$load
+                name  : 'settings',
+                icon  : 'fa fa-magic',
+                text  : QUILocale.get('quiqqer/system', 'properties'),
+                events: {
+                    onActive: this.$load
                 }
             });
 
             this.addCategory({
-                name : 'extra',
-                icon : 'fa fa-gears icon-gears',
-                text : QUILocale.get('quiqqer/system', 'settings'),
-                events : {
-                    onActive : this.$load
+                name  : 'extra',
+                icon  : 'fa fa-gears',
+                text  : QUILocale.get('quiqqer/system', 'settings'),
+                events: {
+                    onActive: this.$load
                 }
             });
 
             this.addCategory({
-                name : 'content',
-                icon : 'icon-file-text-alt',
-                text : QUILocale.get('quiqqer/system', 'content'),
-                events : {
-                    onActive : this.$load
+                name  : 'content',
+                icon  : 'fa fa-file-text-o',
+                text  : QUILocale.get('quiqqer/system', 'content'),
+                events: {
+                    onActive: this.$load
                 }
             });
         },
@@ -148,7 +147,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         /**
          * event : on inject
          */
-        $onInject : function () {
+        $onInject: function () {
             this.Loader.show();
 
             QUIAjax.get([
@@ -160,17 +159,17 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                  * @param {{attributes:object}} data
                  * @param {{settings:object}} data
                  */
-                this.$availableBricks   = bricks;
+                this.$availableBricks = bricks;
                 this.$availableSettings = brick.availableSettings;
                 this.$customfields      = brick.customfields;
 
                 this.setAttribute('data', brick);
 
                 this.setAttributes({
-                    icon  : 'icon-th',
-                    title :  QUILocale.get('quiqqer/bricks', 'panel.title', {
-                        brickId    : this.getAttribute('id'),
-                        brickTitle : brick.attributes.title
+                    icon : 'fa fa-th',
+                    title: QUILocale.get('quiqqer/bricks', 'panel.title', {
+                        brickId   : this.getAttribute('id'),
+                        brickTitle: brick.attributes.title
                     })
                 });
 
@@ -180,15 +179,15 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 this.getCategory('information').click();
 
             }.bind(this), {
-                'package' : 'quiqqer/brick',
-                brickId   : this.getAttribute('id')
+                'package': 'quiqqer/brick',
+                brickId  : this.getAttribute('id')
             });
         },
 
         /**
          * event : on destroy
          */
-        $onDestroy : function () {
+        $onDestroy: function () {
             if (this.$Editor) {
                 this.$Editor.destroy();
             }
@@ -203,7 +202,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          *
          * @return Promise
          */
-        save : function (callback) {
+        save: function (callback) {
             var Active = this.$Active;
 
             this.Loader.show();
@@ -247,18 +246,18 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         /**
          * Delete the brick
          */
-        del : function () {
+        del: function () {
             var self = this;
 
             new QUIConfirm({
-                title : QUILocale.get(lg, 'window.brick.delete.title'),
-                text  : QUILocale.get(lg, 'window.brick.delete.text'),
-                information : QUILocale.get(lg, 'window.brick.delete.information'),
-                maxHeight : 300,
-                maxWidth  : 600,
-                autoclose : false,
-                events : {
-                    onSubmit : function (Win) {
+                title      : QUILocale.get(lg, 'window.brick.delete.title'),
+                text       : QUILocale.get(lg, 'window.brick.delete.text'),
+                information: QUILocale.get(lg, 'window.brick.delete.information'),
+                maxHeight  : 300,
+                maxWidth   : 600,
+                autoclose  : false,
+                events     : {
+                    onSubmit: function (Win) {
                         Win.Loader.show();
 
                         QUIAjax.post('package_quiqqer_bricks_ajax_brick_delete', function () {
@@ -267,8 +266,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                             self.fireEvent('delete');
                             self.destroy();
                         }, {
-                            'package' : 'quiqqer/bricks',
-                            brickIds  : JSON.encode([self.getAttribute('id')])
+                            'package': 'quiqqer/bricks',
+                            brickIds : JSON.encode([self.getAttribute('id')])
                         });
                     }
                 }
@@ -282,7 +281,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          *
          * @return Promise
          */
-        $load : function (Button) {
+        $load: function (Button) {
             this.Loader.show();
 
             return new Promise(function (resolve, reject) {
@@ -303,8 +302,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 this.setAttribute('data', data);
                 this.$Active = Button;
 
-                switch (Button.getAttribute('name'))
-                {
+                switch (Button.getAttribute('name')) {
                     case 'information':
                         Prom = this.$showInformation();
                         break;
@@ -348,7 +346,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         /**
          * event unload category
          */
-        $unload : function () {
+        $unload: function () {
             if (!this.$Active) {
                 return;
             }
@@ -365,13 +363,13 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             }
 
             if (unload == 'settings') {
-                data.attributes.areas   = this.$Areas.getAreas().join(',');
+                data.attributes.areas = this.$Areas.getAreas().join(',');
                 //data.attributes.width   = Form.elements.width.value;
                 //data.attributes.height  = Form.elements.height.value;
                 //data.attributes.classes = Form.elements.classes.value;
 
                 var flexibleList = [],
-                    fieldData = QUIFormUtils.getFormData(Form);
+                    fieldData    = QUIFormUtils.getFormData(Form);
 
                 for (var key in fieldData) {
 
@@ -418,7 +416,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          *
          * @returns {Promise}
          */
-        $showInformation : function () {
+        $showInformation: function () {
             return new Promise(function (resolve, reject) {
 
                 Template.get('ajax/brick/templates/information', function (result) {
@@ -432,8 +430,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     resolve();
 
                 }.bind(this), {
-                    'package' : 'quiqqer/bricks',
-                    onError   : reject
+                    'package': 'quiqqer/bricks',
+                    onError  : reject
                 });
 
             }.bind(this));
@@ -444,33 +442,33 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          *
          * @returns {Promise}
          */
-        $showSettings : function () {
+        $showSettings: function () {
             return new Promise(function (resolve, reject) {
 
                 Template.get('ajax/brick/templates/settings', function (result) {
                     this.setContent(result);
 
                     // areas
-                    var Content = this.getContent(),
-                        areas = [],
+                    var Content      = this.getContent(),
+                        areas        = [],
                         attributes   = this.getAttribute('data').attributes,
                         customfields = this.$customfields;
 
                     if (attributes.areas) {
                         areas = attributes.areas
-                                    .replace(/^,*/, '')
-                                    .replace(/,*$/, '')
-                                    .split(',');
+                            .replace(/^,*/, '')
+                            .replace(/,*$/, '')
+                            .split(',');
                     }
 
                     // areas
                     this.$Areas = new BrickAreas({
-                        brickId     : this.getAttribute('id'),
-                        projectName : this.getAttribute('projectName'),
-                        projectLang : this.getAttribute('projectLang'),
-                        areas  : areas,
-                        styles : {
-                            height : 120
+                        brickId    : this.getAttribute('id'),
+                        projectName: this.getAttribute('projectName'),
+                        projectLang: this.getAttribute('projectLang'),
+                        areas      : areas,
+                        styles     : {
+                            height: 120
                         }
                     }).inject(Content.getElement('.quiqqer-bricks-areas'));
 
@@ -496,13 +494,13 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         data = this.$availableSettings[i];
 
                         new Element('tr', {
-                            'class' : i % 2 ? 'odd' : 'even',
-                            html : '<td>' +
-                                       '<label>' +
-                                           '<input type="checkbox" name="flexible-' + data.name + '" />' +
-                                           '<span>' + QUILocale.get(data.text[0], data.text[1]) + '</span>' +
-                                       '</label>' +
-                                   '</td>'
+                            'class': i % 2 ? 'odd' : 'even',
+                            html   : '<td>' +
+                                     '<label>' +
+                                     '<input type="checkbox" name="flexible-' + data.name + '" />' +
+                                     '<span>' + QUILocale.get(data.text[0], data.text[1]) + '</span>' +
+                                     '</label>' +
+                                     '</td>'
                         }).inject(TBody);
                     }
 
@@ -528,8 +526,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     resolve();
 
                 }.bind(this), {
-                    'package' : 'quiqqer/bricks',
-                    onError   : reject
+                    'package': 'quiqqer/bricks',
+                    onError  : reject
                 });
 
             }.bind(this));
@@ -540,7 +538,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          *
          * @returns {Promise}
          */
-        $showExtras : function () {
+        $showExtras: function () {
             return new Promise(function (resolve, reject) {
 
                 Template.get('ajax/brick/templates/extras', function (result) {
@@ -551,8 +549,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     });
 
                 }.bind(this), {
-                    'package' : 'quiqqer/bricks',
-                    onError   : reject
+                    'package': 'quiqqer/bricks',
+                    onError  : reject
                 });
 
             }.bind(this));
@@ -563,7 +561,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          *
          * @returns {Promise}
          */
-        $showContent : function () {
+        $showContent: function () {
             return new Promise(function (resolve, reject) {
 
                 Template.get('ajax/brick/templates/content', function (result) {
@@ -574,8 +572,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     });
 
                 }.bind(this), {
-                    'package' : 'quiqqer/bricks',
-                    onError   : reject
+                    'package': 'quiqqer/bricks',
+                    onError  : reject
                 });
 
             }.bind(this));
@@ -587,14 +585,14 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          * @param {Function} [callback]
          * @return Promise
          */
-        $createContentEditor : function (callback) {
+        $createContentEditor: function (callback) {
             return new Promise(function (resolve) {
 
                 var TableBody = this.$Elm.getElement('table.brick-edit-content tbody'),
 
-                    TD = new Element('td'),
-                    TR = new Element('tr', {
-                        'class' : 'odd'
+                    TD        = new Element('td'),
+                    TR        = new Element('tr', {
+                        'class': 'odd'
                     });
 
                 TD.inject(TR);
@@ -616,11 +614,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
 
                         var EditorContainer = new Element('div', {
-                            styles : {
-                                clear   : 'both',
-                                'float' : 'left',
-                                height  : height,
-                                width   : '100%'
+                            styles: {
+                                clear  : 'both',
+                                'float': 'left',
+                                height : height,
+                                width  : '100%'
                             }
                         }).inject(TD);
 
@@ -649,7 +647,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          *
          * @return Promise
          */
-        $createExtraData : function () {
+        $createExtraData: function () {
             return new Promise(function (resolve, reject) {
                 var TableExtra = this.$Elm.getElement('table.brick-edit-extra-header'),
                     TableBody  = TableExtra.getElement('tbody');
@@ -658,7 +656,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     TableExtra.setStyle('display', 'none');
 
                     new Element('div', {
-                        html : QUILocale.get(lg, 'window.brick.no.extra.settings')
+                        html: QUILocale.get(lg, 'window.brick.no.extra.settings')
                     }).inject(TableExtra, 'before');
 
                     resolve();
@@ -676,32 +674,32 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                 // extra settings
                 for (i = 0, len = this.$availableSettings.length; i < len; i++) {
-                    setting      = this.$availableSettings[ i ];
+                    setting      = this.$availableSettings[i];
                     extraFieldId = 'extraField_' + id + '_' + i;
 
                     text = setting.text;
 
                     if (typeOf(setting.text) === 'array') {
-                        text = QUILocale.get(setting.text[ 0 ], setting.text[ 1 ]);
+                        text = QUILocale.get(setting.text[0], setting.text[1]);
                     }
 
 
                     Row = new Element('tr', {
-                        'class' : i % 2 ? 'even' : 'odd',
-                        html : '<td>' +
-                               '    <label class="quiqqer-bricks-areas" for="' + extraFieldId + '">' +
-                                        text +
-                               '    </label>' +
-                               '</td>' +
-                               '<td></td>'
+                        'class': i % 2 ? 'even' : 'odd',
+                        html   : '<td>' +
+                                 '    <label class="quiqqer-bricks-areas" for="' + extraFieldId + '">' +
+                                 text +
+                                 '    </label>' +
+                                 '</td>' +
+                                 '<td></td>'
                     }).inject(TableBody);
 
                     if (setting.type != 'select') {
                         Value = new Element('input', {
-                            type    : setting.type,
-                            name    : setting.name,
-                            'class' : setting.class,
-                            id      : extraFieldId
+                            type   : setting.type,
+                            name   : setting.name,
+                            'class': setting.class,
+                            id     : extraFieldId
                         }).inject(Row.getElement('td:last-child'));
 
                         if (setting['data-qui'] !== '') {
@@ -712,9 +710,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     }
 
                     Value = new Element('select', {
-                        name    : setting.name,
-                        'class' : setting.class,
-                        id      : extraFieldId
+                        name   : setting.name,
+                        'class': setting.class,
+                        id     : extraFieldId
                     }).inject(Row.getElement('td:last-child'));
 
 
@@ -723,14 +721,14 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                         if (typeOf(setting.options[c].text) === 'array') {
                             text = QUILocale.get(
-                                setting.options[c].text[ 0 ],
-                                setting.options[c].text[ 1 ]
+                                setting.options[c].text[0],
+                                setting.options[c].text[1]
                             );
                         }
 
                         new Element('option', {
-                            html  : text,
-                            value : setting.options[c].value
+                            html : text,
+                            value: setting.options[c].value
                         }).inject(Value);
                     }
                 }

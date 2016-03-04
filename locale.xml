@@ -45,13 +45,60 @@
             <en><![CDATA[]]></en>
         </locale>
         <locale name="brick.control.contact.title">
-            <de><![CDATA[Baustein: Kontakt]]></de>
-            <en><![CDATA[Brick:Contact]]></en>
+            <de><![CDATA[Baustein: Kontaktformular]]></de>
+            <en><![CDATA[Brick: Contact form]]></en>
         </locale>
         <locale name="brick.control.contact.description">
             <de><![CDATA[Ein vorgefertigtes Kontaktformular]]></de>
             <en><![CDATA[]]></en>
         </locale>
+
+
+        <!-- Simple contact form as brick (new) -->
+
+        <locale name="brick.control.simpleContact.title">
+            <de><![CDATA[Baustein: Einfacher Kontaktformular]]></de>
+            <en><![CDATA[Brick: Simple Contact form]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.description">
+            <de><![CDATA[Ein vorgefertigtes Kontaktformular]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="control.simpleContact.name">
+            <de><![CDATA[Vor- und Nachname]]></de>
+            <en><![CDATA[Name]]></en>
+        </locale>
+        <locale name="control.simpleContact.name.placeholder">
+            <de><![CDATA[Ihr Vor- und Nachname]]></de>
+            <en><![CDATA[Please enter Your First and Last Name here]]></en>
+        </locale>
+        <locale name="control.simpleContact.email">
+            <de><![CDATA[E-Mail]]></de>
+            <en><![CDATA[Email]]></en>
+        </locale>
+        <locale name="control.simpleContact.email.placeholder">
+            <de><![CDATA[Ihre E-Mail-Adresse]]></de>
+            <en><![CDATA[Please enter your email address here]]></en>
+        </locale>
+        <locale name="control.simpleContact.message">
+            <de><![CDATA[Nachricht]]></de>
+            <en><![CDATA[Message]]></en>
+        </locale>
+        <locale name="control.simpleContact.message.placeholder">
+            <de><![CDATA[Ihre Nachricht an uns...]]></de>
+            <en><![CDATA[Your message to us]]></en>
+        </locale>
+        <locale name="control.simpleContact.sentButton">
+            <de><![CDATA[Senden]]></de>
+            <en><![CDATA[Sent]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.mailTo">
+            <de><![CDATA[Ihre E-Mail Adresse]]></de>
+            <en><![CDATA[Your email]]></en>
+        </locale>
+
+
+
         <locale name="package.title">
             <de><![CDATA[Baustein Modul / Bricks]]></de>
             <en><![CDATA[Bricks Module]]></en>
@@ -472,16 +519,16 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
 
         <!-- Simple Google Maps -->
         <locale name="brick.control.simplegooglemaps.title">
-            <de><![CDATA[Baustein: Maps]]></de>
-            <en><![CDATA[Brick: maps]]></en>
+            <de><![CDATA[Baustein: Simple Google Maps]]></de>
+            <en><![CDATA[Brick: Simple Google Maps]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.description">
             <de><![CDATA[Einstellungen für Karten]]></de>
             <en><![CDATA[Maps settings]]></en>
         </locale>
-        <locale name="brick.control.simplegooglemaps.settings.title">
-            <de><![CDATA[Title]]></de>
-            <en><![CDATA[Title]]></en>
+        <locale name="brick.control.simplegooglemaps.settings.place">
+            <de><![CDATA[Google Place]]></de>
+            <en><![CDATA[Google Place]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.street">
             <de><![CDATA[Straße]]></de>

@@ -25,6 +25,14 @@ class Brick extends QUI\QDOM
     protected $id = false;
 
     /**
+     * internal unique ID
+     * This ID is unique for the complete system
+     *
+     * @var string
+     */
+    protected $uniqueId = false;
+
+    /**
      * Brick settings
      *
      * @var array
@@ -61,15 +69,15 @@ class Brick extends QUI\QDOM
     {
         // default
         $default = array(
-            'type'        => 'content',
-            'content'     => '',
-            'title'       => '',
+            'type' => 'content',
+            'content' => '',
+            'title' => '',
             'description' => '',
-            'project'     => '',
-            'areas'       => '',
-            'height'      => '',
-            'width'       => '',
-            'classes'     => ''
+            'project' => '',
+            'areas' => '',
+            'height' => '',
+            'width' => '',
+            'classes' => ''
         );
 
         $this->setAttributes($default);
@@ -82,6 +90,10 @@ class Brick extends QUI\QDOM
 
         if (isset($params['id'])) {
             $this->id = $params['id'];
+        }
+
+        if (isset($params['uniqueId'])) {
+            $this->uniqueId = $params['uniqueId'];
         }
 
         // default settings from control
@@ -152,6 +164,23 @@ class Brick extends QUI\QDOM
         }
 
         return get_class($this);
+    }
+
+    /**
+     * Checks if the internal control is of this class or has this class as one of its parents
+     *
+     * @param string $className
+     * @return bool
+     */
+    public function isInstanceOf($className)
+    {
+        $Control = $this->getControl();
+
+        if (is_object($Control)) {
+            return $Control instanceof $className;
+        }
+
+        return $this instanceof $className;
     }
 
     /**
@@ -232,6 +261,11 @@ class Brick extends QUI\QDOM
 
         if ($this->id) {
             $Control->addCSSClass('brick-' . $this->id);
+            $Control->setAttribute('data-brickid', $this->id);
+        }
+
+        if ($this->uniqueId) {
+            $Control->setAttribute('data-brickuid', $this->uniqueId);
         }
 
         foreach ($this->cssClasses as $cssClass) {

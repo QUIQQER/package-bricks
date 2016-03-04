@@ -13,10 +13,11 @@
         <article class="quiqqer-bricks-sidebox4-article">
 
 
-            {if $this->getAttribute( 'showImage' )}
-                {image src=$Child->getAttribute('image_site') width=650 class="sidebox4-container-image"}
-            {/if}
-
+            <div class="content-switcher-extra-div">
+                {if $this->getAttribute( 'showImage' )}
+                    {image src=$Child->getAttribute('image_site') width=650 class="sidebox4-container-image"}
+                {/if}
+            </div>
             {if $this->getAttribute( 'showTitle' ) || $this->getAttribute( 'showShort' )}
             <header>
                 {if $this->getAttribute( 'showTitle' )}

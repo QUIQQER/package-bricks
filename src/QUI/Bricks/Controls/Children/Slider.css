@@ -1,0 +1,106 @@
+.quiqqer-bricks-children-slider {
+    float: left;
+    position: relative;
+    width: 100%;
+}
+
+.quiqqer-bricks-children-slider-container {
+    float: left;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.quiqqer-bricks-children-slider-container-inner {
+    float: left;
+    height: calc(100% + 20px);
+    left: 0;
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.quiqqer-bricks-children-slider-container-slide {
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+}
+
+.quiqqer-bricks-children-slider-child {
+    display: inline-block;
+    float: none;
+    height: 100%;
+}
+
+.quiqqer-bricks-children-slider-child-display {
+    border: 1px solid #dfe4e4;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    margin: 0 10px;
+    padding: 0;
+    text-align: center;
+}
+
+.quiqqer-bricks-children-slider-child-display img {
+    transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+    width: auto;
+}
+
+.quiqqer-bricks-children-slider-child-display img:hover {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transition: all 2s ease;
+    -webkit-transition: all 2s ease;
+}
+
+.quiqqer-bricks-children-slider-prev,
+.quiqqer-bricks-children-slider-next {
+    color: #f1f1f1;
+    cursor: pointer;
+    font-size: 50px;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    visibility: visible;
+    width: 50px;
+}
+
+.quiqqer-bricks-children-slider-next {
+    right: -50px;
+}
+
+.quiqqer-bricks-children-slider-prev {
+    left: -50px;
+}
+
+.quiqqer-bricks-children-slider-mobile .quiqqer-bricks-children-slider-next {
+    background: #fff;
+    border: 1px solid #f1f1f1;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    right: 20px;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+}
+
+.quiqqer-bricks-children-slider-mobile .quiqqer-bricks-children-slider-prev {
+    background: #fff;
+    border: 1px solid #f1f1f1;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    left: 20px;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+}
+
+.quiqqer-bricks-children-slider-mobile .quiqqer-bricks-children-slider-prev:hover,
+.quiqqer-bricks-children-slider-mobile .quiqqer-bricks-children-slider-next:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+}

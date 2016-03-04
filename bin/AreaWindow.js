@@ -1,4 +1,3 @@
-
 /**
  * AreaWindow Control
  * List of the areas which are available
@@ -27,44 +26,44 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
 
     return new Class({
 
-        Extends : QUIConfirm,
-        Type    : 'package/quiqqer/bricks/bin/AreaWindow',
+        Extends: QUIConfirm,
+        Type   : 'package/quiqqer/bricks/bin/AreaWindow',
 
-        Binds : [
+        Binds: [
             '$onOpen'
         ],
 
-        options : {
-            icon  : 'icon-th',
-            title : QUILocale.get('quiqqer/bricks', 'area.window.title'),
-            projectName : false,
-            projectLang : false,
-            maxHeight : 600,
-            maxWidth  : 400,
-            texticon  : false,
+        options: {
+            icon       : 'fa fa-th',
+            title      : QUILocale.get('quiqqer/bricks', 'area.window.title'),
+            projectName: false,
+            projectLang: false,
+            maxHeight  : 600,
+            maxWidth   : 400,
+            texticon   : false,
 
-            cancel_button : {
-                text      : QUILocale.get('quiqqer/system', 'cancel'),
-                textimage : 'icon-remove fa fa-remove'
+            cancel_button: {
+                text     : QUILocale.get('quiqqer/system', 'cancel'),
+                textimage: 'fa fa-remove'
             },
-            ok_button : {
-                text      : QUILocale.get('quiqqer/system', 'accept'),
-                textimage : 'icon-ok fa fa-check'
+            ok_button    : {
+                text     : QUILocale.get('quiqqer/system', 'accept'),
+                textimage: 'fa fa-check'
             }
         },
 
-        initialize : function (options) {
+        initialize: function (options) {
             this.parent(options);
 
             this.addEvents({
-                onOpen : this.$onOpen
+                onOpen: this.$onOpen
             });
         },
 
         /**
          * event : on open
          */
-        $onOpen : function () {
+        $onOpen: function () {
             var self = this;
 
             this.Loader.show();
@@ -78,9 +77,9 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
                     desc  = result[i].description;
 
                     new Area({
-                        title       : QUILocale.get(title.group, title['var']),
-                        description : QUILocale.get(desc.group, desc['var']),
-                        area        : result[i].name
+                        title      : QUILocale.get(title.group, title['var']),
+                        description: QUILocale.get(desc.group, desc['var']),
+                        area       : result[i].name
                     }).inject(Content);
                 }
 
@@ -93,12 +92,12 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
          *
          * @param {Function} callback
          */
-        getList : function (callback) {
+        getList: function (callback) {
             Ajax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
-                'package' : 'quiqqer/brick',
-                project   : JSON.encode({
-                    name : this.getAttribute('projectName'),
-                    lang : this.getAttribute('projectLang')
+                'package': 'quiqqer/brick',
+                project  : JSON.encode({
+                    name: this.getAttribute('projectName'),
+                    lang: this.getAttribute('projectLang')
                 })
             });
         },
@@ -106,7 +105,7 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
         /**
          * Submit the window
          */
-        submit : function () {
+        submit: function () {
             var Content = this.getContent();
 
             var areas = Content.getElements(

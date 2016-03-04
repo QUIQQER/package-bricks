@@ -20,6 +20,23 @@
             </description>
         </brick>
 
+        <!-- simple contact form (new) -->
+
+        <brick control="\QUI\Bricks\Controls\SimpleContact">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.simpleContact.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.simpleContact.description"/>
+            </description>
+
+            <settings>
+                <setting name="mailTo">
+                    <locale group="quiqqer/bricks" var="brick.control.simpleContact.mailTo"/>
+                </setting>
+            </settings>
+        </brick>
+
         <brick control="\QUI\Controls\LangSwitch">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.langSwitch.title"/>
@@ -56,6 +73,114 @@
 
                 <setting name="socialList" data-qui="package/quiqqer/bricks/bin/Controls/SocialBox">
                     <locale group="quiqqer/bricks" var="SocialBox.socialList"/>
+                </setting>
+            </settings>
+        </brick>
+
+
+        <!-- Children Listing Slider -->
+        <brick control="\QUI\Bricks\Controls\Children\Slider">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.Slider.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.Slider.description"/>
+            </description>
+            <settings>
+                <setting name="site" data-qui="controls/projects/project/site/Select">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.site"/>
+                </setting>
+                <setting name="order" type="select">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
+
+                    <option value="name ASC">
+                        <locale group="quiqqer/system" var="name_asc"/>
+                    </option>
+                    <option value="name DESC">
+                        <locale group="quiqqer/system" var="name_desc"/>
+                    </option>
+                    <option value="title ASC">
+                        <locale group="quiqqer/system" var="title_asc"/>
+                    </option>
+                    <option value="title DESC">
+                        <locale group="quiqqer/system" var="title_desc"/>
+                    </option>
+                    <option value="c_date ASC">
+                        <locale group="quiqqer/system" var="c_date_asc"/>
+                    </option>
+                    <option value="c_date DESC">
+                        <locale group="quiqqer/system" var="c_date_desc"/>
+                    </option>
+                    <option value="e_date ASC">
+                        <locale group="quiqqer/system" var="e_date_asc"/>
+                    </option>
+                    <option value="e_date DESC">
+                        <locale group="quiqqer/system" var="e_date_desc"/>
+                    </option>
+                    <option value="release_from ASC">
+                        <locale group="quiqqer/system" var="release_from_asc"/>
+                    </option>
+                    <option value="release_from DESC">
+                        <locale group="quiqqer/system" var="release_from_desc"/>
+                    </option>
+                </setting>
+            </settings>
+        </brick>
+
+        <brick control="\QUI\Bricks\Controls\Slider\Promoslider">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.promoslider.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.promoslider.description"/>
+            </description>
+        </brick>
+
+        <!-- Children Listing Infnite -->
+        <brick control="\QUI\Bricks\Controls\Children\Infinite">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.Infinite.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.Infinite.description"/>
+            </description>
+            <settings>
+                <setting name="site" data-qui="controls/projects/project/site/Select">
+                    <locale group="quiqqer/bricks" var="brick.control.sidebox1.setting.site"/>
+                </setting>
+                <setting name="order" type="select">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
+
+                    <option value="name ASC">
+                        <locale group="quiqqer/system" var="name_asc"/>
+                    </option>
+                    <option value="name DESC">
+                        <locale group="quiqqer/system" var="name_desc"/>
+                    </option>
+                    <option value="title ASC">
+                        <locale group="quiqqer/system" var="title_asc"/>
+                    </option>
+                    <option value="title DESC">
+                        <locale group="quiqqer/system" var="title_desc"/>
+                    </option>
+                    <option value="c_date ASC">
+                        <locale group="quiqqer/system" var="c_date_asc"/>
+                    </option>
+                    <option value="c_date DESC">
+                        <locale group="quiqqer/system" var="c_date_desc"/>
+                    </option>
+                    <option value="e_date ASC">
+                        <locale group="quiqqer/system" var="e_date_asc"/>
+                    </option>
+                    <option value="e_date DESC">
+                        <locale group="quiqqer/system" var="e_date_desc"/>
+                    </option>
+                    <option value="release_from ASC">
+                        <locale group="quiqqer/system" var="release_from_asc"/>
+                    </option>
+                    <option value="release_from DESC">
+                        <locale group="quiqqer/system" var="release_from_desc"/>
+                    </option>
                 </setting>
             </settings>
         </brick>
@@ -148,8 +273,8 @@
             </description>
 
             <settings>
-                <setting name="title">
-                    <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.title"/>
+                <setting name="place">
+                    <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.place"/>
                 </setting>
                 <setting name="street">
                     <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.street"/>

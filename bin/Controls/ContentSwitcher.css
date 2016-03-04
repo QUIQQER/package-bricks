@@ -6,7 +6,7 @@
     width: 100% !important;
 }
 
-.quiqqer-bricks-ContentSwitcher-entry span {
+.quiqqer-bricks-ContentSwitcher-entry span.entry-title {
     float: left !important;
     line-height: 30px !important;
     width: 140px !important;
