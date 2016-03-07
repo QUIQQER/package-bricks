@@ -88,9 +88,9 @@
             <de><![CDATA[Ihre Nachricht an uns...]]></de>
             <en><![CDATA[Your message to us]]></en>
         </locale>
-        <locale name="control.simpleContact.sentButton">
+        <locale name="control.simpleContact.sendButton">
             <de><![CDATA[Senden]]></de>
-            <en><![CDATA[Sent]]></en>
+            <en><![CDATA[Send]]></en>
         </locale>
         <locale name="brick.control.simpleContact.mailTo">
             <de><![CDATA[Ihre E-Mail Adresse]]></de>
