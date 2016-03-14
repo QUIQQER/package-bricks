@@ -2,7 +2,7 @@
   "name": "quiqqer/bricks",
   "type": "quiqqer-module",
   "description": "Bricks Module",
-  "version": "dev-master",
+  "version": "dev-dev",
   "license": "MIT",
   "authors": [
     {
