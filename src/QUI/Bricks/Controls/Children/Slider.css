@@ -20,6 +20,7 @@
     position: absolute;
     top: 0;
     width: 100%;
+    -webkit-overflow-scrolling: touch;
 }
 
 .quiqqer-bricks-children-slider-container-slide {
