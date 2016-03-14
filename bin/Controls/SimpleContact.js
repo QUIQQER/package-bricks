@@ -58,7 +58,7 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
             var Button = this.$Elm.getElement('.quiqqer-simple-contact-button');
 
             Button.set('disabled', false);
-            Button.set('html', QUILocale.get('quiqqer/bricks', 'control.simpleContact.sentButton'));
+            Button.set('html', QUILocale.get('quiqqer/bricks', 'control.simpleContact.sendButton'));
 
             Button.addEvents({
                 click: function () {
