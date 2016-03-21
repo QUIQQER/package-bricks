@@ -69,15 +69,15 @@ class Brick extends QUI\QDOM
     {
         // default
         $default = array(
-            'type' => 'content',
-            'content' => '',
-            'title' => '',
+            'type'        => 'content',
+            'content'     => '',
+            'title'       => '',
             'description' => '',
-            'project' => '',
-            'areas' => '',
-            'height' => '',
-            'width' => '',
-            'classes' => ''
+            'project'     => '',
+            'areas'       => '',
+            'height'      => '',
+            'width'       => '',
+            'classes'     => ''
         );
 
         $this->setAttributes($default);
@@ -333,6 +333,10 @@ class Brick extends QUI\QDOM
     public function setSettings($settings)
     {
         foreach ($settings as $key => $value) {
+            if ($key === 'classes') {
+                $this->addCSSClass($value);
+                continue;
+            }
             $this->setSetting($key, $value);
         }
     }
