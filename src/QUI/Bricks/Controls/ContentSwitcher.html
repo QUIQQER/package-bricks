@@ -12,7 +12,7 @@
 {assign var=modKey value=$key+1}
     <div class="content-switcher-image {if $modKey && $modKey % 2 !== 0 }push-50 mobile-pull-100{/if}">
         {if $img != ""}
-            {image src=$entry.img width=300 class="content-switcher-image-img"}
+            {image src=$entry.img width=600 class="content-switcher-image-img"}
         {/if}
     </div>
     <div class="content-switcher-content {if $modKey && $modKey % 2 !== 0 }pull-50 mobile-pull-100{/if}">
