@@ -1,23 +1,24 @@
 .content-switcher {
     align-items: center;
     display: flex;
-    margin: 2em 0;
     min-height: 360px;
     flex-direction: row;
 }
 
     .content-switcher-image {
         width: 50%;
-        padding:50px;
         text-align: center;
-        /*display: flex;
-        align-items: center;
-        justify-content: center;*/
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: auto auto;
+        text-align: center;
     }
 
     img.content-switcher-image-img {
         max-height: 100%;
         max-width: 100%;
+        opacity: 0;
+        visibility: hidden;
     }
 
     .content-switcher-content {
@@ -47,4 +48,26 @@
     }
 }
 
+
+/* set in template or custom css */
+
+.content-switcher-content {
+    min-height: 360px;
+    width: 580px;
+    padding-left: 50px;
+}
+
+.content-switcher-image {
+    background-position: left;
+}
+
+.push-custom {
+    background-position: right;
+}
+
+.pull-custom {
+    left: -580px;
+    padding-right: 50px;
+    padding-left: 0;
+}
 

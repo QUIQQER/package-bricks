@@ -6,18 +6,42 @@
 {/if}
 
 {foreach from=$entries item=entry key=key}
-{assign var=img value=$entry.img}
+{image src=$entry.img width=1000 onlysrc=true assign=img}
 
 <div class="content-switcher">
 {assign var=modKey value=$key+1}
-    <div class="content-switcher-image {if $modKey && $modKey % 2 !== 0 }push-50 mobile-pull-100{/if}">
+
+    {if !$this->getAttribute( 'startImgOnLeft' )}
+    <div class="content-switcher-image {if $modKey && $modKey % 2 !== 0 }push-50 mobile-pull-100
+                push-custom push-custom-mobile{/if}"
+                style="background-image: url('{$img}');"
+    >
         {if $img != ""}
             {image src=$entry.img width=600 class="content-switcher-image-img"}
         {/if}
     </div>
-    <div class="content-switcher-content {if $modKey && $modKey % 2 !== 0 }pull-50 mobile-pull-100{/if}">
+    <div class="page-content content-switcher-content {if $modKey && $modKey % 2 !== 0 }pull-50 mobile-pull-100
+                pull-custom pull-custom-mobile{/if}">
         <h2>{$entry.title}</h2>
         <p>{$entry.content}</p>
     </div>
+
+    {else}
+
+    <div class="page-content content-switcher-content {if $modKey && $modKey % 2 !== 0 }push-50 mobile-push-100
+                push-custom push-custom-mobile{/if}">
+        <h2>{$entry.title}</h2>
+        <p>{$entry.content}</p>
+    </div>
+    <div class="content-switcher-image {if $modKey && $modKey % 2 !== 0 }pull-50 mobile-pull-100
+                pull-custom pull-custom-mobile{/if}"
+         style="background-image: url('{$img}');"
+    >
+        {if $img != ""}
+        {image src=$entry.img width=600 class="content-switcher-image-img"}
+        {/if}
+    </div>
+    {/if}
+
 </div>
 {/foreach}
