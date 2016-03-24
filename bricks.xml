@@ -200,6 +200,10 @@
                     <locale group="quiqqer/bricks" var="ContentSwitcher.title"/>
                 </setting>
 
+                <setting name="startImgOnLeft" type="checkbox">
+                    <locale group="quiqqer/bricks" var="ContentSwitcher.startImgOnLeft"/>
+                </setting>
+
                 <setting name="entries" data-qui="package/quiqqer/bricks/bin/Controls/ContentSwitcher">
                     <locale group="quiqqer/bricks" var="ContentSwitcher.entries"/>
                 </setting>

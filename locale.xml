@@ -503,18 +503,27 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="bricks.ContentSwitcher.title">
             <de><![CDATA[Baustein: Content Switcher]]></de>
             <en><![CDATA[Content with image]]></en>
+            <pl><![CDATA[Content Switcher: treść i zdjęcie]]></pl>
         </locale>
         <locale name="bricks.ContentSwitcher.description">
             <de><![CDATA[Inhalt und Bild werden links und rechts abwechslend angezeigt]]></de>
             <en><![CDATA[]]></en>
+            <pl><![CDATA[Treść oraz zdjęcia będą wyświetlane naprzemiennie]]></pl>
         </locale>
         <locale name="ContentSwitcher.title">
             <de><![CDATA[Baustein-Überschrift]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Brick Title]]></en>
+            <pl><![CDATA[Tytuł]]></pl>
+        </locale>
+        <locale name="ContentSwitcher.startImgOnLeft">
+            <de><![CDATA[Fange mit Bild links an]]></de>
+            <en><![CDATA[Start with picture on the left]]></en>
+            <pl><![CDATA[Zacznij z obrazkiem z lewej strony]]></pl>
         </locale>
         <locale name="ContentSwitcher.entries">
             <de><![CDATA[Einträge]]></de>
             <en><![CDATA[]]></en>
+            <pl><![CDATA[Wpisy]]></pl>
         </locale>
 
         <!-- Simple Google Maps -->
