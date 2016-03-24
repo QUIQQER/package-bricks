@@ -303,6 +303,12 @@ class Brick extends QUI\QDOM
         $Control->setAttribute('width', $this->getAttribute('width'));
         $Control->setAttribute('content', $this->getAttribute('content'));
 
+        if ($this->getAttribute('Site')) {
+            $Control->setAttribute('Site', $this->getAttribute('Site'));
+        } else {
+            $Control->setAttribute('Site', QUI::getRewrite()->getSite());
+        }
+
 
         if (!($Control instanceof QUI\Control) || !$Control) {
             return false;
