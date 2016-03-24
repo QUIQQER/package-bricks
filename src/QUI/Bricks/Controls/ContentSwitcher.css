@@ -1,13 +1,13 @@
 .content-switcher {
     align-items: center;
     display: flex;
-    min-height: 360px;
     flex-direction: row;
+    min-height: 360px;
+    width: 100%;
 }
 
     .content-switcher-image {
         width: 50%;
-        text-align: center;
         background-position: center center;
         background-repeat: no-repeat;
         background-size: auto auto;
@@ -22,9 +22,9 @@
     }
 
     .content-switcher-content {
-        width: 50%;
+        min-height: 360px;
         padding: 50px 0;
-        
+        width: 50%;
     }
 
 @media screen and (max-width: 767px){
@@ -46,14 +46,25 @@
     .content-switcher-content {
         width: 100%;
     }
+
+    .content-switcher-content-not-full {
+        padding-right: 0 !important;
+        padding-left: 0 !important;;
+    }
+}
+
+@media screen and (max-width: 1160px){
+    .content-switcher .content-switcher-content {
+        max-width: 100%;
+    }
 }
 
 
-/* set in template or custom css */
 
-.content-switcher-content {
-    min-height: 360px;
-    width: 580px;
+/* set in template or custom css */
+/*
+.content-switcher .content-switcher-content {
+    width: 580px; /* (standard padding of page elements * 2)
     padding-left: 50px;
 }
 
@@ -65,9 +76,10 @@
     background-position: right;
 }
 
-.pull-custom {
+.content-switcher .pull-custom {
     left: -580px;
     padding-right: 50px;
     padding-left: 0;
 }
 
+*/
