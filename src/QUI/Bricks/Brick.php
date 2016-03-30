@@ -99,6 +99,10 @@ class Brick extends QUI\QDOM
         if (isset($params['classes'])) {
             $cssClasses = json_decode($params['classes'], true);
 
+            if (!$cssClasses) {
+                $cssClasses = array();
+            }
+
             foreach ($cssClasses as $cssClass) {
                 $this->addCSSClass($cssClass);
             }
