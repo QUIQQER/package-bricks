@@ -615,7 +615,6 @@ class Manager
             }
         }
 
-
         // update
         QUI::getDataBase()->update($this->getTable(), array(
             'title' => $Brick->getAttribute('title'),
@@ -627,7 +626,7 @@ class Manager
             'areas' => $areaString,
             'height' => $Brick->getAttribute('height'),
             'width' => $Brick->getAttribute('width'),
-            'classes' => $Brick->getAttribute('classes')
+            'classes' => json_encode($Brick->getCSSClasses())
         ), array(
             'id' => (int)$brickId
         ));

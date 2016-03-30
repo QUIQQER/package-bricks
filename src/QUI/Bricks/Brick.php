@@ -69,15 +69,15 @@ class Brick extends QUI\QDOM
     {
         // default
         $default = array(
-            'type'        => 'content',
-            'content'     => '',
-            'title'       => '',
+            'type' => 'content',
+            'content' => '',
+            'title' => '',
             'description' => '',
-            'project'     => '',
-            'areas'       => '',
-            'height'      => '',
-            'width'       => '',
-            'classes'     => ''
+            'project' => '',
+            'areas' => '',
+            'height' => '',
+            'width' => '',
+            'classes' => ''
         );
 
         $this->setAttributes($default);
@@ -94,6 +94,16 @@ class Brick extends QUI\QDOM
 
         if (isset($params['uniqueId'])) {
             $this->uniqueId = $params['uniqueId'];
+        }
+
+        if (isset($params['classes'])) {
+            $cssClasses = json_decode($params['classes'], true);
+
+            foreach ($cssClasses as $cssClass) {
+                $this->addCSSClass($cssClass);
+            }
+
+            unset($params['classes']);
         }
 
         // default settings from control
@@ -326,6 +336,8 @@ class Brick extends QUI\QDOM
      */
     public function getSettings()
     {
+        $this->settings['classes'] = $this->getCSSClasses();
+
         return $this->settings;
     }
 
@@ -356,6 +368,10 @@ class Brick extends QUI\QDOM
      */
     public function getSetting($name)
     {
+        if ($name === 'classes') {
+            return $this->getCSSClasses();
+        }
+
         if (isset($this->settings[$name])) {
             return $this->settings[$name];
         }
@@ -397,7 +413,19 @@ class Brick extends QUI\QDOM
      */
     public function addCSSClass($cssClass)
     {
-        $this->cssClasses[] = $cssClass;
+        if (!empty($cssClass)) {
+            $this->cssClasses[] = $cssClass;
+        }
+    }
+
+    /**
+     * Return all css classes
+     *
+     * @return array
+     */
+    public function getCSSClasses()
+    {
+        return $this->cssClasses;
     }
 
     /**

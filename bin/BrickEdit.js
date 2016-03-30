@@ -298,7 +298,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 var data = this.getAttribute('data');
 
                 this.$unload();
-
+                console.log(data);
                 this.setAttribute('data', data);
                 this.$Active = Button;
 
@@ -354,7 +354,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             var Form   = this.getContent().getElement('form'),
                 unload = this.$Active.getAttribute('name'),
                 data   = this.getAttribute('data');
-
+            console.log(unload);
             if (unload == 'information') {
                 data.attributes = Object.merge(
                     data.attributes,
