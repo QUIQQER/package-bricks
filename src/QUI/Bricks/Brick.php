@@ -259,14 +259,7 @@ class Brick extends QUI\QDOM
         $Control->setAttributes($this->getSettings());
 
         if ($this->getAttribute('classes')) {
-            $classes = explode(' ', $this->getAttribute('classes'));
-
-            foreach ($classes as $class) {
-                $class = trim($class);
-                $class = preg_replace('/[^a-zA-Z0-9\-]/', '', $class);
-
-                $Control->addCSSClass($class);
-            }
+            $Control->addCSSClass($this->getAttribute('classes'));
         }
 
         if ($this->id) {
@@ -413,8 +406,24 @@ class Brick extends QUI\QDOM
      */
     public function addCSSClass($cssClass)
     {
-        if (!empty($cssClass)) {
-            $this->cssClasses[] = $cssClass;
+        if (!is_string($cssClass)) {
+            return;
+        }
+
+        if (empty($cssClass)) {
+            return;
+        }
+
+        $classes = preg_replace('/[^_a-zA-Z0-9-]/', ' ', $cssClass);
+        $classes = explode(' ', $classes);
+
+        $keys = array_flip($this->cssClasses);
+
+        foreach ($classes as $cssClass) {
+            if (!isset($keys[$cssClass])) {
+                $this->cssClasses[] = $cssClass;
+                $keys[$cssClass]    = true;
+            }
         }
     }
 
