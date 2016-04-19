@@ -32,41 +32,44 @@
             <en><![CDATA[Brick:Content]]></en>
         </locale>
         <locale name="brick.content.description">
-            <de>
-                <![CDATA[Ein Baustein mit Text-Editor, in welchem neben Text auch z.B Bilder eingefügt werden können]]></de>
-            <en><![CDATA[]]></en>
+            <de><![CDATA[
+            Ein Baustein mit Text-Editor, in welchem neben Text auch z.B Bilder eingefügt werden können
+            ]]></de>
+            <en><![CDATA[
+            A brick with a text editor, in addition to text, pictures can be inserted, too.
+            ]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.title">
             <de><![CDATA[Baustein: Bradcrumb]]></de>
-            <en><![CDATA[Brick:Bradcrumb]]></en>
+            <en><![CDATA[Bricks: Bradcrumb]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.description">
             <de><![CDATA[Eine "Sie sind hier"-Anzeigenleiste über dem Inhalt]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[A "You are here ..." list above the content]]></en>
         </locale>
         <locale name="brick.control.contact.title">
-            <de><![CDATA[Baustein: Kontaktformular]]></de>
-            <en><![CDATA[Brick: Contact form]]></en>
+            <de><![CDATA[Bausteine: Einfaches Kontaktformular]]></de>
+            <en><![CDATA[Brick: Standard Contact form]]></en>
         </locale>
         <locale name="brick.control.contact.description">
             <de><![CDATA[Ein vorgefertigtes Kontaktformular]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[A prefabricated contact form]]></en>
         </locale>
 
 
         <!-- Simple contact form as brick (new) -->
 
         <locale name="brick.control.simpleContact.title">
-            <de><![CDATA[Baustein: Einfacher Kontaktformular]]></de>
-            <en><![CDATA[Brick: Simple Contact form]]></en>
+            <de><![CDATA[Baustein: Einfaches Kontaktformular]]></de>
+            <en><![CDATA[Brick: Simple contact form]]></en>
         </locale>
         <locale name="brick.control.simpleContact.description">
             <de><![CDATA[Ein vorgefertigtes Kontaktformular]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[A prefabricated contact form]]></en>
         </locale>
         <locale name="control.simpleContact.name">
             <de><![CDATA[Vor- und Nachname]]></de>
-            <en><![CDATA[Name]]></en>
+            <en><![CDATA[Firt- and Last name]]></en>
         </locale>
         <locale name="control.simpleContact.name.placeholder">
             <de><![CDATA[Ihr Vor- und Nachname]]></de>
@@ -97,34 +100,45 @@
             <en><![CDATA[Your email]]></en>
         </locale>
 
-
-
         <locale name="package.title">
             <de><![CDATA[Baustein Modul / Bricks]]></de>
             <en><![CDATA[Bricks Module]]></en>
         </locale>
         <locale name="package.description">
             <de><![CDATA[
-                Platzieren Sie hiermit Grafiken, Texte, Videos, Formulare etc.
+                Platzieren Sie Grafiken, Texte, Videos, Formulare etc.
                 innerhalb eines Templates (einer Seite Ihrer Homepage) beliebig.
             ]]></de>
             <en><![CDATA[
-
+                Place any graphics, text, videos, forms, etc. within a template (a page on your website).
             ]]></en>
         </locale>
         <locale name="brick.control.navigation.title">
-            <de><![CDATA[Baustein: Navigation]]></de>
-            <en><![CDATA[Brick:Navigation]]></en>
+            <de><![CDATA[Bausteine: Navigation]]></de>
+            <en><![CDATA[Bricks: Navigation]]></en>
         </locale>
         <locale name="brick.control.navigation.description">
             <de>
-                <![CDATA[Lassen Sie auf Ihrer Webseite in der rechten oder linken Sidebar eine Seiten-Navigation anzeigen]]></de>
-            <en><![CDATA[]]></en>
+                <![CDATA[Eine Navigation für die Sidebar. Die erste Seite der Navigation und die Navigationstiefe sind flexibel einstellbar.]]></de>
+            <en>
+                <![CDATA[A navigation for the sidebar. The first page of the navigation and the navigation level can be set flexibly.]]></en>
+        </locale>
+        <locale name="brick.control.navigation.setting.startId">
+            <de><![CDATA[Start-ID]]></de>
+            <en><![CDATA[Start ID]]></en>
+        </locale>
+        <locale name="brick.control.navigation.setting.homelink">
+            <de><![CDATA[Home Link anzeigen]]></de>
+            <en><![CDATA[Show the homelink]]></en>
+        </locale>
+        <locale name="brick.control.navigation.setting.levels">
+            <de><![CDATA[Navigationstiefe]]></de>
+            <en><![CDATA[Navigation levels]]></en>
         </locale>
 
         <locale name="brick.control.langSwitch.title">
-            <de><![CDATA[Baustein: Sprachenwechsel]]></de>
-            <en><![CDATA[Brick:Lang switch]]></en>
+            <de><![CDATA[Bausteine: Sprachenwechsel]]></de>
+            <en><![CDATA[Bricks: Language switch]]></en>
         </locale>
         <locale name="brick.control.langSwitch.description">
             <de><![CDATA[]]></de>
@@ -179,53 +193,53 @@
             <en><![CDATA[Extra settings]]></en>
         </locale>
         <locale name="bricks.SocialBox.title">
-            <de><![CDATA[Baustein: Social Media]]></de>
-            <en><![CDATA[]]></en>
+            <de><![CDATA[Bausteine: Social Media]]></de>
+            <en><![CDATA[Bricks: Social Media]]></en>
         </locale>
         <locale name="brick.control.banner.setting.title">
             <de><![CDATA[Baustein-Überschrift]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Brick title]]></en>
         </locale>
         <locale name="brick.control.banner.setting.text">
             <de><![CDATA[Bannertext]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Banner text]]></en>
         </locale>
         <locale name="site.area.button.area.more.openIt">
             <de><![CDATA[Einstellungen]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Settings]]></en>
         </locale>
         <locale name="site.area.button.area.sort">
             <de><![CDATA[Bausteine sortieren]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Sort bricks]]></en>
         </locale>
         <locale name="brick.control.banner.title">
             <de><![CDATA[Baustein: Textbanner]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Bricks: Text banner]]></en>
         </locale>
 
         <locale name="brick.control.sidebox1.title">
-            <de><![CDATA[Baustein: Einzelbox]]></de>
-            <en><![CDATA[]]></en>
+            <de><![CDATA[Bausteine: 1-Seite Box]]></de>
+            <en><![CDATA[Bricks: 1-Page Box]]></en>
         </locale>
         <locale name="brick.control.sidebox2.title">
-            <de><![CDATA[Baustein: 2er-Box]]></de>
-            <en><![CDATA[]]></en>
+            <de><![CDATA[Bausteine: 2-Seiten Box]]></de>
+            <en><![CDATA[Bricks: 2-Page Box]]></en>
         </locale>
         <locale name="brick.control.sidebox3.title">
-            <de><![CDATA[Baustein: 3er-Box]]></de>
-            <en><![CDATA[]]></en>
+            <de><![CDATA[Bausteine: 3-Seiten Box]]></de>
+            <en><![CDATA[Bricks: 3-Page Box]]></en>
         </locale>
         <locale name="brick.control.sidebox4.title">
-            <de><![CDATA[Baustein: 4er-Box]]></de>
-            <en><![CDATA[]]></en>
+            <de><![CDATA[Bausteine: 4-Seiten Box]]></de>
+            <en><![CDATA[Bricks: 4-Page Box]]></en>
         </locale>
         <locale name="brick.control.sidebox4.setting.site">
             <de><![CDATA[Seiten hinzufügen]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Add pages]]></en>
         </locale>
         <locale name="brick.control.setting.limit">
             <de><![CDATA[Limit]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Limit]]></en>
         </locale>
 
         <locale name="controls.pagination.mobile.option">
@@ -264,6 +278,27 @@
         <locale name="site.area.window.settings.setting.classes">
             <de><![CDATA[CSS Klassen]]></de>
             <en><![CDATA[CSS classes]]></en>
+        </locale>
+
+        <locale name="brick.control.slider.title">
+            <de><![CDATA[Bausteine: Seiten-Präsentation]]></de>
+            <en><![CDATA[Bricks: Site-Presentation]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.title">
+            <de><![CDATA[Bausteine: Promoslider ]]></de>
+            <en><![CDATA[Bricks: Promoslider]]></en>
+        </locale>
+        <locale name="brick.control.infinite.title">
+            <de><![CDATA[Bausteine: Seiten-LazyLoader]]></de>
+            <en><![CDATA[Bricks: Sites-LazyLoader]]></en>
+        </locale>
+        <locale name="brick.control.setting.site">
+            <de><![CDATA[Seiten hinzufügen]]></de>
+            <en><![CDATA[Add pages]]></en>
+        </locale>
+        <locale name="sidebox3TitleTop.title">
+            <de><![CDATA[Bausteine: 3 Seiten untereinander]]></de>
+            <en><![CDATA[Bricks: 3 pages among themselves]]></en>
         </locale>
     </groups>
 
@@ -456,63 +491,72 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
     <groups name="quiqqer/bricks" datatype="js,php">
         <locale name="brick.control.navigation.setting.content">
             <de><![CDATA[Text über dem Kontaktformular]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Text above the contact form]]></en>
         </locale>
         <locale name="brick.control.sidebox1.setting.site">
             <de><![CDATA[Seiten hinzufügen]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Add pages]]></en>
         </locale>
         <locale name="brick.control.setting.showTitle">
             <de><![CDATA[Seitentitel anzeigen]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Show page titles]]></en>
         </locale>
         <locale name="brick.control.setting.showImage">
             <de><![CDATA[Seitenbilder anzeigen]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Show page images]]></en>
         </locale>
         <locale name="brick.control.setting.showShort">
             <de><![CDATA[Kurzbeschreibung der Seiten anzeigen]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Show page short descriptions]]></en>
         </locale>
         <locale name="brick.control.setting.showContent">
             <de><![CDATA[Seiteninhalt anzeigen]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Show page content]]></en>
         </locale>
         <locale name="brick.control.sidebox2.setting.site">
             <de><![CDATA[Seiten hinzufügen]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Add pages]]></en>
         </locale>
         <locale name="brick.control.sidebox3.setting.site">
             <de><![CDATA[Seiten hinzufügen]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Add pages]]></en>
         </locale>
         <locale name="SocialBox.title">
             <de><![CDATA[Baustein-Überschrift]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Brick title]]></en>
         </locale>
         <locale name="SocialBox.socialList">
             <de><![CDATA[Social Media Einträge]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Social Media Entries]]></en>
         </locale>
         <locale name="exception.brick.has.no.title">
             <de><![CDATA[Fügen Sie einen Titel hinzu!]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Add a title!]]></en>
+        </locale>
+
+        <locale name="brick.control.googlemaps.title">
+            <de><![CDATA[Bausteine: Maps-Karte]]></de>
+            <en><![CDATA[Brick: maps]]></en>
+        </locale>
+        <locale name="brick.control.googlemaps.description">
+            <de><![CDATA[Einstellungen für Karten]]></de>
+            <en><![CDATA[Maps settings]]></en>
         </locale>
 
         <!-- Content Switcher -->
         <locale name="bricks.ContentSwitcher.title">
-            <de><![CDATA[Baustein: Content Switcher]]></de>
+            <de><![CDATA[Bausteine: Inhalt-Wechsel]]></de>
             <en><![CDATA[Content with image]]></en>
             <pl><![CDATA[Content Switcher: treść i zdjęcie]]></pl>
         </locale>
         <locale name="bricks.ContentSwitcher.description">
-            <de><![CDATA[Inhalt und Bild werden links und rechts abwechslend angezeigt]]></de>
-            <en><![CDATA[]]></en>
+            <de><![CDATA[Inhalt und Bild werden links und rechts abwechselnd angezeigt]]></de>
+            <en><![CDATA[Content and image are displayed alternately left and right]]></en>
             <pl><![CDATA[Treść oraz zdjęcia będą wyświetlane naprzemiennie]]></pl>
         </locale>
         <locale name="ContentSwitcher.title">
             <de><![CDATA[Baustein-Überschrift]]></de>
-            <en><![CDATA[Brick Title]]></en>
+            <en><![CDATA[Brick title]]></en>
             <pl><![CDATA[Tytuł]]></pl>
         </locale>
         <locale name="ContentSwitcher.startImgOnLeft">
@@ -520,15 +564,19 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Start with picture on the left]]></en>
             <pl><![CDATA[Zacznij z obrazkiem z lewej strony]]></pl>
         </locale>
+        <locale name="brick.control.image.title">
+            <de><![CDATA[Bausteine: Bild-Banner]]></de>
+            <en><![CDATA[Bricks: Image-Banner]]></en>
+        </locale>
         <locale name="ContentSwitcher.entries">
             <de><![CDATA[Einträge]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Entries]]></en>
             <pl><![CDATA[Wpisy]]></pl>
         </locale>
 
         <!-- Simple Google Maps -->
         <locale name="brick.control.simplegooglemaps.title">
-            <de><![CDATA[Baustein: Simple Google Maps]]></de>
+            <de><![CDATA[Bausteine: Einfache Google Maps Karte]]></de>
             <en><![CDATA[Brick: Simple Google Maps]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.description">
@@ -538,6 +586,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.control.simplegooglemaps.settings.place">
             <de><![CDATA[Google Place]]></de>
             <en><![CDATA[Google Place]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.title">
+            <de><![CDATA[Title]]></de>
+            <en><![CDATA[Title]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.street">
             <de><![CDATA[Straße]]></de>
@@ -571,13 +623,13 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
         <locale name="BoxContent.entries">
             <de><![CDATA[Einträge]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Entries]]></en>
         </locale>
 
         <!-- Image Brick -->
         <locale name="bricks.Image.link">
-            <de><![CDATA[Baustein: Bild]]></de>
-            <en><![CDATA[Brick: Image]]></en>
+            <de><![CDATA[Bausteine: Bildbanner]]></de>
+            <en><![CDATA[Bricks: Image banner]]></en>
         </locale>
         <locale name="Image.link">
             <de><![CDATA[Link]]></de>
@@ -585,11 +637,11 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
         <locale name="Image.title">
             <de><![CDATA[Baustein-Überschrift]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Brick title]]></en>
         </locale>
         <locale name="Image.picture">
             <de><![CDATA[Bild auswählen]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Select image]]></en>
         </locale>
     </groups>
 </locales>
