@@ -40,7 +40,7 @@
             ]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.title">
-            <de><![CDATA[Baustein: Bradcrumb]]></de>
+            <de><![CDATA[Bausteine: Bradcrumb]]></de>
             <en><![CDATA[Bricks: Bradcrumb]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.description">
@@ -60,8 +60,8 @@
         <!-- Simple contact form as brick (new) -->
 
         <locale name="brick.control.simpleContact.title">
-            <de><![CDATA[Baustein: Einfaches Kontaktformular]]></de>
-            <en><![CDATA[Brick: Simple contact form]]></en>
+            <de><![CDATA[Bausteine: Einfaches Kontaktformular]]></de>
+            <en><![CDATA[Bricks: Simple contact form]]></en>
         </locale>
         <locale name="brick.control.simpleContact.description">
             <de><![CDATA[Ein vorgefertigtes Kontaktformular]]></de>
@@ -213,7 +213,7 @@
             <en><![CDATA[Sort bricks]]></en>
         </locale>
         <locale name="brick.control.banner.title">
-            <de><![CDATA[Baustein: Textbanner]]></de>
+            <de><![CDATA[Bausteine: Textbanner]]></de>
             <en><![CDATA[Bricks: Text banner]]></en>
         </locale>
 
@@ -285,7 +285,7 @@
             <en><![CDATA[Bricks: Site-Presentation]]></en>
         </locale>
         <locale name="brick.control.promoslider.title">
-            <de><![CDATA[Bausteine: Promoslider ]]></de>
+            <de><![CDATA[Bausteine: Promoslider]]></de>
             <en><![CDATA[Bricks: Promoslider]]></en>
         </locale>
         <locale name="brick.control.infinite.title">
