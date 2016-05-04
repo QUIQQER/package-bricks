@@ -13,9 +13,10 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
     'qui/QUI',
     'qui/controls/Control',
-    'qui/utils/String'
+    'qui/utils/String',
+    'Locale'
 
-], function (QUI, QUIControl, QUIStringUtils) {
+], function (QUI, QUIControl, QUIStringUtils, QUILocale) {
     "use strict";
 
     return new Class({
@@ -190,10 +191,17 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 }).inject(Prev, 'after');
 
                 new Element('option', {
-                    value      : window.location.pathname,
-                    html       : i,
-                    'data-page': i
-                }).inject(this.$Select);
+                        value      : window.location.pathname,
+                        html       : QUILocale.get(
+                            "quiqqer/bricks",
+                            "controls.pagination.mobile.option", {
+                                from: i,
+                                max : pages
+                            }
+                        ),
+                        'data-page': i
+                    }
+                ).inject(this.$Select);
             }
 
             this.$sheets = this.$Elm.getElements('.quiqqer-sheets-sheet');
@@ -232,7 +240,8 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
                 self.fireEvent('change', [self, this, Query]);
             });
-        },
+        }
+        ,
 
         /**
          * link / page click
@@ -260,7 +269,8 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
                 this.openPage(parseInt(Target.get('data-page') - 1));
             }
-        },
+        }
+        ,
 
         /**
          * Open page number and trigger the change event when it is necessary
@@ -284,7 +294,8 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
             this.setPage(no);
             this.fireEvent('change', [this, Sheet, query]);
-        },
+        }
+        ,
 
         /**
          * Open page number and does not trigger the change event
@@ -316,7 +327,8 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
             // repaint if next sheet is in the hidden last
             this.$redraw();
-        },
+        }
+        ,
 
         /**
          * Go to the next page
@@ -332,7 +344,8 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             if (currentPage < this.$sheets.length) {
                 this.openPage(currentPage);
             }
-        },
+        }
+        ,
 
         /**
          * Go to the previous page
@@ -351,21 +364,24 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             }
 
             this.first();
-        },
+        }
+        ,
 
         /**
          * Go to the first page
          */
         first: function () {
             this.openPage(0);
-        },
+        }
+        ,
 
         /**
          * Go to the last page
          */
         last: function () {
             this.openPage(this.$sheets.length - 1);
-        },
+        }
+        ,
 
         /**
          * new draw aff the pagination
@@ -449,5 +465,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 this.$MoreNext.setStyle('display', null);
             }
         }
-    });
-});
+    })
+        ;
+})
+;
