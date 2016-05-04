@@ -34,6 +34,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             this.parent(options);
 
             this.$Current = null;
+            this.$Select  = null;
 
             this.$Prev    = null;
             this.$Next    = null;
@@ -67,6 +68,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             this.$Prev      = this.$Elm.getElement('.quiqqer-sheets-prev');
             this.$Last      = this.$Elm.getElement('.quiqqer-sheets-last');
             this.$Next      = this.$Elm.getElement('.quiqqer-sheets-next');
+            this.$Select    = this.$Elm.getElement('.quiqqer-sheets-mobile select');
 
             this.$Current = this.$Elm.getElement(
                 '.quiqqer-sheets-desktop-current'
@@ -167,7 +169,6 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
          * @param {Number} pages
          */
         setPageCount: function (pages) {
-
             if (this.$sheets.length == pages) {
                 return;
             }
@@ -175,9 +176,9 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             var Prev = this.$sheets[0].getPrevious();
 
             this.$sheets.destroy();
+            this.$Select.set('html', '');
 
             for (var i = 1; i <= pages; i++) {
-
                 Prev = new Element('a', {
                     href       : window.location.pathname,
                     html       : i,
@@ -187,6 +188,12 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                         click: this.$linkclick
                     }
                 }).inject(Prev, 'after');
+
+                new Element('option', {
+                    value      : window.location.pathname,
+                    html       : i,
+                    'data-page': i
+                }).inject(this.$Select);
             }
 
             this.$sheets = this.$Elm.getElements('.quiqqer-sheets-sheet');
@@ -216,11 +223,9 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             });
 
             // mobile select
-            var Select = this.$Elm.getElement('.quiqqer-sheets-mobile select');
+            this.$Select.set('onchange', null);
 
-            Select.set('onchange', null);
-
-            Select.addEvent('change', function (event) {
+            this.$Select.addEvent('change', function (event) {
                 event.stop();
 
                 var Query = QUIStringUtils.getUrlParams(this.value);
@@ -264,7 +269,6 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
          * @fire change [this, Sheet, query]
          */
         openPage: function (no) {
-
             if (typeof this.$sheets[no] === 'undefined') {
                 return;
             }
@@ -288,7 +292,6 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
          * @param {Number} no - page number
          */
         setPage: function (no) {
-
             if (typeof this.$sheets[no] === 'undefined') {
                 return;
             }
@@ -368,7 +371,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
          * new draw aff the pagination
          */
         $redraw: function () {
-            var elmSize   = this.$Container.getSize();
+            var elmSize = this.$Container.getSize();
 
             if (!this.$sheets.length) {
                 return;
