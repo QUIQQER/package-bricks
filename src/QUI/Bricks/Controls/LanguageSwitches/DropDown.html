@@ -1,0 +1,42 @@
+{assign var=Site value=$this->getAttribute('Site')}
+{assign var=siteLang value=$Project->getLang()}
+
+{if count($langs) > 1}
+<div class="quiqqer-control-languageswitch-dropdown quiqqer-control-languageswitch-dropdown__withArrow">
+    <div class="quiqqer-control-languageswitch-dropdown-text">
+        {if $this->getAttribute('showFlags')}
+            <span class="quiqqer-control-languageswitch-dropdownicon">
+                <img src="{$smarty.const.URL_BIN_DIR}16x16/flags/{$siteLang}.png"/>
+            </span>
+        {/if}
+
+        {if $this->getAttribute('showText')}
+            <span class="quiqqer-control-languageswitch-dropdown-text">
+                {$siteLang}
+            </span>
+        {/if}
+    </div>
+
+    <div class="quiqqer-control-languageswitch-dropdown-arrow fa fa-angle-down"></div>
+
+    <div class="quiqqer-control-languageswitch-dropdown-dd">
+        {foreach from=$langs item=lang}
+        {if $siteLang != $lang && $Site->existLang($lang)}
+        <a class="quiqqer-control-languageswitch-dropdown-dd-entry" href="{url id=$Site->getId( $lang ) lang=$lang}">
+            {if $this->getAttribute('showFlags')}
+                <span class="quiqqer-control-languageswitch-dropdown-dd-icon">
+                    <img src="{$smarty.const.URL_BIN_DIR}16x16/flags/{$lang}.png"/>
+                </span>
+            {/if}
+
+            {if $this->getAttribute('showText')}
+                <span class="quiqqer-control-languageswitch-dropdown-dd-text">
+                    {$lang}
+                </span>
+            {/if}
+        </a>
+        {/if}
+        {/foreach}
+    </div>
+</div>
+{/if}
