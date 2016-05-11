@@ -1,23 +1,31 @@
 {assign var=Site value=$this->getAttribute('Site')}
 {assign var=siteLang value=$Project->getLang()}
+{assign var=siteLang value=$Project->getLang()}
 {assign var=all value=$this->getAttribute('all')}
+{assign var=path value=$this->getAttribute('flagFolderPath')}
 
 {if count($langs) > 1}
 {strip}
 <div class="quiqqer-bricks-languageswitch-flag">
     {foreach from=$langs item=lang}
-    {if $all || $siteLang != $lang && $Site->existLang( $lang )}
-    <a class="quiqqer-bricks-languageswitch-flag-entry" href="{url id=$Site->getId( $lang ) lang=$lang}">
+    {if $all || $siteLang != $lang}
+
+    {if $Site->getId($lang)}
+    <a class="quiqqer-bricks-languageswitch-flag-entry" href="{url id=$Site->getId($lang) lang=$lang}">
+    {else}
+    <a class="quiqqer-bricks-languageswitch-flag-entry" href="{url id=1 lang=$lang}">
+    {/if}
+
         {if $this->getAttribute('showFlags')}
-            <span class="quiqqer-bricks-languageswitch-flag-entry-icon">
-                <img src="{$smarty.const.URL_BIN_DIR}16x16/flags/{$lang}.png"/>
-            </span>
+        <span class="quiqqer-bricks-languageswitch-flag-entry-icon">
+            <img src="{$path}{$lang}.png"/>
+        </span>
         {/if}
 
         {if $this->getAttribute('showText')}
-            <span class="quiqqer-bricks-languageswitch-flag-entry-text">
-                {$lang}
-            </span>
+        <span class="quiqqer-bricks-languageswitch-flag-entry-text">
+            {$lang}
+        </span>
         {/if}
     </a>
     {/if}

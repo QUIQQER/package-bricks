@@ -30,7 +30,8 @@ class Flags extends QUI\Control
             'showFlags' => true,
             'showText' => true,
             'all' => true,
-            'data-qui' => 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags'
+            'data-qui' => 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags',
+            'flagFolderPath' => URL_BIN_DIR . '16x16/flags/'
         ));
 
         parent::__construct($attributes);

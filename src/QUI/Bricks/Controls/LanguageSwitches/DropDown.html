@@ -1,5 +1,6 @@
 {assign var=Site value=$this->getAttribute('Site')}
 {assign var=siteLang value=$Project->getLang()}
+{assign var=path value=$this->getAttribute('flagFolderPath')}
 
 {if count($langs) > 1}
 <div class="quiqqer-control-languageswitch-dropdown quiqqer-control-languageswitch-dropdown__withArrow">
@@ -25,7 +26,7 @@
         <a class="quiqqer-control-languageswitch-dropdown-dd-entry" href="{url id=$Site->getId( $lang ) lang=$lang}">
             {if $this->getAttribute('showFlags')}
                 <span class="quiqqer-control-languageswitch-dropdown-dd-icon">
-                    <img src="{$smarty.const.URL_BIN_DIR}16x16/flags/{$lang}.png"/>
+                    <img src="{$path}{$lang}.png"/>
                 </span>
             {/if}
 

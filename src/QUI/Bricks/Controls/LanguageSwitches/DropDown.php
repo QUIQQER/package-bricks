@@ -29,7 +29,8 @@ class DropDown extends QUI\Control
             'Site' => false,
             'showFlags' => true,
             'showText' => true,
-            'data-qui' => 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown'
+            'data-qui' => 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown',
+            'flagFolderPath' => URL_BIN_DIR . '16x16/flags/'
         ));
 
         parent::__construct($attributes);
