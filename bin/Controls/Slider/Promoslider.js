@@ -29,14 +29,17 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
         Binds: [
             '$onImport',
             'prev',
-            'next'
+            'next',
+            'resize'
         ],
 
         options: {
             delay         : 5000,
             effectduration: 400,
             autostart     : true,
-            touch         : true
+            touch         : true,
+            pagefit       : false,
+            pagefitcut    : 0
         },
 
         initialize: function (options) {
@@ -44,12 +47,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
             this.$dots    = [];
             this.$running = false;
-
-            this.$Touch = null;
+            this.$Touch   = null;
+            this.$FX      = null;
 
             this.addEvents({
                 onImport: this.$onImport
             });
+
+            QUI.addEvent('resize', this.resize);
         },
 
         /**
@@ -59,6 +64,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             var self   = this,
                 Elm    = this.getElm(),
                 slides = Elm.getElements('.quiqqer-bricks-promoslider-slide');
+
+            this.$FX = moofx(Elm);
 
             var Dots = new Element('div', {
                 'class': 'quiqqer-bricks-promoslider-dots'
@@ -75,7 +82,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             var i, len, Dot;
 
             for (i = 0, len = slides.length; i < len; i++) {
-
                 Dot = new Element('div', {
                     'class'  : 'quiqqer-bricks-promoslider-dot',
                     'data-no': i,
@@ -126,6 +132,31 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             if (this.getAttribute('autostart')) {
                 this.$Timer = (this.next).periodical(this.getAttribute('delay'));
             }
+
+            this.resize();
+        },
+
+        /**
+         * resize the promoslider
+         */
+        resize: function () {
+            if (!this.getAttribute('pagefit')) {
+                return;
+            }
+
+            var winSize = QUI.getWindowSize();
+
+
+            if (this.$FX) {
+                this.$FX.animate({
+                    height: winSize.y - this.getAttribute('pagefitcut')
+                });
+                return;
+            }
+
+            this.getElm().setStyles({
+                height: winSize.y - this.getAttribute('pagefitcut')
+            });
         },
 
         /**

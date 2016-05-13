@@ -14,12 +14,12 @@
 }
 
 .quiqqer-bricks-promoslider-slide-image {
-    height: 100%;
+    height: calc(100% - 50px);
     left: 0;
     padding: 10px 0 0 10px;
     position: absolute;
     top: 0;
-    width: auto;
+    width: 100%;
 }
 
 .quiqqer-bricks-promoslider-slide-image img {

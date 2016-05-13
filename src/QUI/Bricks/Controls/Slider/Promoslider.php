@@ -109,6 +109,14 @@ class Promoslider extends QUI\Control
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
+        if ($this->getAttribute('pagefit')) {
+            $this->setAttribute('data-qui-options-pagefit', $this->getAttribute('pagefit'));
+        }
+
+        if ($this->getAttribute('pagefitcut')) {
+            $this->setAttribute('data-qui-options-pagefitcut', $this->getAttribute('pagefitcut'));
+        }
+
         $Engine->assign(array(
             'this' => $this,
             'desktopSlides' => $this->desktopSlides,

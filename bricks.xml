@@ -134,6 +134,16 @@
             <description>
                 <locale group="quiqqer/bricks" var="brick.control.promoslider.description"/>
             </description>
+
+            <settings>
+                <setting name="pagefit" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.pagefit"/>
+                </setting>
+                <setting name="pagefitcut" type="number">
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.pagefitcut"/>
+                </setting>
+            </settings>
+
         </brick>
 
         <!-- Children Listing Infnite -->
