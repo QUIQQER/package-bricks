@@ -58,12 +58,30 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             this.$Elm = new Element('div', {
                 'class': 'quiqqer-bricks-promoslider-settings',
                 styles : {
+                    clear   : 'both',
+                    'float' : 'left',
                     overflow: 'hidden',
-                    position: 'relative'
+                    position: 'relative',
+                    margin  : '10px 0 0 0',
+                    width   : '100%'
                 }
             }).wraps(this.$Input);
 
+            // exist label?
+            var id    = this.$Input.get('id'),
+                Label = document.getElement('label[for="' + id + '"]');
 
+            if (Label) {
+                var Cell    = Label.getParent('td'),
+                    OldCell = this.$Elm.getParent('td');
+
+                Cell.set('colspan', 2);
+
+                this.$Elm.inject(Cell);
+                OldCell.destroy();
+            }
+
+            // grid and sizes
             var size = this.$Elm.getSize();
 
             var Desktop = new Element('div', {
@@ -73,7 +91,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             }).inject(this.$Elm);
 
             this.$Grid = new Grid(Desktop, {
-                height     : 330,
+                height     : 400,
                 width      : size.x,
                 buttons    : [{
                     name  : 'add',
@@ -478,6 +496,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     '.quiqqer-bricks-promoslider-settings-entry-buttons'
                 );
 
+                var Text = Container.getElement('.field-description');
+
+                Text.getParent().setStyles({
+                    height: 100
+                });
+
                 Close.addEvent('click', function () {
                     moofx(Container).animate({
                         opacity: 0,
@@ -509,6 +533,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                         if (Control == this) {
                             return;
                         }
+
                         if ("setProject" in Control) {
                             Control.setProject(project);
                         }
