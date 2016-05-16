@@ -142,6 +142,17 @@
                 <setting name="pagefitcut" type="number">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.pagefitcut"/>
                 </setting>
+                <setting name="desktopslides" type="hidden"
+                         data-qui="package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings"
+                >
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.desktopslides"/>
+                </setting>
+
+                <setting name="mobileslides" type="hidden"
+                         data-qui="package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings"
+                >
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.mobileslides"/>
+                </setting>
             </settings>
 
         </brick>

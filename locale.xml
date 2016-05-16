@@ -288,6 +288,26 @@
             <de><![CDATA[Bausteine: Promoslider]]></de>
             <en><![CDATA[Bricks: Promoslider]]></en>
         </locale>
+        <locale name="brick.control.promoslider.pagefit">
+            <de><![CDATA[An die Seitenproportionen anpassen (Pagefit)]]></de>
+            <en><![CDATA[Fit to the side proportions (Pagefit)]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.pagefitcut">
+            <de><![CDATA[Pagefit Reduzierung]]></de>
+            <en><![CDATA[Pagefit Cut]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.settings">
+            <de><![CDATA[Slide Einstellungen]]></de>
+            <en><![CDATA[Slide settings]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.settings.desktopslides">
+            <de><![CDATA[Desktop Slides]]></de>
+            <en><![CDATA[Desktop slides]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.settings.mobileslides">
+            <de><![CDATA[Mobile Slides]]></de>
+            <en><![CDATA[Mobile slides]]></en>
+        </locale>
         <locale name="brick.control.infinite.title">
             <de><![CDATA[Bausteine: Seiten-LazyLoader]]></de>
             <en><![CDATA[Bricks: Sites-LazyLoader]]></en>
@@ -485,6 +505,15 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="message.brick.save.success">
             <de><![CDATA[Baustein wurde erfolgreich gespeichert.]]></de>
             <en><![CDATA[Brick successfully saved.]]></en>
+        </locale>
+
+        <locale name="quiqqer.products.control.slidesettings.text">
+            <de><![CDATA[Text]]></de>
+            <en><![CDATA[Text]]></en>
+        </locale>
+        <locale name="quiqqer.products.control.slidesettings.type">
+            <de><![CDATA[Ausrichtung]]></de>
+            <en><![CDATA[Alignment]]></en>
         </locale>
 
     </groups>

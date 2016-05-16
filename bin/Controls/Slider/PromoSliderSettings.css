@@ -1,0 +1,48 @@
+.quiqqer-bricks-promoslider-settings-entry {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    height: 100%;
+    left: 0;
+    overflow: auto;
+    opacity: 0;
+    position: absolute;
+    top: -50px;
+    width: 100%;
+}
+
+.quiqqer-bricks-promoslider-settings-entry-close {
+    cursor: pointer;
+    line-height: 30px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 30px;
+}
+
+.quiqqer-bricks-promoslider-settings-entry-form {
+    clear: both;
+    float: left;
+    height: calc(100% - 50px);
+    overflow: auto;
+    padding: 40px 10px 0 10px;
+    width: 100%;
+}
+
+.quiqqer-bricks-promoslider-settings-entry-form .field-container-field {
+    background: #fff;
+    max-width: none;
+}
+
+.quiqqer-bricks-promoslider-settings-entry-form .field-container-item {
+    width: 100px;
+}
+
+.quiqqer-bricks-promoslider-settings-entry-buttons {
+    clear: both;
+    float: left;
+    height: 50px;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}

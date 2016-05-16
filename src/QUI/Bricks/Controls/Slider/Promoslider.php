@@ -53,51 +53,52 @@ class Promoslider extends QUI\Control
         parent::__construct($attributes);
 
 
-        $this->addSlide(
-            'image.php?project=pbisschop&id=28',
-            'image.php?project=pbisschop&id=24',
-
-            "<p>
-                You lived before you met me?! Maybe I love you so much I love you no matter who you are pretending to
-                be.
-            </p>
-            <p>
-             It may comfort you to know that Fry's death took only fifteen seconds, yet the pain
-                was so intense, that it felt to him like fifteen years.
-            </p>
-            <p>
-                And it goes without saying, it caused him to empty his bowels.
-            </p>",
-
-            'right'
-        );
-
-        $this->addSlide(
-            'image.php?project=pbisschop&id=27',
-            'image.php?project=pbisschop&id=23',
-
-            "<p>
-                You lived before you met me?! Maybe I love you so much I love you no matter who you are pretending to
-                be.
-            </p>"
-        );
-
-        $this->addSlide(
-            'image.php?project=pbisschop&id=26',
-            'image.php?project=pbisschop&id=25',
-
-            "<p>
-                You lived before you met me?! Maybe I love you so much I love you no matter who you are pretending to
-                be.
-            </p>"
-        );
-
-
-        $this->addSlide(
-            'image.php?project=pbischop&id=30',
-            false,
-            false
-        );
+//
+//        $this->addSlide(
+//            'image.php?project=pbisschop&id=28',
+//            'image.php?project=pbisschop&id=24',
+//
+//            "<p>
+//                You lived before you met me?! Maybe I love you so much I love you no matter who you are pretending to
+//                be.
+//            </p>
+//            <p>
+//             It may comfort you to know that Fry's death took only fifteen seconds, yet the pain
+//                was so intense, that it felt to him like fifteen years.
+//            </p>
+//            <p>
+//                And it goes without saying, it caused him to empty his bowels.
+//            </p>",
+//
+//            'right'
+//        );
+//
+//        $this->addSlide(
+//            'image.php?project=pbisschop&id=27',
+//            'image.php?project=pbisschop&id=23',
+//
+//            "<p>
+//                You lived before you met me?! Maybe I love you so much I love you no matter who you are pretending to
+//                be.
+//            </p>"
+//        );
+//
+//        $this->addSlide(
+//            'image.php?project=pbisschop&id=26',
+//            'image.php?project=pbisschop&id=25',
+//
+//            "<p>
+//                You lived before you met me?! Maybe I love you so much I love you no matter who you are pretending to
+//                be.
+//            </p>"
+//        );
+//
+//
+//        $this->addSlide(
+//            'image.php?project=pbischop&id=30',
+//            false,
+//            false
+//        );
     }
 
     /**
@@ -116,6 +117,9 @@ class Promoslider extends QUI\Control
         if ($this->getAttribute('pagefitcut')) {
             $this->setAttribute('data-qui-options-pagefitcut', $this->getAttribute('pagefitcut'));
         }
+
+        $this->parseSlides($this->getAttribute('desktopslides'), 'desktop');
+        $this->parseSlides($this->getAttribute('mobileslides'), 'mobile');
 
         $Engine->assign(array(
             'this' => $this,
@@ -162,6 +166,8 @@ class Promoslider extends QUI\Control
             } catch (QUI\Exception $Exception) {
                 $title = '';
             }
+        } else {
+            $title = QUI\Utils\Security\Orthos::cleanHTML($title);
         }
 
         $pos = 'quiqqer-bricks-promoslider-slide-right';
@@ -221,5 +227,55 @@ class Promoslider extends QUI\Control
             'title' => $title,
             'text' => $text
         );
+    }
+
+    /**
+     *
+     * @param mixed $slides
+     * @param string $type
+     */
+    protected function parseSlides($slides, $type = 'desktop')
+    {
+        if (empty($slides)) {
+            return;
+        }
+
+        // desktop slides
+        if (is_string($slides)) {
+            $slides = json_decode($slides, true);
+        }
+
+        if (!is_array($slides)) {
+            return;
+        }
+
+        $attributes = array('image', 'title', 'text', 'type');
+
+        foreach ($slides as $slide) {
+            foreach ($attributes as $attribute) {
+                if (!isset($slide[$attribute])) {
+                    $slide[$attribute] = false;
+                }
+            }
+
+            switch ($type) {
+                case 'desktop':
+                    $this->addSlide(
+                        $slide['image'],
+                        $slide['title'],
+                        $slide['text'],
+                        $slide['type']
+                    );
+                    break;
+
+                case 'mobile':
+                    $this->addMobileSlide(
+                        $slide['image'],
+                        $slide['title'],
+                        $slide['text']
+                    );
+                    break;
+            }
+        }
     }
 }

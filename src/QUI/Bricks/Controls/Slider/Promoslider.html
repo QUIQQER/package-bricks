@@ -1,12 +1,13 @@
-{foreach $desktopSlides as $key => $slide}
-<div class="quiqqer-bricks-promoslider-slide {$slide.pos} quiqqer-bricks-promoslider-sl{$key}"
-     {if $key == 0}
-     style="display: inline"
-     {else}
-     style="display: none"
-     {/if}
-    data-no="{$key}"
->
+<div class="quiqqer-bricks-promoslider-slide-desktop">
+    {foreach $desktopSlides as $key => $slide}
+    <div class="quiqqer-bricks-promoslider-slide {$slide.pos} quiqqer-bricks-promoslider-sl{$key}"
+         {if $key== 0}
+            style="display: inline"
+         {else}
+            style="display: none"
+         {/if}
+        data-no="{$key}"
+    >
     {if $slide.image}
     <div class="quiqqer-bricks-promoslider-slide-image">
         {image image=$slide.image}
@@ -14,7 +15,7 @@
     {/if}
 
     <div class="quiqqer-bricks-promoslider-slide-display">
-        {if $Utils->isImage($slide.title)}
+        {if $Utils->isImage($slide.title) || $slide.title != ''}
         <header class="quiqqer-bricks-promoslider-slide-title">
             {if $Utils->isImage($slide.title)}
             {image image=$slide.title}
@@ -24,7 +25,7 @@
         </header>
         {/if}
 
-        {if $slide.text}
+        {if $slide.text != ''}
         <div class="quiqqer-bricks-promoslider-slide-text">
             {$slide.text}
         </div>
@@ -32,3 +33,40 @@
     </div>
 </div>
 {/foreach}
+</div>
+
+<div class="quiqqer-bricks-promoslider-slide-mobile">
+    {foreach $mobileSlides as $key => $slide}
+    <div class="quiqqer-bricks-promoslider-slide-mobile-slide quiqqer-bricks-promoslider-slide-mobile-sl{$key}"
+         {if $key== 0}
+         style="display: inline"
+         {else}
+         style="display: none"
+         {/if}
+    data-no="{$key}"
+    >
+    {if $slide.image}
+    <div class="quiqqer-bricks-promoslider-slide-mobile-image">
+        {image image=$slide.image}
+    </div>
+    {/if}
+
+    <div class="quiqqer-bricks-promoslider-slide-mobile-display">
+        {if $Utils->isImage($slide.title) || $slide.title != ''}
+        <header class="quiqqer-bricks-promoslider-slide-mobile-title">
+            {if $Utils->isImage($slide.title)}
+            {image image=$slide.title}
+            {else}
+            {$slide.title}
+            {/if}
+        </header>
+        {/if}
+
+        {if $slide.text != ''}
+        <div class="quiqqer-bricks-promoslider-slide-mobile-text">
+            {$slide.text}
+        </div>
+        {/if}
+    </div>
+    {/foreach}
+</div>
