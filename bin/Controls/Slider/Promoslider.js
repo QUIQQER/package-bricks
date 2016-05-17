@@ -182,6 +182,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                     winSize.x > 768 && this.$mobile === true
                 ) {
                     // view change
+                    this.stop();
+                    this.$running = false;
+                    this.$mobile  = (winSize.x <= 768);
+
                     Prom = this.show(0);
                 }
 
@@ -339,7 +343,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
                 var Slide = this.getElm().getElement(cls);
 
+                console.log(slideNo);
+
                 if (this.$mobile) {
+
+                    console.log(this.$mobiledots[slideNo]);
+
                     if (typeof this.$mobiledots[slideNo] !== 'undefined') {
                         this.$mobiledots[slideNo].addClass(
                             'quiqqer-bricks-promoslider-dot-active'

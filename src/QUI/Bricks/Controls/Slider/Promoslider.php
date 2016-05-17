@@ -39,7 +39,8 @@ class Promoslider extends QUI\Control
             'text' => '',
             'class' => 'quiqqer-bricks-promoslider',
             'nodeName' => 'section',
-            'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/Promoslider'
+            'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/Promoslider',
+            'role' => 'listbox'
         ));
 
         $this->addCSSFile(
@@ -51,54 +52,6 @@ class Promoslider extends QUI\Control
 
 
         parent::__construct($attributes);
-
-
-//
-//        $this->addSlide(
-//            'image.php?project=pbisschop&id=28',
-//            'image.php?project=pbisschop&id=24',
-//
-//            "<p>
-//                You lived before you met me?! Maybe I love you so much I love you no matter who you are pretending to
-//                be.
-//            </p>
-//            <p>
-//             It may comfort you to know that Fry's death took only fifteen seconds, yet the pain
-//                was so intense, that it felt to him like fifteen years.
-//            </p>
-//            <p>
-//                And it goes without saying, it caused him to empty his bowels.
-//            </p>",
-//
-//            'right'
-//        );
-//
-//        $this->addSlide(
-//            'image.php?project=pbisschop&id=27',
-//            'image.php?project=pbisschop&id=23',
-//
-//            "<p>
-//                You lived before you met me?! Maybe I love you so much I love you no matter who you are pretending to
-//                be.
-//            </p>"
-//        );
-//
-//        $this->addSlide(
-//            'image.php?project=pbisschop&id=26',
-//            'image.php?project=pbisschop&id=25',
-//
-//            "<p>
-//                You lived before you met me?! Maybe I love you so much I love you no matter who you are pretending to
-//                be.
-//            </p>"
-//        );
-//
-//
-//        $this->addSlide(
-//            'image.php?project=pbischop&id=30',
-//            false,
-//            false
-//        );
     }
 
     /**
