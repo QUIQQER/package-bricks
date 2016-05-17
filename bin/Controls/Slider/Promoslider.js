@@ -343,12 +343,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
                 var Slide = this.getElm().getElement(cls);
 
-                console.log(slideNo);
-
                 if (this.$mobile) {
-
-                    console.log(this.$mobiledots[slideNo]);
-
                     if (typeof this.$mobiledots[slideNo] !== 'undefined') {
                         this.$mobiledots[slideNo].addClass(
                             'quiqqer-bricks-promoslider-dot-active'
