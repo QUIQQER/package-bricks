@@ -85,6 +85,27 @@ class Promoslider extends QUI\Control
             );
         }
 
+        if ($this->getAttribute('image-wallpaper-position')) {
+            switch ($this->getAttribute('image-wallpaper-position')) {
+                case "top-left":
+                case "top":
+                case "top-right":
+                case "left":
+                case "center":
+                case "right":
+                case "bottom-left":
+                case "bottom":
+                case "bottom-right":
+                    $this->addCSSClass(
+                        'quiqqer-bricks-promoslider-wallpaper__' . $this->getAttribute('image-wallpaper-position')
+                    );
+                    break;
+
+                default:
+                    $this->addCSSClass('quiqqer-bricks-promoslider-wallpaper__center');
+            }
+        }
+
         if ($this->getAttribute('navigation-position')) {
             $this->setAttribute(
                 'data-qui-options-navigation-position',
