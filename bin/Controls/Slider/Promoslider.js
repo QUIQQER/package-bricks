@@ -45,10 +45,15 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
         initialize: function (options) {
             this.parent(options);
 
-            this.$dots    = [];
+            this.$mobile  = (QUI.getWindowSize().x <= 768);
             this.$running = false;
             this.$Touch   = null;
             this.$FX      = null;
+
+            this.$desktopdots = [];
+            this.$mobiledots  = [];
+            this.$DotsDesktop = null;
+            this.$DotsMobile  = null;
 
             this.addEvents({
                 onImport: this.$onImport
@@ -61,15 +66,17 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
          * event : on import
          */
         $onImport: function () {
-            var self   = this,
-                Elm    = this.getElm(),
-                slides = Elm.getElements('.quiqqer-bricks-promoslider-slide');
+            var self = this,
+                Elm  = this.getElm();
+
+            var desktopSlides = Elm.getElements('.quiqqer-bricks-promoslider-slide'),
+                mobileSlides  = Elm.getElements('.quiqqer-bricks-promoslider-slide-mobile-slide');
 
             this.$FX = moofx(Elm);
 
-            var Dots = new Element('div', {
-                'class': 'quiqqer-bricks-promoslider-dots'
-            }).inject(Elm);
+            // DOTS
+            this.$DotsDesktop = Elm.getElement('.quiqqer-bricks-promoslider-slide-desktop-dots');
+            this.$DotsMobile  = Elm.getElement('.quiqqer-bricks-promoslider-slide-mobile-dots');
 
             var click = function (event) {
                 if (self.$Timer) {
@@ -81,7 +88,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
             var i, len, Dot;
 
-            for (i = 0, len = slides.length; i < len; i++) {
+            for (i = 0, len = desktopSlides.length; i < len; i++) {
                 Dot = new Element('div', {
                     'class'  : 'quiqqer-bricks-promoslider-dot',
                     'data-no': i,
@@ -90,16 +97,38 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                     }
                 });
 
-                Dot.inject(Dots);
+                Dot.inject(this.$DotsDesktop);
 
-                this.$dots.push(Dot);
+                this.$desktopdots.push(Dot);
             }
 
-            if (typeof this.$dots[0] !== 'undefined') {
-                this.$dots[0].addClass(
+            if (typeof this.$desktopdots[0] !== 'undefined') {
+                this.$desktopdots[0].addClass(
                     'quiqqer-bricks-promoslider-dot-active'
                 );
             }
+
+
+            for (i = 0, len = mobileSlides.length; i < len; i++) {
+                Dot = new Element('div', {
+                    'class'  : 'quiqqer-bricks-promoslider-dot',
+                    'data-no': i,
+                    events   : {
+                        click: click
+                    }
+                });
+
+                Dot.inject(this.$DotsMobile);
+
+                this.$mobiledots.push(Dot);
+            }
+
+            if (typeof this.$mobiledots[0] !== 'undefined') {
+                this.$mobiledots[0].addClass(
+                    'quiqqer-bricks-promoslider-dot-active'
+                );
+            }
+
 
             // keyboard events
             document.addEvent('keyup', function (event) {
@@ -110,6 +139,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
                 self.next();
             });
+
 
             // touch events
             if (this.getAttribute('touch')) {
@@ -127,36 +157,72 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 });
             }
 
-
-            // periodical slide
-            if (this.getAttribute('autostart')) {
-                this.$Timer = (this.next).periodical(this.getAttribute('delay'));
-            }
-
-            this.resize();
+            this.resize().then(function () {
+                // periodical slide
+                if (this.getAttribute('autostart')) {
+                    this.start();
+                }
+            }.bind(this));
         },
 
         /**
          * resize the promoslider
          */
         resize: function () {
-            if (!this.getAttribute('pagefit')) {
-                return;
+            return new Promise(function (resolve) {
+
+                if (!this.getAttribute('pagefit')) {
+                    return resolve();
+                }
+
+                var Prom    = Promise.resolve(1);
+                var winSize = QUI.getWindowSize();
+
+                if (winSize.x <= 768 && this.$mobile === false ||
+                    winSize.x > 768 && this.$mobile === true
+                ) {
+                    // view change
+                    Prom = this.show(0);
+                }
+
+                this.$mobile = (winSize.x <= 768);
+
+                Prom.then(function () {
+                    if (this.$FX) {
+                        this.$FX.animate({
+                            height: winSize.y - this.getAttribute('pagefitcut')
+                        }, {
+                            callback: resolve
+                        });
+
+                        return;
+                    }
+
+                    this.getElm().setStyles({
+                        height: winSize.y - this.getAttribute('pagefitcut')
+                    });
+
+                    resolve();
+
+                }.bind(this));
+            }.bind(this));
+        },
+
+        /**
+         * Start the autoslide
+         */
+        start: function () {
+            this.stop();
+            this.$Timer = (this.next).periodical(this.getAttribute('delay'));
+        },
+
+        /**
+         * stop the autoslide
+         */
+        stop: function () {
+            if (this.$Timer) {
+                clearInterval(this.$Timer);
             }
-
-            var winSize = QUI.getWindowSize();
-
-
-            if (this.$FX) {
-                this.$FX.animate({
-                    height: winSize.y - this.getAttribute('pagefitcut')
-                });
-                return;
-            }
-
-            this.getElm().setStyles({
-                height: winSize.y - this.getAttribute('pagefitcut')
-            });
         },
 
         /**
@@ -164,7 +230,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
          */
         prev: function () {
             var Elm     = this.getElm(),
-                Current = Elm.getElement('.quiqqer-bricks-promoslider-slide:display(inline)');
+                Current = null;
+
+
+            if (this.$mobile) {
+                Current = Elm.getElement(
+                    '.quiqqer-bricks-promoslider-slide-mobile-slide:display(inline)'
+                );
+            } else {
+                Current = Elm.getElement(
+                    '.quiqqer-bricks-promoslider-slide:display(inline)'
+                );
+            }
+
 
             var slideNo = Current.get('data-no');
 
@@ -184,8 +262,31 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
          */
         next: function () {
             var Elm     = this.getElm(),
-                slides  = Elm.getElements('.quiqqer-bricks-promoslider-slide'),
-                Current = Elm.getElement('.quiqqer-bricks-promoslider-slide:display(inline)');
+                slides  = [],
+                Current = null;
+
+            if (this.$mobile) {
+                slides = Elm.getElements(
+                    '.quiqqer-bricks-promoslider-slide-mobile-slide'
+                );
+
+                Current = Elm.getElement(
+                    '.quiqqer-bricks-promoslider-slide-mobile-slide:display(inline)'
+                );
+            } else {
+                slides = Elm.getElements(
+                    '.quiqqer-bricks-promoslider-slide'
+                );
+
+                Current = Elm.getElement(
+                    '.quiqqer-bricks-promoslider-slide:display(inline)'
+                );
+            }
+
+            if (!Current) {
+                this.show(0);
+                return;
+            }
 
             var slideNo = Current.get('data-no');
 
@@ -202,6 +303,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
          * Shows wanted slide
          *
          * @param {Number} slideNo
+         * @return {Promise}
          */
         show: function (slideNo) {
             if (this.$running) {
@@ -211,34 +313,60 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             this.$running = true;
             this.$normalizeDots();
 
-            if (typeof this.$dots[slideNo] !== 'undefined') {
-                this.$dots[slideNo].addClass(
-                    'quiqqer-bricks-promoslider-dot-active'
-                );
+            if (this.$mobile) {
+                if (typeof this.$mobiledots[slideNo] !== 'undefined') {
+                    this.$mobiledots[slideNo].addClass(
+                        'quiqqer-bricks-promoslider-dot-active'
+                    );
+                }
+            } else {
+                if (typeof this.$desktopdots[slideNo] !== 'undefined') {
+                    this.$desktopdots[slideNo].addClass(
+                        'quiqqer-bricks-promoslider-dot-active'
+                    );
+                }
             }
 
 
             return new Promise(function (resolve) {
+                var cls, Current;
 
-                var self  = this,
-                    cls   = '.quiqqer-bricks-promoslider-sl' + slideNo,
-                    Slide = this.getElm().getElement(cls);
+                if (this.$mobile) {
+                    cls = '.quiqqer-bricks-promoslider-slide-mobile-sl' + slideNo;
+                } else {
+                    cls = '.quiqqer-bricks-promoslider-sl' + slideNo;
+                }
 
-                if (typeof this.$dots[slideNo] !== 'undefined') {
-                    this.$dots[slideNo].addClass(
-                        'quiqqer-bricks-promoslider-dot-active'
+                var Slide = this.getElm().getElement(cls);
+
+                if (this.$mobile) {
+                    if (typeof this.$mobiledots[slideNo] !== 'undefined') {
+                        this.$mobiledots[slideNo].addClass(
+                            'quiqqer-bricks-promoslider-dot-active'
+                        );
+                    }
+                } else {
+                    if (typeof this.$desktopdots[slideNo] !== 'undefined') {
+                        this.$desktopdots[slideNo].addClass(
+                            'quiqqer-bricks-promoslider-dot-active'
+                        );
+                    }
+                }
+
+                if (this.$mobile) {
+                    Current = this.getElm().getElement(
+                        '.quiqqer-bricks-promoslider-slide-mobile-slide:display(inline)'
+                    );
+                } else {
+                    Current = this.getElm().getElement(
+                        '.quiqqer-bricks-promoslider-slide:display(inline)'
                     );
                 }
 
-                var Current = this.getElm().getElement(
-                    '.quiqqer-bricks-promoslider-slide:display(inline)'
-                );
+                this.$hideSheetToLeft(Current).then(function () {
+                    return this.$showSheetFromRight(Slide);
 
-                Promise.all([
-                    self.$hideSheetToLeft(Current),
-                    self.$showSheetFromRight(Slide)
-                ]).then(function () {
-
+                }.bind(this)).then(function () {
                     resolve();
                     this.$running = false;
 
@@ -248,13 +376,22 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
         },
 
         /**
+         * Normalize all dots, all active dots are inactive
          *
          * @returns {Promise}
          */
         $normalizeDots: function () {
             return new Promise(function (resolve) {
-                for (var i = 0, len = this.$dots.length; i < len; i++) {
-                    this.$dots[i].removeClass(
+                var i, len;
+
+                for (i = 0, len = this.$desktopdots.length; i < len; i++) {
+                    this.$desktopdots[i].removeClass(
+                        'quiqqer-bricks-promoslider-dot-active'
+                    );
+                }
+
+                for (i = 0, len = this.$mobiledots.length; i < len; i++) {
+                    this.$mobiledots[i].removeClass(
                         'quiqqer-bricks-promoslider-dot-active'
                     );
                 }
@@ -264,14 +401,23 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
         },
 
         /**
+         * Hide the sheet to the left
          *
          * @param {HTMLDivElement} Sheet
          * @return {Promise}
          */
         $hideSheetToLeft: function (Sheet) {
-            var Image  = Sheet.getElement('.quiqqer-bricks-promoslider-slide-image');
-            var Header = Sheet.getElement('.quiqqer-bricks-promoslider-slide-title');
-            var Text   = Sheet.getElement('.quiqqer-bricks-promoslider-slide-text');
+            var Image, Header, Text;
+
+            if (this.$mobile) {
+                Image  = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-image');
+                Header = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-title');
+                Text   = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-text');
+            } else {
+                Image  = Sheet.getElement('.quiqqer-bricks-promoslider-slide-image');
+                Header = Sheet.getElement('.quiqqer-bricks-promoslider-slide-title');
+                Text   = Sheet.getElement('.quiqqer-bricks-promoslider-slide-text');
+            }
 
             return Promise.all([
                 this.$hideToLeft(Image, 100),
@@ -283,14 +429,23 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
         },
 
         /**
+         * Show the sheet from the right
          *
          * @param {HTMLDivElement} Sheet
          * @return {Promise}
          */
         $showSheetFromRight: function (Sheet) {
-            var Image  = Sheet.getElement('.quiqqer-bricks-promoslider-slide-image');
-            var Header = Sheet.getElement('.quiqqer-bricks-promoslider-slide-title');
-            var Text   = Sheet.getElement('.quiqqer-bricks-promoslider-slide-text');
+            var Image, Header, Text;
+
+            if (this.$mobile) {
+                Image  = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-image');
+                Header = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-title');
+                Text   = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-text');
+            } else {
+                Image  = Sheet.getElement('.quiqqer-bricks-promoslider-slide-image');
+                Header = Sheet.getElement('.quiqqer-bricks-promoslider-slide-title');
+                Text   = Sheet.getElement('.quiqqer-bricks-promoslider-slide-text');
+            }
 
             if (Image) {
                 Image.setStyle('opacity', 0);
@@ -314,10 +469,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
         },
 
         /**
+         * Hide the node to the left
          *
-         * @param Node
-         * @param delay
-         * @returns {*}
+         * @param {HTMLElement} Node
+         * @param {Number} delay
+         * @returns {Promise}
          */
         $hideToLeft: function (Node, delay) {
             delay = delay || 100;
@@ -363,9 +519,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
         },
 
         /**
+         * Show the node to the right
          *
-         * @param Node
-         * @param delay
+         * @param {HTMLElement} Node
+         * @param {Number} delay
          * @returns {Promise}
          */
         $showFromRight: function (Node, delay) {

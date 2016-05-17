@@ -82,10 +82,15 @@
     margin-bottom: 20px;
 }
 
+.quiqqer-bricks-promoslider-slide-mobile-dots {
+    display: none;
+}
+
 /** slide dots
  =============================================== */
 
-.quiqqer-bricks-promoslider-dots {
+.quiqqer-bricks-promoslider-slide-mobile-dots,
+.quiqqer-bricks-promoslider-slide-desktop-dots {
     bottom: 10px;
     left: 0;
     position: absolute;
@@ -140,7 +145,15 @@
         display: none;
     }
 
+    .quiqqer-bricks-promoslider-slide-desktop-dots {
+        display: none;
+    }
+
     .quiqqer-bricks-promoslider-slide-mobile {
+        display: block;
+    }
+
+    .quiqqer-bricks-promoslider-slide-mobile-dots {
         display: block;
     }
 }
@@ -155,14 +168,11 @@
         width: 100%;
     }
 
-    .quiqqer-bricks-promoslider-dots {
+    .quiqqer-bricks-promoslider-slide-desktop-dots {
+        display: inline-block;
+        float: none;
         left: 0;
         text-align: center;
         width: 100%;
-    }
-
-    .quiqqer-bricks-promoslider-dot {
-        display: inline-block;
-        float: none;
     }
 }
