@@ -43,7 +43,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             pagefitcut      : 0,
             pagefitcutmobile: 0,
 
-            'image-as-wallpaper': false
+            'image-as-wallpaper' : false,
+            'wallpaper-position' : 'center',
+            'navigation-position': 'outer'
         },
 
         initialize: function (options) {

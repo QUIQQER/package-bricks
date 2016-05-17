@@ -148,6 +148,50 @@
                 <setting name="image-as-wallpaper" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.image-as-wallpaper"/>
                 </setting>
+                <setting type="select" name="image-wallpaper-position">
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.image-wallpaper-position"/>
+
+                    <option value=""/>
+                    <option value="top-left">
+                        <locale group="quiqqer/system" var="watermark.position.top.left"/>
+                    </option>
+                    <option value="top">
+                        <locale group="quiqqer/system" var="watermark.position.top"/>
+                    </option>
+                    <option value="top-right">
+                        <locale group="quiqqer/system" var="watermark.position.top.right"/>
+                    </option>
+                    <option value="left">
+                        <locale group="quiqqer/system" var="watermark.position.left"/>
+                    </option>
+                    <option value="center">
+                        <locale group="quiqqer/system" var="watermark.position.center"/>
+                    </option>
+                    <option value="right">
+                        <locale group="quiqqer/system" var="watermark.position.right"/>
+                    </option>
+                    <option value="bottom-left">
+                        <locale group="quiqqer/system" var="watermark.position.bottom.left"/>
+                    </option>
+                    <option value="bottom">
+                        <locale group="quiqqer/system" var="watermark.position.bottom"/>
+                    </option>
+                    <option value="bottom-right">
+                        <locale group="quiqqer/system" var="watermark.position.bottom.right"/>
+                    </option>
+                </setting>
+
+                <setting type="select" name="navigation-position">
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.navigation-position"/>
+
+                    <option value="outer">
+                        <locale group="quiqqer/bricks" var="brick.control.promoslider.navigation-position-outer"/>
+                    </option>
+                    <option value="inner">
+                        <locale group="quiqqer/bricks" var="brick.control.promoslider.navigation-position-inner"/>
+                    </option>
+                </setting>
+
                 <setting name="desktopslides" type="hidden"
                          data-qui="package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings"
                 >

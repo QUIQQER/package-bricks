@@ -301,8 +301,12 @@
             <en><![CDATA[Pagefit Cut (mobile)]]></en>
         </locale>
         <locale name="brick.control.promoslider.image-as-wallpaper">
-            <de><![CDATA[Bild voll ausfüllen]]></de>
-            <en><![CDATA[Image full fill]]></en>
+            <de><![CDATA[Bild als Wallpaper]]></de>
+            <en><![CDATA[Image as Wallpaper]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.image-wallpaper-position">
+            <de><![CDATA[Wallpaper-Position]]></de>
+            <en><![CDATA[Wallpaper position]]></en>
         </locale>
         <locale name="brick.control.promoslider.settings">
             <de><![CDATA[Slide Einstellungen]]></de>
@@ -316,6 +320,19 @@
             <de><![CDATA[Mobile Slides]]></de>
             <en><![CDATA[Mobile slides]]></en>
         </locale>
+        <locale name="brick.control.promoslider.settings.navigation-position">
+            <de><![CDATA[Navigations-Position]]></de>
+            <en><![CDATA[Navigation position]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.navigation-position-inner">
+            <de><![CDATA[innen]]></de>
+            <en><![CDATA[inner]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.navigation-position-outer">
+            <de><![CDATA[außen]]></de>
+            <en><![CDATA[outer]]></en>
+        </locale>
+
         <locale name="brick.control.infinite.title">
             <de><![CDATA[Bausteine: Seiten-LazyLoader]]></de>
             <en><![CDATA[Bricks: Sites-LazyLoader]]></en>

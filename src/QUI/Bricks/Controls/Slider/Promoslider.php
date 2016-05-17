@@ -85,6 +85,18 @@ class Promoslider extends QUI\Control
             );
         }
 
+        if ($this->getAttribute('navigation-position')) {
+            $this->setAttribute(
+                'data-qui-options-navigation-position',
+                $this->getAttribute('navigation-position')
+            );
+        }
+
+        if ($this->getAttribute('navigation-position') == 'inner') {
+            $this->addCSSClass('quiqqer-bricks-promoslider__nav_inner');
+        }
+
+
         $this->parseSlides($this->getAttribute('desktopslides'), 'desktop');
         $this->parseSlides($this->getAttribute('mobileslides'), 'mobile');
 
