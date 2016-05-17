@@ -296,6 +296,14 @@
             <de><![CDATA[Pagefit Reduzierung]]></de>
             <en><![CDATA[Pagefit Cut]]></en>
         </locale>
+        <locale name="brick.control.promoslider.pagefitcutmobile">
+            <de><![CDATA[Pagefit Reduzierung (mobil)]]></de>
+            <en><![CDATA[Pagefit Cut (mobile)]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.image-as-wallpaper">
+            <de><![CDATA[Bild voll ausfüllen]]></de>
+            <en><![CDATA[Image full fill]]></en>
+        </locale>
         <locale name="brick.control.promoslider.settings">
             <de><![CDATA[Slide Einstellungen]]></de>
             <en><![CDATA[Slide settings]]></en>

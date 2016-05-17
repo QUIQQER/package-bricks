@@ -71,6 +71,20 @@ class Promoslider extends QUI\Control
             $this->setAttribute('data-qui-options-pagefitcut', $this->getAttribute('pagefitcut'));
         }
 
+        if ($this->getAttribute('pagefitcutmobile')) {
+            $this->setAttribute(
+                'data-qui-options-pagefitcutmobile',
+                $this->getAttribute('pagefitcutmobile')
+            );
+        }
+
+        if ($this->getAttribute('image-as-wallpaper')) {
+            $this->setAttribute(
+                'data-qui-options-image-as-wallpaper',
+                $this->getAttribute('image-as-wallpaper')
+            );
+        }
+
         $this->parseSlides($this->getAttribute('desktopslides'), 'desktop');
         $this->parseSlides($this->getAttribute('mobileslides'), 'mobile');
 

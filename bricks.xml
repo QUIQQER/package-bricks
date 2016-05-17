@@ -142,6 +142,12 @@
                 <setting name="pagefitcut" type="number">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.pagefitcut"/>
                 </setting>
+                <setting name="pagefitcutmobile" type="number">
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.pagefitcutmobile"/>
+                </setting>
+                <setting name="image-as-wallpaper" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.image-as-wallpaper"/>
+                </setting>
                 <setting name="desktopslides" type="hidden"
                          data-qui="package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings"
                 >

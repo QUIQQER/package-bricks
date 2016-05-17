@@ -9,7 +9,11 @@
         data-no="{$key}"
         role=option
     >
-        {if $slide.image}
+        {if $slide.image && $this->getAttribute('image-as-wallpaper')}
+        <div class="quiqqer-bricks-promoslider-slide-image quiqqer-bricks-promoslider-slide-image__cover"
+             style="background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
+        >&nbsp;</div>
+        {elseif $slide.image}
         <div class="quiqqer-bricks-promoslider-slide-image">
             {image image=$slide.image}
         </div>

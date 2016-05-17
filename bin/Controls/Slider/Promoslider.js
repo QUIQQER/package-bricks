@@ -38,8 +38,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             effectduration: 400,
             autostart     : true,
             touch         : true,
-            pagefit       : false,
-            pagefitcut    : 0
+
+            pagefit         : false,
+            pagefitcut      : 0,
+            pagefitcutmobile: 0,
+
+            'image-as-wallpaper': false
         },
 
         initialize: function (options) {
@@ -177,6 +181,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
                 var Prom    = Promise.resolve(1);
                 var winSize = QUI.getWindowSize();
+                var pagefit = this.getAttribute('pagefitcut');
 
                 if (winSize.x <= 768 && this.$mobile === false ||
                     winSize.x > 768 && this.$mobile === true
@@ -191,24 +196,29 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
                 this.$mobile = (winSize.x <= 768);
 
-                Prom.then(function () {
-                    if (this.$FX) {
-                        this.$FX.animate({
-                            height: winSize.y - this.getAttribute('pagefitcut')
-                        }, {
-                            callback: resolve
-                        });
+                if (this.$mobile) {
+                    pagefit = this.getAttribute('pagefitcutmobile');
+                }
 
-                        return;
-                    }
 
-                    this.getElm().setStyles({
-                        height: winSize.y - this.getAttribute('pagefitcut')
+                if (this.$FX) {
+                    this.$FX.animate({
+                        height: winSize.y - pagefit
+                    }, {
+                        callback: function () {
+                            Prom.then(resolve);
+                        }
                     });
 
-                    resolve();
+                    return;
+                }
 
-                }.bind(this));
+                this.getElm().setStyles({
+                    height: winSize.y - pagefit
+                });
+
+                Prom.then(resolve);
+
             }.bind(this));
         },
 
