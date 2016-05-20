@@ -79,6 +79,7 @@ class Promoslider extends QUI\Control
 
         if ($this->getAttribute('pagefit')) {
             $this->setAttribute('data-qui-options-pagefit', $this->getAttribute('pagefit'));
+            $this->setAttribute('height', '100vh');
         }
 
         if ($this->getAttribute('delay')) {
