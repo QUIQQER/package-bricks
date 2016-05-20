@@ -17,7 +17,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
     'utils/Controls',
 
     'text!package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsEntry.html',
-    'css!package/quiqqer/bricks/bin/Controls/Slider/PromoSliderSettings.html'
+    'css!package/quiqqer/bricks/bin/Controls/Slider/PromoSliderSettings.css'
 
 ], function (QUI, QUIControl, QUIConfirm, QUIButton, QUILocale, Mustache, Grid, ControlsUtils, templateEntry) {
     "use strict";
