@@ -87,6 +87,11 @@ class Promoslider extends QUI\Control
 
         if ($this->getAttribute('pagefitcut')) {
             $this->setAttribute('data-qui-options-pagefitcut', $this->getAttribute('pagefitcut'));
+
+            $this->setAttribute(
+                'height',
+                'calc(100vh - ' . (int)$this->getAttribute('pagefitcut') . 'px)'
+            );
         }
 
         if ($this->getAttribute('pagefitcutmobile')) {
