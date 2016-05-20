@@ -94,25 +94,50 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 height     : 400,
                 width      : size.x,
                 buttons    : [{
-                    name  : 'add',
-                    text  : QUILocale.get('quiqqer/system', 'add'),
-                    events: {
+                    name    : 'up',
+                    icon    : 'fa fa-angle-up',
+                    disabled: true,
+                    events  : {
+                        onClick: function () {
+                            this.$Grid.moveup();
+                            this.$refreshSorting();
+                        }.bind(this)
+                    }
+                }, {
+                    name    : 'down',
+                    icon    : 'fa fa-angle-down',
+                    disabled: true,
+                    events  : {
+                        onClick: function () {
+                            this.$Grid.movedown();
+                            this.$refreshSorting();
+                        }.bind(this)
+                    }
+                }, {
+                    type: 'seperator'
+                }, {
+                    name     : 'add',
+                    textimage: 'fa fa-plus',
+                    text     : QUILocale.get('quiqqer/system', 'add'),
+                    events   : {
                         onClick: this.$openAddDialog
                     }
                 }, {
                     type: 'seperator'
                 }, {
-                    name    : 'edit',
-                    text    : QUILocale.get('quiqqer/system', 'edit'),
-                    disabled: true,
-                    events  : {
+                    name     : 'edit',
+                    textimage: 'fa fa-edit',
+                    text     : QUILocale.get('quiqqer/system', 'edit'),
+                    disabled : true,
+                    events   : {
                         onClick: this.$openEditDialog
                     }
                 }, {
-                    name    : 'delete',
-                    text    : QUILocale.get('quiqqer/system', 'delete'),
-                    disabled: true,
-                    events  : {
+                    name     : 'delete',
+                    textimage: 'fa fa-trash',
+                    text     : QUILocale.get('quiqqer/system', 'delete'),
+                    disabled : true,
+                    events   : {
                         onClick: this.$openDeleteDialog
                     }
                 }],
@@ -145,13 +170,25 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             this.$Grid.addEvents({
                 onClick: function () {
                     var buttons = this.$Grid.getButtons(),
+
                         Edit    = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') == 'edit';
                         })[0],
+
+                        Up      = buttons.filter(function (Btn) {
+                            return Btn.getAttribute('name') == 'up';
+                        })[0],
+
+                        Down    = buttons.filter(function (Btn) {
+                            return Btn.getAttribute('name') == 'down';
+                        })[0],
+
                         Delete  = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') == 'delete';
                         })[0];
 
+                    Up.enable();
+                    Down.enable();
                     Edit.enable();
                     Delete.enable();
                 }.bind(this),
@@ -183,7 +220,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 insert = {};
 
                 if ("image" in entry) {
-                    insert.image        = entry.image;
+                    insert.image = entry.image;
+
                     insert.imagePreview = new Element('img', {
                         src: URL_DIR + insert.image + '&maxwidth=50&maxheight=50'
                     });
@@ -209,13 +247,25 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             });
 
             var buttons = this.$Grid.getButtons(),
+
                 Edit    = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') == 'edit';
                 })[0],
+
+                Up      = buttons.filter(function (Btn) {
+                    return Btn.getAttribute('name') == 'up';
+                })[0],
+
+                Down    = buttons.filter(function (Btn) {
+                    return Btn.getAttribute('name') == 'down';
+                })[0],
+
                 Delete  = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') == 'delete';
                 })[0];
 
+            Up.disable();
+            Down.disable();
             Edit.disable();
             Delete.disable();
         },
@@ -344,6 +394,26 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
         },
 
         /**
+         * Refresh the data sorting in dependence of the grid
+         */
+        $refreshSorting: function () {
+            var gridData = this.$Grid.getData(),
+                data     = [];
+
+            for (var i = 0, len = gridData.length; i < len; i++) {
+                data.push({
+                    image: gridData[i].image,
+                    title: gridData[i].title,
+                    text : gridData[i].text,
+                    type : gridData[i].type
+                });
+            }
+
+            this.$data = data;
+            this.update();
+        },
+
+        /**
          * Open edit dialog
          *
          * @retrun {Promise}
@@ -408,9 +478,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
         $openDeleteDialog: function () {
             new QUIConfirm({
                 icon       : 'fa fa-icon',
-                title      : 'Slide wirklich löschen?',
-                text       : 'Möchten Sie den Slide wirklich löschen?',
-                information: 'Der Slide kann nicht wieder hergestellt werden',
+                title      : QUILocale.get(lg, 'quiqqer.products.control.delete.title'),
+                text       : QUILocale.get(lg, 'quiqqer.products.control.delete.text'),
+                information: QUILocale.get(lg, 'quiqqer.products.control.delete.information'),
                 texticon   : false,
                 maxWidth   : 600,
                 maxHeight  : 400,
@@ -480,10 +550,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             return new Promise(function (resolve) {
                 var Container = new Element('div', {
                     html   : Mustache.render(templateEntry, {
-                        fieldImage      : 'Bild',
-                        fieldTitle      : 'Titel',
-                        fieldDescription: 'Text',
-                        fieldType       : 'Ausrichtung'
+                        fieldImage      : QUILocale.get(lg, 'quiqqer.products.control.create.image'),
+                        fieldTitle      : QUILocale.get(lg, 'quiqqer.products.control.create.title'),
+                        fieldDescription: QUILocale.get(lg, 'quiqqer.products.control.create.text'),
+                        fieldType       : QUILocale.get(lg, 'quiqqer.products.control.create.align')
                     }),
                     'class': 'quiqqer-bricks-promoslider-settings-entry'
                 }).inject(this.getElm());

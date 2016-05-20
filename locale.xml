@@ -554,6 +554,36 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Alignment]]></en>
         </locale>
 
+        <locale name="quiqqer.products.control.delete.title">
+            <de><![CDATA[Slide wirklich löschen?]]></de>
+            <en><![CDATA[Do you really want to remove this slide?]]></en>
+        </locale>
+        <locale name="quiqqer.products.control.delete.text">
+            <de><![CDATA[Möchten Sie den Slide wirklich löschen?]]></de>
+            <en><![CDATA[Do you really want to remove this slide?]]></en>
+        </locale>
+        <locale name="quiqqer.products.control.delete.information">
+            <de><![CDATA[Der Slide kann nicht wieder hergestellt werden]]></de>
+            <en><![CDATA[The slide can not be restored]]></en>
+        </locale>
+
+        <locale name="quiqqer.products.control.create.image">
+            <de><![CDATA[Bild]]></de>
+            <en><![CDATA[Image]]></en>
+        </locale>
+        <locale name="quiqqer.products.control.create.title">
+            <de><![CDATA[Titel]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="quiqqer.products.control.create.text">
+            <de><![CDATA[Text]]></de>
+            <en><![CDATA[Text]]></en>
+        </locale>
+        <locale name="quiqqer.products.control.create.align">
+            <de><![CDATA[Ausrichtung]]></de>
+            <en><![CDATA[Align]]></en>
+        </locale>
+
     </groups>
     <groups name="quiqqer/bricks" datatype="js,php">
         <locale name="brick.control.navigation.setting.content">
