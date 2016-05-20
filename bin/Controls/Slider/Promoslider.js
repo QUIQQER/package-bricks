@@ -38,6 +38,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             effectduration: 400,
             autostart     : true,
             touch         : true,
+            shownavigation: true,
 
             pagefit         : false,
             pagefitcut      : 0,
@@ -161,6 +162,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                         self.next();
                     }
                 });
+            }
+
+            if (!this.getAttribute('shownavigation')) {
+                this.$DotsDesktop.setStyle('display', 'none');
+                this.$DotsMobile.setStyle('display', 'none');
             }
 
             this.resize().then(function () {

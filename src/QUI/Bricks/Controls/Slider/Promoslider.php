@@ -40,7 +40,11 @@ class Promoslider extends QUI\Control
             'class' => 'quiqqer-bricks-promoslider',
             'nodeName' => 'section',
             'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/Promoslider',
-            'role' => 'listbox'
+            'role' => 'listbox',
+            'shownavigation' => false,
+            'image-as-wallpaper' => false,
+            'autostart' => false,
+            'delay' => 5000
         ));
 
         $this->addCSSFile(
@@ -63,8 +67,22 @@ class Promoslider extends QUI\Control
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
+        // defaults
+        $this->setAttribute('data-qui-options-autostart', false);
+        $this->setAttribute('data-qui-options-pagefit', false);
+        $this->setAttribute('data-qui-options-pagefitcut', false);
+        $this->setAttribute('data-qui-options-pagefitcutmobile', false);
+        $this->setAttribute('data-qui-options-autostart', false);
+        $this->setAttribute('data-qui-options-shownavigation', false);
+        $this->setAttribute('data-qui-options-image-as-wallpaper', false);
+        $this->setAttribute('data-qui-options-delay', 5000);
+
         if ($this->getAttribute('pagefit')) {
             $this->setAttribute('data-qui-options-pagefit', $this->getAttribute('pagefit'));
+        }
+
+        if ($this->getAttribute('delay')) {
+            $this->setAttribute('data-qui-options-delay', $this->getAttribute('delay'));
         }
 
         if ($this->getAttribute('pagefitcut')) {
@@ -77,6 +95,21 @@ class Promoslider extends QUI\Control
                 $this->getAttribute('pagefitcutmobile')
             );
         }
+
+        if ($this->getAttribute('autostart')) {
+            $this->setAttribute(
+                'data-qui-options-autostart',
+                $this->getAttribute('autostart')
+            );
+        }
+
+        if ($this->getAttribute('shownavigation')) {
+            $this->setAttribute(
+                'data-qui-options-shownavigation',
+                $this->getAttribute('shownavigation')
+            );
+        }
+
 
         if ($this->getAttribute('image-as-wallpaper')) {
             $this->setAttribute(

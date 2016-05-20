@@ -148,6 +148,16 @@
                 <setting name="image-as-wallpaper" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.image-as-wallpaper"/>
                 </setting>
+                <setting name="autostart" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.autostart"/>
+                </setting>
+                <setting name="delay" type="number">
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.delay"/>
+                </setting>
+                <setting name="shownavigation" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.shownavigation"/>
+                </setting>
+
                 <setting type="select" name="image-wallpaper-position">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.image-wallpaper-position"/>
 
