@@ -90,6 +90,11 @@
     display: none;
 }
 
+.quiqqer-bricks-promoslider-slide-mobile-display {
+    position: relative;
+    z-index: 2;
+}
+
 .quiqqer-bricks-promoslider-slide-mobile-image {
     height: calc(100% - 50px);
     left: 0;
@@ -97,6 +102,7 @@
     position: absolute;
     top: 0;
     width: 100%;
+    z-index: 1;
 }
 
 .quiqqer-bricks-promoslider__nav_inner .quiqqer-bricks-promoslider-slide-mobile-image {
