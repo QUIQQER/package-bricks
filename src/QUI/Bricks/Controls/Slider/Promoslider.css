@@ -13,6 +13,7 @@
     display: none;
 }
 
+.quiqqer-bricks-promoslider-slide-mobile-slide,
 .quiqqer-bricks-promoslider-slide {
     float: left;
     height: 100%;
@@ -89,6 +90,24 @@
     display: none;
 }
 
+.quiqqer-bricks-promoslider-slide-mobile-image {
+    height: calc(100% - 50px);
+    left: 0;
+    padding: 10px 0 0 10px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.quiqqer-bricks-promoslider__nav_inner .quiqqer-bricks-promoslider-slide-mobile-image {
+    height: 100%;
+}
+
+.quiqqer-bricks-promoslider-slide-mobile-image img {
+    max-height: 100%;
+    width: auto;
+}
+
 /** slide dots
  =============================================== */
 
@@ -143,38 +162,47 @@
 /** Wallpaper classes
  ================================================ */
 
+.quiqqer-bricks-promoslider-wallpaper__top .quiqqer-bricks-promoslider-slide-mobile-image,
 .quiqqer-bricks-promoslider-wallpaper__top .quiqqer-bricks-promoslider-slide-image {
     background-position: top center;
 }
 
+.quiqqer-bricks-promoslider-wallpaper__top-left .quiqqer-bricks-promoslider-slide-mobile-image,
 .quiqqer-bricks-promoslider-wallpaper__top-left .quiqqer-bricks-promoslider-slide-image {
     background-position: top left;
 }
 
+.quiqqer-bricks-promoslider-wallpaper__top-right .quiqqer-bricks-promoslider-slide-mobile-image,
 .quiqqer-bricks-promoslider-wallpaper__top-right .quiqqer-bricks-promoslider-slide-image {
     background-position: top right;
 }
 
+.quiqqer-bricks-promoslider-wallpaper__left .quiqqer-bricks-promoslider-slide-mobile-image,
 .quiqqer-bricks-promoslider-wallpaper__left .quiqqer-bricks-promoslider-slide-image {
     background-position: left center;
 }
 
+.quiqqer-bricks-promoslider-wallpaper__right .quiqqer-bricks-promoslider-slide-mobile-image,
 .quiqqer-bricks-promoslider-wallpaper__right .quiqqer-bricks-promoslider-slide-image {
     background-position: right center;
 }
 
+.quiqqer-bricks-promoslider-wallpaper__center .quiqqer-bricks-promoslider-slide-mobile-image,
 .quiqqer-bricks-promoslider-wallpaper__center .quiqqer-bricks-promoslider-slide-image {
     background-position: center center;
 }
 
+.quiqqer-bricks-promoslider-wallpaper__bottom .quiqqer-bricks-promoslider-slide-mobile-image,
 .quiqqer-bricks-promoslider-wallpaper__bottom .quiqqer-bricks-promoslider-slide-image {
     background-position: bottom center;
 }
 
+.quiqqer-bricks-promoslider-wallpaper__bottom-left .quiqqer-bricks-promoslider-slide-mobile-image,
 .quiqqer-bricks-promoslider-wallpaper__bottom-left .quiqqer-bricks-promoslider-slide-image {
     background-position: bottom right;
 }
 
+.quiqqer-bricks-promoslider-wallpaper__bottom-right .quiqqer-bricks-promoslider-slide-mobile-image,
 .quiqqer-bricks-promoslider-wallpaper__bottom-right .quiqqer-bricks-promoslider-slide-image {
     background-position: bottom right;
 }
