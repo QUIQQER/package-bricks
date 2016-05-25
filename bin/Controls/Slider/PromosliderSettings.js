@@ -4,6 +4,14 @@
  *
  * @require qui/QUI
  * @require qui/controls/Control
+ * @require qui/controls/windows/Confirm
+ * @require qui/controls/buttons/Button
+ * @require Locale
+ * @require Mustache
+ * @require controls/grid/Grid
+ * @require utils/Controls
+ * @require text!package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsEntry.html
+ * @require css!package/quiqqer/bricks/bin/Controls/Slider/PromoSliderSettings.css
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
@@ -60,6 +68,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 styles : {
                     clear   : 'both',
                     'float' : 'left',
+                    height  : 400,
                     overflow: 'hidden',
                     position: 'relative',
                     margin  : '10px 0 0 0',
@@ -196,6 +205,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 onDblClick: this.$openEditDialog
             });
 
+            this.$Grid.getElm().setStyles({
+                position: 'absolute'
+            });
+
+
             try {
                 this.$data = JSON.decode(this.$Input.value);
 
@@ -206,6 +220,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 this.refresh();
             } catch (e) {
             }
+        },
+
+        /**
+         * Resize the control
+         *
+         * @return {Promise}
+         */
+        resize: function () {
+            var size = this.getElm().getSize();
+
+            return this.$Grid.setWidth(size.x).then(function () {
+                this.$Grid.resize();
+            }.bind(this));
         },
 
         /**

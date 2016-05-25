@@ -73,7 +73,15 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             this.addEvents({
                 onInject : this.$onInject,
                 onCreate : this.$onCreate,
-                onDestroy: this.$onDestroy
+                onDestroy: this.$onDestroy,
+                onResize : function () {
+                    var controls = QUI.Controls.getControlsInElement(this.getContent());
+                    controls.each(function (Control) {
+                        if ("resize" in Control) {
+                            Control.resize();
+                        }
+                    });
+                }.bind(this)
             });
         },
 
