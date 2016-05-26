@@ -2,9 +2,11 @@
  * @module package/quiqqer/bricks/bin/Controls/Slider/Promoslider
  * @author www.pcsg.de (Henning Leutz)
  *
+ * Promo Slider - Slider für eye catching Sachen
+ *
  * @require qui/QUI
  * @require qui/controls/Control
- * @require qui/utils/Functions
+ * @require URL_OPT_DIR + bin/hammerjs/hammer.min.js
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
@@ -164,7 +166,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 });
             }
 
-            if (!this.getAttribute('shownavigation')) {
+            if (this.dotLength() <= 1 || !this.getAttribute('shownavigation')) {
                 this.$DotsDesktop.setStyle('display', 'none');
                 this.$DotsMobile.setStyle('display', 'none');
             }
@@ -234,6 +236,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
          * Start the autoslide
          */
         start: function () {
+            if (this.dotLength() <= 1) {
+                return;
+            }
+
             this.stop();
             this.$Timer = (this.next).periodical(this.getAttribute('delay'));
         },
@@ -249,11 +255,16 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
         /**
          * Show previous slide
+         *
+         * @return {Promise}
          */
         prev: function () {
+            if (this.dotLength() <= 1) {
+                return Promise.resolve();
+            }
+
             var Elm     = this.getElm(),
                 Current = null;
-
 
             if (this.$mobile) {
                 Current = Elm.getElement(
@@ -276,13 +287,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                     ).length - 1;
             }
 
-            this.show(slideNo);
+            return this.show(slideNo);
         },
 
         /**
          * Show next slide
+         *
+         * @return {Promise}
          */
         next: function () {
+            if (this.dotLength() <= 1) {
+                return Promise.resolve();
+            }
+
             var Elm     = this.getElm(),
                 slides  = [],
                 Current = null;
@@ -318,7 +335,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 slideNo++;
             }
 
-            this.show(slideNo);
+            return this.show(slideNo);
         },
 
         /**
@@ -331,6 +348,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             if (this.$running) {
                 return Promise.resolve();
             }
+
+            if (this.dotLength() <= 1) {
+                return Promise.resolve();
+            }
+
 
             this.$running = true;
             this.$normalizeDots();
@@ -586,6 +608,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
                 }).delay(delay);
             });
+        },
+
+        /**
+         * Length of the current dots / navigtation
+         *
+         * @returns {Number}
+         */
+        dotLength: function () {
+            if (this.$mobile) {
+                return this.$mobiledots.length;
+            }
+
+            return this.$desktopdots.length;
         }
     });
 });
