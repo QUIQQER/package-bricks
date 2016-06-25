@@ -8,7 +8,7 @@ namespace QUI\Bricks\Controls\Children;
 use QUI;
 
 /**
- * Class Infinite
+ * Class Slider
  * @package QUI\Bricks\Controls\Children
  */
 class Slider extends QUI\Control
