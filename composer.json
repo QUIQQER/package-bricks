@@ -17,7 +17,8 @@
   },
   "require": {
     "quiqqer/quiqqer": "*@dev",
-    "npm-asset/hammerjs": "2.*"
+    "npm-asset/hammerjs": "2.*",
+    "npm-asset\/mustache": "2.*"
   },
   "autoload": {
     "psr-0": {
