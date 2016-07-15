@@ -346,17 +346,31 @@
             <en><![CDATA[outer]]></en>
         </locale>
 
-        <locale name="brick.control.infinite.title">
+        <locale name="brick.control.Infinite.title">
             <de><![CDATA[Bausteine: Seiten-LazyLoader]]></de>
             <en><![CDATA[Bricks: Sites-LazyLoader]]></en>
+            <pl><![CDATA[Bricks: Wczytywanie podstron (Infinity Loader)]]></pl>
         </locale>
+
         <locale name="brick.control.setting.site">
             <de><![CDATA[Seiten hinzufügen]]></de>
             <en><![CDATA[Add pages]]></en>
+            <pl><![CDATA[Dodawanie stron]]></pl>
         </locale>
         <locale name="sidebox3TitleTop.title">
             <de><![CDATA[Bausteine: 3 Seiten untereinander]]></de>
             <en><![CDATA[Bricks: 3 pages among themselves]]></en>
+        </locale>
+
+        <locale name="brick.control.Infinite.childrenPerRow">
+            <de><![CDATA[Anzahl der Einträge in einer Reihe]]></de>
+            <en><![CDATA[Number of entrys in a single row]]></en>
+            <pl><![CDATA[Liczba wpisów w jednym wierszu]]></pl>
+        </locale>
+        <locale name="brick.control.Infinite.rows">
+            <de><![CDATA[Anzahl der Zeilen]]></de>
+            <en><![CDATA[Number of rows]]></en>
+            <pl><![CDATA[Liczba wierszy]]></pl>
         </locale>
     </groups>
 

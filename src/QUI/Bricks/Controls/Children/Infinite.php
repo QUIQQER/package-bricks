@@ -20,15 +20,18 @@ class Infinite extends QUI\Control
      */
     public function __construct($attributes = array())
     {
+        $childrenPerRow = $this->getAttribute('childrenPerRow');
+        $rows           = $this->getAttribute('rows');
+        
         // default options
         $this->setAttributes(array(
-            'class' => 'quiqqer-bricks-children-infinite',
-            'nodeName' => 'section',
-            'childrenPerRow' => 4,
-            'rows' => 2,
-            'site' => '',
-            'order' => false,
-            'data-qui' => 'package/quiqqer/bricks/bin/Controls/Children/Infinite'
+            'class'          => 'quiqqer-bricks-children-infinite',
+            'nodeName'       => 'section',
+            'childrenPerRow' => $childrenPerRow,
+            'rows'           => $rows,
+            'site'           => '',
+            'order'          => false,
+            'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Children/Infinite'
         ));
 
         $this->addCSSFile(
@@ -48,23 +51,43 @@ class Infinite extends QUI\Control
         $Engine   = QUI::getTemplateManager()->getEngine();
         $children = '';
 
+        switch ($this->getAttribute('childrenPerRow'))
+        {
+            case 2 :
+                $this->setAttribute('gridClass', 'grid-50');
+                break;
+            case 3 :
+                $this->setAttribute('gridClass', 'grid-33');
+                break;
+            case 4 :
+                $this->setAttribute('gridClass', 'grid-25');
+                break;
+            case 5 :
+                $this->setAttribute('gridClass', 'grid-20');
+                break;
+            default :
+                $this->setAttribute('gridClass', 'grid-25');
+        }
+
         $this->setAttribute(
             'data-qui-options-childrenperrow',
             $this->getAttribute('childrenPerRow')
+
         );
 
         for ($i = 0, $len = (int)$this->getAttribute('rows'); $i < $len; $i++) {
             $Engine->assign(array(
                 'children' => $this->getRow($i),
-                'row' => $i
+                'row'      => $i,
+                'this' => $this
             ));
 
             $children .= $Engine->fetch($this->getRowTemplate());
         }
 
         $Engine->assign(array(
-            'this' => $this,
-            'children' => $children
+            'this'           => $this,
+            'children'       => $children
         ));
 
         return $Engine->fetch(dirname(__FILE__) . '/Infinite.html');

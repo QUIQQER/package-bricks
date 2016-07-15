@@ -263,6 +263,21 @@
                         <locale group="quiqqer/system" var="release_from_desc"/>
                     </option>
                 </setting>
+
+                <!-- children per row -->
+                <setting name="childrenPerRow" type="select">
+                    <locale group="quiqqer/bricks" var="brick.control.Infinite.childrenPerRow" />
+
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </setting>
+
+                <!-- how much rows -->
+                <setting name="rows" type="number">
+                    <locale group="quiqqer/bricks" var="brick.control.Infinite.rows" />
+                </setting>
             </settings>
         </brick>
 

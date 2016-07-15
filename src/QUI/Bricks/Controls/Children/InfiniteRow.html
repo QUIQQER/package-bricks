@@ -1,6 +1,7 @@
 <div data-row="{$row}" class="quiqqer-bricks-children-infinite-row">
     {foreach from=$children item=Child}
-    <div class="grid-25 mobile-grid-50 quiqqer-bricks-children-infinite-child">
+    {assign var=gridClass value=$this->getAttribute('gridClass')}
+    <div class="{$gridClass} mobile-grid-50 quiqqer-bricks-children-infinite-child">
         <article class="quiqqer-bricks-children-infinite-child-display">
             {assign var=attrTitle value=$Child->getAttribute('title')|escape:"html"}
             <a href="{url site=$Child}" title="{$attrTitle}">
