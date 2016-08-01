@@ -28,22 +28,24 @@
         </div>
         {/if}
 
-        <div class="quiqqer-bricks-promoslider-slide-display">
-            {if $Utils->isImage($slide.title) || $slide.title != ''}
-            <header class="quiqqer-bricks-promoslider-slide-title">
-                {if $Utils->isImage($slide.title)}
-                {image image=$slide.title}
-                {else}
-                {$slide.title}
+        <div class="grid-container quiqqer-bricks-promoslider-slide-wrapper">
+            <div class="quiqqer-bricks-promoslider-slide-display">
+                {if $Utils->isImage($slide.title) || $slide.title != ''}
+                <header class="quiqqer-bricks-promoslider-slide-title">
+                    {if $Utils->isImage($slide.title)}
+                    {image image=$slide.title}
+                    {else}
+                    {$slide.title}
+                    {/if}
+                </header>
                 {/if}
-            </header>
-            {/if}
 
-            {if $slide.text != ''}
-            <div class="quiqqer-bricks-promoslider-slide-text">
-                {$slide.text}
+                {if $slide.text != ''}
+                <div class="quiqqer-bricks-promoslider-slide-text">
+                    {$slide.text}
+                </div>
+                {/if}
             </div>
-            {/if}
         </div>
     </div>
     {/foreach}

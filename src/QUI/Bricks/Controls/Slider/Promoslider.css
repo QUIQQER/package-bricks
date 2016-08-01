@@ -13,6 +13,10 @@
     display: none;
 }
 
+.quiqqer-bricks-promoslider-slide-wrapper {
+    position: relative;
+}
+
 .quiqqer-bricks-promoslider-slide-mobile-slide,
 .quiqqer-bricks-promoslider-slide {
     float: left;
