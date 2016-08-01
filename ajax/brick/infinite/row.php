@@ -33,7 +33,9 @@ QUI::$Ajax->registerFunction(
 
         $Engine->assign(array(
             'children' => $Infinite->getRow((int)$row),
-            'row' => (int)$row
+            'row' => (int)$row,
+            'this' => $Infinite,
+            'gridClass' =>$Infinite->getAttribute('gridClass')
         ));
 
         return $Engine->fetch($Infinite->getRowTemplate());

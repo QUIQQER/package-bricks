@@ -22,7 +22,7 @@ class Infinite extends QUI\Control
     {
         $childrenPerRow = $this->getAttribute('childrenPerRow');
         $rows           = $this->getAttribute('rows');
-        
+
         // default options
         $this->setAttributes(array(
             'class'          => 'quiqqer-bricks-children-infinite',
@@ -51,8 +51,7 @@ class Infinite extends QUI\Control
         $Engine   = QUI::getTemplateManager()->getEngine();
         $children = '';
 
-        switch ($this->getAttribute('childrenPerRow'))
-        {
+        switch ($this->getAttribute('childrenPerRow')) {
             case 2 :
                 $this->setAttribute('gridClass', 'grid-50');
                 break;
@@ -69,6 +68,8 @@ class Infinite extends QUI\Control
                 $this->setAttribute('gridClass', 'grid-25');
         }
 
+
+
         $this->setAttribute(
             'data-qui-options-childrenperrow',
             $this->getAttribute('childrenPerRow')
@@ -79,15 +80,16 @@ class Infinite extends QUI\Control
             $Engine->assign(array(
                 'children' => $this->getRow($i),
                 'row'      => $i,
-                'this' => $this
+                'this'     => $this,
+                'gridClass' => $this->getAttribute('gridClass')
             ));
 
             $children .= $Engine->fetch($this->getRowTemplate());
         }
 
         $Engine->assign(array(
-            'this'           => $this,
-            'children'       => $children
+            'this'     => $this,
+            'children' => $children
         ));
 
         return $Engine->fetch(dirname(__FILE__) . '/Infinite.html');
