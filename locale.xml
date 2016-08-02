@@ -2,6 +2,12 @@
 <locales>
     <groups name="quiqqer/bricks" datatype="php,js">
 
+        <locale name="brickFullWidth">
+            <de><![CDATA[Volle Breite erlauben]]></de>
+            <en><![CDATA[Allow full size]]></en>
+            <pl><![CDATA[Pełna szerokość]]></pl>
+        </locale>
+
         <locale name="permission.quiqqer.bricks._header">
             <de><![CDATA[Bausteine]]></de>
             <en><![CDATA[Bricks]]></en>
