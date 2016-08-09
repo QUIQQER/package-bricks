@@ -31,6 +31,9 @@ QUI::$Ajax->registerFunction(
         $Engine   = QUI::getTemplateManager()->getEngine();
         $Infinite = new Infinite($settings);
 
+        // bad fix for getting the right attributes - like gridClass
+        $Infinite->getBody();
+
         $Engine->assign(array(
             'children'  => $Infinite->getRow((int)$row),
             'row'       => (int)$row,
