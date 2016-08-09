@@ -50,37 +50,45 @@ class Infinite extends QUI\Control
     {
         $Engine   = QUI::getTemplateManager()->getEngine();
         $children = '';
+        $rows     = $this->getAttribute('rows');
 
         switch ($this->getAttribute('childrenPerRow')) {
-            case 2 :
+            case 2:
                 $this->setAttribute('gridClass', 'grid-50');
                 break;
-            case 3 :
+
+            case 3:
                 $this->setAttribute('gridClass', 'grid-33');
                 break;
-            case 4 :
+
+            case 4:
                 $this->setAttribute('gridClass', 'grid-25');
                 break;
-            case 5 :
+
+            case 5:
                 $this->setAttribute('gridClass', 'grid-20');
                 break;
-            default :
+
+            default:
                 $this->setAttribute('gridClass', 'grid-25');
         }
-
-
 
         $this->setAttribute(
             'data-qui-options-childrenperrow',
             $this->getAttribute('childrenPerRow')
-
         );
 
-        for ($i = 0, $len = (int)$this->getAttribute('rows'); $i < $len; $i++) {
+        $rows = (int)$rows;
+
+        if (empty($rows)) {
+            $rows = 1;
+        }
+
+        for ($i = 0, $len = $rows; $i < $len; $i++) {
             $Engine->assign(array(
-                'children' => $this->getRow($i),
-                'row'      => $i,
-                'this'     => $this,
+                'children'  => $this->getRow($i),
+                'row'       => $i,
+                'this'      => $this,
                 'gridClass' => $this->getAttribute('gridClass')
             ));
 

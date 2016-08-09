@@ -32,10 +32,10 @@ QUI::$Ajax->registerFunction(
         $Infinite = new Infinite($settings);
 
         $Engine->assign(array(
-            'children' => $Infinite->getRow((int)$row),
-            'row' => (int)$row,
-            'this' => $Infinite,
-            'gridClass' =>$Infinite->getAttribute('gridClass')
+            'children'  => $Infinite->getRow((int)$row),
+            'row'       => (int)$row,
+            'this'      => $Infinite,
+            'gridClass' => $Infinite->getAttribute('gridClass')
         ));
 
         return $Engine->fetch($Infinite->getRowTemplate());
