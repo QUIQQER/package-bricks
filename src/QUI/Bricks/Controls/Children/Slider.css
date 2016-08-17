@@ -14,7 +14,7 @@
 
 .quiqqer-bricks-children-slider-container-inner {
     float: left;
-    height: calc(100% + 22px);
+    /*height: calc(100% + 22px);*/
     left: 0;
     overflow: auto;
     position: absolute;
