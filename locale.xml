@@ -378,6 +378,10 @@
             <en><![CDATA[Number of rows]]></en>
             <pl><![CDATA[Liczba wierszy]]></pl>
         </locale>
+        <locale name="brick.control.Infinite.more.button">
+            <de><![CDATA[Mehr laden]]></de>
+            <en><![CDATA[more]]></en>
+        </locale>
     </groups>
 
     <groups name="quiqqer/bricks" datatype="php">

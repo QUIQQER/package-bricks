@@ -23,6 +23,10 @@ class Infinite extends QUI\Control
         $childrenPerRow = $this->getAttribute('childrenPerRow');
         $rows           = $this->getAttribute('rows');
 
+        if (!$childrenPerRow) {
+            $childrenPerRow = 3;
+        }
+
         // default options
         $this->setAttributes(array(
             'class'          => 'quiqqer-bricks-children-infinite',
@@ -95,9 +99,20 @@ class Infinite extends QUI\Control
             $children .= $Engine->fetch($this->getRowTemplate());
         }
 
+        // more button
+        $listCount = $this->getAttribute('childrenPerRow') * $rows;
+        $count     = $this->countChildren();
+
+        $showMoreButton = true;
+
+        if ($count <= $listCount) {
+            $showMoreButton = false;
+        }
+
         $Engine->assign(array(
-            'this'     => $this,
-            'children' => $children
+            'this'           => $this,
+            'children'       => $children,
+            'showMoreBUtton' => $showMoreButton
         ));
 
         return $Engine->fetch(dirname(__FILE__) . '/Infinite.html');
@@ -143,6 +158,22 @@ class Infinite extends QUI\Control
         );
 
         return $children;
+    }
+
+    /**
+     * Return the number of children
+     *
+     * @return int
+     */
+    protected function countChildren()
+    {
+        $result = QUI\Projects\Site\Utils::getSitesByInputList(
+            $this->getProject(),
+            $this->getAttribute('site'),
+            array('count' => true)
+        );
+
+        return (int)$result[0]['count'];
     }
 
     /**
