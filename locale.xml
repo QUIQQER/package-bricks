@@ -369,8 +369,8 @@
         </locale>
 
         <locale name="brick.control.Infinite.childrenPerRow">
-            <de><![CDATA[Anzahl der Einträge in einer Reihe]]></de>
-            <en><![CDATA[Number of entrys in a single row]]></en>
+            <de><![CDATA[Maximale Anzahl der Einträge in einer Reihe]]></de>
+            <en><![CDATA[Maximum number of entries in a single row]]></en>
             <pl><![CDATA[Liczba wpisów w jednym wierszu]]></pl>
         </locale>
         <locale name="brick.control.Infinite.rows">
