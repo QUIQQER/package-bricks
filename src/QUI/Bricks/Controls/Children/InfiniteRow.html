@@ -4,7 +4,7 @@
     <div class="{$gridClass} mobile-grid-50 quiqqer-bricks-children-infinite-child">
         <article class="quiqqer-bricks-children-infinite-child-display">
             {assign var=attrTitle value=$Child->getAttribute('title')|escape:"html"}
-            <a href="{url site=$Child}" title="{$attrTitle}">
+            <a href="{url site=$Child rewrited=true}" title="{$attrTitle}">
                 {assign var=hasImage value=0}
                 {if $Child->getAttribute('image_site')}
                     {assign var=hasImage value=1}
