@@ -378,6 +378,10 @@
             <en><![CDATA[Number of rows]]></en>
             <pl><![CDATA[Liczba wierszy]]></pl>
         </locale>
+        <locale name="brick.control.Infinite.loadingrows">
+            <de><![CDATA[Anzahl der Zeilen welche nachgeladen werden sollen]]></de>
+            <en><![CDATA[Number of rows that are to be loaded]]></en>
+        </locale>
         <locale name="brick.control.Infinite.more.button">
             <de><![CDATA[Mehr laden]]></de>
             <en><![CDATA[more]]></en>

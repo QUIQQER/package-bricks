@@ -278,6 +278,10 @@
                 <setting name="rows" type="number">
                     <locale group="quiqqer/bricks" var="brick.control.Infinite.rows" />
                 </setting>
+
+                <setting name="loadingrows" type="number">
+                    <locale group="quiqqer/bricks" var="brick.control.Infinite.loadingrows" />
+                </setting>
             </settings>
         </brick>
 

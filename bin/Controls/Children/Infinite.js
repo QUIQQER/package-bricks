@@ -89,27 +89,43 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
                                 html: result
                             });
 
-                            var Row = Container.getElement(
+                            var Rows = Container.getElements(
                                 '.quiqqer-bricks-children-infinite-row'
                             );
 
-                            Row.setStyles({
+                            // no results founds
+                            // hide more button and do nothing
+                            if (!Rows.length) {
+                                self.$More.removeEvents('click');
+
+                                moofx(self.$More).animate({
+                                    cursor : 'default',
+                                    opacity: 0
+                                });
+
+                                return;
+                            }
+
+                            Rows.setStyles({
                                 'float' : 'left',
                                 opacity : 0,
                                 position: 'absolute',
                                 overflow: 'hidden'
                             });
 
-                            Row.inject(self.$More, 'before');
+                            Rows.each(function (Row) {
+                                Row.inject(self.$More, 'before');
+                            });
 
-                            var height = Row.getSize().y;
 
-                            Row.setStyles({
+                            var height = Rows[0].getSize().y;
+
+                            Rows.setStyles({
                                 height  : 0,
                                 position: null
                             });
 
-                            var childrenCount = Row.getElements(
+                            var childrenCount = Rows.getLast().getElements(
                                 '.quiqqer-bricks-children-infinite-child'
                             ).length;
 
@@ -123,7 +139,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
                             }
 
 
-                            moofx(Row).animate({
+                            moofx(Rows).animate({
                                 height : height,
                                 opacity: 1
                             }, {
@@ -142,7 +158,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
 
                                     new Fx.Scroll(window.document).start(
                                         0,
-                                        Row.getPosition().y - 200
+                                        Rows[0].getPosition().y - 200
                                     ).chain(function () {
                                         self.$More.focus();
                                         resolve();

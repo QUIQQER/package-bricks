@@ -112,7 +112,7 @@ class Infinite extends QUI\Control
         $Engine->assign(array(
             'this'           => $this,
             'children'       => $children,
-            'showMoreBUtton' => $showMoreButton
+            'showMoreButton' => $showMoreButton
         ));
 
         return $Engine->fetch(dirname(__FILE__) . '/Infinite.html');

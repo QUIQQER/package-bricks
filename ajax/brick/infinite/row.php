@@ -34,14 +34,32 @@ QUI::$Ajax->registerFunction(
         // bad fix for getting the right attributes - like gridClass
         $Infinite->getBody();
 
-        $Engine->assign(array(
-            'children'  => $Infinite->getRow((int)$row),
-            'row'       => (int)$row,
-            'this'      => $Infinite,
-            'gridClass' => $Infinite->getAttribute('gridClass')
-        ));
 
-        return $Engine->fetch($Infinite->getRowTemplate());
+        // generate rows
+        $loadingRows = 1;
+
+        if (isset($settings['loadingrows'])
+            && !empty($settings['loadingrows'])
+            && (int)$settings['loadingrows']
+        ) {
+            $loadingRows = (int)$settings['loadingrows'];
+        }
+
+        $result = '';
+
+        for ($i = 0; $i < $loadingRows; $i++) {
+            $Engine->assign(array(
+                'children'  => $Infinite->getRow((int)$row),
+                'row'       => (int)$row,
+                'this'      => $Infinite,
+                'gridClass' => $Infinite->getAttribute('gridClass')
+            ));
+
+            $result .= $Engine->fetch($Infinite->getRowTemplate());
+            $row++;
+        }
+
+        return $result;
     },
     array('brickId', 'brickUID', 'row'),
     false
