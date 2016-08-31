@@ -1,0 +1,25 @@
+<div class="quiqqer-bricks-promoslider-wallpaper-container">
+    {strip}
+    <ul>
+        {foreach $desktopSlides as $key => $slide}
+        <li>
+            {assign var=extraStyle value=""}
+            {*if $key >= 1}
+            {assign var=extraStyle value="display: none;"}
+            {/if*}
+            <div class="quiqqer-bricks-promoslider-wallpaper-image"
+                 style="{$extraStyle}background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
+            >&nbsp;</div>
+            &nbsp;
+        </li>
+        {/foreach}
+    </ul>
+    {/strip}
+</div>
+<div class="quiqqer-bricks-promoslider-wallpaper-dots"></div>
+<div class="quiqqer-bricks-promoslider-wallpaper-prev">
+    <span class="fa fa-chevron-left"></span>
+</div>
+<div class="quiqqer-bricks-promoslider-wallpaper-next">
+    <span class="fa fa-chevron-right"></span>
+</div>

@@ -169,6 +169,10 @@
     background-size: cover;
 }
 
+.quiqqer-bricks-promoslider-slide-image__fixed {
+    background-attachment: fixed;
+}
+
 /** Wallpaper classes
  ================================================ */
 

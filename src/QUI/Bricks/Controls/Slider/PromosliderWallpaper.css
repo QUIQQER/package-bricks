@@ -1,0 +1,123 @@
+.quiqqer-bricks-promoslider-wallpaper {
+    float: left;
+    height: 540px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.quiqqer-bricks-promoslider-wallpaper-container {
+    left: 0;
+    float: left;
+    height: calc(100% + 20px);
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    -webkit-overflow-scrolling: touch;
+}
+
+.quiqqer-bricks-promoslider-wallpaper ul {
+    display: inline-block;
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.quiqqer-bricks-promoslider-wallpaper li {
+    display: inline-block;
+    float: none;
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+    width: 100%;
+}
+
+.quiqqer-bricks-promoslider-wallpaper-image {
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    left: 0;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.quiqqer-bricks-promoslider-wallpaper-prev,
+.quiqqer-bricks-promoslider-wallpaper-next {
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    font-size: 3vw;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    text-shadow: 1px 1px 1px #000;
+    width: 80px;
+    z-index: 2;
+}
+
+.quiqqer-bricks-promoslider-wallpaper-prev .fa,
+.quiqqer-bricks-promoslider-wallpaper-next .fa {
+    line-height: 4vw;
+    margin-top: -2vw;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 100%;
+}
+
+.quiqqer-bricks-promoslider-wallpaper-next {
+    left: inherit;
+    right: 0;
+}
+
+/**
+ ============================================= */
+
+.quiqqer-bricks-promoslider-wallpaper-dots {
+    bottom: 10px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 2;
+}
+
+.quiqqer-bricks-promoslider-wallpaper__nav_inner .quiqqer-bricks-promoslider-wallpaper-dots {
+    bottom: 20px;
+}
+
+.quiqqer-bricks-promoslider-wallpaper-dot {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    margin: 0 10px 0 0;
+    box-shadow: 1px 1px 1px #000;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    width: 20px;
+}
+
+.quiqqer-bricks-promoslider-wallpaper-dot:hover {
+    background: #d9232b;
+    opacity: 0.5;
+    transition: all 2s ease;
+    -webkit-transition: all 0.3s ease;
+}
+
+.quiqqer-bricks-promoslider-wallpaper-dot-active {
+    background: #d9232b;
+    transition: all 2s ease;
+    -webkit-transition: all 0.3s ease;
+}

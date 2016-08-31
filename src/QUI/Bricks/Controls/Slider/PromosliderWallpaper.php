@@ -14,7 +14,7 @@ use QUI\Projects\Media\Utils;
  *
  * @package QUI\Bricks\Controls
  */
-class Promoslider extends AbstractPromoslider
+class PromosliderWallpaper extends AbstractPromoslider
 {
     /**
      * constructor
@@ -25,26 +25,24 @@ class Promoslider extends AbstractPromoslider
     {
         // default options
         $this->setAttributes(array(
-            'title'                      => '',
-            'text'                       => '',
-            'class'                      => 'quiqqer-bricks-promoslider',
-            'nodeName'                   => 'section',
-            'data-qui'                   => 'package/quiqqer/bricks/bin/Controls/Slider/Promoslider',
-            'role'                       => 'listbox',
-            'shownavigation'             => false,
-            'image-as-wallpaper'         => false,
-            'image-wallpaper-attachment' => false,
-            'autostart'                  => false,
-            'delay'                      => 5000
+            'title'          => '',
+            'text'           => '',
+            'class'          => 'quiqqer-bricks-promoslider-wallpaper',
+            'nodeName'       => 'section',
+            'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
+            'role'           => 'listbox',
+            'shownavigation' => false,
+            'attachment'     => false,
+            'autostart'      => false,
+            'delay'          => 5000
         ));
 
         $this->addCSSFile(
-            dirname(__FILE__) . '/Promoslider.css'
+            dirname(__FILE__) . '/PromosliderWallpaper.css'
         );
 
         $this->addCSSClass('grid-100');
         $this->addCSSClass('mobile-grid-100');
-
 
         parent::__construct($attributes);
     }
@@ -65,8 +63,7 @@ class Promoslider extends AbstractPromoslider
         $this->setAttribute('data-qui-options-pagefitcutmobile', false);
         $this->setAttribute('data-qui-options-autostart', false);
         $this->setAttribute('data-qui-options-shownavigation', false);
-        $this->setAttribute('data-qui-options-image-as-wallpaper', false);
-        $this->setAttribute('data-qui-options-wallpaper-attachment', false);
+        $this->setAttribute('data-qui-options-attachment', false);
         $this->setAttribute('data-qui-options-delay', 5000);
 
         if ($this->getAttribute('pagefit')) {
@@ -78,7 +75,7 @@ class Promoslider extends AbstractPromoslider
             $this->setAttribute('data-qui-options-delay', $this->getAttribute('delay'));
         }
 
-        if ($this->getAttribute('pagefitcut')) {
+        if ($this->getAttribute('pagefitcut') && (int)$this->getAttribute('pagefitcut')) {
             $this->setAttribute('data-qui-options-pagefitcut', $this->getAttribute('pagefitcut'));
 
             $this->setAttribute(
@@ -108,21 +105,14 @@ class Promoslider extends AbstractPromoslider
             );
         }
 
-        if ($this->getAttribute('image-as-wallpaper')) {
-            $this->setAttribute(
-                'data-qui-options-image-as-wallpaper',
-                $this->getAttribute('image-as-wallpaper')
-            );
-        }
-
-        if ($this->getAttribute('image-wallpaper-attachment') == 'fixed') {
+        if ($this->getAttribute('attachment') == 'fixed') {
             $this->addCSSClass(
                 'quiqqer-bricks-promoslider-slide-image__fixed'
             );
         }
 
-        if ($this->getAttribute('image-wallpaper-position')) {
-            switch ($this->getAttribute('image-wallpaper-position')) {
+        if ($this->getAttribute('position')) {
+            switch ($this->getAttribute('position')) {
                 case "top-left":
                 case "top":
                 case "top-right":
@@ -133,7 +123,7 @@ class Promoslider extends AbstractPromoslider
                 case "bottom":
                 case "bottom-right":
                     $this->addCSSClass(
-                        'quiqqer-bricks-promoslider-wallpaper__' . $this->getAttribute('image-wallpaper-position')
+                        'quiqqer-bricks-promoslider-wallpaper__' . $this->getAttribute('position')
                     );
                     break;
 
@@ -164,6 +154,6 @@ class Promoslider extends AbstractPromoslider
             'Utils'         => new Utils()
         ));
 
-        return $Engine->fetch(dirname(__FILE__) . '/Promoslider.html');
+        return $Engine->fetch(dirname(__FILE__) . '/PromosliderWallpaper.html');
     }
 }

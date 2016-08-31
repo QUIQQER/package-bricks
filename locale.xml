@@ -290,6 +290,10 @@
             <de><![CDATA[Bausteine: Seiten-Präsentation]]></de>
             <en><![CDATA[Bricks: Site-Presentation]]></en>
         </locale>
+        <locale name="brick.control.promosliderWallpaper.title">
+            <de><![CDATA[Bausteine: Promoslider Wallpaper]]></de>
+            <en><![CDATA[Bricks: Promoslider Wallpaper]]></en>
+        </locale>
         <locale name="brick.control.promoslider.title">
             <de><![CDATA[Bausteine: Promoslider]]></de>
             <en><![CDATA[Bricks: Promoslider]]></en>
@@ -313,6 +317,14 @@
         <locale name="brick.control.promoslider.image-wallpaper-position">
             <de><![CDATA[Wallpaper-Position]]></de>
             <en><![CDATA[Wallpaper position]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.image-wallpaper-attachment">
+            <de><![CDATA[Wallpaper-Fixierung]]></de>
+            <en><![CDATA[Wallpaper attachment]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.image-wallpaper-attachment.fixed">
+            <de><![CDATA[festgesetzt]]></de>
+            <en><![CDATA[fixed]]></en>
         </locale>
         <locale name="brick.control.promoslider.settings">
             <de><![CDATA[Slide Einstellungen]]></de>
