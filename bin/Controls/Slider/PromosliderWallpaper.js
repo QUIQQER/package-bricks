@@ -54,6 +54,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
             this.$childrenCount     = 0;
             this.$scrollOnMouseMove = false;
+            this.$orientation       = 'landscape'; // portrait
 
             this.addEvents({
                 onImport: this.$onImport
