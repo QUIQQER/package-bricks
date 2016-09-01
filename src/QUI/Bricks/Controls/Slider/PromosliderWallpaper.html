@@ -4,12 +4,36 @@
         {foreach $desktopSlides as $key => $slide}
         <li>
             {assign var=extraStyle value=""}
-            {*if $key >= 1}
+            {if $key >= 1}
             {assign var=extraStyle value="display: none;"}
-            {/if*}
+            {/if}
+
             <div class="quiqqer-bricks-promoslider-wallpaper-image"
                  style="{$extraStyle}background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
             >&nbsp;</div>
+
+            {if $slide.title != '' || $slide.text != ''}
+            <div class="grid-container">
+                <div class="quiqqer-bricks-promoslider-wallpaper-text">
+                    {if $Utils->isImage($slide.title) || $slide.title != ''}
+                    <header>
+                        {if $Utils->isImage($slide.title)}
+                        {image image=$slide.title}
+                        {else}
+                        {$slide.title}
+                        {/if}
+                    </header>
+                    {/if}
+
+                    {if $slide.text != ''}
+                    <div class="quiqqer-bricks-promoslider-wallpaper-text-description">
+                        {$slide.text}
+                    </div>
+                    {/if}
+                </div>
+            </div>
+            {/if}
+
             &nbsp;
         </li>
         {/foreach}
@@ -17,9 +41,9 @@
     {/strip}
 </div>
 <div class="quiqqer-bricks-promoslider-wallpaper-dots"></div>
-<div class="quiqqer-bricks-promoslider-wallpaper-prev">
+<div class="quiqqer-bricks-promoslider-wallpaper-prev hide-on-mobile">
     <span class="fa fa-chevron-left"></span>
 </div>
-<div class="quiqqer-bricks-promoslider-wallpaper-next">
+<div class="quiqqer-bricks-promoslider-wallpaper-next hide-on-mobile">
     <span class="fa fa-chevron-right"></span>
 </div>
