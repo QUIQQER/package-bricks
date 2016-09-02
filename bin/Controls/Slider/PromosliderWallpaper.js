@@ -4,7 +4,6 @@
  *
  * @require qui/QUI
  * @require qui/controls/Control
- * @require qui/utils/Functions
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
@@ -54,7 +53,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
             this.$childrenCount     = 0;
             this.$scrollOnMouseMove = false;
-            this.$orientation       = 'landscape'; // portrait
+            this.$orientation       = false; // landscape / portrait
 
             this.addEvents({
                 onImport: this.$onImport
@@ -89,6 +88,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             this.$Scroll = moofx(this.$List, {
                 duration: 250
             });
+
 
             // create dots
             var dotClick = function (event) {
@@ -294,7 +294,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
          * @returns {Promise}
          */
         onResize: function () {
-            if (this.getAttribute('pagefit')) {
+            var orientation     = this.$orientation,
+                newOritentation = this.$getOrientation();
+
+            if (this.getAttribute('pagefit') && orientation != newOritentation) {
                 var winSize = QUI.getWindowSize();
                 var pagefit = this.getAttribute('pagefitcut');
 
@@ -304,6 +307,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                 this.$Elm.setStyle('height', winSize.y - pagefit);
             }
+
+            this.$orientation = newOritentation;
 
             // set the sheet to the right place
             return new Promise(function (resolve) {
@@ -499,10 +504,21 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
          * calculat the max scroll
          */
         $calcMaxScroll: function () {
-            var liList = this.$Container.getElements('li');
+            var liList = this.$List.getElements('li');
 
             this.$childrenCount = liList.length;
-            this.$maxScroll     = liList[liList.length - 1].getBoundingClientRect().left;
+            this.$maxScroll     = liList[liList.length - 1].getPosition(this.$List).x;
+        },
+
+        /**
+         * Return the current orientation
+         *
+         * @return {String} - landscape, portrait
+         */
+        $getOrientation: function () {
+            var size = QUI.getWindowSize();
+
+            return size.x > size.y ? 'landscape' : 'portrait';
         }
     });
 });

@@ -48,6 +48,46 @@ class PromosliderWallpaper extends AbstractPromoslider
     }
 
     /**
+     * @return string
+     */
+    public function create()
+    {
+        $result = '';
+
+        if ($this->getAttribute('pagefitcut')
+            && (int)$this->getAttribute('pagefitcut')
+        ) {
+            $pagefit = (int)$this->getAttribute('pagefitcut');
+
+            $result .= '
+                <style>
+                    .quiqqer-bricks-promoslider-wallpaper {
+                        height: calc(100vh - ' . $pagefit . 'px);
+                    }
+                </style>';
+        }
+
+        if ($this->getAttribute('pagefitcutmobile')
+            && (int)$this->getAttribute('pagefitcutmobile')
+        ) {
+            $pagefit = (int)$this->getAttribute('pagefitcutmobile');
+
+            $result .= '
+                <style>
+                    @media screen and (max-width: 768px) {
+                        .quiqqer-bricks-promoslider-wallpaper {
+                            height: calc(100vh - ' . $pagefit . 'px);
+                        }
+                    }
+                </style>';
+        }
+
+        $result .= parent::create();
+
+        return $result;
+    }
+
+    /**
      * (non-PHPdoc)
      *
      * @see \QUI\Control::create()
@@ -68,7 +108,6 @@ class PromosliderWallpaper extends AbstractPromoslider
 
         if ($this->getAttribute('pagefit')) {
             $this->setAttribute('data-qui-options-pagefit', $this->getAttribute('pagefit'));
-            $this->setAttribute('height', '100vh');
         }
 
         if ($this->getAttribute('delay')) {
@@ -77,11 +116,6 @@ class PromosliderWallpaper extends AbstractPromoslider
 
         if ($this->getAttribute('pagefitcut') && (int)$this->getAttribute('pagefitcut')) {
             $this->setAttribute('data-qui-options-pagefitcut', $this->getAttribute('pagefitcut'));
-
-            $this->setAttribute(
-                'height',
-                'calc(100vh - ' . (int)$this->getAttribute('pagefitcut') . 'px)'
-            );
         }
 
         if ($this->getAttribute('pagefitcutmobile')) {
