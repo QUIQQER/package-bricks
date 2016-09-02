@@ -69,6 +69,11 @@ class Promoslider extends AbstractPromoslider
         $this->setAttribute('data-qui-options-wallpaper-attachment', false);
         $this->setAttribute('data-qui-options-delay', 5000);
 
+        if ($this->getAttribute('pagefit') === false) {
+            $this->setAttribute('pagefitcut', false);
+            $this->setAttribute('pagefitcutmobile', false);
+        }
+        
         if ($this->getAttribute('pagefit')) {
             $this->setAttribute('data-qui-options-pagefit', $this->getAttribute('pagefit'));
             $this->setAttribute('height', '100vh');
