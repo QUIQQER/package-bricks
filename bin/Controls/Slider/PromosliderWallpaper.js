@@ -147,6 +147,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                         "-ms-transition"    : transition,
                         transition          : transition
                     });
+
+                    this.stop();
                 }.bind(this),
 
                 mousedown: function (event) {
