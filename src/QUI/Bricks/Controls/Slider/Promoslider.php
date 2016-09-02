@@ -73,7 +73,7 @@ class Promoslider extends AbstractPromoslider
             $this->setAttribute('pagefitcut', false);
             $this->setAttribute('pagefitcutmobile', false);
         }
-        
+
         if ($this->getAttribute('pagefit')) {
             $this->setAttribute('data-qui-options-pagefit', $this->getAttribute('pagefit'));
             $this->setAttribute('height', '100vh');

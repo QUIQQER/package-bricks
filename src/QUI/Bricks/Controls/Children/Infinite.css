@@ -43,6 +43,7 @@
 .quiqqer-bricks-children-infinite .button {
     clear: both;
     display: block;
+    float: none;
     margin: 0 auto;
     text-align: center;
     width: 160px;
