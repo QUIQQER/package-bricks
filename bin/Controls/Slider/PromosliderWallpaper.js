@@ -212,6 +212,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                         lastClientX = event.page.x;
                     }
 
+                    var diff = Math.abs(startScroll - lastClientX);
+
+                    if (diff < 50) {
+                        this.show(currentSlide);
+                        return;
+                    }
+
                     // previous
                     if (startScroll < lastClientX) {
                         this.show(currentSlide - 1);
@@ -230,6 +237,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                     var diff  = event.page.x - startScroll;
                     var value = Math.round(-lastScrollLeft + diff);
+
+                    if (Math.abs(diff) < 10) {
+                        return;
+                    }
 
                     var transform = 'translate3d(' + value + 'px, 0, 0)';
 
