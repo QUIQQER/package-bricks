@@ -149,13 +149,18 @@
     z-index: 3;
 }
 
+.quiqqer-bricks-promoslider-wallpaper-text__right {
+    left: auto;
+    right: 0;
+}
+
 .quiqqer-bricks-promoslider-wallpaper-text header {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.8);
     padding: 20px;
 }
 
 .quiqqer-bricks-promoslider-wallpaper-text-description {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.8);
     float: left;
     padding: 20px;
     position: relative;

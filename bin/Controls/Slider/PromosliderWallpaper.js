@@ -272,6 +272,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 event.stop();
                 this.$scrollOnMouseMove = false;
                 this.$scrolling         = true;
+                this.stop();
                 this.next();
             }.bind(this));
 
@@ -279,6 +280,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 event.stop();
                 this.$scrollOnMouseMove = false;
                 this.$scrolling         = true;
+                this.stop();
                 this.previous();
             }.bind(this));
 
@@ -295,7 +297,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
             // autostart
             if (this.getAttribute('autostart')) {
-
+                this.start();
             }
         },
 
@@ -344,6 +346,23 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                 this.show(Math.round(next / this.$width)).then(resolve);
             }.bind(this));
+        },
+
+        /**
+         * Start the autoslide
+         */
+        start: function () {
+            this.stop();
+            this.$Timer = (this.next).periodical(this.getAttribute('delay'));
+        },
+
+        /**
+         * stop the autoslide
+         */
+        stop: function () {
+            if (this.$Timer) {
+                clearInterval(this.$Timer);
+            }
         },
 
         /**
