@@ -25,12 +25,12 @@ class Events
      */
     public static function onSiteSave($Site)
     {
-        QUI\Rights\Permission::checkPermission('quiqqer.bricks.assign');
+        QUI\Permissions\Permission::checkPermission('quiqqer.bricks.assign');
 
         $areas = $Site->getAttribute('quiqqer.bricks.areas');
         $areas = json_decode($areas, true);
 
-        if (!$areas ||empty($areas)) {
+        if (!$areas || empty($areas)) {
             return;
         }
 
@@ -60,14 +60,14 @@ class Events
             // clear area and new data set
             QUI::getDataBase()->delete($projectTable, array(
                 'id'   => $Site->getId(),
-                'area' => $area[ 'name' ]
+                'area' => $area['name']
             ));
 
             // check if deactivated
             if (isset($bricks[0]) && isset($bricks[0]['deactivate'])) {
                 QUI::getDataBase()->insert($projectTable, array(
                     'id'    => $Site->getId(),
-                    'area'  => $area[ 'name' ],
+                    'area'  => $area['name'],
                     'brick' => -1
                 ));
 
@@ -79,23 +79,26 @@ class Events
                 $customFields = array();
 
                 if (isset($brick['customfields'])
-                    && is_string($brick['customfields'])) {
+                    && is_string($brick['customfields'])
+                ) {
                     $customFields = json_decode($brick['customfields'], true);
                 }
 
                 if (isset($brick['customfields'])
-                    && is_array($brick['customfields'])) {
+                    && is_array($brick['customfields'])
+                ) {
                     $customFields = $brick['customfields'];
                 }
 
                 if (!isset($customFields['inheritance'])
-                    || !(int)$customFields['inheritance']) {
+                    || !(int)$customFields['inheritance']
+                ) {
                     continue;
                 }
 
                 QUI::getDataBase()->insert($projectTable, array(
                     'id'    => $Site->getId(),
-                    'area'  => $area[ 'name' ],
+                    'area'  => $area['name'],
                     'brick' => (int)$brick['brickId']
                 ));
             }
@@ -105,6 +108,8 @@ class Events
     /**
      * Event : on smarty init
      * add new brickarea function
+     *
+     * @param \Smarty $Smarty
      */
     public static function onSmartyInit($Smarty)
     {
@@ -112,7 +117,7 @@ class Events
         if (!isset($Smarty->registered_plugins['function'])
             || !isset($Smarty->registered_plugins['function']['brickarea'])
         ) {
-            $Smarty->registerPlugin("function", "brickarea", "\QUI\Bricks\Events::brickarea");
+            $Smarty->registerPlugin("function", "brickarea", "\\QUI\\Bricks\\Events::brickarea");
         }
     }
 
@@ -120,21 +125,22 @@ class Events
      * Smarty brickarea function {brickarea}
      *
      * @param array $params - function parameter
-     * @param \Smarty
+     * @param \Smarty $smarty
+     * @return string
      */
     public static function brickarea($params, $smarty)
     {
         if (!isset($params['Site']) || !isset($params['area'])) {
             if (!isset($params['assign'])) {
-                return array();
+                return '';
             }
 
             $smarty->assign($params['assign'], array());
-            return;
+            return '';
         }
 
 
-        $BricksManager = \QUI\Bricks\Manager::init();
+        $BricksManager = QUI\Bricks\Manager::init();
 
         $Site = $params['Site'];
         $area = $params['area'];
@@ -146,5 +152,6 @@ class Events
         }
 
         $smarty->assign($params['assign'], $result);
+        return '';
     }
 }

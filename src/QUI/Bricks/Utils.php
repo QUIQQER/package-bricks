@@ -7,7 +7,7 @@
 namespace QUI\Bricks;
 
 use QUI;
-use QUI\Utils\XML;
+use QUI\Utils\Text\XML;
 use QUI\Projects\Project;
 
 /**
@@ -66,17 +66,14 @@ class Utils
         $Dom  = XML::getDomFromXml($file);
         $Path = new \DOMXPath($Dom);
 
-        $globalAreas
-            = $Path->query("//quiqqer/bricks/templateAreas/areas/area");
+        $globalAreas = $Path->query("//quiqqer/bricks/templateAreas/areas/area");
 
         if ($layoutType) {
             $typeAreas = $Path->query(
                 "//quiqqer/bricks/templateAreas/layouts/layout[@layout='{$layoutType}']/area"
             );
-
         } else {
-            $typeAreas
-                = $Path->query("//quiqqer/bricks/templateAreas/layouts/layout/area");
+            $typeAreas = $Path->query("//quiqqer/bricks/templateAreas/layouts/layout/area");
         }
 
 
@@ -99,7 +96,6 @@ class Utils
 
     public static function getGlobalTemplateAreasFromXML()
     {
-
     }
 
     /**
@@ -108,7 +104,6 @@ class Utils
      */
     public static function getTypeTemplateAreasFromXML($file, $siteType)
     {
-
     }
 
     /**
