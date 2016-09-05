@@ -354,6 +354,10 @@
             <de><![CDATA[Navigation anzeigen]]></de>
             <en><![CDATA[Show navigation]]></en>
         </locale>
+        <locale name="brick.control.promoslider.settings.showarrows">
+            <de><![CDATA[Navigation-Pfeile anzeigen]]></de>
+            <en><![CDATA[Show navigation arrows]]></en>
+        </locale>
         <locale name="brick.control.promoslider.settings.delay">
             <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>
             <en><![CDATA[Time to start next slide (Delay)]]></en>

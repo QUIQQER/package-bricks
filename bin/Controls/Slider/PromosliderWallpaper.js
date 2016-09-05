@@ -33,6 +33,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             delay         : 5000,
             autostart     : true,
             shownavigation: true,
+            shownarrows   : true,
 
             pagefit         : false,
             pagefitcut      : 0,
@@ -582,7 +583,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
             var liList = this.$List.getElements('li');
 
-            if (liList.length > 1) {
+            if (liList.length > 1 && this.getAttribute('shownavigation')) {
                 var dotClick = function (event) {
                     event.stop();
                     this.show(event.target.get('data-index'));

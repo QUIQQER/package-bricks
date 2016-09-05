@@ -31,7 +31,8 @@ class PromosliderWallpaper extends AbstractPromoslider
             'nodeName'       => 'section',
             'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
             'role'           => 'listbox',
-            'shownavigation' => false,
+            'shownavigation' => true,
+            'showarrows'     => true,
             'autostart'      => false,
             'delay'          => 5000,
             'template'       => dirname(__FILE__) . '/PromosliderWallpaper.html'
@@ -107,9 +108,10 @@ class PromosliderWallpaper extends AbstractPromoslider
         $this->setAttribute('data-qui-options-pagefitcut', false);
         $this->setAttribute('data-qui-options-pagefitcutmobile', false);
         $this->setAttribute('data-qui-options-autostart', false);
-        $this->setAttribute('data-qui-options-shownavigation', false);
         $this->setAttribute('data-qui-options-attachment', false);
         $this->setAttribute('data-qui-options-delay', 5000);
+        $this->setAttribute('data-qui-options-shownavigation', false);
+        $this->setAttribute('data-qui-options-showarrows', false);
 
         if ($this->getAttribute('pagefit') === false) {
             $this->setAttribute('pagefitcut', false);
@@ -146,6 +148,13 @@ class PromosliderWallpaper extends AbstractPromoslider
             $this->setAttribute(
                 'data-qui-options-shownavigation',
                 $this->getAttribute('shownavigation')
+            );
+        }
+
+        if ($this->getAttribute('showarrows')) {
+            $this->setAttribute(
+                'data-qui-options-showarrows',
+                $this->getAttribute('showarrows')
             );
         }
 

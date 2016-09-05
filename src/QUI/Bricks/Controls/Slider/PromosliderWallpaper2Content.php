@@ -33,7 +33,8 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
             'nodeName'       => 'section',
             'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
             'role'           => 'listbox',
-            'shownavigation' => false,
+            'shownavigation' => true,
+            'showarrows'     => true,
             'autostart'      => false,
             'delay'          => 5000,
             'template'       => dirname(__FILE__) . '/PromosliderWallpaper2Content.html'
