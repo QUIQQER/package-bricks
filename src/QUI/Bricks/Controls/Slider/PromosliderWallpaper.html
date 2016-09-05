@@ -1,17 +1,64 @@
 <div class="quiqqer-bricks-promoslider-wallpaper-container">
     {strip}
-    <ul>
+    <ul class="hide-on-mobile">
         {foreach $desktopSlides as $key => $slide}
         <li>
             {assign var=extraStyle value=""}
             {assign var=extraClass value=""}
 
             {if $key >= 1}
-                {assign var=extraStyle value="display: none;"}
+            {assign var=extraStyle value="display: none;"}
             {/if}
 
             {if $slide.pos == 'quiqqer-bricks-promoslider-slide-right'}
-                {assign var=extraClass value=" quiqqer-bricks-promoslider-wallpaper-text__right"}
+            {assign var=extraClass value=" quiqqer-bricks-promoslider-wallpaper-text__right"}
+            {/if}
+
+            <div class="quiqqer-bricks-promoslider-wallpaper-image"
+                 style="{$extraStyle}background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
+            >&nbsp;</div>
+
+            {if $slide.title != '' || $slide.text != ''}
+            <div class="grid-container">
+                <div class="quiqqer-bricks-promoslider-wallpaper-text{$extraClass}">
+                    {if $Utils->isImage($slide.title) || $slide.title != ''}
+                    <header>
+                        {if $Utils->isImage($slide.title)}
+                        {image image=$slide.title}
+                        {else}
+                        {$slide.title}
+                        {/if}
+                    </header>
+                    {/if}
+
+                    {if $slide.text != ''}
+                    <div class="quiqqer-bricks-promoslider-wallpaper-text-description">
+                        {$slide.text}
+                    </div>
+                    {/if}
+                </div>
+            </div>
+            {/if}
+
+            &nbsp;
+        </li>
+        {/foreach}
+    </ul>
+    {/strip}
+
+    {strip}
+    <ul class="hide-on-desktop">
+        {foreach $mobileSlides as $key => $slide}
+        <li>
+            {assign var=extraStyle value=""}
+            {assign var=extraClass value=""}
+
+            {if $key >= 1}
+            {assign var=extraStyle value="display: none;"}
+            {/if}
+
+            {if $slide.pos == 'quiqqer-bricks-promoslider-slide-right'}
+            {assign var=extraClass value=" quiqqer-bricks-promoslider-wallpaper-text__right"}
             {/if}
 
             <div class="quiqqer-bricks-promoslider-wallpaper-image"

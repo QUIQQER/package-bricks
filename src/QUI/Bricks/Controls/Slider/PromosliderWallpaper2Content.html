@@ -1,18 +1,52 @@
 <div class="quiqqer-bricks-promoslider-wallpaper-container">
     {strip}
-    <ul>
+    <ul class="hide-on-mobile">
         {foreach $desktopSlides as $key => $slide}
         <li>
             {assign var=extraStyle value=""}
             {assign var=extraClass value=""}
 
             {if $key >= 1}
-                {assign var=extraStyle value="display: none;"}
+            {assign var=extraStyle value="display: none;"}
             {/if}
 
             <div class="quiqqer-bricks-promoslider-wallpaper-image"
                  style="{$extraStyle}background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
-            >&nbsp</div>
+            >&nbsp
+            </div>
+
+            <div class="grid-container">
+                <div class="quiqqer-bricks-promoslider-wallpaper2Content-left">
+                    {if isset($slide.left)}
+                    {$slide.left}
+                    {/if}
+                </div>
+                <div class="quiqqer-bricks-promoslider-wallpaper2Content-right">
+                    {if isset($slide.right)}
+                    {$slide.right}
+                    {/if}
+                </div>
+            </div>
+        </li>
+        {/foreach}
+    </ul>
+    {/strip}
+
+    {strip}
+    <ul class="hide-on-desktop">
+        {foreach $mobileSlides as $key => $slide}
+        <li>
+            {assign var=extraStyle value=""}
+            {assign var=extraClass value=""}
+
+            {if $key >= 1}
+            {assign var=extraStyle value="display: none;"}
+            {/if}
+
+            <div class="quiqqer-bricks-promoslider-wallpaper-image"
+                 style="{$extraStyle}background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
+            >&nbsp
+            </div>
 
             <div class="grid-container">
                 <div class="quiqqer-bricks-promoslider-wallpaper2Content-left">

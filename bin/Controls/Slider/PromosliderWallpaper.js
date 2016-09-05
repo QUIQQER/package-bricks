@@ -2,6 +2,8 @@
  * @module package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper
  * @author www.pcsg.de (Henning Leutz)
  *
+ * Wallpaper Slider
+ *
  * @require qui/QUI
  * @require qui/controls/Control
  */
@@ -61,8 +63,16 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
             QUI.addEvent('resize', function () {
                 if (this.getElm()) {
+                    var oldMobileStatus = this.$mobile;
+
                     this.$width  = this.getElm().getSize().x;
                     this.$mobile = (QUI.getWindowSize().x <= 768);
+
+                    if (oldMobileStatus != this.$mobile) {
+                        // mobile desktop switched
+                        this.$setCurrentSlideList();
+                        this.$refreshDots();
+                    }
 
                     this.$calcMaxScroll();
                     this.onResize();
@@ -83,32 +93,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             this.$Next      = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-next');
             this.$Previous  = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-prev');
             this.$Dots      = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-dots');
-            this.$List      = Elm.getElement('ul');
+            this.$List      = this.$setCurrentSlideList();
 
             this.$Scroll = moofx(this.$List, {
                 duration: 250
             });
 
-
             // create dots
-            var dotClick = function (event) {
-                event.stop();
-                this.show(event.target.get('data-index'));
-            }.bind(this);
-
-            var liList = this.$Container.getElements('li');
-
-            for (i = 0, len = liList.length; i < len; i++) {
-                new Element('span', {
-                    'class'     : 'quiqqer-bricks-promoslider-wallpaper-dot',
-                    'data-index': i,
-                    events      : {
-                        click: dotClick
-                    }
-                }).inject(this.$Dots);
-            }
-
-            this.$childrenCount = liList.length;
+            this.$refreshDots();
             this.$calcMaxScroll();
 
             // focus helper
@@ -121,6 +113,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
             this.$Container.addEvents({
                 touchstart: function (event) {
+                    if (this.$childrenCount <= 1) {
+                        return;
+                    }
+
                     var Target = event.target;
 
                     if (Target.hasClass('quiqqer-bricks-promoslider-wallpaper-next') ||
@@ -187,6 +183,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                         return;
                     }
 
+                    if (this.$childrenCount <= 1) {
+                        return;
+                    }
+
                     var Target = event.target;
 
                     if (Target.hasClass('quiqqer-bricks-promoslider-wallpaper-next') ||
@@ -234,6 +234,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                 touchmove: function (event) {
                     if (!this.$scrolling) {
+                        return;
+                    }
+
+                    if (this.$childrenCount <= 1) {
                         return;
                     }
 
@@ -551,6 +555,51 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             var size = QUI.getWindowSize();
 
             return size.x > size.y ? 'landscape' : 'portrait';
+        },
+
+        /**
+         * Return the current ul list, mobile  or desktop list
+         *
+         * @returns {null|*}
+         */
+        $setCurrentSlideList: function () {
+            if (this.$mobile) {
+                // mobile list
+                this.$List = this.getElm().getElement('ul.hide-on-desktop');
+            } else {
+                // dekstop list
+                this.$List = this.getElm().getElement('ul.hide-on-mobile');
+            }
+
+            return this.$List;
+        },
+
+        /**
+         * Refresh the dot display
+         */
+        $refreshDots: function () {
+            this.$Dots.set('html', '');
+
+            var liList = this.$List.getElements('li');
+
+            if (liList.length > 1) {
+                var dotClick = function (event) {
+                    event.stop();
+                    this.show(event.target.get('data-index'));
+                }.bind(this);
+
+                for (var i = 0, len = liList.length; i < len; i++) {
+                    new Element('span', {
+                        'class'     : 'quiqqer-bricks-promoslider-wallpaper-dot',
+                        'data-index': i,
+                        events      : {
+                            click: dotClick
+                        }
+                    }).inject(this.$Dots);
+                }
+            }
+
+            this.$childrenCount = liList.length;
         }
     });
 });
