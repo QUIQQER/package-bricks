@@ -1,0 +1,16 @@
+/** text
+ ============================================= */
+
+.quiqqer-bricks-promoslider-wallpaper2Content-left,
+.quiqqer-bricks-promoslider-wallpaper2Content-right {
+    float: left;
+    padding: 20px 0;
+    width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+    .quiqqer-bricks-promoslider-wallpaper2Content-left,
+    .quiqqer-bricks-promoslider-wallpaper2Content-right {
+        width: 100%;
+    }
+}

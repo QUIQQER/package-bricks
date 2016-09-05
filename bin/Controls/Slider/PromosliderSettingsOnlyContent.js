@@ -1,21 +1,7 @@
 /**
- * @module package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings
- * @author www.pcsg.de (Henning Leutz)
  *
- * Inhaltseinstellung für Promoslider
- *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/controls/windows/Confirm
- * @require qui/controls/buttons/Button
- * @require Locale
- * @require Mustache
- * @require controls/grid/Grid
- * @require utils/Controls
- * @require text!package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsEntry.html
- * @require css!package/quiqqer/bricks/bin/Controls/Slider/PromoSliderSettings.css
  */
-define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
+define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContent', [
 
     'qui/QUI',
     'qui/controls/Control',
@@ -26,10 +12,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
     'controls/grid/Grid',
     'utils/Controls',
 
-    'text!package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsEntry.html',
+    'text!package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContentEntry.html',
     'css!package/quiqqer/bricks/bin/Controls/Slider/PromoSliderSettings.css'
 
-], function (QUI, QUIControl, QUIConfirm, QUIButton, QUILocale, Mustache, Grid, ControlsUtils, templateEntry) {
+], function (QUI, QUIControl, QUIConfirm, QUIButton, QUILocale,
+             Mustache, Grid, ControlsUtils, templateEntry) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
@@ -158,22 +145,18 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     dataType : 'node',
                     width    : 60
                 }, {
-                    header   : QUILocale.get('quiqqer/system', 'title'),
-                    dataIndex: 'title',
-                    dataType : 'string',
+                    header   : QUILocale.get(lg, 'quiqqer.products.control.promoslider.left'),
+                    dataIndex: 'left',
+                    dataType : 'code',
                     width    : 300
                 }, {
-                    header   : QUILocale.get(lg, 'quiqqer.products.control.slidesettings.type'),
-                    dataIndex: 'type',
-                    dataType : 'string',
-                    width    : 200
+                    header   : QUILocale.get(lg, 'quiqqer.products.control.promoslider.right'),
+                    dataIndex: 'right',
+                    dataType : 'code',
+                    width    : 300
                 }, {
                     dataIndex: 'image',
                     dataType : 'string',
-                    hidden   : true
-                }, {
-                    header   : QUILocale.get(lg, 'quiqqer.products.control.slidesettings.text'),
-                    dataIndex: 'text',
                     hidden   : true
                 }]
             });
@@ -224,6 +207,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             }
         },
 
+
         /**
          * Resize the control
          *
@@ -246,7 +230,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
             for (i = 0, len = this.$data.length; i < len; i++) {
                 entry  = this.$data[i];
-                insert = {};
+                insert = {
+                    image       : '',
+                    imagePreview: new Element('span', {html: '&nbsp;'})
+                };
 
                 if ("image" in entry) {
                     insert.image = entry.image;
@@ -256,16 +243,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     });
                 }
 
-                if ("title" in entry) {
-                    insert.title = entry.title;
+                if ("left" in entry) {
+                    insert.left = entry.left;
                 }
 
-                if ("text" in entry) {
-                    insert.text = entry.text;
-                }
-
-                if ("type" in entry) {
-                    insert.type = entry.type;
+                if ("right" in entry) {
+                    insert.right = entry.right;
                 }
 
                 data.push(insert);
@@ -309,33 +292,16 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
         /**
          * Add an entry
          *
-         * @param {Object} params
+         * @param {string} [left] - left content
+         * @param {string} [right] - right content
          */
-        add: function (params) {
-            var entry = {
-                image: '',
-                title: '',
-                text : '',
-                type : ''
-            };
+        add: function (left, right, image) {
+            this.$data.push({
+                left : left || '',
+                right: right || '',
+                image: image || ''
+            });
 
-            if ("image" in params) {
-                entry.image = params.image;
-            }
-
-            if ("title" in params) {
-                entry.title = params.title;
-            }
-
-            if ("text" in params) {
-                entry.text = params.text;
-            }
-
-            if ("type" in params) {
-                entry.type = params.type;
-            }
-
-            this.$data.push(entry);
             this.refresh();
             this.update();
         },
@@ -344,37 +310,20 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
          * Edit an entry
          *
          * @param {number} index
-         * @param {object} params
+         * @param {string} [left] - left content
+         * @param {string} [right] - right content
+         * @param {string} [image] - image path
          */
-        edit: function (index, params) {
+        edit: function (index, left, right, image) {
             if (typeof index === 'undefined') {
                 return;
             }
 
-            var entry = {
-                image: '',
-                title: '',
-                text : '',
-                type : ''
+            this.$data[index] = {
+                left : left || '',
+                right: right || '',
+                image: image || ''
             };
-
-            if ("image" in params) {
-                entry.image = params.image;
-            }
-
-            if ("title" in params) {
-                entry.title = params.title;
-            }
-
-            if ("text" in params) {
-                entry.text = params.text;
-            }
-
-            if ("type" in params) {
-                entry.type = params.type;
-            }
-
-            this.$data[index] = entry;
 
             this.refresh();
             this.update();
@@ -423,26 +372,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
         },
 
         /**
-         * Refresh the data sorting in dependence of the grid
-         */
-        $refreshSorting: function () {
-            var gridData = this.$Grid.getData(),
-                data     = [];
-
-            for (var i = 0, len = gridData.length; i < len; i++) {
-                data.push({
-                    image: gridData[i].image,
-                    title: gridData[i].title,
-                    text : gridData[i].text,
-                    type : gridData[i].type
-                });
-            }
-
-            this.$data = data;
-            this.update();
-        },
-
-        /**
          * Open edit dialog
          *
          * @retrun {Promise}
@@ -463,20 +392,15 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     '.quiqqer-bricks-promoslider-settings-entry-buttons button'
                 );
 
-                var Form        = Container.getElement('form');
-                var Image       = Form.elements.image;
-                var Title       = Form.elements.title;
-                var Description = Form.elements.description;
-                var Type        = Form.elements.type;
-                var Button      = QUI.Controls.getById(CloseButton.get('data-quiid'));
+                var Button = QUI.Controls.getById(CloseButton.get('data-quiid'));
+                var Form   = Container.getElement('form');
+
+                var Left  = Form.elements.left;
+                var Right = Form.elements.right;
+                var Image = Form.elements.image;
 
                 Button.addEvent('click', function () {
-                    this.edit(index, {
-                        image: Image.value,
-                        title: Title.value,
-                        text : Description.value,
-                        type : Type.value
-                    });
+                    this.edit(index, Left.value, Right.value, Image.value);
 
                     moofx(Container).animate({
                         opacity: 0,
@@ -489,13 +413,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     });
                 }.bind(this));
 
-                Image.value       = data.image;
-                Title.value       = data.title;
-                Description.value = data.text;
-                Type.value        = data.type;
+                Left.value  = data.left;
+                Right.value = data.right;
+                Image.value = data.image;
 
                 Image.fireEvent('change');
-                Description.fireEvent('change');
             }.bind(this));
         },
 
@@ -530,9 +452,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
         },
 
         /**
-         * opens the add dialog
          *
-         * @return {Promise}
+         * @returns {Promise}
          */
         $openAddDialog: function () {
             return this.$createDialog().then(function (Container) {
@@ -545,17 +466,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 Button.addEvent('click', function () {
                     var Form = Container.getElement('form');
 
-                    var Image       = Form.elements.image;
-                    var Title       = Form.elements.title;
-                    var Description = Form.elements.description;
-                    var Type        = Form.elements.type;
+                    var Left  = Form.elements.left;
+                    var Right = Form.elements.right;
+                    var Image = Form.elements.image;
 
-                    this.add({
-                        image: Image.value,
-                        title: Title.value,
-                        text : Description.value,
-                        type : Type.value
-                    });
+                    this.add(Left.value, Right.value, Image.value);
 
                     moofx(Container).animate({
                         opacity: 0,
@@ -579,10 +494,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             return new Promise(function (resolve) {
                 var Container = new Element('div', {
                     html   : Mustache.render(templateEntry, {
-                        fieldImage      : QUILocale.get(lg, 'quiqqer.products.control.create.image'),
-                        fieldTitle      : QUILocale.get(lg, 'quiqqer.products.control.create.title'),
-                        fieldDescription: QUILocale.get(lg, 'quiqqer.products.control.create.text'),
-                        fieldType       : QUILocale.get(lg, 'quiqqer.products.control.create.align')
+                        fieldLeft : QUILocale.get(lg, 'quiqqer.products.control.promoslider.left'),
+                        fieldRight: QUILocale.get(lg, 'quiqqer.products.control.promoslider.right')
                     }),
                     'class': 'quiqqer-bricks-promoslider-settings-entry'
                 }).inject(this.getElm());

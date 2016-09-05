@@ -127,6 +127,7 @@ class AbstractPromoslider extends QUI\Control
     }
 
     /**
+     * Parse slide params and add the slide
      *
      * @param mixed $slides
      * @param string $type

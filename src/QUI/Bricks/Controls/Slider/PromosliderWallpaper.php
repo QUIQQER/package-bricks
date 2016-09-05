@@ -34,7 +34,8 @@ class PromosliderWallpaper extends AbstractPromoslider
             'shownavigation' => false,
             'attachment'     => false,
             'autostart'      => false,
-            'delay'          => 5000
+            'delay'          => 5000,
+            'template'       => dirname(__FILE__) . '/PromosliderWallpaper.html'
         ));
 
         $this->addCSSFile(
@@ -198,6 +199,6 @@ class PromosliderWallpaper extends AbstractPromoslider
             'Utils'         => new Utils()
         ));
 
-        return $Engine->fetch(dirname(__FILE__) . '/PromosliderWallpaper.html');
+        return $Engine->fetch($this->getAttribute('template'));
     }
 }

@@ -10,37 +10,22 @@
                 {assign var=extraStyle value="display: none;"}
             {/if}
 
-            {if $slide.pos == 'quiqqer-bricks-promoslider-slide-right'}
-                {assign var=extraClass value=" quiqqer-bricks-promoslider-wallpaper-text__right"}
-            {/if}
-
             <div class="quiqqer-bricks-promoslider-wallpaper-image"
                  style="{$extraStyle}background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
-            >&nbsp;</div>
+            >&nbsp</div>
 
-            {if $slide.title != '' || $slide.text != ''}
             <div class="grid-container">
-                <div class="quiqqer-bricks-promoslider-wallpaper-text{$extraClass}">
-                    {if $Utils->isImage($slide.title) || $slide.title != ''}
-                    <header>
-                        {if $Utils->isImage($slide.title)}
-                        {image image=$slide.title}
-                        {else}
-                        {$slide.title}
-                        {/if}
-                    </header>
+                <div class="quiqqer-bricks-promoslider-wallpaper2Content-left">
+                    {if isset($slide.left)}
+                    {$slide.left}
                     {/if}
-
-                    {if $slide.text != ''}
-                    <div class="quiqqer-bricks-promoslider-wallpaper-text-description">
-                        {$slide.text}
-                    </div>
+                </div>
+                <div class="quiqqer-bricks-promoslider-wallpaper2Content-right">
+                    {if isset($slide.right)}
+                    {$slide.right}
                     {/if}
                 </div>
             </div>
-            {/if}
-
-            &nbsp;
         </li>
         {/foreach}
     </ul>

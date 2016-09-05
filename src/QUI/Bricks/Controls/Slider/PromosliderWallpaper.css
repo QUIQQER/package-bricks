@@ -9,7 +9,7 @@
 .quiqqer-bricks-promoslider-wallpaper-container {
     left: 0;
     float: left;
-    height: calc(100% + 20px);
+    height: 100%;
     overflow: hidden;
     position: absolute;
     transform: translate3d(0, 0, 0);
@@ -38,6 +38,7 @@
     float: none;
     height: 100%;
     margin: 0 !important;
+    overflow: hidden;
     padding: 0 !important;
     position: relative;
     width: 100%;

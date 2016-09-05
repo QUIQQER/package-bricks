@@ -294,6 +294,10 @@
             <de><![CDATA[Bausteine: Promoslider Wallpaper]]></de>
             <en><![CDATA[Bricks: Promoslider Wallpaper]]></en>
         </locale>
+        <locale name="brick.control.promosliderWallpaper2Content.title">
+            <de><![CDATA[Bausteine: Promoslider Wallpaper mit 2 Inhaltsbereichen]]></de>
+            <en><![CDATA[Bricks: Promoslider Wallpaper with two content areas]]></en>
+        </locale>
         <locale name="brick.control.promoslider.title">
             <de><![CDATA[Bausteine: Promoslider]]></de>
             <en><![CDATA[Bricks: Promoslider]]></en>
@@ -592,6 +596,15 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="quiqqer.products.control.slidesettings.type">
             <de><![CDATA[Ausrichtung]]></de>
             <en><![CDATA[Alignment]]></en>
+        </locale>
+
+        <locale name="quiqqer.products.control.promoslider.left">
+            <de><![CDATA[Linker Inhaltsbereich]]></de>
+            <en><![CDATA[Left content]]></en>
+        </locale>
+        <locale name="quiqqer.products.control.promoslider.right">
+            <de><![CDATA[Rechter Inhaltsbereich]]></de>
+            <en><![CDATA[Right content]]></en>
         </locale>
 
         <locale name="quiqqer.products.control.delete.title">
