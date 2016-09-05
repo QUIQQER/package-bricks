@@ -277,16 +277,6 @@
                     </option>
                 </setting>
 
-                <setting type="select" name="attachment">
-                    <locale group="quiqqer/bricks" var="brick.control.promoslider.image-wallpaper-attachment"/>
-
-                    <option value=""/>
-                    <option value="fixed">
-                        <locale group="quiqqer/bricks"
-                                var="brick.control.promoslider.image-wallpaper-attachment.fixed"/>
-                    </option>
-                </setting>
-
                 <setting type="select" name="navigation-position">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.navigation-position"/>
 
@@ -370,16 +360,6 @@
                     </option>
                     <option value="bottom-right">
                         <locale group="quiqqer/system" var="watermark.position.bottom.right"/>
-                    </option>
-                </setting>
-
-                <setting type="select" name="attachment">
-                    <locale group="quiqqer/bricks" var="brick.control.promoslider.image-wallpaper-attachment"/>
-
-                    <option value=""/>
-                    <option value="fixed">
-                        <locale group="quiqqer/bricks"
-                                var="brick.control.promoslider.image-wallpaper-attachment.fixed"/>
                     </option>
                 </setting>
 
