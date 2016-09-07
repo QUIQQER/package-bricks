@@ -41,6 +41,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
             this.$scrollLength = null;
             this.$scrollMax    = 0;
             this.$mobile       = true;
+            this.$icons        = null;
 
             this.addEvents({
                 onImport: this.$onImport
@@ -67,6 +68,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
 
             this.$scrollLength = (size.x / 1.2).round();
             this.$scrollMax    = this.$Inner.getScrollSize().x - size.x;
+            this.$icons.setStyle('line-height', size.y);
         },
 
         /**
@@ -109,6 +111,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
             );
 
             this.$SlideFX = new Fx.Scroll(this.$Inner);
+            this.$icons   = Elm.getElements('article a .quiqqer-icon');
 
             var scrollSpy = QUIFunctionUtils.debounce(this.$onScroll, 200);
 
@@ -121,6 +124,12 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
 
             // calc scrolling vars
             this.resize();
+
+            moofx(this.$icons).animate({
+                opacity: 1
+            }, {
+                duration: 200
+            });
         },
 
         /**

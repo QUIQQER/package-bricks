@@ -55,6 +55,13 @@
     display: block;
 }
 
+.quiqqer-bricks-children-slider-child .quiqqer-icon {
+    font-size: 40px;
+    height: 100%;
+    opacity: 0;
+    padding: 0 20px;
+}
+
 .quiqqer-bricks-children-slider-child-display img {
     transition: all 1s ease;
     -webkit-transition: all 1s ease;
