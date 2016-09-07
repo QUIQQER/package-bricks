@@ -110,7 +110,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             // dragable scroll
             var startScroll    = 0,
                 lastScrollLeft = 0,
-                lastClientX    = 0;
+                lastClientX    = 0,
+                musewheelRuns  = false;
 
             this.$Container.addEvents({
                 touchstart: function (event) {
@@ -151,6 +152,35 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 mousedown: function (event) {
                     this.$Container.fireEvent('touchstart', [event]);
                     event.stop();
+                }.bind(this),
+
+                mousewheel: function (event) {
+                    if (musewheelRuns) {
+                        return;
+                    }
+
+                    if (event.event.wheelDeltaX <= -10) {
+                        musewheelRuns = true;
+                        event.stop();
+                        this.$scrollOnMouseMove = false;
+                        this.$scrolling         = true;
+                        this.stop();
+                        this.next().then(function () {
+                            musewheelRuns = false;
+                        });
+                    }
+
+                    if (event.event.wheelDeltaX >= 10) {
+                        musewheelRuns = true;
+
+                        event.stop();
+                        this.$scrollOnMouseMove = false;
+                        this.$scrolling         = true;
+                        this.stop();
+                        this.previous().then(function () {
+                            musewheelRuns = false;
+                        });
+                    }
                 }.bind(this),
 
                 keyup: function (event) {
