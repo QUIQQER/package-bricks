@@ -330,6 +330,18 @@
             <de><![CDATA[festgesetzt]]></de>
             <en><![CDATA[fixed]]></en>
         </locale>
+        <locale name="brick.control.promoslider.image-wallpaper-size">
+            <de><![CDATA[Wallpaper-Größe]]></de>
+            <en><![CDATA[Wallpaper size]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.image-wallpaper-size.cover">
+            <de><![CDATA[Vollständig abdecken]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="brick.control.promoslider.image-wallpaper-size.contain">
+            <de><![CDATA[Vollständig sichtbar]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
         <locale name="brick.control.promoslider.settings">
             <de><![CDATA[Slide Einstellungen]]></de>
             <en><![CDATA[Slide settings]]></en>

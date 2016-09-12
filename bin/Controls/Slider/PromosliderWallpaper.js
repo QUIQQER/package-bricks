@@ -26,15 +26,17 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             '$checkdotPosition',
             'next',
             'previous',
-            'show'
+            'show',
+            '$onWindowResize'
         ],
 
         options: {
-            delay         : 5000,
             autostart     : true,
+            delay         : 5000,
             shownavigation: true,
             shownarrows   : true,
 
+            height          : false,
             pagefit         : false,
             pagefitcut      : 0,
             pagefitcutmobile: 0
@@ -59,26 +61,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             this.$orientation       = false; // landscape / portrait
 
             this.addEvents({
-                onImport: this.$onImport
+                onImport : this.$onImport,
+                onDestroy: function () {
+                    QUI.removeEvent('resize', this.$onWindowResize);
+                }.bind(this)
             });
 
-            QUI.addEvent('resize', function () {
-                if (this.getElm()) {
-                    var oldMobileStatus = this.$mobile;
-
-                    this.$width  = this.getElm().getSize().x;
-                    this.$mobile = (QUI.getWindowSize().x <= 768);
-
-                    if (oldMobileStatus != this.$mobile) {
-                        // mobile desktop switched
-                        this.$setCurrentSlideList();
-                        this.$refreshDots();
-                    }
-
-                    this.$calcMaxScroll();
-                    this.onResize();
-                }
-            }.bind(this));
+            QUI.addEvent('resize', this.$onWindowResize);
         },
 
         /**
@@ -260,7 +249,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                     // next
                     this.show(currentSlide + 1);
-
                 }.bind(this),
 
                 touchmove: function (event) {
@@ -305,21 +293,25 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             });
 
             // navigation
-            this.$Next.addEvent('click', function (event) {
-                event.stop();
-                this.$scrollOnMouseMove = false;
-                this.$scrolling         = true;
-                this.stop();
-                this.next();
-            }.bind(this));
+            if (this.$Next) {
+                this.$Next.addEvent('click', function (event) {
+                    event.stop();
+                    this.$scrollOnMouseMove = false;
+                    this.$scrolling         = true;
+                    this.stop();
+                    this.next();
+                }.bind(this));
+            }
 
-            this.$Previous.addEvent('click', function (event) {
-                event.stop();
-                this.$scrollOnMouseMove = false;
-                this.$scrolling         = true;
-                this.stop();
-                this.previous();
-            }.bind(this));
+            if (this.$Previous) {
+                this.$Previous.addEvent('click', function (event) {
+                    event.stop();
+                    this.$scrollOnMouseMove = false;
+                    this.$scrolling         = true;
+                    this.stop();
+                    this.previous();
+                }.bind(this));
+            }
 
             this.onResize();
 
@@ -336,6 +328,29 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             if (this.getAttribute('autostart')) {
                 this.start();
             }
+        },
+
+        /**
+         * event : on window resize
+         */
+        $onWindowResize: function () {
+            if (!this.getElm()) {
+                return;
+            }
+
+            var oldMobileStatus = this.$mobile;
+
+            this.$width  = this.getElm().getSize().x;
+            this.$mobile = (QUI.getWindowSize().x <= 768);
+
+            if (oldMobileStatus != this.$mobile) {
+                // mobile desktop switched
+                this.$setCurrentSlideList();
+                this.$refreshDots();
+            }
+
+            this.$calcMaxScroll();
+            this.onResize();
         },
 
         /**
@@ -356,6 +371,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 }
 
                 this.$Elm.setStyle('height', winSize.y - pagefit);
+            } else if (this.getAttribute('height')) {
+                this.$Elm.setStyle('height', this.getAttribute('height'));
             }
 
             this.$orientation = newOritentation;
@@ -383,7 +400,18 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                 this.show(Math.round(next / this.$width)).then(resolve);
             }.bind(this));
-        },
+        }
+        ,
+
+        /**
+         * Return the slides - li domnodes
+         *
+         * @returns {Array}
+         */
+        getSlides: function () {
+            return this.$List.getElements('li');
+        }
+        ,
 
         /**
          * Start the autoslide
@@ -391,7 +419,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
         start: function () {
             this.stop();
             this.$Timer = (this.next).periodical(this.getAttribute('delay'));
-        },
+        }
+        ,
 
         /**
          * stop the autoslide
@@ -400,7 +429,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             if (this.$Timer) {
                 clearInterval(this.$Timer);
             }
-        },
+        }
+        ,
 
         /**
          * Shows the next slide
@@ -415,7 +445,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             );
 
             return this.show(slideNo);
-        },
+        }
+        ,
 
         /**
          * Shows the previous slide
@@ -430,7 +461,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             );
 
             return this.show(slideNo);
-        },
+        }
+        ,
 
         /**
          * Show a specific slide
@@ -494,7 +526,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 }).delay(duration, this);
 
             }.bind(this));
-        },
+        }
+        ,
 
         /**
          * shows the correct dot
@@ -504,7 +537,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             var count = Math.round(left / this.$width);
             var Dot   = this.$Dots.getElement(':nth-child(' + (count + 1) + ')');
 
-            if (Dot.hasClass('quiqqer-bricks-promoslider-wallpaper-dot-active')) {
+            if (!Dot || Dot.hasClass('quiqqer-bricks-promoslider-wallpaper-dot-active')) {
                 return;
             }
 
@@ -513,7 +546,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 .removeClass('quiqqer-bricks-promoslider-wallpaper-dot-active');
 
             Dot.addClass('quiqqer-bricks-promoslider-wallpaper-dot-active');
-        },
+        }
+        ,
 
         /**
          * looks if the sheet is visible and the background is loaded
@@ -544,7 +578,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                     opacity: 1
                 });
             });
-        },
+        }
+        ,
 
         /**
          * Return the position of the list
@@ -565,7 +600,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             transform = transform.replace('translate3d(', '').split(',');
 
             return parseInt(transform[0]);
-        },
+        }
+        ,
 
         /**
          * calculat the max scroll
@@ -574,8 +610,15 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             var liList = this.$List.getElements('li');
 
             this.$childrenCount = liList.length;
-            this.$maxScroll     = liList[liList.length - 1].getPosition(this.$List).x;
-        },
+
+            if (!liList.length) {
+                this.$maxScroll = 0;
+                return;
+            }
+
+            this.$maxScroll = liList[liList.length - 1].getPosition(this.$List).x;
+        }
+        ,
 
         /**
          * Return the current orientation
@@ -586,7 +629,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             var size = QUI.getWindowSize();
 
             return size.x > size.y ? 'landscape' : 'portrait';
-        },
+        }
+        ,
 
         /**
          * Return the current ul list, mobile  or desktop list
@@ -603,7 +647,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             }
 
             return this.$List;
-        },
+        }
+        ,
 
         /**
          * Refresh the dot display

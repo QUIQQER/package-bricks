@@ -177,6 +177,10 @@
 /** Wallpaper classes
  ================================================ */
 
+.quiqqer-bricks-promoslider-wallpaper__contain .quiqqer-bricks-promoslider-wallpaper-image {
+    background-size: contain;
+}
+
 .quiqqer-bricks-promoslider-wallpaper__top .quiqqer-bricks-promoslider-wallpaper-image {
     background-position: top center;
 }

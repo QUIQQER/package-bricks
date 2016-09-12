@@ -185,6 +185,17 @@ class PromosliderWallpaper extends AbstractPromoslider
             }
         }
 
+        // wallpaper background site
+        if ($this->getAttribute('size')) {
+            switch ($this->getAttribute('size')) {
+                case 'contain':
+                    $this->addCSSClass(
+                        'quiqqer-bricks-promoslider-wallpaper__contain'
+                    );
+                    break;
+            }
+        }
+
         if ($this->getAttribute('navigation-position')) {
             $this->setAttribute(
                 'data-qui-options-navigation-position',

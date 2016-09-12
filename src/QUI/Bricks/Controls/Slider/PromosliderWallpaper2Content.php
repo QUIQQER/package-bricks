@@ -47,16 +47,15 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
         $this->addCSSClass('quiqqer-bricks-promoslider-wallpaper');
     }
 
-
     /**
      * Add a slide for the desktop view
      *
      * @param string $image - image.php URL to an image
-     * @param string $left - Left text
-     * @param string $right - Right text
-     * @param string|bool $type - not exists, but we are from PromosliderWallpaper and AbstractPromoslider
+     * @param string $left - optional, left text
+     * @param string $right - optional, right text
+     * @param string|bool $type - optional, not exists, but we are from PromosliderWallpaper and AbstractPromoslider
      */
-    public function addSlide($image, $left, $right, $type = false)
+    public function addSlide($image, $left = '', $right = '', $type = false)
     {
         $this->desktopSlides[] = $this->checkSlideParams($image, $left, $right);
     }
@@ -65,10 +64,10 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * Add a slide for the mobile view
      *
      * @param string $image - image.php URL to an image
-     * @param string $left - Left text
-     * @param string $right - Right text
+     * @param string $left - optional, left text
+     * @param string $right - optional, right text
      */
-    public function addMobileSlide($image, $left, $right)
+    public function addMobileSlide($image, $left = '', $right = '')
     {
         $this->mobileSlides[] = $this->checkSlideParams($image, $left, $right);
     }
