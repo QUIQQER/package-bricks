@@ -6,6 +6,7 @@
     float: left;
     padding: 20px 0;
     width: 50%;
+    white-space: normal;
 }
 
 @media screen and (max-width: 768px) {
