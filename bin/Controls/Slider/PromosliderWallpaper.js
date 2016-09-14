@@ -400,8 +400,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                 this.show(Math.round(next / this.$width)).then(resolve);
             }.bind(this));
-        }
-        ,
+        },
 
         /**
          * Return the slides - li domnodes
@@ -410,8 +409,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
          */
         getSlides: function () {
             return this.$List.getElements('li');
-        }
-        ,
+        },
 
         /**
          * Start the autoslide
@@ -419,8 +417,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
         start: function () {
             this.stop();
             this.$Timer = (this.next).periodical(this.getAttribute('delay'));
-        }
-        ,
+        },
 
         /**
          * stop the autoslide
@@ -429,8 +426,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             if (this.$Timer) {
                 clearInterval(this.$Timer);
             }
-        }
-        ,
+        },
 
         /**
          * Shows the next slide
@@ -445,8 +441,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             );
 
             return this.show(slideNo);
-        }
-        ,
+        },
 
         /**
          * Shows the previous slide
@@ -461,8 +456,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             );
 
             return this.show(slideNo);
-        }
-        ,
+        },
 
         /**
          * Show a specific slide
@@ -526,8 +520,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 }).delay(duration, this);
 
             }.bind(this));
-        }
-        ,
+        },
 
         /**
          * shows the correct dot
@@ -546,8 +539,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 .removeClass('quiqqer-bricks-promoslider-wallpaper-dot-active');
 
             Dot.addClass('quiqqer-bricks-promoslider-wallpaper-dot-active');
-        }
-        ,
+        },
 
         /**
          * looks if the sheet is visible and the background is loaded
@@ -578,8 +570,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                     opacity: 1
                 });
             });
-        }
-        ,
+        },
 
         /**
          * Return the position of the list
@@ -600,8 +591,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             transform = transform.replace('translate3d(', '').split(',');
 
             return parseInt(transform[0]);
-        }
-        ,
+        },
 
         /**
          * calculat the max scroll
@@ -617,8 +607,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             }
 
             this.$maxScroll = liList[liList.length - 1].getPosition(this.$List).x;
-        }
-        ,
+        },
 
         /**
          * Return the current orientation
@@ -629,8 +618,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             var size = QUI.getWindowSize();
 
             return size.x > size.y ? 'landscape' : 'portrait';
-        }
-        ,
+        },
 
         /**
          * Return the current ul list, mobile  or desktop list
@@ -647,8 +635,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             }
 
             return this.$List;
-        }
-        ,
+        },
 
         /**
          * Refresh the dot display

@@ -125,6 +125,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
             // calc scrolling vars
             this.resize();
 
+            if (!this.$icons || !this.$icons.length) {
+                return;
+            }
+
             moofx(this.$icons).animate({
                 opacity: 1
             }, {
