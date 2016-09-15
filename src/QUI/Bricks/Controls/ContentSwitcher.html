@@ -20,7 +20,7 @@
             {image src=$entry.img class="content-switcher-image-img"}
         {/if}
     </div>
-    <div class="page-content content-switcher-content content-switcher-content-not-full
+    <div class="content-switcher-content content-switcher-content-not-full
                 {if $modKey && $modKey % 2 !== 0 }pull-50 mobile-pull-100
                 pull-custom pull-custom-mobile{/if}">
         <h2>{$entry.title}</h2>
@@ -38,7 +38,7 @@
         {/if}
     </div>
 
-    <div class="page-content content-switcher-content {if $modKey && $modKey % 2 == 0 }pull-50 mobile-pull-100
+    <div class="content-switcher-content {if $modKey && $modKey % 2 == 0 }pull-50 mobile-pull-100
                 pull-custom{/if}">
         <h2>{$entry.title}</h2>
         <p>{$entry.content}</p>
