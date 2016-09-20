@@ -1,29 +1,31 @@
 {if count($children)}
-<div data-row="{$row}" class="quiqqer-bricks-children-infinite-row">
-    {foreach from=$children item=Child}
-    <div class="{$gridClass} mobile-grid-50 quiqqer-bricks-children-infinite-child">
-        <article class="quiqqer-bricks-children-infinite-child-display">
-            {assign var=attrTitle value=$Child->getAttribute('title')|escape:"html"}
-            <a href="{url site=$Child rewrited=true}" title="{$attrTitle}">
-                {assign var=hasImage value=0}
-                {if $Child->getAttribute('image_site')}
-                    {assign var=hasImage value=1}
-                {/if}
+<div class="grid-children">
+    <div data-row="{$row}" class="grid-children-container quiqqer-bricks-children-infinite-row">
+        {foreach from=$children item=Child}
+        <div class="{$gridClass} mobile-grid-50 quiqqer-bricks-children-infinite-child">
+            <article class="quiqqer-bricks-children-infinite-child-display">
+                {assign var=attrTitle value=$Child->getAttribute('title')|escape:"html"}
+                <a href="{url site=$Child rewrited=true}" title="{$attrTitle}">
+                    {assign var=hasImage value=0}
+                    {if $Child->getAttribute('image_site')}
+                        {assign var=hasImage value=1}
+                    {/if}
 
-                <header>
-                    {$Child->getAttribute('title')}
-                </header>
+                    <header>
+                        {$Child->getAttribute('title')}
+                    </header>
 
-                {if $Child->getAttribute('image_site')}
-                    {image src=$Child->getAttribute('image_site')
-                        style="width: 100%; height: auto;"
-                        maxwidth="280"}
-                {else}
-                    <img src="{$Child->getProject()->getMedia()->getPlaceholder()}" style="width: 100%; height: auto;" />
-                {/if}
-            </a>
-        </article>
+                    {if $Child->getAttribute('image_site')}
+                        {image src=$Child->getAttribute('image_site')
+                            style="width: 100%; height: auto;"
+                            maxwidth="280"}
+                    {else}
+                        <img src="{$Child->getProject()->getMedia()->getPlaceholder()}" style="width: 100%; height: auto;" />
+                    {/if}
+                </a>
+            </article>
+        </div>
+        {/foreach}
     </div>
-    {/foreach}
 </div>
 {/if}
