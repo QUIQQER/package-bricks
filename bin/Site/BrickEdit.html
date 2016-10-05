@@ -17,14 +17,18 @@
         {if isset($params.customfields)}
         {foreach $params.customfields as $key => $field}
 
-        {foreach $params.availableSettings as $setting}
+            {foreach $params.availableSettings as $setting}
             {if $setting.name == $field}
             <tr class="{cycle values="even,odd"}">
                 <td>
                     <label for="{$setting.name}">
-                        {assign var=group value=$setting.text.0}
-                        {assign var=val value=$setting.text.1}
-                        {locale group=$group var=$val}
+                        {if isset($setting.text.0) && isset($setting.text.1)}
+                            {assign var=group value=$setting.text.0}
+                            {assign var=val value=$setting.text.1}
+                            {locale group=$group var=$val}
+                        {else}
+                            {$setting.text}
+                        {/if}
                     </label>
                 </td>
                 <td>
@@ -34,7 +38,13 @@
                     >
                         {foreach $setting.options as $option}
                         <option value="{$option.value}">
-                            {locale group=$option.text.0 value=$option.text.1}
+                            {if isset($option.text.0) && isset($option.text.1)}
+                                {locale group=$option.text.0 value=$option.text.1}
+                            {elseif isset($option.text)}
+                                {$option.text}
+                            {else}
+                                ---
+                            {/if}
                         </option>
                         {/foreach}
                     </select>
