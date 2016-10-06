@@ -40,6 +40,16 @@
     -webkit-transition: all 2s ease;
 }
 
+.quiqqer-bricks-children-infinite-child-display .quiqqer-icon {
+    align-items: center;
+    display: flex;
+    font-size: 80px;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+    top: -10%;
+}
+
 .quiqqer-bricks-children-infinite .button {
     clear: both;
     display: block;
