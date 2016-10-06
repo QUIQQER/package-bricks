@@ -15,15 +15,15 @@ QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_contact',
     function ($brickId, $project, $siteId, $message, $email, $name) {
         $BrickManager = QUI\Bricks\Manager::init();
-        $Brick = $BrickManager->getBrickByID($brickId);
-        $Project = QUI::getProjectManager()->decode($project);
-        $Site = $Project->get((int)$siteId);
+        $Brick        = $BrickManager->getBrickByID($brickId);
+        $Project      = QUI::getProjectManager()->decode($project);
+        $Site         = $Project->get((int)$siteId);
 
         $Mailer = QUI::getMailManager()->getMailer();
 
         $Mailer->addRecipient($Brick->getSetting('mailTo'));
         $Mailer->addReplyTo($email);
-        $Mailer->setSubject($Site->getAttribute('title') .' '. $Site->getUrlRewritten());
+        $Mailer->setSubject($Site->getAttribute('title') . ' ' . $Site->getUrlRewritten());
 
         $Mailer->setBody("
 
@@ -34,12 +34,15 @@ QUI::$Ajax->registerFunction(
             </div>
         ");
 
-        $Mailer->send();
+        try {
+            $Mailer->send();
+        } catch (\Exception $Exception) {
+            throw new QUI\Exception(
+                $Exception->getMessage(),
+                $Exception->getCode()
+            );
+        }
     },
     array('brickId', 'project', 'siteId', 'message', 'email', 'name'),
     false
 );
-
-
-
-
