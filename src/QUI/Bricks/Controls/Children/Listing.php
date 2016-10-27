@@ -56,6 +56,5 @@ class Listing extends QUI\Control
         $Control->setAttribute('order', $this->getAttribute('order'));
 
         return $Control->create();
-
     }
 }
