@@ -809,5 +809,93 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Bild auswählen]]></de>
             <en><![CDATA[Select image]]></en>
         </locale>
+
+        <!-- sites listing -->
+        <locale name="news.control.list.title">
+            <de><![CDATA[Newsliste]]></de>
+            <en><![CDATA[News list]]></en>
+            <pl><![CDATA[Lista newsów]]></pl>
+        </locale>
+        <locale name="news.control.list.description">
+            <de><![CDATA[Stellt eine Liste mit Neuigkeiten dar, die man als Baustein überall
+                        platzieren kan.]]></de>
+            <en><![CDATA[List of the latest news]]></en>
+            <pl><![CDATA[Lista newsów, która może być wykorzystana do wyświetlenia ostatnich wpisów.]]></pl>
+        </locale>
+
+        <locale name="news.template">
+            <de><![CDATA[Layout]]></de>
+            <en><![CDATA[Layout]]></en>
+            <pl><![CDATA[Layout]]></pl>
+        </locale>
+        <locale name="news.standard">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Standard]]></en>
+            <pl><![CDATA[Standardowy]]></pl>
+        </locale>
+        <locale name="news.border">
+            <de><![CDATA[Mit Rahmen]]></de>
+            <en><![CDATA[Border]]></en>
+            <pl><![CDATA[Z ramką]]></pl>
+        </locale>
+        <locale name="news.simpleArticleList">
+            <de><![CDATA[Einfache Artikel-Liste]]></de>
+            <en><![CDATA[Simple article list]]></en>
+            <pl><![CDATA[Prosta lista artykułów]]></pl>
+        </locale>
+        <locale name="news.advancedArticleList">
+            <de><![CDATA[Erweiterte Artikel-Liste]]></de>
+            <en><![CDATA[Advanced article list]]></en>
+            <pl><![CDATA[Rozszerzona lista artykulów]]></pl>
+        </locale>
+
+        <!-- max news -->
+        <locale name="news.max">
+            <de><![CDATA[Anzahl Neuigkeiten pro Seite]]></de>
+            <en><![CDATA[Number of news posts per page]]></en>
+            <pl><![CDATA[Ile wpisów pokazać?]]></pl>
+        </locale>
+
+        <!-- show short -->
+        <locale name="news.showShort">
+            <de><![CDATA[Kurzbeschreibung anzeigen]]></de>
+            <en><![CDATA[Show short description]]></en>
+            <pl><![CDATA[Pokaż krótki opis newsa]]></pl>
+        </locale>
+
+        <!-- show creator -->
+        <locale name="news.showCreator">
+            <de><![CDATA[Author anzeigen]]></de>
+            <en><![CDATA[Show author]]></en>
+            <pl><![CDATA[Pokaż autora]]></pl>
+        </locale>
+
+        <!-- show date -->
+        <locale name="news.showDate">
+            <de><![CDATA[Datum anzeigen]]></de>
+            <en><![CDATA[Show date]]></en>
+            <pl><![CDATA[Pokaż datę publikacji]]></pl>
+        </locale>
+
+        <!-- show time -->
+        <locale name="news.showTime">
+            <de><![CDATA[Uhrzeit anzeigen]]></de>
+            <en><![CDATA[Show time]]></en>
+            <pl><![CDATA[Pokaż godzinę publikacji]]></pl>
+        </locale>
+
+        <!-- show time -->
+        <locale name="news.showImages">
+            <de><![CDATA[Bild anzeigen]]></de>
+            <en><![CDATA[Show image]]></en>
+            <pl><![CDATA[Pokaż zdjęcie artykułów]]></pl>
+        </locale>
+
+
+        <locale name="news.sectionTitle">
+            <de><![CDATA[Letzte News]]></de>
+            <en><![CDATA[Last News]]></en>
+            <pl><![CDATA[Ostatnie newsy]]></pl>
+        </locale>
     </groups>
 </locales>
