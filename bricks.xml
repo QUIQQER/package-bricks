@@ -927,7 +927,7 @@
                 </setting>
 
 
-                <setting name="bricks.template" type="select">
+                <setting name="template" type="select">
                     <locale group="quiqqer/bricks" var="bricks.template" />
                     <option value="standardList">
                         <locale group="quiqqer/bricks" var="bricks.standardList" />
@@ -943,34 +943,34 @@
                     </option>
                 </setting>
 
-                <setting name="bricks.max">
+                <setting name="max">
                     <defaoult>5</defaoult>
                     <locale group="quiqqer/bricks"
                             var="bricks.max"
                     />
                 </setting>
 
-                <setting name="bricks.showShort" type="checkbox">
+                <setting name="showShort" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="bricks.showShort" />
                 </setting>
 
-                <setting name="bricks.showCreator" type="checkbox">
+                <setting name="showCreator" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="bricks.showCreator" />
                 </setting>
 
-                <setting name="bricks.showDate" type="checkbox">
+                <setting name="showDate" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="bricks.showDate" />
                 </setting>
 
-                <setting name="bricks.showTime" type="checkbox">
+                <setting name="showTime" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="bricks.showTime" />
                 </setting>
 
-                <setting name="bricks.showImages" type="checkbox">
+                <setting name="showImages" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="bricks.showImages"
                     />

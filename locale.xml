@@ -811,88 +811,89 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
 
         <!-- sites listing -->
-        <locale name="news.control.list.title">
-            <de><![CDATA[Newsliste]]></de>
-            <en><![CDATA[News list]]></en>
-            <pl><![CDATA[Lista newsów]]></pl>
+        <locale name="bricks.list.title">
+            <de><![CDATA[Seitenliste]]></de>
+            <en><![CDATA[Site list]]></en>
+            <pl><![CDATA[Lista wpisów]]></pl>
         </locale>
-        <locale name="news.control.list.description">
-            <de><![CDATA[Stellt eine Liste mit Neuigkeiten dar, die man als Baustein überall
+        <locale name="bricks.list.description">
+            <de><![CDATA[Stellt eine Liste von Seiten dar, die man als Baustein überall
                         platzieren kan.]]></de>
-            <en><![CDATA[List of the latest news]]></en>
-            <pl><![CDATA[Lista newsów, która może być wykorzystana do wyświetlenia ostatnich wpisów.]]></pl>
+            <en><![CDATA[List of the sites, e.g. latest news]]></en>
+            <pl><![CDATA[Lista wybranych stron, która może być wykorzystana np.
+            do wyświetlenia ostatnich wpisów.]]></pl>
         </locale>
 
-        <locale name="news.template">
+        <locale name="bricks.template">
             <de><![CDATA[Layout]]></de>
             <en><![CDATA[Layout]]></en>
             <pl><![CDATA[Layout]]></pl>
         </locale>
-        <locale name="news.standard">
+        <locale name="bricks.standardList">
             <de><![CDATA[Standard]]></de>
             <en><![CDATA[Standard]]></en>
             <pl><![CDATA[Standardowy]]></pl>
         </locale>
-        <locale name="news.border">
+        <locale name="bricks.listWithBorder">
             <de><![CDATA[Mit Rahmen]]></de>
             <en><![CDATA[Border]]></en>
             <pl><![CDATA[Z ramką]]></pl>
         </locale>
-        <locale name="news.simpleArticleList">
+        <locale name="bricks.simpleArticleList">
             <de><![CDATA[Einfache Artikel-Liste]]></de>
             <en><![CDATA[Simple article list]]></en>
             <pl><![CDATA[Prosta lista artykułów]]></pl>
         </locale>
-        <locale name="news.advancedArticleList">
+        <locale name="bricks.advancedArticleList">
             <de><![CDATA[Erweiterte Artikel-Liste]]></de>
             <en><![CDATA[Advanced article list]]></en>
-            <pl><![CDATA[Rozszerzona lista artykulów]]></pl>
+            <pl><![CDATA[Rozszerzona lista wpisów]]></pl>
         </locale>
 
         <!-- max news -->
-        <locale name="news.max">
-            <de><![CDATA[Anzahl Neuigkeiten pro Seite]]></de>
-            <en><![CDATA[Number of news posts per page]]></en>
-            <pl><![CDATA[Ile wpisów pokazać?]]></pl>
+        <locale name="bricks.max">
+            <de><![CDATA[Anzahl der Seiten]]></de>
+            <en><![CDATA[Number of sites]]></en>
+            <pl><![CDATA[Liczba stron]]></pl>
         </locale>
 
         <!-- show short -->
-        <locale name="news.showShort">
+        <locale name="bricks.showShort">
             <de><![CDATA[Kurzbeschreibung anzeigen]]></de>
             <en><![CDATA[Show short description]]></en>
             <pl><![CDATA[Pokaż krótki opis newsa]]></pl>
         </locale>
 
         <!-- show creator -->
-        <locale name="news.showCreator">
+        <locale name="bricks.showCreator">
             <de><![CDATA[Author anzeigen]]></de>
             <en><![CDATA[Show author]]></en>
             <pl><![CDATA[Pokaż autora]]></pl>
         </locale>
 
         <!-- show date -->
-        <locale name="news.showDate">
+        <locale name="bricks.showDate">
             <de><![CDATA[Datum anzeigen]]></de>
             <en><![CDATA[Show date]]></en>
             <pl><![CDATA[Pokaż datę publikacji]]></pl>
         </locale>
 
         <!-- show time -->
-        <locale name="news.showTime">
+        <locale name="bricks.showTime">
             <de><![CDATA[Uhrzeit anzeigen]]></de>
             <en><![CDATA[Show time]]></en>
             <pl><![CDATA[Pokaż godzinę publikacji]]></pl>
         </locale>
 
         <!-- show time -->
-        <locale name="news.showImages">
+        <locale name="bricks.showImages">
             <de><![CDATA[Bild anzeigen]]></de>
             <en><![CDATA[Show image]]></en>
             <pl><![CDATA[Pokaż zdjęcie artykułów]]></pl>
         </locale>
 
 
-        <locale name="news.sectionTitle">
+        <locale name="bricks.sectionTitle">
             <de><![CDATA[Letzte News]]></de>
             <en><![CDATA[Last News]]></en>
             <pl><![CDATA[Ostatnie newsy]]></pl>

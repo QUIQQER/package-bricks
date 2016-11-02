@@ -23,7 +23,7 @@ class Listing extends QUI\Control
     {
         // default options
         $this->setAttributes(array(
-            'class'          => 'qui-control-list',
+            'class'          => 'qui-control-brick',
             'limit'          => 2,
             'showSheets'     => true,
             'showImages'     => true,
@@ -54,6 +54,13 @@ class Listing extends QUI\Control
         $Control = new QUI\Controls\ChildrenList();
         $Control->setAttribute('parentInputList', $this->getAttribute('site'));
         $Control->setAttribute('order', $this->getAttribute('order'));
+        $Control->setAttribute('display', $this->getAttribute('template'));
+        $Control->setAttribute('limit', $this->getAttribute('max'));
+        $Control->setAttribute('showShort', $this->getAttribute('showShort'));
+        $Control->setAttribute('showImages', $this->getAttribute('showImages'));
+        $Control->setAttribute('showTime', $this->getAttribute('showTime'));
+        $Control->setAttribute('showDate', $this->getAttribute('showDate'));
+        $Control->setAttribute('showCreator', $this->getAttribute('showCreator'));
 
         return $Control->create();
     }
