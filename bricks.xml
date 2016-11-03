@@ -878,10 +878,10 @@
         <!-- sites listing -->
         <brick control="\QUI\Bricks\Controls\Children\Listing">
             <title>
-                <locale group="quiqqer/bricks" var="bricks.control.list.aaaaaaaaaaaaaaa" />
+                <locale group="quiqqer/bricks" var="bricks.list.title" />
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="bricks.control.list.description" />
+                <locale group="quiqqer/bricks" var="bricks.list.description" />
             </description>
 
             <settings>

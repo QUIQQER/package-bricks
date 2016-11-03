@@ -61,6 +61,7 @@ class Listing extends QUI\Control
         $Control->setAttribute('showTime', $this->getAttribute('showTime'));
         $Control->setAttribute('showDate', $this->getAttribute('showDate'));
         $Control->setAttribute('showCreator', $this->getAttribute('showCreator'));
+        $Control->setAttribute('Site', false);
 
         return $Control->create();
     }
