@@ -849,6 +849,11 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Advanced article list]]></en>
             <pl><![CDATA[Rozszerzona lista wpisów]]></pl>
         </locale>
+        <locale name="bricks.template.icons">
+            <de><![CDATA[Icons]]></de>
+            <en><![CDATA[Icons]]></en>
+            <pl><![CDATA[Ikony]]></pl>
+        </locale>
 
         <!-- max news -->
         <locale name="bricks.max">

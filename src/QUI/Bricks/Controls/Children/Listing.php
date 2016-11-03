@@ -25,7 +25,7 @@ class Listing extends QUI\Control
         $this->setAttributes(array(
             'class'          => 'qui-control-brick',
             'limit'          => 2,
-            'showSheets'     => true,
+            'showSheets'     => false,
             'showImages'     => true,
             'showShort'      => true,
             'showHeader'     => true,
@@ -61,6 +61,8 @@ class Listing extends QUI\Control
         $Control->setAttribute('showTime', $this->getAttribute('showTime'));
         $Control->setAttribute('showDate', $this->getAttribute('showDate'));
         $Control->setAttribute('showCreator', $this->getAttribute('showCreator'));
+        $Control->setAttribute('showSheets', $this->getAttribute('showSheets'));
+        $Control->setAttribute('showTitle', $this->getAttribute('showTitle'));
         $Control->setAttribute('Site', false);
 
         return $Control->create();

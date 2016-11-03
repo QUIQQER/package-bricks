@@ -49,7 +49,7 @@ class Brick extends QUI\QDOM
     /**
      * Internal control
      *
-     * @var null
+     * @var null|QUI\Control
      */
     protected $Control = null;
 
@@ -69,15 +69,15 @@ class Brick extends QUI\QDOM
     {
         // default
         $default = array(
-            'type' => 'content',
-            'content' => '',
-            'title' => '',
+            'type'        => 'content',
+            'content'     => '',
+            'title'       => '',
             'description' => '',
-            'project' => '',
-            'areas' => '',
-            'height' => '',
-            'width' => '',
-            'classes' => ''
+            'project'     => '',
+            'areas'       => '',
+            'height'      => '',
+            'width'       => '',
+            'classes'     => ''
         );
 
         $this->setAttributes($default);
@@ -393,6 +393,10 @@ class Brick extends QUI\QDOM
     {
         if (isset($this->settings[$name])) {
             $this->settings[$name] = $value;
+        }
+
+        if ($this->Control && $this->Control instanceof QUI\Control) {
+            $this->Control->setAttribute($name, $value);
         }
     }
 

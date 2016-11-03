@@ -941,6 +941,9 @@
                     <option value="advancedArticleList">
                         <locale group="quiqqer/bricks" var="bricks.advancedArticleList" />
                     </option>
+                    <option value="icons">
+                        <locale group="quiqqer/bricks" var="bricks.template.icons" />
+                    </option>
                 </setting>
 
                 <setting name="max">
@@ -975,6 +978,11 @@
                             var="bricks.showImages"
                     />
                 </setting>
+
+                <!--<setting name="showSheets" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="bricks.showSheets" />
+                </setting>-->
 
                 <!--<input conf="quiqqer.settings.sitetypes.list.showSheets" type="checkbox">
                     <text>
