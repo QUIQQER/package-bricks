@@ -8,6 +8,12 @@
             <pl><![CDATA[Pełna szerokość]]></pl>
         </locale>
 
+        <locale name="brick.control.setting.site">
+            <de><![CDATA[Seiten hinzufügen]]></de>
+            <en><![CDATA[Add pages]]></en>
+            <pl><![CDATA[Dodaj strony]]></pl>
+        </locale>
+
         <locale name="permission.quiqqer.bricks._header">
             <de><![CDATA[Bausteine]]></de>
             <en><![CDATA[Bricks]]></en>
@@ -272,7 +278,9 @@
         <locale name="brick.control.setting.order">
             <de><![CDATA[Sortierung]]></de>
             <en><![CDATA[Sort]]></en>
+            <pl><![CDATA[Sortowanie]]></pl>
         </locale>
+
         <locale name="site.area.window.settings.setting.width">
             <de><![CDATA[Breite]]></de>
             <en><![CDATA[Width]]></en>
@@ -814,7 +822,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="bricks.list.title">
             <de><![CDATA[Seitenliste]]></de>
             <en><![CDATA[Site list]]></en>
-            <pl><![CDATA[Lista wpisów]]></pl>
+            <pl><![CDATA[Lista stron / wpisów]]></pl>
         </locale>
         <locale name="bricks.list.description">
             <de><![CDATA[Stellt eine Liste von Seiten dar, die man als Baustein überall
@@ -824,74 +832,91 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             do wyświetlenia ostatnich wpisów.]]></pl>
         </locale>
 
-        <locale name="bricks.template">
+        <!-- templates / layout -->
+        <locale name="brick.listTemplate">
             <de><![CDATA[Layout]]></de>
             <en><![CDATA[Layout]]></en>
             <pl><![CDATA[Layout]]></pl>
         </locale>
-        <locale name="bricks.standardList">
+        <locale name="brick.listTemplate.standardList">
+            <de><![CDATA[Standard (Sidebar)]]></de>
+            <en><![CDATA[Standard (sidebar)]]></en>
+            <pl><![CDATA[Standardowy (sidebar)]]></pl>
+        </locale>
+        <locale name="brick.listTemplate.listWithBorder">
+            <de><![CDATA[Mit Rahmen (Sidebar)]]></de>
+            <en><![CDATA[Border (sidebar)]]></en>
+            <pl><![CDATA[Z ramką (sidebar)]]></pl>
+        </locale>
+        <locale name="brick.listTemplate.simpleArticleList">
+            <de><![CDATA[Einfache Artikel-Liste (Sidebar)]]></de>
+            <en><![CDATA[Simple article list (sidebar)]]></en>
+            <pl><![CDATA[Prosta lista artykułów (sidebar)]]></pl>
+        </locale>
+        <locale name="brick.listTemplate.advancedArticleList">
+            <de><![CDATA[Erweiterte Artikel-Liste (Sidebar)]]></de>
+            <en><![CDATA[Advanced article list (sidebar)]]></en>
+            <pl><![CDATA[Rozszerzona lista wpisów (sidebar)]]></pl>
+        </locale>
+        <locale name="brick.listTemplate.childrenList">
             <de><![CDATA[Standard]]></de>
-            <en><![CDATA[Standard]]></en>
-            <pl><![CDATA[Standardowy]]></pl>
+            <en><![CDATA[Default]]></en>
+            <pl><![CDATA[Standardowy widok]]></pl>
         </locale>
-        <locale name="bricks.listWithBorder">
-            <de><![CDATA[Mit Rahmen]]></de>
-            <en><![CDATA[Border]]></en>
-            <pl><![CDATA[Z ramką]]></pl>
+        <locale name="brick.listTemplate.longFooter">
+            <de><![CDATA[Langes Footer]]></de>
+            <en><![CDATA[Long footer]]></en>
+            <pl><![CDATA[Długa stopka]]></pl>
         </locale>
-        <locale name="bricks.simpleArticleList">
-            <de><![CDATA[Einfache Artikel-Liste]]></de>
-            <en><![CDATA[Simple article list]]></en>
-            <pl><![CDATA[Prosta lista artykułów]]></pl>
+        <locale name="brick.listTemplate.authorTop">
+            <de><![CDATA[Autor und Datum oben]]></de>
+            <en><![CDATA[Author and date top]]></en>
+            <pl><![CDATA[Autor i data na górze]]></pl>
         </locale>
-        <locale name="bricks.advancedArticleList">
-            <de><![CDATA[Erweiterte Artikel-Liste]]></de>
-            <en><![CDATA[Advanced article list]]></en>
-            <pl><![CDATA[Rozszerzona lista wpisów]]></pl>
-        </locale>
-        <locale name="bricks.template.icons">
+        <locale name="brick.listTemplate.icons">
             <de><![CDATA[Icons]]></de>
             <en><![CDATA[Icons]]></en>
             <pl><![CDATA[Ikony]]></pl>
         </locale>
 
-        <!-- max news -->
-        <locale name="bricks.max">
+
+        <!-- max siten -->
+        <locale name="brick.max">
             <de><![CDATA[Anzahl der Seiten]]></de>
             <en><![CDATA[Number of sites]]></en>
             <pl><![CDATA[Liczba stron]]></pl>
         </locale>
 
         <!-- show short -->
-        <locale name="bricks.showShort">
+        <locale name="brick.showShort">
             <de><![CDATA[Kurzbeschreibung anzeigen]]></de>
             <en><![CDATA[Show short description]]></en>
             <pl><![CDATA[Pokaż krótki opis newsa]]></pl>
         </locale>
 
         <!-- show creator -->
-        <locale name="bricks.showCreator">
-            <de><![CDATA[Author anzeigen]]></de>
+        <locale name="brick.showCreator">
+            <de><![CDATA[Autor anzeigen]]></de>
             <en><![CDATA[Show author]]></en>
             <pl><![CDATA[Pokaż autora]]></pl>
         </locale>
 
         <!-- show date -->
-        <locale name="bricks.showDate">
+        <locale name="brick.showDate">
             <de><![CDATA[Datum anzeigen]]></de>
             <en><![CDATA[Show date]]></en>
             <pl><![CDATA[Pokaż datę publikacji]]></pl>
         </locale>
 
         <!-- show time -->
-        <locale name="bricks.showTime">
+        <locale name="brick.showTime">
             <de><![CDATA[Uhrzeit anzeigen]]></de>
             <en><![CDATA[Show time]]></en>
             <pl><![CDATA[Pokaż godzinę publikacji]]></pl>
         </locale>
 
-        <!-- show time -->
-        <locale name="bricks.showImages">
+        <!-- show images -->
+        <locale name="brick.showImages">
             <de><![CDATA[Bild anzeigen]]></de>
             <en><![CDATA[Show image]]></en>
             <pl><![CDATA[Pokaż zdjęcie artykułów]]></pl>

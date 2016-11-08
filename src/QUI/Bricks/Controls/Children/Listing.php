@@ -52,6 +52,7 @@ class Listing extends QUI\Control
     public function getBody()
     {
         $Control = new QUI\Controls\ChildrenList();
+
         $Control->setAttribute('parentInputList', $this->getAttribute('site'));
         $Control->setAttribute('order', $this->getAttribute('order'));
         $Control->setAttribute('display', $this->getAttribute('template'));
@@ -62,8 +63,13 @@ class Listing extends QUI\Control
         $Control->setAttribute('showDate', $this->getAttribute('showDate'));
         $Control->setAttribute('showCreator', $this->getAttribute('showCreator'));
         $Control->setAttribute('showSheets', $this->getAttribute('showSheets'));
-        $Control->setAttribute('showTitle', $this->getAttribute('showTitle'));
         $Control->setAttribute('Site', false);
+
+        $Control->setAttribute('showTitle', $this->getAttribute('showTitle'));
+        $Control->setAttribute('showBrickTitle', $this->getAttribute('showBrickTitle'));
+        $Control->setAttribute('title', $this->getAttribute('title'));
+        $Control->setAttribute('content', $this->getAttribute('content'));
+
 
         return $Control->create();
     }

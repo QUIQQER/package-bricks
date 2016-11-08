@@ -887,7 +887,7 @@
             <settings>
                 <!-- select site -->
                 <setting name="site" data-qui="controls/projects/project/site/Select">
-                    <locale group="quiqqer/bricks" var="brick.control.sidebox3.setting.site"/>
+                    <locale group="quiqqer/bricks" var="brick.control.setting.site"/>
                 </setting>
 
                 <!-- order -->
@@ -928,69 +928,66 @@
 
 
                 <setting name="template" type="select">
-                    <locale group="quiqqer/bricks" var="bricks.template" />
+                    <locale group="quiqqer/bricks" var="brick.listTemplate" />
                     <option value="standardList">
-                        <locale group="quiqqer/bricks" var="bricks.standardList" />
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.standardList" />
                     </option>
                     <option value="listWithBorder">
-                        <locale group="quiqqer/bricks" var="bricks.listWithBorder" />
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.listWithBorder" />
                     </option>
                     <option value="simpleArticleList">
-                        <locale group="quiqqer/bricks" var="bricks.simpleArticleList" />
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.simpleArticleList" />
                     </option>
                     <option value="advancedArticleList">
-                        <locale group="quiqqer/bricks" var="bricks.advancedArticleList" />
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.advancedArticleList" />
                     </option>
                     <option value="icons">
-                        <locale group="quiqqer/bricks" var="bricks.template.icons" />
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.icons" />
+                    </option>
+                    <option value="childrenList">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.childrenList" />
+                    </option>
+                    <option value="longFooter">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.longFooter" />
+                    </option>
+                    <option value="authorTop">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.authorTop" />
                     </option>
                 </setting>
 
-                <setting name="max">
+                <setting name="max" type="number">
                     <defaoult>5</defaoult>
                     <locale group="quiqqer/bricks"
-                            var="bricks.max"
+                            var="brick.max"
                     />
                 </setting>
 
                 <setting name="showShort" type="checkbox">
                     <locale group="quiqqer/bricks"
-                            var="bricks.showShort" />
+                            var="brick.showShort" />
                 </setting>
 
                 <setting name="showCreator" type="checkbox">
                     <locale group="quiqqer/bricks"
-                            var="bricks.showCreator" />
+                            var="brick.showCreator" />
                 </setting>
 
                 <setting name="showDate" type="checkbox">
                     <locale group="quiqqer/bricks"
-                            var="bricks.showDate" />
+                            var="brick.showDate" />
                 </setting>
 
                 <setting name="showTime" type="checkbox">
                     <locale group="quiqqer/bricks"
-                            var="bricks.showTime" />
+                            var="brick.showTime" />
                 </setting>
 
                 <setting name="showImages" type="checkbox">
                     <locale group="quiqqer/bricks"
-                            var="bricks.showImages"
+                            var="brick.showImages"
                     />
                 </setting>
 
-                <!--<setting name="showSheets" type="checkbox">
-                    <locale group="quiqqer/bricks"
-                            var="bricks.showSheets" />
-                </setting>-->
-
-                <!--<input conf="quiqqer.settings.sitetypes.list.showSheets" type="checkbox">
-                    <text>
-                        <locale group="quiqqer/sitetypes"
-                                var="quiqqer.sitetypes.list.settings.showSheets"
-                        />
-                    </text>
-                </input>-->
             </settings>
         </brick>
 
