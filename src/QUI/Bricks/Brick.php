@@ -304,7 +304,9 @@ class Brick extends QUI\QDOM
         }
 
         /* @var $Control \QUI\Control */
-        $Control = new $Ctrl($this->getSettings());
+        $Control = new $Ctrl(
+            array_merge($this->getSettings(), $this->getAttributes())
+        );
 
         $Control->setAttribute('height', $this->getAttribute('height'));
         $Control->setAttribute('width', $this->getAttribute('width'));
