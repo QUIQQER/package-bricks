@@ -1,5 +1,19 @@
 /**
+ * @module package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContent
+ * @author www.pcsg.de (Henning Leutz)
  *
+ * Wallpaper Slider mit zwei Inhaltsbereichen
+ *
+ * @require qui/QUI
+ * @require qui/controls/Control
+ * @require qui/controls/windows/Confirm
+ * @require qui/controls/buttons/Button
+ * @require Locale
+ * @require Mustache
+ * @require controls/grid/Grid
+ * @require utils/Controls
+ * @require text!package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContentEntry.html
+ * @require css!package/quiqqer/bricks/bin/Controls/Slider/PromoSliderSettings.css
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContent', [
 
