@@ -283,6 +283,25 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
         },
 
         /**
+         * Refresh the data sorting in dependence of the grid
+         */
+        $refreshSorting: function () {
+            var gridData = this.$Grid.getData(),
+                data     = [];
+
+            for (var i = 0, len = gridData.length; i < len; i++) {
+                data.push({
+                    image: gridData[i].image,
+                    left : gridData[i].left,
+                    right: gridData[i].right
+                });
+            }
+
+            this.$data = data;
+            this.update();
+        },
+
+        /**
          * Update the field
          */
         update: function () {
@@ -294,6 +313,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
          *
          * @param {string} [left] - left content
          * @param {string} [right] - right content
+         * @param {string} [image] - image
          */
         add: function (left, right, image) {
             this.$data.push({
