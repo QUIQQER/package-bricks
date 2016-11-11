@@ -251,7 +251,14 @@ class Brick extends QUI\QDOM
             $classesStr = implode($_classes, ' ');
             $classesStr = 'class="' . $classesStr . '"';
 
-            return "<div {$classesStr}>{$this->getAttribute('content')}</div>";
+            $Engine = QUI::getTemplateManager()->getEngine();
+
+            $Engine->assign(array(
+                'this'       => $this,
+                'classesStr' => $classesStr
+            ));
+
+            return $Engine->fetch(dirname(__FILE__) . '/Brick.html');
         }
 
         $Control = $this->getControl();
