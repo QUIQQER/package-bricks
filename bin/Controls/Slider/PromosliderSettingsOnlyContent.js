@@ -249,7 +249,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     imagePreview: new Element('span', {html: '&nbsp;'})
                 };
 
-                if ("image" in entry) {
+                if ("image" in entry && entry.image !== '') {
                     insert.image = entry.image;
 
                     insert.imagePreview = new Element('img', {
