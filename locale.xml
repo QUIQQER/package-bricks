@@ -190,7 +190,7 @@
             <pl><![CDATA[Nazwa]]></pl>
         </locale>
         <locale name="brick.edit.frontendTitle">
-            <de><![CDATA[Titel (frontend)]]></de>
+            <de><![CDATA[Titel (Frontend)]]></de>
             <en><![CDATA[Title (frontend)]]></en>
             <pl><![CDATA[Tytuł (frontend)]]></pl>
         </locale>
