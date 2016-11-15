@@ -62,27 +62,27 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         initialize: function (options) {
             this.parent(options);
 
-            this.$availableBricks   = [];
+            this.$availableBricks = [];
             this.$availableSettings = [];
-            this.$customfields      = [];
+            this.$customfields = [];
 
             this.$Editor = false;
-            this.$Areas  = false;
+            this.$Areas = false;
             this.$Active = false;
 
             this.addEvents({
-                onInject : this.$onInject,
-                onCreate : this.$onCreate,
-                onDestroy: this.$onDestroy,
-                onResize : function () {
-                    var controls = QUI.Controls.getControlsInElement(this.getContent());
-                    controls.each(function (Control) {
-                        if ("resize" in Control) {
-                            Control.resize();
-                        }
-                    });
-                }.bind(this)
-            });
+                               onInject : this.$onInject,
+                               onCreate : this.$onCreate,
+                               onDestroy: this.$onDestroy,
+                               onResize : function () {
+                                   var controls = QUI.Controls.getControlsInElement(this.getContent());
+                                   controls.each(function (Control) {
+                                       if ("resize" in Control) {
+                                           Control.resize();
+                                       }
+                                   });
+                               }.bind(this)
+                           });
         },
 
         /**
@@ -90,66 +90,66 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          */
         $onCreate: function () {
             this.setAttributes({
-                icon : 'fa fa-spinner fa-spin',
-                title: '...'
-            });
+                                   icon : 'fa fa-spinner fa-spin',
+                                   title: '...'
+                               });
 
             this.addButton({
-                name     : 'save',
-                textimage: 'fa fa-save',
-                text     : QUILocale.get('quiqqer/system', 'save'),
-                events   : {
-                    click: this.save
-                }
-            });
+                               name     : 'save',
+                               textimage: 'fa fa-save',
+                               text     : QUILocale.get('quiqqer/system', 'save'),
+                               events   : {
+                                   click: this.save
+                               }
+                           });
 
             this.addButton({
-                name  : 'delete',
-                icon  : 'fa fa-trash-o',
-                title : QUILocale.get('quiqqer/system', 'delete'),
-                events: {
-                    click: this.del
-                },
-                styles: {
-                    'float': 'right'
-                }
-            });
+                               name  : 'delete',
+                               icon  : 'fa fa-trash-o',
+                               title : QUILocale.get('quiqqer/system', 'delete'),
+                               events: {
+                                   click: this.del
+                               },
+                               styles: {
+                                   'float': 'right'
+                               }
+                           });
 
             this.addCategory({
-                name  : 'information',
-                icon  : 'fa fa-file-o',
-                text  : QUILocale.get('quiqqer/system', 'information'),
-                events: {
-                    onActive: this.$load
-                }
-            });
+                                 name  : 'information',
+                                 icon  : 'fa fa-file-o',
+                                 text  : QUILocale.get('quiqqer/system', 'information'),
+                                 events: {
+                                     onActive: this.$load
+                                 }
+                             });
 
             this.addCategory({
-                name  : 'settings',
-                icon  : 'fa fa-magic',
-                text  : QUILocale.get('quiqqer/system', 'properties'),
-                events: {
-                    onActive: this.$load
-                }
-            });
+                                 name  : 'settings',
+                                 icon  : 'fa fa-magic',
+                                 text  : QUILocale.get('quiqqer/system', 'properties'),
+                                 events: {
+                                     onActive: this.$load
+                                 }
+                             });
 
             this.addCategory({
-                name  : 'extra',
-                icon  : 'fa fa-gears',
-                text  : QUILocale.get('quiqqer/system', 'settings'),
-                events: {
-                    onActive: this.$load
-                }
-            });
+                                 name  : 'extra',
+                                 icon  : 'fa fa-gears',
+                                 text  : QUILocale.get('quiqqer/system', 'settings'),
+                                 events: {
+                                     onActive: this.$load
+                                 }
+                             });
 
             this.addCategory({
-                name  : 'content',
-                icon  : 'fa fa-file-text-o',
-                text  : QUILocale.get('quiqqer/system', 'content'),
-                events: {
-                    onActive: this.$load
-                }
-            });
+                                 name  : 'content',
+                                 icon  : 'fa fa-file-text-o',
+                                 text  : QUILocale.get('quiqqer/system', 'content'),
+                                 events: {
+                                     onActive: this.$load
+                                 }
+                             });
         },
 
         /**
@@ -159,9 +159,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             this.Loader.show();
 
             QUIAjax.get([
-                'package_quiqqer_bricks_ajax_getBrick',
-                'package_quiqqer_bricks_ajax_getAvailableBricks'
-            ], function (brick, bricks) {
+                            'package_quiqqer_bricks_ajax_getBrick',
+                            'package_quiqqer_bricks_ajax_getAvailableBricks'
+                        ], function (brick, bricks) {
                 /**
                  * @param {{availableSettings:object}} data
                  * @param {{attributes:object}} data
@@ -169,17 +169,17 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                  */
                 this.$availableBricks = bricks;
                 this.$availableSettings = brick.availableSettings;
-                this.$customfields      = brick.customfields;
+                this.$customfields = brick.customfields;
 
                 this.setAttribute('data', brick);
 
                 this.setAttributes({
-                    icon : 'fa fa-th',
-                    title: QUILocale.get('quiqqer/bricks', 'panel.title', {
-                        brickId   : this.getAttribute('id'),
-                        brickTitle: brick.attributes.title
-                    })
-                });
+                                       icon : 'fa fa-th',
+                                       title: QUILocale.get('quiqqer/bricks', 'panel.title', {
+                                           brickId   : this.getAttribute('id'),
+                                           brickTitle: brick.attributes.title
+                                       })
+                                   });
 
                 this.refresh();
 
@@ -187,9 +187,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 this.getCategory('information').click();
 
             }.bind(this), {
-                'package': 'quiqqer/brick',
-                brickId  : this.getAttribute('id')
-            });
+                            'package': 'quiqqer/brick',
+                            brickId  : this.getAttribute('id')
+                        });
         },
 
         /**
@@ -240,11 +240,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         this.Loader.hide();
 
                     }.bind(this), {
-                        'package': 'quiqqer/brick',
-                        brickId  : this.getAttribute('id'),
-                        data     : JSON.encode(data),
-                        onError  : reject
-                    });
+                                     'package': 'quiqqer/brick',
+                                     brickId  : this.getAttribute('id'),
+                                     data     : JSON.encode(data),
+                                     onError  : reject
+                                 });
 
                 }.bind(this));
 
@@ -274,9 +274,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                             self.fireEvent('delete');
                             self.destroy();
                         }, {
-                            'package': 'quiqqer/bricks',
-                            brickIds : JSON.encode([self.getAttribute('id')])
-                        });
+                                         'package': 'quiqqer/bricks',
+                                         brickIds : JSON.encode([self.getAttribute('id')])
+                                     });
                     }
                 }
             }).open();
@@ -370,6 +370,10 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 );
             }
 
+            if (Form.getElement('[name="frontendTitle"]')) {
+                data.attributes.frontendTitle = Form.getElement('[name="frontendTitle"]').value;
+            }
+
             if (unload == 'settings') {
                 data.attributes.areas = this.$Areas.getAreas().join(',');
                 //data.attributes.width   = Form.elements.width.value;
@@ -438,9 +442,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     resolve();
 
                 }.bind(this), {
-                    'package': 'quiqqer/bricks',
-                    onError  : reject
-                });
+                                 'package': 'quiqqer/bricks',
+                                 onError  : reject
+                             });
 
             }.bind(this));
         },
@@ -534,9 +538,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     resolve();
 
                 }.bind(this), {
-                    'package': 'quiqqer/bricks',
-                    onError  : reject
-                });
+                                 'package': 'quiqqer/bricks',
+                                 onError  : reject
+                             });
 
             }.bind(this));
         },
@@ -557,9 +561,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     });
 
                 }.bind(this), {
-                    'package': 'quiqqer/bricks',
-                    onError  : reject
-                });
+                                 'package': 'quiqqer/bricks',
+                                 onError  : reject
+                             });
 
             }.bind(this));
         },
@@ -580,9 +584,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     });
 
                 }.bind(this), {
-                    'package': 'quiqqer/bricks',
-                    onError  : reject
-                });
+                                 'package': 'quiqqer/bricks',
+                                 onError  : reject
+                             });
 
             }.bind(this));
         },
@@ -660,6 +664,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 var TableExtra = this.$Elm.getElement('table.brick-edit-extra-header'),
                     TableBody  = TableExtra.getElement('tbody');
 
+                TableBody.getElement('[name="frontendTitle"]').value = this.getAttribute('data').attributes.frontendTitle;
+
                 if (!this.$availableSettings || !this.$availableSettings.length) {
                     TableExtra.setStyle('display', 'none');
 
@@ -682,7 +688,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                 // extra settings
                 for (i = 0, len = this.$availableSettings.length; i < len; i++) {
-                    setting      = this.$availableSettings[i];
+                    setting = this.$availableSettings[i];
                     extraFieldId = 'extraField_' + id + '_' + i;
 
                     text = setting.text;
@@ -693,7 +699,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
 
                     Row = new Element('tr', {
-                        'class': i % 2 ? 'even' : 'odd',
+                        'class': i % 2 ? 'odd' : 'even',
                         html   : '<td>' +
                                  '    <label class="quiqqer-bricks-areas" for="' + extraFieldId + '">' +
                                  text +

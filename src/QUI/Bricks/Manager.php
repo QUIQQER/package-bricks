@@ -614,16 +614,17 @@ class Manager
 
         // update
         QUI::getDataBase()->update($this->getTable(), array(
-            'title'        => $Brick->getAttribute('title'),
-            'description'  => $Brick->getAttribute('description'),
-            'content'      => $Brick->getAttribute('content'),
-            'type'         => $Brick->getAttribute('type'),
-            'settings'     => json_encode($Brick->getSettings()),
-            'customfields' => json_encode($customfields),
-            'areas'        => $areaString,
-            'height'       => $Brick->getAttribute('height'),
-            'width'        => $Brick->getAttribute('width'),
-            'classes'      => json_encode($Brick->getCSSClasses())
+            'title'         => $Brick->getAttribute('title'),
+            'frontendTitle' => $Brick->getAttribute('frontendTitle'),
+            'description'   => $Brick->getAttribute('description'),
+            'content'       => $Brick->getAttribute('content'),
+            'type'          => $Brick->getAttribute('type'),
+            'settings'      => json_encode($Brick->getSettings()),
+            'customfields'  => json_encode($customfields),
+            'areas'         => $areaString,
+            'height'        => $Brick->getAttribute('height'),
+            'width'         => $Brick->getAttribute('width'),
+            'classes'       => json_encode($Brick->getCSSClasses())
         ), array(
             'id' => (int)$brickId
         ));

@@ -184,6 +184,16 @@
             <de><![CDATA[Baustein bearbeiten]]></de>
             <en><![CDATA[Edit Brick]]></en>
         </locale>
+        <locale name="brick.edit.backendTitle">
+            <de><![CDATA[Bausteinname]]></de>
+            <en><![CDATA[Brick name]]></en>
+            <pl><![CDATA[Nazwa]]></pl>
+        </locale>
+        <locale name="brick.edit.frontendTitle">
+            <de><![CDATA[Titel (frontend)]]></de>
+            <en><![CDATA[Title (frontend)]]></en>
+            <pl><![CDATA[Tytuł (frontend)]]></pl>
+        </locale>
         <locale name="brick.edit.description">
             <de><![CDATA[Bausteinbeschreibung]]></de>
             <en><![CDATA[Brick description]]></en>

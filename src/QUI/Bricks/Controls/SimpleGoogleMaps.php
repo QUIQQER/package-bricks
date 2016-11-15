@@ -56,7 +56,8 @@ class SimpleGoogleMaps extends QUI\Control
         $url = 'https://www.google.com/maps/embed/v1/place?' . $query . "&zoom=" . $zoom . "&";
 
         $Engine->assign(array(
-            'url' => $url
+            'this' => $this,
+            'url'  => $url
         ));
 
         return $Engine->fetch(dirname(__FILE__) . '/SimpleGoogleMaps.html');
