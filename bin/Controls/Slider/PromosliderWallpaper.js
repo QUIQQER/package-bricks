@@ -324,6 +324,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 }
             }
 
+            // select first dot
+            this.$checkdotPosition();
+
             // autostart
             if (this.getAttribute('autostart')) {
                 this.start();
@@ -569,6 +572,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 moofx(Background).animate({
                     opacity: 1
                 });
+            }, function () {
             });
         },
 

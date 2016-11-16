@@ -1,0 +1,8 @@
+<div {$classesStr}>
+    {if $this->getAttribute('showTitle') && $this->getAttribute('title')}
+    <header>
+        <h2>{$this->getAttribute('title')}</h2>
+    </header>
+    {/if}
+    {$this->getAttribute('content')}
+</div>

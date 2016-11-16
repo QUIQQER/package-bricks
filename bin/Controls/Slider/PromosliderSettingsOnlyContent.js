@@ -1,5 +1,19 @@
 /**
+ * @module package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContent
+ * @author www.pcsg.de (Henning Leutz)
  *
+ * Wallpaper Slider mit zwei Inhaltsbereichen
+ *
+ * @require qui/QUI
+ * @require qui/controls/Control
+ * @require qui/controls/windows/Confirm
+ * @require qui/controls/buttons/Button
+ * @require Locale
+ * @require Mustache
+ * @require controls/grid/Grid
+ * @require utils/Controls
+ * @require text!package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContentEntry.html
+ * @require css!package/quiqqer/bricks/bin/Controls/Slider/PromoSliderSettings.css
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContent', [
 
@@ -235,7 +249,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     imagePreview: new Element('span', {html: '&nbsp;'})
                 };
 
-                if ("image" in entry) {
+                if ("image" in entry && entry.image !== '') {
                     insert.image = entry.image;
 
                     insert.imagePreview = new Element('img', {
@@ -283,6 +297,25 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
         },
 
         /**
+         * Refresh the data sorting in dependence of the grid
+         */
+        $refreshSorting: function () {
+            var gridData = this.$Grid.getData(),
+                data     = [];
+
+            for (var i = 0, len = gridData.length; i < len; i++) {
+                data.push({
+                    image: gridData[i].image,
+                    left : gridData[i].left,
+                    right: gridData[i].right
+                });
+            }
+
+            this.$data = data;
+            this.update();
+        },
+
+        /**
          * Update the field
          */
         update: function () {
@@ -294,6 +327,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
          *
          * @param {string} [left] - left content
          * @param {string} [right] - right content
+         * @param {string} [image] - image
          */
         add: function (left, right, image) {
             this.$data.push({

@@ -248,7 +248,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 entry  = this.$data[i];
                 insert = {};
 
-                if ("image" in entry) {
+                if ("image" in entry && entry.image !== '') {
                     insert.image = entry.image;
 
                     insert.imagePreview = new Element('img', {
