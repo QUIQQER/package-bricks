@@ -1,14 +1,20 @@
 {assign var=img value=$brickImage}
 {assign var=link value=$brickLink}
-<div class="content-body brick-image">
+<div class=" brick-image">
 
-    {if !$this->getAttribute('content') == ""}
-    <div class="quiqqer-content grid-100 grid-parent brick-image-text">
-    {$this->getAttribute('content')}
+    {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+    <header class="control-header">
+        <h1>{$this->getAttribute('frontendTitle')}</h1>
+    </header>
+    {/if}
+
+    {if $this->getAttribute('content') != ""}
+    <div class="control-content">
+        {$this->getAttribute('content')}
     </div>
     {/if}
 
-    <div class="grid-100 grid-parent brick-image-picture-container">
+    <div class="brick-image-picture-container">
         {if $link != ""}
         <a class="brick-image-link" href="{$link}">
         {/if}

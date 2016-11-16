@@ -64,12 +64,10 @@ class Listing extends QUI\Control
         $Control->setAttribute('showCreator', $this->getAttribute('showCreator'));
         $Control->setAttribute('showSheets', $this->getAttribute('showSheets'));
         $Control->setAttribute('Site', false);
-
-        $Control->setAttribute('showTitle', $this->getAttribute('showTitle'));
-        $Control->setAttribute('showBrickTitle', $this->getAttribute('showBrickTitle'));
-        $Control->setAttribute('title', $this->getAttribute('title'));
         $Control->setAttribute('content', $this->getAttribute('content'));
 
+        $Control->setAttribute('frontendTitle', $this->getAttribute('frontendTitle'));
+        $Control->setAttribute('showTitle', $this->getAttribute('showTitle'));
 
         return $Control->create();
     }

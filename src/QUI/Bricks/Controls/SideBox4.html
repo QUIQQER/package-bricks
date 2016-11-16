@@ -1,8 +1,14 @@
 
 <div class="quiqqer-bricks-sidebox4">
 
-    {if $this->getAttribute('content')}
-    <div class="quiqqer-bricks-sidebox4-content">
+    {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+    <header class="control-header">
+        <h1>{$this->getAttribute('frontendTitle')}</h1>
+    </header>
+    {/if}
+
+    {if $this->getAttribute('content') != ""}
+    <div class="control-content">
         {$this->getAttribute('content')}
     </div>
     {/if}

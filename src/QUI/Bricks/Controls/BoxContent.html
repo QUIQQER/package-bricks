@@ -1,9 +1,16 @@
 <div class="quiqqer-box-content">
-    {if $this->getAttribute('content')}
-    <div class="grid-100 grid-parent">
+    {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+    <header class="control-header">
+        <h1>{$this->getAttribute('frontendTitle')}</h1>
+    </header>
+    {/if}
+
+    {if $this->getAttribute('content') != ""}
+    <div class="control-content">
         {$this->getAttribute('content')}
     </div>
     {/if}
+
     {foreach from=$entries item=entry}
     <div class="box-content-entry{$extraClass}">
         <h4 title="{$entry.title|escape:"html"}">
