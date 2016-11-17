@@ -56,10 +56,10 @@
 }
 
 .quiqqer-bricks-children-slider-child .quiqqer-icon {
-    font-size: 40px;
+    font-size: 80px;
     height: 100%;
     opacity: 0;
-    padding: 0 20px;
+    padding: 0 1em;
 }
 
 .quiqqer-bricks-children-slider-child-display img {
@@ -123,3 +123,17 @@
     transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
 }
+
+
+
+
+
+
+.quiqqer-bricks-children-slider-prev,
+.quiqqer-bricks-children-slider-next {
+    color: red;
+}
+/*
+.quiqqer-bricks-children-slider {
+    height: auto !important;
+}*/

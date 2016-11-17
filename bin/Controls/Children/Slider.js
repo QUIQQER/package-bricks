@@ -76,6 +76,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          */
         $onImport: function () {
             var Elm  = this.getElm(),
+            // var Elm  = this.getElm().getElement('.wrapper').getElement('.quiqqer-bricks-children-slider-container'),
                 size = Elm.getSize();
 
             this.$Next = new Element('div', {

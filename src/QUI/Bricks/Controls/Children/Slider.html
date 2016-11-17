@@ -1,3 +1,16 @@
+{*if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+<header class="control-header">
+    <h1>{$this->getAttribute('frontendTitle')}</h1>
+</header>
+{/if}
+
+{if $this->getAttribute('content') != ""}
+<div class="control-content">
+    {$this->getAttribute('content')}
+</div>
+{/if*}
+
+<!--<div class="wrapper" style="height: {$this->getAttribute('height')}px;">-->
 <div class="quiqqer-bricks-children-slider-container">
     <div class="quiqqer-bricks-children-slider-container-inner">
         <ul class="quiqqer-bricks-children-slider-container-slide"
@@ -28,3 +41,4 @@
         </ul>
     </div>
 </div>
+<!--</div>-->
