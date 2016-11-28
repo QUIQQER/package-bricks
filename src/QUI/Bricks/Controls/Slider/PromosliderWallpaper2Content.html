@@ -2,7 +2,7 @@
     {strip}
     <ul class="hide-on-mobile">
         {foreach $desktopSlides as $key => $slide}
-        <li>
+        <li data-url="{url url=$slide.url rewritten=1}">
             {assign var=extraStyle value=""}
             {assign var=extraClass value=""}
 
@@ -35,7 +35,7 @@
     {strip}
     <ul class="hide-on-desktop">
         {foreach $mobileSlides as $key => $slide}
-        <li>
+        <li data-url="{url url=$slide.url rewritten=1}">
             {assign var=extraStyle value=""}
             {assign var=extraClass value=""}
 

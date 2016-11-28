@@ -54,10 +54,11 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param string $left - optional, left text
      * @param string $right - optional, right text
      * @param string|bool $type - optional, not exists, but we are from PromosliderWallpaper and AbstractPromoslider
+     * @param string $url - index.php? or extern url
      */
-    public function addSlide($image, $left = '', $right = '', $type = false)
+    public function addSlide($image, $left = '', $right = '', $type = false, $url = '')
     {
-        $this->desktopSlides[] = $this->checkSlideParams($image, $left, $right);
+        $this->desktopSlides[] = $this->checkSlideParams($image, $left, $right, $url);
     }
 
     /**
@@ -66,10 +67,11 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param string $image - image.php URL to an image
      * @param string $left - optional, left text
      * @param string $right - optional, right text
+     * @param string $url - index.php? or extern url
      */
-    public function addMobileSlide($image, $left = '', $right = '')
+    public function addMobileSlide($image, $left = '', $right = '', $url = '')
     {
-        $this->mobileSlides[] = $this->checkSlideParams($image, $left, $right);
+        $this->mobileSlides[] = $this->checkSlideParams($image, $left, $right, $url);
     }
 
     /**
@@ -78,9 +80,10 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param string $image - image.php URL to an image
      * @param string $left - Left text
      * @param string $right - Right text
+     * @param string $url - index.php? or extern url
      * @return array
      */
-    protected function checkSlideParams($image, $left = '', $right = '')
+    protected function checkSlideParams($image, $left = '', $right = '', $url = '')
     {
         if (Utils::isMediaUrl($image)) {
             try {
@@ -102,7 +105,8 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
         return array(
             'image' => $image,
             'left'  => $left,
-            'right' => $right
+            'right' => $right,
+            'url'   => $url
         );
     }
 
@@ -127,7 +131,7 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
             return;
         }
 
-        $attributes = array('image', 'left', 'right');
+        $attributes = array('image', 'left', 'right', 'url');
 
         foreach ($slides as $slide) {
             foreach ($attributes as $attribute) {
@@ -141,7 +145,9 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
                     $this->addSlide(
                         $slide['image'],
                         $slide['left'],
-                        $slide['right']
+                        $slide['right'],
+                        'desktop',
+                        $slide['url']
                     );
                     break;
 
@@ -149,7 +155,8 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
                     $this->addMobileSlide(
                         $slide['image'],
                         $slide['left'],
-                        $slide['right']
+                        $slide['right'],
+                        $slide['url']
                     );
                     break;
             }

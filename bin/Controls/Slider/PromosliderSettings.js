@@ -168,6 +168,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     dataType : 'string',
                     width    : 200
                 }, {
+                    header   : QUILocale.get(lg, 'quiqqer.products.control.slidesettings.url'),
+                    dataIndex: 'url',
+                    dataType : 'string',
+                    width    : 300
+                }, {
                     dataIndex: 'image',
                     dataType : 'string',
                     hidden   : true
@@ -316,7 +321,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 image: '',
                 title: '',
                 text : '',
-                type : ''
+                type : '',
+                url  : ''
             };
 
             if ("image" in params) {
@@ -333,6 +339,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
             if ("type" in params) {
                 entry.type = params.type;
+            }
+
+            if ("url" in params) {
+                entry.url = params.url;
             }
 
             this.$data.push(entry);
@@ -355,7 +365,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 image: '',
                 title: '',
                 text : '',
-                type : ''
+                type : '',
+                url  : ''
             };
 
             if ("image" in params) {
@@ -372,6 +383,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
             if ("type" in params) {
                 entry.type = params.type;
+            }
+
+            if ("url" in params) {
+                entry.url = params.url;
             }
 
             this.$data[index] = entry;
@@ -580,6 +595,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 var Container = new Element('div', {
                     html   : Mustache.render(templateEntry, {
                         fieldImage      : QUILocale.get(lg, 'quiqqer.products.control.create.image'),
+                        fieldUrl        : QUILocale.get(lg, 'quiqqer.products.control.create.url'),
                         fieldTitle      : QUILocale.get(lg, 'quiqqer.products.control.create.title'),
                         fieldDescription: QUILocale.get(lg, 'quiqqer.products.control.create.text'),
                         fieldType       : QUILocale.get(lg, 'quiqqer.products.control.create.align')
