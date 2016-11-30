@@ -632,6 +632,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Alignment]]></en>
         </locale>
 
+        <locale name="quiqqer.products.control.promoslider.image">
+            <de><![CDATA[Hintergrundbild]]></de>
+            <en><![CDATA[Background image]]></en>
+        </locale>
+        <locale name="quiqqer.products.control.promoslider.url">
+            <de><![CDATA[Weiterleitungsadresse]]></de>
+            <en><![CDATA[Forwarding address]]></en>
+        </locale>
         <locale name="quiqqer.products.control.promoslider.left">
             <de><![CDATA[Linker Inhaltsbereich]]></de>
             <en><![CDATA[Left content]]></en>
