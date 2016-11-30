@@ -95,13 +95,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
                 self.show(event.target.get('data-no'));
             };
-
-
-            desktopSlides.addEvent('click', function () {
-                alert(1);
-            });
-
-
+            
             var i, len, Dot;
 
             for (i = 0, len = desktopSlides.length; i < len; i++) {
