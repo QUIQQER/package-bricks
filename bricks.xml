@@ -882,7 +882,7 @@
             </settings>
         </brick>
 
-        <!-- sites listing -->
+        <!-- Listing -->
         <brick control="\QUI\Bricks\Controls\Children\Listing">
             <title>
                 <locale group="quiqqer/bricks" var="bricks.list.title"/>
@@ -948,8 +948,17 @@
                     <option value="advancedArticleList">
                         <locale group="quiqqer/bricks" var="brick.listTemplate.advancedArticleList"/>
                     </option>
-                    <option value="icons">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.icons"/>
+                    <option value="1er">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.1er"/>
+                    </option>
+                    <option value="2er">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.2er"/>
+                    </option>
+                    <option value="3er">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.3er"/>
+                    </option>
+                    <option value="4er">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.4er"/>
                     </option>
                     <option value="childrenList">
                         <locale group="quiqqer/bricks" var="brick.listTemplate.childrenList"/>
@@ -969,6 +978,13 @@
                     />
                 </setting>
 
+
+                <setting name="showImages" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="brick.showImages"
+                    />
+                </setting>
+
                 <setting name="showShort" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="brick.showShort"/>
@@ -984,16 +1000,10 @@
                             var="brick.showDate"/>
                 </setting>
 
-                <setting name="showTime" type="checkbox">
+                <!--<setting name="showTime" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="brick.showTime"/>
-                </setting>
-
-                <setting name="showImages" type="checkbox">
-                    <locale group="quiqqer/bricks"
-                            var="brick.showImages"
-                    />
-                </setting>
+                </setting>-->
 
             </settings>
         </brick>

@@ -876,6 +876,26 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Advanced article list (sidebar)]]></en>
             <pl><![CDATA[Rozszerzona lista wpisów (sidebar)]]></pl>
         </locale>
+        <locale name="brick.listTemplate.1er">
+            <de><![CDATA[1 Box pro Reihe]]></de>
+            <en><![CDATA[1 box in a row]]></en>
+            <pl><![CDATA[1 kontener w rzędzie]]></pl>
+        </locale>
+        <locale name="brick.listTemplate.2er">
+            <de><![CDATA[2 Boxen pro Reihe]]></de>
+            <en><![CDATA[2 boxes in a row]]></en>
+            <pl><![CDATA[2 kontenery w rzędzie]]></pl>
+        </locale>
+        <locale name="brick.listTemplate.3er">
+            <de><![CDATA[3 Boxen pro Reihe]]></de>
+            <en><![CDATA[3 boxes in a row]]></en>
+            <pl><![CDATA[3 kontenery w rzędzie]]></pl>
+        </locale>
+        <locale name="brick.listTemplate.4er">
+            <de><![CDATA[4 Boxen pro Reihe]]></de>
+            <en><![CDATA[4 boxes in a row]]></en>
+            <pl><![CDATA[4 treści w rzędzie]]></pl>
+        </locale>
         <locale name="brick.listTemplate.childrenList">
             <de><![CDATA[Standard]]></de>
             <en><![CDATA[Default]]></en>
@@ -890,11 +910,6 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Autor und Datum oben]]></de>
             <en><![CDATA[Author and date top]]></en>
             <pl><![CDATA[Autor i data na górze]]></pl>
-        </locale>
-        <locale name="brick.listTemplate.icons">
-            <de><![CDATA[Icons]]></de>
-            <en><![CDATA[Icons]]></en>
-            <pl><![CDATA[Ikony]]></pl>
         </locale>
 
 
