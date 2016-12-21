@@ -236,7 +236,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                     var diff = Math.abs(startScroll - lastClientX);
 
-                    if (diff <= 5) {
+                    if (diff <= 5 && QUI.isScrolling() === false) {
                         // click event
                         var Li = this.$List.getElement('li:nth-child(' + parseInt(currentSlide + 1) + ')');
 
@@ -310,7 +310,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                 LiElement.setStyle('cursor', 'pointer');
                 LiElement.addEvent('click', function () {
-                    window.location = this.get('data-url');
+                    if (QUI.isScrolling() === false) {
+                        window.location = this.get('data-url');
+                    }
                 });
             });
 
