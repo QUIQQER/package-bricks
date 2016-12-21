@@ -15,7 +15,7 @@
 {image src=$entry.img  width=1000 onlysrc=true assign=img}
 {assign var=modKey value=$key+1}
 
-<div class="content-switcher content-switcher-{$modKey}">
+<div class="content-switcher content-switcher-{$modKey} control-template">
 
     {if !$this->getAttribute( 'startImgOnLeft' )}
     <div class="content-switcher-image {if $modKey && $modKey % 2 !== 0 }push-50 mobile-pull-100
@@ -26,8 +26,7 @@
             {image src=$entry.img class="content-switcher-image-img"}
         {/if}
     </div>
-    <div class="content-switcher-content content-switcher-content-not-full
-                {if $modKey && $modKey % 2 !== 0 }pull-50 mobile-pull-100
+    <div class="content-switcher-content {if $modKey && $modKey % 2 !== 0 }pull-50 mobile-pull-100
                 pull-custom pull-custom-mobile{/if}">
         <h2>{$entry.title}</h2>
         <p>{$entry.content}</p>
@@ -40,7 +39,7 @@
          style="background-image: url('{$img}');"
     >
         {if $img != ""}
-        {image src=$entry.img class="content-switcher-image-img"}
+            {image src=$entry.img class="content-switcher-image-img"}
         {/if}
     </div>
 

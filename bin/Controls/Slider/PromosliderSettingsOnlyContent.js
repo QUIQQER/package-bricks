@@ -169,6 +169,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     dataType : 'code',
                     width    : 300
                 }, {
+                    header   : QUILocale.get(lg, 'quiqqer.products.control.promoslider.url'),
+                    dataIndex: 'url',
+                    dataType : 'string',
+                    width    : 300
+                }, {
                     dataIndex: 'image',
                     dataType : 'string',
                     hidden   : true
@@ -265,6 +270,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     insert.right = entry.right;
                 }
 
+                if ("url" in entry) {
+                    insert.url = entry.url;
+                }
+
                 data.push(insert);
             }
 
@@ -307,7 +316,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                 data.push({
                     image: gridData[i].image,
                     left : gridData[i].left,
-                    right: gridData[i].right
+                    right: gridData[i].right,
+                    url  : gridData[i].url || ''
                 });
             }
 
@@ -328,12 +338,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
          * @param {string} [left] - left content
          * @param {string} [right] - right content
          * @param {string} [image] - image
+         * @param {string} [url] - click url
          */
-        add: function (left, right, image) {
+        add: function (left, right, image, url) {
             this.$data.push({
                 left : left || '',
                 right: right || '',
-                image: image || ''
+                image: image || '',
+                url  : url || ''
             });
 
             this.refresh();
@@ -347,8 +359,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
          * @param {string} [left] - left content
          * @param {string} [right] - right content
          * @param {string} [image] - image path
+         * @param {string} [url] - click url
          */
-        edit: function (index, left, right, image) {
+        edit: function (index, left, right, image, url) {
             if (typeof index === 'undefined') {
                 return;
             }
@@ -356,7 +369,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
             this.$data[index] = {
                 left : left || '',
                 right: right || '',
-                image: image || ''
+                image: image || '',
+                url  : url || ''
             };
 
             this.refresh();
@@ -432,9 +446,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                 var Left  = Form.elements.left;
                 var Right = Form.elements.right;
                 var Image = Form.elements.image;
+                var Url   = Form.elements.url;
 
                 Button.addEvent('click', function () {
-                    this.edit(index, Left.value, Right.value, Image.value);
+                    this.edit(index, Left.value, Right.value, Image.value, Url.value);
 
                     moofx(Container).animate({
                         opacity: 0,
@@ -450,6 +465,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                 Left.value  = data.left;
                 Right.value = data.right;
                 Image.value = data.image;
+                Url.value   = data.url;
 
                 Image.fireEvent('change');
             }.bind(this));
@@ -503,8 +519,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     var Left  = Form.elements.left;
                     var Right = Form.elements.right;
                     var Image = Form.elements.image;
+                    var Url   = Form.elements.url;
 
-                    this.add(Left.value, Right.value, Image.value);
+                    this.add(Left.value, Right.value, Image.value, Url.value);
 
                     moofx(Container).animate({
                         opacity: 0,
@@ -528,6 +545,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
             return new Promise(function (resolve) {
                 var Container = new Element('div', {
                     html   : Mustache.render(templateEntry, {
+                        fieldImage: QUILocale.get(lg, 'quiqqer.products.control.promoslider.image'),
+                        fieldUrl  : QUILocale.get(lg, 'quiqqer.products.control.promoslider.url'),
                         fieldLeft : QUILocale.get(lg, 'quiqqer.products.control.promoslider.left'),
                         fieldRight: QUILocale.get(lg, 'quiqqer.products.control.promoslider.right')
                     }),

@@ -82,6 +82,11 @@
     width: 100%;
 }
 
+.quiqqer-bricks-promoslider-wallpaper-prev:hover .fa,
+.quiqqer-bricks-promoslider-wallpaper-next:hover .fa {
+    transform: scale(1.15);
+}
+
 .quiqqer-bricks-promoslider-wallpaper-next {
     left: inherit;
     right: 0;

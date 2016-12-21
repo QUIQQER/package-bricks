@@ -10,7 +10,7 @@
             {assign var=extraStyle value="display: none;"}
             {/if}
 
-            {if $slide.pos == 'quiqqer-bricks-promoslider-slide-right'}
+            {if isset($slide.pos) && $slide.pos == 'quiqqer-bricks-promoslider-slide-right'}
             {assign var=extraClass value=" quiqqer-bricks-promoslider-wallpaper-text__right"}
             {/if}
 
@@ -57,7 +57,7 @@
             {assign var=extraStyle value="display: none;"}
             {/if}
 
-            {if $slide.pos == 'quiqqer-bricks-promoslider-slide-right'}
+            {if isset($slide.pos) && $slide.pos == 'quiqqer-bricks-promoslider-slide-right'}
             {assign var=extraClass value=" quiqqer-bricks-promoslider-wallpaper-text__right"}
             {/if}
 

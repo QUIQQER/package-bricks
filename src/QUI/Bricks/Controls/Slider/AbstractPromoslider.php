@@ -35,8 +35,9 @@ class AbstractPromoslider extends QUI\Control
      * @param string $title - Title Text or image.php URL to an image
      * @param string $text - Description text
      * @param string $type - left, right (default = right)
+     * @param string $url - index.php? or extern url
      */
-    public function addSlide($image, $title, $text, $type = 'right')
+    public function addSlide($image, $title, $text, $type = 'right', $url = '')
     {
         if (Utils::isMediaUrl($image)) {
             try {
@@ -77,7 +78,8 @@ class AbstractPromoslider extends QUI\Control
             'image' => $image,
             'title' => $title,
             'text'  => $text,
-            'pos'   => $pos
+            'pos'   => $pos,
+            'url'   => $url
         );
     }
 
@@ -87,8 +89,9 @@ class AbstractPromoslider extends QUI\Control
      * @param string $image
      * @param string $title
      * @param string $text
+     * @param string $url - index.php? or extern url
      */
-    public function addMobileSlide($image, $title, $text)
+    public function addMobileSlide($image, $title, $text, $url = '')
     {
         if (Utils::isMediaUrl($image)) {
             try {
@@ -122,7 +125,8 @@ class AbstractPromoslider extends QUI\Control
         $this->mobileSlides[] = array(
             'image' => $image,
             'title' => $title,
-            'text'  => $text
+            'text'  => $text,
+            'url'   => $url
         );
     }
 
@@ -147,7 +151,7 @@ class AbstractPromoslider extends QUI\Control
             return;
         }
 
-        $attributes = array('image', 'title', 'text', 'type');
+        $attributes = array('image', 'title', 'text', 'type', 'url');
 
         foreach ($slides as $slide) {
             foreach ($attributes as $attribute) {
@@ -162,7 +166,8 @@ class AbstractPromoslider extends QUI\Control
                         $slide['image'],
                         $slide['title'],
                         $slide['text'],
-                        $slide['type']
+                        $slide['type'],
+                        $slide['url']
                     );
                     break;
 
@@ -170,7 +175,8 @@ class AbstractPromoslider extends QUI\Control
                     $this->addMobileSlide(
                         $slide['image'],
                         $slide['title'],
-                        $slide['text']
+                        $slide['text'],
+                        $slide['url']
                     );
                     break;
             }

@@ -42,18 +42,22 @@ class SimpleGoogleMaps extends QUI\Control
     public function getBody()
     {
         $Engine      = QUI::getTemplateManager()->getEngine();
-        $brickTitle  = $this->getAttribute('place');
-        $brickStreet = $this->getAttribute('street');
+        $brickPlace  = $this->getAttribute('place');
         $brickZip    = $this->getAttribute('zip');
+        $brickStreet = $this->getAttribute('street');
         $brickCity   = $this->getAttribute('city');
         $zoom        = $this->getAttribute('zoom');
 
+        if (!$zoom) {
+            $zoom = 15;
+        }
+
         $query = http_build_query(array(
             'key' => trim($this->getAttribute('api')),
-            'q'   => "{$brickTitle},{$brickZip},{$brickStreet},{$brickCity}"
+            'q'   => "{$brickPlace},{$brickZip},{$brickStreet},{$brickCity}"
         ));
 
-        $url = 'https://www.google.com/maps/embed/v1/place?' . $query . "&zoom=" . $zoom . "&";
+        $url = 'https://www.google.com/maps/embed/v1/place?' . $query . "&zoom=" . $zoom;
 
         $Engine->assign(array(
             'this' => $this,
