@@ -936,11 +936,11 @@
 
                 <setting name="template" type="select">
                     <locale group="quiqqer/bricks" var="brick.listTemplate"/>
-                    <option value="standardList">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.standardList"/>
+                    <option value="imageTop">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.imageTop"/>
                     </option>
-                    <option value="listWithBorder">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.listWithBorder"/>
+                    <option value="imageTopBorder">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.imageTopBorder"/>
                     </option>
                     <option value="simpleArticleList">
                         <locale group="quiqqer/bricks" var="brick.listTemplate.simpleArticleList"/>
@@ -978,7 +978,6 @@
                     />
                 </setting>
 
-
                 <setting name="showImages" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="brick.showImages"
@@ -1000,10 +999,10 @@
                             var="brick.showDate"/>
                 </setting>
 
-                <!--<setting name="showTime" type="checkbox">
+                <setting name="showTime" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="brick.showTime"/>
-                </setting>-->
+                </setting>
 
             </settings>
         </brick>

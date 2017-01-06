@@ -856,15 +856,15 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Layout]]></en>
             <pl><![CDATA[Layout]]></pl>
         </locale>
-        <locale name="brick.listTemplate.standardList">
-            <de><![CDATA[Standard (Sidebar)]]></de>
-            <en><![CDATA[Standard (sidebar)]]></en>
-            <pl><![CDATA[Standardowy (sidebar)]]></pl>
+        <locale name="brick.listTemplate.imageTop">
+            <de><![CDATA[Bild oben]]></de>
+            <en><![CDATA[Picture top]]></en>
+            <pl><![CDATA[Zdjęcie na górze]]></pl>
         </locale>
-        <locale name="brick.listTemplate.listWithBorder">
-            <de><![CDATA[Mit Rahmen (Sidebar)]]></de>
-            <en><![CDATA[Border (sidebar)]]></en>
-            <pl><![CDATA[Z ramką (sidebar)]]></pl>
+        <locale name="brick.listTemplate.imageTopBorder">
+            <de><![CDATA[Bild oben (mit Rahmen)]]></de>
+            <en><![CDATA[Picture top (with border)]]></en>
+            <pl><![CDATA[Zdjęcie na górze (z ramką)]]></pl>
         </locale>
         <locale name="brick.listTemplate.simpleArticleList">
             <de><![CDATA[Einfache Artikel-Liste (Sidebar)]]></de>
@@ -938,21 +938,21 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.showDate">
             <de><![CDATA[Datum anzeigen]]></de>
             <en><![CDATA[Show date]]></en>
-            <pl><![CDATA[Pokaż datę publikacji]]></pl>
+            <pl><![CDATA[Pokaż datę]]></pl>
         </locale>
 
         <!-- show time -->
         <locale name="brick.showTime">
             <de><![CDATA[Uhrzeit anzeigen]]></de>
             <en><![CDATA[Show time]]></en>
-            <pl><![CDATA[Pokaż godzinę publikacji]]></pl>
+            <pl><![CDATA[Pokaż godzinę]]></pl>
         </locale>
 
         <!-- show images -->
         <locale name="brick.showImages">
             <de><![CDATA[Bild anzeigen]]></de>
             <en><![CDATA[Show image]]></en>
-            <pl><![CDATA[Pokaż zdjęcie artykułów]]></pl>
+            <pl><![CDATA[Pokaż zdjęcie]]></pl>
         </locale>
 
 
