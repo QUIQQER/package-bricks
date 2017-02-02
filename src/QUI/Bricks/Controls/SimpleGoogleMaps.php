@@ -32,6 +32,8 @@ class SimpleGoogleMaps extends QUI\Control
         $this->addCSSFile(
             dirname(__FILE__) . '/SimpleGoogleMaps.css'
         );
+
+        $this->setAttribute('qui-class', "package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps");
     }
 
     /**

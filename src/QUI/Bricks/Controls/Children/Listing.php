@@ -35,7 +35,8 @@ class Listing extends QUI\Control
             'Site'           => true,
             'where'          => false,
             'itemtype'       => 'http://schema.org/ItemList',
-            'child-itemtype' => 'http://schema.org/NewsArticle',
+            'child-itemtype' => 'https://schema.org/ListItem',
+            'child-itemprop' => 'itemListElement',
             'display'        => 'childrenlist',
             'order'          => 'c_date DESC'
         ));
