@@ -512,7 +512,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 }
 
                 console.warn(scrollTo);
-                console.log(this.$maxScroll);
+                console.log(this.$maxScroll + (-scrollTo / 2));
 
                 if (-scrollTo > this.$maxScroll + (-scrollTo / 2)) {
                     // go to the first
