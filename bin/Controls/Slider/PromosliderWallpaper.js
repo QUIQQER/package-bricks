@@ -511,6 +511,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                     return;
                 }
 
+                console.warn(scrollTo);
+
                 if (-scrollTo > this.$maxScroll) {
                     // go to the first
                     return this.show(0).then(resolve);
