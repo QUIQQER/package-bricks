@@ -475,7 +475,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
          * @return {Promise}
          */
         previous: function () {
-            var left = this.$List.this.$getYPosition();
+            var left = this.$getYPosition();
 
             var slideNo = Math.round(
                 (left - this.$width) / this.$width
@@ -499,7 +499,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                     return this.show(this.$childrenCount - 1).then(resolve);
                 }
 
-                var left     = this.$List.this.$getYPosition(),
+                var left     = this.$getYPosition(),
                     scrollTo = slideNo * this.$width * -1;
 
                 if (left == scrollTo) {
