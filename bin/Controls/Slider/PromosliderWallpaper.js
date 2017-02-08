@@ -499,6 +499,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                     return this.show(this.$childrenCount - 1).then(resolve);
                 }
 
+                console.log(slideNo);
+                console.log(this.$getYPosition());
+
                 var left     = this.$getYPosition(),
                     scrollTo = slideNo * this.$width * -1;
 
