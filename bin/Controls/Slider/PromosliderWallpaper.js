@@ -499,9 +499,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                     return this.show(this.$childrenCount - 1).then(resolve);
                 }
 
-                console.log(slideNo);
-                console.log(this.$getYPosition());
-
                 var left     = this.$getYPosition(),
                     scrollTo = slideNo * this.$width * -1;
 
@@ -511,10 +508,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                     return;
                 }
 
-                console.warn(scrollTo);
-                console.log(this.$maxScroll + (-scrollTo / 2));
-
-                if (-scrollTo > this.$maxScroll + (-scrollTo / 2)) {
+                if (-scrollTo > this.$maxScroll + (this.$width / 2)) {
                     // go to the first
                     return this.show(0).then(resolve);
                 }
