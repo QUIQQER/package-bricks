@@ -506,11 +506,11 @@
 
             <settings>
                 <setting name="link" class="project-site">
-                    <locale group="quiqqer/bricks" var="Image.link"/>
+                    <locale group="quiqqer/bricks" var="bricks.Image.link"/>
                 </setting>
 
                 <setting name="picture" class="media-image">
-                    <locale group="quiqqer/bricks" var="Image.picture"/>
+                    <locale group="quiqqer/bricks" var="bricks.Image.picture"/>
                 </setting>
             </settings>
         </brick>
