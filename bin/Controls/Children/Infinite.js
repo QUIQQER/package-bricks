@@ -49,6 +49,11 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
             var Elm = this.getElm();
 
             this.$More = Elm.getElement('.button');
+
+            if (!this.$More) {
+                return;
+            }
+
             this.$More.addEvent('click', this.next);
             this.$More.removeClass('disabled');
 
