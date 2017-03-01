@@ -778,7 +778,7 @@ class Manager
             }
 
             foreach ($area as $brick) {
-                if (isset($brickIds[$brick['brickId']])) {
+                if (isset($brick['brickId']) && isset($brickIds[$brick['brickId']])) {
                     $result[] = $brick;
                 }
             }
