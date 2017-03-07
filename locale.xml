@@ -52,8 +52,8 @@
             ]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.title">
-            <de><![CDATA[Bausteine: Bradcrumb]]></de>
-            <en><![CDATA[Bricks: Bradcrumb]]></en>
+            <de><![CDATA[Bausteine: Breadcrumb]]></de>
+            <en><![CDATA[Bricks: Breadcrumb]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.description">
             <de><![CDATA[Eine "Sie sind hier"-Anzeigenleiste über dem Inhalt]]></de>
