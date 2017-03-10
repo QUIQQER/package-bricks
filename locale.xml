@@ -593,6 +593,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Baustein hinzufügen]]></de>
             <en><![CDATA[Add a Brick]]></en>
         </locale>
+        <locale name="manager.button.edit">
+            <de><![CDATA[Baustein bearbeiten]]></de>
+            <en><![CDATA[Edit a Brick]]></en>
+        </locale>
         <locale name="manager.button.delete">
             <de><![CDATA[Markierte Bausteine löschen]]></de>
             <en><![CDATA[Delete marked Bricks]]></en>
@@ -788,30 +792,30 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Google Place]]></de>
             <en><![CDATA[Google Place]]></en>
         </locale>
-            <locale name="brick.control.simplegooglemaps.settings.title">
-                <de><![CDATA[Title]]></de>
-                <en><![CDATA[Title]]></en>
-            </locale>
-            <locale name="brick.control.simplegooglemaps.settings.street">
-                <de><![CDATA[Straße]]></de>
-                <en><![CDATA[Street]]></en>
-            </locale>
-            <locale name="brick.control.simplegooglemaps.settings.zip">
-                <de><![CDATA[PLZ]]></de>
-                <en><![CDATA[ZIP code]]></en>
-            </locale>
-            <locale name="brick.control.simplegooglemaps.settings.city">
-                <de><![CDATA[Stadt]]></de>
-                <en><![CDATA[City]]></en>
-            </locale>
-            <locale name="brick.control.simplegooglemaps.settings.zoom">
-                <de><![CDATA[Zoom]]></de>
-                <en><![CDATA[Zoom]]></en>
-            </locale>
-            <locale name="brick.control.simplegooglemaps.settings.api">
-                <de><![CDATA[API Key]]></de>
-                <en><![CDATA[API Key]]></en>
-            </locale>
+        <locale name="brick.control.simplegooglemaps.settings.title">
+            <de><![CDATA[Title]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.street">
+            <de><![CDATA[Straße]]></de>
+            <en><![CDATA[Street]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.zip">
+            <de><![CDATA[PLZ]]></de>
+            <en><![CDATA[ZIP code]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.city">
+            <de><![CDATA[Stadt]]></de>
+            <en><![CDATA[City]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.zoom">
+            <de><![CDATA[Zoom]]></de>
+            <en><![CDATA[Zoom]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.api">
+            <de><![CDATA[API Key]]></de>
+            <en><![CDATA[API Key]]></en>
+        </locale>
 
         <!-- Box Content -->
         <locale name="bricks.BoxContent.title">
