@@ -99,6 +99,9 @@ define('package/quiqqer/bricks/bin/guides/General', [
         when    : {
             show: function () {
                 BricksMenuEntry.getElm().addEvent('click', Bricks.next);
+            },
+            hide: function () {
+                BricksMenuEntry.getElm().removeEvent('click', Bricks.next);
             }
         }
     });
@@ -128,6 +131,9 @@ define('package/quiqqer/bricks/bin/guides/General', [
             show: function () {
                 BrickPanel = QUI.Controls.getByType('package/quiqqer/bricks/bin/Manager')[0].getElm();
                 BrickPanel.getElement('[name="brick-add"]').addEvent('click', Bricks.next);
+            },
+            hide: function () {
+                BrickPanel.getElement('[name="brick-add"]').removeEvent('click', Bricks.next);
             }
         }
     });
@@ -318,7 +324,17 @@ define('package/quiqqer/bricks/bin/guides/General', [
         buttons : {
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
-                Bricks.next();
+                var Footer;
+                Footer = PopupBox2.getElements('.quiqqer-bricks-area.smooth');
+                Footer.forEach(function (Entry) {
+                    if (Entry.getAttribute('data-area') === "footer") {
+                        Footer = Entry;
+                    }
+                });
+                if (!Footer.getAttribute('class').includes('quiqqer-bricks-area-selected')){
+                    Footer.fireEvent('click');
+                }else{
+                    Bricks.next();}
             }
         },
         when    : {
@@ -360,7 +376,6 @@ define('package/quiqqer/bricks/bin/guides/General', [
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 PopupBox2.getElement('[name = "submit"]').fireEvent('click');
-                Bricks.next();
             }
         },
         when    : {
@@ -431,7 +446,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
                 BrickSettings.getElm().getElement('[name="save"]').addEvent('click', Bricks.next)
             },
             hide: function () {
-                BrickSettings.getElm().getElement('[name="save"]').removeEvent('click', Bricks.next)
+                BrickSettings.getElm().getElement('[name="save"]').removeEvent('click', Bricks.next);
             }
         }
     });
@@ -457,7 +472,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
         },
         when    : {
             show: function () {
-                BrickSettings.getElm().getElement('[name="close"]').addEvent('click', Bricks.next)
+                BrickSettings.getElm().getElement('[name="close"]').addEvent('click', Bricks.next);
             }
         }
     });
