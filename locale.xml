@@ -416,7 +416,7 @@
             <en><![CDATA[Add pages]]></en>
             <pl><![CDATA[Dodawanie stron]]></pl>
         </locale>
-        <locale name="sidebox3TitleTop.title">
+        <locale name="brick.control.sidebox3TitleTop.title">
             <de><![CDATA[Bausteine: 3 Seiten untereinander]]></de>
             <en><![CDATA[Bricks: 3 pages among themselves]]></en>
         </locale>

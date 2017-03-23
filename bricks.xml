@@ -81,10 +81,10 @@
         <!-- Children Listing Slider -->
         <brick control="\QUI\Bricks\Controls\Children\Slider">
             <title>
-                <locale group="quiqqer/bricks" var="brick.control.Slider.title"/>
+                <locale group="quiqqer/bricks" var="brick.control.slider.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="brick.control.Slider.description"/>
+                <locale group="quiqqer/bricks" var="brick.control.slider.description"/>
             </description>
             <settings>
                 <setting name="site" data-qui="controls/projects/project/site/Select">
