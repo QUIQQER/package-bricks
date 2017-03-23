@@ -61,7 +61,7 @@
         </locale>
         <locale name="brick.control.contact.title">
             <de><![CDATA[Bausteine: Einfaches Kontaktformular (QUIQQER)]]></de>
-            <en><![CDATA[Brick: Standard Contact form (Bricks]]]></en>
+            <en><![CDATA[Brick: Standard Contact form (Bricks)]]]></en>
         </locale>
         <locale name="brick.control.contact.description">
             <de><![CDATA[Ein vorgefertigtes Kontaktformular]]></de>
