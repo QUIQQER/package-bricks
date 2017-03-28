@@ -111,18 +111,24 @@ define('package/quiqqer/bricks/bin/Manager', [
          * Refresh the buttons status
          */
         refreshButtons: function () {
-            var selected  = this.$Grid.getSelectedData(),
-                AddButton = this.getButtons('brick-add'),
-                DelButton = this.getButtons('brick-delete');
+            var selected   = this.$Grid.getSelectedData(),
+                AddButton  = this.getButtons('brick-add'),
+                EditButton = this.getButtons('brick-edit'),
+                DelButton  = this.getButtons('brick-delete');
 
             if (!selected.length) {
                 AddButton.enable();
                 DelButton.disable();
+                EditButton.disable();
                 return;
             }
 
             AddButton.enable();
             DelButton.enable();
+
+            if (selected.length == 1) {
+                EditButton.enable();
+            }
 
             if (selected.length > 1) {
                 AddButton.disable();
@@ -159,10 +165,12 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.addButton(
                 new QUIButton({
-                    text    : QUILocale.get(lg, 'manager.button.add'),
-                    name    : 'brick-add',
-                    disabled: true,
-                    events  : {
+                    textimage: 'fa fa-plus',
+                    text     : QUILocale.get(lg, 'manager.button.add'),
+                    title    : QUILocale.get(lg, 'manager.button.add'),
+                    name     : 'brick-add',
+                    disabled : true,
+                    events   : {
                         onClick: this.$openCreateDialog
                     }
                 })
@@ -170,9 +178,30 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.addButton(
                 new QUIButton({
-                    text    : QUILocale.get(lg, 'manager.button.delete'),
+                    textimage: 'fa fa-edit',
+                    text     : QUILocale.get(lg, 'manager.button.edit'),
+                    title    : QUILocale.get(lg, 'manager.button.edit'),
+                    name     : 'brick-edit',
+                    disabled : true,
+                    events   : {
+                        onClick: function () {
+                            this.editBrick(
+                                this.$Grid.getSelectedData()[0].id
+                            );
+                        }.bind(this)
+                    }
+                })
+            );
+
+            this.addButton(
+                new QUIButton({
+                    icon    : 'fa fa-trash',
+                    title   : QUILocale.get(lg, 'manager.button.delete'),
                     name    : 'brick-delete',
                     disabled: true,
+                    styles  : {
+                        'float': 'right'
+                    },
                     events  : {
                         onClick: this.$openDeleteDialog
                     }

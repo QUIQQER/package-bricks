@@ -41,6 +41,7 @@
     overflow: hidden;
     padding: 0 !important;
     position: relative;
+    vertical-align: top;
     width: 100%;
 }
 

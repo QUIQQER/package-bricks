@@ -40,8 +40,8 @@
             <en><![CDATA[Bricks-Manager]]></en>
         </locale>
         <locale name="brick.content.title">
-            <de><![CDATA[Baustein: Inhalt]]></de>
-            <en><![CDATA[Brick:Content]]></en>
+            <de><![CDATA[Bausteine: Inhalt]]></de>
+            <en><![CDATA[Bricks: Content]]></en>
         </locale>
         <locale name="brick.content.description">
             <de><![CDATA[
@@ -52,16 +52,16 @@
             ]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.title">
-            <de><![CDATA[Bausteine: Bradcrumb]]></de>
-            <en><![CDATA[Bricks: Bradcrumb]]></en>
+            <de><![CDATA[Bausteine: Breadcrumb]]></de>
+            <en><![CDATA[Bricks: Breadcrumb]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.description">
             <de><![CDATA[Eine "Sie sind hier"-Anzeigenleiste über dem Inhalt]]></de>
             <en><![CDATA[A "You are here ..." list above the content]]></en>
         </locale>
         <locale name="brick.control.contact.title">
-            <de><![CDATA[Bausteine: Einfaches Kontaktformular]]></de>
-            <en><![CDATA[Brick: Standard Contact form]]></en>
+            <de><![CDATA[Bausteine: Einfaches Kontaktformular (QUIQQER)]]></de>
+            <en><![CDATA[Brick: Standard Contact form (Bricks)]]]></en>
         </locale>
         <locale name="brick.control.contact.description">
             <de><![CDATA[Ein vorgefertigtes Kontaktformular]]></de>
@@ -72,8 +72,8 @@
         <!-- Simple contact form as brick (new) -->
 
         <locale name="brick.control.simpleContact.title">
-            <de><![CDATA[Bausteine: Einfaches Kontaktformular]]></de>
-            <en><![CDATA[Bricks: Simple contact form]]></en>
+            <de><![CDATA[Bausteine: Einfaches Kontaktformular (Bricks]]></de>
+            <en><![CDATA[Bricks: Simple contact form (Bricks]]]></en>
         </locale>
         <locale name="brick.control.simpleContact.description">
             <de><![CDATA[Ein vorgefertigtes Kontaktformular]]></de>
@@ -349,16 +349,19 @@
             <en><![CDATA[fixed]]></en>
         </locale>
         <locale name="brick.control.promoslider.image-wallpaper-size">
-            <de><![CDATA[Wallpaper-Größe]]></de>
-            <en><![CDATA[Wallpaper size]]></en>
+            <de><![CDATA[Bild Verhalten]]></de>
+            <en><![CDATA[Image behavior]]></en>
+            <pl><![CDATA[Zachowanie obrazka]]></pl>
         </locale>
         <locale name="brick.control.promoslider.image-wallpaper-size.cover">
-            <de><![CDATA[Vollständig abdecken]]></de>
-            <en><![CDATA[]]></en>
+            <de><![CDATA[Gesamte Fläche ausfüllen]]></de>
+            <en><![CDATA[Fill the whole area]]></en>
+            <pl><![CDATA[Wypełnić całą dostępną przestrzeń]]></pl>
         </locale>
         <locale name="brick.control.promoslider.image-wallpaper-size.contain">
-            <de><![CDATA[Vollständig sichtbar]]></de>
-            <en><![CDATA[]]></en>
+            <de><![CDATA[Bild vollständig anzeigen]]></de>
+            <en><![CDATA[Show total image]]></en>
+            <pl><![CDATA[Pokaż cały obrazek]]></pl>
         </locale>
         <locale name="brick.control.promoslider.settings">
             <de><![CDATA[Slide Einstellungen]]></de>
@@ -413,7 +416,7 @@
             <en><![CDATA[Add pages]]></en>
             <pl><![CDATA[Dodawanie stron]]></pl>
         </locale>
-        <locale name="sidebox3TitleTop.title">
+        <locale name="brick.control.sidebox3TitleTop.title">
             <de><![CDATA[Bausteine: 3 Seiten untereinander]]></de>
             <en><![CDATA[Bricks: 3 pages among themselves]]></en>
         </locale>
@@ -590,6 +593,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Baustein hinzufügen]]></de>
             <en><![CDATA[Add a Brick]]></en>
         </locale>
+        <locale name="manager.button.edit">
+            <de><![CDATA[Baustein bearbeiten]]></de>
+            <en><![CDATA[Edit a Brick]]></en>
+        </locale>
         <locale name="manager.button.delete">
             <de><![CDATA[Markierte Bausteine löschen]]></de>
             <en><![CDATA[Delete marked Bricks]]></en>
@@ -738,8 +745,8 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <!-- Content Switcher -->
         <locale name="bricks.ContentSwitcher.title">
             <de><![CDATA[Bausteine: Inhalt-Wechsel]]></de>
-            <en><![CDATA[Content with image]]></en>
-            <pl><![CDATA[Content Switcher: treść i zdjęcie]]></pl>
+            <en><![CDATA[Bricks Content with image]]></en>
+            <pl><![CDATA[Bricks: Content Switcher: treść i zdjęcie]]></pl>
         </locale>
         <locale name="bricks.ContentSwitcher.description">
             <de><![CDATA[Inhalt und Bild werden links und rechts abwechselnd angezeigt]]></de>
@@ -756,10 +763,6 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Start with picture on the left]]></en>
             <pl><![CDATA[Zacznij z obrazkiem z lewej strony]]></pl>
         </locale>
-        <locale name="brick.control.image.title">
-            <de><![CDATA[Bausteine: Bild-Banner]]></de>
-            <en><![CDATA[Bricks: Image-Banner]]></en>
-        </locale>
         <locale name="ContentSwitcher.entries">
             <de><![CDATA[Einträge]]></de>
             <en><![CDATA[Entries]]></en>
@@ -769,12 +772,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <!-- Simple Google Maps -->
         <locale name="brick.control.simplegooglemaps.title">
             <de><![CDATA[Bausteine: Einfache Google Maps Karte]]></de>
-            <en><![CDATA[Brick: Simple Google Maps]]></en>
+            <en><![CDATA[Bricks: Simple Google Maps]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.description">
             <de><![CDATA[Einstellungen für Karten]]></de>
             <en><![CDATA[Maps settings]]></en>
         </locale>
+        <locale name="brick.control.simplegooglemaps.clickToActivate">
+            <de><![CDATA[Zum Aktivieren klicken]]></de>
+            <en><![CDATA[Click to activate]]></en>
+            <pl><![CDATA[Kliknij, zeby aktywowac]]></pl>
+        </locale>
+
         <locale name="brick.control.simplegooglemaps.settings.place">
             <de><![CDATA[Google Place]]></de>
             <en><![CDATA[Google Place]]></en>
@@ -806,12 +815,12 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
 
         <!-- Box Content -->
         <locale name="bricks.BoxContent.title">
-            <de><![CDATA[Inhalt in Boxen]]></de>
-            <en><![CDATA[]]></en>
+            <de><![CDATA[Bausteine: Inhalt in Boxen]]></de>
+            <en><![CDATA[Bricks: Text in boxes]]></en>
         </locale>
         <locale name="bricks.BoxContent.description">
             <de><![CDATA[Inhalte werden in Boxen nebeneinander gestellt und zentriert]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Show the text in boxes, which are in a single line.]]></en>
         </locale>
         <locale name="BoxContent.entries">
             <de><![CDATA[Einträge]]></de>
@@ -819,28 +828,28 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
 
         <!-- Image Brick -->
-        <locale name="bricks.Image.link">
-            <de><![CDATA[Bausteine: Bildbanner]]></de>
-            <en><![CDATA[Bricks: Image banner]]></en>
+        <locale name="bricks.control.image.title">
+            <de><![CDATA[Bausteine: Bild-Banner]]></de>
+            <en><![CDATA[Bricks: Image-Banner]]></en>
         </locale>
-        <locale name="Image.link">
+        <locale name="bricks.control.image.description">
+            <de><![CDATA[Einzelnes Bild hinzufügen und ggf. mit einem Link versehen.]]></de>
+            <en><![CDATA[The brick makes it possible to add a single picture with a hyper link, if you want.]]></en>
+        </locale>
+        <locale name="bricks.control.image.link">
             <de><![CDATA[Link]]></de>
             <en><![CDATA[Hyperlink]]></en>
         </locale>
-        <locale name="Image.title">
-            <de><![CDATA[Baustein-Überschrift]]></de>
-            <en><![CDATA[Brick title]]></en>
-        </locale>
-        <locale name="Image.picture">
+        <locale name="bricks.control.image.picture">
             <de><![CDATA[Bild auswählen]]></de>
             <en><![CDATA[Select image]]></en>
         </locale>
 
         <!-- sites listing -->
         <locale name="bricks.list.title">
-            <de><![CDATA[Seitenliste]]></de>
-            <en><![CDATA[Site list]]></en>
-            <pl><![CDATA[Lista stron / wpisów]]></pl>
+            <de><![CDATA[Bausteine: Seitenliste]]></de>
+            <en><![CDATA[Bricks: Site list]]></en>
+            <pl><![CDATA[Bricks: Lista stron / wpisów]]></pl>
         </locale>
         <locale name="bricks.list.description">
             <de><![CDATA[Stellt eine Liste von Seiten dar, die man als Baustein überall
@@ -856,15 +865,15 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Layout]]></en>
             <pl><![CDATA[Layout]]></pl>
         </locale>
-        <locale name="brick.listTemplate.standardList">
-            <de><![CDATA[Standard (Sidebar)]]></de>
-            <en><![CDATA[Standard (sidebar)]]></en>
-            <pl><![CDATA[Standardowy (sidebar)]]></pl>
+        <locale name="brick.listTemplate.imageTop">
+            <de><![CDATA[Bild oben]]></de>
+            <en><![CDATA[Picture top]]></en>
+            <pl><![CDATA[Zdjęcie na górze]]></pl>
         </locale>
-        <locale name="brick.listTemplate.listWithBorder">
-            <de><![CDATA[Mit Rahmen (Sidebar)]]></de>
-            <en><![CDATA[Border (sidebar)]]></en>
-            <pl><![CDATA[Z ramką (sidebar)]]></pl>
+        <locale name="brick.listTemplate.imageTopBorder">
+            <de><![CDATA[Bild oben (mit Rahmen)]]></de>
+            <en><![CDATA[Picture top (with border)]]></en>
+            <pl><![CDATA[Zdjęcie na górze (z ramką)]]></pl>
         </locale>
         <locale name="brick.listTemplate.simpleArticleList">
             <de><![CDATA[Einfache Artikel-Liste (Sidebar)]]></de>
@@ -938,28 +947,188 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.showDate">
             <de><![CDATA[Datum anzeigen]]></de>
             <en><![CDATA[Show date]]></en>
-            <pl><![CDATA[Pokaż datę publikacji]]></pl>
+            <pl><![CDATA[Pokaż datę]]></pl>
         </locale>
 
         <!-- show time -->
         <locale name="brick.showTime">
             <de><![CDATA[Uhrzeit anzeigen]]></de>
             <en><![CDATA[Show time]]></en>
-            <pl><![CDATA[Pokaż godzinę publikacji]]></pl>
+            <pl><![CDATA[Pokaż godzinę]]></pl>
         </locale>
 
         <!-- show images -->
         <locale name="brick.showImages">
             <de><![CDATA[Bild anzeigen]]></de>
             <en><![CDATA[Show image]]></en>
-            <pl><![CDATA[Pokaż zdjęcie artykułów]]></pl>
+            <pl><![CDATA[Pokaż zdjęcie]]></pl>
         </locale>
 
 
         <locale name="bricks.sectionTitle">
-            <de><![CDATA[Letzte News]]></de>
-            <en><![CDATA[Last News]]></en>
-            <pl><![CDATA[Ostatnie newsy]]></pl>
+            <de><![CDATA[Bausteine: Letzte News]]></de>
+            <en><![CDATA[Bricks: Last News]]></en>
+            <pl><![CDATA[Bricks: Ostatnie newsy]]></pl>
         </locale>
+
+        <!-- Tour Data -->
+        <locale name="tour.general.BricksTitle">
+            <de><![CDATA[Bausteine]]></de>
+            <en><![CDATA[Bricks]]></en>
+        </locale>
+        <locale name="tour.general.BricksDescription">
+            <de><![CDATA[Bausteine ermöglichen es dir, deine Webseite selbst nach deinen Wünschen zu gestalten. Sie füllst du die Zonen eines Templates mit verschiedenen Elementen, wie zum Beispiel einer Galerie, einem Kontaktformular, Bild-/Textbannern, Referenzen, News und vielem mehr.]]></de>
+            <en><![CDATA[Bricks enable you to design your Web-page by filling diffrent Zones of a template with various elements like a gallery, a contact-forumla, Image-/Textbanners, References, News and many more. ]]></en>
+        </locale>
+
+        <!-- General -->
+        <locale name="tour.general.bricks.Step1.Title">
+            <de><![CDATA[Bausteine]]></de>
+            <en><![CDATA[Bricks]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step1_1.Text">
+            <de><![CDATA[Willkommen in der <b>Bausteine-Tour</b>. <br/><br/> Fertige Bausteine werden in Template-Zonen eingesetzt. Diese können sich von Template zu Template unterscheiden. <br/> <br/> Nehmen Sie sich die Zeit folgendes Bild kurz zu studieren. Es zeigt die Bezeichnung der einzelnen Zonen. Mit einem Klick darauf lässt es sich vergrössern. <br/>]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step1_2.Text">
+            <de><![CDATA[<br/><br/> <a target="_blank" href="https://www.quiqqer.com/Entdecken/Was-kann-QUIQQER/Das-bringt-es-mit/Bausteine">FAQ - Bausteinzonen</a> ]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step2.Text">
+            <de><![CDATA[Zunächst werden wir einen eigenen Baustein erstellen. <br/> Das Menü für die Verwaltung von Bausteinen finden sie unter <b>Verwaltung</b>]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step3.Text">
+            <de><![CDATA[Wählen Sie den Menüpunkt <b>Bausteine</b>...]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step4.Text">
+            <de><![CDATA[Willkommen im Baustein-Bedienungsfeld.<br/> Hier können Sie mittels einer Auflistung Ihre Bausteine verwalten.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step5.Text">
+            <de><![CDATA[Klicken Sie auf <b>Baustein hinzufügen</b> um einen Baustein zu erstellen.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step6.Text">
+            <de><![CDATA[Wie Sie sehen hat sich ein Pop-Up geöffnet, das Sie auffordert <b>Titel</b> und <b>Typ</b> des Bausteins zu wählen...]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step7.Text">
+            <de><![CDATA[Wählen Sie aus der Liste z.B. den <b>Baustein:<br/> Einfaches Kontaktformular</b> ...]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step8.Text">
+            <de><![CDATA[Wählen Sie nun einen eingängigen Titel für diesen Baustein]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step9.Text">
+            <de><![CDATA[Mit einen Klick auf <b>Übernehmen</b> bestätigen Sie Ihre Eingaben.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step10.Text">
+            <de><![CDATA[Abschließend werden Sie automatisch in das Bedienfeld des neu-erstellten Bausteins navigiert]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step11.Text">
+            <de><![CDATA[Unter dem  Menüeintrag <b>Information</b> finden Sie: <ul> <li>erneut die Angabe zum <b>Titel</b> des Bausteins</li><li>die Möglichkeit eine <b>Beschreibung</b> zu hinterlegen</li><li>und einen Vermerk von welchem <b>Bausteintyp </b> der Baustein ist</li> </ul>]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step12_1.Text">
+            <de><![CDATA[Unter dem  Menüeintrag <b>Eigenschaften</b> können Sie festlegen: <ul> <li>Welche <b>Zonen</b> den Baustein aufnehmen können sollen</li><li>Welche Einstellungen von Benutzern des Inhaltsverwaltungssystem (CMS) geändert werden dürfen </li> </ul>]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step12_2.Text">
+            <de><![CDATA[Klicken sie auf <b>Bausteinzone hinzufügen</b> ...  ]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step12_3.Text">
+            <de><![CDATA[Das <b>Bausteinzonen-Popup</b> gibt ihnen eine Übersicht über alle verfügbaren Bausteinzonen. Mit gedrückter <b>STRG</b>-Taste ist eine Mehrfachauswahl möglich.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step12_4.Text">
+            <de><![CDATA[Jedoch wählen wir für dieses Beispiel die <b>Footer Bausteinzone</b> ...]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step12_5.Text">
+            <de><![CDATA[... und Bestätigen die Änderung mit <b>Übernehmen</b> ]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step13.Text">
+            <de><![CDATA[Die <b>Einstellungen </b> sind Bausteinspezifisch. D.h. je nach Bausteintyp sind verschiedene Einstellungen verfügbar. Diese beinhalten ua.: <ul> <li>den <b>Titel</b> benutzerseitig ändern</li><li>Die <b>Größe des Bausteins</b> über Höhe und Breite bestimmen</li><li>Spezielle <b>CSS</b> Klassen anfügen (besonders mächtig in Verbindung mit Custom CSS)</li>  <li>Bei Google-Maps Baustein: kommen  beispielsweise Einstellungen zu Straße PLZ und Stadt und Zoom hinzu.</li></ul>]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step14.Text">
+            <de><![CDATA[Unter dem  Menüeintrag <b>Inhalt</b> befindet sich ein WYSIWYG-Editor mit dem Sie die Inhalte dieses Bausteins gestalten können.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step15.Text">
+            <de><![CDATA[Vergessen Sie nicht Ihre Einstellungen abschließend zu <b>speichern</b> ...]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step16.Text">
+            <de><![CDATA[um anschließend die Bearbeitungsoberfläche für diesen Baustein schließen.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step17.Text">
+            <de><![CDATA[Jetzt können wir unser Kontaktformular in die festgelegten Zonen einer Website einfügen. <br/>Dazu begeben wir uns in die Startseite ihres Standart-Projektes (<b>Main-Project</b>)]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step18.Text">
+            <de><![CDATA[Hier wählen wir den Menü-Punkt <b>Bausteine</b>.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step19.Text">
+            <de><![CDATA[Um das Erstellte Kontaktformular nun in die Fußzeile (Footer) der Startseite einzufügen, klicken Sie bitte hier. ]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step20.Text">
+            <de><![CDATA[Wählen sie hier ihr Kontaktformular aus indem Sie darauf klicken.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step21.Text">
+            <de><![CDATA[Anschließend können wir noch die <b>Vererbungseinstellungen</b> des Bausteins bearbeiten.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step22.Text">
+            <de><![CDATA[Wenn sie hier ein Häkchen setzten, erben alle Kinder dieser Seite diesen Baustein im Footer. <br/> In diesem Fall sind dieß alle Seiten des Projektes, da Seiten des Projektes Unterseiten der Startseite sind.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step23.Text">
+            <de><![CDATA[Übernehmen sie die Einstellungen.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step24.Text">
+            <de><![CDATA[Hier können sie den Baustein wieder aus der Seite <b>entfernen</b>.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step25.Text">
+            <de><![CDATA[Sie können die <b>Preview-Funktion</b> nutzen um zu sehen was sich an ihrer seite verändert hat ]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step26.Text">
+            <de><![CDATA[Gefällt Ihnen die Implemenation Ihres Bausteines?<br/> Dann vergessen Sie nicht die Änderungen zu <b>speichern</b> ]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step26.Text">
+            <de><![CDATA[<b>Gratulation</b>. <br/>Sie haben erfolgreich die Bausteine-Tour absolviert ]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+
+        <!-- Bricks Buttons -->
+        <locale name="tour.general.bricks.Button.Ende">
+            <de><![CDATA[Ende]]></de>
+            <en><![CDATA[Exit]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Button.Abbruch">
+            <de><![CDATA[Abbruch]]></de>
+            <en><![CDATA[Cancel]]></en>
+        </locale>
+
+        <locale name="tour.general.bricks.Button.Weiter">
+            <de><![CDATA[Weiter]]></de>
+            <en><![CDATA[Continue]]></en>
+        </locale>
+
     </groups>
 </locales>

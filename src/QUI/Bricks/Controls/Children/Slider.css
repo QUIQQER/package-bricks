@@ -16,7 +16,8 @@
     float: left;
     /*height: calc(100% + 22px);*/
     left: 0;
-    overflow: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
     position: absolute;
     top: 0;
     width: 100%;

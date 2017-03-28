@@ -69,6 +69,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
             this.$scrollLength = (size.x / 1.2).round();
             this.$scrollMax    = this.$Inner.getScrollSize().x - size.x;
             this.$icons.setStyle('line-height', size.y);
+            this.$onScroll();
         },
 
         /**
@@ -76,7 +77,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          */
         $onImport: function () {
             var Elm  = this.getElm(),
-            // var Elm  = this.getElm().getElement('.wrapper').getElement('.quiqqer-bricks-children-slider-container'),
+                // var Elm  = this.getElm().getElement('.wrapper').getElement('.quiqqer-bricks-children-slider-container'),
                 size = Elm.getSize();
 
             this.$Next = new Element('div', {
@@ -121,10 +122,8 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
             this.$NextFX = moofx(this.$Next);
             this.$PrevFX = moofx(this.$Prev);
 
-            this.showNextButton.delay(200, this);
-
             // calc scrolling vars
-            this.resize();
+            this.resize.delay(200, this);
 
             if (!this.$icons || !this.$icons.length) {
                 return;
@@ -265,6 +264,15 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          */
         $onScroll: function () {
             var left = this.$Inner.getScroll().x;
+
+            var scrollSize = this.$Inner.getScrollSize().x;
+            var domSize    = this.$Inner.getSize().x;
+
+            if (scrollSize <= domSize) {
+                this.hidePrevButton();
+                this.hideNextButton();
+                return;
+            }
 
             if (left === 0) {
                 this.hidePrevButton();

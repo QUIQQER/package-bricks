@@ -21,8 +21,8 @@ Installation
 Der Paketname ist: quiqqer/bricks
 
 Nutzung des Simple Google Maps Baustein:
-- GoogleMap Key: https://console.developers.google.com/apis/library
-- Benötigtte APIS:  Google Maps Embed API, Google Maps JavaScript API, Google Static Maps API 
+- Google Maps Key: https://console.developers.google.com/apis/library
+- Benötigte API's:  Google Maps Embed API, Google Maps JavaScript API, Google Static Maps API 
 
 
 Mitwirken
@@ -36,9 +36,10 @@ Mitwirken
 Support
 -------
 
-Falls Sie ein Fehler gefunden haben oder Verbesserungen wünschen,
-Dann können Sie gerne an support@pcsg.de eine E-Mail schreiben.
-
+Falls Sie Fehler gefunden, Wünsche oder Verbesserungsvorschläge haben, 
+können Sie uns gern per Mail an support@pcsg.de darüber informieren.  
+Wir werden versuchen auf Ihre Wünsche einzugehen bzw. diese an die zuständigen Entwickler 
+des Projektes weiterleiten.
 
 License
 -------
@@ -48,7 +49,7 @@ GPL-3.0+
 Entwickler
 --------
 
-PHP - Eigenen Baustein
+PHP - Custom Baustein
 
 ```php
 <?php

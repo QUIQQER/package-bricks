@@ -1,0 +1,14 @@
+<quiqqer>
+    <tours>
+        <tour require="package/quiqqer/bricks/bin/guides/General">
+            <title>
+                <locale group="quiqqer/bricks" var="tour.general.BricksTitle"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="tour.general.BricksDescription"/>
+            </description>
+
+            <icon/>
+        </tour>
+    </tours>
+</quiqqer>

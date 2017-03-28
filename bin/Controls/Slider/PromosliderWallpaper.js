@@ -18,7 +18,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
+        Type: 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
 
         Binds: [
             'onResize',
@@ -31,14 +31,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
         ],
 
         options: {
-            autostart     : true,
-            delay         : 5000,
+            autostart: true,
+            delay: 5000,
             shownavigation: true,
-            shownarrows   : true,
+            shownarrows: true,
 
-            height          : false,
-            pagefit         : false,
-            pagefitcut      : 0,
+            height: false,
+            pagefit: false,
+            pagefitcut: 0,
             pagefitcutmobile: 0
         },
 
@@ -46,22 +46,22 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             this.parent(options);
 
             this.$Container = null;
-            this.$Next      = null;
-            this.$Previous  = null;
-            this.$Dots      = null;
-            this.$List      = null;
+            this.$Next = null;
+            this.$Previous = null;
+            this.$Dots = null;
+            this.$List = null;
 
-            this.$width     = 0;
+            this.$width = 0;
             this.$maxScroll = 0;
             this.$scrolling = false;
-            this.$mobile    = (QUI.getWindowSize().x <= 768);
+            this.$mobile = (QUI.getWindowSize().x <= 768);
 
-            this.$childrenCount     = 0;
+            this.$childrenCount = 0;
             this.$scrollOnMouseMove = false;
-            this.$orientation       = false; // landscape / portrait
+            this.$orientation = false; // landscape / portrait
 
             this.addEvents({
-                onImport : this.$onImport,
+                onImport: this.$onImport,
                 onDestroy: function () {
                     QUI.removeEvent('resize', this.$onWindowResize);
                 }.bind(this)
@@ -80,10 +80,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             this.$width = Elm.getSize().x;
 
             this.$Container = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-container');
-            this.$Next      = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-next');
-            this.$Previous  = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-prev');
-            this.$Dots      = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-dots');
-            this.$List      = this.$setCurrentSlideList();
+            this.$Next = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-next');
+            this.$Previous = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-prev');
+            this.$Dots = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-dots');
+            this.$List = this.$setCurrentSlideList();
 
             this.$Scroll = moofx(this.$List, {
                 duration: 250
@@ -97,10 +97,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             this.$Container.set('tabindex', -1);
 
             // dragable scroll
-            var startScroll    = 0,
+            var startScroll = 0,
                 lastScrollLeft = 0,
-                lastClientX    = 0,
-                musewheelRuns  = false;
+                lastClientX = 0,
+                musewheelRuns = false;
 
             this.$Container.addEvents({
                 touchstart: function (event) {
@@ -122,17 +122,17 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                     this.$scrolling = true;
 
-                    startScroll    = event.page.x;
+                    startScroll = event.page.x;
                     lastScrollLeft = this.$getYPosition() * -1;
 
                     var transition = 'all 0s';
 
                     this.$List.setStyles({
                         "-webkit-transition": transition,
-                        "-moz-transition"   : transition,
-                        "-o-transition"     : transition,
-                        "-ms-transition"    : transition,
-                        transition          : transition
+                        "-moz-transition": transition,
+                        "-o-transition": transition,
+                        "-ms-transition": transition,
+                        transition: transition
                     });
 
                     this.stop();
@@ -152,7 +152,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                         musewheelRuns = true;
                         event.stop();
                         this.$scrollOnMouseMove = false;
-                        this.$scrolling         = true;
+                        this.$scrolling = true;
                         this.stop();
                         this.next().then(function () {
                             musewheelRuns = false;
@@ -164,7 +164,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                         event.stop();
                         this.$scrollOnMouseMove = false;
-                        this.$scrolling         = true;
+                        this.$scrolling = true;
                         this.stop();
                         this.previous().then(function () {
                             musewheelRuns = false;
@@ -175,7 +175,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 keyup: function (event) {
                     if (event.key === 'left') {
                         event.stop();
-                        this.$scrolling         = true;
+                        this.$scrolling = true;
                         this.$scrollOnMouseMove = false;
 
                         this.previous().then(function () {
@@ -187,7 +187,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                     if (event.key === 'right') {
                         event.stop();
-                        this.$scrolling         = true;
+                        this.$scrolling = true;
                         this.$scrollOnMouseMove = false;
 
                         this.next().then(function () {
@@ -221,7 +221,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                     event.stop();
 
-                    this.$scrolling         = false;
+                    this.$scrolling = false;
                     this.$scrollOnMouseMove = false;
 
                     lastClientX = 0;
@@ -270,7 +270,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                         return;
                     }
 
-                    var diff  = event.page.x - startScroll;
+                    var diff = event.page.x - startScroll;
                     var value = Math.round(-lastScrollLeft + diff);
 
                     if (Math.abs(diff) < 10) {
@@ -281,10 +281,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                     this.$List.setStyles({
                         "-webkit-transform": transform,
-                        "-moz-transform"   : transform,
-                        "-o-transform"     : transform,
-                        "-ms-transform"    : transform,
-                        transform          : transform
+                        "-moz-transform": transform,
+                        "-o-transform": transform,
+                        "-ms-transform": transform,
+                        transform: transform
                     });
                 }.bind(this),
 
@@ -322,7 +322,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 this.$Next.addEvent('click', function (event) {
                     event.stop();
                     this.$scrollOnMouseMove = false;
-                    this.$scrolling         = true;
+                    this.$scrolling = true;
                     this.stop();
                     this.next();
                 }.bind(this));
@@ -332,7 +332,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 this.$Previous.addEvent('click', function (event) {
                     event.stop();
                     this.$scrollOnMouseMove = false;
-                    this.$scrolling         = true;
+                    this.$scrolling = true;
                     this.stop();
                     this.previous();
                 }.bind(this));
@@ -368,7 +368,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
             var oldMobileStatus = this.$mobile;
 
-            this.$width  = this.getElm().getSize().x;
+            this.$width = this.getElm().getSize().x;
             this.$mobile = (QUI.getWindowSize().x <= 768);
 
             if (oldMobileStatus != this.$mobile) {
@@ -387,7 +387,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
          * @returns {Promise}
          */
         onResize: function () {
-            var orientation     = this.$orientation,
+            var orientation = this.$orientation,
                 newOritentation = this.$getOrientation();
 
             if (this.getAttribute('pagefit') && orientation != newOritentation) {
@@ -462,13 +462,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
          * @return {Promise}
          */
         next: function () {
-            var left = this.$List.getBoundingClientRect().left * -1;
-
-            var slideNo = Math.round(
-                (left + this.$width) / this.$width
+            var currentSlide = Math.round(
+                (this.$getYPosition() * -1) / this.$width
             );
 
-            return this.show(slideNo);
+            return this.show(currentSlide + 1);
         },
 
         /**
@@ -477,13 +475,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
          * @return {Promise}
          */
         previous: function () {
-            var left = this.$List.getBoundingClientRect().left * -1;
-
-            var slideNo = Math.round(
-                (left - this.$width) / this.$width
+            var currentSlide = Math.round(
+                (this.$getYPosition() * -1) / this.$width
             );
 
-            return this.show(slideNo);
+            return this.show(currentSlide - 1);
         },
 
         /**
@@ -501,7 +497,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                     return this.show(this.$childrenCount - 1).then(resolve);
                 }
 
-                var left     = this.$List.getBoundingClientRect().left,
+                var left = this.$getYPosition(),
                     scrollTo = slideNo * this.$width * -1;
 
                 if (left == scrollTo) {
@@ -510,7 +506,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                     return;
                 }
 
-                if (-scrollTo > this.$maxScroll) {
+                if (-scrollTo > this.$maxScroll + (this.$width / 2)) {
                     // go to the first
                     return this.show(0).then(resolve);
                 }
@@ -524,21 +520,21 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 }
 
                 var transduration = Math.round(duration * 10 / 10) / 1000;
-                var transform     = 'translate3d(' + scrollTo + 'px, 0, 0)';
-                var transition    = 'all ' + transduration + 's ease-out 0s';
+                var transform = 'translate3d(' + scrollTo + 'px, 0, 0)';
+                var transition = 'all ' + transduration + 's ease-out 0s';
 
                 this.$List.setStyles({
                     "-webkit-transition": transition,
-                    "-moz-transition"   : transition,
-                    "-o-transition"     : transition,
-                    "-ms-transition"    : transition,
-                    transition          : transition,
+                    "-moz-transition": transition,
+                    "-o-transition": transition,
+                    "-ms-transition": transition,
+                    transition: transition,
 
                     "-webkit-transform": transform,
-                    "-moz-transform"   : transform,
-                    "-o-transform"     : transform,
-                    "-ms-transform"    : transform,
-                    transform          : transform
+                    "-moz-transform": transform,
+                    "-o-transform": transform,
+                    "-ms-transform": transform,
+                    transform: transform
                 });
 
                 (function () {
@@ -554,9 +550,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
          * shows the correct dot
          */
         $checkdotPosition: function () {
-            var left  = this.$List.getBoundingClientRect().left * -1;
+            var left = this.$List.getBoundingClientRect().left * -1;
             var count = Math.round(left / this.$width);
-            var Dot   = this.$Dots.getElement(':nth-child(' + (count + 1) + ')');
+            var Dot = this.$Dots.getElement(':nth-child(' + (count + 1) + ')');
 
             if (!Dot || Dot.hasClass('quiqqer-bricks-promoslider-wallpaper-dot-active')) {
                 return;
@@ -574,14 +570,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
          */
         $showSheet: function (slideNo) {
             var liCount = parseInt(slideNo) + 1;
-            var Slide   = this.$List.getElement('li:nth-child(' + liCount + ')');
+            var Slide = this.$List.getElement('li:nth-child(' + liCount + ')');
 
             if (!Slide) {
                 return;
             }
 
             var Background = Slide.getElement('.quiqqer-bricks-promoslider-wallpaper-image');
-            var display    = Background.getStyle('display');
+            var display = Background.getStyle('display');
 
             if (display !== 'none') {
                 return;
@@ -682,9 +678,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
                 for (var i = 0, len = liList.length; i < len; i++) {
                     new Element('span', {
-                        'class'     : 'quiqqer-bricks-promoslider-wallpaper-dot',
+                        'class': 'quiqqer-bricks-promoslider-wallpaper-dot',
                         'data-index': i,
-                        events      : {
+                        events: {
                             click: dotClick
                         }
                     }).inject(this.$Dots);
