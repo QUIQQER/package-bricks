@@ -43,6 +43,10 @@ class Utils
         }
 
         foreach ($bricks as $Brick) {
+            if ($Brick->getAttribute('control') == '*') {
+                continue;
+            }
+
             $list[] = self::parseAreaToArray($Brick, $Path);
         }
 
