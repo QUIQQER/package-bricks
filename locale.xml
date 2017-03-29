@@ -61,7 +61,7 @@
         </locale>
         <locale name="brick.control.contact.title">
             <de><![CDATA[Bausteine: Einfaches Kontaktformular (QUIQQER)]]></de>
-            <en><![CDATA[Brick: Standard Contact form (Bricks]]]></en>
+            <en><![CDATA[Brick: Standard Contact form (Bricks)]]]></en>
         </locale>
         <locale name="brick.control.contact.description">
             <de><![CDATA[Ein vorgefertigtes Kontaktformular]]></de>
@@ -416,7 +416,7 @@
             <en><![CDATA[Add pages]]></en>
             <pl><![CDATA[Dodawanie stron]]></pl>
         </locale>
-        <locale name="sidebox3TitleTop.title">
+        <locale name="brick.control.sidebox3TitleTop.title">
             <de><![CDATA[Bausteine: 3 Seiten untereinander]]></de>
             <en><![CDATA[Bricks: 3 pages among themselves]]></en>
         </locale>
@@ -763,10 +763,6 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Start with picture on the left]]></en>
             <pl><![CDATA[Zacznij z obrazkiem z lewej strony]]></pl>
         </locale>
-        <locale name="brick.control.image.title">
-            <de><![CDATA[Bausteine: Bild-Banner]]></de>
-            <en><![CDATA[Bricks: Image-Banner]]></en>
-        </locale>
         <locale name="ContentSwitcher.entries">
             <de><![CDATA[Einträge]]></de>
             <en><![CDATA[Entries]]></en>
@@ -832,15 +828,19 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
 
         <!-- Image Brick -->
-        <locale name="bricks.Image.link">
-            <de><![CDATA[Bausteine: Bildbanner]]></de>
-            <en><![CDATA[Bricks: Image banner]]></en>
+        <locale name="bricks.control.image.title">
+            <de><![CDATA[Bausteine: Bild-Banner]]></de>
+            <en><![CDATA[Bricks: Image-Banner]]></en>
         </locale>
-        <locale name="bricks.Image.link">
+        <locale name="bricks.control.image.description">
+            <de><![CDATA[Einzelnes Bild hinzufügen und ggf. mit einem Link versehen.]]></de>
+            <en><![CDATA[The brick makes it possible to add a single picture with a hyper link, if you want.]]></en>
+        </locale>
+        <locale name="bricks.control.image.link">
             <de><![CDATA[Link]]></de>
             <en><![CDATA[Hyperlink]]></en>
         </locale>
-        <locale name="bricks.Image.picture">
+        <locale name="bricks.control.image.picture">
             <de><![CDATA[Bild auswählen]]></de>
             <en><![CDATA[Select image]]></en>
         </locale>

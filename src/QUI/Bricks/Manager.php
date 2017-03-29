@@ -251,10 +251,20 @@ class Manager
             $result = array_merge($result, Utils::getBricksFromXML($bricksXML));
         }
 
-        QUI\Cache\Manager::set($cache, $result);
+        $result = array_filter($result, function ($brick) {
+            return !empty($brick['title']);
+        });
 
+        // js workaround
+        $list = array();
 
-        return $result;
+        foreach ($result as $entry) {
+            $list[] = $entry;
+        }
+
+        QUI\Cache\Manager::set($cache, $list);
+
+        return $list;
     }
 
     /**

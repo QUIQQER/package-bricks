@@ -42,7 +42,12 @@ class Utils
             return $list;
         }
 
+        /* @var $Brick \DOMElement */
         foreach ($bricks as $Brick) {
+            if ($Brick->getAttribute('control') == '*') {
+                continue;
+            }
+
             $list[] = self::parseAreaToArray($Brick, $Path);
         }
 

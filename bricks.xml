@@ -81,10 +81,10 @@
         <!-- Children Listing Slider -->
         <brick control="\QUI\Bricks\Controls\Children\Slider">
             <title>
-                <locale group="quiqqer/bricks" var="brick.control.Slider.title"/>
+                <locale group="quiqqer/bricks" var="brick.control.slider.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="brick.control.Slider.description"/>
+                <locale group="quiqqer/bricks" var="brick.control.slider.description"/>
             </description>
             <settings>
                 <setting name="site" data-qui="controls/projects/project/site/Select">
@@ -498,19 +498,19 @@
         <!-- Image Brick -->
         <brick control="\QUI\Bricks\Controls\Image">
             <title>
-                <locale group="quiqqer/bricks" var="bricks.Image.title"/>
+                <locale group="quiqqer/bricks" var="bricks.control.image.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="bricks.Image.description"/>
+                <locale group="quiqqer/bricks" var="bricks.control.image.description"/>
             </description>
 
             <settings>
                 <setting name="link" class="project-site">
-                    <locale group="quiqqer/bricks" var="bricks.Image.link"/>
+                    <locale group="quiqqer/bricks" var="bricks.control.image.link"/>
                 </setting>
 
                 <setting name="picture" class="media-image">
-                    <locale group="quiqqer/bricks" var="bricks.Image.picture"/>
+                    <locale group="quiqqer/bricks" var="bricks.control.image.picture"/>
                 </setting>
             </settings>
         </brick>
