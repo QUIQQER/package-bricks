@@ -987,7 +987,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Bricks]]></en>
         </locale>
         <locale name="tour.general.bricks.Step1_1.Text">
-            <de><![CDATA[Willkommen in der <b>Bausteine-Tour</b>. <br/><br/> Fertige Bausteine werden in Template-Zonen eingesetzt. Diese können sich von Template zu Template unterscheiden. <br/> <br/> Nehmen Sie sich die Zeit folgendes Bild kurz zu studieren. Es zeigt die Bezeichnung der einzelnen Zonen. Mit einem Klick darauf lässt es sich vergrössern. <br/>]]></de>
+            <de><![CDATA[Willkommen in der <b>Bausteine-Tour</b>. <br/><br/> Fertige Bausteine werden in Template-Zonen eingesetzt. Diese können sich von Template zu Template unterscheiden. <br/> <br/> Nehmen Sie sich die Zeit folgendes Bild kurz zu studieren. Es zeigt die Bezeichnung der einzelnen Zonen. Mit einem Klick darauf lässt es sich vergrößern. <br/>]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step1_2.Text">
@@ -1055,7 +1055,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step13.Text">
-            <de><![CDATA[Die <b>Einstellungen </b> sind Bausteinspezifisch. D.h. je nach Bausteintyp sind verschiedene Einstellungen verfügbar. Diese beinhalten ua.: <ul> <li>den <b>Titel</b> benutzerseitig ändern</li><li>Die <b>Größe des Bausteins</b> über Höhe und Breite bestimmen</li><li>Spezielle <b>CSS</b> Klassen anfügen (besonders mächtig in Verbindung mit Custom CSS)</li>  <li>Bei Google-Maps Baustein: kommen  beispielsweise Einstellungen zu Straße PLZ und Stadt und Zoom hinzu.</li></ul>]]></de>
+            <de><![CDATA[Die <b>Einstellungen </b> sind bausteinspezifisch. D.h. je nach Bausteintyp sind verschiedene Einstellungen verfügbar. Diese beinhalten ua.: <ul> <li>den <b>Titel</b> benutzerseitig ändern</li><li>Die <b>Größe des Bausteins</b> über Höhe und Breite bestimmen</li><li>Spezielle <b>CSS</b> Klassen anfügen (besonders mächtig in Verbindung mit Custom CSS)</li>  <li>Bei Google-Maps Baustein: kommen  beispielsweise Einstellungen zu Straße PLZ und Stadt und Zoom hinzu.</li></ul>]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step14.Text">
@@ -1067,7 +1067,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step16.Text">
-            <de><![CDATA[um anschließend die Bearbeitungsoberfläche für diesen Baustein schließen.]]></de>
+            <de><![CDATA[Um anschließend die Bearbeitungsoberfläche für diesen Baustein schließen.]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step17.Text">
@@ -1079,11 +1079,11 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step19.Text">
-            <de><![CDATA[Um das Erstellte Kontaktformular nun in die Fußzeile (Footer) der Startseite einzufügen, klicken Sie bitte hier. ]]></de>
+            <de><![CDATA[Um das erstellte Kontaktformular nun in die Fußzeile (Footer) der Startseite einzufügen, klicken Sie bitte hier. ]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step20.Text">
-            <de><![CDATA[Wählen sie hier ihr Kontaktformular aus indem Sie darauf klicken.]]></de>
+            <de><![CDATA[Wählen Sie hier ihr Kontaktformular aus indem Sie darauf klicken.]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step21.Text">
@@ -1091,11 +1091,11 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step22.Text">
-            <de><![CDATA[Wenn sie hier ein Häkchen setzten, erben alle Kinder dieser Seite diesen Baustein im Footer. <br/> In diesem Fall sind dieß alle Seiten des Projektes, da Seiten des Projektes Unterseiten der Startseite sind.]]></de>
+            <de><![CDATA[Wenn sie hier ein Häkchen setzten, erben alle Kinder dieser Seite diesen Baustein im Footer. <br/> In diesem Fall sind dies alle Seiten des Projektes, da Seiten des Projektes Unterseiten der Startseite sind.]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step23.Text">
-            <de><![CDATA[Übernehmen sie die Einstellungen.]]></de>
+            <de><![CDATA[Übernehmen Sie die Einstellungen.]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step24.Text">
@@ -1107,7 +1107,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step26.Text">
-            <de><![CDATA[Gefällt Ihnen die Implemenation Ihres Bausteines?<br/> Dann vergessen Sie nicht die Änderungen zu <b>speichern</b> ]]></de>
+            <de><![CDATA[Gefällt Ihnen die Implementation Ihres Bausteines?<br/> Dann vergessen Sie nicht die Änderungen zu <b>speichern</b> ]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step26.Text">
