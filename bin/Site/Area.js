@@ -93,9 +93,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             this.$Elm = new Element('div', {
                 'class'    : 'quiqqer-bricks-site-category-area',
                 html       : '<div class="quiqqer-bricks-site-category-area-title">' +
-                             QUILocale.get(title.group, title.var) +
-                             '   <div class="quiqqer-bricks-site-category-area-buttons"></div>' +
-                             '</div><ul class="quiqqer-bricks-site-category-area-list"></ul>',
+                QUILocale.get(title.group, title.var) +
+                '   <div class="quiqqer-bricks-site-category-area-buttons"></div>' +
+                '</div><ul class="quiqqer-bricks-site-category-area-list"></ul>',
                 'data-name': this.getAttribute('name')
             });
 
@@ -605,6 +605,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                 width = width + Elm.getStyle('margin-left').toInt();
                 width = width + Elm.getStyle('margin-right').toInt();
+                width = width + 2;
 
                 return width;
             }).sum();
