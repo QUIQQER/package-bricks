@@ -8,7 +8,7 @@
  * @require qui/controls/desktop/Panel
  * @require qui/controls/buttons/Select
  * @require qui/controls/buttons/Button
- * @require qui/controls/buttons/Seperator
+ * @require qui/controls/buttons/Separator
  * @require qui/controls/windows/Confirm
  * @require controls/grid/Grid
  * @require Locale
@@ -22,7 +22,7 @@ define('package/quiqqer/bricks/bin/Manager', [
     'qui/controls/desktop/Panel',
     'qui/controls/buttons/Select',
     'qui/controls/buttons/Button',
-    'qui/controls/buttons/Seperator',
+    'qui/controls/buttons/Separator',
     'qui/controls/windows/Confirm',
     'controls/grid/Grid',
     'Locale',
@@ -31,7 +31,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
     'css!package/quiqqer/bricks/bin/Manager.css'
 
-], function (QUI, QUIPanel, QUISelect, QUIButton, QUISeperator, QUIConfirm, Grid, QUILocale, Projects, Ajax) {
+], function (QUI, QUIPanel, QUISelect, QUIButton, QUISeparator, QUIConfirm, Grid, QUILocale, Projects, Ajax) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
@@ -161,7 +161,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.addButton(this.$ProjectSelect);
             this.addButton(this.$ProjectLangs);
-            this.addButton(new QUISeperator());
+            this.addButton(new QUISeparator());
 
             this.addButton(
                 new QUIButton({
