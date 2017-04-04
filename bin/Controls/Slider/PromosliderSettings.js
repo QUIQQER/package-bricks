@@ -125,7 +125,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                         }.bind(this)
                     }
                 }, {
-                    type: 'seperator'
+                    type: 'separator'
                 }, {
                     name     : 'add',
                     textimage: 'fa fa-plus',
@@ -134,7 +134,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                         onClick: this.$openAddDialog
                     }
                 }, {
-                    type: 'seperator'
+                    type: 'separator'
                 }, {
                     name     : 'edit',
                     textimage: 'fa fa-edit',

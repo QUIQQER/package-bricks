@@ -8,7 +8,7 @@
  * @require qui/controls/desktop/Panel
  * @require qui/controls/buttons/Select
  * @require qui/controls/buttons/Button
- * @require qui/controls/buttons/Seperator
+ * @require qui/controls/buttons/Separator
  * @require qui/controls/windows/Confirm
  * @require controls/grid/Grid
  * @require Locale
@@ -22,7 +22,7 @@ define('package/quiqqer/bricks/bin/Manager', [
     'qui/controls/desktop/Panel',
     'qui/controls/buttons/Select',
     'qui/controls/buttons/Button',
-    'qui/controls/buttons/Seperator',
+    'qui/controls/buttons/Separator',
     'qui/controls/windows/Confirm',
     'controls/grid/Grid',
     'Locale',
