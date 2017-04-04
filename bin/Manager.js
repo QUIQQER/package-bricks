@@ -31,7 +31,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
     'css!package/quiqqer/bricks/bin/Manager.css'
 
-], function (QUI, QUIPanel, QUISelect, QUIButton, QUISeperator, QUIConfirm, Grid, QUILocale, Projects, Ajax) {
+], function (QUI, QUIPanel, QUISelect, QUIButton, QUISeparator, QUIConfirm, Grid, QUILocale, Projects, Ajax) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
@@ -161,7 +161,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.addButton(this.$ProjectSelect);
             this.addButton(this.$ProjectLangs);
-            this.addButton(new QUISeperator());
+            this.addButton(new QUISeparator());
 
             this.addButton(
                 new QUIButton({
