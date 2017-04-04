@@ -17,6 +17,7 @@
   },
   "require": {
     "quiqqer/quiqqer": "*@dev",
+    "quiqqer\/qui": ">=1.*|dev-master|dev-dev",
     "quiqqer/utils": ">=1.4|dev-dev",
     "npm-asset/hammerjs": "2.*",
     "npm-asset\/mustache": "2.*"
