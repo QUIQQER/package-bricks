@@ -438,6 +438,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
         buttons : {
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
+                BrickSettings.getElm().getElement('[name="save"]').click();
                 Bricks.next();
             }
         },
