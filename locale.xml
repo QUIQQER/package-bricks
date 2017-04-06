@@ -1067,7 +1067,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step16.Text">
-            <de><![CDATA[Um anschließend die Bearbeitungsoberfläche für diesen Baustein schließen.]]></de>
+            <de><![CDATA[... und anschließend die Bearbeitungsoberfläche für diesen Baustein zu schließen.]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step17.Text">
