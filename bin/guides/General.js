@@ -331,10 +331,11 @@ define('package/quiqqer/bricks/bin/guides/General', [
                         Footer = Entry;
                     }
                 });
-                if (!Footer.getAttribute('class').includes('quiqqer-bricks-area-selected')){
+                if (!Footer.getAttribute('class').includes('quiqqer-bricks-area-selected')) {
                     Footer.fireEvent('click');
-                }else{
-                    Bricks.next();}
+                } else {
+                    Bricks.next();
+                }
             }
         },
         when    : {
@@ -501,10 +502,10 @@ define('package/quiqqer/bricks/bin/guides/General', [
                         Panel.openProject();
 
                         PanelUtils.openSitePanel(projectName, projectLang, 1)
-                            .then(function (CreatedPanel) {
-                                SitePanel = CreatedPanel;
-                                Bricks.next.delay(500);
-                            });
+                                  .then(function (CreatedPanel) {
+                                      SitePanel = CreatedPanel;
+                                      Bricks.next.delay(500);
+                                  });
                     });
                 });
             }
