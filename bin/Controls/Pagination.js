@@ -123,35 +123,38 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 }).inject(this.$Next, 'before');
             }
 
-            var LastSheet = this.$sheets[this.$sheets.length - 1],
-                last      = LastSheet.get('data-page').toInt();
+            var LastSheet = this.$sheets[this.$sheets.length - 1];
 
-            for (i = last + 1; i < this.$lastSheetNumber; i++) {
-                new Element('a', {
-                    html       : i,
-                    href       : '?sheet=' + i + '&limit=' + params.limit,
-                    'class'    : 'quiqqer-sheets-sheet',
-                    'data-page': i,
-                    styles     : {
-                        display: 'none'
-                    }
-                }).inject(this.$MoreNext, 'before');
+            if (LastSheet) {
+                var last = LastSheet.get('data-page').toInt();
+
+                for (i = last + 1; i < this.$lastSheetNumber; i++) {
+                    new Element('a', {
+                        html       : i,
+                        href       : '?sheet=' + i + '&limit=' + params.limit,
+                        'class'    : 'quiqqer-sheets-sheet',
+                        'data-page': i,
+                        styles     : {
+                            display: 'none'
+                        }
+                    }).inject(this.$MoreNext, 'before');
+                }
+
+                var lastSize = LastSheet.getSize().x;
+
+                this.$sheets = this.$Elm.getElements('.quiqqer-sheets-sheet');
+
+                this.$sheets.each(function (Sheet) {
+                    Sheet.setStyle('width', lastSize);
+                });
+
+                this.$MorePrev.setStyle('width', lastSize);
+                this.$MoreNext.setStyle('width', lastSize);
+                this.$Prev.setStyle('width', lastSize);
+                this.$Next.setStyle('width', lastSize);
+                this.$First.setStyle('width', lastSize);
+                this.$Last.setStyle('width', lastSize);
             }
-
-            this.$sheets = this.$Elm.getElements('.quiqqer-sheets-sheet');
-
-            var lastSize = LastSheet.getSize().x;
-
-            this.$sheets.each(function (Sheet) {
-                Sheet.setStyle('width', lastSize);
-            });
-
-            this.$MorePrev.setStyle('width', lastSize);
-            this.$MoreNext.setStyle('width', lastSize);
-            this.$Prev.setStyle('width', lastSize);
-            this.$Next.setStyle('width', lastSize);
-            this.$First.setStyle('width', lastSize);
-            this.$Last.setStyle('width', lastSize);
 
             this.$redraw();
             this.$registerEvents();
@@ -170,11 +173,17 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
          * @param {Number} pages
          */
         setPageCount: function (pages) {
-            if (this.$sheets.length == pages) {
+            if (this.$sheets.length === pages) {
                 return;
             }
 
-            var Prev = this.$sheets[0].getPrevious();
+            var Prev;
+
+            if (this.$sheets.length) {
+                Prev = this.$sheets[0].getPrevious();
+            } else {
+                Prev = this.$Elm.getElement('a.quiqqer-sheets-prev');
+            }
 
             this.$sheets.destroy();
             this.$Select.set('html', '');
@@ -405,8 +414,8 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             var lastSize = this.$Last.getSize().x;
 
             lastSize = lastSize +
-                       this.$Last.getStyle('marginRight').toInt() +
-                       this.$Last.getStyle('marginLeft').toInt();
+                this.$Last.getStyle('marginRight').toInt() +
+                this.$Last.getStyle('marginLeft').toInt();
 
             this.$showMax = (elmSize.x / lastSize).floor();
 
