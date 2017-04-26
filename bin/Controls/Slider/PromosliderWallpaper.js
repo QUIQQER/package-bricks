@@ -552,7 +552,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
         $checkdotPosition: function () {
             var left  = this.$List.getBoundingClientRect().left * -1;
             var count = Math.round(left / this.$width);
-            var Dot   = this.$Dots.getElement(':nth-child(' + (count + 2) + ')');
+            var Dot   = this.$Dots.getElement(':nth-child(' + (count + 1) + ')');
 
             if (count === -1) {
                 Dot = this.$Dots.getFirst();
