@@ -550,7 +550,18 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
          * shows the correct dot
          */
         $checkdotPosition: function () {
-            var left  = this.$List.getBoundingClientRect().left * -1;
+            var left      = 0;
+            var transform = this.$List.getStyle('transform');
+
+            if (transform.match('translate3d')) {
+                var transValues = transform.replace('translate3d(', '')
+                                           .replace(')', '')
+                                           .split(',');
+
+                left = parseInt(transValues[0].trim().replace('px'));
+                left = left * -1;
+            }
+
             var count = Math.round(left / this.$width);
             var Dot   = this.$Dots.getElement(':nth-child(' + (count + 1) + ')');
 
