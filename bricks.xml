@@ -969,6 +969,9 @@
                     <option value="authorTop">
                         <locale group="quiqqer/bricks" var="brick.listTemplate.authorTop"/>
                     </option>
+                    <option value="grid3x3">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.grid3x3"/>
+                    </option>
                 </setting>
 
                 <setting name="max" type="number">
@@ -1002,6 +1005,11 @@
                 <setting name="showTime" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="brick.showTime"/>
+                </setting>
+
+                <setting name="showSheets" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="brick.showSheets"/>
                 </setting>
 
             </settings>
