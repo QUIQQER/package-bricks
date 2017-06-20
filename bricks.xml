@@ -11,17 +11,7 @@
             </description>
         </brick>
 
-        <brick control="\QUI\Controls\Contact">
-            <title>
-                <locale group="quiqqer/bricks" var="brick.control.contact.title"/>
-            </title>
-            <description>
-                <locale group="quiqqer/bricks" var="brick.control.contact.description"/>
-            </description>
-        </brick>
-
-        <!-- simple contact form (new) -->
-
+        <!-- simple contact form -->
         <brick control="\QUI\Bricks\Controls\SimpleContact">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.simpleContact.title"/>
