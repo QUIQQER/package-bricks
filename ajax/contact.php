@@ -35,13 +35,15 @@ QUI::$Ajax->registerFunction(
         ");
 
         try {
-            $Mailer->send();
+//            $Mailer->send();
         } catch (\Exception $Exception) {
             throw new QUI\Exception(
                 $Exception->getMessage(),
                 $Exception->getCode()
             );
         }
+
+        return true;
     },
     array('brickId', 'project', 'siteId', 'message', 'email', 'name'),
     false
