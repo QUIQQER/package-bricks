@@ -107,7 +107,6 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
 
             Ajax.post('package_quiqqer_bricks_ajax_contact', function (result) {
 
-
                 if (result) {
                     var html = '<span class="fa fa-check fa-check-simple-contact control-color"></span>';
                     html += QUILocale.get('quiqqer/system', 'message.contact.successful');

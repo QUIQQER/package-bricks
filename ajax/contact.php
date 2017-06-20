@@ -19,9 +19,15 @@ QUI::$Ajax->registerFunction(
         $Project      = QUI::getProjectManager()->decode($project);
         $Site         = $Project->get((int)$siteId);
 
+        $receiver = $Brick->getSetting('mailTo');
+
+        if ($receiver == '') {
+            $receiver = (QUI::conf('mail', 'admin_mail'));
+        }
+
         $Mailer = QUI::getMailManager()->getMailer();
 
-        $Mailer->addRecipient($Brick->getSetting('mailTo'));
+        $Mailer->addRecipient($receiver);
         $Mailer->addReplyTo($email);
         $Mailer->setSubject($Site->getAttribute('title') . ' ' . $Site->getUrlRewritten());
 
