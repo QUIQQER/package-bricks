@@ -35,7 +35,7 @@ QUI::$Ajax->registerFunction(
         ");
 
         try {
-//            $Mailer->send();
+            $Mailer->send();
         } catch (\Exception $Exception) {
             throw new QUI\Exception(
                 $Exception->getMessage(),
