@@ -14,6 +14,17 @@
 QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_contact',
     function ($brickId, $project, $siteId, $message, $email, $name) {
+
+        // check if email correct
+        if (!QUI\Utils\Security\Orthos::checkMailSyntax($email)) {
+            throw new QUI\Exception(
+                QUI::getLocale()->get(
+                    'quiqqer/system',
+                    'exception.contact.wrong.email'
+                )
+            );
+        }
+
         $BrickManager = QUI\Bricks\Manager::init();
         $Brick        = $BrickManager->getBrickByID($brickId);
         $Project      = QUI::getProjectManager()->decode($project);
