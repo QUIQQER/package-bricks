@@ -59,6 +59,7 @@ class Listing extends QUI\Control
         $Control->setAttribute('display', $this->getAttribute('template'));
         $Control->setAttribute('limit', $this->getAttribute('max'));
         $Control->setAttribute('showShort', $this->getAttribute('showShort'));
+        $Control->setAttribute('showSheets', $this->getAttribute('showSheets'));
         $Control->setAttribute('showImages', $this->getAttribute('showImages'));
         $Control->setAttribute('showTime', $this->getAttribute('showTime'));
         $Control->setAttribute('showDate', $this->getAttribute('showDate'));

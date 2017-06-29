@@ -74,8 +74,8 @@
             <en><![CDATA[A "You are here ..." list above the content]]></en>
         </locale>
         <locale name="brick.control.contact.title">
-            <de><![CDATA[Bausteine: Einfaches Kontaktformular (QUIQQER)]]></de>
-            <en><![CDATA[Brick: Standard Contact form (Bricks)]]]></en>
+            <de><![CDATA[Bausteine: Einfaches Kontaktformular]]></de>
+            <en><![CDATA[Brick: Standard Contact form]]]></en>
         </locale>
         <locale name="brick.control.contact.description">
             <de><![CDATA[Ein vorgefertigtes Kontaktformular]]></de>
@@ -86,44 +86,55 @@
         <!-- Simple contact form as brick (new) -->
 
         <locale name="brick.control.simpleContact.title">
-            <de><![CDATA[Bausteine: Einfaches Kontaktformular (Bricks]]></de>
-            <en><![CDATA[Bricks: Simple contact form (Bricks]]]></en>
+            <de><![CDATA[Bausteine: Einfaches Kontaktformular]]></de>
+            <en><![CDATA[Bricks: Simple contact form]]]></en>
+            <pl><![CDATA[Widgets: prosty formularz kontaktowy]]]></pl>
         </locale>
         <locale name="brick.control.simpleContact.description">
             <de><![CDATA[Ein vorgefertigtes Kontaktformular]]></de>
             <en><![CDATA[A prefabricated contact form]]></en>
+            <pl><![CDATA[Prosty formularz kontaktowy do umieszczenia na przykład w
+                        stopce serwisu albo w panelu bocznym.]]></pl>
         </locale>
         <locale name="control.simpleContact.name">
             <de><![CDATA[Vor- und Nachname]]></de>
             <en><![CDATA[Firt- and Last name]]></en>
+            <pl><![CDATA[Imię i nazwisko]]></pl>
         </locale>
         <locale name="control.simpleContact.name.placeholder">
             <de><![CDATA[Ihr Vor- und Nachname]]></de>
             <en><![CDATA[Please enter Your First and Last Name here]]></en>
+            <pl><![CDATA[Imię i nazwisko]]></pl>
         </locale>
         <locale name="control.simpleContact.email">
             <de><![CDATA[E-Mail]]></de>
             <en><![CDATA[Email]]></en>
+            <pl><![CDATA[Adres e-mail]]></pl>
         </locale>
         <locale name="control.simpleContact.email.placeholder">
             <de><![CDATA[Ihre E-Mail-Adresse]]></de>
             <en><![CDATA[Please enter your email address here]]></en>
+            <pl><![CDATA[twój@adres.pl]]></pl>
         </locale>
         <locale name="control.simpleContact.message">
             <de><![CDATA[Nachricht]]></de>
             <en><![CDATA[Message]]></en>
+            <pl><![CDATA[Treść]]></pl>
         </locale>
         <locale name="control.simpleContact.message.placeholder">
             <de><![CDATA[Ihre Nachricht an uns...]]></de>
             <en><![CDATA[Your message to us]]></en>
+            <pl><![CDATA[Wiadomość do nas]]></pl>
         </locale>
         <locale name="control.simpleContact.sendButton">
             <de><![CDATA[Senden]]></de>
             <en><![CDATA[Send]]></en>
+            <pl><![CDATA[Wyślij]]></pl>
         </locale>
         <locale name="brick.control.simpleContact.mailTo">
             <de><![CDATA[Ihre E-Mail Adresse]]></de>
             <en><![CDATA[Your email]]></en>
+            <pl><![CDATA[Twój adres e-mail]]></pl>
         </locale>
 
         <locale name="brick.control.navigation.title">
