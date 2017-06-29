@@ -38,22 +38,17 @@
             </li>
             {/foreach}
         {/strip}
-            {if $this->getAttribute('moreLink')}
-            <li>
+
+        {if $MoreLink}
+            <li class="quiqqer-bricks-children-slider-child">
                 <article class="quiqqer-bricks-children-slider-child-display">
                     <a href="{url site=$MoreLink}" title="{$MoreLink->getAttribute('title')|escape:" html"}">
-                    {if !$MoreLink->getAttribute('image_site')}
-                        <header>
-                            {$MoreLink->getAttribute('title')}
-                        </header>
-                        {$MoreLink->getAttribute('short')}
-                    {else}
-                        {image src=$MoreLink->getAttribute('image_site') height=$this->getAttribute('height')}
-                    {/if}
+                        <span class="quiqqer-icon fa fa-angle-right"></span>
+                        <span class="quiqqer-bricks-children-slider-moreLink-text">Mehr</span>
                     </a>
                 </article>
             </li>
-            {/if}
+        {/if}
         </ul>
     </div>
 </div>

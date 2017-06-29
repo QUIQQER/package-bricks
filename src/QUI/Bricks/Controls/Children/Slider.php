@@ -47,15 +47,24 @@ class Slider extends QUI\Control
      */
     public function getBody()
     {
-        $Engine = QUI::getTemplateManager()->getEngine();
+        $Engine   = QUI::getTemplateManager()->getEngine();
+        $MoreLink = null;
 
         if (!$this->getAttribute('height')) {
             $this->setAttribute('height', 200);
         }
 
+        if ($this->getAttribute('moreLink')) {
+            try {
+                $MoreLink = QUI\Projects\Site\Utils::getSiteByLink($this->getAttribute('moreLink'));
+            } catch (QUI\Exception $Exception) {
+            }
+        }
+
         $Engine->assign(array(
             'this'     => $this,
-            'children' => $this->getChildren()
+            'children' => $this->getChildren(),
+            'MoreLink' => $MoreLink
         ));
 
         return $Engine->fetch(dirname(__FILE__) . '/Slider.html');
