@@ -131,7 +131,16 @@
                         <locale group="quiqqer/quiqqer" var="order_field_desc"/>
                     </option>
                 </setting>
+
+                <setting name="limit" type="number" min="1">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.limit"/>
+                </setting>
+
+                <setting name="moreLink" data-qui="controls/projects/project/site/Input">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.moreLink"/>
+                </setting>
             </settings>
+
         </brick>
 
         <brick control="\QUI\Bricks\Controls\Slider\Promoslider">

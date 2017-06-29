@@ -3,6 +3,7 @@
 /**
  * This file contains QUI\Bricks\Controls\Children\Slider
  */
+
 namespace QUI\Bricks\Controls\Children;
 
 use QUI;
@@ -26,6 +27,8 @@ class Slider extends QUI\Control
             'nodeName' => 'section',
             'site'     => '',
             'order'    => false,
+            'limit'    => false,
+            'moreLink' => false,
             'data-qui' => 'package/quiqqer/bricks/bin/Controls/Children/Slider',
             'height'   => 200
         ));
@@ -81,7 +84,7 @@ class Slider extends QUI\Control
             $this->getAttribute('site'),
             array(
                 'order' => $this->getAttribute('order'),
-                'limit' => false
+                'limit' => $this->getAttribute('limit')
             )
         );
 
