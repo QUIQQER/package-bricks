@@ -11,17 +11,7 @@
             </description>
         </brick>
 
-        <brick control="\QUI\Controls\Contact">
-            <title>
-                <locale group="quiqqer/bricks" var="brick.control.contact.title"/>
-            </title>
-            <description>
-                <locale group="quiqqer/bricks" var="brick.control.contact.description"/>
-            </description>
-        </brick>
-
-        <!-- simple contact form (new) -->
-
+        <!-- simple contact form -->
         <brick control="\QUI\Bricks\Controls\SimpleContact">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.simpleContact.title"/>
@@ -131,7 +121,16 @@
                         <locale group="quiqqer/quiqqer" var="order_field_desc"/>
                     </option>
                 </setting>
+
+                <setting name="limit" type="number" min="1">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.limit"/>
+                </setting>
+
+                <setting name="moreLink" data-qui="controls/projects/project/site/Input">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.moreLink"/>
+                </setting>
             </settings>
+
         </brick>
 
         <brick control="\QUI\Bricks\Controls\Slider\Promoslider">
@@ -969,6 +968,9 @@
                     <option value="authorTop">
                         <locale group="quiqqer/bricks" var="brick.listTemplate.authorTop"/>
                     </option>
+                    <option value="grid3x3">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.grid3x3"/>
+                    </option>
                 </setting>
 
                 <setting name="max" type="number">
@@ -1002,6 +1004,11 @@
                 <setting name="showTime" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="brick.showTime"/>
+                </setting>
+
+                <setting name="showSheets" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="brick.showSheets"/>
                 </setting>
 
             </settings>

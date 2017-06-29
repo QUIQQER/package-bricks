@@ -38,6 +38,17 @@
             </li>
             {/foreach}
         {/strip}
+
+        {if $MoreLink}
+            <li class="quiqqer-bricks-children-slider-child">
+                <article class="quiqqer-bricks-children-slider-child-display">
+                    <a href="{url site=$MoreLink}" title="{$MoreLink->getAttribute('title')|escape:" html"}">
+                        <span class="quiqqer-icon fa fa-angle-right"></span>
+                        <span class="quiqqer-bricks-children-slider-moreLink-text">Mehr</span>
+                    </a>
+                </article>
+            </li>
+        {/if}
         </ul>
     </div>
 </div>

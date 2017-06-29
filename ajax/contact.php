@@ -14,14 +14,31 @@
 QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_contact',
     function ($brickId, $project, $siteId, $message, $email, $name) {
+
+        // check if email correct
+        if (!QUI\Utils\Security\Orthos::checkMailSyntax($email)) {
+            throw new QUI\Exception(
+                QUI::getLocale()->get(
+                    'quiqqer/system',
+                    'exception.contact.wrong.email'
+                )
+            );
+        }
+
         $BrickManager = QUI\Bricks\Manager::init();
         $Brick        = $BrickManager->getBrickByID($brickId);
         $Project      = QUI::getProjectManager()->decode($project);
         $Site         = $Project->get((int)$siteId);
 
+        $receiver = $Brick->getSetting('mailTo');
+
+        if ($receiver == '') {
+            $receiver = (QUI::conf('mail', 'admin_mail'));
+        }
+
         $Mailer = QUI::getMailManager()->getMailer();
 
-        $Mailer->addRecipient($Brick->getSetting('mailTo'));
+        $Mailer->addRecipient($receiver);
         $Mailer->addReplyTo($email);
         $Mailer->setSubject($Site->getAttribute('title') . ' ' . $Site->getUrlRewritten());
 
@@ -42,6 +59,8 @@ QUI::$Ajax->registerFunction(
                 $Exception->getCode()
             );
         }
+
+        return true;
     },
     array('brickId', 'project', 'siteId', 'message', 'email', 'name'),
     false

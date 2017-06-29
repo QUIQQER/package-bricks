@@ -3,6 +3,7 @@
 /**
  * This file contains QUI\Bricks\Controls\Children\Slider
  */
+
 namespace QUI\Bricks\Controls\Children;
 
 use QUI;
@@ -26,6 +27,8 @@ class Slider extends QUI\Control
             'nodeName' => 'section',
             'site'     => '',
             'order'    => false,
+            'limit'    => false,
+            'moreLink' => false,
             'data-qui' => 'package/quiqqer/bricks/bin/Controls/Children/Slider',
             'height'   => 200
         ));
@@ -44,15 +47,24 @@ class Slider extends QUI\Control
      */
     public function getBody()
     {
-        $Engine = QUI::getTemplateManager()->getEngine();
+        $Engine   = QUI::getTemplateManager()->getEngine();
+        $MoreLink = null;
 
         if (!$this->getAttribute('height')) {
             $this->setAttribute('height', 200);
         }
 
+        if ($this->getAttribute('moreLink')) {
+            try {
+                $MoreLink = QUI\Projects\Site\Utils::getSiteByLink($this->getAttribute('moreLink'));
+            } catch (QUI\Exception $Exception) {
+            }
+        }
+
         $Engine->assign(array(
             'this'     => $this,
-            'children' => $this->getChildren()
+            'children' => $this->getChildren(),
+            'MoreLink' => $MoreLink
         ));
 
         return $Engine->fetch(dirname(__FILE__) . '/Slider.html');
@@ -81,7 +93,7 @@ class Slider extends QUI\Control
             $this->getAttribute('site'),
             array(
                 'order' => $this->getAttribute('order'),
-                'limit' => false
+                'limit' => $this->getAttribute('limit')
             )
         );
 
