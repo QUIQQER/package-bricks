@@ -26,11 +26,17 @@ QUI::$Ajax->registerFunction(
         }
 
         $BrickManager = QUI\Bricks\Manager::init();
-        $Brick        = $BrickManager->getBrickByID($brickId);
         $Project      = QUI::getProjectManager()->decode($project);
         $Site         = $Project->get((int)$siteId);
 
-        $receiver = $Brick->getSetting('mailTo');
+        if ($Site->getAttribute('type') === 'quiqqer/sitetypes:types/contact') {
+            // Contact form (site)
+            $receiver = $Site->getAttribute('quiqqer.settings.sitetypes.contact.email');
+        } else {
+            // Contact form (brick)
+            $Brick    = $BrickManager->getBrickByID($brickId);
+            $receiver = $Brick->getSetting('mailTo');
+        }
 
         if ($receiver == '') {
             $receiver = (QUI::conf('mail', 'admin_mail'));
