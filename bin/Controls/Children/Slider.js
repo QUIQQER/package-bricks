@@ -30,6 +30,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
             'resize'
         ],
 
+        options: {
+            usemobile: false
+        },
+
         initialize: function (options) {
             this.parent(options);
 
@@ -58,7 +62,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
                 winSize = QUI.getWindowSize();
 
             // display the buttons? if mobile, dont display it
-            if (winSize.x < size.x + 100) {
+            if (winSize.x < size.x + 100 || this.getAttribute('usemobile')) {
                 this.$mobile = true;
                 this.getElm().addClass('quiqqer-bricks-children-slider-mobile');
             } else {
@@ -121,6 +125,11 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
 
             this.$NextFX = moofx(this.$Next);
             this.$PrevFX = moofx(this.$Prev);
+
+            this.setAttribute(
+                'usemobile',
+                Elm.get('data-qui-options-usemobile')
+            );
 
             // calc scrolling vars
             this.resize.delay(200, this);
