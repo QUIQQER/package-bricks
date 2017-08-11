@@ -30,11 +30,13 @@ class Slider extends QUI\Control
             'limit'    => false,
             'moreLink' => false,
             'data-qui' => 'package/quiqqer/bricks/bin/Controls/Children/Slider',
-            'height'   => 200
+            'height'   => 200,
+
+            'data-qui-options-usemobile' => false
         ));
 
         $this->addCSSFile(
-            dirname(__FILE__) . '/Slider.css'
+            dirname(__FILE__).'/Slider.css'
         );
 
         parent::__construct($attributes);
@@ -67,7 +69,7 @@ class Slider extends QUI\Control
             'MoreLink' => $MoreLink
         ));
 
-        return $Engine->fetch(dirname(__FILE__) . '/Slider.html');
+        return $Engine->fetch(dirname(__FILE__).'/Slider.html');
     }
 
     /**
@@ -77,7 +79,7 @@ class Slider extends QUI\Control
      */
     protected function getTemplate()
     {
-        return dirname(__FILE__) . '/Slider.html';
+        return dirname(__FILE__).'/Slider.html';
     }
 
     /**
