@@ -783,7 +783,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                         var EditButton = new QUIButton({
                             textimage: 'fa fa-edit',
-                            text     : 'Baustein bearbeiten',
+                            text     : QUILocale.get(lg, 'brick.sheet.edit.title'),
                             disabled : true
                         }).inject(Win.$Buttons, 'top');
 
