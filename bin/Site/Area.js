@@ -776,6 +776,17 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 },
                 events       : {
                     onOpen: function (Win) {
+                        var buttons = Win.$Buttons.getElements('button');
+
+                        buttons.setStyle('float', 'right');
+                        buttons.set('disabled', true);
+
+                        var EditButton = new QUIButton({
+                            textimage: 'fa fa-edit',
+                            text     : 'Baustein bearbeiten',
+                            disabled : true
+                        }).inject(Win.$Buttons, 'top');
+
                         require([
                             'package/quiqqer/bricks/bin/Site/BrickEdit'
                         ], function (BrickEdit) {
@@ -789,7 +800,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                             custom = JSON.decode(custom);
 
-                            new BrickEdit({
+                            var Edit = new BrickEdit({
                                 brickId     : Select.value,
                                 Site        : self.getAttribute('Site'),
                                 customfields: custom,
@@ -797,6 +808,14 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                                     height: Win.getContent().getSize().y
                                 }
                             }).inject(Win.getContent());
+
+                            EditButton.addEvent('click', function () {
+                                Edit.openBrick();
+                                Win.close();
+                            });
+
+                            buttons.set('disabled', false);
+                            EditButton.enable();
                         });
                     },
 
