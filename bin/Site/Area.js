@@ -135,7 +135,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 icon  : 'fa fa-caret-left',
                 events: {
                     onClick: function (Btn) {
-                        if (Btn.getAttribute('icon') == 'fa fa-caret-left') {
+                        if (Btn.getAttribute('icon') === 'fa fa-caret-left') {
                             self.openButtons();
                             return;
                         }
@@ -248,9 +248,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 });
 
                 if (promises.length) {
-
                     Promise.resolve(promises).then(function () {
-
                         self.refresh();
                         Loader.destroy();
                     });
@@ -513,7 +511,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 clone : function (event) {
                     var Target = event.target;
 
-                    if (Target.nodeName != 'LI') {
+                    if (Target.nodeName !== 'LI') {
                         Target = Target.getParent('li');
                     }
 

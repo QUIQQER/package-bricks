@@ -44,6 +44,8 @@ define('package/quiqqer/bricks/bin/Site/Category', [
             this.Loader = new QUILoader();
             this.areas  = [];
 
+            this.$Areas = null;
+
             this.addEvents({
                 onInject : this.$onInject,
                 onDestroy: this.$onDestroy
@@ -56,11 +58,15 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          */
         create: function () {
             this.$Elm = new Element('div', {
-                'class': 'quiqqer-bricks-site-category'
+                'class': 'quiqqer-bricks-site-category',
+                'html' : '<div class="quiqqer-bricks-site-category-areas"></div>' +
+                '<div class="quiqqer-bricks-site-category-image"></div>'
             });
 
             this.Loader.inject(this.$Elm);
 
+            this.$Areas = this.$Elm.getElement('.quiqqer-bricks-site-category-areas');
+            this.$Image = this.$Elm.getElement('.quiqqer-bricks-site-category-image');
 
             return this.$Elm;
         },
@@ -69,17 +75,32 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          * event : on inject
          */
         $onInject: function () {
-            var self = this;
-
             this.Loader.show();
 
-            this.getBrickAreas(function (bricks) {
+            var self    = this,
+                Site    = this.getAttribute('Site'),
+                Project = Site.getProject(),
+                layout  = Site.getAttribute('layout');
+
+            Project.getLayouts().then(function (layouts) {
+                layout = layouts.find(function (entry) {
+                    return entry.type === layout;
+                });
+
+                if (layout.image && layout.image !== '') {
+                    new Element('img', {
+                        src: layout.image
+                    }).inject(self.$Image);
+                }
+
+                return self.getBrickAreas();
+
+            }).then(function (bricks) {
                 if (!bricks.length) {
-                    self.$Elm.set(
+                    self.$Areas.set(
                         'html',
                         QUILocale.get('quiqqer/bricks', 'bricks.message.no.areas.found')
                     );
-
                     return;
                 }
 
@@ -138,24 +159,35 @@ define('package/quiqqer/bricks/bin/Site/Category', [
 
         /**
          * Return the available areas for the site
-         * @param {Function} callback - callback function
+         *
+         * @param {Function} [callback] - callback function
+         * @return {Promise}
          */
         getBrickAreas: function (callback) {
             var Site    = this.getAttribute('Site'),
                 Project = Site.getProject();
 
-            Project.getConfig(function (layout) {
-                if (Site.getAttribute('layout')) {
-                    layout = Site.getAttribute('layout');
-                }
+            return new Promise(function (resolve, reject) {
+                Project.getConfig(function (layout) {
+                    if (Site.getAttribute('layout')) {
+                        layout = Site.getAttribute('layout');
+                    }
 
-                QUIAjax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
-                    'package': 'quiqqer/bricks',
-                    project  : Project.encode(),
-                    layout   : layout
-                });
+                    QUIAjax.get('package_quiqqer_bricks_ajax_project_getAreas', function (result) {
+                        if (typeof callback === 'function') {
+                            callback(result);
+                        }
 
-            }, 'layout');
+                        resolve(result);
+                    }, {
+                        'package': 'quiqqer/bricks',
+                        project  : Project.encode(),
+                        layout   : layout,
+                        onError  : reject
+                    });
+
+                }, 'layout');
+            });
         },
 
         /**
@@ -173,7 +205,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
             Control.setAttribute('Site', Site);
             Control.setAttributes(area);
 
-            Control.inject(this.$Elm);
+            Control.inject(this.$Areas);
 
             this.areas.push(Control);
 

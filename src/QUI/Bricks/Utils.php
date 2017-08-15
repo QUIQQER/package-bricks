@@ -148,7 +148,8 @@ class Utils
             'name'        => $name,
             'title'       => $title,
             'description' => $description,
-            'inheritance' => $Brick->getAttribute('inheritance')
+            'inheritance' => $Brick->getAttribute('inheritance'),
+            'priority'    => $Brick->getAttribute('priority')
         );
     }
 
@@ -164,7 +165,7 @@ class Utils
         $template = $Project->getAttribute('template');
 
         // getAreasByProject
-        $brickXML = realpath(OPT_DIR . $template . '/bricks.xml');
+        $brickXML = realpath(OPT_DIR.$template.'/bricks.xml');
         $bricks   = self::getTemplateAreasFromXML($brickXML);
 
         foreach ($bricks as $brickData) {
