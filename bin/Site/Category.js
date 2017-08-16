@@ -87,7 +87,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
                     return entry.type === layout;
                 });
 
-                if ("image" in layout && layout.image !== '') {
+                if (layout && "image" in layout && layout.image !== '') {
                     new Element('img', {
                         src: layout.image
                     }).inject(self.$Image);
