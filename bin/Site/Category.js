@@ -91,6 +91,9 @@ define('package/quiqqer/bricks/bin/Site/Category', [
                     new Element('img', {
                         src: layout.image
                     }).inject(self.$Image);
+                } else {
+                    self.$Image.setStyle('display', 'none');
+                    self.$Areas.setStyle('width', '100%');
                 }
 
                 return self.getBrickAreas();
