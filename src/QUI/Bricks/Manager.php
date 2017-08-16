@@ -174,7 +174,7 @@ class Manager
 
         // get bricks
         foreach ($templates as $template) {
-            $brickXML = realpath(OPT_DIR . $template . '/bricks.xml');
+            $brickXML = realpath(OPT_DIR.$template.'/bricks.xml');
 
             if (!$brickXML) {
                 continue;
@@ -186,7 +186,7 @@ class Manager
             );
         }
 
-        // unque values
+        // unique values
         $cleaned = array();
         foreach ($bricks as $val) {
             if (!isset($cleaned[$val['name']])) {
@@ -198,6 +198,13 @@ class Manager
 
         // use @ because: https://bugs.php.net/bug.php?id=50688
         @usort($bricks, function ($a, $b) {
+            if (isset($a['priority']) && isset($b['priority'])) {
+                if ($a['priority'] == $b['priority']) {
+                    return 0;
+                }
+
+                return ($a['priority'] < $b['priority']) ? -1 : 1;
+            }
 
             $transA = QUI::getLocale()->get(
                 $a['title']['group'],
@@ -344,7 +351,7 @@ class Manager
      */
     public function getAvailableBrickSettingsByBrickType($brickType)
     {
-        $cache = 'quiqqer/bricks/brickType/' . md5($brickType);
+        $cache = 'quiqqer/bricks/brickType/'.md5($brickType);
 
         try {
             return QUI\Cache\Manager::get($cache);
@@ -496,7 +503,7 @@ class Manager
                 $result[] = $Clone->check();
             } catch (QUI\Exception $Exception) {
                 QUI\System\Log::addWarning(
-                    $Exception->getMessage() . ' Brick-ID:' . $brickId
+                    $Exception->getMessage().' Brick-ID:'.$brickId
                 );
             }
         }
@@ -578,7 +585,7 @@ class Manager
         }
 
         if (!empty($areas)) {
-            $areaString = ',' . implode(',', $areas) . ',';
+            $areaString = ','.implode(',', $areas).',';
         }
 
         $Brick->setAttributes($brickData);
@@ -679,7 +686,7 @@ class Manager
 
         // package bricks
         foreach ($packages as $package) {
-            $bricksXML = OPT_DIR . $package['name'] . '/bricks.xml';
+            $bricksXML = OPT_DIR.$package['name'].'/bricks.xml';
 
             if (file_exists($bricksXML)) {
                 $result[] = $bricksXML;
@@ -690,7 +697,7 @@ class Manager
         $projects = $Projects->getProjects();
 
         foreach ($projects as $project) {
-            $bricksXML = USR_DIR . $project . '/bricks.xml';
+            $bricksXML = USR_DIR.$project.'/bricks.xml';
 
             if (file_exists($bricksXML)) {
                 $result[] = $bricksXML;

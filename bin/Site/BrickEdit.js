@@ -62,7 +62,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
          * @returns {HTMLDivElement}
          */
         create: function () {
-            this.$Elm  = new Element('div', {
+            this.$Elm = new Element('div', {
                 'class': 'quiqqer-bricks-site-brickedit'
             });
 
@@ -138,6 +138,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                 }
 
                 self.Loader.hide();
+                self.Loader.hide();
 
             }).catch(function (err) {
                 console.error(err);
@@ -161,6 +162,37 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                 });
 
             }.bind(this));
+        },
+
+        /**
+         * Opens the brick panel
+         */
+        openBrick: function () {
+            var brickId     = this.getAttribute('brickId'),
+                projectName = '',
+                projectLang = '';
+
+            if (this.getAttribute('Site')) {
+                projectName = this.getAttribute('Site').getProject().getName();
+                projectLang = this.getAttribute('Site').getProject().getLang();
+            }
+
+            return new Promise(function (resolve) {
+                require([
+                    'package/quiqqer/bricks/bin/BrickEdit',
+                    'utils/Panels'
+                ], function (BrickEdit, PanelUtils) {
+                    var Panel = new BrickEdit({
+                        '#id'      : 'brick-edit-' + brickId,
+                        id         : brickId,
+                        projectName: projectName,
+                        projectLang: projectLang
+                    });
+
+                    PanelUtils.openPanelInTasks(Panel);
+                    resolve(Panel);
+                });
+            });
         }
     });
 });

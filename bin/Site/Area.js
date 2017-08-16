@@ -135,7 +135,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 icon  : 'fa fa-caret-left',
                 events: {
                     onClick: function (Btn) {
-                        if (Btn.getAttribute('icon') == 'fa fa-caret-left') {
+                        if (Btn.getAttribute('icon') === 'fa fa-caret-left') {
                             self.openButtons();
                             return;
                         }
@@ -248,9 +248,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 });
 
                 if (promises.length) {
-
                     Promise.resolve(promises).then(function () {
-
                         self.refresh();
                         Loader.destroy();
                     });
@@ -513,7 +511,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 clone : function (event) {
                     var Target = event.target;
 
-                    if (Target.nodeName != 'LI') {
+                    if (Target.nodeName !== 'LI') {
                         Target = Target.getParent('li');
                     }
 
@@ -776,6 +774,17 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 },
                 events       : {
                     onOpen: function (Win) {
+                        var buttons = Win.$Buttons.getElements('button');
+
+                        buttons.setStyle('float', 'right');
+                        buttons.set('disabled', true);
+
+                        var EditButton = new QUIButton({
+                            textimage: 'fa fa-edit',
+                            text     : QUILocale.get(lg, 'brick.sheet.edit.title'),
+                            disabled : true
+                        }).inject(Win.$Buttons, 'top');
+
                         require([
                             'package/quiqqer/bricks/bin/Site/BrickEdit'
                         ], function (BrickEdit) {
@@ -789,7 +798,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                             custom = JSON.decode(custom);
 
-                            new BrickEdit({
+                            var Edit = new BrickEdit({
                                 brickId     : Select.value,
                                 Site        : self.getAttribute('Site'),
                                 customfields: custom,
@@ -797,6 +806,14 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                                     height: Win.getContent().getSize().y
                                 }
                             }).inject(Win.getContent());
+
+                            EditButton.addEvent('click', function () {
+                                Edit.openBrick();
+                                Win.close();
+                            });
+
+                            buttons.set('disabled', false);
+                            EditButton.enable();
                         });
                     },
 

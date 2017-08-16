@@ -1,7 +1,22 @@
 
-.quiqqer-bricks-site-category {
+.quiqqer-bricks-site-category,
+.quiqqer-bricks-site-category-image {
     float: left;
-    height: 100%;
     position: relative;
     width: 100%;
+}
+
+.quiqqer-bricks-site-category-areas {
+    float: left;
+    width: 60%;
+}
+
+.quiqqer-bricks-site-category-image {
+    float: left;
+    padding-left: 20px;
+    width: 40%;
+}
+
+.quiqqer-bricks-site-category-image img {
+    max-width: 100%;
 }
