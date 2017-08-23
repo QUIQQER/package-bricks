@@ -5,16 +5,6 @@
  * @module package/quiqqer/bricks/bin/BrickEdit
  * @author www.pcsg.de (Henning Leutz)
  *
- * @require qui/QUI
- * @require qui/controls/desktop/Panel
- * @require package/quiqqer/bricks/bin/BrickAreas
- * @require Ajax
- * @require Locale
- * @require qui/utils/Form
- * @require utils/Controls
- * @require utils/Template
- * @require css!package/quiqqer/bricks/bin/BrickEdit.css
- *
  * @event onLoaded [ this ]
  * @event onSave [ this ]
  * @event onDelete [ this ]
@@ -27,13 +17,14 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
     'package/quiqqer/bricks/bin/BrickAreas',
     'Ajax',
     'Locale',
+    'Projects',
     'qui/utils/Form',
     'utils/Controls',
     'utils/Template',
 
     'css!package/quiqqer/bricks/bin/BrickEdit.css'
 
-], function (QUI, QUIPanel, QUIConfirm, BrickAreas, QUIAjax, QUILocale, QUIFormUtils, ControlUtils, Template) {
+], function (QUI, QUIPanel, QUIConfirm, BrickAreas, QUIAjax, QUILocale, Projects, QUIFormUtils, ControlUtils, Template) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
@@ -297,7 +288,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 var Prom = false,
                     self = this;
 
-                if (Button == this.$Active) {
+                if (Button === this.$Active) {
                     reject();
                     self.Loader.hide();
                     return;
@@ -363,7 +354,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 unload = this.$Active.getAttribute('name'),
                 data   = this.getAttribute('data');
 
-            if (unload == 'information') {
+            if (unload === 'information') {
                 data.attributes = Object.merge(
                     data.attributes,
                     QUIFormUtils.getFormData(Form)
@@ -374,7 +365,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 data.attributes.frontendTitle = Form.getElement('[name="frontendTitle"]').value;
             }
 
-            if (unload == 'settings') {
+            if (unload === 'settings') {
                 data.attributes.areas = this.$Areas.getAreas().join(',');
                 //data.attributes.width   = Form.elements.width.value;
                 //data.attributes.height  = Form.elements.height.value;
@@ -404,14 +395,14 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 this.$Areas = false;
             }
 
-            if (unload == 'extra') {
+            if (unload === 'extra') {
                 data.settings = Object.merge(
                     data.settings,
                     QUIFormUtils.getFormData(Form)
                 );
             }
 
-            if (unload == 'content') {
+            if (unload === 'content') {
                 data.attributes.content = this.$Editor.getContent();
 
                 this.$Editor.destroy();
@@ -483,18 +474,6 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                             height: 120
                         }
                     }).inject(Content.getElement('.quiqqer-bricks-areas'));
-
-                    //if ("width" in attributes) {
-                    //    Content.getElement('[name="width"]').value = attributes.width;
-                    //}
-                    //
-                    //if ("height" in attributes) {
-                    //    Content.getElement('[name="height"]').value = attributes.height;
-                    //}
-                    //
-                    //if ("classes" in attributes) {
-                    //    Content.getElement('[name="classes"]').value = attributes.classes;
-                    //}
 
 
                     // flexble settings
@@ -601,7 +580,6 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             return new Promise(function (resolve) {
 
                 var TableBody = this.$Elm.getElement('table.brick-edit-content tbody'),
-
                     TD        = new Element('td'),
                     TR        = new Element('tr', {
                         'class': 'odd'
@@ -617,6 +595,13 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     new EditorManager().getEditor(null, function (Editor) {
                         this.$Editor = Editor;
                         this.$Editor.setAttribute('showLoader', false);
+
+                        var Project = Projects.get(
+                            this.getAttribute('projectName'),
+                            this.getAttribute('projectLang')
+                        );
+
+                        this.$Editor.setProject(Project);
 
                         var height = 300;
 
@@ -709,7 +694,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         '<td></td>'
                     }).inject(TableBody);
 
-                    if (setting.type != 'select') {
+                    if (setting.type !== 'select') {
                         Value = new Element('input', {
                             type   : setting.type,
                             name   : setting.name,
