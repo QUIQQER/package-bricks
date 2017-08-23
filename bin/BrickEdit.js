@@ -17,13 +17,14 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
     'package/quiqqer/bricks/bin/BrickAreas',
     'Ajax',
     'Locale',
+    'Projects',
     'qui/utils/Form',
     'utils/Controls',
     'utils/Template',
 
     'css!package/quiqqer/bricks/bin/BrickEdit.css'
 
-], function (QUI, QUIPanel, QUIConfirm, BrickAreas, QUIAjax, QUILocale, QUIFormUtils, ControlUtils, Template) {
+], function (QUI, QUIPanel, QUIConfirm, BrickAreas, QUIAjax, QUILocale, Projects, QUIFormUtils, ControlUtils, Template) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
@@ -579,7 +580,6 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             return new Promise(function (resolve) {
 
                 var TableBody = this.$Elm.getElement('table.brick-edit-content tbody'),
-
                     TD        = new Element('td'),
                     TR        = new Element('tr', {
                         'class': 'odd'
@@ -595,6 +595,13 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     new EditorManager().getEditor(null, function (Editor) {
                         this.$Editor = Editor;
                         this.$Editor.setAttribute('showLoader', false);
+
+                        var Project = Projects.get(
+                            this.getAttribute('projectName'),
+                            this.getAttribute('projectLang')
+                        );
+
+                        this.$Editor.setProject(Project);
 
                         var height = 300;
 
