@@ -143,6 +143,13 @@ define('package/quiqqer/bricks/bin/Site/Category', [
         },
 
         /**
+         * on control unload
+         */
+        unload: function () {
+            this.updateSite();
+        },
+
+        /**
          * Update the internal site object
          */
         updateSite: function () {
