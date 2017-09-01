@@ -76,3 +76,5 @@ Template Area
 ```html
 {brickarea assign="bricks" area="footer" Site=$Site}
 ```
+
+test
