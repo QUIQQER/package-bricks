@@ -77,4 +77,3 @@ Template Area
 {brickarea assign="bricks" area="footer" Site=$Site}
 ```
 
-test
