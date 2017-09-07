@@ -1,3 +1,4 @@
+![QUIQQER Bricks](bin/images/Readme.jpg)
 
 QUIQQER Bausteine
 ========
