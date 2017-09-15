@@ -10,9 +10,10 @@
 define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
     'qui/QUI',
-    'qui/controls/Control'
+    'qui/controls/Control',
+    'qui/controls/loader/Loader'
 
-], function (QUI, QUIControl) {
+], function (QUI, QUIControl, QUILoader) {
     "use strict";
 
     return new Class({
@@ -44,6 +45,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
         initialize: function (options) {
             this.parent(options);
+
+            this.Loader = new QUILoader();
 
             this.$Container = null;
             this.$Next      = null;
@@ -88,6 +91,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             this.$Scroll = moofx(this.$List, {
                 duration: 250
             });
+
+            this.Loader.inject(this.getElm());
 
             // create dots
             this.$refreshDots();
@@ -595,9 +600,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 return;
             }
 
-            var Background = Slide.getElement('.quiqqer-bricks-promoslider-wallpaper-image');
-            var display    = Background.getStyle('display');
-            var image      = Slide.get('data-url');
+            var self       = this,
+                Background = Slide.getElement('.quiqqer-bricks-promoslider-wallpaper-image'),
+                display    = Background.getStyle('display'),
+                image      = Slide.get('data-url');
 
             if (display !== 'none') {
                 return;
@@ -613,9 +619,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
             Background.setStyle('opacity', 0);
 
+            this.Loader.show();
+
             require(['image!' + image], function () {
                 Background.setStyle('display', null);
                 Background.setStyle('background-image', "url('" + image + "')");
+
+                self.Loader.hide();
+
                 // loaded
                 moofx(Background).animate({
                     opacity: 1
