@@ -304,16 +304,17 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
             // click events
             this.$Container.getElements("li[data-url]").each(function (LiElement) {
-                if (LiElement.get('data-url') === '') {
-                    return;
-                }
 
-                LiElement.setStyle('cursor', 'pointer');
-                LiElement.addEvent('click', function () {
-                    if (QUI.isScrolling() === false) {
-                        window.location = this.get('data-url');
-                    }
-                });
+                // if (LiElement.get('data-url') === '') {
+                //     return;
+                // }
+                //
+                // LiElement.setStyle('cursor', 'pointer');
+                // LiElement.addEvent('click', function () {
+                //     if (QUI.isScrolling() === false) {
+                //         window.location = this.get('data-url');
+                //     }
+                // });
             });
 
 
@@ -347,6 +348,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 for (i = 1, len = lis.length; i < len; i++) {
                     this.$showSheet(i);
                 }
+            } else {
+                // load first image
+                this.$showSheet(0);
             }
 
             // select first dot
@@ -593,17 +597,25 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
             var Background = Slide.getElement('.quiqqer-bricks-promoslider-wallpaper-image');
             var display    = Background.getStyle('display');
+            var image      = Slide.get('data-url');
 
             if (display !== 'none') {
                 return;
             }
 
-            Background.setStyle('opacity', 0);
-            Background.setStyle('display', null);
+            if (!Background.get('background-url')) {
+                var ending = image.substr(image.lastIndexOf('.'));
+                var split  = image.substr(0, image.lastIndexOf('.')).split('__')[0];
+                var width  = parseInt(this.getElm().getSize().x);
 
-            var image = Background.getStyle('background-image').slice(4, -1).replace(/"/g, "");
+                image = split + '__' + width + ending;
+            }
+
+            Background.setStyle('opacity', 0);
 
             require(['image!' + image], function () {
+                Background.setStyle('display', null);
+                Background.setStyle('background-image', "url('" + image + "')");
                 // loaded
                 moofx(Background).animate({
                     opacity: 1
