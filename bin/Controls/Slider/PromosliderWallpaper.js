@@ -632,6 +632,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                     opacity: 1
                 });
             }, function () {
+                self.Loader.hide();
             });
         },
 
