@@ -350,7 +350,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 // bei mobilen geräten die bilder und slides laden
                 var lis = this.$List.getElements('li');
 
-                for (i = 1, len = lis.length; i < len; i++) {
+                for (i = 0, len = lis.length; i < len; i++) {
                     this.$showSheet(i);
                 }
             } else {
