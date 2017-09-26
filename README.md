@@ -1,3 +1,4 @@
+![QUIQQER Bricks](bin/images/Readme.jpg)
 
 QUIQQER Bausteine
 ========
@@ -76,3 +77,4 @@ Template Area
 ```html
 {brickarea assign="bricks" area="footer" Site=$Site}
 ```
+

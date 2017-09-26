@@ -2,18 +2,8 @@
     {strip}
     <ul class="hide-on-mobile">
         {foreach $desktopSlides as $key => $slide}
-        <li data-url="{url url=$slide.url rewritten=1}">
-            {assign var=extraStyle value=""}
-            {assign var=extraClass value=""}
-
-            {if $key >= 1}
-            {assign var=extraStyle value="display: none;"}
-            {/if}
-
-            <div class="quiqqer-bricks-promoslider-wallpaper-image"
-                 style="{$extraStyle}background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
-            >&nbsp
-            </div>
+        <li data-url="{image image=$slide.image onlysrc=1}">
+            <div class="quiqqer-bricks-promoslider-wallpaper-image" style="display: none">&nbsp;</div>
 
             <div class="grid-container">
                 <div class="quiqqer-bricks-promoslider-wallpaper2Content-left">
@@ -35,18 +25,8 @@
     {strip}
     <ul class="hide-on-desktop">
         {foreach $mobileSlides as $key => $slide}
-        <li data-url="{url url=$slide.url rewritten=1}">
-            {assign var=extraStyle value=""}
-            {assign var=extraClass value=""}
-
-            {if $key >= 1}
-            {assign var=extraStyle value="display: none;"}
-            {/if}
-
-            <div class="quiqqer-bricks-promoslider-wallpaper-image"
-                 style="{$extraStyle}background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
-            >&nbsp
-            </div>
+        <li data-url="{image image=$slide.image onlysrc=1}">
+            <div class="quiqqer-bricks-promoslider-wallpaper-image" style="display: none">&nbsp;</div>
 
             <div class="grid-container">
                 <div class="quiqqer-bricks-promoslider-wallpaper2Content-left">

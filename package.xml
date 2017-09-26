@@ -1,0 +1,27 @@
+<quiqqer>
+    <package>
+        <title>
+            <locale group="quiqqer/bricks" var="package.title"/>
+        </title>
+
+        <description>
+            <locale group="quiqqer/bricks" var="package.description"/>
+        </description>
+
+        <support>
+            <email>support@pcsg.de</email>
+            <forum>https://community.quiqqer.com</forum>
+            <source>https://dev.quiqqer.com/quiqqer/package-bricks</source>
+            <issues>https://dev.quiqqer.com/quiqqer/package-bricks/issues</issues>
+            <wiki>https://dev.quiqqer.com/quiqqer/package-bricks/wikis/home</wiki>
+        </support>
+
+        <image src="URL_OPT_DIR/quiqqer/package-bricks/bin/images/Logo.jpg"/>
+
+        <copyright>
+            <name><![CDATA[PCSG - Computer & Internet Service OHG]]></name>
+            <license>GPL-3.0+</license>
+        </copyright>
+
+    </package>
+</quiqqer>

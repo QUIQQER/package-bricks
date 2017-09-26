@@ -2,21 +2,14 @@
     {strip}
     <ul class="hide-on-mobile">
         {foreach $desktopSlides as $key => $slide}
-        <li>
-            {assign var=extraStyle value=""}
+        <li data-url="{image image=$slide.image onlysrc=1}">
             {assign var=extraClass value=""}
-
-            {if $key >= 1}
-            {assign var=extraStyle value="display: none;"}
-            {/if}
 
             {if isset($slide.pos) && $slide.pos == 'quiqqer-bricks-promoslider-slide-right'}
             {assign var=extraClass value=" quiqqer-bricks-promoslider-wallpaper-text__right"}
             {/if}
 
-            <div class="quiqqer-bricks-promoslider-wallpaper-image"
-                 style="{$extraStyle}background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
-            >&nbsp;</div>
+            <div class="quiqqer-bricks-promoslider-wallpaper-image" style="display: none">&nbsp;</div>
 
             {if $slide.title != '' || $slide.text != ''}
             <div class="grid-container">
@@ -49,21 +42,14 @@
     {strip}
     <ul class="hide-on-desktop">
         {foreach $mobileSlides as $key => $slide}
-        <li>
-            {assign var=extraStyle value=""}
+        <li data-url="{image image=$slide.image onlysrc=1}">
             {assign var=extraClass value=""}
-
-            {if $key >= 1}
-            {assign var=extraStyle value="display: none;"}
-            {/if}
 
             {if isset($slide.pos) && $slide.pos == 'quiqqer-bricks-promoslider-slide-right'}
             {assign var=extraClass value=" quiqqer-bricks-promoslider-wallpaper-text__right"}
             {/if}
 
-            <div class="quiqqer-bricks-promoslider-wallpaper-image"
-                 style="{$extraStyle}background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
-            >&nbsp;</div>
+            <div class="quiqqer-bricks-promoslider-wallpaper-image" style="display: none">&nbsp;</div>
 
             {if $slide.title != '' || $slide.text != ''}
             <div class="grid-container">
@@ -87,7 +73,7 @@
             </div>
             {/if}
 
-            &nbsp
+            &nbsp;
         </li>
         {/foreach}
     </ul>

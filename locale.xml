@@ -8,11 +8,10 @@
         </locale>
         <locale name="package.description">
             <de><![CDATA[
-                Platzieren Sie Grafiken, Texte, Videos, Formulare etc.
-                innerhalb eines Templates (einer Seite Ihrer Homepage) beliebig.
+                Das Baustein System ermöglicht es Ihnen, Ihre Webseite selbst nach Ihren Wünschen zu gestalten. Bausteine können Sie schnell an verschiedene Stellen im Template verschieben, anlegen oder entfernen.
             ]]></de>
             <en><![CDATA[
-                Place any graphics, text, videos, forms, etc. within a template (a page on your website).
+                The brick system allows you to design your website according to your wishes. You can quickly move, create, or remove bricks to different places in the template.
             ]]></en>
         </locale>
 

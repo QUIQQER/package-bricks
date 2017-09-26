@@ -10,9 +10,10 @@
 define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
     'qui/QUI',
-    'qui/controls/Control'
+    'qui/controls/Control',
+    'qui/controls/loader/Loader'
 
-], function (QUI, QUIControl) {
+], function (QUI, QUIControl, QUILoader) {
     "use strict";
 
     return new Class({
@@ -44,6 +45,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
         initialize: function (options) {
             this.parent(options);
+
+            this.Loader = new QUILoader();
 
             this.$Container = null;
             this.$Next      = null;
@@ -88,6 +91,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             this.$Scroll = moofx(this.$List, {
                 duration: 250
             });
+
+            this.Loader.inject(this.getElm());
 
             // create dots
             this.$refreshDots();
@@ -304,16 +309,17 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
             // click events
             this.$Container.getElements("li[data-url]").each(function (LiElement) {
-                if (LiElement.get('data-url') === '') {
-                    return;
-                }
 
-                LiElement.setStyle('cursor', 'pointer');
-                LiElement.addEvent('click', function () {
-                    if (QUI.isScrolling() === false) {
-                        window.location = this.get('data-url');
-                    }
-                });
+                // if (LiElement.get('data-url') === '') {
+                //     return;
+                // }
+                //
+                // LiElement.setStyle('cursor', 'pointer');
+                // LiElement.addEvent('click', function () {
+                //     if (QUI.isScrolling() === false) {
+                //         window.location = this.get('data-url');
+                //     }
+                // });
             });
 
 
@@ -344,9 +350,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 // bei mobilen geräten die bilder und slides laden
                 var lis = this.$List.getElements('li');
 
-                for (i = 1, len = lis.length; i < len; i++) {
+                for (i = 0, len = lis.length; i < len; i++) {
                     this.$showSheet(i);
                 }
+            } else {
+                // load first image
+                this.$showSheet(0);
             }
 
             // select first dot
@@ -591,24 +600,39 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 return;
             }
 
-            var Background = Slide.getElement('.quiqqer-bricks-promoslider-wallpaper-image');
-            var display    = Background.getStyle('display');
+            var self       = this,
+                Background = Slide.getElement('.quiqqer-bricks-promoslider-wallpaper-image'),
+                display    = Background.getStyle('display'),
+                image      = Slide.get('data-url');
 
             if (display !== 'none') {
                 return;
             }
 
-            Background.setStyle('opacity', 0);
-            Background.setStyle('display', null);
+            if (!Background.get('background-url')) {
+                var ending = image.substr(image.lastIndexOf('.'));
+                var split  = image.substr(0, image.lastIndexOf('.')).split('__')[0];
+                var width  = parseInt(this.getElm().getSize().x);
 
-            var image = Background.getStyle('background-image').slice(4, -1).replace(/"/g, "");
+                image = split + '__' + width + ending;
+            }
+
+            Background.setStyle('opacity', 0);
+
+            this.Loader.show();
 
             require(['image!' + image], function () {
+                Background.setStyle('display', null);
+                Background.setStyle('background-image', "url('" + image + "')");
+
+                self.Loader.hide();
+
                 // loaded
                 moofx(Background).animate({
                     opacity: 1
                 });
             }, function () {
+                self.Loader.hide();
             });
         },
 
