@@ -84,7 +84,7 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
 
                     <option value=""/>
-                    <option value="name ASC">
+                    <option value="name ASC" selected="selected">
                         <locale group="quiqqer/system" var="name_asc"/>
                     </option>
                     <option value="name DESC">
@@ -968,8 +968,8 @@
                     <option value="authorTop">
                         <locale group="quiqqer/bricks" var="brick.listTemplate.authorTop"/>
                     </option>
-                    <option value="grid3x3">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.grid3x3"/>
+                    <option value="cardRows">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.cardRows"/>
                     </option>
                 </setting>
 

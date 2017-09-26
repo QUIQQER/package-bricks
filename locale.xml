@@ -936,6 +936,11 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Author and date top]]></en>
             <pl><![CDATA[Autor i data na górze]]></pl>
         </locale>
+        <locale name="brick.listTemplate.cardRows">
+            <de><![CDATA[Cards]]></de>
+            <en><![CDATA[Cards]]></en>
+            <pl><![CDATA[Cards]]></pl>
+        </locale>
 
 
         <!-- max siten -->
