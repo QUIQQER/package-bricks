@@ -33,7 +33,7 @@ class SimpleGoogleMaps extends QUI\Control
             dirname(__FILE__) . '/SimpleGoogleMaps.css'
         );
 
-        $this->setAttribute('qui-class', "package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps");
+//        $this->setAttribute('qui-class', "package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps");
     }
 
     /**

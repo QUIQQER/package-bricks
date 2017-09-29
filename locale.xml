@@ -800,44 +800,48 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.control.simplegooglemaps.title">
             <de><![CDATA[Bausteine: Einfache Google Maps Karte]]></de>
             <en><![CDATA[Bricks: Simple Google Maps]]></en>
+            <pl><![CDATA[Bricks: Simple Google Maps]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.description">
             <de><![CDATA[Einstellungen für Karten]]></de>
             <en><![CDATA[Maps settings]]></en>
-        </locale>
-        <locale name="brick.control.simplegooglemaps.clickToActivate">
-            <de><![CDATA[Zum Aktivieren klicken]]></de>
-            <en><![CDATA[Click to activate]]></en>
-            <pl><![CDATA[Kliknij, zeby aktywowac]]></pl>
+            <pl><![CDATA[Ustawienia mapy]]></pl>
         </locale>
 
         <locale name="brick.control.simplegooglemaps.settings.place">
             <de><![CDATA[Google Place]]></de>
             <en><![CDATA[Google Place]]></en>
+            <pl><![CDATA[Google Place]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.title">
             <de><![CDATA[Title]]></de>
             <en><![CDATA[Title]]></en>
+            <pl><![CDATA[Tytuł]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.street">
             <de><![CDATA[Straße]]></de>
             <en><![CDATA[Street]]></en>
+            <pl><![CDATA[Ulica]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.zip">
             <de><![CDATA[PLZ]]></de>
             <en><![CDATA[ZIP code]]></en>
+            <pl><![CDATA[Kod pocztowy]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.city">
             <de><![CDATA[Stadt]]></de>
             <en><![CDATA[City]]></en>
+            <pl><![CDATA[Miejscowość]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.zoom">
             <de><![CDATA[Zoom]]></de>
             <en><![CDATA[Zoom]]></en>
+            <pl><![CDATA[Zoom]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.api">
             <de><![CDATA[API Key]]></de>
             <en><![CDATA[API Key]]></en>
+            <pl><![CDATA[Klucz API]]></pl>
         </locale>
 
         <!-- Box Content -->
@@ -946,6 +950,11 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Autor und Datum oben]]></de>
             <en><![CDATA[Author and date top]]></en>
             <pl><![CDATA[Autor i data na górze]]></pl>
+        </locale>
+        <locale name="brick.listTemplate.cardRows">
+            <de><![CDATA[Cards]]></de>
+            <en><![CDATA[Cards]]></en>
+            <pl><![CDATA[Cards]]></pl>
         </locale>
 
 
