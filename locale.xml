@@ -684,23 +684,35 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[The slide can not be restored]]></en>
         </locale>
 
-        <locale name="quiqqer.products.control.create.image">
+        <locale name="quiqqer.bricks.promoslider.create.image">
             <de><![CDATA[Bild]]></de>
             <en><![CDATA[Image]]></en>
         </locale>
-        <locale name="quiqqer.products.control.create.title">
+        <locale name="quiqqer.bricks.promoslider.create.url">
+            <de><![CDATA[URL]]></de>
+            <en><![CDATA[URL]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.create.title">
             <de><![CDATA[Titel]]></de>
             <en><![CDATA[Title]]></en>
         </locale>
-        <locale name="quiqqer.products.control.create.text">
+        <locale name="quiqqer.bricks.promoslider.create.text">
             <de><![CDATA[Text]]></de>
             <en><![CDATA[Text]]></en>
         </locale>
-        <locale name="quiqqer.products.control.create.align">
+        <locale name="quiqqer.bricks.promoslider.create.align">
             <de><![CDATA[Ausrichtung]]></de>
             <en><![CDATA[Align]]></en>
         </locale>
 
+        <locale name="quiqqer.bricks.promoslider.adddialog.title">
+            <de><![CDATA[Slide erstellen]]></de>
+            <en><![CDATA[Add Slide]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.editialog.title">
+            <de><![CDATA[Slide bearbieten]]></de>
+            <en><![CDATA[Edit Slide]]></en>
+        </locale>
     </groups>
     <groups name="quiqqer/bricks" datatype="js,php">
         <locale name="brick.control.navigation.setting.content">

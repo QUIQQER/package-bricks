@@ -3,17 +3,6 @@
  * @author www.pcsg.de (Henning Leutz)
  *
  * Wallpaper Slider mit zwei Inhaltsbereichen
- *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/controls/windows/Confirm
- * @require qui/controls/buttons/Button
- * @require Locale
- * @require Mustache
- * @require controls/grid/Grid
- * @require utils/Controls
- * @require text!package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContentEntry.html
- * @require css!package/quiqqer/bricks/bin/Controls/Slider/PromoSliderSettings.css
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContent', [
 
@@ -185,19 +174,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     var buttons = this.$Grid.getButtons(),
 
                         Edit    = buttons.filter(function (Btn) {
-                            return Btn.getAttribute('name') == 'edit';
+                            return Btn.getAttribute('name') === 'edit';
                         })[0],
 
                         Up      = buttons.filter(function (Btn) {
-                            return Btn.getAttribute('name') == 'up';
+                            return Btn.getAttribute('name') === 'up';
                         })[0],
 
                         Down    = buttons.filter(function (Btn) {
-                            return Btn.getAttribute('name') == 'down';
+                            return Btn.getAttribute('name') === 'down';
                         })[0],
 
                         Delete  = buttons.filter(function (Btn) {
-                            return Btn.getAttribute('name') == 'delete';
+                            return Btn.getAttribute('name') === 'delete';
                         })[0];
 
                     Up.enable();
@@ -217,7 +206,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
             try {
                 this.$data = JSON.decode(this.$Input.value);
 
-                if (typeOf(this.$data) != 'array') {
+                if (typeOf(this.$data) !== 'array') {
                     this.$data = [];
                 }
 
@@ -284,19 +273,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
             var buttons = this.$Grid.getButtons(),
 
                 Edit    = buttons.filter(function (Btn) {
-                    return Btn.getAttribute('name') == 'edit';
+                    return Btn.getAttribute('name') === 'edit';
                 })[0],
 
                 Up      = buttons.filter(function (Btn) {
-                    return Btn.getAttribute('name') == 'up';
+                    return Btn.getAttribute('name') === 'up';
                 })[0],
 
                 Down    = buttons.filter(function (Btn) {
-                    return Btn.getAttribute('name') == 'down';
+                    return Btn.getAttribute('name') === 'down';
                 })[0],
 
                 Delete  = buttons.filter(function (Btn) {
-                    return Btn.getAttribute('name') == 'delete';
+                    return Btn.getAttribute('name') === 'delete';
                 })[0];
 
             Up.disable();
@@ -385,7 +374,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
         del: function (index) {
             var newList = [];
 
-            if (typeOf(index) != 'array') {
+            if (typeOf(index) !== 'array') {
                 index = [index];
             }
 
@@ -409,7 +398,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
             var controls = QUI.Controls.getControlsInElement(this.getElm());
 
             controls.each(function (Control) {
-                if (Control == this) {
+                if (Control === this) {
                     return;
                 }
 
@@ -595,7 +584,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                         project  = this.getAttribute('project');
 
                     controls.each(function (Control) {
-                        if (Control == this) {
+                        if (Control === this) {
                             return;
                         }
 

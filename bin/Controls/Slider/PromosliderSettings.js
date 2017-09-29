@@ -3,17 +3,6 @@
  * @author www.pcsg.de (Henning Leutz)
  *
  * Inhaltseinstellung für Promoslider
- *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/controls/windows/Confirm
- * @require qui/controls/buttons/Button
- * @require Locale
- * @require Mustache
- * @require controls/grid/Grid
- * @require utils/Controls
- * @require text!package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsEntry.html
- * @require css!package/quiqqer/bricks/bin/Controls/Slider/PromoSliderSettings.css
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
@@ -163,22 +152,18 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     dataType : 'string',
                     width    : 300
                 }, {
-                    header   : QUILocale.get(lg, 'quiqqer.products.control.slidesettings.type'),
+                    header   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.align'),
                     dataIndex: 'type',
                     dataType : 'string',
                     width    : 200
                 }, {
-                    header   : QUILocale.get(lg, 'quiqqer.products.control.slidesettings.url'),
+                    header   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url'),
                     dataIndex: 'url',
                     dataType : 'string',
                     width    : 300
                 }, {
                     dataIndex: 'image',
                     dataType : 'string',
-                    hidden   : true
-                }, {
-                    header   : QUILocale.get(lg, 'quiqqer.products.control.slidesettings.text'),
-                    dataIndex: 'text',
                     hidden   : true
                 }]
             });
@@ -188,19 +173,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var buttons = this.$Grid.getButtons(),
 
                         Edit    = buttons.filter(function (Btn) {
-                            return Btn.getAttribute('name') == 'edit';
+                            return Btn.getAttribute('name') === 'edit';
                         })[0],
 
                         Up      = buttons.filter(function (Btn) {
-                            return Btn.getAttribute('name') == 'up';
+                            return Btn.getAttribute('name') === 'up';
                         })[0],
 
                         Down    = buttons.filter(function (Btn) {
-                            return Btn.getAttribute('name') == 'down';
+                            return Btn.getAttribute('name') === 'down';
                         })[0],
 
                         Delete  = buttons.filter(function (Btn) {
-                            return Btn.getAttribute('name') == 'delete';
+                            return Btn.getAttribute('name') === 'delete';
                         })[0];
 
                     Up.enable();
@@ -220,7 +205,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             try {
                 this.$data = JSON.decode(this.$Input.value);
 
-                if (typeOf(this.$data) != 'array') {
+                if (typeOf(this.$data) !== 'array') {
                     this.$data = [];
                 }
 
@@ -273,6 +258,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     insert.type = entry.type;
                 }
 
+                if ("url" in entry) {
+                    insert.url = entry.url;
+                }
+
                 data.push(insert);
             }
 
@@ -283,19 +272,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             var buttons = this.$Grid.getButtons(),
 
                 Edit    = buttons.filter(function (Btn) {
-                    return Btn.getAttribute('name') == 'edit';
+                    return Btn.getAttribute('name') === 'edit';
                 })[0],
 
                 Up      = buttons.filter(function (Btn) {
-                    return Btn.getAttribute('name') == 'up';
+                    return Btn.getAttribute('name') === 'up';
                 })[0],
 
                 Down    = buttons.filter(function (Btn) {
-                    return Btn.getAttribute('name') == 'down';
+                    return Btn.getAttribute('name') === 'down';
                 })[0],
 
                 Delete  = buttons.filter(function (Btn) {
-                    return Btn.getAttribute('name') == 'delete';
+                    return Btn.getAttribute('name') === 'delete';
                 })[0];
 
             Up.disable();
@@ -403,7 +392,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
         del: function (index) {
             var newList = [];
 
-            if (typeOf(index) != 'array') {
+            if (typeOf(index) !== 'array') {
                 index = [index];
             }
 
@@ -427,7 +416,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             var controls = QUI.Controls.getControlsInElement(this.getElm());
 
             controls.each(function (Control) {
-                if (Control == this) {
+                if (Control === this) {
                     return;
                 }
 
@@ -449,7 +438,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     image: gridData[i].image,
                     title: gridData[i].title,
                     text : gridData[i].text,
-                    type : gridData[i].type
+                    type : gridData[i].type,
+                    url  : gridData[i].url
                 });
             }
 
@@ -458,61 +448,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
         },
 
         /**
-         * Open edit dialog
-         *
-         * @retrun {Promise}
+         * Dialogs
          */
-        $openEditDialog: function () {
-            var data  = this.$Grid.getSelectedData();
-            var index = this.$Grid.getSelectedIndices();
-
-            if (!data.length) {
-                return;
-            }
-
-            data  = data[0];
-            index = index[0];
-
-            return this.$createDialog().then(function (Container) {
-                var CloseButton = Container.getElement(
-                    '.quiqqer-bricks-promoslider-settings-entry-buttons button'
-                );
-
-                var Form        = Container.getElement('form');
-                var Image       = Form.elements.image;
-                var Title       = Form.elements.title;
-                var Description = Form.elements.description;
-                var Type        = Form.elements.type;
-                var Button      = QUI.Controls.getById(CloseButton.get('data-quiid'));
-
-                Button.addEvent('click', function () {
-                    this.edit(index, {
-                        image: Image.value,
-                        title: Title.value,
-                        text : Description.value,
-                        type : Type.value
-                    });
-
-                    moofx(Container).animate({
-                        opacity: 0,
-                        top    : -30
-                    }, {
-                        duration: 250,
-                        callback: function () {
-                            Container.destroy();
-                        }
-                    });
-                }.bind(this));
-
-                Image.value       = data.image;
-                Title.value       = data.title;
-                Description.value = data.text;
-                Type.value        = data.type;
-
-                Image.fireEvent('change');
-                Description.fireEvent('change');
-            }.bind(this));
-        },
 
         /**
          * opens the delete dialog
@@ -545,44 +482,106 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
         },
 
         /**
-         * opens the add dialog
+         * Open edit dialog
          *
-         * @return {Promise}
+         * @retrun {Promise}
          */
-        $openAddDialog: function () {
-            return this.$createDialog().then(function (Container) {
-                var CloseButton = Container.getElement(
-                    '.quiqqer-bricks-promoslider-settings-entry-buttons button'
-                );
+        $openEditDialog: function () {
+            var self  = this,
+                data  = this.$Grid.getSelectedData(),
+                index = this.$Grid.getSelectedIndices();
 
-                var Button = QUI.Controls.getById(CloseButton.get('data-quiid'));
+            if (!data.length) {
+                return Promise.resolve();
+            }
 
-                Button.addEvent('click', function () {
-                    var Form = Container.getElement('form');
+            data  = data[0];
+            index = index[0];
+
+            return this.$createDialog().then(function (Dialog) {
+                Dialog.addEvent('onSubmit', function () {
+                    Dialog.Loader.show();
+
+                    var Content = Dialog.getContent();
+                    var Form    = Content.getElement('form');
 
                     var Image       = Form.elements.image;
                     var Title       = Form.elements.title;
                     var Description = Form.elements.description;
                     var Type        = Form.elements.type;
+                    var Url         = Form.elements.url;
 
-                    this.add({
+                    self.edit(index, {
                         image: Image.value,
                         title: Title.value,
                         text : Description.value,
-                        type : Type.value
+                        type : Type.value,
+                        url  : Url.value
                     });
 
-                    moofx(Container).animate({
-                        opacity: 0,
-                        top    : -30
-                    }, {
-                        duration: 250,
-                        callback: function () {
-                            Container.destroy();
-                        }
+                    Dialog.close();
+                });
+
+
+                Dialog.addEvent('onOpenAfterCreate', function () {
+                    var Content = Dialog.getContent();
+                    var Form    = Content.getElement('form');
+
+                    var Image       = Form.elements.image;
+                    var Title       = Form.elements.title;
+                    var Description = Form.elements.description;
+                    var Type        = Form.elements.type;
+                    var Url         = Form.elements.url;
+
+                    Image.value       = data.image;
+                    Title.value       = data.title;
+                    Description.value = data.text;
+                    Type.value        = data.type;
+                    Url.value         = data.url;
+
+                    Image.fireEvent('change');
+                    Description.fireEvent('change');
+                });
+
+                Dialog.setAttribute('title', QUILocale.get(lg, 'quiqqer.bricks.promoslider.editialog.title'));
+                Dialog.open();
+            });
+        },
+
+        /**
+         * opens the add dialog
+         *
+         * @return {Promise}
+         */
+        $openAddDialog: function () {
+            var self = this;
+
+            return this.$createDialog().then(function (Dialog) {
+                Dialog.addEvent('onSubmit', function () {
+                    Dialog.Loader.show();
+
+                    var Content = Dialog.getContent();
+                    var Form    = Content.getElement('form');
+
+                    var Image       = Form.elements.image;
+                    var Title       = Form.elements.title;
+                    var Description = Form.elements.description;
+                    var Type        = Form.elements.type;
+                    var Url         = Form.elements.url;
+
+                    self.add({
+                        image: Image.value,
+                        title: Title.value,
+                        text : Description.value,
+                        type : Type.value,
+                        url  : Url.value
                     });
-                }.bind(this));
-            }.bind(this));
+
+                    Dialog.close();
+                });
+
+                Dialog.open();
+            });
         },
 
         /**
@@ -591,80 +590,72 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
          * @return {Promise}
          */
         $createDialog: function () {
+            var self = this;
+
             return new Promise(function (resolve) {
-                var Container = new Element('div', {
-                    html   : Mustache.render(templateEntry, {
-                        fieldImage      : QUILocale.get(lg, 'quiqqer.products.control.create.image'),
-                        fieldUrl        : QUILocale.get(lg, 'quiqqer.products.control.create.url'),
-                        fieldTitle      : QUILocale.get(lg, 'quiqqer.products.control.create.title'),
-                        fieldDescription: QUILocale.get(lg, 'quiqqer.products.control.create.text'),
-                        fieldType       : QUILocale.get(lg, 'quiqqer.products.control.create.align')
-                    }),
-                    'class': 'quiqqer-bricks-promoslider-settings-entry'
-                }).inject(this.getElm());
+                var Dialog = new QUIConfirm({
+                    title    : QUILocale.get(lg, 'quiqqer.bricks.promoslider.adddialog.title'),
+                    icon     : 'fa fa-edit',
+                    maxWidth : 800,
+                    maxHeight: 600,
+                    autoclose: false,
+                    events   : {
+                        onOpen: function (Win) {
+                            Win.Loader.show();
+                            Win.getContent().set('html', '');
 
-                var Close = Container.getElement(
-                    '.quiqqer-bricks-promoslider-settings-entry-close'
-                );
+                            var Container = new Element('div', {
+                                html   : Mustache.render(templateEntry, {
+                                    fieldImage      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.image'),
+                                    fieldUrl        : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url'),
+                                    fieldTitle      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.title'),
+                                    fieldDescription: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.text'),
+                                    fieldType       : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.align')
+                                }),
+                                'class': 'quiqqer-bricks-promoslider-settings-entry'
+                            }).inject(Win.getContent());
 
-                var Buttons = Container.getElement(
-                    '.quiqqer-bricks-promoslider-settings-entry-buttons'
-                );
+                            var Text = Container.getElement('.field-description');
 
-                var Text = Container.getElement('.field-description');
+                            Text.getParent().setStyles({
+                                height: 100
+                            });
 
-                Text.getParent().setStyles({
-                    height: 100
-                });
+                            QUI.parse(Container).then(function () {
+                                return ControlsUtils.parse(Container);
+                            }).then(function () {
+                                var controls = QUI.Controls.getControlsInElement(Container),
+                                    project  = self.getAttribute('project');
 
-                Close.addEvent('click', function () {
-                    moofx(Container).animate({
-                        opacity: 0,
-                        top    : -30
-                    }, {
-                        duration: 250,
-                        callback: function () {
-                            Container.destroy();
+                                controls.each(function (Control) {
+                                    if (Control === self) {
+                                        return;
+                                    }
+
+                                    if ("setProject" in Control) {
+                                        Control.setProject(project);
+                                    }
+                                });
+
+                                Win.fireEvent('openAfterCreate', [Win]);
+
+                                moofx(Container).animate({
+                                    opacity: 1,
+                                    top    : 0
+                                }, {
+                                    duration: 250,
+                                    callback: function () {
+                                        resolve(Container);
+                                        Win.Loader.hide();
+                                    }
+                                });
+                            });
                         }
-                    });
-                });
-
-                new QUIButton({
-                    text  : QUILocale.get('quiqqer/system', 'accept'),
-                    styles: {
-                        'float': 'none'
                     }
-                }).inject(Buttons);
+                });
 
-
-                QUI.parse(Container).then(function () {
-                    return ControlsUtils.parse(Container);
-                }).then(function () {
-
-                    var controls = QUI.Controls.getControlsInElement(Container),
-                        project  = this.getAttribute('project');
-
-                    controls.each(function (Control) {
-                        if (Control == this) {
-                            return;
-                        }
-
-                        if ("setProject" in Control) {
-                            Control.setProject(project);
-                        }
-                    }.bind(this));
-
-                    moofx(Container).animate({
-                        opacity: 1,
-                        top    : 0
-                    }, {
-                        duration: 250,
-                        callback: function () {
-                            resolve(Container);
-                        }
-                    });
-                }.bind(this));
-            }.bind(this));
+                resolve(Dialog);
+            });
         }
     });
 });
