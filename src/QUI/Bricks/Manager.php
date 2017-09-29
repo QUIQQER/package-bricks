@@ -645,6 +645,9 @@ class Manager
         ), array(
             'id' => (int)$brickId
         ));
+
+        // @todo it is a workaround
+        QUI\Cache\Manager::clearAll();
     }
 
     /**

@@ -63,6 +63,9 @@ define('package/quiqqer/bricks/bin/guides/General', [
     Bricks.addStep({
         title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
         text    : QUILocale.get(lg, 'tour.general.bricks.Step2.Text'),
+        tetherOptions: {
+            constraints: null // this disables pinning (which breaks the arrows)
+        },
         buttons : false,
         attachTo: {
             element: function () {
@@ -244,7 +247,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
             element: function () {
                 return BrickSettings.getElm().getElement('[name="information"]')
             },
-            on     : 'right'
+            on     : 'left'
         },
         buttons : {
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
@@ -262,7 +265,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
             element: function () {
                 return BrickSettings.getElm().getElement('[name="settings"]')
             },
-            on     : 'right'
+            on     : 'left'
         },
         buttons : {
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
@@ -394,7 +397,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
             element: function () {
                 return BrickSettings.getElm().getElement('[name="extra"]')
             },
-            on     : 'right'
+            on     : 'left'
         },
         buttons : {
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
@@ -417,7 +420,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
             element: function () {
                 return BrickSettings.getElm().getElement('[name="content"]')
             },
-            on     : 'right'
+            on     : 'left'
         },
         buttons : {
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
@@ -502,10 +505,10 @@ define('package/quiqqer/bricks/bin/guides/General', [
                         Panel.openProject();
 
                         PanelUtils.openSitePanel(projectName, projectLang, 1)
-                                  .then(function (CreatedPanel) {
-                                      SitePanel = CreatedPanel;
-                                      Bricks.next.delay(500);
-                                  });
+                            .then(function (CreatedPanel) {
+                                SitePanel = CreatedPanel;
+                                Bricks.next.delay(500);
+                            });
                     });
                 });
             }
@@ -519,7 +522,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
             element: function () {
                 return SitePanel.getElm().getElement('[name="quiqqer.bricks"]');
             },
-            on     : 'right'
+            on     : 'left'
         },
         buttons : {
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
@@ -599,21 +602,21 @@ define('package/quiqqer/bricks/bin/guides/General', [
             on     : 'right'
         },
         buttons : false,
-            // {
-            // text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
-            // action: function () {
-            //     //console.log(document.getElements('.qui-window-popup.box .qui-window-popup-content.box .qui-elements-list-item.smooth')[0]);
-            //     //document.getElements('.qui-window-popup.box .qui-window-popup-content.box .qui-elements-list-item.smooth')[0].fireEvent('click');
-            //     var list = QUI.Controls.getByType('qui/controls/elements/List');
-            //     console.log(list);
-            //     list = list[list.length-1];
-            //     console.log(list);
-            //     var entries  = list.getElm().getChildren();
-            //     var entry = entries[entries.length - 1];
-            //     console.log(entry);
-            //     entry.click();            //Das funktioniert leider nicht die entries haben keine click funktion
-            //     Bricks.next.delay(1000);
-            // }
+        // {
+        // text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        // action: function () {
+        //     //console.log(document.getElements('.qui-window-popup.box .qui-window-popup-content.box .qui-elements-list-item.smooth')[0]);
+        //     //document.getElements('.qui-window-popup.box .qui-window-popup-content.box .qui-elements-list-item.smooth')[0].fireEvent('click');
+        //     var list = QUI.Controls.getByType('qui/controls/elements/List');
+        //     console.log(list);
+        //     list = list[list.length-1];
+        //     console.log(list);
+        //     var entries  = list.getElm().getChildren();
+        //     var entry = entries[entries.length - 1];
+        //     console.log(entry);
+        //     entry.click();            //Das funktioniert leider nicht die entries haben keine click funktion
+        //     Bricks.next.delay(1000);
+        // }
         // },
         when    : {
             show: function () {

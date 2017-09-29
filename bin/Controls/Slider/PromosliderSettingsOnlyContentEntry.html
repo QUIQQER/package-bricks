@@ -1,47 +1,53 @@
-<div class="quiqqer-bricks-promoslider-settings-entry-header">
-    <div class="quiqqer-bricks-promoslider-settings-entry-close">
-        <span class="fa fa-remove"></span>
-    </div>
-</div>
-
 <form name="quiqqer-bricks-promoslider-settings-entry"
       class="quiqqer-bricks-promoslider-settings-entry-form"
 >
-    <label class="field-container">
-        <span class="field-container-item">
-            {{fieldImage}}
-        </span>
-        <span class="field-container-field">
-            <input name="image" class="field-image media-image"/>
-        </span>
-    </label>
-
-    <label class="field-container">
-        <span class="field-container-item">
-            {{fieldUrl}}
-        </span>
-        <span class="field-container-field">
-            <input name="url" data-qui="controls/projects/project/site/Input"/>
-        </span>
-    </label>
-
-    <label class="field-container">
-        <span class="field-container-item">
-            {{fieldLeft}}
-        </span>
-        <input name="left" class="field-container-field field-description"
-               data-qui="controls/editors/Input"
-        />
-    </label>
-
-    <label class="field-container">
-        <span class="field-container-item">
-            {{fieldRight}}
-        </span>
-        <input name="right" class="field-container-field field-description"
-               data-qui="controls/editors/Input"
-        />
-    </label>
+    <table class="data-table data-table-flexbox">
+        <tbody>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        {{fieldImage}}
+                    </span>
+                    <input name="image" class="field-container-field field-image media-image"/>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        {{fieldUrl}}
+                    </span>
+                    <input name="url" class="field-container-field"
+                           data-qui="controls/projects/project/site/Input"/>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        {{fieldLeft}}
+                    </span>
+                    <input name="left" class="field-container-field field-description"
+                           data-qui="controls/editors/Input"
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        {{fieldRight}}
+                    </span>
+                    <input name="right" class="field-container-field field-description"
+                           data-qui="controls/editors/Input"
+                    />
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </form>
-
-<div class="quiqqer-bricks-promoslider-settings-entry-buttons"></div>

@@ -1,65 +1,8 @@
-.quiqqer-bricks-promoslider-settings {
-    position: relative;
+.quiqqer-bricks-promoslider-settings-entry-form table {
+    border: none;
 }
 
-.quiqqer-bricks-promoslider-settings-entry {
-    background: #f0f0f0;
-    border: 1px solid #ddd;
-    height: 100%;
-    left: 0;
-    overflow: auto;
-    opacity: 0;
-    position: absolute;
-    top: -50px;
-    width: 100%;
-}
-
-.quiqqer-bricks-promoslider-settings-entry-header {
-    background: #e1e4e9;
-    clear: both;
-    float: left;
-    height: 30px;
-    width: 100%;
-}
-
-.quiqqer-bricks-promoslider-settings-entry-close {
-    cursor: pointer;
-    line-height: 30px;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: 0;
-    width: 30px;
-}
-
-.quiqqer-bricks-promoslider-settings-entry-close:hover {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.quiqqer-bricks-promoslider-settings-entry-form {
-    clear: both;
-    float: left;
-    height: calc(100% - 100px);
-    margin-top: 10px;
-    overflow: auto;
-    padding: 0 10px 0 10px;
-    width: 100%;
-}
-
-.quiqqer-bricks-promoslider-settings-entry-form .field-container-field {
-    background: #fff;
-    max-width: none;
-}
-
-.quiqqer-bricks-promoslider-settings-entry-form .field-container-item {
-    width: 100px;
-}
-
-.quiqqer-bricks-promoslider-settings-entry-buttons {
-    clear: both;
-    float: left;
-    height: 50px;
-    padding: 10px 0;
-    text-align: center;
-    width: 100%;
+.quiqqer-bricks-promoslider-settings-entry-form td {
+    padding-left: 0;
+    padding-right: 0;
 }
