@@ -2,7 +2,7 @@
     {strip}
     <ul class="hide-on-mobile">
         {foreach $desktopSlides as $key => $slide}
-        <li data-url="{image image=$slide.image onlysrc=1}">
+        <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}">
             {assign var=extraClass value=""}
 
             {if isset($slide.pos) && $slide.pos == 'quiqqer-bricks-promoslider-slide-right'}
@@ -42,7 +42,7 @@
     {strip}
     <ul class="hide-on-desktop">
         {foreach $mobileSlides as $key => $slide}
-        <li data-url="{image image=$slide.image onlysrc=1}">
+        <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}">
             {assign var=extraClass value=""}
 
             {if isset($slide.pos) && $slide.pos == 'quiqqer-bricks-promoslider-slide-right'}

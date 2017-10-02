@@ -2,7 +2,7 @@
     {strip}
     <ul class="hide-on-mobile">
         {foreach $desktopSlides as $key => $slide}
-        <li data-url="{image image=$slide.image onlysrc=1}">
+        <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}">
             <div class="quiqqer-bricks-promoslider-wallpaper-image" style="display: none">&nbsp;</div>
 
             <div class="grid-container">
@@ -25,7 +25,7 @@
     {strip}
     <ul class="hide-on-desktop">
         {foreach $mobileSlides as $key => $slide}
-        <li data-url="{image image=$slide.image onlysrc=1}">
+        <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}">
             <div class="quiqqer-bricks-promoslider-wallpaper-image" style="display: none">&nbsp;</div>
 
             <div class="grid-container">

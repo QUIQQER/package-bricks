@@ -245,8 +245,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                         // click event
                         var Li = this.$List.getElement('li:nth-child(' + parseInt(currentSlide + 1) + ')');
 
-                        if (Li.get('data-url') && Li.get('data-url') !== '') {
-                            window.location = Li.get('data-url');
+                        if (Li.get('data-href') && Li.get('data-href') !== '') {
+                            window.location = Li.get('data-href');
                             return;
                         }
                     }
@@ -308,18 +308,17 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             });
 
             // click events
-            this.$Container.getElements("li[data-url]").each(function (LiElement) {
+            this.$Container.getElements("li[data-href]").each(function (LiElement) {
+                if (LiElement.get('data-href') === '') {
+                    return;
+                }
 
-                // if (LiElement.get('data-url') === '') {
-                //     return;
-                // }
-                //
-                // LiElement.setStyle('cursor', 'pointer');
-                // LiElement.addEvent('click', function () {
-                //     if (QUI.isScrolling() === false) {
-                //         window.location = this.get('data-url');
-                //     }
-                // });
+                LiElement.setStyle('cursor', 'pointer');
+                LiElement.addEvent('click', function () {
+                    if (QUI.isScrolling() === false) {
+                        window.location = this.get('data-href');
+                    }
+                });
             });
 
 
@@ -603,7 +602,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             var self       = this,
                 Background = Slide.getElement('.quiqqer-bricks-promoslider-wallpaper-image'),
                 display    = Background.getStyle('display'),
-                image      = Slide.get('data-url');
+                image      = Slide.get('data-image');
 
             if (display !== 'none') {
                 return;
