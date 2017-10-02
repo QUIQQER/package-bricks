@@ -3,18 +3,6 @@
  *
  * @module package/quiqqer/bricks/bin/Manager
  * @author www.pcsg.de (Henning Leutz)
- *
- * @require qui/QUI
- * @require qui/controls/desktop/Panel
- * @require qui/controls/buttons/Select
- * @require qui/controls/buttons/Button
- * @require qui/controls/buttons/Separator
- * @require qui/controls/windows/Confirm
- * @require controls/grid/Grid
- * @require Locale
- * @require Projects
- * @require Ajax
- * @require css!package/quiqqer/bricks/bin/Manager.css
  */
 define('package/quiqqer/bricks/bin/Manager', [
 
