@@ -5,12 +5,6 @@
  * @module package/quiqqer/bricks/bin/AreaWindow
  * @author www.pcsg.de (Henning Leutz)
  *
- * @require qui/QUI
- * @require qui/controls/windows/Confirm
- * @require package/quiqqer/bricks/bin/Area
- * @require Ajax
- * @require Locale
- *
  * @event onSubmit [ this, areas ]
  */
 define('package/quiqqer/bricks/bin/AreaWindow', [
@@ -93,6 +87,8 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
          * @param {Function} callback
          */
         getList: function (callback) {
+            require(['']);
+
             Ajax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
                 'package': 'quiqqer/brick',
                 project  : JSON.encode({

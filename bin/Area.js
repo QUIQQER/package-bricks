@@ -5,14 +5,6 @@
  * @module package/quiqqer/bricks/bin/BrickAreas
  * @author www.pcsg.de (Henning Leutz)
  *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/controls/buttons/Button
- * @require package/quiqqer/bricks/bin/AreaWindow
- * @require Ajax
- * @require Locale
- * @require css!package/quiqqer/bricks/bin/Area.css
- *
  * @event onLoaded [ this ]
  */
 define('package/quiqqer/bricks/bin/Area', [
@@ -61,12 +53,12 @@ define('package/quiqqer/bricks/bin/Area', [
             this.$Elm = new Element('div', {
                 'class': 'quiqqer-bricks-area smooth',
                 html   : '<div class="quiqqer-bricks-area-icon">' +
-                         '<span class="fa fa-list-alt"></span>' +
-                         '</div>' +
-                         '<div class="quiqqer-bricks-area-content">' +
-                         '<div class="quiqqer-bricks-area-content-title"></div>' +
-                         '<div class="quiqqer-bricks-area-content-description"></div>' +
-                         '</div>',
+                '<span class="fa fa-list-alt"></span>' +
+                '</div>' +
+                '<div class="quiqqer-bricks-area-content">' +
+                '<div class="quiqqer-bricks-area-content-title"></div>' +
+                '<div class="quiqqer-bricks-area-content-description"></div>' +
+                '</div>',
                 events : {
                     click: this.toggle
                 }
