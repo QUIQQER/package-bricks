@@ -202,4 +202,14 @@ class Events
 
         return '';
     }
+
+    /**
+     * @param QUI\Package\Package $Package
+     */
+    public static function onPackageSetup(QUI\Package\Package $Package)
+    {
+        if ($Package->getName() !== 'quiqqer/bricks') {
+            return;
+        }
+    }
 }
