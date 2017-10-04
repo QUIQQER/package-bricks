@@ -60,6 +60,7 @@ foreach ($projects as $Project) {
             echo $Project->getName().'-'.$Project->getLang().'-'.$id.PHP_EOL;
 
             $Edit = $Site->getEdit();
+            $Edit->load();
             $Edit->save(QUI::getUsers()->getSystemUser());
         } catch (QUI\Exception $Exception) {
             continue;
