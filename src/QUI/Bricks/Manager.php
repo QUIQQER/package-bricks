@@ -10,6 +10,8 @@ use QUI;
 use QUI\Projects\Project;
 use QUI\Projects\Site;
 use QUI\Utils\Text\XML;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
 /**
  * Brick Manager
@@ -93,7 +95,6 @@ class Manager
     {
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.create');
 
-
         QUI::getDataBase()->insert(
             $this->getTable(),
             array(
@@ -108,6 +109,98 @@ class Manager
         $lastId = QUI::getPDO()->lastInsertId();
 
         return $lastId;
+    }
+
+    /**
+     * Create and update a unique site brick
+     *
+     * @param Site $Site
+     * @param array $brickData
+     * @return string - Unique ID
+     */
+    public function createUniqueSiteBrick(Site $Site, $brickData = array())
+    {
+        if (isset($brickData['uid'])) {
+            $uid = $brickData['uid'];
+
+            if ($this->existsUniqueBrickId($uid) === false) {
+                $uid = $this->createUniqueBrickId((int)$brickData['brickId'], $Site);
+            }
+        } else {
+            $uid = $this->createUniqueBrickId((int)$brickData['brickId'], $Site);
+        }
+
+        $customFields = array();
+
+        if (isset($brickData['customfields'])) {
+            $customFields = $brickData['customfields'];
+        }
+
+        if (is_array($customFields)) {
+            $customFields = json_encode($customFields);
+        }
+
+        QUI::getDataBase()->update($this->getUIDTable(), array(
+            'customfields' => $customFields
+        ), array(
+            'uid' => $uid
+        ));
+
+
+        return $uid;
+    }
+
+    /**
+     * Create a new unique Brick ID
+     *
+     * @param integer $brickId - Brick ID
+     * @param Site $Site - Current Site
+     * @return bool
+     */
+    protected function createUniqueBrickId($brickId, $Site)
+    {
+        $Project = $Site->getProject();
+        $uId     = md5(microtime());
+        $Brick   = $this->getBrickById($brickId);
+
+        try {
+            $UUID = Uuid::uuid1();
+            $uId  = $UUID->toString();
+
+            QUI::getDataBase()->insert($this->getUIDTable(), array(
+                'uid'        => $uId,
+                'brickId'    => $brickId,
+                'project'    => $Project->getName(),
+                'lang'       => $Project->getLang(),
+                'siteId'     => $Site->getId(),
+                'attributes' => json_encode($Brick->getAttributes())
+            ));
+        } catch (UnsatisfiedDependencyException $Exception) {
+            QUI\System\Log::writeException($Exception);
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::writeException($Exception);
+        }
+
+        return $uId;
+    }
+
+    /**
+     * Check if an unique brick ID exists
+     *
+     * @param string $uid - Brick Unique ID
+     * @return bool
+     */
+    public function existsUniqueBrickId($uid)
+    {
+        $result = QUI::getDataBase()->fetch(array(
+            'from'  => $this->getUIDTable(),
+            'where' => array(
+                'uid' => $uid
+            ),
+            'limit' => 1
+        ));
+
+        return isset($result[0]);
     }
 
     /**
@@ -128,10 +221,46 @@ class Manager
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.delete');
 
         // check if brick exist
-        $this->getBrickById($brickId);
+        $Brick = $this->getBrickById($brickId);
 
         QUI::getDataBase()->delete($this->getTable(), array(
             'id' => $brickId
+        ));
+
+        if (isset($this->bricks[$brickId])) {
+            unset($this->bricks[$brickId]);
+        }
+
+
+        $uniqueBrickIds = QUI::getDataBase()->fetch(array(
+            'select' => 'siteId, project, lang',
+            'from'   => QUI\Bricks\Manager::getUIDTable(),
+            'where'  => array(
+                'brickId' => $brickId,
+                'project' => $Brick->getAttribute('project'),
+                'lang'    => $Brick->getAttribute('lang')
+            ),
+            'group'  => 'siteId, project, lang'
+        ));
+
+        // delete bricks in sites
+        foreach ($uniqueBrickIds as $uniqueBrickId) {
+            $project = $uniqueBrickId['project'];
+            $lang    = $uniqueBrickId['lang'];
+
+            $Project = QUI::getProject($project, $lang);
+            $Site    = $Project->get($uniqueBrickId['siteId']);
+            $Edit    = $Site->getEdit();
+
+            $Edit->load();
+            $Edit->save(QUI::getUsers()->getSystemUser());
+        }
+
+        // delete unique ids
+        QUI::getDataBase()->delete(QUI\Bricks\Manager::getUIDTable(), array(
+            'brickId' => $brickId,
+            'project' => $Brick->getAttribute('project'),
+            'lang'    => $Brick->getAttribute('lang')
         ));
     }
 
@@ -323,9 +452,9 @@ class Manager
         }
 
         $data = QUI::getDataBase()->fetch(array(
-            'from'  => $this->getTable(),
+            'from'  => $this->getUIDTable(),
             'where' => array(
-                'id' => (int)$uid
+                'uid' => $uid
             ),
             'limit' => 1
         ));
@@ -334,12 +463,34 @@ class Manager
             throw new QUI\Exception('Brick not found');
         }
 
-        $Brick = new Brick($data[0]);
-        $Brick->setAttribute('id', $uid);
+        $data    = $data[0];
+        $brickId = $data['brickId'];
+        $custom  = $data['customfields'];
 
-        $this->brickUIDs[$uid] = $Brick;
+        $attributes = $data['attributes'];
+        $attributes = json_decode($attributes, true);
 
-        return $this->brickUIDs[$uid];
+        $Original = new Brick($attributes);
+        $Original->setAttribute('id', $brickId);
+
+        $Clone = clone $Original;
+
+        if (!empty($custom)) {
+            $custom = json_decode($custom, true);
+
+            if ($custom) {
+                $Clone->setSettings($custom);
+            }
+
+            // workaround
+            if (isset($custom['brickTitle'])) {
+                $Clone->setAttribute('frontendTitle', $custom['brickTitle']);
+            }
+        }
+
+        $this->brickUIDs[$uid] = $Clone;
+
+        return $Clone;
     }
 
     /**
@@ -483,10 +634,17 @@ class Manager
 
         $result = array();
 
-        foreach ($bricks as $brickData) {
+        foreach ($bricks as $key => $brickData) {
             $brickId = (int)$brickData['brickId'];
 
             try {
+                if (isset($brickData['uid'])) {
+                    $Brick    = $this->getBrickByUID($brickData['uid']);
+                    $result[] = $Brick->check();
+                    continue;
+                }
+
+                // fallback
                 $Brick = $this->getBrickById($brickId);
                 $Clone = clone $Brick;
 
@@ -502,12 +660,10 @@ class Manager
 
                 $result[] = $Clone->check();
             } catch (QUI\Exception $Exception) {
-                QUI\System\Log::addWarning(
-                    $Exception->getMessage().' Brick-ID:'.$brickId
-                );
+                QUI\System\Log::writeRecursive($brickData);
+                QUI\System\Log::writeException($Exception);
             }
         }
-
 
         return $result;
     }
@@ -646,8 +802,35 @@ class Manager
             'id' => (int)$brickId
         ));
 
-        // @todo it is a workaround
-        QUI\Cache\Manager::clearAll();
+        // refresh all bricks with this id
+        $uniqueBricks = QUI::getDataBase()->fetch(array(
+            'from'  => QUI\Bricks\Manager::getUIDTable(),
+            'where' => array(
+                'project' => $Project->getName(),
+                'lang'    => $Project->getLang(),
+                'brickId' => (int)$brickId
+            )
+        ));
+
+        foreach ($uniqueBricks as $uniqueBrick) {
+            $customFieldsUniqueBrick = json_decode($uniqueBrick['customfields'], true);
+            $attributes              = $Brick->getAttributes();
+
+            if (isset($attributes['attributes'])) {
+                unset($attributes['attributes']);
+            }
+
+            if (!is_array($customFieldsUniqueBrick)) {
+                $customFieldsUniqueBrick = array();
+            }
+
+            QUI::getDataBase()->update(QUI\Bricks\Manager::getUIDTable(), array(
+                'customfields' => json_encode($customFieldsUniqueBrick),
+                'attributes'   => json_encode($attributes)
+            ), array(
+                'uid' => $uniqueBrick['uid']
+            ));
+        }
     }
 
     /**
@@ -663,9 +846,9 @@ class Manager
     /**
      * @return string
      */
-    protected function getUIDTable()
+    public static function getUIDTable()
     {
-        return QUI::getDBTableName(self::TABLE);
+        return QUI::getDBTableName(self::TABLE_UID);
     }
 
     /**

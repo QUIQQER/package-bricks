@@ -337,8 +337,10 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                     return;
                 }
 
-                this.$brickCustomData[BrickNode.get('id')] = brickData.customfields;
-
+                this.$brickCustomData[BrickNode.get('id')] = {
+                    customfields: brickData.customfields,
+                    uid         : brickData.uid
+                };
             }.bind(this));
         },
 
@@ -443,22 +445,25 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 }];
             }
 
-            var i, len, custom, brickId;
+            var i, len, uid, custom, brickId;
 
             var data   = [],
                 bricks = this.$Elm.getElements('select');
 
             for (i = 0, len = bricks.length; i < len; i++) {
                 custom  = '';
+                uid     = '';
                 brickId = bricks[i].getParent().get('id');
 
                 if (brickId in this.$brickCustomData) {
-                    custom = this.$brickCustomData[brickId];
+                    custom = this.$brickCustomData[brickId].customfields;
+                    uid    = this.$brickCustomData[brickId].uid;
                 }
 
                 data.push({
                     brickId     : bricks[i].value,
-                    customfields: custom
+                    customfields: custom,
+                    uid         : uid
                 });
             }
 
@@ -788,20 +793,17 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                         require([
                             'package/quiqqer/bricks/bin/Site/BrickEdit'
                         ], function (BrickEdit) {
-
                             var brickId = Select.getParent().get('id');
                             var custom  = '';
 
                             if (brickId in self.$brickCustomData) {
-                                custom = self.$brickCustomData[brickId];
+                                custom = self.$brickCustomData[brickId].customfields;
                             }
-
-                            custom = JSON.decode(custom);
 
                             var Edit = new BrickEdit({
                                 brickId     : Select.value,
                                 Site        : self.getAttribute('Site'),
-                                customfields: custom,
+                                customfields: JSON.decode(custom),
                                 styles      : {
                                     height: Win.getContent().getSize().y
                                 }
@@ -826,7 +828,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                                 data    = QUIFormUtils.getFormData(Form),
                                 brickId = Select.getParent().get('id');
 
-                            self.$brickCustomData[brickId] = JSON.encode(data);
+                            self.$brickCustomData[brickId].customfields = JSON.encode(data);
 
                             Win.close();
                         });
