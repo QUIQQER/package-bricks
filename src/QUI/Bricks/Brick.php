@@ -74,6 +74,7 @@ class Brick extends QUI\QDOM
             'title'         => '',
             'description'   => '',
             'project'       => '',
+            'lang'          => '',
             'areas'         => '',
             'height'        => '',
             'width'         => '',
@@ -213,7 +214,9 @@ class Brick extends QUI\QDOM
         $Control = $this->getControl();
 
         if (!$Control) {
-            throw new QUI\Exception('Control not found. Brick could not be created');
+            throw new QUI\Exception(
+                'Control not found. Brick could not be created. Maybe wrong type '.$this->getAttribute('type')
+            );
         }
 
         return $this;
@@ -230,7 +233,7 @@ class Brick extends QUI\QDOM
     {
         if ($this->getAttribute('type') == 'content') {
             $_classes = array(
-                'brick-' . $this->id
+                'brick-'.$this->id
             );
 
             foreach ($this->cssClasses as $cssClass) {
@@ -250,7 +253,7 @@ class Brick extends QUI\QDOM
 
             $_classes   = array_unique($_classes);
             $classesStr = implode($_classes, ' ');
-            $classesStr = 'class="' . $classesStr . '"';
+            $classesStr = 'class="'.$classesStr.'"';
 
             $Engine = QUI::getTemplateManager()->getEngine();
 
@@ -259,7 +262,7 @@ class Brick extends QUI\QDOM
                 'classesStr' => $classesStr
             ));
 
-            return $Engine->fetch(dirname(__FILE__) . '/Brick.html');
+            return $Engine->fetch(dirname(__FILE__).'/Brick.html');
         }
 
         $Control = $this->getControl();
@@ -279,7 +282,7 @@ class Brick extends QUI\QDOM
         $Control->setAttribute('title', $this->getAttribute('frontendTitle'));
 
         if ($this->id) {
-            $Control->addCSSClass('brick-' . $this->id);
+            $Control->addCSSClass('brick-'.$this->id);
             $Control->setAttribute('data-brickid', $this->id);
         }
 
@@ -380,7 +383,7 @@ class Brick extends QUI\QDOM
      *
      * @param String $name - Name of the setting
      *
-     * @return boolean|string
+     * @return boolean|string|array
      */
     public function getSetting($name)
     {

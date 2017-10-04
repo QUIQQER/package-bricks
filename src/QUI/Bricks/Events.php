@@ -36,11 +36,13 @@ class Events
 
         $Manager = Manager::init();
 
-        // get inharitance areas
+        // get inheritance areas
         $Project      = $Site->getProject();
         $projectAreas = $Manager->getAreasByProject($Project);
         $projectTable = QUI::getDBProjectTableName(Manager::TABLE_CACHE, $Project);
 
+        $uidTable           = QUI\Bricks\Manager::getUIDTable();
+        $availableUniqueIds = array();
 
         foreach ($projectAreas as $area) {
             if (!$area['inheritance']) {
@@ -74,25 +76,38 @@ class Events
                 continue;
             }
 
+            foreach ($bricks as $bricksKey => $brick) {
+                try {
+                    $Manager->getBrickById($brick['brickId']);
+                } catch (QUI\Exception $Exception) {
+                    unset($areas[$area['name']][$bricksKey]);
+                    continue;
+                }
 
-            foreach ($bricks as $brick) {
+                try {
+                    $uid = $Manager->createUniqueSiteBrick($Site, $brick);
+                } catch (QUI\Exception $Exception) {
+                    unset($areas[$area['name']][$bricksKey]);
+                    continue;
+                }
+
+                $areas[$area['name']][$bricksKey]['uid'] = $uid;
+
+                $availableUniqueIds[] = $uid;
+
+
                 $customFields = array();
 
-                if (isset($brick['customfields'])
-                    && is_string($brick['customfields'])
-                ) {
+                // Custom data cache
+                if (isset($brick['customfields']) && is_string($brick['customfields'])) {
                     $customFields = json_decode($brick['customfields'], true);
                 }
 
-                if (isset($brick['customfields'])
-                    && is_array($brick['customfields'])
-                ) {
+                if (isset($brick['customfields']) && is_array($brick['customfields'])) {
                     $customFields = $brick['customfields'];
                 }
 
-                if (!isset($customFields['inheritance'])
-                    || !(int)$customFields['inheritance']
-                ) {
+                if (!isset($customFields['inheritance']) || !(int)$customFields['inheritance']) {
                     continue;
                 }
 
@@ -103,6 +118,37 @@ class Events
                 ));
             }
         }
+
+        // cleanup unique ids
+        $uniquerIdsInDataBase = QUI::getDataBase()->fetch(array(
+            'select' => 'uid',
+            'from'   => $uidTable,
+            'where'  => array(
+                'project' => $Project->getName(),
+                'lang'    => $Project->getLang(),
+                'siteId'  => $Site->getId()
+            )
+        ));
+
+        $uniquerIdsInDataBase = array_map(function ($uid) {
+            return $uid['uid'];
+        }, $uniquerIdsInDataBase);
+
+        $availableUniqueIds = array_flip($availableUniqueIds);
+
+        foreach ($uniquerIdsInDataBase as $uid) {
+            if (isset($availableUniqueIds[$uid])) {
+                continue;
+            }
+
+            QUI::getDataBase()->delete($uidTable, array(
+                'uid' => $uid
+            ));
+        }
+
+        // save bricks with unique ids
+        $Site->setAttribute('quiqqer.bricks.areas', json_encode($areas));
+        $Site->save();
     }
 
     /**
@@ -126,7 +172,7 @@ class Events
      *
      * @param array $params - function parameter
      * @param \Smarty $smarty
-     * @return string
+     * @return string|array
      */
     public static function brickarea($params, $smarty)
     {
@@ -136,6 +182,7 @@ class Events
             }
 
             $smarty->assign($params['assign'], array());
+
             return '';
         }
 
@@ -152,6 +199,7 @@ class Events
         }
 
         $smarty->assign($params['assign'], $result);
+
         return '';
     }
 }

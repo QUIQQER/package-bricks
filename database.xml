@@ -20,12 +20,13 @@
         </table>
 
         <table name="bricksUID">
-            <field type="INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY">id</field>
+            <field type="VARCHAR(80) NOT NULL PRIMARY KEY">uid</field>
             <field type="INT(3)">brickId</field>
             <field type="VARCHAR(255)">project</field>
             <field type="VARCHAR(2)">lang</field>
             <field type="BIGINT(20)">siteId</field>
-            <field type="TEXT NULL">settings</field>
+            <field type="LONGTEXT NULL">customfields</field>
+            <field type="LONGTEXT NULL">attributes</field>
         </table>
     </global>
 

@@ -116,6 +116,10 @@ define('package/quiqqer/bricks/bin/Site/Category', [
                     areas = JSON.decode(areas);
                 }
 
+                var loadData = function (brickData) {
+                    AC.addBrick(brickData);
+                };
+
                 for (i = 0, len = bricks.length; i < len; i++) {
                     AC = self.$insertBrickAreaEdit(bricks[i]);
 
@@ -124,10 +128,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
                     }
 
                     data = areas[AC.getAttribute('name')];
-
-                    data.each(function (brickData) {
-                        AC.addBrick(brickData);
-                    });
+                    data.each(loadData);
                 }
 
                 self.Loader.hide();
