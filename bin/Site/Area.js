@@ -828,6 +828,10 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                                 data    = QUIFormUtils.getFormData(Form),
                                 brickId = Select.getParent().get('id');
 
+                            if (typeof self.$brickCustomData[brickId] === 'undefined') {
+                                self.$brickCustomData[brickId] = {};
+                            }
+
                             self.$brickCustomData[brickId].customfields = JSON.encode(data);
 
                             Win.close();
