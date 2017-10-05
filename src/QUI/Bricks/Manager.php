@@ -470,7 +470,15 @@ class Manager
         $attributes = $data['attributes'];
         $attributes = json_decode($attributes, true);
 
-        $Original = new Brick($attributes);
+        $real = QUI::getDataBase()->fetch(array(
+            'from'  => $this->getTable(),
+            'where' => array(
+                'id' => (int)$brickId
+            ),
+            'limit' => 1
+        ));
+
+        $Original = new Brick($real[0]);
         $Original->setAttribute('id', $brickId);
 
         $Clone = clone $Original;
@@ -838,7 +846,7 @@ class Manager
      *
      * @return String
      */
-    protected function getTable()
+    public static function getTable()
     {
         return QUI::getDBTableName(self::TABLE);
     }

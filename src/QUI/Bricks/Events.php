@@ -17,6 +17,8 @@ use QUI\Projects\Site\Edit;
  */
 class Events
 {
+    protected static $saved = array();
+
     /**
      * Event : on site save
      * Create site brick cache, for inheritance
@@ -25,6 +27,10 @@ class Events
      */
     public static function onSiteSave($Site)
     {
+        if (isset(self::$saved[$Site->getId()])) {
+            return;
+        }
+
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.assign');
 
         $areas = $Site->getAttribute('quiqqer.bricks.areas');
@@ -145,6 +151,8 @@ class Events
                 'uid' => $uid
             ));
         }
+
+        self::$saved[$Site->getId()] = true;
 
         // save bricks with unique ids
         $Site->setAttribute('quiqqer.bricks.areas', json_encode($areas));
