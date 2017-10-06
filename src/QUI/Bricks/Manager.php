@@ -989,7 +989,16 @@ class Manager
             }
 
             foreach ($area as $brick) {
-                if (isset($brick['brickId']) && isset($brickIds[$brick['brickId']])) {
+                $customFields = json_decode($brick['customfields'], true);
+
+                if ($customFields
+                    && isset($customFields['inheritance'])
+                    && $customFields['inheritance'] === false) {
+                    continue;
+                }
+
+                if (isset($brick['brickId'])
+                    && isset($brickIds[$brick['brickId']])) {
                     $result[] = $brick;
                 }
             }
