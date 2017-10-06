@@ -1,3 +1,8 @@
+/**
+ * Main area handler
+ *
+ * @author www.pcsg.de (Henning Leutz)
+ */
 define('package/quiqqer/bricks/bin/classes/Areas', [
 
     'qui/QUI',
@@ -10,7 +15,7 @@ define('package/quiqqer/bricks/bin/classes/Areas', [
     return new Class({
 
         Extends: QDOM,
-        Type   : 'classes/editor/Manager',
+        Type   : 'package/quiqqer/bricks/bin/classes/Areas',
 
         initialize: function (options) {
             this.parent(options);

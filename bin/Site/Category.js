@@ -4,14 +4,6 @@
  * @module package/quiqqer/bricks/bin/Site/Category
  * @author www.pcsg.de (Henning Leutz)
  *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/controls/loader/Loader
- * @require Ajax
- * @require Locale
- * @require package/quiqqer/bricks/bin/Site/Area
- * @require css!package/quiqqer/bricks/bin/Site/Category.css
- *
  * @event onLoaded
  */
 define('package/quiqqer/bricks/bin/Site/Category', [
@@ -141,6 +133,11 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          */
         $onDestroy: function () {
             this.updateSite();
+
+            // destroy areas
+            this.areas.each(function (Area) {
+                Area.destroy();
+            });
         },
 
         /**

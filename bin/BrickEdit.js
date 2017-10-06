@@ -21,10 +21,12 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
     'qui/utils/Form',
     'utils/Controls',
     'utils/Template',
+    'package/quiqqer/bricks/bin/Bricks',
 
     'css!package/quiqqer/bricks/bin/BrickEdit.css'
 
-], function (QUI, QUIPanel, QUIConfirm, BrickAreas, QUIAjax, QUILocale, Projects, QUIFormUtils, ControlUtils, Template) {
+], function (QUI, QUIPanel, QUIConfirm, BrickAreas, QUIAjax, QUILocale,
+             Projects, QUIFormUtils, ControlUtils, Template, Bricks) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
@@ -201,57 +203,46 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          *
          * @return Promise
          */
-        save: function (callback) {
-            var Active = this.$Active;
+        save: function () {
+            var self   = this,
+                Active = this.$Active;
 
             this.Loader.show();
             this.$unload();
 
             return this.$load(Active).then(function () {
+                var data          = self.getAttribute('data');
+                data.customfields = self.$customfields;
 
-                return new Promise(function (resolve, reject) {
-                    var data = this.getAttribute('data');
-
-                    data.customfields = this.$customfields;
-
-                    QUIAjax.post('package_quiqqer_bricks_ajax_brick_save', function () {
-                        if (typeof callback === 'function') {
-                            callback();
-                        }
-
-                        resolve();
-
-                        QUI.getMessageHandler().then(function (MH) {
-                            MH.addSuccess(
-                                QUILocale.get(lg, 'message.brick.save.success')
-                            );
-                        });
-
-                        this.fireEvent('save', [this]);
-                        this.Loader.hide();
-
-                    }.bind(this), {
-                        'package': 'quiqqer/brick',
-                        brickId  : this.getAttribute('id'),
-                        data     : JSON.encode(data),
-                        onError  : reject
+                return Bricks.saveBrick(self.getAttribute('id'), data).then(function () {
+                    QUI.getMessageHandler().then(function (MH) {
+                        MH.addSuccess(
+                            QUILocale.get(lg, 'message.brick.save.success')
+                        );
                     });
 
-                }.bind(this));
-
-            }.bind(this));
+                    self.fireEvent('save', [self]);
+                    self.Loader.hide();
+                });
+            });
         },
 
         /**
          * Delete the brick
          */
         del: function () {
-            var self = this;
+            var self = this,
+                data = this.getAttribute('data');
 
             new QUIConfirm({
                 title      : QUILocale.get(lg, 'window.brick.delete.title'),
-                text       : QUILocale.get(lg, 'window.brick.delete.text'),
+                text       : QUILocale.get(lg, 'window.brick.delete.text', {
+                    brickId   : self.getAttribute('id'),
+                    brickTitle: data.attributes.title
+                }),
                 information: QUILocale.get(lg, 'window.brick.delete.information'),
+                icon       : 'fa fa-trash',
+                texticon   : 'fa fa-trash',
                 maxHeight  : 300,
                 maxWidth   : 600,
                 autoclose  : false,
@@ -259,14 +250,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     onSubmit: function (Win) {
                         Win.Loader.show();
 
-                        QUIAjax.post('package_quiqqer_bricks_ajax_brick_delete', function () {
+                        Bricks.deleteBricks([self.getAttribute('id')]).then(function () {
                             Win.close();
-
                             self.fireEvent('delete');
-                            self.destroy();
-                        }, {
-                            'package': 'quiqqer/bricks',
-                            brickIds : JSON.encode([self.getAttribute('id')])
                         });
                     }
                 }
