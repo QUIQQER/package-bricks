@@ -6,13 +6,27 @@ require dirname(dirname(dirname(dirname(__FILE__)))).'/header.php';
 
 // workaround for older patch
 $Bricks = QUI\Bricks\Manager::init();
+
+// database table
+$columns = QUI::getDataBase()->table()->getColumns($Bricks->getUIDTable());
+$columns = array_flip($columns);
+
+if (isset($columns['id'])) {
+    QUI::getDataBase()->table()->deleteColumn(
+        $Bricks->getUIDTable(),
+        'id'
+    );
+
+    QUI::getPackage('quiqqer/bricks')->setup();
+}
+
 $result = QUI::getDataBase()->fetch(array(
     'count' => 'count',
     'from'  => $Bricks->getUIDTable(),
 ));
 
 // if unique ids already exist, the pages no longer have to be passed through
-if (false && isset($result[0]) && isset($result[0]['count']) && $result[0]['count']) {
+if (isset($result[0]) && isset($result[0]['count']) && $result[0]['count']) {
     echo 'Already executed'.PHP_EOL;
 
     return;
