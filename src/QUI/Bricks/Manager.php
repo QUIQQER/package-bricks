@@ -84,6 +84,24 @@ class Manager
     }
 
     /**
+     * Returns the bricks table name
+     *
+     * @return String
+     */
+    public static function getTable()
+    {
+        return QUI::getDBTableName(self::TABLE);
+    }
+
+    /**
+     * @return string
+     */
+    public static function getUIDTable()
+    {
+        return QUI::getDBTableName(self::TABLE_UID);
+    }
+
+    /**
      * Creates a new brick for the project
      *
      * @param Project $Project
@@ -842,21 +860,52 @@ class Manager
     }
 
     /**
-     * Returns the bricks table name
+     * Copy a brick
      *
-     * @return String
+     * @param integer|string $brickId
+     * @param array $params - project, lang, title, description
+     * @return integer
+     *
+     * @throws QUI\Exception
      */
-    public static function getTable()
+    public function copyBrick($brickId, $params = array())
     {
-        return QUI::getDBTableName(self::TABLE);
-    }
+        QUI\Permissions\Permission::checkPermission('quiqqer.bricks.create');
 
-    /**
-     * @return string
-     */
-    public static function getUIDTable()
-    {
-        return QUI::getDBTableName(self::TABLE_UID);
+        $result = QUI::getDataBase()->fetch(array(
+            'from'  => $this->getTable(),
+            'where' => array(
+                'id' => $brickId
+            )
+        ));
+
+        if (!isset($result[0])) {
+            throw new QUI\Exception('Brick not found');
+        }
+
+        $allowed = array('project', 'lang', 'title', 'description');
+        $allowed = array_flip($allowed);
+        $data    = $result[0];
+
+        unset($data['id']);
+
+        if (!is_array($params)) {
+            $params = array();
+        }
+
+        foreach ($params as $param => $value) {
+            if (!isset($allowed[$param])) {
+                continue;
+            }
+
+            $data[$param] = $value;
+        }
+
+        QUI::getDataBase()->insert($this->getTable(), $data);
+
+        $lastId = QUI::getPDO()->lastInsertId();
+
+        return $lastId;
     }
 
     /**
