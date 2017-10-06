@@ -15,3 +15,11 @@
         width: 100%;
     }
 }
+
+.quiqqer-bricks-promoslider-wallpaper-container .quiqqer-bricks-promoslider-wallpaper2Content-noScriptImage {
+    object-fit:contain;
+    object-position:0 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}

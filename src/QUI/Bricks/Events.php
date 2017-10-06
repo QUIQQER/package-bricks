@@ -219,5 +219,7 @@ class Events
         if ($Package->getName() !== 'quiqqer/bricks') {
             return;
         }
+
+        shell_exec('php '.OPT_DIR.'quiqqer/bricks/patches/uniqueIds.php');
     }
 }

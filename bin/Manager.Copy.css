@@ -1,0 +1,16 @@
+.dialog-bricks-copy {
+    margin-top: 20px;
+}
+
+.dialog-bricks-copy .data-table-flexbox {
+    border: none;
+}
+
+.dialog-bricks-copy .data-table-flexbox td {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.dialog-bricks-copy [name="description"] {
+    height: 100px;
+}

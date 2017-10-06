@@ -17,6 +17,18 @@
                     {/if}
                 </div>
             </div>
+
+            {if $key === 0}
+            <noscript>
+                {if $slide.url}
+                <a href="{$slide.url}">
+                    {/if}
+                    {image image=$slide.image class="quiqqer-bricks-promoslider-wallpaper2Content-noScriptImage"}
+                    {if $slide.url}
+                </a>
+                {/if}
+            </noscript>
+            {/if}
         </li>
         {/foreach}
     </ul>
@@ -40,6 +52,18 @@
                     {/if}
                 </div>
             </div>
+
+            {if $key === 0}
+            <noscript>
+                {if $slide.url}
+                <a href="{$slide.url}">
+                    {/if}
+                    {image image=$slide.image class="quiqqer-bricks-promoslider-wallpaper2Content-noScriptImage"}
+                    {if $slide.url}
+                </a>
+                {/if}
+            </noscript>
+            {/if}
         </li>
         {/foreach}
     </ul>
@@ -54,4 +78,15 @@
 <div class="quiqqer-bricks-promoslider-wallpaper-next hide-on-mobile">
     <span class="fa fa-chevron-right"></span>
 </div>
+
+<noscript>
+    {literal}
+    <style>
+        .quiqqer-bricks-promoslider-wallpaper-next,
+        .quiqqer-bricks-promoslider-wallpaper-prev {
+            display: none;
+        }
+    </style>
+    {/literal}
+</noscript>
 {/if}
