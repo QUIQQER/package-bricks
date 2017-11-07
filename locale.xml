@@ -802,7 +802,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <!-- Content Switcher -->
         <locale name="bricks.ContentSwitcher.title">
             <de><![CDATA[Bausteine: Inhalt-Wechsel]]></de>
-            <en><![CDATA[Bricks Content with image]]></en>
+            <en><![CDATA[Bricks Content Switcher]]></en>
             <pl><![CDATA[Bricks: Content Switcher: treść i zdjęcie]]></pl>
         </locale>
         <locale name="bricks.ContentSwitcher.description">
