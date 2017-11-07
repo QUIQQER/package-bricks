@@ -726,6 +726,21 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Edit Slide]]></en>
         </locale>
 
+        <locale name="contentSwitcher.entries.entry.picture">
+            <de><![CDATA[Bild]]></de>
+            <en><![CDATA[Picture]]></en>
+        </locale>
+
+        <locale name="contentSwitcher.entries.entry.title">
+            <de><![CDATA[Überschrift]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+
+        <locale name="contentSwitcher.entries.entry.content">
+            <de><![CDATA[Text]]></de>
+            <en><![CDATA[Content]]></en>
+        </locale>
+
         <locale name="dialog.copy.title">
             <de><![CDATA[Baustein #[id] kopieren]]></de>
             <en><![CDATA[Copy brick #[id]]]></en>
