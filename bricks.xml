@@ -582,7 +582,7 @@
             </settings>
         </brick>
 
-        <brick control="\QUI\Bricks\Controls\SideBox1">
+        <!--<brick control="\QUI\Bricks\Controls\SideBox1">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox1.title"/>
             </title>
@@ -641,9 +641,9 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.showContent"/>
                 </setting>
             </settings>
-        </brick>
+        </brick>-->
 
-        <brick control="\QUI\Bricks\Controls\SideBox2">
+        <!--<brick control="\QUI\Bricks\Controls\SideBox2">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox2.title"/>
             </title>
@@ -699,9 +699,9 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.showShort"/>
                 </setting>
             </settings>
-        </brick>
+        </brick>-->
 
-        <brick control="\QUI\Bricks\Controls\SideBox3">
+        <!--<brick control="\QUI\Bricks\Controls\SideBox3">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox3.title"/>
             </title>
@@ -760,9 +760,9 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.limit"/>
                 </setting>
             </settings>
-        </brick>
+        </brick>-->
 
-        <brick control="\QUI\Bricks\Controls\SideBox3TitleTop">
+        <!--<brick control="\QUI\Bricks\Controls\SideBox3TitleTop">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox3TitleTop.title"/>
             </title>
@@ -818,9 +818,9 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.showShort"/>
                 </setting>
             </settings>
-        </brick>
+        </brick>-->
 
-        <brick control="\QUI\Bricks\Controls\SideBox4">
+        <!--<brick control="\QUI\Bricks\Controls\SideBox4">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox4.title"/>
             </title>
@@ -879,7 +879,7 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.limit"/>
                 </setting>
             </settings>
-        </brick>
+        </brick>-->
 
         <!-- Listing -->
         <brick control="\QUI\Bricks\Controls\Children\Listing">
