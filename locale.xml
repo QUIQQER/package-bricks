@@ -726,6 +726,11 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Edit Slide]]></en>
         </locale>
 
+        <locale name="contentSwitcher.entries.button.text">
+            <de><![CDATA[Eintrag hinzufügen]]></de>
+            <en><![CDATA[Add entry]]></en>
+        </locale>
+
         <locale name="contentSwitcher.entries.entry.picture">
             <de><![CDATA[Bild]]></de>
             <en><![CDATA[Picture]]></en>

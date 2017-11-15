@@ -32,30 +32,29 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
                 parsed: this.onParsed
             });
 
-            this.setAttribute(
-                'entry',
-
-                '<div class="quiqqer-bricks-ContentSwitcher-entry" style="display: none;">' +
-                    '<label class="entry-image">' +
-                        '<span class="entry-title">' +
-                            QUILocale.get(lg, 'contentSwitcher.entries.entry.picture') +
-                        '</span>' +
-                        '<input class="media-image" data-qui-options-selectable_types="image" name="img"/>' +
-                    '</label>' +
-                    '<label>' +
-                        '<span class="entry-title">' +
-                             QUILocale.get(lg, 'contentSwitcher.entries.entry.title') +
-                        '</span>' +
-                        '<input type="text" name="title" />' +
-                    '</label>' +
-                    '<label>' +
-                        '<span class="entry-title">' +
-                            QUILocale.get(lg, 'contentSwitcher.entries.entry.content') +
-                        '</span>' +
-                        '<textarea name="content" rows="10"></textarea>' +
-                    '</label>' +
-                '</div>'
-            );
+            this.setAttributes({
+                buttonText: QUILocale.get(lg, 'contentSwitcher.entries.button.text'),
+                entry: '<div class="quiqqer-bricks-ContentSwitcher-entry" style="display: none;">' +
+                           '<label class="entry-image">' +
+                               '<span class="entry-title">' +
+                                 QUILocale.get(lg, 'contentSwitcher.entries.entry.picture') +
+                               '</span>' +
+                               '<input class="media-image" data-qui-options-selectable_types="image" name="img"/>' +
+                           '</label>' +
+                           '<label>' +
+                               '<span class="entry-title">' +
+                                 QUILocale.get(lg, 'contentSwitcher.entries.entry.title') +
+                               '</span>' +
+                               '<input type="text" name="title" />' +
+                           '</label>' +
+                           '<label>' +
+                               '<span class="entry-title">' +
+                                  QUILocale.get(lg, 'contentSwitcher.entries.entry.content') +
+                               '</span>' +
+                               '<textarea name="content" rows="10"></textarea>' +
+                           '</label>' +
+                       '</div>'
+            });
         },
 
 
