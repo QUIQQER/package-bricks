@@ -629,11 +629,11 @@ class Manager
      * Return the bricks from the area
      *
      * @param string $brickArea - Name of the area
-     * @param Site $Site
+     * @param QUI\Interfaces\Projects\Site $Site
      *
      * @return array
      */
-    public function getBricksByArea($brickArea, Site $Site)
+    public function getBricksByArea($brickArea, QUI\Interfaces\Projects\Site $Site)
     {
         if (empty($brickArea)) {
             return array();
@@ -957,11 +957,11 @@ class Manager
      * Return the bricks from an area which are inherited from its parents
      *
      * @param string $brickArea - Name of the area
-     * @param Site $Site - Site object
+     * @param QUI\Interfaces\Projects\Site $Site - Site object
      *
      * @return array
      */
-    protected function getInheritedBricks($brickArea, Site $Site)
+    protected function getInheritedBricks($brickArea, QUI\Interfaces\Projects\Site $Site)
     {
         // inheritance ( vererbung )
         $Project = $Site->getProject();
