@@ -1,16 +1,11 @@
 /**
- *
  * @module package/quiqqer/bricks/bin/Controls/ContentSwitcher
- *
- * @require qui/controls/elements/FormList
- * @require css!package/quiqqer/bricks/bin/Controls/ContentSwitcher.css
+ * @author www.pcsg.de (Henning Leutz)
  */
 define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
 
     'qui/controls/elements/FormList',
-
     'utils/Controls',
-
     'Locale',
 
     'css!package/quiqqer/bricks/bin/Controls/ContentSwitcher.css'
@@ -25,11 +20,15 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
         Extends: QUIFormList,
         Type   : 'package/quiqqer/bricks/bin/Controls/ContentSwitcher',
 
+        Binds: [
+            '$onParsed'
+        ],
+
         initialize: function (options) {
             this.parent(options);
 
             this.addEvents({
-                parsed: this.onParsed
+                onParsed  : this.$onParsed
             });
 
             this.setAttributes({
@@ -57,7 +56,6 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
             });
         },
 
-
         /**
          * Parses QUI controls when a new entry is created
          *
@@ -66,11 +64,13 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
          * @param event
          * @param Element - The element that was previously parsed by (inherited) FormList
          */
-        onParsed: function (event, Element) {
-            QUIControls.parse(Element).then(function () {
-                // Element is fully parsed so we can finally show it
-                Element.getElement('.quiqqer-bricks-ContentSwitcher-entry').show();
-            });
+        $onParsed: function (event, Element) {
+            Element.getElement('.quiqqer-bricks-ContentSwitcher-entry').show();
+            //
+            // QUIControls.parse(Element).then(function () {
+            //     // Element is fully parsed so we can finally show it
+            //     Element.getElement('.quiqqer-bricks-ContentSwitcher-entry').show();
+            // });
         }
     });
 });
