@@ -820,7 +820,7 @@
             </settings>
         </brick>
 
-        <<brick control="\QUI\Bricks\Controls\SideBox4" deprecated="1">
+        <brick control="\QUI\Bricks\Controls\SideBox4" deprecated="1">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox4.title"/>
             </title>
