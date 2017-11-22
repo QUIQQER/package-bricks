@@ -47,6 +47,7 @@
 
 .quiqqer-bricks-promoslider__nav_inner .quiqqer-bricks-promoslider-slide-image {
     height: 100%;
+    padding: 0;
 }
 
 .quiqqer-bricks-promoslider-slide-image img {
