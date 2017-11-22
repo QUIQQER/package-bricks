@@ -3,10 +3,6 @@
  * @author www.pcsg.de (Henning Leutz)
  *
  * Promo Slider - Slider für eye catching Sachen
- *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require URL_OPT_DIR + bin/hammerjs/hammer.min.js
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
@@ -95,7 +91,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
                 self.show(event.target.get('data-no'));
             };
-            
+
             var i, len, Dot;
 
             for (i = 0, len = desktopSlides.length; i < len; i++) {
@@ -110,6 +106,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 Dot.inject(this.$DotsDesktop);
 
                 this.$desktopdots.push(Dot);
+
+                if (desktopSlides[i].get('data-href') && desktopSlides[i].get('data-href') !== '') {
+                    desktopSlides[i].setStyle('cursor', 'pointer');
+                }
             }
 
             if (typeof this.$desktopdots[0] !== 'undefined') {
@@ -130,6 +130,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 Dot.inject(this.$DotsMobile);
 
                 this.$mobiledots.push(Dot);
+
+                if (mobileSlides[i].get('data-href') && mobileSlides[i].get('data-href') !== '') {
+                    mobileSlides[i].setStyle('cursor', 'pointer');
+                }
             }
 
             if (typeof this.$mobiledots[0] !== 'undefined') {
@@ -141,7 +145,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
             // keyboard events
             document.addEvent('keyup', function (event) {
-                if (event.key == 'left') {
+                if (event.key === 'left') {
                     self.prev();
                     return;
                 }
@@ -149,18 +153,28 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 self.next();
             });
 
+            // slide clicks
+            var slideClick = function () {
+                if (this.get('data-href') && this.get('data-href') !== '') {
+                    window.location = this.get('data-href');
+                }
+            };
+
+            desktopSlides.addEvent('click', slideClick);
+            mobileSlides.addEvent('click', slideClick);
+
 
             // touch events
             if (this.getAttribute('touch')) {
                 this.$Touch = new Hammer(this.getElm());
 
                 this.$Touch.on('swipe', function (ev) {
-                    if (ev.offsetDirection == 4) {
+                    if (ev.offsetDirection === 4) {
                         self.prev();
                         return;
                     }
 
-                    if (ev.offsetDirection == 2) {
+                    if (ev.offsetDirection === 2) {
                         self.next();
                     }
                 });
@@ -283,8 +297,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
             if (slideNo < 0) {
                 slideNo = Elm.getElements(
-                        '.quiqqer-bricks-promoslider-slide'
-                    ).length - 1;
+                    '.quiqqer-bricks-promoslider-slide'
+                ).length - 1;
             }
 
             return this.show(slideNo);
@@ -409,11 +423,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
                 this.$hideSheetToLeft(Current).then(function () {
                     return this.$showSheetFromRight(Slide);
-
                 }.bind(this)).then(function () {
                     resolve();
                     this.$running = false;
-
                 }.bind(this));
 
             }.bind(this));
@@ -530,7 +542,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
             return new Promise(function (resolve) {
                 (function () {
-                    if (Node.getStyle('position') == 'absolute') {
+                    if (Node.getStyle('position') === 'absolute') {
                         var oldPos = Node.getStyle('left').toInt();
 
                         moofx(Node).animate({
@@ -580,7 +592,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
             return new Promise(function (resolve) {
                 (function () {
-                    if (Node.getStyle('position') == 'absolute') {
+                    if (Node.getStyle('position') === 'absolute') {
                         var origLeft = Node.getStyle('left').toInt();
 
                         Node.setStyle('left', origLeft + 50);
