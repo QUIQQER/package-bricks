@@ -4,6 +4,7 @@
           name="bricks"
           icon="fa fa-th"
           require="package/quiqqer/bricks/bin/Manager"
+          permission="quiqqer.bricks.edit"
     >
         <locale group="quiqqer/bricks" var="menu.bricks.text" />
     </item>
