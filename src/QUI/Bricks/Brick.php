@@ -79,7 +79,8 @@ class Brick extends QUI\QDOM
             'height'        => '',
             'width'         => '',
             'classes'       => '',
-            'frontendTitle' => ''
+            'frontendTitle' => '',
+            'hasContent'    => 1
         );
 
         $this->setAttributes($default);

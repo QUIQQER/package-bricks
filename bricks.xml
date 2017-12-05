@@ -2,7 +2,7 @@
 <quiqqer>
     <bricks>
         <!-- available standard bricks -->
-        <brick control="\QUI\Controls\Breadcrumb">
+        <brick control="\QUI\Controls\Breadcrumb" hasContent="0">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.breadcrumb.title"/>
             </title>

@@ -174,6 +174,16 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     })
                 });
 
+                // brick xml settings
+                var type = brick.attributes.type;
+                var data = bricks.filter(function (entry) {
+                    return entry.control === type;
+                });
+
+                if (data.length && data[0].hasContent === 0) {
+                    this.getCategory('content').hide();
+                }
+
                 this.refresh();
 
                 this.fireEvent('loaded', [this]);

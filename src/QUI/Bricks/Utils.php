@@ -121,8 +121,16 @@ class Utils
      */
     public static function parseAreaToArray(\DOMElement $Brick, \DOMXPath $Path)
     {
-        $control     = $Brick->getAttribute('control');
-        $name        = $Brick->getAttribute('name');
+        $control = $Brick->getAttribute('control');
+        $name    = $Brick->getAttribute('name');
+
+        $hasContent = 1;
+
+        if ($Brick->hasAttribute('hasContent')
+            && (int)$Brick->getAttribute('hasContent') === 0) {
+            $hasContent = 0;
+        }
+
         $title       = array();
         $description = array();
 
@@ -145,6 +153,7 @@ class Utils
 
         return array(
             'control'     => $control,
+            'hasContent'  => $hasContent,
             'name'        => $name,
             'title'       => $title,
             'description' => $description,
