@@ -191,4 +191,112 @@ class Utils
 
         return true;
     }
+
+    /**
+     * List of available bricks.xml files
+     *
+     * @return array
+     */
+    public static function getBricksXMLFiles()
+    {
+        $cache = 'quiqqer/bricks/availableBrickFiles';
+
+        try {
+            return QUI\Cache\Manager::get($cache);
+        } catch (QUI\Exception $Exception) {
+        }
+
+        $PKM      = QUI::getPackageManager();
+        $Projects = QUI::getProjectManager();
+        $packages = $PKM->getInstalled();
+        $result   = array();
+
+        // package bricks
+        foreach ($packages as $package) {
+            $bricksXML = OPT_DIR.$package['name'].'/bricks.xml';
+
+            if (file_exists($bricksXML)) {
+                $result[] = $bricksXML;
+            }
+        }
+
+        // project bricks
+        $projects = $Projects->getProjects();
+
+        foreach ($projects as $project) {
+            $bricksXML = USR_DIR.$project.'/bricks.xml';
+
+            if (file_exists($bricksXML)) {
+                $result[] = $bricksXML;
+            }
+        }
+
+
+        QUI\Cache\Manager::set($cache, $result);
+
+        return $result;
+    }
+
+    /**
+     * Return all available attributes for a brick
+     *
+     * @param Brick $Brick
+     * @return array
+     */
+    public static function getAttributesForBrick(Brick $Brick)
+    {
+        $attributes = array();
+        $files      = Panel::getInstance()->getXMLFilesForBricks($Brick);
+
+        // main path
+        $type = $Brick->getAttribute('type');
+        $type = '\\'.trim($type, '\\');
+
+        $path  = '//quiqqer/bricks/brick[@control="'.$type.'"]';
+        $cache = 'quiqqer/bricks/'.md5($type).'/attributes';
+
+        try {
+            return QUI\Cache\Manager::get($cache);
+        } catch (QUI\Exception $Exception) {
+        }
+
+
+        $settingsPath   = $path.'/settings/setting';
+        $categoriesPath = $path.'/window/categories/category/settings';
+
+        foreach ($files as $file) {
+            $Dom  = QUI\Utils\Text\XML::getDomFromXml($file);
+            $Path = new \DOMXPath($Dom);
+
+            // settings
+            $settings = $Path->query($settingsPath);
+
+            /* @var $Setting \DOMElement */
+            foreach ($settings as $Setting) {
+                $attributes[] = $Setting->getAttribute('name');
+            }
+
+            // categories
+            $categories = $Path->query($categoriesPath);
+
+            /* @var $Settings \DOMElement */
+            foreach ($categories as $Settings) {
+                $children = $Settings->childNodes;
+
+                /* @var $Child \DOMElement */
+                foreach ($children as $Child) {
+                    switch ($Child->nodeName) {
+                        case 'input':
+                        case 'textarea':
+                            $attributes[] = $Child->getAttribute('conf');
+                            break;
+                    }
+                }
+            }
+        }
+
+        QUI\Cache\Manager::set($cache, $attributes);
+
+        return $attributes;
+    }
 }

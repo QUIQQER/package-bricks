@@ -5,6 +5,16 @@
     width: 100%;
 }
 
+.quiqqer-bricks-container {
+    float: left;
+    position: relative;
+    width: 100%;
+}
+
+.brick-edit-content {
+    margin-bottom: 0;
+}
+
 .quiqqer-bricks-brickedit label {
     clear: both;
     float: left;

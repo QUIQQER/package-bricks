@@ -755,7 +755,6 @@ class Manager
             $brickData['areas'] = $brickData['attributes']['areas'];
         }
 
-
         if (isset($brickData['areas'])) {
             $parts = explode(',', $brickData['areas']);
 
@@ -788,6 +787,13 @@ class Manager
             $Brick->setSettings($brickData['settings']);
         }
 
+        $brickAttributes = Utils::getAttributesForBrick($Brick);
+
+        foreach ($brickAttributes as $attribute) {
+            if (isset($brickData['attributes'][$attribute])) {
+                $Brick->setSetting($attribute, $brickData['attributes'][$attribute]);
+            }
+        }
 
         // custom fields
         $customfields = array();
@@ -810,6 +816,9 @@ class Manager
                 }
             }
         }
+
+        QUI\System\Log::writeRecursive($brickData);
+        QUI\System\Log::writeRecursive($Brick->getSettings());
 
         // update
         QUI::getDataBase()->update($this->getTable(), array(
@@ -915,42 +924,7 @@ class Manager
      */
     protected function getBricksXMLFiles()
     {
-        $cache = 'quiqqer/bricks/availableBrickFiles';
-
-        try {
-            return QUI\Cache\Manager::get($cache);
-        } catch (QUI\Exception $Exception) {
-        }
-
-        $PKM      = QUI::getPackageManager();
-        $Projects = QUI::getProjectManager();
-        $packages = $PKM->getInstalled();
-        $result   = array();
-
-        // package bricks
-        foreach ($packages as $package) {
-            $bricksXML = OPT_DIR.$package['name'].'/bricks.xml';
-
-            if (file_exists($bricksXML)) {
-                $result[] = $bricksXML;
-            }
-        }
-
-        // project bricks
-        $projects = $Projects->getProjects();
-
-        foreach ($projects as $project) {
-            $bricksXML = USR_DIR.$project.'/bricks.xml';
-
-            if (file_exists($bricksXML)) {
-                $result[] = $bricksXML;
-            }
-        }
-
-
-        QUI\Cache\Manager::set($cache, $result);
-
-        return $result;
+        return Utils::getBricksXMLFiles();
     }
 
     /**
