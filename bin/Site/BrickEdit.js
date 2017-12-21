@@ -3,15 +3,6 @@
  *
  * @module package/quiqqer/bricks/bin/Site/Area
  * @author www.pcsg.de (Henning Leutz)
- *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/controls/loader/Loader
- * @require qui/utils/Form
- * @require utils/Template
- * @require utils/Controls
- * @require Ajax
- * @require css!package/quiqqer/bricks/bin/Site/BrickEdit.css
  */
 define('package/quiqqer/bricks/bin/Site/BrickEdit', [
 

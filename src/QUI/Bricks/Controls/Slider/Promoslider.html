@@ -18,7 +18,8 @@
             style="display: none"
          {/if}
         data-no="{$key}"
-        role=option
+        role="option"
+        data-href="{$slide.url}"
     >
         {if $slide.image && $this->getAttribute('image-as-wallpaper')}
         <div class="quiqqer-bricks-promoslider-slide-image quiqqer-bricks-promoslider-slide-image__cover"
@@ -63,7 +64,8 @@
          style="display: none"
          {/if}
         data-no="{$key}"
-        role=option
+        data-href="{$slide.url}"
+        role="option"
     >
         {if $slide.image && $this->getAttribute('image-as-wallpaper')}
         <div class="quiqqer-bricks-promoslider-slide-mobile-image quiqqer-bricks-promoslider-slide-image__cover"

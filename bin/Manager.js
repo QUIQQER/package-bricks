@@ -16,10 +16,15 @@ define('package/quiqqer/bricks/bin/Manager', [
     'Locale',
     'Projects',
     'Ajax',
+    'package/quiqqer/bricks/bin/Bricks',
+    'Mustache',
 
+    'text!package/quiqqer/bricks/bin/Manager.Copy.html',
+    'css!package/quiqqer/bricks/bin/Manager.Copy.css',
     'css!package/quiqqer/bricks/bin/Manager.css'
 
-], function (QUI, QUIPanel, QUISelect, QUIButton, QUISeparator, QUIConfirm, Grid, QUILocale, Projects, Ajax) {
+], function (QUI, QUIPanel, QUISelect, QUIButton, QUISeparator, QUIConfirm, Grid, QUILocale, Projects, Ajax,
+             Bricks, Mustache, templateCopy) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
@@ -36,9 +41,12 @@ define('package/quiqqer/bricks/bin/Manager', [
             '$onCreate',
             '$onResize',
             '$openCreateDialog',
+            '$openCopyDialog',
             '$openDeleteDialog',
             '$onDblClick',
-            '$onClick'
+            '$onClick',
+            '$onInject',
+            '$onDestroy'
         ],
 
         options: {
@@ -53,8 +61,10 @@ define('package/quiqqer/bricks/bin/Manager', [
             this.$ProjectLangs  = false;
 
             this.addEvents({
-                onCreate: this.$onCreate,
-                onResize: this.$onResize
+                onCreate : this.$onCreate,
+                onResize : this.$onResize,
+                onInject : this.$onInject,
+                onDestroy: this.$onDestroy
             });
         },
 
@@ -74,7 +84,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.Loader.show();
 
-            this.getBricksFromProject(project, lang, function (result) {
+            Bricks.getBricksFromProject(project, lang).then(function (result) {
                 if (typeof callback === 'function') {
                     callback();
                 }
@@ -102,11 +112,13 @@ define('package/quiqqer/bricks/bin/Manager', [
             var selected   = this.$Grid.getSelectedData(),
                 AddButton  = this.getButtons('brick-add'),
                 EditButton = this.getButtons('brick-edit'),
+                CopyButton = this.getButtons('brick-copy'),
                 DelButton  = this.getButtons('brick-delete');
 
             if (!selected.length) {
                 AddButton.enable();
                 DelButton.disable();
+                CopyButton.disable();
                 EditButton.disable();
                 return;
             }
@@ -114,12 +126,14 @@ define('package/quiqqer/bricks/bin/Manager', [
             AddButton.enable();
             DelButton.enable();
 
-            if (selected.length == 1) {
+            if (selected.length === 1) {
                 EditButton.enable();
+                CopyButton.enable();
             }
 
             if (selected.length > 1) {
-                AddButton.disable();
+                EditButton.disable();
+                CopyButton.disable();
             }
         },
 
@@ -164,19 +178,40 @@ define('package/quiqqer/bricks/bin/Manager', [
                 })
             );
 
+            this.addButton(new QUISeparator());
+
             this.addButton(
                 new QUIButton({
                     textimage: 'fa fa-edit',
-                    text     : QUILocale.get(lg, 'manager.button.edit'),
-                    title    : QUILocale.get(lg, 'manager.button.edit'),
+                    text     : QUILocale.get(lg, 'manager.button.edit.text'),
+                    title    : QUILocale.get(lg, 'manager.button.edit.title'),
                     name     : 'brick-edit',
                     disabled : true,
                     events   : {
                         onClick: function () {
-                            this.editBrick(
-                                this.$Grid.getSelectedData()[0].id
+                            self.editBrick(
+                                self.$Grid.getSelectedData()[0].id
                             );
-                        }.bind(this)
+                        }
+                    }
+                })
+            );
+
+            this.addButton(
+                new QUIButton({
+                    textimage: 'fa fa-copy',
+                    text     : QUILocale.get(lg, 'manager.button.copy.text'),
+                    title    : QUILocale.get(lg, 'manager.button.copy.title'),
+                    name     : 'brick-copy',
+                    disabled : true,
+                    events   : {
+                        onClick: function () {
+                            var data = self.$Grid.getSelectedData();
+
+                            if (data.length === 1) {
+                                self.$openCopyDialog(data[0].id);
+                            }
+                        }
                     }
                 })
             );
@@ -253,6 +288,30 @@ define('package/quiqqer/bricks/bin/Manager', [
         },
 
         /**
+         * event: on inject
+         */
+        $onInject: function () {
+            Bricks.addEvents({
+                onBrickDelete: this.refresh,
+                onBrickSave  : this.refresh,
+                onBrickCopy  : this.refresh,
+                onBrickCreate: this.refresh
+            });
+        },
+
+        /**
+         * event: on destroy
+         */
+        $onDestroy: function () {
+            Bricks.removeEvents({
+                onBrickDelete: this.refresh,
+                onBrickSave  : this.refresh,
+                onBrickCopy  : this.refresh,
+                onBrickCreate: this.refresh
+            });
+        },
+
+        /**
          * event : on resize
          */
         $onResize: function () {
@@ -290,7 +349,7 @@ define('package/quiqqer/bricks/bin/Manager', [
         },
 
         /**
-         * Refresh the project language dropdown
+         * Refresh the project language DropDown
          */
         $refreshProjectLanguages: function () {
             var self          = this,
@@ -302,7 +361,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                         continue;
                     }
 
-                    if (activeProject != project) {
+                    if (activeProject !== project) {
                         continue;
                     }
 
@@ -360,7 +419,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                             '</label>'
                         );
 
-                        self.getAvailableBricks(function (bricklist) {
+                        Bricks.getAvailableBricks().then(function (bricklist) {
                             if (!Body) {
                                 return;
                             }
@@ -414,17 +473,15 @@ define('package/quiqqer/bricks/bin/Manager', [
                         }
 
                         var project = self.$ProjectSelect.getValue(),
-                            lang    = self.$ProjectLangs.getValue();
+                            lang    = self.$ProjectLangs.getValue(),
+                            data    = {
+                                title: Title.value,
+                                type : Type.value
+                            };
 
-                        self.createBrick(project, lang, {
-                            title: Title.value,
-                            type : Type.value
-                        }, function (brickId) {
+                        Bricks.createBrick(project, lang, data).then(function (brickId) {
                             Win.close();
-
-                            self.refresh(function () {
-                                self.editBrick(brickId);
-                            });
+                            self.editBrick(brickId);
                         });
                     }
                 }
@@ -467,9 +524,90 @@ define('package/quiqqer/bricks/bin/Manager', [
                     onSubmit: function (Win) {
                         Win.Loader.show();
 
-                        self.deleteBricks(brickIds, function () {
+                        Bricks.deleteBricks(brickIds).then(function () {
                             Win.close();
-                            self.refresh();
+                        });
+                    }
+                }
+            }).open();
+        },
+
+        /**
+         * opens the copy dialog
+         */
+        $openCopyDialog: function (brickId) {
+            var self = this;
+
+            new QUIConfirm({
+                title    : QUILocale.get(lg, 'dialog.copy.title', {
+                    id: brickId
+                }),
+                icon     : 'fa fa-copy',
+                maxHeight: 600,
+                maxWidth : 800,
+                autoclose: false,
+
+                events: {
+                    onOpen: function (Win) {
+                        Win.Loader.show();
+
+                        var Content = Win.getContent(),
+                            project = self.$ProjectSelect.getValue(),
+                            lang    = self.$ProjectLangs.getValue(),
+                            Project = Projects.get(project);
+
+                        Content.set('html', Mustache.render(templateCopy, {
+                            text: QUILocale.get(lg, 'dialog.copy.message')
+                        }));
+
+                        Project.getConfig().then(function (config) {
+                            var Select = new QUISelect({
+                                name: 'language-select'
+                            });
+
+                            var langs = config.langs.split(',');
+
+                            for (var i = 0, len = langs.length; i < len; i++) {
+                                Select.appendChild(
+                                    QUILocale.get('quiqqer/system', 'language.' + langs[i]),
+                                    langs[i],
+                                    URL_BIN_DIR + '16x16/flags/' + langs[i] + '.png'
+                                );
+                            }
+
+                            Select.inject(Content.getElement('.dialog-bricks-copy-languages'));
+                            Select.getElm().setStyle('width', '100%');
+                            Select.getElm().setStyle('border', 0);
+
+                            Select.setValue(lang);
+
+                            Bricks.getBrick(brickId).then(function (data) {
+                                var Form = Content.getElement('form');
+
+                                Form.elements.title.value       = data.attributes.title;
+                                Form.elements.description.value = data.attributes.description;
+
+                                Win.Loader.hide();
+                            });
+                        });
+                    },
+
+                    onSubmit: function (Win) {
+                        Win.Loader.show();
+
+                        var Content = Win.getContent(),
+                            Form    = Content.getElement('form');
+
+                        var Select   = Content.getElement('.dialog-bricks-copy-languages [data-quiid]');
+                        var Language = QUI.Controls.getById(Select.get('data-quiid'));
+
+                        Bricks.copyBrick(brickId, {
+                            'lang'       : Language.getValue(),
+                            'title'      : Form.elements.title.value,
+                            'description': Form.elements.description.value
+                        }).then(function (data) {
+                            Win.close();
+                            self.editBrick(data.id);
                         });
                     }
                 }
@@ -491,151 +629,10 @@ define('package/quiqqer/bricks/bin/Manager', [
                         '#id'      : 'brick-edit-' + brickId,
                         id         : brickId,
                         projectName: this.$ProjectSelect.getValue(),
-                        projectLang: this.$ProjectLangs.getValue(),
-                        events     : {
-                            onDelete: this.refresh
-                        }
+                        projectLang: this.$ProjectLangs.getValue()
                     })
                 );
             }.bind(this));
-        },
-
-        /**
-         * Methods / Model
-         */
-
-        /**
-         * Return the available bricks
-         *
-         * @param {Function} [callback] - callback function
-         *
-         * @return Promise
-         */
-        getAvailableBricks: function (callback) {
-            return new Promise(function (resolve, reject) {
-
-                Ajax.get('package_quiqqer_bricks_ajax_getAvailableBricks', function (result) {
-
-                    if (typeof callback === 'function') {
-                        callback(result);
-                    }
-
-                    resolve(result);
-                }, {
-                    'package': 'quiqqer/bricks',
-                    onError  : reject
-                });
-
-            });
-        },
-
-        /**
-         * Return the bricksf from a project
-         *
-         * @param {String} project - name of the project
-         * @param {String} lang - Language of the project
-         * @param {Function} [callback] - callback function
-         *
-         * @return Promise
-         */
-        getBricksFromProject: function (project, lang, callback) {
-            return new Promise(function (resolve, reject) {
-
-                Ajax.get('package_quiqqer_bricks_ajax_project_getBricks', function (result) {
-
-                    if (typeof callback === 'function') {
-                        callback(result);
-                    }
-
-                    resolve(result);
-                }, {
-                    'package': 'quiqqer/bricks',
-                    project  : JSON.encode({
-                        name: project,
-                        lang: lang
-                    }),
-                    onError  : reject
-                });
-
-            });
-        },
-
-        /**
-         * Create a new brick
-         *
-         * @param {String} project - name of the project
-         * @param {String} lang - Language of the project
-         * @param {Object} data - Data of the brick
-         * @param {Function} [callback] - callback function
-         *
-         * @return Promise
-         */
-        createBrick: function (project, lang, data, callback) {
-            return new Promise(function (resolve, reject) {
-
-                Ajax.post('package_quiqqer_bricks_ajax_project_createBrick', function (brickId) {
-
-                    if (typeof callback === 'function') {
-                        callback(brickId);
-                    }
-
-                    resolve(brickId);
-                }, {
-                    'package': 'quiqqer/bricks',
-                    project  : JSON.encode({
-                        name: project,
-                        lang: lang
-                    }),
-                    data     : JSON.encode(data),
-                    onError  : reject
-                });
-
-            });
-        },
-
-        /**
-         * Delete the Brick-Ids
-         *
-         * @param {Array} brickIds - Brick IDs which should be deleted
-         * @param {Function} [callback] - callback function
-         *
-         * @return Promise
-         */
-        deleteBricks: function (brickIds, callback) {
-            var panels = QUI.Controls.getByType(
-                'package/quiqqer/bricks/bin/BrickEdit'
-            );
-
-            return new Promise(function (resolve, reject) {
-
-                Ajax.post('package_quiqqer_bricks_ajax_brick_delete', function () {
-
-                    if (typeof callback === 'function') {
-                        callback();
-                    }
-
-                    resolve();
-
-                    // exist brick panels?
-                    var c, i, len, clen, brickId;
-
-                    for (i = 0, len = brickIds.length; i < len; i++) {
-                        brickId = brickIds[i];
-
-                        for (c = 0, clen = panels.length; c < clen; c++) {
-                            if (panels[c].getAttribute('id') == brickId) {
-                                panels[c].destroy();
-                            }
-                        }
-                    }
-
-                }, {
-                    'package': 'quiqqer/bricks',
-                    brickIds : JSON.encode(brickIds),
-                    onError  : reject
-                });
-
-            });
         }
     });
 });

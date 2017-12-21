@@ -219,7 +219,7 @@ class Events
         if ($Package->getName() !== 'quiqqer/bricks') {
             return;
         }
-
+        
         $php = 'php';
 
         if (defined('PHP_BINARY')) {

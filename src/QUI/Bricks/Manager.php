@@ -84,6 +84,24 @@ class Manager
     }
 
     /**
+     * Returns the bricks table name
+     *
+     * @return String
+     */
+    public static function getTable()
+    {
+        return QUI::getDBTableName(self::TABLE);
+    }
+
+    /**
+     * @return string
+     */
+    public static function getUIDTable()
+    {
+        return QUI::getDBTableName(self::TABLE_UID);
+    }
+
+    /**
      * Creates a new brick for the project
      *
      * @param Project $Project
@@ -611,11 +629,11 @@ class Manager
      * Return the bricks from the area
      *
      * @param string $brickArea - Name of the area
-     * @param Site $Site
+     * @param QUI\Interfaces\Projects\Site $Site
      *
      * @return array
      */
-    public function getBricksByArea($brickArea, Site $Site)
+    public function getBricksByArea($brickArea, QUI\Interfaces\Projects\Site $Site)
     {
         if (empty($brickArea)) {
             return array();
@@ -737,7 +755,6 @@ class Manager
             $brickData['areas'] = $brickData['attributes']['areas'];
         }
 
-
         if (isset($brickData['areas'])) {
             $parts = explode(',', $brickData['areas']);
 
@@ -770,6 +787,13 @@ class Manager
             $Brick->setSettings($brickData['settings']);
         }
 
+        $brickAttributes = Utils::getAttributesForBrick($Brick);
+
+        foreach ($brickAttributes as $attribute) {
+            if (isset($brickData['attributes'][$attribute])) {
+                $Brick->setSetting($attribute, $brickData['attributes'][$attribute]);
+            }
+        }
 
         // custom fields
         $customfields = array();
@@ -792,6 +816,9 @@ class Manager
                 }
             }
         }
+
+        QUI\System\Log::writeRecursive($brickData);
+        QUI\System\Log::writeRecursive($Brick->getSettings());
 
         // update
         QUI::getDataBase()->update($this->getTable(), array(
@@ -842,21 +869,52 @@ class Manager
     }
 
     /**
-     * Returns the bricks table name
+     * Copy a brick
      *
-     * @return String
+     * @param integer|string $brickId
+     * @param array $params - project, lang, title, description
+     * @return integer
+     *
+     * @throws QUI\Exception
      */
-    public static function getTable()
+    public function copyBrick($brickId, $params = array())
     {
-        return QUI::getDBTableName(self::TABLE);
-    }
+        QUI\Permissions\Permission::checkPermission('quiqqer.bricks.create');
 
-    /**
-     * @return string
-     */
-    public static function getUIDTable()
-    {
-        return QUI::getDBTableName(self::TABLE_UID);
+        $result = QUI::getDataBase()->fetch(array(
+            'from'  => $this->getTable(),
+            'where' => array(
+                'id' => $brickId
+            )
+        ));
+
+        if (!isset($result[0])) {
+            throw new QUI\Exception('Brick not found');
+        }
+
+        $allowed = array('project', 'lang', 'title', 'description');
+        $allowed = array_flip($allowed);
+        $data    = $result[0];
+
+        unset($data['id']);
+
+        if (!is_array($params)) {
+            $params = array();
+        }
+
+        foreach ($params as $param => $value) {
+            if (!isset($allowed[$param])) {
+                continue;
+            }
+
+            $data[$param] = $value;
+        }
+
+        QUI::getDataBase()->insert($this->getTable(), $data);
+
+        $lastId = QUI::getPDO()->lastInsertId();
+
+        return $lastId;
     }
 
     /**
@@ -866,53 +924,18 @@ class Manager
      */
     protected function getBricksXMLFiles()
     {
-        $cache = 'quiqqer/bricks/availableBrickFiles';
-
-        try {
-            return QUI\Cache\Manager::get($cache);
-        } catch (QUI\Exception $Exception) {
-        }
-
-        $PKM      = QUI::getPackageManager();
-        $Projects = QUI::getProjectManager();
-        $packages = $PKM->getInstalled();
-        $result   = array();
-
-        // package bricks
-        foreach ($packages as $package) {
-            $bricksXML = OPT_DIR.$package['name'].'/bricks.xml';
-
-            if (file_exists($bricksXML)) {
-                $result[] = $bricksXML;
-            }
-        }
-
-        // project bricks
-        $projects = $Projects->getProjects();
-
-        foreach ($projects as $project) {
-            $bricksXML = USR_DIR.$project.'/bricks.xml';
-
-            if (file_exists($bricksXML)) {
-                $result[] = $bricksXML;
-            }
-        }
-
-
-        QUI\Cache\Manager::set($cache, $result);
-
-        return $result;
+        return Utils::getBricksXMLFiles();
     }
 
     /**
      * Return the bricks from an area which are inherited from its parents
      *
      * @param string $brickArea - Name of the area
-     * @param Site $Site - Site object
+     * @param QUI\Interfaces\Projects\Site $Site - Site object
      *
      * @return array
      */
-    protected function getInheritedBricks($brickArea, Site $Site)
+    protected function getInheritedBricks($brickArea, QUI\Interfaces\Projects\Site $Site)
     {
         // inheritance ( vererbung )
         $Project = $Site->getProject();
@@ -989,7 +1012,16 @@ class Manager
             }
 
             foreach ($area as $brick) {
-                if (isset($brick['brickId']) && isset($brickIds[$brick['brickId']])) {
+                $customFields = json_decode($brick['customfields'], true);
+
+                if ($customFields
+                    && isset($customFields['inheritance'])
+                    && $customFields['inheritance'] === false) {
+                    continue;
+                }
+
+                if (isset($brick['brickId'])
+                    && isset($brickIds[$brick['brickId']])) {
                     $result[] = $brick;
                 }
             }

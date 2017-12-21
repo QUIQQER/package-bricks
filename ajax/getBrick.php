@@ -18,9 +18,9 @@ QUI::$Ajax->registerFunction(
         $Brick        = $BrickManager->getBrickById($brickId);
 
         return array(
-            'attributes' => $Brick->getAttributes(),
-            'settings' => $Brick->getSettings(),
-            'customfields' => $Brick->getCustomFields(),
+            'attributes'        => $Brick->getAttributes(),
+            'settings'          => $Brick->getSettings(),
+            'customfields'      => $Brick->getCustomFields(),
             'availableSettings' => $BrickManager->getAvailableBrickSettingsByBrickType(
                 $Brick->getAttribute('type')
             )

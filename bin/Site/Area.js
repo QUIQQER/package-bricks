@@ -3,17 +3,6 @@
  *
  * @module package/quiqqer/bricks/bin/Site/Area
  * @author www.pcsg.de (Henning Leutz)
- *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/controls/buttons/Button
- * @require qui/controls/windows/Popup
- * @require qui/controls/windows/Confirm
- * @require qui/controls/elements/List
- * @require Locale
- * @require Ajax
- * @require package/quiqqer/bricks/bin/Sortables
- * @require css!package/quiqqer/bricks/bin/Site/Area.css
  */
 define('package/quiqqer/bricks/bin/Site/Area', [
 
@@ -24,17 +13,17 @@ define('package/quiqqer/bricks/bin/Site/Area', [
     'qui/controls/windows/Alert',
     'qui/controls/windows/Confirm',
     'qui/controls/elements/List',
+    'package/quiqqer/bricks/bin/Bricks',
     'Locale',
     'Ajax',
     'package/quiqqer/bricks/bin/Sortables',
 
     'css!package/quiqqer/bricks/bin/Site/Area.css'
 
-], function (QUI, QUIControl, QUIButton, QUIPopup, QUIAlert, QUIConfirm, QUIList, QUILocale, QUIAjax, Sortables) {
+], function (QUI, QUIControl, QUIButton, QUIPopup, QUIAlert, QUIConfirm, QUIList, Bricks, QUILocale, QUIAjax, Sortables) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
-
 
     return new Class({
 
@@ -46,7 +35,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             'openBrickSettingDialog',
             'openSettingsDialog',
             'createNewBrick',
-            '$onInject'
+            '$onInject',
+            '$onDestroy',
+            '$onBrickRefresh'
         ],
 
         options: {
@@ -78,12 +69,33 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             this.$ExtraBtns   = false;
 
             this.addEvents({
-                onInject: this.$onInject
+                onInject : this.$onInject,
+                onDestroy: this.$onDestroy
+            });
+
+            Bricks.addEvents({
+                onBrickDelete: this.$onBrickRefresh,
+                onBrickSave  : this.$onBrickRefresh,
+                onBrickCopy  : this.$onBrickRefresh,
+                onBrickCreate: this.$onBrickRefresh
             });
         },
 
         /**
-         * Return the domnode element
+         * event: on destroy
+         */
+        $onDestroy: function () {
+            Bricks.removeEvents({
+                onBrickDelete: this.$onBrickRefresh,
+                onBrickSave  : this.$onBrickRefresh,
+                onBrickCopy  : this.$onBrickRefresh,
+                onBrickCreate: this.$onBrickRefresh
+            });
+        },
+
+        /**
+         * Return the DOMNode element
+         *
          * @return {HTMLElement}
          */
         create: function () {
@@ -214,9 +226,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * event : on inject
          */
         $onInject: function () {
-            var self    = this,
-                Site    = this.getAttribute('Site'),
-                Project = Site.getProject();
+            var self = this;
 
             var Loader = new Element('div', {
                 'class': 'quiqqer-bricks-site-category-area-loader',
@@ -231,11 +241,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 opacity : 0
             });
 
-            QUIAjax.get('package_quiqqer_bricks_ajax_project_getBricks', function (bricks) {
+            this.$refreshAvailableBricks().then(function () {
                 self.$AddButton.enable();
-
-                self.$availableBricks = bricks;
-                self.$loaded          = true;
+                self.$loaded = true;
 
                 self.$brickIds.each(function (brickId) {
                     self.addBrickById(brickId);
@@ -257,11 +265,35 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 }
 
                 Loader.destroy();
+            });
+        },
 
-            }, {
-                'package': 'quiqqer/bricks',
-                project  : Project.encode(),
-                area     : this.getAttribute('name')
+        /**
+         * event : on brick changes
+         */
+        $onBrickRefresh: function () {
+            this.$refreshAvailableBricks();
+        },
+
+        /**
+         * Refresh the available bricks
+         *
+         * @return {*|Promise}
+         */
+        $refreshAvailableBricks: function () {
+            var self    = this,
+                Site    = this.getAttribute('Site'),
+                Project = Site.getProject();
+            console.warn('refresh');
+            return new Promise(function (resolve) {
+                QUIAjax.get('package_quiqqer_bricks_ajax_project_getBricks', function (bricks) {
+                    self.$availableBricks = bricks;
+                    resolve(bricks);
+                }, {
+                    'package': 'quiqqer/bricks',
+                    project  : Project.encode(),
+                    area     : self.getAttribute('name')
+                });
             });
         },
 
