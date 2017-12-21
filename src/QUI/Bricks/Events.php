@@ -219,5 +219,17 @@ class Events
         if ($Package->getName() !== 'quiqqer/bricks') {
             return;
         }
+
+        $php = 'php';
+
+        if (defined('PHP_BINARY')) {
+            $php = PHP_BINARY;
+        }
+
+        try {
+            shell_exec($php.' '.OPT_DIR.'quiqqer/bricks/patches/uniqueIds.php');
+        } catch (\Exception $Exception) {
+            QUI\System\Log::writeException($Exception);
+        }
     }
 }
