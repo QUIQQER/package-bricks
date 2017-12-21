@@ -726,6 +726,26 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Edit Slide]]></en>
         </locale>
 
+        <locale name="contentSwitcher.entries.button.text">
+            <de><![CDATA[Eintrag hinzufügen]]></de>
+            <en><![CDATA[Add entry]]></en>
+        </locale>
+
+        <locale name="contentSwitcher.entries.entry.picture">
+            <de><![CDATA[Bild]]></de>
+            <en><![CDATA[Picture]]></en>
+        </locale>
+
+        <locale name="contentSwitcher.entries.entry.title">
+            <de><![CDATA[Überschrift]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+
+        <locale name="contentSwitcher.entries.entry.content">
+            <de><![CDATA[Text]]></de>
+            <en><![CDATA[Content]]></en>
+        </locale>
+
         <locale name="dialog.copy.title">
             <de><![CDATA[Baustein #[id] kopieren]]></de>
             <en><![CDATA[Copy brick #[id]]]></en>
@@ -802,7 +822,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <!-- Content Switcher -->
         <locale name="bricks.ContentSwitcher.title">
             <de><![CDATA[Bausteine: Inhalt-Wechsel]]></de>
-            <en><![CDATA[Bricks Content with image]]></en>
+            <en><![CDATA[Bricks Content Switcher]]></en>
             <pl><![CDATA[Bricks: Content Switcher: treść i zdjęcie]]></pl>
         </locale>
         <locale name="bricks.ContentSwitcher.description">

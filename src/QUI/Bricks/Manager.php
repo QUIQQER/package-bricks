@@ -629,11 +629,11 @@ class Manager
      * Return the bricks from the area
      *
      * @param string $brickArea - Name of the area
-     * @param Site $Site
+     * @param QUI\Interfaces\Projects\Site $Site
      *
      * @return array
      */
-    public function getBricksByArea($brickArea, Site $Site)
+    public function getBricksByArea($brickArea, QUI\Interfaces\Projects\Site $Site)
     {
         if (empty($brickArea)) {
             return array();
@@ -755,7 +755,6 @@ class Manager
             $brickData['areas'] = $brickData['attributes']['areas'];
         }
 
-
         if (isset($brickData['areas'])) {
             $parts = explode(',', $brickData['areas']);
 
@@ -788,6 +787,13 @@ class Manager
             $Brick->setSettings($brickData['settings']);
         }
 
+        $brickAttributes = Utils::getAttributesForBrick($Brick);
+
+        foreach ($brickAttributes as $attribute) {
+            if (isset($brickData['attributes'][$attribute])) {
+                $Brick->setSetting($attribute, $brickData['attributes'][$attribute]);
+            }
+        }
 
         // custom fields
         $customfields = array();
@@ -810,6 +816,9 @@ class Manager
                 }
             }
         }
+
+        QUI\System\Log::writeRecursive($brickData);
+        QUI\System\Log::writeRecursive($Brick->getSettings());
 
         // update
         QUI::getDataBase()->update($this->getTable(), array(
@@ -915,53 +924,18 @@ class Manager
      */
     protected function getBricksXMLFiles()
     {
-        $cache = 'quiqqer/bricks/availableBrickFiles';
-
-        try {
-            return QUI\Cache\Manager::get($cache);
-        } catch (QUI\Exception $Exception) {
-        }
-
-        $PKM      = QUI::getPackageManager();
-        $Projects = QUI::getProjectManager();
-        $packages = $PKM->getInstalled();
-        $result   = array();
-
-        // package bricks
-        foreach ($packages as $package) {
-            $bricksXML = OPT_DIR.$package['name'].'/bricks.xml';
-
-            if (file_exists($bricksXML)) {
-                $result[] = $bricksXML;
-            }
-        }
-
-        // project bricks
-        $projects = $Projects->getProjects();
-
-        foreach ($projects as $project) {
-            $bricksXML = USR_DIR.$project.'/bricks.xml';
-
-            if (file_exists($bricksXML)) {
-                $result[] = $bricksXML;
-            }
-        }
-
-
-        QUI\Cache\Manager::set($cache, $result);
-
-        return $result;
+        return Utils::getBricksXMLFiles();
     }
 
     /**
      * Return the bricks from an area which are inherited from its parents
      *
      * @param string $brickArea - Name of the area
-     * @param Site $Site - Site object
+     * @param QUI\Interfaces\Projects\Site $Site - Site object
      *
      * @return array
      */
-    protected function getInheritedBricks($brickArea, Site $Site)
+    protected function getInheritedBricks($brickArea, QUI\Interfaces\Projects\Site $Site)
     {
         // inheritance ( vererbung )
         $Project = $Site->getProject();

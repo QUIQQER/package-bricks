@@ -79,7 +79,8 @@ class Brick extends QUI\QDOM
             'height'        => '',
             'width'         => '',
             'classes'       => '',
-            'frontendTitle' => ''
+            'frontendTitle' => '',
+            'hasContent'    => 1
         );
 
         $this->setAttributes($default);
@@ -123,6 +124,13 @@ class Brick extends QUI\QDOM
         foreach ($availableSettings as $entry) {
             $this->settings[$entry['name']] = false;
         }
+
+        $availableAttributes = Utils::getAttributesForBrick($this);
+
+        foreach ($availableAttributes as $attribute) {
+            $this->settings[$attribute] = false;
+        }
+
 
         // control default settings
         if (is_object($Control)) {

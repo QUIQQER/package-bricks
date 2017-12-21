@@ -2,7 +2,7 @@
 <quiqqer>
     <bricks>
         <!-- available standard bricks -->
-        <brick control="\QUI\Controls\Breadcrumb">
+        <brick control="\QUI\Controls\Breadcrumb" hasContent="0">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.breadcrumb.title"/>
             </title>
@@ -582,7 +582,7 @@
             </settings>
         </brick>
 
-        <brick control="\QUI\Bricks\Controls\SideBox1">
+        <brick control="\QUI\Bricks\Controls\SideBox1" deprecated="1">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox1.title"/>
             </title>
@@ -643,7 +643,7 @@
             </settings>
         </brick>
 
-        <brick control="\QUI\Bricks\Controls\SideBox2">
+        <brick control="\QUI\Bricks\Controls\SideBox2" deprecated="1">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox2.title"/>
             </title>
@@ -701,7 +701,7 @@
             </settings>
         </brick>
 
-        <brick control="\QUI\Bricks\Controls\SideBox3">
+        <brick control="\QUI\Bricks\Controls\SideBox3" deprecated="1">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox3.title"/>
             </title>
@@ -820,7 +820,7 @@
             </settings>
         </brick>
 
-        <brick control="\QUI\Bricks\Controls\SideBox4">
+        <brick control="\QUI\Bricks\Controls\SideBox4" deprecated="1">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox4.title"/>
             </title>
