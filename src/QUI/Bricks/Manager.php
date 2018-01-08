@@ -10,8 +10,6 @@ use QUI;
 use QUI\Projects\Project;
 use QUI\Projects\Site;
 use QUI\Utils\Text\XML;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
 /**
  * Brick Manager
@@ -138,7 +136,7 @@ class Manager
      */
     public function createUniqueSiteBrick(Site $Site, $brickData = array())
     {
-        if (isset($brickData['uid'])) {
+        if (isset($brickData['uid']) || empty($brickData['uid'])) {
             $uid = $brickData['uid'];
 
             if ($this->existsUniqueBrickId($uid) === false) {
@@ -178,28 +176,19 @@ class Manager
     protected function createUniqueBrickId($brickId, $Site)
     {
         $Project = $Site->getProject();
-        $uId     = md5(microtime());
+        $uuid    = QUI\Utils\Uuid::get();
         $Brick   = $this->getBrickById($brickId);
 
-        try {
-            $UUID = Uuid::uuid1();
-            $uId  = $UUID->toString();
+        QUI::getDataBase()->insert($this->getUIDTable(), array(
+            'uid'        => $uuid,
+            'brickId'    => $brickId,
+            'project'    => $Project->getName(),
+            'lang'       => $Project->getLang(),
+            'siteId'     => $Site->getId(),
+            'attributes' => json_encode($Brick->getAttributes())
+        ));
 
-            QUI::getDataBase()->insert($this->getUIDTable(), array(
-                'uid'        => $uId,
-                'brickId'    => $brickId,
-                'project'    => $Project->getName(),
-                'lang'       => $Project->getLang(),
-                'siteId'     => $Site->getId(),
-                'attributes' => json_encode($Brick->getAttributes())
-            ));
-        } catch (UnsatisfiedDependencyException $Exception) {
-            QUI\System\Log::writeException($Exception);
-        } catch (QUI\Exception $Exception) {
-            QUI\System\Log::writeException($Exception);
-        }
-
-        return $uId;
+        return $uuid;
     }
 
     /**
@@ -816,9 +805,6 @@ class Manager
                 }
             }
         }
-
-        QUI\System\Log::writeRecursive($brickData);
-        QUI\System\Log::writeRecursive($Brick->getSettings());
 
         // update
         QUI::getDataBase()->update($this->getTable(), array(
