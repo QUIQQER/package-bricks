@@ -255,6 +255,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 });
 
                 self.fireEvent('save', [self]);
+
+                if (self.getActiveCategory().getAttribute('name')) {
+
+                }
+
                 self.Loader.hide();
             });
         },
@@ -371,12 +376,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     QUIFormUtils.getFormData(Form)
                 );
             }
-
             if (unload === 'content' && this.$Editor) {
                 data.attributes.content = this.$Editor.getContent();
-
-                this.$Editor.destroy();
-                this.$Editor = false;
             }
 
             this.setAttribute('data', data);
