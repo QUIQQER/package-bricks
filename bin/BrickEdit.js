@@ -374,9 +374,6 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
             if (unload === 'content' && this.$Editor) {
                 data.attributes.content = this.$Editor.getContent();
-
-                this.$Editor.destroy();
-                this.$Editor = false;
             }
 
             this.setAttribute('data', data);
