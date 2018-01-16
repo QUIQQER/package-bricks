@@ -24,6 +24,7 @@ class Events
      * Create site brick cache, for inheritance
      *
      * @param Site|Edit $Site
+     * @throws QUI\Exception
      */
     public static function onSiteSave($Site)
     {
@@ -164,6 +165,7 @@ class Events
      * add new brickarea function
      *
      * @param \Smarty $Smarty
+     * @throws \SmartyException
      */
     public static function onSmartyInit($Smarty)
     {
@@ -219,7 +221,7 @@ class Events
         if ($Package->getName() !== 'quiqqer/bricks') {
             return;
         }
-        
+
         $php = 'php';
 
         if (defined('PHP_BINARY')) {
