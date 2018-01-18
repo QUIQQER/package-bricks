@@ -1,16 +1,28 @@
+{if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+<header class="control-header">
+    <h1>{$this->getAttribute('frontendTitle')}</h1>
+</header>
+{/if}
+
+{if $this->getAttribute('content') != ""}
+<div class="control-content">
+    {$this->getAttribute('content')}
+</div>
+{/if}
+
+{if isset( $successMessage )}
+<div class="quiqqer-simple-contact-message quiqqer-simple-contact-message-success">
+    {$successMessage}
+</div>
+{/if}
+
+{if isset( $errorMessage )}
+<div class="quiqqer-simple-contact-message quiqqer-simple-contact-message-error">
+    {$errorMessage}
+</div>
+{/if}
+
 <form class="quiqqer-simple-contact" method="POST" action="">
-
-    {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
-    <header class="control-header">
-        <h1>{$this->getAttribute('frontendTitle')}</h1>
-    </header>
-    {/if}
-
-    {if $this->getAttribute('content') != ""}
-    <div class="control-content">
-        {$this->getAttribute('content')}
-    </div>
-    {/if}
 
     {if $this->getAttribute('labels')}
     <label for="qui-contact-name">
@@ -21,7 +33,7 @@
            name="name"
            id="qui-contact-name"
            required="required"
-           value=""
+           value="{$name}"
            placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.name.placeholder"}"
     />
 
@@ -30,11 +42,11 @@
         {locale group="quiqqer/bricks" value="control.simpleContact.email"}
     </label>
     {/if}
-    <input type="email"
+    <input type=""
            name="email"
            id="qui-contact-email"
            required="required"
-           value=""
+           value="{$email}"
            placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.email.placeholder"}"
     />
 
@@ -47,10 +59,11 @@
               id="qui-contact-message"
               required="required"
               placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.message.placeholder"}"
-    ></textarea>
+    >{$message}</textarea>
 
-    <button class="quiqqer-simple-contact-button" type="button" disabled="disabled">
-        <span class="fa fa-spinner fa-spin"></span>
-    </button>
+    <noscript>
+        <input class="quiqqer-simple-contact-button" type="submit"
+               value="{locale group='quiqqer/bricks' value='control.simpleContact.sendButton'}" />
+    </noscript>
 
 </form>

@@ -32,7 +32,6 @@
 .quiqqer-simple-contact-message {
     border: 1px solid #555;
     clear: both;
-    float: left;
     margin: 1em 0;
     padding: 0.8em;
     position: relative;
@@ -52,7 +51,6 @@
 
 
 /* check icon */
-
 .fa-check-simple-contact {
     margin: 10% auto;
     width: 60px;
