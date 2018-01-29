@@ -89,13 +89,14 @@ define('package/quiqqer/bricks/bin/Site/Category', [
                 }
 
                 return self.getBrickAreas();
-
             }).then(function (bricks) {
                 if (!bricks.length) {
                     self.$Areas.set(
                         'html',
                         QUILocale.get('quiqqer/bricks', 'bricks.message.no.areas.found')
                     );
+
+                    self.Loader.hide();
                     return;
                 }
 
