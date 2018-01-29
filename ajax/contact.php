@@ -13,14 +13,14 @@
  */
 QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_contact',
-    function ($brickId, $project, $siteId, $message, $email, $name) {
+    function ($brickId, $project, $siteId, $message, $name, $email) {
 
         // check if email correct
         if (!QUI\Utils\Security\Orthos::checkMailSyntax($email)) {
             throw new QUI\Exception(
                 QUI::getLocale()->get(
-                    'quiqqer/system',
-                    'exception.contact.wrong.email'
+                    'quiqqer/bricks',
+                    'brick.control.simpleContact.error.wrongEmail'
                 )
             );
         }
@@ -38,7 +38,8 @@ QUI::$Ajax->registerFunction(
             $receiver = $Brick->getSetting('mailTo');
         }
 
-        if ($receiver == '') {
+        // fallback: admin email
+        if (!QUI\Utils\Security\Orthos::checkMailSyntax($receiver)) {
             $receiver = (QUI::conf('mail', 'admin_mail'));
         }
 
@@ -60,14 +61,16 @@ QUI::$Ajax->registerFunction(
         try {
             $Mailer->send();
         } catch (\Exception $Exception) {
+
+            \QUI\System\Log::writeException($Exception);
+
             throw new QUI\Exception(
-                $Exception->getMessage(),
-                $Exception->getCode()
+                QUI::getLocale()->get('quiqqer/bricks', 'brick.control.simpleContact.error.serverError')
             );
         }
 
         return true;
     },
-    array('brickId', 'project', 'siteId', 'message', 'email', 'name'),
+    array('brickId', 'project', 'siteId', 'message', 'name', 'email'),
     false
 );

@@ -131,10 +131,33 @@
             <pl><![CDATA[Wyślij]]></pl>
         </locale>
         <locale name="brick.control.simpleContact.mailTo">
-            <de><![CDATA[Ihre E-Mail Adresse]]></de>
-            <en><![CDATA[Your email]]></en>
-            <pl><![CDATA[Twój adres e-mail]]></pl>
+            <de><![CDATA[E-Mail Adresse, wo die Nachricht gesendet wird]]></de>
+            <en><![CDATA[Email where the message will send to]]></en>
+            <pl><![CDATA[Adres mailowy, na który zostanie wysłania wiadomość]]></pl>
         </locale>
+
+        <locale name="brick.control.simpleContact.successful">
+            <de><![CDATA[Vielen Dank für Ihre E-Mail. Wir werden uns schnellstmöglich bei Ihnen melden.]]></de>
+            <en><![CDATA[Thank you for your email. We will contact you as soon as possible.]]></en>
+            <pl><![CDATA[Dziękujemy za wiadomość. Skontaktujemy się tak szybko, jak to możliwe.]]></pl>
+        </locale>
+        <locale name="brick.control.simpleContact.error.serverError">
+            <de><![CDATA[Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später noch einmal oder kontaktieren Sie den Support per E-Mail.]]></de>
+            <en><![CDATA[Your message could not be sent. Please try again later or contact our support by e-mail.]]></en>
+            <pl><![CDATA[Wiadomość nie mogła zostać wysłana. Spróbuj ponownie później lub skontaktuj się przez e-mail z naszym dzialem pomocy.]]></pl>
+        </locale>
+
+        <locale name="brick.control.simpleContact.error.serverError">
+            <de><![CDATA[Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später noch einmal oder kontaktieren Sie den Support per E-Mail.]]></de>
+            <en><![CDATA[Your message could not be sent. Please try again later or contact our support by e-mail.]]></en>
+            <pl><![CDATA[Wiadomość nie mogła zostać wysłana. Spróbuj ponownie później lub skontaktuj się przez e-mail z naszym dzialem pomocy.]]></pl>
+        </locale>
+        <locale name="brick.control.simpleContact.error.wrongEmail">
+            <de><![CDATA[Die eingegebene E-mail Adresse ist nicht korrekt. Bitte geben Sie eine korrekte E-Mail an.]]></de>
+            <en><![CDATA[The entered e-mail address is not correct. Please enter a correct one.]]></en>
+            <pl><![CDATA[Wprowadzony adres e-mail nie jest poprawny. Proszę podać prawidłowy adres e-mail.]]></pl>
+        </locale>
+
 
         <locale name="brick.control.navigation.title">
             <de><![CDATA[Bausteine: Navigation]]></de>

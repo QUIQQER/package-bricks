@@ -106,6 +106,8 @@ class Manager
      * @param Brick $Brick
      *
      * @return integer - Brick-ID
+     *
+     * @throws QUI\Exception
      */
     public function createBrickForProject(Project $Project, Brick $Brick)
     {
@@ -133,10 +135,12 @@ class Manager
      * @param Site $Site
      * @param array $brickData
      * @return string - Unique ID
+     *
+     * @throws QUI\Exception
      */
     public function createUniqueSiteBrick(Site $Site, $brickData = array())
     {
-        if (isset($brickData['uid']) || empty($brickData['uid'])) {
+        if (!empty($brickData['uid'])) {
             $uid = $brickData['uid'];
 
             if ($this->existsUniqueBrickId($uid) === false) {
@@ -172,6 +176,8 @@ class Manager
      * @param integer $brickId - Brick ID
      * @param Site $Site - Current Site
      * @return bool
+     *
+     * @throws QUI\Exception
      */
     protected function createUniqueBrickId($brickId, $Site)
     {
@@ -222,6 +228,7 @@ class Manager
      * Delete the brick
      *
      * @param integer $brickId - Brick-ID
+     * @throws QUI\Exception
      */
     public function deleteBrick($brickId)
     {
@@ -687,8 +694,9 @@ class Manager
      * Return a list with \QUI\Bricks\Brick which are assigned to a project
      *
      * @param Project $Project
-     *
      * @return array
+     *
+     * @throws QUI\Exception
      */
     public function getBricksFromProject(Project $Project)
     {
@@ -712,6 +720,7 @@ class Manager
     /**
      * @param string|integer $brickId - Brick-ID
      * @param array $brickData - Brick data
+     * @throws QUI\Exception
      */
     public function saveBrick($brickId, array $brickData)
     {

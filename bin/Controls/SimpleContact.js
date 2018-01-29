@@ -54,18 +54,20 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
             var self = this;
 
             this.Loader.inject(this.$Elm);
+            this.Form = this.$Elm.getElement('form');
 
-            var Button = this.$Elm.getElement('.quiqqer-simple-contact-button');
-
-            Button.set('disabled', false);
-            Button.set('html', QUILocale.get('quiqqer/bricks', 'control.simpleContact.sendButton'));
-
-            Button.addEvents({
-                click: function () {
-                    self.$Elm.getElement('form').fireEvent('submit');
+            var Button = new Element('button', {
+                'class' : 'quiqqer-simple-contact-button',
+                'type': 'button',
+                'html' : QUILocale.get('quiqqer/bricks', 'control.simpleContact.sendButton'),
+                events: {
+                    click: function () {
+                        self.$Elm.getElement('form').fireEvent('submit');
+                    }
                 }
             });
 
+            Button.inject(this.Form);
 
             this.$Elm.getElement('form').addEvent('submit', function (event) {
                 if (typeof event !== 'undefined') {
@@ -106,11 +108,10 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
             this.Loader.show();
 
             Ajax.post('package_quiqqer_bricks_ajax_contact', function (result) {
-
                 if (result) {
                     var html = '<span class="fa fa-check fa-check-simple-contact control-color"></span>';
-                    html += QUILocale.get('quiqqer/system', 'message.contact.successful');
-                    self.$Elm.set('html', html);
+                    html += QUILocale.get('quiqqer/bricks', 'brick.control.simpleContact.successful');
+                    self.Form.set('html', html);
                 }
 
                 self.Loader.hide();
@@ -128,6 +129,7 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                     self.Loader.hide();
 
                     QUI.getMessageHandler(function (MH) {
+                        MH.options.displayTimeMessages = 8000;
                         MH.addError(Exception.getMessage(), self.$Elm);
                     });
                 }
