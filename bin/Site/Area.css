@@ -43,7 +43,17 @@
     background: #fff;
     margin: 2px;
     padding: 2px;
-    width: calc( 100% - 75px );
+    width: calc(100% - 75px);
+}
+
+.quiqqer-bricks-site-category-area-brick select[disabled] {
+    border: none;
+    color: #212527;
+    cursor: default;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .quiqqer-bricks-site-category-area-brick button {
@@ -55,7 +65,7 @@
 }
 
 .quiqqer-bricks-site-category-area-deactivate {
-    opacity : 0.5;
+    opacity: 0.5;
     text-decoration: line-through;
 }
 
