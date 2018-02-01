@@ -1,7 +1,11 @@
 .quiqqer-bricks-children-slider {
-    float: left;
+    float: none;
     position: relative;
     width: 100%;
+}
+
+.quiqqer-bricks-children-slider-container-wrapper {
+    position: relative;
 }
 
 .quiqqer-bricks-children-slider-container {
