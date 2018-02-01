@@ -249,8 +249,33 @@
                 <setting name="shownavigation" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.shownavigation"/>
                 </setting>
-                <setting name="showarrows" type="checkbox">
+                <setting type="select" name="showarrows">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.showarrows"/>
+
+                    <option value="showHoverScale">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverScale"/>
+                    </option>
+                    <option value="showHoverSlide">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverSlide"/>
+                    </option>
+                    <option value="showHoverBackgroundLight">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverBackgroundLight"/>
+                    </option>
+                    <option value="showHoverBackgroundDark">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverBackgroundDark"/>
+                    </option>
+                    <option value="showHoverOpacity">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverOpacity"/>
+                    </option>
+                    <option value="hide">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.hide"/>
+                    </option>
                 </setting>
 
                 <setting type="select" name="position">
@@ -338,8 +363,37 @@
                 <setting name="shownavigation" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.shownavigation"/>
                 </setting>
-                <setting name="showarrows" type="checkbox">
+                <!--<setting name="showarrows" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.showarrows"/>
+                </setting>-->
+
+                <setting type="select" name="showarrows">
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.showarrows"/>
+
+                    <option value="showHoverScale">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverScale"/>
+                    </option>
+                    <option value="showHoverSlide">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverSlide"/>
+                    </option>
+                    <option value="showHoverBackgroundLight">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverBackgroundLight"/>
+                    </option>
+                    <option value="showHoverBackgroundDark">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverBackgroundDark"/>
+                    </option>
+                    <option value="showHoverOpacity">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverOpacity"/>
+                    </option>
+                    <option value="hide">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.hide"/>
+                    </option>
                 </setting>
 
                 <setting type="select" name="position">

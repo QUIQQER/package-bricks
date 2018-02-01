@@ -32,7 +32,7 @@ class PromosliderWallpaper extends AbstractPromoslider
             'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
             'role'           => 'listbox',
             'shownavigation' => true,
-            'showarrows'     => true,
+            'showarrows'     => 'showHoverScale',
             'autostart'      => false,
             'delay'          => 5000,
             'template'       => dirname(__FILE__) . '/PromosliderWallpaper.html'
