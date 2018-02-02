@@ -65,12 +65,10 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
          * @param Element - The element that was previously parsed by (inherited) FormList
          */
         $onParsed: function (event, Element) {
-            Element.getElement('.quiqqer-bricks-ContentSwitcher-entry').show();
-            //
-            // QUIControls.parse(Element).then(function () {
-            //     // Element is fully parsed so we can finally show it
-            //     Element.getElement('.quiqqer-bricks-ContentSwitcher-entry').show();
-            // });
+            QUIControls.parse(Element).then(function () {
+                // Element is fully parsed so we can finally show it
+                Element.getElement('.quiqqer-bricks-ContentSwitcher-entry').show();
+            });
         }
     });
 });
