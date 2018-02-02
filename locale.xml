@@ -426,9 +426,40 @@
             <en><![CDATA[Show navigation]]></en>
         </locale>
         <locale name="brick.control.promoslider.settings.showarrows">
-            <de><![CDATA[Navigation-Pfeile anzeigen]]></de>
-            <en><![CDATA[Show navigation arrows]]></en>
+            <de><![CDATA[Navigation-Pfeile]]></de>
+            <en><![CDATA[Navigation arrows]]></en>
+            <pl><![CDATA[Strzałki nawigacyjne]]></pl>
         </locale>
+            <locale name="brick.control.promoslider.settings.showarrows.showHoverScale">
+                <de><![CDATA[Anzeigen - Scale Effekt]]></de>
+                <en><![CDATA[Show - scale effect]]></en>
+                <pl><![CDATA[Pokaż - effet powiększenia (scale)]]></pl>
+            </locale>
+            <locale name="brick.control.promoslider.settings.showarrows.showHoverSlide">
+                <de><![CDATA[Anzeigen - Slide Effekt]]></de>
+                <en><![CDATA[Show - slide effect]]></en>
+                <pl><![CDATA[Pokaż - efekt przesunięcia (slide)]]></pl>
+            </locale>
+            <locale name="brick.control.promoslider.settings.showarrows.showHoverBackgroundLight">
+                <de><![CDATA[Anzeigen - Hintergrundfarbe Effekt (hell)]]></de>
+                <en><![CDATA[Show - background color effect (light)]]></en>
+                <pl><![CDATA[Pokaż - efekt zmiany tła (jasny)]]></pl>
+            </locale>
+            <locale name="brick.control.promoslider.settings.showarrows.showHoverBackgroundDark">
+                <de><![CDATA[Anzeigen - Hintergrundfarbe Effekt (dunkel)]]></de>
+                <en><![CDATA[Show - background color effect (dark)]]></en>
+                <pl><![CDATA[Pokaż - efekt zmiany tła (ciemny)]]></pl>
+            </locale>
+            <locale name="brick.control.promoslider.settings.showarrows.showHoverOpacity">
+                <de><![CDATA[Anzeigen - Transparenz Effekt]]></de>
+                <en><![CDATA[Show - opacity effect]]></en>
+                <pl><![CDATA[Pokaż - efekt zmiany przeźroczystości]]></pl>
+            </locale>
+            <locale name="brick.control.promoslider.settings.showarrows.hide">
+                <de><![CDATA[Auschalten]]></de>
+                <en><![CDATA[Disable]]></en>
+                <pl><![CDATA[Wyłączone]]></pl>
+            </locale>
         <locale name="brick.control.promoslider.settings.delay">
             <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>
             <en><![CDATA[Time to start next slide (Delay)]]></en>

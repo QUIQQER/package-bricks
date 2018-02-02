@@ -83,9 +83,36 @@
     width: 100%;
 }
 
-.quiqqer-bricks-promoslider-wallpaper-prev:hover .fa,
-.quiqqer-bricks-promoslider-wallpaper-next:hover .fa {
-    transform: scale(1.15);
+/* effect scale */
+.quiqqer-bricks-promoslider-wallpaper-prev.showHoverScale:hover .fa,
+.quiqqer-bricks-promoslider-wallpaper-next.showHoverScale:hover .fa {
+    transform: scale(1.2);
+}
+
+/* effect slide */
+.quiqqer-bricks-promoslider-wallpaper-prev.showHoverSlide:hover .fa {
+    transform: translateX(-10px);
+}
+.quiqqer-bricks-promoslider-wallpaper-next.showHoverSlide:hover .fa {
+    transform: translateX(10px);
+}
+
+/* effect background: light */
+.quiqqer-bricks-promoslider-wallpaper-prev.showHoverBackgroundLight:hover .fa,
+.quiqqer-bricks-promoslider-wallpaper-next.showHoverBackgroundLight:hover .fa {
+    background: rgba(255,255,255,0.7);
+}
+
+/* effect background: dark */
+.quiqqer-bricks-promoslider-wallpaper-prev.showHoverBackgroundDark:hover .fa,
+.quiqqer-bricks-promoslider-wallpaper-next.showHoverBackgroundDark:hover .fa {
+    background: rgba(0,0,0,0.07);
+}
+
+/* effect opacity */
+.quiqqer-bricks-promoslider-wallpaper-prev.showHoverOpacity:hover .fa,
+.quiqqer-bricks-promoslider-wallpaper-next.showHoverOpacity:hover .fa {
+    opacity: 0.6;
 }
 
 .quiqqer-bricks-promoslider-wallpaper-next {

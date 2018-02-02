@@ -399,7 +399,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             var BrickNode = this.createNewBrick();
 
             BrickNode.getElement('select').set('value', brickId);
-            BrickNode.getElement('select').set('disable', true);
+            BrickNode.getElement('select').set('disabled', true);
 
             this.refresh();
 
@@ -432,7 +432,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             Elm.inject(this.$List);
 
             Select = Elm.getElement('select');
-            Select.set('disable', true);
+            Select.set('disabled', true);
 
             new QUIButton({
                 title : QUILocale.get(lg, 'site.area.button.delete'),
@@ -471,6 +471,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
         /**
          * Return the brick list
+         *
          * @returns {Array}
          */
         getData: function () {
