@@ -508,6 +508,12 @@
             <de><![CDATA[Mehr laden]]></de>
             <en><![CDATA[more]]></en>
         </locale>
+
+        <locale name="brick.control.setting.site">
+            <de><![CDATA[Seiten hinzufügen]]></de>
+            <en><![CDATA[Add pages]]></en>
+            <pl><![CDATA[Dodawanie stron]]></pl>
+        </locale>
     </groups>
 
     <groups name="quiqqer/bricks" datatype="php">

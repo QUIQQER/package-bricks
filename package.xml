@@ -8,6 +8,17 @@
             <locale group="quiqqer/bricks" var="package.description"/>
         </description>
 
+        <image src="URL_OPT_DIR/quiqqer/bricks/bin/images/Logo.jpg"/>
+
+        <preview>
+            <image src="URL_OPT_DIR/quiqqer/bricks/bin/images/preview/Bricks_1.jpg"/>
+            <image src="URL_OPT_DIR/quiqqer/bricks/bin/images/preview/Bricks_2.jpg"/>
+            <image src="URL_OPT_DIR/quiqqer/bricks/bin/images/preview/Bricks_3.jpg"/>
+            <image src="URL_OPT_DIR/quiqqer/bricks/bin/images/preview/Bricks_4.jpg"/>
+            <image src="URL_OPT_DIR/quiqqer/bricks/bin/images/preview/Bricks_5.jpg"/>
+            <image src="URL_OPT_DIR/quiqqer/bricks/bin/images/preview/Bricks_6.jpg"/>
+        </preview>
+
         <support>
             <email><![CDATA[support@pcsg.de]]></email>
             <forum><![CDATA[https://community.quiqqer.com]]></forum>
@@ -15,8 +26,6 @@
             <issues><![CDATA[https://dev.quiqqer.com/quiqqer/package-bricks/issues]]></issues>
             <wiki><![CDATA[https://dev.quiqqer.com/quiqqer/package-bricks/wikis/home]]></wiki>
         </support>
-
-        <image src="URL_OPT_DIR/quiqqer/bricks/bin/images/Logo.jpg"/>
 
         <copyright>
             <name><![CDATA[PCSG - Computer & Internet Service OHG]]></name>
