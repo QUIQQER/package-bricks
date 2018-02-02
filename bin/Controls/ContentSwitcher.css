@@ -1,20 +1,49 @@
+.qui-controls-formlist-entry {
+    background: #e8edff;
+    padding: 10px;
+    margin: 10px 0;
+    border-bottom: none;
+    position: relative;
+}
+
+.qui-controls-formlist-entry-delete {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 !important;
+}
+
+.qui-controls-formlist-entry-delete .qui-button {
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    border-left: 1px solid #cdd2e2;
+    background: #c8cdde;
+    border-bottom: 1px solid #cdd2e2;
+    color: #333;
+}
+
+.qui-controls-formlist-entry-delete .qui-button:hover {
+    background: #a6abbd;
+}
+
+.qui-controls-formlist-entry-data {
+    max-width: 700px;
+    width: 100% !important;
+}
 
 .quiqqer-bricks-ContentSwitcher-entry label {
-    clear: both !important;
-    float: left !important;
-    margin: 0 0 10px 0 !important;
     width: 100% !important;
 }
 
 .quiqqer-bricks-ContentSwitcher-entry span.entry-title {
-    float: left !important;
-    line-height: 30px !important;
-    width: 140px !important;
+
+    display: block;
+    margin-bottom: 6px;
 }
 
 .quiqqer-bricks-ContentSwitcher-entry input,
 .quiqqer-bricks-ContentSwitcher-entry textarea {
-    clear: none;
-    float: left;
-    width: calc( 100% - 140px );
+    max-width: 100%;
+    width: 100%;
 }
