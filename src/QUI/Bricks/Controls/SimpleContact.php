@@ -44,6 +44,7 @@ class SimpleContact extends QUI\Control
      * (non-PHPdoc)
      *
      * @see \QUI\Control::create()
+     * @throws QUI\Exception
      */
     public function getBody()
     {
@@ -60,7 +61,6 @@ class SimpleContact extends QUI\Control
             try {
                 $this->sendMail($Engine);
             } catch (\Exception $Exception) {
-
                 $name    = $_POST['name'];
                 $email   = $_POST['email'];
                 $message = $_POST['message'];
@@ -84,7 +84,7 @@ class SimpleContact extends QUI\Control
     /**
      * Send email per post request if javascript is disabled
      *
-     * @param $Engine
+     * @param QUI\Interfaces\Template\EngineInterface $Engine
      * @throws QUI\Exception
      */
     public function sendMail($Engine)
@@ -127,12 +127,11 @@ class SimpleContact extends QUI\Control
             $Mailer->send();
             $Engine->assign(array(
                 'successMessage' => QUI::getLocale()->get(
-                    'quiqqer/bricks', 'brick.control.simpleContact.successful'
+                    'quiqqer/bricks',
+                    'brick.control.simpleContact.successful'
                 )
             ));
-
         } catch (\Exception $Exception) {
-
             QUI\System\Log::writeException($Exception);
 
             throw new QUI\Exception(
@@ -146,6 +145,8 @@ class SimpleContact extends QUI\Control
 
     /**
      * @return mixed|QUI\Projects\Site
+     *
+     * @throws QUI\Exception
      */
     protected function getSite()
     {
@@ -153,7 +154,7 @@ class SimpleContact extends QUI\Control
             return $this->getAttribute('Site');
         }
 
-        $Site = \QUI::getRewrite()->getSite();
+        $Site = QUI::getRewrite()->getSite();
 
         $this->setAttribute('Site', $Site);
 
