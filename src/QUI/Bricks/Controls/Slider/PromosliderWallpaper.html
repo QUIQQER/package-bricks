@@ -81,11 +81,13 @@
 </div>
 <div class="quiqqer-bricks-promoslider-wallpaper-dots"></div>
 
-{if count($desktopSlides) > 1 && $this->getAttribute('showarrows')}
-<div class="quiqqer-bricks-promoslider-wallpaper-prev hide-on-mobile">
+{if count($desktopSlides) > 1 && $this->getAttribute('showarrows') != 'hide'}
+<div class="quiqqer-bricks-promoslider-wallpaper-prev hide-on-mobile
+            {$this->getAttribute('showarrows')}">
     <span class="fa fa-chevron-left"></span>
 </div>
-<div class="quiqqer-bricks-promoslider-wallpaper-next hide-on-mobile">
+<div class="quiqqer-bricks-promoslider-wallpaper-next hide-on-mobile
+            {$this->getAttribute('showarrows')}">
     <span class="fa fa-chevron-right"></span>
 </div>
 {/if}

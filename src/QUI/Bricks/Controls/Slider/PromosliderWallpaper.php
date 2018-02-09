@@ -32,7 +32,7 @@ class PromosliderWallpaper extends AbstractPromoslider
             'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
             'role'           => 'listbox',
             'shownavigation' => true,
-            'showarrows'     => true,
+            'showarrows'     => 'showHoverScale',
             'autostart'      => false,
             'delay'          => 5000,
             'template'       => dirname(__FILE__) . '/PromosliderWallpaper.html'
@@ -151,6 +151,17 @@ class PromosliderWallpaper extends AbstractPromoslider
             );
         }
 
+        // fallback for existed sliders (showarrows was a checkbox input)
+        switch ($this->getAttribute('showarrows')) {
+            case false:
+                echo "checkbox war false";
+                $this->setAttribute('showarrows', 'hide');
+                break;
+            case 1:
+                echo "checkbox war TRUE";
+                $this->setAttribute('showarrows', 'showHoverScale');
+                break;
+        }
         if ($this->getAttribute('showarrows')) {
             $this->setAttribute(
                 'data-qui-options-showarrows',

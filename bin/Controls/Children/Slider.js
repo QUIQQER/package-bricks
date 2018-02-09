@@ -80,37 +80,39 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          * event : on import
          */
         $onImport: function () {
-            var Elm  = this.getElm(),
-                // var Elm  = this.getElm().getElement('.wrapper').getElement('.quiqqer-bricks-children-slider-container'),
-                size = Elm.getSize();
+            var Elm     = this.getElm(),
+                size    = Elm.getSize(),
+                wrapper = Elm.getElement('.quiqqer-bricks-children-slider-container-wrapper');
 
-            this.$Next = new Element('div', {
-                'class': 'quiqqer-bricks-children-slider-next hide-on-mobile',
-                html   : '<span class="fa fa-angle-right"></span>',
-                styles : {
-                    display   : 'none',
-                    lineHeight: size.y,
-                    opacity   : 0,
-                    right     : 0
-                },
-                events : {
-                    click: this.next
-                }
-            }).inject(Elm);
+            if (wrapper) {
+                this.$Next = new Element('div', {
+                    'class': 'quiqqer-bricks-children-slider-next hide-on-mobile',
+                    html   : '<span class="fa fa-angle-right"></span>',
+                    styles : {
+                        display   : 'none',
+                        lineHeight: size.y,
+                        opacity   : 0,
+                        right     : 0
+                    },
+                    events : {
+                        click: this.next
+                    }
+                }).inject(wrapper);
 
-            this.$Prev = new Element('div', {
-                'class': 'quiqqer-bricks-children-slider-prev hide-on-mobile',
-                html   : '<span class="fa fa-angle-left"></span>',
-                styles : {
-                    display   : 'none',
-                    left      : 0,
-                    lineHeight: size.y,
-                    opacity   : 0
-                },
-                events : {
-                    click: this.prev
-                }
-            }).inject(Elm);
+                this.$Prev = new Element('div', {
+                    'class': 'quiqqer-bricks-children-slider-prev hide-on-mobile',
+                    html   : '<span class="fa fa-angle-left"></span>',
+                    styles : {
+                        display   : 'none',
+                        left      : 0,
+                        lineHeight: size.y,
+                        opacity   : 0
+                    },
+                    events : {
+                        click: this.prev
+                    }
+                }).inject(wrapper);
+            }
 
             this.$Inner = Elm.getElement(
                 '.quiqqer-bricks-children-slider-container-inner'
@@ -182,6 +184,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          * @returns {Promise}
          */
         showNextButton: function () {
+            if (!this.$Next) {
+                return Promise.resolve();
+            }
+
             return new Promise(function (resolve) {
                 this.$Next.setStyle('display', null);
 
@@ -208,6 +214,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          * @returns {Promise}
          */
         showPrevButton: function () {
+            if (!this.$Prev) {
+                return Promise.resolve();
+            }
+
             return new Promise(function (resolve) {
                 this.$Prev.setStyle('display', null);
 
@@ -234,6 +244,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          * @returns {Promise}
          */
         hideNextButton: function () {
+            if (!this.$NextFX) {
+                return Promise.resolve();
+            }
+
             return new Promise(function (resolve) {
                 this.$NextFX.animate({
                     right  : 0,
@@ -253,6 +267,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          * @returns {Promise}
          */
         hidePrevButton: function () {
+            if (!this.$PrevFX) {
+                return Promise.resolve();
+            }
+
             return new Promise(function (resolve) {
                 this.$PrevFX.animate({
                     left   : 0,

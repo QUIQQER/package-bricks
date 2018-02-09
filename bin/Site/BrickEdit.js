@@ -93,7 +93,6 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                 });
 
             }).then(function (html) {
-
                 self.getElm().set('html', html);
 
                 QUIFormUtils.setDataToForm(
@@ -109,10 +108,8 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                 }
 
                 return QUI.parse(self.getElm());
-
             }).then(function () {
                 return ControlUtils.parse(self.getElm());
-
             }).then(function () {
 
                 var i, len, Control;
@@ -130,8 +127,8 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
 
                 self.Loader.hide();
                 self.Loader.hide();
-
             }).catch(function (err) {
+                self.Loader.hide();
                 console.error(err);
             });
         },

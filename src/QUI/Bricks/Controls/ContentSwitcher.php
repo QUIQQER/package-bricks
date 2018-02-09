@@ -46,9 +46,15 @@ class ContentSwitcher extends QUI\Control
         $Engine  = QUI::getTemplateManager()->getEngine();
         $entries = $this->getAttribute('entries');
 
+        echo "<pre>";
+        var_dump($entries);
+        echo "</pre>";
+
         if (is_string($entries)) {
             $entries = json_decode($entries, true);
         }
+
+
 
         $Engine->assign(array(
             'this'    => $this,

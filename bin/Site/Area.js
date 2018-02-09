@@ -284,7 +284,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             var self    = this,
                 Site    = this.getAttribute('Site'),
                 Project = Site.getProject();
-            console.warn('refresh');
+
             return new Promise(function (resolve) {
                 QUIAjax.get('package_quiqqer_bricks_ajax_project_getBricks', function (bricks) {
                     self.$availableBricks = bricks;
@@ -399,6 +399,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             var BrickNode = this.createNewBrick();
 
             BrickNode.getElement('select').set('value', brickId);
+            BrickNode.getElement('select').set('disabled', true);
 
             this.refresh();
 
@@ -429,7 +430,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             });
 
             Elm.inject(this.$List);
+
             Select = Elm.getElement('select');
+            Select.set('disabled', true);
 
             new QUIButton({
                 title : QUILocale.get(lg, 'site.area.button.delete'),
@@ -468,6 +471,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
         /**
          * Return the brick list
+         *
          * @returns {Array}
          */
         getData: function () {
@@ -601,7 +605,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                     '.quiqqer-bricks-site-category-area-brick'
                 );
 
-            Elm.getElements('select').set('disabled', false);
+            //Elm.getElements('select').set('disabled', false);
             Elm.getElements('.quiqqer-bricks-site-category-area-placeholder').destroy();
 
             elements.each(function (Brick) {
