@@ -14,7 +14,6 @@
 QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_contact',
     function ($brickId, $project, $siteId, $message, $name, $email) {
-
         // check if email correct
         if (!QUI\Utils\Security\Orthos::checkMailSyntax($email)) {
             throw new QUI\Exception(
@@ -50,7 +49,6 @@ QUI::$Ajax->registerFunction(
         $Mailer->setSubject($Site->getAttribute('title') . ' ' . $Site->getUrlRewritten());
 
         $Mailer->setBody("
-
             <span style=\"font-weight: bold;\">From:</span> {$name}<br />
             <span style=\"font-weight: bold;\">E-mail:</span> {$email}<br />
             <span style=\"font-weight: bold;\">Message:</span><br /><br />
@@ -61,8 +59,7 @@ QUI::$Ajax->registerFunction(
         try {
             $Mailer->send();
         } catch (\Exception $Exception) {
-
-            \QUI\System\Log::writeException($Exception);
+            QUI\System\Log::writeException($Exception);
 
             throw new QUI\Exception(
                 QUI::getLocale()->get('quiqqer/bricks', 'brick.control.simpleContact.error.serverError')
