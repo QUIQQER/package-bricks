@@ -154,11 +154,9 @@ class PromosliderWallpaper extends AbstractPromoslider
         // fallback for existed sliders (showarrows was a checkbox input)
         switch ($this->getAttribute('showarrows')) {
             case false:
-                echo "checkbox war false";
                 $this->setAttribute('showarrows', 'hide');
                 break;
             case 1:
-                echo "checkbox war TRUE";
                 $this->setAttribute('showarrows', 'showHoverScale');
                 break;
         }
