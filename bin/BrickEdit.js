@@ -560,7 +560,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 return new Promise(function (resolve) {
                     require(['package/quiqqer/bricks/bin/Controls/backend/BrickUsage'], function (Control) {
                         new Control({
-                            events: {
+                            brickId: self.getAttribute('id'),
+                            events : {
                                 onLoad: resolve
                             }
                         }).inject(self.$Container);

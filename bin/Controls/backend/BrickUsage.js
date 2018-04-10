@@ -7,10 +7,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
     'qui/QUI',
     'qui/controls/Control',
     'controls/grid/Grid',
+    'utils/Panels',
     'Locale',
     'Ajax'
 
-], function (QUI, QUIControl, Grid, QUILocale, QUIAjax) {
+], function (QUI, QUIControl, Grid, PanelUtils, QUILocale, QUIAjax) {
     "use strict";
 
     return new Class({
@@ -19,7 +20,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
         Type   : 'package/quiqqer/bricks/bin/Controls/backend/BrickUsage',
 
         Binds: [
-            '$onInject'
+            '$onInject',
+            '$dblClick'
         ],
 
         options: {
@@ -61,7 +63,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
             this.$Grid = new Grid(Container, {
                 columnModel: [{
                     header   : QUILocale.get('quiqqer/system', 'project'),
-                    dataIndex: 'id',
+                    dataIndex: 'project',
                     dataType : 'string',
                     width    : 100
                 }, {
@@ -79,8 +81,17 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
                     dataIndex: 'title',
                     dataType : 'string',
                     width    : 200
+                }, {
+                    header   : QUILocale.get('quiqqer/bricks', 'brick.panel.usage.grid.url'),
+                    dataIndex: 'url',
+                    dataType : 'string',
+                    width    : 300
                 }],
                 onrefresh  : this.refresh
+            });
+
+            this.$Grid.addEvents({
+                onDblClick: this.$dblClick
             });
 
             return this.$Elm;
@@ -96,9 +107,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
                 QUIAjax.get('package_quiqqer_bricks_ajax_getSitesFromBrick', function (result) {
                     self.$Grid.setData(result);
                     resolve();
+                    console.log(result);
                 }, {
                     'package': 'quiqqer/bricks',
-                    brickId  : self.getAttribute('brickId')
+                    brickId  : self.getAttribute('brickId'),
+                    options  : JSON.encode({})
                 });
             });
         },
@@ -129,7 +142,24 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
         $onInject: function () {
             this.refresh().then(function () {
                 this.fireEvent('load', [this]);
-            });
+            }.bind(this));
+        },
+
+        /**
+         * grid dbl click
+         */
+        $dblClick: function () {
+            var selected = this.$Grid.getSelectedData();
+
+            if (!selected.length) {
+                return;
+            }
+
+            PanelUtils.openSitePanel(
+                selected[0].project,
+                selected[0].lang,
+                selected[0].id
+            );
         }
     });
 });

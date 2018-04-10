@@ -519,6 +519,10 @@
             <de><![CDATA[Verwendung]]></de>
             <en><![CDATA[Usage]]></en>
         </locale>
+        <locale name="brick.panel.usage.grid.url">
+            <de><![CDATA[Seiten URL]]></de>
+            <en><![CDATA[Site URL]]></en>
+        </locale>
     </groups>
 
     <groups name="quiqqer/bricks" datatype="php">
