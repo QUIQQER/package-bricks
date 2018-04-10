@@ -514,6 +514,11 @@
             <en><![CDATA[Add pages]]></en>
             <pl><![CDATA[Dodawanie stron]]></pl>
         </locale>
+
+        <locale name="brick.panel.category.usage">
+            <de><![CDATA[Verwendung]]></de>
+            <en><![CDATA[Usage]]></en>
+        </locale>
     </groups>
 
     <groups name="quiqqer/bricks" datatype="php">
