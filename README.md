@@ -3,10 +3,9 @@
 QUIQQER Bricks
 ========
 
-Bricks are modules with freely definable fields, 
-they allow you to create modules that meet exactly those requirements.
+Bricks are small blocks that you can set free on your website.
 
-Within the template areas you can place all kinds of content, such as advertising banners, 
+Within the template areas you can place all kinds of bricks, such as advertising banners, content bricks, 
 contact data, news and blog entries, pictures and so on. 
 
 In order to make it easier for you and so that you can design your website quickly 
@@ -14,6 +13,8 @@ and easily according to your own wishes, the bricks are at your disposal. Create
 bricks of various types and insert them into the areas on your website.
 
 With a few simple steps you can expand your website without extensive development knowledge.
+
+Build your website like with building blocks
 
 
 Package name:
