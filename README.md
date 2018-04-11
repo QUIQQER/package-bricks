@@ -50,10 +50,8 @@ Contribution
 Support
 -------
 
-Falls Sie Fehler gefunden, Wünsche oder Verbesserungsvorschläge haben, 
-können Sie uns gern per Mail an support@pcsg.de darüber informieren.  
-Wir werden versuchen auf Ihre Wünsche einzugehen bzw. diese an die zuständigen Entwickler 
-des Projektes weiterleiten.
+If you have found an error or want improvements, please send an e-mail to support@pcsg.de.
+
 
 License
 -------
