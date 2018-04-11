@@ -29,14 +29,14 @@ class Utils
     public static function getBricksFromXML($file)
     {
         if (!file_exists($file)) {
-            return array();
+            return [];
         }
 
         $Dom  = XML::getDomFromXml($file);
         $Path = new \DOMXPath($Dom);
 
         $bricks = $Path->query("//quiqqer/bricks/brick");
-        $list   = array();
+        $list   = [];
 
         if (!$bricks->length) {
             return $list;
@@ -65,7 +65,7 @@ class Utils
     public static function getTemplateAreasFromXML($file, $layoutType = false)
     {
         if (!file_exists($file)) {
-            return array();
+            return [];
         }
 
         $Dom  = XML::getDomFromXml($file);
@@ -82,7 +82,7 @@ class Utils
         }
 
 
-        $list = array();
+        $list = [];
 
         if ($globalAreas->length) {
             foreach ($globalAreas as $Area) {
@@ -131,27 +131,27 @@ class Utils
             $hasContent = 0;
         }
 
-        $title       = array();
-        $description = array();
+        $title       = [];
+        $description = [];
 
         $titleLocale = $Path->query('./title/locale', $Brick);
         $descLocale  = $Path->query('./description/locale', $Brick);
 
         if ($titleLocale->length) {
-            $title = array(
+            $title = [
                 'group' => $titleLocale->item(0)->getAttribute('group'),
                 'var'   => $titleLocale->item(0)->getAttribute('var')
-            );
+            ];
         }
 
         if ($descLocale->length) {
-            $description = array(
+            $description = [
                 'group' => $descLocale->item(0)->getAttribute('group'),
                 'var'   => $descLocale->item(0)->getAttribute('var')
-            );
+            ];
         }
 
-        return array(
+        return [
             'control'     => $control,
             'hasContent'  => $hasContent,
             'name'        => $name,
@@ -159,7 +159,7 @@ class Utils
             'description' => $description,
             'inheritance' => $Brick->getAttribute('inheritance'),
             'priority'    => $Brick->getAttribute('priority')
-        );
+        ];
     }
 
     /**
@@ -209,7 +209,7 @@ class Utils
         $PKM      = QUI::getPackageManager();
         $Projects = QUI::getProjectManager();
         $packages = $PKM->getInstalled();
-        $result   = array();
+        $result   = [];
 
         // package bricks
         foreach ($packages as $package) {
@@ -245,7 +245,7 @@ class Utils
      */
     public static function getAttributesForBrick(Brick $Brick)
     {
-        $attributes = array();
+        $attributes = [];
         $files      = Panel::getInstance()->getXMLFilesForBricks($Brick);
 
         // main path

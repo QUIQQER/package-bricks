@@ -38,14 +38,14 @@ class Manager
      *
      * @var array
      */
-    protected $bricks = array();
+    protected $bricks = [];
 
     /**
      * Brick UID temp collector
      *
      * @var array
      */
-    protected $brickUIDs = array();
+    protected $brickUIDs = [];
 
     /**
      * Initialized brick manager
@@ -115,13 +115,13 @@ class Manager
 
         QUI::getDataBase()->insert(
             $this->getTable(),
-            array(
+            [
                 'project'     => $Project->getName(),
                 'lang'        => $Project->getLang(),
                 'title'       => $Brick->getAttribute('title'),
                 'description' => $Brick->getAttribute('description'),
                 'type'        => $Brick->getAttribute('type')
-            )
+            ]
         );
 
         $lastId = QUI::getPDO()->lastInsertId();
@@ -138,7 +138,7 @@ class Manager
      *
      * @throws QUI\Exception
      */
-    public function createUniqueSiteBrick(Site $Site, $brickData = array())
+    public function createUniqueSiteBrick(Site $Site, $brickData = [])
     {
         if (!empty($brickData['uid'])) {
             $uid = $brickData['uid'];
@@ -150,7 +150,7 @@ class Manager
             $uid = $this->createUniqueBrickId((int)$brickData['brickId'], $Site);
         }
 
-        $customFields = array();
+        $customFields = [];
 
         if (isset($brickData['customfields'])) {
             $customFields = $brickData['customfields'];
@@ -160,11 +160,11 @@ class Manager
             $customFields = json_encode($customFields);
         }
 
-        QUI::getDataBase()->update($this->getUIDTable(), array(
+        QUI::getDataBase()->update($this->getUIDTable(), [
             'customfields' => $customFields
-        ), array(
+        ], [
             'uid' => $uid
-        ));
+        ]);
 
 
         return $uid;
@@ -185,14 +185,14 @@ class Manager
         $uuid    = QUI\Utils\Uuid::get();
         $Brick   = $this->getBrickById($brickId);
 
-        QUI::getDataBase()->insert($this->getUIDTable(), array(
+        QUI::getDataBase()->insert($this->getUIDTable(), [
             'uid'        => $uuid,
             'brickId'    => $brickId,
             'project'    => $Project->getName(),
             'lang'       => $Project->getLang(),
             'siteId'     => $Site->getId(),
             'attributes' => json_encode($Brick->getAttributes())
-        ));
+        ]);
 
         return $uuid;
     }
@@ -205,13 +205,13 @@ class Manager
      */
     public function existsUniqueBrickId($uid)
     {
-        $result = QUI::getDataBase()->fetch(array(
+        $result = QUI::getDataBase()->fetch([
             'from'  => $this->getUIDTable(),
-            'where' => array(
+            'where' => [
                 'uid' => $uid
-            ),
+            ],
             'limit' => 1
-        ));
+        ]);
 
         return isset($result[0]);
     }
@@ -237,25 +237,25 @@ class Manager
         // check if brick exist
         $Brick = $this->getBrickById($brickId);
 
-        QUI::getDataBase()->delete($this->getTable(), array(
+        QUI::getDataBase()->delete($this->getTable(), [
             'id' => $brickId
-        ));
+        ]);
 
         if (isset($this->bricks[$brickId])) {
             unset($this->bricks[$brickId]);
         }
 
 
-        $uniqueBrickIds = QUI::getDataBase()->fetch(array(
+        $uniqueBrickIds = QUI::getDataBase()->fetch([
             'select' => 'siteId, project, lang',
             'from'   => QUI\Bricks\Manager::getUIDTable(),
-            'where'  => array(
+            'where'  => [
                 'brickId' => $brickId,
                 'project' => $Brick->getAttribute('project'),
                 'lang'    => $Brick->getAttribute('lang')
-            ),
+            ],
             'group'  => 'siteId, project, lang'
-        ));
+        ]);
 
         // delete bricks in sites
         foreach ($uniqueBrickIds as $uniqueBrickId) {
@@ -271,11 +271,11 @@ class Manager
         }
 
         // delete unique ids
-        QUI::getDataBase()->delete(QUI\Bricks\Manager::getUIDTable(), array(
+        QUI::getDataBase()->delete(QUI\Bricks\Manager::getUIDTable(), [
             'brickId' => $brickId,
             'project' => $Brick->getAttribute('project'),
             'lang'    => $Brick->getAttribute('lang')
-        ));
+        ]);
     }
 
     /**
@@ -289,8 +289,8 @@ class Manager
      */
     public function getAreasByProject(Project $Project, $layoutType = false)
     {
-        $templates = array();
-        $bricks    = array();
+        $templates = [];
+        $bricks    = [];
 
         $projectName = $Project->getName();
 
@@ -330,7 +330,7 @@ class Manager
         }
 
         // unique values
-        $cleaned = array();
+        $cleaned = [];
         foreach ($bricks as $val) {
             if (!isset($cleaned[$val['name']])) {
                 $cleaned[$val['name']] = $val;
@@ -362,11 +362,14 @@ class Manager
             return $transA > $transB ? 1 : -1;
         });
 
-
-        QUI::getEvents()->fireEvent(
-            'onBricksGetAreaByProject',
-            array($this, $Project, &$bricks)
-        );
+        try {
+            QUI::getEvents()->fireEvent(
+                'onBricksGetAreaByProject',
+                [$this, $Project, &$bricks]
+            );
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::writeException($Exception);
+        }
 
         return $bricks;
     }
@@ -386,16 +389,16 @@ class Manager
         }
 
         $xmlFiles = $this->getBricksXMLFiles();
-        $result   = array();
+        $result   = [];
 
-        $result[] = array(
-            'title'       => array('quiqqer/bricks', 'brick.content.title'),
-            'description' => array(
+        $result[] = [
+            'title'       => ['quiqqer/bricks', 'brick.content.title'],
+            'description' => [
                 'quiqqer/bricks',
                 'brick.content.description'
-            ),
+            ],
             'control'     => 'content'
-        );
+        ];
 
         foreach ($xmlFiles as $bricksXML) {
             $result = array_merge($result, Utils::getBricksFromXML($bricksXML));
@@ -406,13 +409,17 @@ class Manager
         });
 
         // js workaround
-        $list = array();
+        $list = [];
 
         foreach ($result as $entry) {
             $list[] = $entry;
         }
 
-        QUI\Cache\Manager::set($cache, $list);
+        try {
+            QUI\Cache\Manager::set($cache, $list);
+        } catch (\Exception $Exception) {
+            QUI\System\Log::writeException($Exception);
+        }
 
         return $list;
     }
@@ -431,13 +438,13 @@ class Manager
             return $this->bricks[$id];
         }
 
-        $data = QUI::getDataBase()->fetch(array(
+        $data = QUI::getDataBase()->fetch([
             'from'  => $this->getTable(),
-            'where' => array(
+            'where' => [
                 'id' => (int)$id
-            ),
+            ],
             'limit' => 1
-        ));
+        ]);
 
         if (!isset($data[0])) {
             throw new QUI\Exception('Brick not found');
@@ -465,13 +472,13 @@ class Manager
             return $this->brickUIDs[$uid];
         }
 
-        $data = QUI::getDataBase()->fetch(array(
+        $data = QUI::getDataBase()->fetch([
             'from'  => $this->getUIDTable(),
-            'where' => array(
+            'where' => [
                 'uid' => $uid
-            ),
+            ],
             'limit' => 1
-        ));
+        ]);
 
         if (!isset($data[0])) {
             throw new QUI\Exception('Brick not found');
@@ -484,13 +491,13 @@ class Manager
         $attributes = $data['attributes'];
         $attributes = json_decode($attributes, true);
 
-        $real = QUI::getDataBase()->fetch(array(
+        $real = QUI::getDataBase()->fetch([
             'from'  => $this->getTable(),
-            'where' => array(
+            'where' => [
                 'id' => (int)$brickId
-            ),
+            ],
             'limit' => 1
-        ));
+        ]);
 
         $Original = new Brick($real[0]);
         $Original->setAttribute('id', $brickId);
@@ -532,34 +539,34 @@ class Manager
         }
 
 
-        $settings = array();
+        $settings = [];
 
-        $settings[] = array(
+        $settings[] = [
             'name'     => 'width',
-            'text'     => array('quiqqer/bricks', 'site.area.window.settings.setting.width'),
+            'text'     => ['quiqqer/bricks', 'site.area.window.settings.setting.width'],
             'type'     => '',
             'class'    => '',
             'data-qui' => '',
             'options'  => false
-        );
+        ];
 
-        $settings[] = array(
+        $settings[] = [
             'name'     => 'height',
-            'text'     => array('quiqqer/bricks', 'site.area.window.settings.setting.height'),
+            'text'     => ['quiqqer/bricks', 'site.area.window.settings.setting.height'],
             'type'     => '',
             'class'    => '',
             'data-qui' => '',
             'options'  => false
-        );
+        ];
 
-        $settings[] = array(
+        $settings[] = [
             'name'     => 'classes',
-            'text'     => array('quiqqer/bricks', 'site.area.window.settings.setting.classes'),
+            'text'     => ['quiqqer/bricks', 'site.area.window.settings.setting.classes'],
             'type'     => '',
             'class'    => '',
             'data-qui' => '',
             'options'  => false
-        );
+        ];
 
         $xmlFiles = $this->getBricksXMLFiles();
 
@@ -584,7 +591,12 @@ class Manager
             }
         }
 
-        QUI\Cache\Manager::set($cache, $settings);
+        try {
+            QUI\Cache\Manager::set($cache, $settings);
+        } catch (\Exception $Exception) {
+            QUI\System\Log::writeException($Exception);
+        }
+
 
         return $settings;
     }
@@ -604,21 +616,21 @@ class Manager
             $optionElements = $Setting->getElementsByTagName('option');
 
             foreach ($optionElements as $Option) {
-                $options[] = array(
+                $options[] = [
                     'value' => $Option->getAttribute('value'),
                     'text'  => QUI\Utils\DOM::getTextFromNode($Option, false)
-                );
+                ];
             }
         }
 
-        return array(
+        return [
             'name'     => $Setting->getAttribute('name'),
             'text'     => QUI\Utils\DOM::getTextFromNode($Setting, false),
             'type'     => $Setting->getAttribute('type'),
             'class'    => $Setting->getAttribute('class'),
             'data-qui' => $Setting->getAttribute('data-qui'),
             'options'  => $options
-        );
+        ];
     }
 
     /**
@@ -632,7 +644,7 @@ class Manager
     public function getBricksByArea($brickArea, QUI\Interfaces\Projects\Site $Site)
     {
         if (empty($brickArea)) {
-            return array();
+            return [];
         }
 
         $brickAreas = $Site->getAttribute('quiqqer.bricks.areas');
@@ -641,7 +653,7 @@ class Manager
         if (!isset($brickAreas[$brickArea]) || empty($brickAreas[$brickArea])) {
             $bricks = $this->getInheritedBricks($brickArea, $Site);
         } else {
-            $bricks    = array();
+            $bricks    = [];
             $brickData = $brickAreas[$brickArea];
 
             foreach ($brickData as $brick) {
@@ -654,7 +666,7 @@ class Manager
         }
 
 
-        $result = array();
+        $result = [];
 
         foreach ($bricks as $key => $brickData) {
             $brickId = (int)$brickData['brickId'];
@@ -700,18 +712,56 @@ class Manager
      */
     public function getBricksFromProject(Project $Project)
     {
-        $result = array();
+        $result = [];
 
-        $list = QUI::getDataBase()->fetch(array(
+        $list = QUI::getDataBase()->fetch([
             'from'  => $this->getTable(),
-            'where' => array(
+            'where' => [
                 'project' => $Project->getName(),
                 'lang'    => $Project->getLang()
-            )
-        ));
+            ]
+        ]);
 
         foreach ($list as $entry) {
             $result[] = $this->getBrickById($entry['id']);
+        }
+
+        return $result;
+    }
+
+
+    /**
+     * Return a list with \QUI\Bricks\Brick which are assigned to a project
+     *
+     * @param Brick $Brick
+     * @return array
+     */
+    public function getSitesByBrick(Brick $Brick)
+    {
+        $result = [];
+
+        $list = QUI::getDataBase()->fetch([
+            'select' => ['brickId', 'project', 'lang', 'siteId'],
+            'from'   => $this->getUIDTable(),
+            'where'  => [
+                'project' => $Brick->getAttribute('project'),
+                'lang'    => $Brick->getAttribute('lang'),
+                'brickId' => $Brick->getAttribute('id')
+            ]
+        ]);
+
+        $Project = QUI::getProject(
+            $Brick->getAttribute('project'),
+            $Brick->getAttribute('lang')
+        );
+
+        foreach ($list as $entry) {
+            try {
+                $result[] = $Project->get($entry['siteId']);
+            } catch (QUI\Exception $Exception) {
+                QUI\System\Log::writeDebugException($Exception);
+                continue;
+            }
         }
 
         return $result;
@@ -727,7 +777,7 @@ class Manager
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.edit');
 
         $Brick      = $this->getBrickById($brickId);
-        $areas      = array();
+        $areas      = [];
         $areaString = '';
 
         if (isset($brickData['id'])) {
@@ -794,7 +844,7 @@ class Manager
         }
 
         // custom fields
-        $customfields = array();
+        $customfields = [];
 
         if (isset($brickData['customfields'])) {
             $availableSettings           = $Brick->getSettings();
@@ -816,7 +866,7 @@ class Manager
         }
 
         // update
-        QUI::getDataBase()->update($this->getTable(), array(
+        QUI::getDataBase()->update($this->getTable(), [
             'title'         => $Brick->getAttribute('title'),
             'frontendTitle' => $Brick->getAttribute('frontendTitle'),
             'description'   => $Brick->getAttribute('description'),
@@ -828,19 +878,19 @@ class Manager
             'height'        => $Brick->getAttribute('height'),
             'width'         => $Brick->getAttribute('width'),
             'classes'       => json_encode($Brick->getCSSClasses())
-        ), array(
+        ], [
             'id' => (int)$brickId
-        ));
+        ]);
 
         // refresh all bricks with this id
-        $uniqueBricks = QUI::getDataBase()->fetch(array(
+        $uniqueBricks = QUI::getDataBase()->fetch([
             'from'  => QUI\Bricks\Manager::getUIDTable(),
-            'where' => array(
+            'where' => [
                 'project' => $Project->getName(),
                 'lang'    => $Project->getLang(),
                 'brickId' => (int)$brickId
-            )
-        ));
+            ]
+        ]);
 
         foreach ($uniqueBricks as $uniqueBrick) {
             $customFieldsUniqueBrick = json_decode($uniqueBrick['customfields'], true);
@@ -851,15 +901,15 @@ class Manager
             }
 
             if (!is_array($customFieldsUniqueBrick)) {
-                $customFieldsUniqueBrick = array();
+                $customFieldsUniqueBrick = [];
             }
 
-            QUI::getDataBase()->update(QUI\Bricks\Manager::getUIDTable(), array(
+            QUI::getDataBase()->update(QUI\Bricks\Manager::getUIDTable(), [
                 'customfields' => json_encode($customFieldsUniqueBrick),
                 'attributes'   => json_encode($attributes)
-            ), array(
+            ], [
                 'uid' => $uniqueBrick['uid']
-            ));
+            ]);
         }
     }
 
@@ -872,29 +922,29 @@ class Manager
      *
      * @throws QUI\Exception
      */
-    public function copyBrick($brickId, $params = array())
+    public function copyBrick($brickId, $params = [])
     {
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.create');
 
-        $result = QUI::getDataBase()->fetch(array(
+        $result = QUI::getDataBase()->fetch([
             'from'  => $this->getTable(),
-            'where' => array(
+            'where' => [
                 'id' => $brickId
-            )
-        ));
+            ]
+        ]);
 
         if (!isset($result[0])) {
             throw new QUI\Exception('Brick not found');
         }
 
-        $allowed = array('project', 'lang', 'title', 'description');
+        $allowed = ['project', 'lang', 'title', 'description'];
         $allowed = array_flip($allowed);
         $data    = $result[0];
 
         unset($data['id']);
 
         if (!is_array($params)) {
-            $params = array();
+            $params = [];
         }
 
         foreach ($params as $param => $value) {
@@ -943,26 +993,26 @@ class Manager
             }
 
             if (!$area['inheritance']) {
-                return array();
+                return [];
             }
 
             break;
         }
 
         if (!isset($area) || !isset($area['name'])) {
-            return array();
+            return [];
         }
 
         if ($area['name'] != $brickArea) {
-            return array();
+            return [];
         }
 
         if (!Utils::hasInheritance($Project, $brickArea)) {
-            return array();
+            return [];
         }
 
 
-        $result    = array();
+        $result    = [];
         $parentIds = $Site->getParentIdTree();
         $parentIds = array_reverse($parentIds);
 
@@ -972,13 +1022,13 @@ class Manager
         );
 
         foreach ($parentIds as $parentId) {
-            $bricks = QUI::getDataBase()->fetch(array(
+            $bricks = QUI::getDataBase()->fetch([
                 'from'  => $projectCacheTable,
-                'where' => array(
+                'where' => [
                     'id'   => $parentId,
                     'area' => $brickArea
-                )
-            ));
+                ]
+            ]);
 
             if (empty($bricks) || !is_array($bricks)) {
                 continue;
@@ -999,7 +1049,7 @@ class Manager
             }
 
 
-            $brickIds = array();
+            $brickIds = [];
             $area     = $parentAreas[$brickArea];
 
             foreach ($bricks as $brick) {

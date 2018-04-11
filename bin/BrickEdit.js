@@ -45,6 +45,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             'showSettings',
             'showExtras',
             'showContent',
+            'showUsage',
 
             '$load',
             '$unload',
@@ -153,6 +154,15 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 text  : QUILocale.get('quiqqer/system', 'content'),
                 events: {
                     onClick: this.showContent
+                }
+            });
+
+            this.addCategory({
+                name  : 'usage',
+                icon  : 'fa fa-map-signs',
+                text  : QUILocale.get(lg, 'brick.panel.category.usage'),
+                events: {
+                    onClick: this.showUsage
                 }
             });
         },
@@ -544,6 +554,40 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         },
 
         /**
+         *
+         * @return {Promise<T>}
+         */
+        showUsage: function () {
+            var self = this;
+
+            return this.$hideCategory().then(function () {
+                return new Promise(function (resolve) {
+                    require(['package/quiqqer/bricks/bin/Controls/backend/BrickUsage'], function (Control) {
+                        new Control({
+                            brickId: self.getAttribute('id'),
+                            events : {
+                                onLoad: resolve
+                            }
+                        }).inject(self.$Container);
+                    });
+                });
+            }).then(function (BrickUsage) {
+                self.$Container.setStyles({
+                    height: '100%'
+                });
+
+                BrickUsage.resize();
+
+                return self.$showCategory();
+            }).then(function () {
+                self.Loader.hide();
+            }).catch(function (err) {
+                console.error(err);
+                self.Loader.hide();
+            });
+        },
+
+        /**
          * Create the editor, if the brick type is a content type
          *
          * @return Promise
@@ -745,6 +789,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 case 'extra':
                 case 'settings':
                 case 'content':
+                case 'usage':
                     return Promise.resolve();
             }
 
