@@ -121,7 +121,10 @@ define('package/quiqqer/bricks/bin/Site/Category', [
                     }
 
                     data = areas[AC.getAttribute('name')];
-                    data.each(loadData);
+
+                    if (data && typeof data.each !== 'undefined') {
+                        data.each(loadData);
+                    }
                 }
 
                 self.Loader.hide();
