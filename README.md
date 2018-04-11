@@ -1,10 +1,22 @@
 ![QUIQQER Bricks](bin/images/Readme.jpg)
 
-QUIQQER Bausteine
+QUIQQER Bricks
 ========
 
+Bricks are modules with freely definable fields, 
+they allow you to create modules that meet exactly those requirements.
 
-Paketname:
+Within the template areas you can place all kinds of content, such as advertising banners, 
+contact data, news and blog entries, pictures and so on. 
+
+In order to make it easier for you and so that you can design your website quickly 
+and easily according to your own wishes, the bricks are at your disposal. Create own 
+bricks of various types and insert them into the areas on your website.
+
+With a few simple steps you can expand your website without extensive development knowledge.
+
+
+Package name:
 
     quiqqer/bricks
 
@@ -12,21 +24,21 @@ Paketname:
 Features
 --------
 
-- Baustein-Verwaltung
-- Einer Seite können verschiedene Bausteine zugewiesen werden
-- Bausteine können für jedes Projekt eigens angelegt und verwaltet werden
+- Brick administration
+- Different bricks can be assigned to one page
+- Bricks can be created and managed for each project individually
+- More than 20 flexible bricks are delivered
+  - Create page lists in no time at all with the different brick lists
+  - A lot of sliders
+
 
 Installation
 ------------
 
-Der Paketname ist: quiqqer/bricks
-
-Nutzung des Simple Google Maps Baustein:
-- Google Maps Key: https://console.developers.google.com/apis/library
-- Benötigte API's:  Google Maps Embed API, Google Maps JavaScript API, Google Static Maps API 
+The package name: quiqqer/bricks
 
 
-Mitwirken
+Contribution
 ----------
 
 - Project: https://dev.quiqqer.com/quiqqer/package-bricks
@@ -46,35 +58,3 @@ License
 -------
 
 GPL-3.0+
-
-Entwickler
---------
-
-PHP - Custom Baustein
-
-```php
-<?php
-
-class Baustein extends QUI\Control
-{
-    public function __construct($attributes = array())
-    {
-    
-    }
-    
-    public function getBody()
-    {
-        return '<p>html</p>';
-    }
-}
-
-?>
-```
-
-
-Template Area
-
-```html
-{brickarea assign="bricks" area="footer" Site=$Site}
-```
-
