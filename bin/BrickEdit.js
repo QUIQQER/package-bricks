@@ -560,13 +560,21 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         showUsage: function () {
             var self = this;
 
+            this.Loader.show();
+
             return this.$hideCategory().then(function () {
                 return new Promise(function (resolve) {
                     require(['package/quiqqer/bricks/bin/Controls/backend/BrickUsage'], function (Control) {
                         new Control({
                             brickId: self.getAttribute('id'),
                             events : {
-                                onLoad: resolve
+                                onLoad        : resolve,
+                                onRefresh     : function () {
+                                    self.Loader.hide();
+                                },
+                                onRefreshBegin: function () {
+                                    self.Loader.show();
+                                }
                             }
                         }).inject(self.$Container);
                     });

@@ -103,11 +103,14 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
         refresh: function () {
             var self = this;
 
+            this.fireEvent('refreshBegin', [this]);
+
             return new Promise(function (resolve) {
                 QUIAjax.get('package_quiqqer_bricks_ajax_getSitesFromBrick', function (result) {
                     self.$Grid.setData(result);
+                    self.fireEvent('refresh', [this]);
+
                     resolve();
-                    console.log(result);
                 }, {
                     'package': 'quiqqer/bricks',
                     brickId  : self.getAttribute('brickId'),
