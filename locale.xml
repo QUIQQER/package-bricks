@@ -130,6 +130,10 @@
             <en><![CDATA[Send]]></en>
             <pl><![CDATA[Wyślij]]></pl>
         </locale>
+        <locale name="control.simpleContact.privacyPolicy.label">
+            <de><![CDATA[Die [Datenschutzbestimmungen] habe ich zur Kenntnis genommen.]]></de>
+            <en><![CDATA[I am aware of the [Privacy Policy].]]></en>
+        </locale>
         <locale name="brick.control.simpleContact.mailTo">
             <de><![CDATA[E-Mail Adresse, wo die Nachricht gesendet wird]]></de>
             <en><![CDATA[Email where the message will send to]]></en>
