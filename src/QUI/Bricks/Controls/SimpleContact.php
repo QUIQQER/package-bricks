@@ -22,21 +22,22 @@ class SimpleContact extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
-        $this->setAttributes(array(
-            'class'        => 'quiqqer-simple-contact',
-            'qui-class'    => 'package/quiqqer/bricks/bin/Controls/SimpleContact',
-            'labels'       => true,
-            'data-brickid' => true,
-            'mailTo'       => '' // receiver email
-        ));
+        $this->setAttributes([
+            'class'                     => 'quiqqer-simple-contact',
+            'qui-class'                 => 'package/quiqqer/bricks/bin/Controls/SimpleContact',
+            'labels'                    => true,
+            'data-brickid'              => true,
+            'mailTo'                    => '', // receiver email
+            'showPrivacyPolicyCheckbox' => false
+        ]);
 
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__) . '/SimpleContact.css'
+            dirname(__FILE__).'/SimpleContact.css'
         );
     }
 
@@ -65,20 +66,53 @@ class SimpleContact extends QUI\Control
                 $email   = $_POST['email'];
                 $message = $_POST['message'];
 
-                $Engine->assign(array(
+                $Engine->assign([
                     'errorMessage' => $Exception->getMessage()
-                ));
+                ]);
             }
         }
 
-        $Engine->assign(array(
+        if ($this->getAttribute('showPrivacyPolicyCheckbox')) {
+            $PrivacyPolicySite = $this->getPrivacyPolicySite();
+            $label             = QUI::getLocale()->get(
+                'quiqqer/bricks',
+                'control.simpleContact.privacyPolicy.label'
+            );
+
+            if ($PrivacyPolicySite) {
+                $url = $PrivacyPolicySite->getUrlRewrittenWithHost();
+
+                $label = preg_replace(
+                    '#\[([^\]]*)\]#i',
+                    '<a href="'.$url.'" target="_blank">$1</a>',
+                    $label
+                );
+
+                $Project = QUI::getRewrite()->getProject();
+
+                $Engine->assign([
+                    'projectName' => $Project->getName(),
+                    'projectLang' => $Project->getLang(),
+                    'siteId'      => $PrivacyPolicySite->getId()
+                ]);
+            }
+
+            $label = str_replace(['[', ']'], '', $label);
+
+            $Engine->assign([
+                'privacyPolicyLabel'      => $label,
+                'createPrivacyPolicyLink' => $PrivacyPolicySite !== false
+            ]);
+        }
+
+        $Engine->assign([
             'this'    => $this,
             'name'    => $name,
             'email'   => $email,
             'message' => $message
-        ));
+        ]);
 
-        return $Engine->fetch(dirname(__FILE__) . '/SimpleContact.html');
+        return $Engine->fetch(dirname(__FILE__).'/SimpleContact.html');
     }
 
     /**
@@ -102,7 +136,7 @@ class SimpleContact extends QUI\Control
         }
 
         $receiver = $this->getAttribute('mailTo');
-        $url      = $this->getProject()->getHost() . $Site->getUrlRewritten();
+        $url      = $this->getProject()->getHost().$Site->getUrlRewritten();
 
         // fallback: admin email
         if (!QUI\Utils\Security\Orthos::checkMailSyntax($receiver)) {
@@ -113,7 +147,7 @@ class SimpleContact extends QUI\Control
 
         $Mailer->addRecipient($receiver);
         $Mailer->addReplyTo($_POST['email']);
-        $Mailer->setSubject($Site->getAttribute('title') . ' | ' . $url);
+        $Mailer->setSubject($Site->getAttribute('title').' | '.$url);
 
         $Mailer->setBody("
             <span style=\"font-weight: bold;\">From:</span> {$_POST['name']}<br />
@@ -125,12 +159,12 @@ class SimpleContact extends QUI\Control
 
         try {
             $Mailer->send();
-            $Engine->assign(array(
+            $Engine->assign([
                 'successMessage' => QUI::getLocale()->get(
                     'quiqqer/bricks',
                     'brick.control.simpleContact.successful'
                 )
-            ));
+            ]);
         } catch (\Exception $Exception) {
             QUI\System\Log::writeException($Exception);
 
@@ -141,6 +175,34 @@ class SimpleContact extends QUI\Control
                 )
             );
         }
+    }
+
+    /**
+     * Get Privacy Policy Site of the current Project
+     *
+     * @return QUI\Projects\Site|false
+     */
+    protected function getPrivacyPolicySite()
+    {
+        try {
+            $Project = QUI::getRewrite()->getProject();
+
+            $result = $Project->getSites([
+                'where' => [
+                    'type' => 'quiqqer/sitetypes:types/privacypolicy'
+                ],
+                'limit' => 1
+            ]);
+        } catch (\Exception $Exception) {
+            QUI\System\Log::writeException($Exception);
+            return false;
+        }
+
+        if (empty($result)) {
+            return false;
+        }
+
+        return current($result);
     }
 
     /**

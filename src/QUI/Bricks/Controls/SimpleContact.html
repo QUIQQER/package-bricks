@@ -61,6 +61,51 @@
               placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.message.placeholder"}"
     >{$message}</textarea>
 
+    {if $this->getAttribute('showPrivacyPolicyCheckbox')}
+    <label for="qui-contact-privacypolicy">
+        <input type="checkbox"
+               name="privacyPolicy"
+               id="qui-contact-privacypolicy"
+               required="required"/>
+        <span>{$privacyPolicyLabel}</span>
+    </label>
+
+        {if $createPrivacyPolicyLink}
+        <script>
+            {literal}(function() {{/literal}
+                var projectName = "{$projectName}";
+                var projectLang = "{$projectLang}";
+                var siteId      = "{$siteId}";
+
+                {literal}
+                require([
+                    'package/quiqqer/controls/bin/site/Window',
+                    'Locale'
+                ], function (QUISiteWindow, QUILocale) {
+                    var Links = document.getElement('label[for="qui-contact-privacypolicy"]').getParent().getElements('a');
+
+                    if (!Links.length) {
+                        return;
+                    }
+
+                    Links.addEvent('click', function (event) {
+                        event.stop();
+
+                        new QUISiteWindow({
+                            closeButtonText: QUILocale.get('quiqqer/system', 'btn.close'),
+                            showTitle      : true,
+                            project        : projectName,
+                            lang           : projectLang,
+                            id             : siteId
+                        }).open();
+                    });
+                });
+            })();
+            {/literal}
+        </script>
+        {/if}
+    {/if}
+
     <noscript>
         <input class="quiqqer-simple-contact-button" type="submit"
                value="{locale group='quiqqer/bricks' value='control.simpleContact.sendButton'}" />
