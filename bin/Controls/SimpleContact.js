@@ -57,10 +57,10 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
             this.Form = this.$Elm.getElement('form');
 
             var Button = new Element('button', {
-                'class' : 'quiqqer-simple-contact-button',
-                'type': 'button',
+                'class': 'quiqqer-simple-contact-button',
+                'type' : 'button',
                 'html' : QUILocale.get('quiqqer/bricks', 'control.simpleContact.sendButton'),
-                events: {
+                events : {
                     click: function () {
                         self.$Elm.getElement('form').fireEvent('submit');
                     }
@@ -102,6 +102,12 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                 return;
             }
 
+            var PrivacyPolicyCheckbox = this.$Elm.getElement('#qui-contact-privacypolicy');
+            var privacyPolicyAccepted = false;
+
+            if (PrivacyPolicyCheckbox) {
+                privacyPolicyAccepted = PrivacyPolicyCheckbox.checked;
+            }
 
             var self = this;
 
@@ -117,15 +123,16 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                 self.Loader.hide();
 
             }, {
-                'package': 'quiqqer/bricks',
-                brickId  : this.$Elm.get('data-brickid'),
-                message  : this.$Text.value,
-                email    : this.$Email.value,
-                name     : this.$Name.value,
-                showError: false,
-                project  : JSON.encode(QUIQQER_PROJECT),
-                siteId   : QUIQQER_SITE.id,
-                onError  : function (Exception) {
+                'package'            : 'quiqqer/bricks',
+                brickId              : this.$Elm.get('data-brickid'),
+                message              : this.$Text.value,
+                email                : this.$Email.value,
+                name                 : this.$Name.value,
+                showError            : false,
+                project              : JSON.encode(QUIQQER_PROJECT),
+                siteId               : QUIQQER_SITE.id,
+                privacyPolicyAccepted: privacyPolicyAccepted ? 1 : 0,
+                onError              : function (Exception) {
                     self.Loader.hide();
 
                     QUI.getMessageHandler(function (MH) {
