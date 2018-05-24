@@ -24,6 +24,9 @@
                 <setting name="mailTo">
                     <locale group="quiqqer/bricks" var="brick.control.simpleContact.mailTo"/>
                 </setting>
+                <setting name="showPrivacyPolicyCheckbox">
+                    <locale group="quiqqer/bricks" var="brick.control.simpleContact.showPrivacyPolicyCheckbox"/>
+                </setting>
             </settings>
         </brick>
 
