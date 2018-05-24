@@ -161,7 +161,14 @@
             <en><![CDATA[The entered e-mail address is not correct. Please enter a correct one.]]></en>
             <pl><![CDATA[Wprowadzony adres e-mail nie jest poprawny. Proszę podać prawidłowy adres e-mail.]]></pl>
         </locale>
-
+        <locale name="brick.control.simpleContact.error.privacyPolicyRequired">
+            <de><![CDATA[Bitte akzeptieren Sie die Datenschutzbestimmungen, um fortzufahren.]]></de>
+            <en><![CDATA[Please accept the Privacy Policy to continue.]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.mail.privacyPolicy_accepted">
+            <de><![CDATA[Der Benutzer hat die Datenschutzbestimmungen akzeptiert.]]></de>
+            <en><![CDATA[The user has accepted the Privacy Policy.]]></en>
+        </locale>
 
         <locale name="brick.control.navigation.title">
             <de><![CDATA[Bausteine: Navigation]]></de>

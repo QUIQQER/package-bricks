@@ -49,26 +49,38 @@ class SimpleContact extends QUI\Control
      */
     public function getBody()
     {
-        $Engine  = QUI::getTemplateManager()->getEngine();
-        $name    = '';
-        $email   = '';
-        $message = '';
+        $Engine                = QUI::getTemplateManager()->getEngine();
+        $name                  = '';
+        $email                 = '';
+        $message               = '';
+        $Site                  = $this->getSite();
+        $privacyPolicyCheckbox = boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'));
+        $error                 = false;
 
         // is javascript disabled?
         if (isset($_POST['name'])
             && isset($_POST['email'])
             && isset($_POST['message'])
         ) {
-            try {
-                $this->sendMail($Engine);
-            } catch (\Exception $Exception) {
-                $name    = $_POST['name'];
-                $email   = $_POST['email'];
-                $message = $_POST['message'];
-
+            if ($privacyPolicyCheckbox && empty($_POST['privacyPolicy'])) {
                 $Engine->assign([
-                    'errorMessage' => $Exception->getMessage()
+                    'errorMessage' => QUI::getLocale()->get(
+                        'quiqqer/bricks',
+                        'brick.control.simpleContact.error.privacyPolicyRequired'
+                    )
                 ]);
+
+                $error = true;
+            } else {
+                try {
+                    $this->sendMail($Engine);
+                } catch (\Exception $Exception) {
+                    $Engine->assign([
+                        'errorMessage' => $Exception->getMessage()
+                    ]);
+
+                    $error = true;
+                }
             }
         }
 
@@ -105,6 +117,12 @@ class SimpleContact extends QUI\Control
             ]);
         }
 
+        if ($error) {
+            $name    = !empty($_POST['name']) ? $_POST['name'] : '';
+            $email   = !empty($_POST['email']) ? $_POST['email'] : '';
+            $message = !empty($_POST['message']) ? $_POST['message'] : '';
+        }
+
         $Engine->assign([
             'this'    => $this,
             'name'    => $name,
@@ -123,7 +141,10 @@ class SimpleContact extends QUI\Control
      */
     public function sendMail($Engine)
     {
-        $Site = $this->getSite();
+        $Site                  = $this->getSite();
+        $privacyPolicyCheckbox = boolval($Site->getAttribute(
+            'quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'
+        ));
 
         // email correct?
         if (!QUI\Utils\Security\Orthos::checkMailSyntax($_POST['email'])) {
@@ -149,13 +170,25 @@ class SimpleContact extends QUI\Control
         $Mailer->addReplyTo($_POST['email']);
         $Mailer->setSubject($Site->getAttribute('title').' | '.$url);
 
-        $Mailer->setBody("
+        $body = "
             <span style=\"font-weight: bold;\">From:</span> {$_POST['name']}<br />
             <span style=\"font-weight: bold;\">E-mail:</span> {$_POST['email']}<br />
-            <span style=\"font-weight: bold;\">Message:</span><br /><br />
+        ";
+
+        if ($privacyPolicyCheckbox && !empty($_POST['privacyPolicy'])) {
+            $body .= '<span style="font-weight: bold;">'
+                     .QUI::getLocale()->get(
+                    'quiqqer/bricks',
+                    'brick.control.simpleContact.mail.privacyPolicy_accepted'
+                )
+                     .'</span><br/>';
+        }
+
+        $body .= "<span style=\"font-weight: bold;\">Message:</span><br /><br />
             <div style=\"white-space: pre-line;\">{$_POST['message']}
-            </div>
-        ");
+            </div>";
+
+        $Mailer->setBody($body);
 
         try {
             $Mailer->send();

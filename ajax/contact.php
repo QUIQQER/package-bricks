@@ -13,7 +13,7 @@
  */
 QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_contact',
-    function ($brickId, $project, $siteId, $message, $name, $email) {
+    function ($brickId, $project, $siteId, $message, $name, $email, $privacyPolicyAccepted) {
         // check if email correct
         if (!QUI\Utils\Security\Orthos::checkMailSyntax($email)) {
             throw new QUI\Exception(
@@ -24,9 +24,19 @@ QUI::$Ajax->registerFunction(
             );
         }
 
-        $BrickManager = QUI\Bricks\Manager::init();
-        $Project      = QUI::getProjectManager()->decode($project);
-        $Site         = $Project->get((int)$siteId);
+        $BrickManager          = QUI\Bricks\Manager::init();
+        $Project               = QUI::getProjectManager()->decode($project);
+        $Site                  = $Project->get((int)$siteId);
+        $privacyPolicyCheckbox = boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'));
+
+        if ($privacyPolicyCheckbox && !(int)$privacyPolicyAccepted) {
+            throw new QUI\Exception(
+                QUI::getLocale()->get(
+                    'quiqqer/bricks',
+                    'brick.control.simpleContact.error.privacyPolicyRequired'
+                )
+            );
+        }
 
         if ($Site->getAttribute('type') === 'quiqqer/sitetypes:types/contact') {
             // Contact form (site)
@@ -46,15 +56,27 @@ QUI::$Ajax->registerFunction(
 
         $Mailer->addRecipient($receiver);
         $Mailer->addReplyTo($email);
-        $Mailer->setSubject($Site->getAttribute('title') . ' ' . $Site->getUrlRewritten());
+        $Mailer->setSubject($Site->getAttribute('title').' '.$Site->getUrlRewritten());
 
-        $Mailer->setBody("
+        $body = "
             <span style=\"font-weight: bold;\">From:</span> {$name}<br />
             <span style=\"font-weight: bold;\">E-mail:</span> {$email}<br />
-            <span style=\"font-weight: bold;\">Message:</span><br /><br />
-            <div style=\"white-space: pre-line;\">{$message}
-            </div>
-        ");
+        ";
+
+        if ($privacyPolicyCheckbox) {
+            $body .= '<span style="font-weight: bold;">'
+                     .QUI::getLocale()->get(
+                    'quiqqer/bricks',
+                    'brick.control.simpleContact.mail.privacyPolicy_accepted'
+                )
+                     .'</span><br/>';
+        }
+
+        $body .= "<span style=\"font-weight: bold;\">Message:</span><br /><br />
+            <div style=\"white-space: pre-line;\">{$_POST['message']}
+            </div>";
+
+        $Mailer->setBody($body);
 
         try {
             $Mailer->send();
@@ -68,6 +90,6 @@ QUI::$Ajax->registerFunction(
 
         return true;
     },
-    array('brickId', 'project', 'siteId', 'message', 'name', 'email'),
+    ['brickId', 'project', 'siteId', 'message', 'name', 'email', 'privacyPolicyAccepted'],
     false
 );
