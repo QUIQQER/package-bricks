@@ -20,10 +20,23 @@ if (isset($columns['id'])) {
     QUI::getPackage('quiqqer/bricks')->setup();
 }
 
-$result = QUI::getDataBase()->fetch(array(
+// if no bricks exists, we not need it
+$result = QUI::getDataBase()->fetch([
+    'count' => 'count',
+    'from'  => $Bricks->getTable(),
+]);
+
+if (!isset($result[0]) || !isset($result[0]['count']) || !$result[0]['count']) {
+    echo 'Patch is not needed. No Bricks available'.PHP_EOL;
+
+    return;
+}
+
+
+$result = QUI::getDataBase()->fetch([
     'count' => 'count',
     'from'  => $Bricks->getUIDTable(),
-));
+]);
 
 // if unique ids already exist, the pages no longer have to be passed through
 if (isset($result[0]) && isset($result[0]['count']) && $result[0]['count']) {
@@ -90,9 +103,9 @@ foreach ($projects as $Project) {
 echo 'Bricks saving...';
 
 // alle bausteine speichern
-$bricks = QUI::getDataBase()->fetch(array(
+$bricks = QUI::getDataBase()->fetch([
     'from' => $Bricks->getTable()
-));
+]);
 
 foreach ($bricks as $brick) {
     try {
