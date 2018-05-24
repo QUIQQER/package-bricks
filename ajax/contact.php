@@ -24,12 +24,14 @@ QUI::$Ajax->registerFunction(
             );
         }
 
-        $BrickManager          = QUI\Bricks\Manager::init();
-        $Project               = QUI::getProjectManager()->decode($project);
-        $Site                  = $Project->get((int)$siteId);
-        $privacyPolicyCheckbox = boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'));
+        $BrickManager               = QUI\Bricks\Manager::init();
+        $Project                    = QUI::getProjectManager()->decode($project);
+        $Site                       = $Project->get((int)$siteId);
+        $Brick                      = $BrickManager->getBrickByID($brickId);
+        $privacyPolicyCheckbox      = boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'));
+        $privacyPolicyCheckboxBrick = $Brick->getSetting('showPrivacyPolicyCheckbox');
 
-        if ($privacyPolicyCheckbox && !(int)$privacyPolicyAccepted) {
+        if (($privacyPolicyCheckbox || $privacyPolicyCheckboxBrick) && !(int)$privacyPolicyAccepted) {
             throw new QUI\Exception(
                 QUI::getLocale()->get(
                     'quiqqer/bricks',
@@ -43,7 +45,6 @@ QUI::$Ajax->registerFunction(
             $receiver = $Site->getAttribute('quiqqer.settings.sitetypes.contact.email');
         } else {
             // Contact form (brick)
-            $Brick    = $BrickManager->getBrickByID($brickId);
             $receiver = $Brick->getSetting('mailTo');
         }
 
@@ -66,9 +67,9 @@ QUI::$Ajax->registerFunction(
         if ($privacyPolicyCheckbox) {
             $body .= '<span style="font-weight: bold;">'
                      .QUI::getLocale()->get(
-                         'quiqqer/bricks',
-                         'brick.control.simpleContact.mail.privacyPolicy_accepted'
-                     ).'</span><br/>';
+                    'quiqqer/bricks',
+                    'brick.control.simpleContact.mail.privacyPolicy_accepted'
+                ).'</span><br/>';
         }
 
         $body .= "<span style=\"font-weight: bold;\">Message:</span><br /><br />
