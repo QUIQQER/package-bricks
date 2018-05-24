@@ -165,6 +165,10 @@
             <de><![CDATA[Bitte akzeptieren Sie die Datenschutzbestimmungen, um fortzufahren.]]></de>
             <en><![CDATA[Please accept the Privacy Policy to continue.]]></en>
         </locale>
+        <locale name="brick.control.simpleContact.showPrivacyPolicyCheckbox">
+            <de><![CDATA[Datenschutzbestimmungen-Checkbox im Formular anzeigen (Pflichtfeld)]]></de>
+            <en><![CDATA[Show Privacy Policy checkbox (required field)]]></en>
+        </locale>
         <locale name="brick.control.simpleContact.mail.privacyPolicy_accepted">
             <de><![CDATA[Der Benutzer hat die Datenschutzbestimmungen akzeptiert.]]></de>
             <en><![CDATA[The user has accepted the Privacy Policy.]]></en>
