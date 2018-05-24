@@ -178,9 +178,9 @@ class SimpleContact extends QUI\Control
         if ($privacyPolicyCheckbox && !empty($_POST['privacyPolicy'])) {
             $body .= '<span style="font-weight: bold;">'
                      .QUI::getLocale()->get(
-                    'quiqqer/bricks',
-                    'brick.control.simpleContact.mail.privacyPolicy_accepted'
-                )
+                         'quiqqer/bricks',
+                         'brick.control.simpleContact.mail.privacyPolicy_accepted'
+                     )
                      .'</span><br/>';
         }
 
