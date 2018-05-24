@@ -56,7 +56,7 @@ class SimpleContact extends QUI\Control
         $privacyPolicyCheckbox = $this->getAttribute('showPrivacyPolicyCheckbox');
         $error                 = false;
 
-        // is javascript disabled?
+        // Is javascript disabled?
         if (isset($_POST['name'])
             && isset($_POST['email'])
             && isset($_POST['message'])
@@ -177,9 +177,9 @@ class SimpleContact extends QUI\Control
         if ($privacyPolicyCheckbox && !empty($_POST['privacyPolicy'])) {
             $body .= '<span style="font-weight: bold;">'
                      .QUI::getLocale()->get(
-                    'quiqqer/bricks',
-                    'brick.control.simpleContact.mail.privacyPolicy_accepted'
-                )
+                         'quiqqer/bricks',
+                         'brick.control.simpleContact.mail.privacyPolicy_accepted'
+                     )
                      .'</span><br/>';
         }
 
