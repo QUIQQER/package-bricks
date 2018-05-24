@@ -53,8 +53,7 @@ class SimpleContact extends QUI\Control
         $name                  = '';
         $email                 = '';
         $message               = '';
-        $Site                  = $this->getSite();
-        $privacyPolicyCheckbox = boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'));
+        $privacyPolicyCheckbox = $this->getAttribute('showPrivacyPolicyCheckbox');
         $error                 = false;
 
         // is javascript disabled?
@@ -84,7 +83,7 @@ class SimpleContact extends QUI\Control
             }
         }
 
-        if ($this->getAttribute('showPrivacyPolicyCheckbox')) {
+        if ($privacyPolicyCheckbox) {
             $PrivacyPolicySite = $this->getPrivacyPolicySite();
             $label             = QUI::getLocale()->get(
                 'quiqqer/bricks',
@@ -178,9 +177,9 @@ class SimpleContact extends QUI\Control
         if ($privacyPolicyCheckbox && !empty($_POST['privacyPolicy'])) {
             $body .= '<span style="font-weight: bold;">'
                      .QUI::getLocale()->get(
-                         'quiqqer/bricks',
-                         'brick.control.simpleContact.mail.privacyPolicy_accepted'
-                     )
+                    'quiqqer/bricks',
+                    'brick.control.simpleContact.mail.privacyPolicy_accepted'
+                )
                      .'</span><br/>';
         }
 
