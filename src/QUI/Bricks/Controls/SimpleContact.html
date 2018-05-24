@@ -69,38 +69,41 @@
                required="required"/>
         <span>{$privacyPolicyLabel}</span>
     </label>
-    <script>
-        {literal}(function() {{/literal}
-            var projectName = "{$projectName}";
-            var projectLang = "{$projectLang}";
-            var siteId      = "{$siteId}";
 
-            {literal}
-            require([
-                'package/quiqqer/controls/bin/site/Window',
-                'Locale'
-            ], function (QUISiteWindow, QUILocale) {
-                var Links = document.getElement('label[for="qui-contact-privacypolicy"]').getParent().getElements('a');
+        {if $createPrivacyPolicyLink}
+        <script>
+            {literal}(function() {{/literal}
+                var projectName = "{$projectName}";
+                var projectLang = "{$projectLang}";
+                var siteId      = "{$siteId}";
 
-                if (!Links.length) {
-                    return;
-                }
+                {literal}
+                require([
+                    'package/quiqqer/controls/bin/site/Window',
+                    'Locale'
+                ], function (QUISiteWindow, QUILocale) {
+                    var Links = document.getElement('label[for="qui-contact-privacypolicy"]').getParent().getElements('a');
 
-                Links.addEvent('click', function (event) {
-                    event.stop();
+                    if (!Links.length) {
+                        return;
+                    }
 
-                    new QUISiteWindow({
-                        closeButtonText: QUILocale.get('quiqqer/system', 'btn.close'),
-                        showTitle      : true,
-                        project        : projectName,
-                        lang           : projectLang,
-                        id             : siteId
-                    }).open();
+                    Links.addEvent('click', function (event) {
+                        event.stop();
+
+                        new QUISiteWindow({
+                            closeButtonText: QUILocale.get('quiqqer/system', 'btn.close'),
+                            showTitle      : true,
+                            project        : projectName,
+                            lang           : projectLang,
+                            id             : siteId
+                        }).open();
+                    });
                 });
-            });
-        })();
-        {/literal}
-    </script>
+            })();
+            {/literal}
+        </script>
+        {/if}
     {/if}
 
     <noscript>

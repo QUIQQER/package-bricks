@@ -87,15 +87,21 @@ class SimpleContact extends QUI\Control
                     '<a href="'.$url.'" target="_blank">$1</a>',
                     $label
                 );
+
+                $Project = QUI::getRewrite()->getProject();
+
+                $Engine->assign([
+                    'projectName' => $Project->getName(),
+                    'projectLang' => $Project->getLang(),
+                    'siteId'      => $PrivacyPolicySite->getId()
+                ]);
             }
 
-            $Project = QUI::getRewrite()->getProject();
+            $label = str_replace(['[', ']'], '', $label);
 
             $Engine->assign([
-                'privacyPolicyLabel' => $label,
-                'projectName'        => $Project->getName(),
-                'projectLang'        => $Project->getLang(),
-                'siteId'             => $PrivacyPolicySite->getId()
+                'privacyPolicyLabel'      => $label,
+                'createPrivacyPolicyLink' => $PrivacyPolicySite !== false
             ]);
         }
 
