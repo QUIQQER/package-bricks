@@ -9,7 +9,7 @@
 }
 
 .quiqqer-simple-contact label,
-.quiqqer-simple-contact input,
+.quiqqer-simple-contact input:not([type="checkbox"]),
 .quiqqer-simple-contact textarea {
     float: left;
     clear: both;
