@@ -68,8 +68,7 @@ QUI::$Ajax->registerFunction(
             $body .= '<span style="font-weight: bold;">'
                      .QUI::getLocale()->get(
                     'quiqqer/bricks',
-                    'brick.control.simpleContact.mail.privacyPolicy_accepted'
-                ).'</span><br/>';
+                    'brick.control.simpleContact.mail.privacyPolicy_accepted').'</span><br/>';
         }
 
         $body .= "<span style=\"font-weight: bold;\">Message:</span><br /><br />
