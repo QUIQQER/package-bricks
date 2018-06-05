@@ -11,5 +11,7 @@
 {/if}
 
 <div class="simpleGoogleMap">
+    {if !$preventLoadMap}
     <iframe class="simpleGoogleMap-iframe" src="{$url}"></iframe>
+    {/if}
 </div>
