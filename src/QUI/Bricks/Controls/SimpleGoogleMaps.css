@@ -1,11 +1,12 @@
 .simpleGoogleMap {
-    position: relative;
-    height: 100%;
-
-    min-height: 300px;
-    display: flex;
-    justify-content: center;
     align-items: stretch;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    min-height: 300px;
+    position: relative;
 }
 
 .simpleGoogleMap-iframe {
@@ -19,16 +20,14 @@
 
 .btn-active-map {
     align-self: center;
-    color: #333;
-    border-color: #333;
     background: none;
+    border-color: #333;
+    color: #333;
     font-size: 1.2rem;
-    background-position: center;
-    background-size: cover;
 }
 
 .btn-active-map:hover,
 .btn-active-map:active{
-    color: #333;
     background: #33333311;
+    color: #333;
 }
