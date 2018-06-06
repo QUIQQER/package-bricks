@@ -942,6 +942,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <pl><![CDATA[Ustawienia mapy]]></pl>
         </locale>
 
+        <locale name="brick.control.simplegooglemaps.settings.preventLoadMap">
+            <de><![CDATA[Das automatische Laden von Google Maps verhindern. Der Benutzer muss sie manuell aktivieren.]]></de>
+            <en><![CDATA[Prevent auto-load Google Maps. User must activate it manually.]]></en>
+        </locale>
         <locale name="brick.control.simplegooglemaps.settings.place">
             <de><![CDATA[Google Place]]></de>
             <en><![CDATA[Google Place]]></en>
@@ -976,6 +980,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[API Key]]></de>
             <en><![CDATA[API Key]]></en>
             <pl><![CDATA[Klucz API]]></pl>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.frontend.buttonShow">
+            <de><![CDATA[Google Maps aktivieren]]></de>
+            <en><![CDATA[Enable Google Maps]]></en>
         </locale>
 
         <!-- Box Content -->

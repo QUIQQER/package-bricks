@@ -617,6 +617,9 @@
             </description>
 
             <settings>
+                <setting name="preventLoadMap" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.preventLoadMap"/>
+                </setting>
                 <setting name="place">
                     <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.place"/>
                 </setting>
