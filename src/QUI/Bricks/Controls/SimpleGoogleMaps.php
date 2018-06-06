@@ -49,7 +49,6 @@ class SimpleGoogleMaps extends QUI\Control
         $brickCity      = $this->getAttribute('city');
         $zoom           = $this->getAttribute('zoom');
         $preventLoadMap = $this->getAttribute('preventLoadMap');
-        $imgUrl         = '';
 
         if (!$zoom) {
             $zoom = 15;
@@ -61,6 +60,7 @@ class SimpleGoogleMaps extends QUI\Control
         ]);
 
         $url = 'https://www.google.com/maps/embed/v1/place?' . $query . "&zoom=" . $zoom;
+
         if ($preventLoadMap) {
             $imgUrl = URL_OPT_DIR . 'quiqqer/bricks/bin/images/SimpleGoogleMapsBackground1.png';
 

@@ -9,9 +9,10 @@
     {$this->getAttribute('content')}
 </div>
 {/if}
-
-<div class="simpleGoogleMap">
-    {if !$preventLoadMap}
-    <iframe class="simpleGoogleMap-iframe" src="{$url}"></iframe>
-    {/if}
+<div class="simpleGoogleMap-wrapper">
+    <div class="simpleGoogleMap">
+        {if !$preventLoadMap}
+        <iframe class="simpleGoogleMap-iframe" src="{$url}"></iframe>
+        {/if}
+    </div>
 </div>

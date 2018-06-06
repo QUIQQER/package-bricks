@@ -1,7 +1,10 @@
-.simpleGoogleMap {
-    align-items: stretch;
+.simpleGoogleMap-wrapper {
     background-position: center;
     background-size: cover;
+}
+
+.simpleGoogleMap {
+    align-items: stretch;
     display: flex;
     height: 100%;
     justify-content: center;

@@ -1,6 +1,6 @@
 /**
  * @module package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps
- * @author www.pcsg.de (Henning Leutz)
+ * @author www.pcsg.de (Michael Danielczok)
  */
 define('package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps', [
 
@@ -26,6 +26,9 @@ define('package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps', [
 
         initialize: function (options) {
             this.parent(options);
+            
+            this.Wrapper = null;
+            this.MapContainer = null;
 
             this.addEvents({
                 onImport: this.$onImport
@@ -44,14 +47,16 @@ define('package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps', [
             });
 
             this.$Elm = this.getElm();
-            this.MapWrapper = this.$Elm.getElement('.simpleGoogleMap');
+            this.Wrapper = this.$Elm.getElement('.simpleGoogleMap-wrapper');
+            this.MapContainer = this.$Elm.getElement('.simpleGoogleMap');
 
             this.$Elm.setStyle('opacity', 0);
-            this.MapWrapper.setStyle(
+
+            this.Wrapper.setStyle(
                 'backgroundImage', 'url(' + this.$Elm.getAttribute('data-qui-imgUrl') + ')'
             );
 
-            this.Loader.inject(this.MapWrapper);
+            this.Loader.inject(this.MapContainer);
 
             this.createElm().then(function () {
                 self.showMapWrapper();
@@ -79,7 +84,7 @@ define('package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps', [
                     }
                 });
 
-                self.Button.inject(self.MapWrapper);
+                self.Button.inject(self.MapContainer);
 
                 resolve();
             });
@@ -111,8 +116,7 @@ define('package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps', [
             this.Iframe = new Element('iframe', {
                 'class': 'simpleGoogleMap-iframe',
                 styles : {
-                    opacity : 0,
-                    position: 'absolute'
+                    opacity : 0
                 },
                 src    : this.$Elm.getAttribute('data-qui-url'),
                 events : {
@@ -120,12 +124,12 @@ define('package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps', [
                 }
             });
 
-            this.Iframe.inject(this.MapWrapper);
+            this.Iframe.inject(this.MapContainer);
 
         },
 
         /**
-         * Perform this when iframe with Google Maps has been loaded
+         * Perform this when iFrame with Google Maps has been loaded
          */
         onIframeLoad: function () {
             var self = this;
@@ -142,4 +146,3 @@ define('package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps', [
 
     });
 });
-
