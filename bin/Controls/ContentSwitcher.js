@@ -51,6 +51,7 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
                                   QUILocale.get(lg, 'contentSwitcher.entries.entry.content') +
                                '</span>' +
                                '<textarea name="content" rows="10"></textarea>' +
+//                               '<input name="content" data-qui="controls/editors/Input" />' +
                            '</label>' +
                        '</div>'
             });

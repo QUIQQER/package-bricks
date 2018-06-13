@@ -47,3 +47,13 @@
     max-width: 100%;
     width: 100%;
 }
+
+.quiqqer-bricks-ContentSwitcher-entry .field-container-field {
+    border: none;
+    padding: 0;
+}
+
+.quiqqer-bricks-ContentSwitcher-entry .control-editor-preview {
+    height: 120px !important;
+    background: #fff;
+}
