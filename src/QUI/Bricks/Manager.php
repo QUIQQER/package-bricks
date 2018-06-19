@@ -1057,6 +1057,10 @@ class Manager
             }
 
             foreach ($area as $brick) {
+                if (!isset($brick['customfields'])) {
+                    continue;
+                }
+
                 $customFields = json_decode($brick['customfields'], true);
 
                 if ($customFields
