@@ -143,6 +143,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     }
                 }],
                 columnModel: [{
+                    header   : QUILocale.get('quiqqer/system', 'title'),
+                    dataIndex: 'title',
+                    dataType : 'string',
+                    width    : 100
+                },{
                     header   : QUILocale.get('quiqqer/system', 'image'),
                     dataIndex: 'imagePreview',
                     dataType : 'node',
@@ -243,6 +248,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     imagePreview: new Element('span', {html: '&nbsp;'})
                 };
 
+                if ("title" in entry) {
+                    insert.title = entry.title;
+                }
+
                 if ("image" in entry && entry.image !== '') {
                     insert.image = entry.image;
 
@@ -303,6 +312,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
 
             for (var i = 0, len = gridData.length; i < len; i++) {
                 data.push({
+                    title: gridData[i].title,
                     image: gridData[i].image,
                     left : gridData[i].left,
                     right: gridData[i].right,
@@ -324,13 +334,15 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
         /**
          * Add an entry
          *
+         * @param {string} [title] - slide title
          * @param {string} [left] - left content
          * @param {string} [right] - right content
          * @param {string} [image] - image
          * @param {string} [url] - click url
          */
-        add: function (left, right, image, url) {
+        add: function (title, left, right, image, url) {
             this.$data.push({
+                title: title || '',
                 left : left || '',
                 right: right || '',
                 image: image || '',
@@ -345,17 +357,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
          * Edit an entry
          *
          * @param {number} index
+         * @param {string} [title] - slide title
          * @param {string} [left] - left content
          * @param {string} [right] - right content
          * @param {string} [image] - image path
          * @param {string} [url] - click url
          */
-        edit: function (index, left, right, image, url) {
+        edit: function (index, title, left, right, image, url) {
             if (typeof index === 'undefined') {
                 return;
             }
 
             this.$data[index] = {
+                title: title || '',
                 left : left || '',
                 right: right || '',
                 image: image || '',
@@ -464,11 +478,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     var Content = Dialog.getContent();
                     var Form    = Content.getElement('form');
 
+                    var Title = Form.elements.title;
                     var Left  = Form.elements.left;
                     var Right = Form.elements.right;
                     var Image = Form.elements.image;
                     var Url   = Form.elements.url;
 
+                    Title.value = data.title;
                     Left.value  = data.left;
                     Right.value = data.right;
                     Image.value = data.image;
@@ -483,12 +499,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     var Content = Dialog.getContent();
                     var Form    = Content.getElement('form');
 
+                    var Title = Form.elements.title;
                     var Left  = Form.elements.left;
                     var Right = Form.elements.right;
                     var Image = Form.elements.image;
                     var Url   = Form.elements.url;
 
-                    self.edit(index, Left.value, Right.value, Image.value, Url.value);
+                    self.edit(index, Title.value, Left.value, Right.value, Image.value, Url.value);
 
                     Dialog.close();
                 });
@@ -512,12 +529,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     var Content = Dialog.getContent();
                     var Form    = Content.getElement('form');
 
+                    var Title = Form.elements.title;
                     var Left  = Form.elements.left;
                     var Right = Form.elements.right;
                     var Image = Form.elements.image;
                     var Url   = Form.elements.url;
 
-                    self.add(Left.value, Right.value, Image.value, Url.value);
+                    self.add(Title.value, Left.value, Right.value, Image.value, Url.value);
 
                     Dialog.close();
                 });
