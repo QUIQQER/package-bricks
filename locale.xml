@@ -800,6 +800,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Ausrichtung]]></de>
             <en><![CDATA[Align]]></en>
         </locale>
+        <locale name="quiqqer.bricks.promoslider.create.align.left">
+            <de><![CDATA[Text links platzieren]]></de>
+            <en><![CDATA[Place text on the left]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.create.align.right">
+            <de><![CDATA[Text rechts platzieren]]></de>
+            <en><![CDATA[Place text on the right]]></en>
+        </locale>
 
         <locale name="quiqqer.bricks.promoslider.adddialog.title">
             <de><![CDATA[Slide erstellen]]></de>

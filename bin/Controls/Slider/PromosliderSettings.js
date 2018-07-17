@@ -610,7 +610,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                                     fieldUrl        : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url'),
                                     fieldTitle      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.title'),
                                     fieldDescription: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.text'),
-                                    fieldType       : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.align')
+                                    fieldType       : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.align'),
+                                    fieldTypeLeft   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.align.left'),
+                                    fieldTypeRight  : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.align.right')
                                 }),
                                 'class': 'quiqqer-bricks-promoslider-settings-entry'
                             }).inject(Win.getContent());
