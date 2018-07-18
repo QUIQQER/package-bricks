@@ -504,7 +504,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     Image.value  = data.image;
                     Url.value    = data.url;
 
-                    if (data.newTab === 1) {
+                    if (data.newTab === "1") {
                         Dialog.NewTabSwitch.on();
                     } else {
                         Dialog.NewTabSwitch.off();
