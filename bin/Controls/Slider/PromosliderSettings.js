@@ -32,7 +32,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             '$onImport',
             '$openAddDialog',
             '$openDeleteDialog',
-            '$openEditDialog'
+            '$openEditDialog',
+            '$toggleSlideStatus'
         ],
 
         initialize: function (options) {
@@ -125,6 +126,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 }, {
                     type: 'separator'
                 }, {
+                    name     : 'toggle',
+                    textimage: 'fa fa-toggle-off',
+                    text     : QUILocale.get(lg, 'quiqqer.bricks.promoslider.button.text.enable'),
+                    disabled : true,
+                    events   : {
+                        onClick: this.$toggleSlideStatus
+                    }
+                }, {
                     name     : 'edit',
                     textimage: 'fa fa-edit',
                     text     : QUILocale.get('quiqqer/system', 'edit'),
@@ -196,12 +205,29 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
                         Delete  = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'delete';
+                        })[0],
+
+                        Toggle = buttons.filter(function (Btn) {
+                            return Btn.getAttribute('name') === 'toggle';
                         })[0];
 
                     Up.enable();
                     Down.enable();
                     Edit.enable();
                     Delete.enable();
+                    Toggle.enable();
+
+                    if (this.$Grid.getSelectedData()[0].isDisabled === "1") {
+                        Toggle.setAttributes({
+                            text: QUILocale.get(lg, 'quiqqer.bricks.promoslider.button.text.enable'),
+                            textimage: 'fa fa-toggle-off'
+                        });
+                    } else {
+                        Toggle.setAttributes({
+                            text: QUILocale.get(lg, 'quiqqer.bricks.promoslider.button.text.disable'),
+                            textimage: 'fa fa-toggle-on'
+                        });
+                    }
                 }.bind(this),
 
                 onDblClick: this.$openEditDialog
@@ -222,6 +248,25 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 this.refresh();
             } catch (e) {
             }
+        },
+
+
+        /**
+         * Toggles the slide's status between enabled and disabled
+         *
+         * @param {number} [index] - the slide's index
+         */
+        $toggleSlideStatus: function() {
+            var index = this.$Grid.getSelectedIndices()[0],
+                data  = this.$data[index];
+
+            if (data.isDisabled === "1") {
+                data.isDisabled = "0";
+            } else {
+                data.isDisabled = "1";
+            }
+
+            this.edit(index, data);
         },
 
         /**
@@ -303,12 +348,18 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
                 Delete  = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'delete';
+                })[0],
+
+                Toggle  = buttons.filter(function (Btn) {
+                    return Btn.getAttribute('name') === 'toggle';
                 })[0];
 
             Up.disable();
             Down.disable();
             Edit.disable();
             Delete.disable();
+            Toggle.disable();
+
         },
 
         /**
