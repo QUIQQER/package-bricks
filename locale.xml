@@ -780,6 +780,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[The slide can not be restored]]></en>
         </locale>
 
+        <locale name="quiqqer.bricks.promoslider.create.isDisabled">
+            <de><![CDATA[Slide deaktivieren]]></de>
+            <en><![CDATA[Deactivate slide]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.create.isDisabled.short">
+            <de><![CDATA[Deaktiviert]]></de>
+            <en><![CDATA[Deactivated]]></en>
+        </locale>
         <locale name="quiqqer.bricks.promoslider.create.image">
             <de><![CDATA[Bild]]></de>
             <en><![CDATA[Image]]></en>
