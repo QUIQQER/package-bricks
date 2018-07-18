@@ -143,6 +143,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     }
                 }],
                 columnModel: [{
+                    header   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled.short'),
+                    dataIndex: 'isDisabled',
+                    dataType : 'boolean',
+                    width    : 60
+                }, {
                     header   : QUILocale.get('quiqqer/system', 'title'),
                     dataIndex: 'title',
                     dataType : 'string',
@@ -253,6 +258,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     imagePreview: new Element('span', {html: '&nbsp;'})
                 };
 
+                if ("isDisabled" in entry) {
+                    insert.isDisabled = entry.isDisabled;
+                }
+
                 if ("title" in entry) {
                     insert.title = entry.title;
                 }
@@ -321,12 +330,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
 
             for (var i = 0, len = gridData.length; i < len; i++) {
                 data.push({
-                    title : gridData[i].title,
-                    image : gridData[i].image,
-                    left  : gridData[i].left,
-                    right : gridData[i].right,
-                    url   : gridData[i].url || '',
-                    newTab: gridData[i].newTab
+                    isDisabled: gridData[i].isDisabled,
+                    title     : gridData[i].title,
+                    image     : gridData[i].image,
+                    left      : gridData[i].left,
+                    right     : gridData[i].right,
+                    url       : gridData[i].url || '',
+                    newTab    : gridData[i].newTab
                 });
             }
 
@@ -350,15 +360,17 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
          * @param {string} [image] - image
          * @param {string} [url] - click url
          * @param {boolean} [newTab] - open url in new tab?
+         * @param {boolean} [isDisabled] - is the slide enabled?
          */
-        add: function (title, left, right, image, url, newTab) {
+        add: function (title, left, right, image, url, newTab, isDisabled) {
             this.$data.push({
-                title : title || '',
-                left  : left || '',
-                right : right || '',
-                image : image || '',
-                url   : url || '',
-                newTab: newTab
+                title     : title || '',
+                left      : left || '',
+                right     : right || '',
+                image     : image || '',
+                url       : url || '',
+                newTab    : newTab,
+                isDisabled: isDisabled
             });
 
             this.refresh();
@@ -375,19 +387,21 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
          * @param {string} [image] - image path
          * @param {string} [url] - click url
          * @param {boolean} [newTab] - open url in new tab?
+         * @param {boolean} [isDisabled] - is the slide disabled?
          */
-        edit: function (index, title, left, right, image, url, newTab) {
+        edit: function (index, title, left, right, image, url, newTab, isDisabled) {
             if (typeof index === 'undefined') {
                 return;
             }
 
             this.$data[index] = {
-                title : title || '',
-                left  : left || '',
-                right : right || '',
-                image : image || '',
-                url   : url || '',
-                newTab: newTab
+                title     : title || '',
+                left      : left || '',
+                right     : right || '',
+                image     : image || '',
+                url       : url || '',
+                newTab    : newTab,
+                isDisabled: isDisabled
             };
 
             this.refresh();
@@ -498,6 +512,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     var Image  = Form.elements.image;
                     var Url    = Form.elements.url;
 
+                    if (data.isDisabled === "1") {
+                        Dialog.IsDisabledSwitch.on();
+                    } else {
+                        Dialog.IsDisabledSwitch.off();
+                    }
+
                     Title.value  = data.title;
                     Left.value   = data.left;
                     Right.value  = data.right;
@@ -519,14 +539,15 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     var Content = Dialog.getContent();
                     var Form    = Content.getElement('form');
 
-                    var Title  = Form.elements.title;
-                    var Left   = Form.elements.left;
-                    var Right  = Form.elements.right;
-                    var Image  = Form.elements.image;
-                    var Url    = Form.elements.url;
+                    var IsDisabled = Form.elements.isDisabled;
+                    var Title = Form.elements.title;
+                    var Left = Form.elements.left;
+                    var Right = Form.elements.right;
+                    var Image = Form.elements.image;
+                    var Url = Form.elements.url;
                     var NewTab = Form.elements.newTab;
 
-                    self.edit(index, Title.value, Left.value, Right.value, Image.value, Url.value, NewTab.value);
+                    self.edit(index, Title.value, Left.value, Right.value, Image.value, Url.value, NewTab.value, IsDisabled.value);
 
                     Dialog.close();
                 });
@@ -550,14 +571,15 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     var Content = Dialog.getContent();
                     var Form    = Content.getElement('form');
 
-                    var Title  = Form.elements.title;
-                    var Left   = Form.elements.left;
-                    var Right  = Form.elements.right;
-                    var Image  = Form.elements.image;
-                    var Url    = Form.elements.url;
-                    var NewTab = Form.elements.newTab;
+                    var IsDisabled = Form.elements.isDisabled;
+                    var Title      = Form.elements.title;
+                    var Left       = Form.elements.left;
+                    var Right      = Form.elements.right;
+                    var Image      = Form.elements.image;
+                    var Url        = Form.elements.url;
+                    var NewTab     = Form.elements.newTab;
 
-                    self.add(Title.value, Left.value, Right.value, Image.value, Url.value, NewTab.value);
+                    self.add(Title.value, Left.value, Right.value, Image.value, Url.value, NewTab.value, IsDisabled.value);
 
                     Dialog.close();
                 });
@@ -589,6 +611,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
 
                             var Container = new Element('div', {
                                 html   : Mustache.render(templateEntry, {
+                                    fieldIsDisabled : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled'),
                                     fieldImage      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.image'),
                                     fieldUrl        : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url'),
                                     fieldNewTab     : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.newTab'),
@@ -609,6 +632,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
 
                             var ThisDialog = this;
                             require(['qui/controls/buttons/Switch'], function (SwitchControl) {
+                                ThisDialog.IsDisabledSwitch = new SwitchControl({
+                                    name: 'isDisabled'
+                                });
+                                ThisDialog.IsDisabledSwitch.inject(Container.getElement('#isDisabledWrapper'));
+
                                 ThisDialog.NewTabSwitch = new SwitchControl({
                                     name: 'newTab'
                                 });

@@ -138,6 +138,10 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
         $attributes = array('image', 'left', 'right', 'url', 'newTab');
 
         foreach ($slides as $slide) {
+            if (isset($slide['isDisabled']) && $slide['isDisabled']) {
+                continue;
+            }
+
             foreach ($attributes as $attribute) {
                 if (!isset($slide[$attribute])) {
                     $slide[$attribute] = false;
