@@ -560,7 +560,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     Type.value        = data.type;
                     Url.value         = data.url;
 
-                    if (data.newTab === 1) {
+                    if (data.newTab === "1") {
                         Dialog.NewTabSwitch.on();
                     } else {
                         Dialog.NewTabSwitch.off();
