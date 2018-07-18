@@ -33,7 +33,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
             '$onImport',
             '$openAddDialog',
             '$openDeleteDialog',
-            '$openEditDialog'
+            '$openEditDialog',
+            '$toggleSlideStatus'
         ],
 
         initialize: function (options) {
@@ -126,6 +127,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                 }, {
                     type: 'separator'
                 }, {
+                    name     : 'toggle',
+                    textimage: 'fa fa-toggle-off',
+                    text     : QUILocale.get(lg, 'quiqqer.bricks.promoslider.button.text.enable'),
+                    disabled : true,
+                    events   : {
+                        onClick: this.$toggleSlideStatus
+                    }
+                }, {
                     name     : 'edit',
                     textimage: 'fa fa-edit',
                     text     : QUILocale.get('quiqqer/system', 'edit'),
@@ -202,12 +211,30 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
 
                         Delete  = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'delete';
+                        })[0],
+
+                        Toggle = buttons.filter(function (Btn) {
+                            return Btn.getAttribute('name') === 'toggle';
                         })[0];
+
+
+                    if (this.$Grid.getSelectedData()[0].isDisabled === "1") {
+                        Toggle.setAttributes({
+                            text: QUILocale.get(lg, 'quiqqer.bricks.promoslider.button.text.enable'),
+                            textimage: 'fa fa-toggle-off'
+                        });
+                    } else {
+                        Toggle.setAttributes({
+                            text: QUILocale.get(lg, 'quiqqer.bricks.promoslider.button.text.disable'),
+                            textimage: 'fa fa-toggle-on'
+                        });
+                    }
 
                     Up.enable();
                     Down.enable();
                     Edit.enable();
                     Delete.enable();
+                    Toggle.enable();
                 }.bind(this),
 
                 onDblClick: this.$openEditDialog
@@ -228,6 +255,23 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                 this.refresh();
             } catch (e) {
             }
+        },
+
+
+        /**
+         * Toggles the slide's status between enabled and disabled
+         */
+        $toggleSlideStatus: function() {
+            var index = this.$Grid.getSelectedIndices()[0],
+                data  = this.$data[index];
+
+            if (data.isDisabled === "1") {
+                data.isDisabled = "0";
+            } else {
+                data.isDisabled = "1";
+            }
+
+            this.edit(index, data.title, data.left, data.right, data.image, data.url, data.newTab, data.isDisabled);
         },
 
 
@@ -313,12 +357,18 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
 
                 Delete  = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'delete';
+                })[0],
+
+                Toggle  = buttons.filter(function (Btn) {
+                    return Btn.getAttribute('name') === 'toggle';
                 })[0];
+
 
             Up.disable();
             Down.disable();
             Edit.disable();
             Delete.disable();
+            Toggle.disable();
         },
 
         /**
@@ -387,7 +437,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
          * @param {string} [image] - image path
          * @param {string} [url] - click url
          * @param {boolean} [newTab] - open url in new tab?
-         * @param {boolean} [isDisabled] - is the slide disabled?
+         * @param {string} [isDisabled] - is the slide disabled? ("1" or "0")
          */
         edit: function (index, title, left, right, image, url, newTab, isDisabled) {
             if (typeof index === 'undefined') {
