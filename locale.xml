@@ -788,6 +788,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[URL]]></de>
             <en><![CDATA[URL]]></en>
         </locale>
+        <locale name="quiqqer.bricks.promoslider.create.newTab">
+            <de><![CDATA[Link in neuem Tab öffnen]]></de>
+            <en><![CDATA[Open link in new tab]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.create.newTab.short">
+            <de><![CDATA[Neuer Tab]]></de>
+            <en><![CDATA[New tab]]></en>
+        </locale>
         <locale name="quiqqer.bricks.promoslider.create.title">
             <de><![CDATA[Titel]]></de>
             <en><![CDATA[Title]]></en>

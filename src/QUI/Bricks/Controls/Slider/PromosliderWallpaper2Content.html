@@ -2,7 +2,7 @@
     {strip}
     <ul class="hide-on-mobile">
         {foreach $desktopSlides as $key => $slide}
-        <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}">
+        <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}" data-newTab="{$slide.newTab}">
             <div class="quiqqer-bricks-promoslider-wallpaper-image" style="display: none">&nbsp;</div>
 
             <div class="grid-container">
@@ -21,7 +21,7 @@
             {if $key === 0}
             <noscript>
                 {if $slide.url}
-                <a href="{$slide.url}">
+                <a href="{$slide.url}" {if $slide.newTab}target="_blank"{/if}>
                     {/if}
                     {image image=$slide.image class="quiqqer-bricks-promoslider-wallpaper2Content-noScriptImage"}
                     {if $slide.url}
@@ -37,7 +37,7 @@
     {strip}
     <ul class="hide-on-desktop">
         {foreach $mobileSlides as $key => $slide}
-        <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}">
+        <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}" data-newTab="{$slide.newTab}">
             <div class="quiqqer-bricks-promoslider-wallpaper-image" style="display: none">&nbsp;</div>
 
             <div class="grid-container">
@@ -56,7 +56,7 @@
             {if $key === 0}
             <noscript>
                 {if $slide.url}
-                <a href="{$slide.url}">
+                <a href="{$slide.url}" {if $slide.newTab}target="_blank"{/if}>
                     {/if}
                     {image image=$slide.image class="quiqqer-bricks-promoslider-wallpaper2Content-noScriptImage"}
                     {if $slide.url}

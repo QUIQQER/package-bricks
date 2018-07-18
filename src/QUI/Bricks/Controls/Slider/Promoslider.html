@@ -20,6 +20,7 @@
         data-no="{$key}"
         role="option"
         data-href="{$slide.url}"
+        data-newTab="{$slide.newTab}"
     >
         {if $slide.image && $this->getAttribute('image-as-wallpaper')}
         <div class="quiqqer-bricks-promoslider-slide-image quiqqer-bricks-promoslider-slide-image__cover"
@@ -65,6 +66,7 @@
          {/if}
         data-no="{$key}"
         data-href="{$slide.url}"
+        data-newTab="{$slide.newTab}"
         role="option"
     >
         {if $slide.image && $this->getAttribute('image-as-wallpaper')}

@@ -246,7 +246,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                         var Li = this.$List.getElement('li:nth-child(' + parseInt(currentSlide + 1) + ')');
 
                         if (Li.get('data-href') && Li.get('data-href') !== '') {
-                            window.location = Li.get('data-href');
+                            if (Li.get('data-newTab') && Li.get('data-newTab') === '1') {
+                                window.open(Li.get('data-href'), '_blank');
+                            } else {
+                                window.location = Li.get('data-href');
+                            }
                             return;
                         }
                     }
@@ -316,7 +320,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 LiElement.setStyle('cursor', 'pointer');
                 LiElement.addEvent('click', function () {
                     if (QUI.isScrolling() === false) {
-                        window.location = this.get('data-href');
+                        var url = this.get('data-href');
+                        if (this.get('data-newTab') && this.get('data-newTab') === '1') {
+                            window.open(url, '_blank');
+                        } else {
+                            window.location = url;
+                        }
                     }
                 });
             });

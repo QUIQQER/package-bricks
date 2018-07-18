@@ -156,7 +156,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             // slide clicks
             var slideClick = function () {
                 if (this.get('data-href') && this.get('data-href') !== '') {
-                    window.location = this.get('data-href');
+                    var url = this.get('data-href');
+                    if (this.get('data-newTab') && this.get('data-newTab') === "1") {
+                        window.open(url, '_blank');
+                    } else {
+                        window.location = url;
+                    }
                 }
             };
 
