@@ -683,7 +683,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                             var ThisDialog = this;
                             require(['qui/controls/buttons/Switch'], function (SwitchControl) {
                                 ThisDialog.IsDisabledSwitch = new SwitchControl({
-                                    name: 'isDisabled'
+                                    name: 'isDisabled',
+                                    status: false
                                 });
                                 ThisDialog.IsDisabledSwitch.inject(Container.getElement('#isDisabledWrapper'));
 
