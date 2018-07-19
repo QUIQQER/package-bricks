@@ -3,6 +3,7 @@
     <ul class="hide-on-mobile">
         {foreach $desktopSlides as $key => $slide}
         <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}" data-newTab="{$slide.newTab}">
+            <a href="{$slide.url}" {if $slide.newTab} target="_blank" {/if}>
             <div class="quiqqer-bricks-promoslider-wallpaper-image" style="display: none">&nbsp;</div>
 
             <div class="grid-container">
@@ -29,6 +30,7 @@
                 {/if}
             </noscript>
             {/if}
+            </a>
         </li>
         {/foreach}
     </ul>
@@ -38,6 +40,7 @@
     <ul class="hide-on-desktop">
         {foreach $mobileSlides as $key => $slide}
         <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}" data-newTab="{$slide.newTab}">
+            <a href="{$slide.url}" {if $slide.newTab} target="_blank" {/if}>
             <div class="quiqqer-bricks-promoslider-wallpaper-image" style="display: none">&nbsp;</div>
 
             <div class="grid-container">
@@ -64,6 +67,7 @@
                 {/if}
             </noscript>
             {/if}
+            </a>
         </li>
         {/foreach}
     </ul>
