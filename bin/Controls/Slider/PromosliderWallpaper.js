@@ -224,8 +224,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                         return;
                     }
 
-                    event.stop();
-
                     this.$scrolling         = false;
                     this.$scrollOnMouseMove = false;
 
@@ -242,18 +240,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                     var diff = Math.abs(startScroll - lastClientX);
 
                     if (diff <= 5 && QUI.isScrolling() === false) {
-                        // click event
-                        var Li = this.$List.getElement('li:nth-child(' + parseInt(currentSlide + 1) + ')');
-
-                        if (Li.get('data-href') && Li.get('data-href') !== '') {
-                            if (Li.get('data-newTab') && Li.get('data-newTab') === '1') {
-                                window.open(Li.get('data-href'), '_blank');
-                            } else {
-                                window.location = Li.get('data-href');
-                            }
-                            return;
-                        }
+                        return;
                     }
+
+                    event.stop();
 
                     if (diff < 50) {
                         this.show(currentSlide);
@@ -318,16 +308,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 }
 
                 LiElement.setStyle('cursor', 'pointer');
-                LiElement.addEvent('click', function () {
-                    if (QUI.isScrolling() === false) {
-                        var url = this.get('data-href');
-                        if (this.get('data-newTab') && this.get('data-newTab') === '1') {
-                            window.open(url, '_blank');
-                        } else {
-                            window.location = url;
-                        }
-                    }
-                });
             });
 
 
