@@ -20,7 +20,9 @@
         data-no="{$key}"
         role="option"
         data-href="{$slide.url}"
+        data-newTab="{$slide.newTab}"
     >
+        <a href="{$slide.url}" {if $slide.newTab} target="_blank" {/if}>
         {if $slide.image && $this->getAttribute('image-as-wallpaper')}
         <div class="quiqqer-bricks-promoslider-slide-image quiqqer-bricks-promoslider-slide-image__cover"
              style="background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
@@ -50,6 +52,7 @@
                 {/if}
             </div>
         </div>
+        </a>
     </div>
     {/foreach}
     <div class="quiqqer-bricks-promoslider-slide-desktop-dots"></div>
@@ -65,8 +68,10 @@
          {/if}
         data-no="{$key}"
         data-href="{$slide.url}"
+        data-newTab="{$slide.newTab}"
         role="option"
     >
+        <a href="{$slide.url}" {if $slide.newTab} target="_blank" {/if}>
         {if $slide.image && $this->getAttribute('image-as-wallpaper')}
         <div class="quiqqer-bricks-promoslider-slide-mobile-image quiqqer-bricks-promoslider-slide-image__cover"
              style="background-image: url('{image image=$slide.image onlysrc=1 width=1900}')"
@@ -94,6 +99,7 @@
             </div>
             {/if}
         </div>
+        </a>
     </div>
     {/foreach}
 
