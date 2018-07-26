@@ -10,6 +10,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
     'qui/controls/Control',
     'qui/controls/windows/Confirm',
     'qui/controls/buttons/Button',
+    'qui/controls/buttons/Switch',
     'Locale',
     'Mustache',
     'controls/grid/Grid',
@@ -18,7 +19,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
     'text!package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsEntry.html',
     'css!package/quiqqer/bricks/bin/Controls/Slider/PromoSliderSettings.css'
 
-], function (QUI, QUIControl, QUIConfirm, QUIButton, QUILocale, Mustache, Grid, ControlsUtils, templateEntry) {
+], function (QUI, QUIControl, QUIConfirm, QUIButton, QUISwitch, QUILocale, Mustache, Grid, ControlsUtils, templateEntry) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
@@ -33,7 +34,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             '$openAddDialog',
             '$openDeleteDialog',
             '$openEditDialog',
-            '$toggleSlideStatus'
+            '$toggleSlideStatus',
+            'update'
         ],
 
         initialize: function (options) {
@@ -126,14 +128,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 }, {
                     type: 'separator'
                 }, {
-                    name     : 'toggle',
-                    textimage: 'fa fa-toggle-off',
-                    text     : QUILocale.get(lg, 'quiqqer.bricks.promoslider.button.text.enable'),
-                    disabled : true,
-                    events   : {
-                        onClick: this.$toggleSlideStatus
-                    }
-                }, {
                     name     : 'edit',
                     textimage: 'fa fa-edit',
                     text     : QUILocale.get('quiqqer/system', 'edit'),
@@ -153,7 +147,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 columnModel: [{
                     header   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled.short'),
                     dataIndex: 'isDisabled',
-                    dataType : 'boolean',
+                    dataType : 'QUI',
                     width    : 60
                 }, {
                     header   : QUILocale.get('quiqqer/system', 'image'),
@@ -205,29 +199,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
                         Delete  = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'delete';
-                        })[0],
-
-                        Toggle = buttons.filter(function (Btn) {
-                            return Btn.getAttribute('name') === 'toggle';
                         })[0];
 
                     Up.enable();
                     Down.enable();
                     Edit.enable();
                     Delete.enable();
-                    Toggle.enable();
-
-                    if (this.$Grid.getSelectedData()[0].isDisabled === "1") {
-                        Toggle.setAttributes({
-                            text: QUILocale.get(lg, 'quiqqer.bricks.promoslider.button.text.enable'),
-                            textimage: 'fa fa-toggle-off'
-                        });
-                    } else {
-                        Toggle.setAttributes({
-                            text: QUILocale.get(lg, 'quiqqer.bricks.promoslider.button.text.disable'),
-                            textimage: 'fa fa-toggle-on'
-                        });
-                    }
                 }.bind(this),
 
                 onDblClick: this.$openEditDialog
@@ -254,10 +231,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
         /**
          * Toggles the slide's status between enabled and disabled
          *
-         * @param {number} [index] - the slide's index
+         * @param {Object} [caller] - the object calling this event
          */
-        $toggleSlideStatus: function() {
-            var index = this.$Grid.getSelectedIndices()[0],
+        $toggleSlideStatus: function(caller) {
+            if (!caller) {
+                return;
+            }
+
+            var index = caller.options.name,
                 data  = this.$data[index];
 
             if (data.isDisabled === "1") {
@@ -266,7 +247,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 data.isDisabled = "1";
             }
 
-            this.edit(index, data);
+            this.$data[index] = data;
+            this.update();
         },
 
         /**
@@ -293,9 +275,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 entry  = this.$data[i];
                 insert = {};
 
-                if ("isDisabled" in entry) {
-                    insert.isDisabled = entry.isDisabled;
-                }
+                insert.isDisabled = new QUISwitch({
+                    status: entry.isDisabled === "1",
+                    name   : i,
+                    uid: i,
+                    events: {
+                        onChange: this.$toggleSlideStatus
+                    }
+                });
 
                 if ("image" in entry && entry.image !== '') {
                     insert.image = entry.image;
@@ -348,18 +335,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
                 Delete  = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'delete';
-                })[0],
-
-                Toggle  = buttons.filter(function (Btn) {
-                    return Btn.getAttribute('name') === 'toggle';
                 })[0];
 
             Up.disable();
             Down.disable();
             Edit.disable();
             Delete.disable();
-            Toggle.disable();
-
         },
 
         /**
@@ -594,7 +575,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var Content = Dialog.getContent();
                     var Form    = Content.getElement('form');
 
-                    var IsDisabled  = Form.elements.isDisabled;
+                    var IsDisabled  = Form.elements.isDisabled.$status;
                     var Image       = Form.elements.image;
                     var Title       = Form.elements.title;
                     var Description = Form.elements.description;
@@ -603,7 +584,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var NewTab      = Form.elements.newTab;
 
                     self.edit(index, {
-                        isDisabled: IsDisabled.value,
+                        isDisabled: IsDisabled,
                         image     : Image.value,
                         title     : Title.value,
                         text      : Description.value,
@@ -626,7 +607,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var Type        = Form.elements.type;
                     var Url         = Form.elements.url;
 
-                    if (data.isDisabled === "1") {
+                    if (data.isDisabled.$status) {
                         Dialog.IsDisabledSwitch.on();
                     } else {
                         Dialog.IsDisabledSwitch.off();
@@ -736,20 +717,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                                 height: 100
                             });
 
-                            var ThisDialog = this;
-                            require(['qui/controls/buttons/Switch'], function (SwitchControl) {
-                                ThisDialog.IsDisabledSwitch = new SwitchControl({
-                                    name: 'isDisabled',
-                                    status: false
-                                });
-                                ThisDialog.IsDisabledSwitch.inject(Container.getElement('#isDisabledWrapper'));
 
-                                ThisDialog.NewTabSwitch = new SwitchControl({
-                                    name: 'newTab'
-                                });
-                                ThisDialog.NewTabSwitch.inject(Container.getElement('#newTabWrapper'));
+                            this.IsDisabledSwitch = new QUISwitch({
+                                name: 'isDisabled',
+                                status: false
                             });
+                            this.IsDisabledSwitch.inject(Container.getElement('#isDisabledWrapper'));
 
+                            this.NewTabSwitch = new QUISwitch({
+                                name: 'newTab'
+                            });
+                            this.NewTabSwitch.inject(Container.getElement('#newTabWrapper'));
+
+                            
                             QUI.parse(Container).then(function () {
                                 return ControlsUtils.parse(Container);
                             }).then(function () {
