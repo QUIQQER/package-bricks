@@ -164,7 +164,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 }, {
                     header   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.newTab.short'),
                     dataIndex: 'newTab',
-                    dataType : 'boolean',
+                    dataType : 'node',
                     width    : 60
                 }, {
                     dataIndex: 'image',
@@ -268,7 +268,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 }
 
                 if ("newTab" in entry) {
-                    insert.newTab = entry.newTab;
+                    insert.newTab = new Element('span', {
+                        'class': entry.newTab === "1" ? 'fa fa-check' : 'fa fa-times',
+                        'data-enabled': entry.newTab
+                    });
                 }
 
                 data.push(insert);
@@ -560,7 +563,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     Type.value        = data.type;
                     Url.value         = data.url;
 
-                    if (data.newTab === "1") {
+                    if (data.newTab.getAttribute('data-enabled') === "1") {
                         Dialog.NewTabSwitch.on();
                     } else {
                         Dialog.NewTabSwitch.off();
