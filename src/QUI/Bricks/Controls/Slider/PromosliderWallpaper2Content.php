@@ -27,17 +27,18 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
 
         // default options
         $this->setAttributes(array(
-            'title'          => '',
-            'text'           => '',
-            'class'          => 'quiqqer-bricks-promoslider-wallpaper2Content',
-            'nodeName'       => 'section',
-            'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
-            'role'           => 'listbox',
-            'shownavigation' => true,
-            'showarrows'     => 'showHoverScale',
-            'autostart'      => false,
-            'delay'          => 5000,
-            'template'       => dirname(__FILE__) . '/PromosliderWallpaper2Content.html'
+            'title'                 => '',
+            'text'                  => '',
+            'class'                 => 'quiqqer-bricks-promoslider-wallpaper2Content',
+            'nodeName'              => 'section',
+            'data-qui'              => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
+            'role'                  => 'listbox',
+            'shownavigation'        => true,
+            'showarrows'            => 'showHoverScale',
+            'autostart'             => false,
+            'delay'                 => 5000,
+            'template'              => dirname(__FILE__) . '/PromosliderWallpaper2Content.html',
+            'isMobileSlidesEnabled' => false
         ));
 
         $this->addCSSFile(dirname(__FILE__) . '/PromosliderWallpaper2Content.css');
