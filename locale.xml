@@ -424,6 +424,12 @@
             <de><![CDATA[Desktop Slides]]></de>
             <en><![CDATA[Desktop slides]]></en>
         </locale>
+
+        <locale name="brick.control.promoslider.settings.isMobileSlidesEnabled">
+            <de><![CDATA[Separate Slides auf Mobilgeräten]]></de>
+            <en><![CDATA[Separate slides on mobile devices]]></en>
+        </locale>
+
         <locale name="brick.control.promoslider.settings.mobileslides">
             <de><![CDATA[Mobile Slides]]></de>
             <en><![CDATA[Mobile slides]]></en>

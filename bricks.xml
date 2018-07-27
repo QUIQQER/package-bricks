@@ -217,6 +217,12 @@
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.desktopslides"/>
                 </setting>
 
+                <setting name="isMobileSlidesEnabled" type="hidden"
+                         data-qui="package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting"
+                >
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.isMobileSlidesEnabled"/>
+                </setting>
+
                 <setting name="mobileslides" type="hidden"
                          data-qui="package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings"
                 >
