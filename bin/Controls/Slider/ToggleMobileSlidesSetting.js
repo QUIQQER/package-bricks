@@ -46,19 +46,16 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
             this.$Switch = new QUISwitch({
                 status: this.getElm().value === "true",
                 events: {
-                    onChange: this.$switchToggled
+                    onChange: this.$switchToggled,
+                    onLoad: function() {
+                        if (!this.$Switch.getStatus()) {
+                            this.hideMobileSlidesSetting();
+                        }
+                    }.bind(this)
                 }
             }).inject(Wrapper);
 
             Wrapper.wraps(this.getElm());
-
-            if (!this.$Switch.getStatus()) {
-                // Wait for the MobileSlides-control to be loaded before it can be hidden
-                // TODO: Maybe there is a better way than setTimeout()?
-                setTimeout(function() {
-                    this.hideMobileSlidesSetting();
-                }.bind(this), 200);
-            }
         },
 
 
