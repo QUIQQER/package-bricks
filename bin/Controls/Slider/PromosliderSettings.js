@@ -10,6 +10,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
     'qui/controls/Control',
     'qui/controls/windows/Confirm',
     'qui/controls/buttons/Button',
+    'qui/controls/buttons/Switch',
     'Locale',
     'Mustache',
     'controls/grid/Grid',
@@ -18,7 +19,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
     'text!package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsEntry.html',
     'css!package/quiqqer/bricks/bin/Controls/Slider/PromoSliderSettings.css'
 
-], function (QUI, QUIControl, QUIConfirm, QUIButton, QUILocale, Mustache, Grid, ControlsUtils, templateEntry) {
+], function (QUI, QUIControl, QUIConfirm, QUIButton, QUISwitch, QUILocale, Mustache, Grid, ControlsUtils, templateEntry) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
@@ -32,7 +33,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             '$onImport',
             '$openAddDialog',
             '$openDeleteDialog',
-            '$openEditDialog'
+            '$openEditDialog',
+            '$toggleSlideStatus',
+            'update'
         ],
 
         initialize: function (options) {
@@ -142,6 +145,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     }
                 }],
                 columnModel: [{
+                    header   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled.short'),
+                    dataIndex: 'isDisabled',
+                    dataType : 'QUI',
+                    width    : 60
+                }, {
                     header   : QUILocale.get('quiqqer/system', 'image'),
                     dataIndex: 'imagePreview',
                     dataType : 'node',
@@ -219,6 +227,30 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             }
         },
 
+
+        /**
+         * Toggles the slide's status between enabled and disabled
+         *
+         * @param {Object} [caller] - the object calling this event
+         */
+        $toggleSlideStatus: function(caller) {
+            if (!caller) {
+                return;
+            }
+
+            var index = caller.options.name,
+                data  = this.$data[index];
+
+            if (data.isDisabled === "1") {
+                data.isDisabled = "0";
+            } else {
+                data.isDisabled = "1";
+            }
+
+            this.$data[index] = data;
+            this.update();
+        },
+
         /**
          * Resize the control
          *
@@ -242,6 +274,15 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             for (i = 0, len = this.$data.length; i < len; i++) {
                 entry  = this.$data[i];
                 insert = {};
+
+                insert.isDisabled = new QUISwitch({
+                    status: entry.isDisabled === "1",
+                    name   : i,
+                    uid: i,
+                    events: {
+                        onChange: this.$toggleSlideStatus
+                    }
+                });
 
                 if ("image" in entry && entry.image !== '') {
                     insert.image = entry.image;
@@ -327,6 +368,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 newTab: ''
             };
 
+            if ("isDisabled" in params) {
+                entry.isDisabled = params.isDisabled;
+            }
+
             if ("image" in params) {
                 entry.image = params.image;
             }
@@ -368,13 +413,18 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             }
 
             var entry = {
-                image : '',
-                title : '',
-                text  : '',
-                type  : '',
-                url   : '',
-                newTab: ''
+                isDisabled: '',
+                image     : '',
+                title     : '',
+                text      : '',
+                type      : '',
+                url       : '',
+                newTab    : ''
             };
+
+            if ("isDisabled" in params) {
+                entry.isDisabled = params.isDisabled;
+            }
 
             if ("image" in params) {
                 entry.image = params.image;
@@ -457,11 +507,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
             for (var i = 0, len = gridData.length; i < len; i++) {
                 data.push({
-                    image: gridData[i].image,
-                    title: gridData[i].title,
-                    text : gridData[i].text,
-                    type : gridData[i].type,
-                    url  : gridData[i].url
+                    isDisabled: gridData[i].isDisabled,
+                    image     : gridData[i].image,
+                    title     : gridData[i].title,
+                    text      : gridData[i].text,
+                    type      : gridData[i].type,
+                    url       : gridData[i].url
                 });
             }
 
@@ -527,6 +578,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var Content = Dialog.getContent();
                     var Form    = Content.getElement('form');
 
+                    var IsDisabled  = Form.elements.isDisabled.$status;
                     var Image       = Form.elements.image;
                     var Title       = Form.elements.title;
                     var Description = Form.elements.description;
@@ -535,12 +587,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var NewTab      = Form.elements.newTab;
 
                     self.edit(index, {
-                        image : Image.value,
-                        title : Title.value,
-                        text  : Description.value,
-                        type  : Type.value,
-                        url   : Url.value,
-                        newTab: NewTab.value
+                        isDisabled: IsDisabled,
+                        image     : Image.value,
+                        title     : Title.value,
+                        text      : Description.value,
+                        type      : Type.value,
+                        url       : Url.value,
+                        newTab    : NewTab.value
                     });
 
                     Dialog.close();
@@ -556,6 +609,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var Description = Form.elements.description;
                     var Type        = Form.elements.type;
                     var Url         = Form.elements.url;
+
+                    if (data.isDisabled.$status) {
+                        Dialog.IsDisabledSwitch.on();
+                    } else {
+                        Dialog.IsDisabledSwitch.off();
+                    }
 
                     Image.value       = data.image;
                     Title.value       = data.title;
@@ -593,20 +652,22 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var Content = Dialog.getContent();
                     var Form    = Content.getElement('form');
 
-                    var Image       = Form.elements.image;
-                    var Title       = Form.elements.title;
-                    var Description = Form.elements.description;
-                    var Type        = Form.elements.type;
-                    var Url         = Form.elements.url;
-                    var NewTab      = Form.elements.newTab;
+                    var IsDisabled   = Form.elements.isDisabled;
+                    var Image        = Form.elements.image;
+                    var Title        = Form.elements.title;
+                    var Description  = Form.elements.description;
+                    var Type         = Form.elements.type;
+                    var Url          = Form.elements.url;
+                    var NewTab       = Form.elements.newTab;
 
                     self.add({
-                        image : Image.value,
-                        title : Title.value,
-                        text  : Description.value,
-                        type  : Type.value,
-                        url   : Url.value,
-                        newTab: NewTab.value
+                        isDisabled: IsDisabled.value,
+                        image     : Image.value,
+                        title     : Title.value,
+                        text      : Description.value,
+                        type      : Type.value,
+                        url       : Url.value,
+                        newTab    : NewTab.value
                     });
 
                     Dialog.close();
@@ -626,19 +687,21 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
             return new Promise(function (resolve) {
                 var Dialog = new QUIConfirm({
-                    title       : QUILocale.get(lg, 'quiqqer.bricks.promoslider.adddialog.title'),
-                    icon        : 'fa fa-edit',
-                    maxWidth    : 800,
-                    maxHeight   : 600,
-                    autoclose   : false,
-                    NewTabSwitch: false,
-                    events      : {
+                    title           : QUILocale.get(lg, 'quiqqer.bricks.promoslider.adddialog.title'),
+                    icon            : 'fa fa-edit',
+                    maxWidth        : 800,
+                    maxHeight       : 600,
+                    autoclose       : false,
+                    IsDisabledSwitch: false,
+                    NewTabSwitch    : false,
+                    events          : {
                         onOpen: function (Win) {
                             Win.Loader.show();
                             Win.getContent().set('html', '');
 
                             var Container = new Element('div', {
                                 html   : Mustache.render(templateEntry, {
+                                    fieldIsDisabled : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled'),
                                     fieldImage      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.image'),
                                     fieldUrl        : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url'),
                                     fieldNewTab     : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.newTab'),
@@ -657,14 +720,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                                 height: 100
                             });
 
-                            var ThisDialog = this;
-                            require(['qui/controls/buttons/Switch'], function (SwitchControl) {
-                                ThisDialog.NewTabSwitch = new SwitchControl({
-                                    name: 'newTab'
-                                });
-                                ThisDialog.NewTabSwitch.inject(Container.getElement('#newTabWrapper'));
-                            });
 
+                            this.IsDisabledSwitch = new QUISwitch({
+                                name: 'isDisabled',
+                                status: false
+                            });
+                            this.IsDisabledSwitch.inject(Container.getElement('#isDisabledWrapper'));
+
+                            this.NewTabSwitch = new QUISwitch({
+                                name: 'newTab'
+                            });
+                            this.NewTabSwitch.inject(Container.getElement('#newTabWrapper'));
+
+                            
                             QUI.parse(Container).then(function () {
                                 return ControlsUtils.parse(Container);
                             }).then(function () {

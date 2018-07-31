@@ -25,17 +25,18 @@ class PromosliderWallpaper extends AbstractPromoslider
     {
         // default options
         $this->setAttributes(array(
-            'title'          => '',
-            'text'           => '',
-            'class'          => 'quiqqer-bricks-promoslider-wallpaper',
-            'nodeName'       => 'section',
-            'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
-            'role'           => 'listbox',
-            'shownavigation' => true,
-            'showarrows'     => 'showHoverScale',
-            'autostart'      => false,
-            'delay'          => 5000,
-            'template'       => dirname(__FILE__) . '/PromosliderWallpaper.html'
+            'title'                 => '',
+            'text'                  => '',
+            'class'                 => 'quiqqer-bricks-promoslider-wallpaper',
+            'nodeName'              => 'section',
+            'data-qui'              => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
+            'role'                  => 'listbox',
+            'shownavigation'        => true,
+            'showarrows'            => 'showHoverScale',
+            'autostart'             => false,
+            'delay'                 => 5000,
+            'template'              => dirname(__FILE__) . '/PromosliderWallpaper.html',
+            'isMobileSlidesEnabled' => false
         ));
 
         $this->addCSSFile(
@@ -112,6 +113,7 @@ class PromosliderWallpaper extends AbstractPromoslider
         $this->setAttribute('data-qui-options-delay', 5000);
         $this->setAttribute('data-qui-options-shownavigation', false);
         $this->setAttribute('data-qui-options-showarrows', false);
+        $this->setAttribute('data-qui-options-isMobileSlidesEnabled', false);
 
         if ($this->getAttribute('pagefit') === false) {
             $this->setAttribute('pagefitcut', false);
@@ -218,14 +220,24 @@ class PromosliderWallpaper extends AbstractPromoslider
 
 
         $this->parseSlides($this->getAttribute('desktopslides'), 'desktop');
-        $this->parseSlides($this->getAttribute('mobileslides'), 'mobile');
 
-        $Engine->assign(array(
+        $options = array(
             'this'          => $this,
             'desktopSlides' => $this->desktopSlides,
-            'mobileSlides'  => $this->mobileSlides,
             'Utils'         => new Utils()
-        ));
+        );
+
+        if ($this->getAttribute('isMobileSlidesEnabled') === "true") {
+            $this->parseSlides($this->getAttribute('mobileslides'), 'mobile');
+
+            $options['mobileSlides'] = $this->mobileSlides;
+        } else {
+            $this->parseSlides($this->getAttribute('desktopslides'), 'mobile');
+
+            $options['mobileSlides'] = $this->desktopSlides;
+        }
+
+        $Engine->assign($options);
 
         return $Engine->fetch($this->getAttribute('template'));
     }

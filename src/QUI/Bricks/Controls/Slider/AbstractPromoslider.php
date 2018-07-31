@@ -155,9 +155,13 @@ class AbstractPromoslider extends QUI\Control
             return;
         }
 
-        $attributes = array('image', 'title', 'text', 'type', 'url', 'newTab');
+        $attributes = array('image', 'title', 'text', 'type', 'url', 'newTab', 'isDisabled');
 
         foreach ($slides as $slide) {
+            if (isset($slide['isDisabled']) && $slide['isDisabled']) {
+                continue;
+            }
+
             foreach ($attributes as $attribute) {
                 if (!isset($slide[$attribute])) {
                     $slide[$attribute] = false;
