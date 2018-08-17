@@ -34,9 +34,35 @@ define('package/quiqqer/bricks/bin/guides/General', [
 
     var step1Text = QUILocale.get(lg, 'tour.general.bricks.Step1_1.Text') +
         '<a target="_blank" href = "https://www.quiqqer.com/media/cache/quiqqer/zonen-bild.png">' +
-        '<img src="' + URL_OPT_DIR + 'quiqqer/tour/img/zonen-bild.png"' +
+        '<img src="' + URL_OPT_DIR + 'quiqqer/tour/bin/img/zonen-bild.png"' +
         ' style="max-width: 100%; height: 200px;" /></a>'
         + QUILocale.get(lg, 'tour.general.bricks.Step1_2.Text');
+
+    var catchClicks = function(){
+        //make rest unclickable
+        var clickCatcher = new Element('div', {
+            'class': 'clickCatcher',
+            styles : {
+                width    : '100%',
+                height   : '100%',
+                'z-index': 100001,
+                'top'    : '0px',
+                position : 'absolute',
+                'opacity': '0'
+            }
+        });
+
+        clickCatcher.inject(document.getElement('body'));
+    };
+
+    var stopCatching = function(){
+        var clickCatcher = document.getElement('.clickCatcher');
+
+        //checking because event gets triggered double
+        if (clickCatcher) {
+            clickCatcher.destroy();
+        }
+    };
 
     Bricks.addStep({
         title  : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
@@ -61,19 +87,19 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step2.Text'),
+        title        : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text         : QUILocale.get(lg, 'tour.general.bricks.Step2.Text'),
         tetherOptions: {
             constraints: null // this disables pinning (which breaks the arrows)
         },
-        buttons : false,
-        attachTo: {
+        buttons      : false,
+        attachTo     : {
             element: function () {
                 return DropDownMenu.getElm();
             },
             on     : 'right'
         },
-        when    : {
+        when         : {
             show: function () {
                 DropDownMenu.getElm().addEvent('click', Bricks.next);
                 var Entries = DropDownMenu.getChildren();
@@ -110,9 +136,12 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title  : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text   : QUILocale.get(lg, 'tour.general.bricks.Step4.Text'),
-        buttons: {
+        title        : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text         : QUILocale.get(lg, 'tour.general.bricks.Step4.Text'),
+        tetherOptions: {
+            constraints: null // this disables pinning (which breaks the arrows)
+        },
+        buttons      : {
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 Bricks.next();
@@ -147,7 +176,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
         buttons: {
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
-                Bricks.next();
+                Bricks.next()
             }
         }
     });
@@ -304,6 +333,12 @@ define('package/quiqqer/bricks/bin/guides/General', [
                 PopupBox2 = QUI.Controls.getByType('package/quiqqer/bricks/bin/AreaWindow')[0].getElm();
                 Bricks.next();
             }
+        },
+        when   : {
+            show: function () {
+                //make rest unclickable
+                catchClicks();
+            }
         }
     });
 
@@ -320,6 +355,8 @@ define('package/quiqqer/bricks/bin/guides/General', [
                     }
                 });
 
+                Footer.scrollIntoView();
+
                 return Footer
             },
             on     : 'right'
@@ -328,6 +365,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 var Footer;
+
                 Footer = PopupBox2.getElements('.quiqqer-bricks-area.smooth');
                 Footer.forEach(function (Entry) {
                     if (Entry.getAttribute('data-area') === "footer") {
@@ -385,6 +423,11 @@ define('package/quiqqer/bricks/bin/guides/General', [
         when    : {
             show: function () {
                 PopupBox2.getElement('[name = "submit"]').addEvent('click', Bricks.next)
+            },
+
+            hide: function () {
+                //remove clickCatcher from step 12_3
+                stopCatching();
             }
         }
     });
@@ -457,15 +500,18 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step16.Text'),
-        attachTo: {
+        title        : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text         : QUILocale.get(lg, 'tour.general.bricks.Step16.Text'),
+        tetherOptions: {
+            constraints: null // this disables pinning (which breaks the arrows)
+        },
+        attachTo     : {
             element: function () {
                 return BrickSettings.getElm().getElement('[name="close"]')
             },
             on     : 'left'
         },
-        buttons : {
+        buttons      : {
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 if (BrickSettings.getElm().getElement('[name="close"]')) {
@@ -475,7 +521,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
                 }
             }
         },
-        when    : {
+        when         : {
             show: function () {
                 BrickSettings.getElm().getElement('[name="close"]').addEvent('click', Bricks.next);
             }
@@ -547,6 +593,17 @@ define('package/quiqqer/bricks/bin/guides/General', [
         }
     });
 
+    Bricks.addStep({
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step18_2.Text'),
+        buttons: {
+            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+            action: function(){
+                Bricks.next();
+            }
+        }
+    });
+
 
     Bricks.addStep({
         title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
@@ -555,6 +612,8 @@ define('package/quiqqer/bricks/bin/guides/General', [
             element: function () {
                 var rows    = SitePanel.getElm().getElements('.quiqqer-bricks-site-category-area');
                 var counter = 1;
+                var Buttons;
+
                 while (rows === null) {
                     counter++;
                     rows = SitePanel.getElm().getElements('.quiqqer-bricks-site-category-area');
@@ -562,13 +621,16 @@ define('package/quiqqer/bricks/bin/guides/General', [
                         break;
                     }
                 }
+
                 rows.forEach(function (row) {
                     if (row.getAttribute('data-name') === "footer") {
                         FooterZone = row;
                     }
                 });
-                var Buttons = FooterZone.getElements('button');
-                return FooterZone.getElement('button'); //@todo zufall ... welcher button das genau ist
+
+                Buttons = FooterZone.getElements('button');
+
+                return FooterZone.getElement('button');
             },
             on     : 'right'
         },
@@ -622,12 +684,12 @@ define('package/quiqqer/bricks/bin/guides/General', [
             show: function () {
                 document.getElements('.qui-window-popup.box .qui-window-popup-content.box .qui-elements-list-item.smooth').forEach(function (Item) {
                     Item.addEvent('click', Bricks.next)
-                })
+                });
             }
         }
     });
 
-    Bricks.addWaitingStepByCSSClass(document, 'button .fa.fa-gear' , 0, 50);
+    Bricks.addWaitingStepByCSSClass(document, 'button .fa.fa-gear', 0, 50);
 
     Bricks.addStep({
         title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
@@ -661,7 +723,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
         }
     });
 
-    Bricks.addWaitingStepByCSSClass(document, '.qui-window-popup.box [name="inheritance"]' , 0, 50);
+    Bricks.addWaitingStepByCSSClass(document, '.qui-window-popup.box [name="inheritance"]', 0, 50);
 
     Bricks.addStep({
         title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
@@ -680,6 +742,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
         },
         when    : {
             show: function () {
+                catchClicks();
                 document.getElement('.qui-window-popup.box [name="inheritance"]').addEvent('click', Bricks.next)
             },
             hide: function () {
@@ -726,6 +789,11 @@ define('package/quiqqer/bricks/bin/guides/General', [
             text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 Bricks.next()
+            }
+        },
+        when:{
+            show: function(){
+                stopCatching();
             }
         }
     });

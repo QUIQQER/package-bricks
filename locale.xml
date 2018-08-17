@@ -1308,6 +1308,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Hier wählen wir den Menü-Punkt <b>Bausteine</b>.]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
+        <locale name="tour.general.bricks.Step18_2.Text">
+            <de><![CDATA[Dieses Menü ermöglicht es Ihnen unterschiedliche Bausteine, an den rechts grafisch Dargestellten Positionen einzubinden.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
         <locale name="tour.general.bricks.Step19.Text">
             <de>
                 <![CDATA[Um das erstellte Kontaktformular nun in die Fußzeile (Footer) der Startseite einzufügen, klicken Sie bitte hier. ]]></de>
