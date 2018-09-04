@@ -23,8 +23,6 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      */
     public function __construct($attributes = array())
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes(array(
             'title'                 => '',
@@ -46,6 +44,8 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
         $this->addCSSClass('grid-100');
         $this->addCSSClass('mobile-grid-100');
         $this->addCSSClass('quiqqer-bricks-promoslider-wallpaper');
+
+        parent::__construct($attributes);
     }
 
     /**
