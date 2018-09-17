@@ -549,13 +549,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                         Dialog.IsDisabledSwitch.off();
                     }
 
-                    Title.value  = data.title;
-                    Left.value   = data.left;
-                    Right.value  = data.right;
-                    Image.value  = data.image;
-                    Url.value    = data.url;
+                    Title.value = data.title || '';
+                    Left.value  = data.left  || '';
+                    Right.value = data.right || '';
+                    Image.value = data.image || '';
+                    Url.value   = data.url   || '';
 
-                    if (data.newTab.getAttribute('data-enabled') === "1") {
+                    if (data.newTab && data.newTab.getAttribute('data-enabled') === "1") {
                         Dialog.NewTabSwitch.on();
                     } else {
                         Dialog.NewTabSwitch.off();

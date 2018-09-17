@@ -23,8 +23,9 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      */
     public function __construct($attributes = array())
     {
-        // default options
-        $this->setAttributes(array(
+        parent::__construct();
+
+        $defaultAttributes = array(
             'title'                 => '',
             'text'                  => '',
             'class'                 => 'quiqqer-bricks-promoslider-wallpaper2Content',
@@ -37,15 +38,16 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
             'delay'                 => 5000,
             'template'              => dirname(__FILE__) . '/PromosliderWallpaper2Content.html',
             'isMobileSlidesEnabled' => false
-        ));
+        );
+
+        // merge default attributes with custom attributes (custom overwrites default values)
+        $this->setAttributes(array_merge($defaultAttributes, $attributes));
 
         $this->addCSSFile(dirname(__FILE__) . '/PromosliderWallpaper2Content.css');
 
         $this->addCSSClass('grid-100');
         $this->addCSSClass('mobile-grid-100');
         $this->addCSSClass('quiqqer-bricks-promoslider-wallpaper');
-
-        parent::__construct($attributes);
     }
 
     /**
