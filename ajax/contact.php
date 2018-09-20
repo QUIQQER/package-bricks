@@ -39,8 +39,6 @@ QUI::$Ajax->registerFunction(
             $BrickManager               = QUI\Bricks\Manager::init();
             $Brick                      = $BrickManager->getBrickByID($brickId);
             $privacyPolicyCheckboxBrick = $Brick->getSetting('showPrivacyPolicyCheckbox');
-
-            \QUI\System\Log::writeRecursive("BRICK FOUND!");
         }
 
         $Project               = QUI::getProjectManager()->decode($project);
