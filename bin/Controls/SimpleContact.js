@@ -4,25 +4,20 @@
  * @author www.pcsg.de (Henning Leutz)
  * @author www.pcsg.de (Michael Danielczok)
  * @module Bricks\Controls\SimpleContact
- *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/controls/buttons/Button
- * @require qui/controls/loader/Loader
- * @require Ajax
- * @require Locale
  */
 define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
 
     'qui/QUI',
     'qui/controls/Control',
-    'qui/controls/buttons/Button',
+    'utils/Controls',
     'qui/controls/loader/Loader',
     'Ajax',
     'Locale'
 
-], function (QUI, QUIControl, QUIButton, QUILoader, Ajax, QUILocale) {
+], function (QUI, QUIControl, QUIControlUtils, QUILoader, Ajax, QUILocale) {
     "use strict";
+
+    var lg = 'quiqqer/bricks';
 
     return new Class({
 
@@ -38,9 +33,11 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
 
             this.Loader = new QUILoader();
 
-            this.$Text  = null;
-            this.$Email = null;
-            this.$Name  = null;
+            this.$Text            = null;
+            this.$Email           = null;
+            this.$Name            = null;
+            this.$captchaResponse = false;
+            this.$captchaRequired = false;
 
             this.addEvents({
                 onImport: this.$onImport
@@ -62,6 +59,18 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                 'html' : QUILocale.get('quiqqer/bricks', 'control.simpleContact.sendButton'),
                 events : {
                     click: function () {
+                        if (self.$captchaRequired && !self.$captchaResponse) {
+                            QUI.getMessageHandler(function (MH) {
+                                MH.options.displayTimeMessages = 2000;
+                                MH.addError(
+                                    QUILocale.get(lg, 'brick.control.simpleContact.error.captcha_failed'),
+                                    self.$Elm.getElement('.qui-contact-captcha')
+                                );
+                            });
+
+                            return;
+                        }
+
                         self.$Elm.getElement('form').fireEvent('submit');
                     }
                 }
@@ -80,6 +89,30 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
             this.$Text  = this.$Elm.getElement('[name="message"]');
             this.$Email = this.$Elm.getElement('[name="email"]');
             this.$Name  = this.$Elm.getElement('[name="name"]');
+
+            // CAPTCHA
+            var CaptchaElm = this.$Elm.getElement(
+                'div[data-qui="package/quiqqer/captcha/bin/controls/CaptchaDisplay"]'
+            );
+
+            if (!CaptchaElm) {
+                return;
+            }
+
+            QUIControlUtils.getControlByElement(CaptchaElm).then(function (CaptchaDisplay) {
+                CaptchaDisplay.getCaptchaControl().then(function (CaptchaControl) {
+                    self.$captchaRequired = true;
+
+                    CaptchaControl.addEvents({
+                        onSuccess: function (response) {
+                            self.$captchaResponse = response;
+                        },
+                        onExpired: function () {
+                            self.$captchaResponse = false;
+                        }
+                    });
+                });
+            });
         },
 
         /**
@@ -132,6 +165,7 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                 project              : JSON.encode(QUIQQER_PROJECT),
                 siteId               : QUIQQER_SITE.id,
                 privacyPolicyAccepted: privacyPolicyAccepted ? 1 : 0,
+                captchaResponse      : this.$captchaResponse,
                 onError              : function (Exception) {
                     self.Loader.hide();
 

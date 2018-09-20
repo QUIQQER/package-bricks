@@ -28,9 +28,10 @@ class SimpleContact extends QUI\Control
             'class'                     => 'quiqqer-simple-contact',
             'qui-class'                 => 'package/quiqqer/bricks/bin/Controls/SimpleContact',
             'labels'                    => true,
-            'data-brickid'              => true,
+            'data-brickid'              => false,
             'mailTo'                    => '', // receiver email
-            'showPrivacyPolicyCheckbox' => false
+            'showPrivacyPolicyCheckbox' => false,
+            'useCaptcha'                => false
         ]);
 
 
@@ -54,6 +55,7 @@ class SimpleContact extends QUI\Control
         $email                 = '';
         $message               = '';
         $privacyPolicyCheckbox = $this->getAttribute('showPrivacyPolicyCheckbox');
+        $useCaptcha            = $this->getAttribute('useCaptcha');
         $error                 = false;
 
         // Is javascript disabled?
@@ -83,6 +85,7 @@ class SimpleContact extends QUI\Control
             }
         }
 
+        // Privacy Policy checkbox
         if ($privacyPolicyCheckbox) {
             $PrivacyPolicySite = $this->getPrivacyPolicySite();
             $label             = QUI::getLocale()->get(
@@ -114,6 +117,11 @@ class SimpleContact extends QUI\Control
                 'privacyPolicyLabel'      => $label,
                 'createPrivacyPolicyLink' => $PrivacyPolicySite !== false
             ]);
+        }
+
+        // CAPTCHA
+        if ($useCaptcha && QUI::getPackageManager()->isInstalled('quiqqer/captcha')) {
+            $Engine->assign('CaptchaDisplay', new QUI\Captcha\Controls\CaptchaDisplay());
         }
 
         if ($error) {
@@ -177,9 +185,9 @@ class SimpleContact extends QUI\Control
         if ($privacyPolicyCheckbox && !empty($_POST['privacyPolicy'])) {
             $body .= '<span style="font-weight: bold;">'
                      .QUI::getLocale()->get(
-                         'quiqqer/bricks',
-                         'brick.control.simpleContact.mail.privacyPolicy_accepted'
-                     )
+                    'quiqqer/bricks',
+                    'brick.control.simpleContact.mail.privacyPolicy_accepted'
+                )
                      .'</span><br/>';
         }
 

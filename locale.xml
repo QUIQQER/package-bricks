@@ -110,6 +110,11 @@
             <en><![CDATA[Email]]></en>
             <pl><![CDATA[Adres e-mail]]></pl>
         </locale>
+        <locale name="control.simpleContact.captcha">
+            <de><![CDATA[Sicherheitsprüfung]]></de>
+            <en><![CDATA[Security check]]></en>
+            <pl><![CDATA[Kontrola bezpieczeństwa]]></pl>
+        </locale>
         <locale name="control.simpleContact.email.placeholder">
             <de><![CDATA[Ihre E-Mail-Adresse]]></de>
             <en><![CDATA[Please enter your email address here]]></en>
@@ -169,9 +174,17 @@
             <de><![CDATA[Datenschutzbestimmungen-Checkbox im Formular anzeigen (Pflichtfeld)]]></de>
             <en><![CDATA[Show Privacy Policy checkbox (required field)]]></en>
         </locale>
+        <locale name="brick.control.simpleContact.useCaptcha">
+            <de><![CDATA[Absenden des Formulars mittels CAPTCHA vor Spam schützen (setzt voraus, dass <b>quiqqer/captcha</b> installiert ist!)]]></de>
+            <en><![CDATA[Protect form submit from spam with a CAPTCHA (requires <b>quiqqer/captcha</b> to be installed!)]]></en>
+        </locale>
         <locale name="brick.control.simpleContact.mail.privacyPolicy_accepted">
             <de><![CDATA[Der Benutzer hat die Datenschutzbestimmungen akzeptiert.]]></de>
             <en><![CDATA[The user has accepted the Privacy Policy.]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.error.captcha_failed">
+            <de><![CDATA[Bitte absolvieren Sie die Sicherheitsprüfung (CAPTCHA).]]></de>
+            <en><![CDATA[Please complete the sequrity check (CAPTCHA).]]></en>
         </locale>
 
         <locale name="brick.control.navigation.title">

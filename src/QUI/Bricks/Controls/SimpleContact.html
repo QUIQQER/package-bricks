@@ -106,6 +106,15 @@
         {/if}
     {/if}
 
+    {if isset($CaptchaDisplay)}
+        {if $this->getAttribute('labels') && !$CaptchaDisplay->isInvisible()}
+        <label class="qui-contact-captcha">
+            {locale group="quiqqer/bricks" value="control.simpleContact.captcha"}
+        </label>
+        {/if}
+        {$CaptchaDisplay->create()}
+    {/if}
+
     <noscript>
         <input class="quiqqer-simple-contact-button" type="submit"
                value="{locale group='quiqqer/bricks' value='control.simpleContact.sendButton'}" />
