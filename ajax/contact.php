@@ -91,11 +91,12 @@ QUI::$Ajax->registerFunction(
         ";
 
         if ($privacyPolicyCheckbox) {
-            $body .= '<span style="font-weight: bold;">'
-                     .QUI::getLocale()->get(
-                    'quiqqer/bricks',
-                    'brick.control.simpleContact.mail.privacyPolicy_accepted'
-                ).'</span><br/>';
+            $body .= '<span style="font-weight: bold;">';
+            $body .= QUI::getLocale()->get(
+                'quiqqer/bricks',
+                'brick.control.simpleContact.mail.privacyPolicy_accepted'
+            );
+            $body .= '</span><br/>';
         }
 
         $body .= "<span style=\"font-weight: bold;\">Message:</span><br /><br />
