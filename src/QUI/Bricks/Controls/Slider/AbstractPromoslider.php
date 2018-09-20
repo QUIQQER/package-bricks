@@ -36,8 +36,9 @@ class AbstractPromoslider extends QUI\Control
      * @param string $text - Description text
      * @param string $type - left, right (default = right)
      * @param string $url - index.php? or extern url
+     * @param boolean $newTab - should the url be opened in a new tab?
      */
-    public function addSlide($image, $title, $text, $type = 'right', $url = '')
+    public function addSlide($image, $title, $text, $type = 'right', $url = '', $newTab = false)
     {
         if (Utils::isMediaUrl($image)) {
             try {
@@ -75,11 +76,12 @@ class AbstractPromoslider extends QUI\Control
         }
 
         $this->desktopSlides[] = array(
-            'image' => $image,
-            'title' => $title,
-            'text'  => $text,
-            'pos'   => $pos,
-            'url'   => $url
+            'image'  => $image,
+            'title'  => $title,
+            'text'   => $text,
+            'pos'    => $pos,
+            'url'    => $url,
+            'newTab' => $newTab
         );
     }
 
@@ -90,8 +92,9 @@ class AbstractPromoslider extends QUI\Control
      * @param string $title
      * @param string $text
      * @param string $url - index.php? or extern url
+     * @param boolean $newTab - should the url be opened in a new tab?
      */
-    public function addMobileSlide($image, $title, $text, $url = '')
+    public function addMobileSlide($image, $title, $text, $url = '', $newTab = false)
     {
         if (Utils::isMediaUrl($image)) {
             try {
@@ -123,10 +126,11 @@ class AbstractPromoslider extends QUI\Control
         }
 
         $this->mobileSlides[] = array(
-            'image' => $image,
-            'title' => $title,
-            'text'  => $text,
-            'url'   => $url
+            'image'  => $image,
+            'title'  => $title,
+            'text'   => $text,
+            'url'    => $url,
+            'newTab' => $newTab
         );
     }
 
@@ -151,9 +155,13 @@ class AbstractPromoslider extends QUI\Control
             return;
         }
 
-        $attributes = array('image', 'title', 'text', 'type', 'url');
+        $attributes = array('image', 'title', 'text', 'type', 'url', 'newTab', 'isDisabled');
 
         foreach ($slides as $slide) {
+            if (isset($slide['isDisabled']) && $slide['isDisabled']) {
+                continue;
+            }
+
             foreach ($attributes as $attribute) {
                 if (!isset($slide[$attribute])) {
                     $slide[$attribute] = false;
@@ -167,7 +175,8 @@ class AbstractPromoslider extends QUI\Control
                         $slide['title'],
                         $slide['text'],
                         $slide['type'],
-                        $slide['url']
+                        $slide['url'],
+                        $slide['newTab']
                     );
                     break;
 
@@ -176,7 +185,8 @@ class AbstractPromoslider extends QUI\Control
                         $slide['image'],
                         $slide['title'],
                         $slide['text'],
-                        $slide['url']
+                        $slide['url'],
+                        $slide['newTab']
                     );
                     break;
             }

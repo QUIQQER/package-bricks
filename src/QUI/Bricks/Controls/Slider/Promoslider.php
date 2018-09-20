@@ -35,7 +35,8 @@ class Promoslider extends AbstractPromoslider
             'image-as-wallpaper'         => false,
             'image-wallpaper-attachment' => false,
             'autostart'                  => false,
-            'delay'                      => 5000
+            'delay'                      => 5000,
+            'isMobileSlidesEnabled'      => false
         ));
 
         $this->addCSSFile(
@@ -68,6 +69,7 @@ class Promoslider extends AbstractPromoslider
         $this->setAttribute('data-qui-options-image-as-wallpaper', false);
         $this->setAttribute('data-qui-options-wallpaper-attachment', false);
         $this->setAttribute('data-qui-options-delay', 5000);
+        $this->setAttribute('data-qui-options-isMobileSlidesEnabled', false);
 
         if ($this->getAttribute('pagefit') === false) {
             $this->setAttribute('pagefitcut', false);
@@ -158,16 +160,32 @@ class Promoslider extends AbstractPromoslider
             $this->addCSSClass('quiqqer-bricks-promoslider__nav_inner');
         }
 
+        if ($this->getAttribute('isMobileSlidesEnabled') === "true") {
+            $this->setAttribute(
+                'data-qui-options-isMobileSlidesEnabled',
+                $this->getAttribute('isMobileSlidesEnabled')
+            );
+        }
 
         $this->parseSlides($this->getAttribute('desktopslides'), 'desktop');
-        $this->parseSlides($this->getAttribute('mobileslides'), 'mobile');
 
-        $Engine->assign(array(
+        $options = array(
             'this'          => $this,
             'desktopSlides' => $this->desktopSlides,
-            'mobileSlides'  => $this->mobileSlides,
             'Utils'         => new Utils()
-        ));
+        );
+        
+        if ($this->getAttribute('isMobileSlidesEnabled') === "true") {
+            $this->parseSlides($this->getAttribute('mobileslides'), 'mobile');
+
+            $options['mobileSlides'] = $this->mobileSlides;
+        } else {
+            $this->parseSlides($this->getAttribute('desktopslides'), 'mobile');
+
+            $options['mobileSlides'] = $this->desktopSlides;
+        }
+
+        $Engine->assign($options);
 
         return $Engine->fetch(dirname(__FILE__) . '/Promoslider.html');
     }

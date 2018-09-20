@@ -110,6 +110,11 @@
             <en><![CDATA[Email]]></en>
             <pl><![CDATA[Adres e-mail]]></pl>
         </locale>
+        <locale name="control.simpleContact.captcha">
+            <de><![CDATA[Sicherheitsprüfung]]></de>
+            <en><![CDATA[Security check]]></en>
+            <pl><![CDATA[Kontrola bezpieczeństwa]]></pl>
+        </locale>
         <locale name="control.simpleContact.email.placeholder">
             <de><![CDATA[Ihre E-Mail-Adresse]]></de>
             <en><![CDATA[Please enter your email address here]]></en>
@@ -169,9 +174,17 @@
             <de><![CDATA[Datenschutzbestimmungen-Checkbox im Formular anzeigen (Pflichtfeld)]]></de>
             <en><![CDATA[Show Privacy Policy checkbox (required field)]]></en>
         </locale>
+        <locale name="brick.control.simpleContact.useCaptcha">
+            <de><![CDATA[Absenden des Formulars mittels CAPTCHA vor Spam schützen (setzt voraus, dass <b>quiqqer/captcha</b> installiert ist!)]]></de>
+            <en><![CDATA[Protect form submit from spam with a CAPTCHA (requires <b>quiqqer/captcha</b> to be installed!)]]></en>
+        </locale>
         <locale name="brick.control.simpleContact.mail.privacyPolicy_accepted">
             <de><![CDATA[Der Benutzer hat die Datenschutzbestimmungen akzeptiert.]]></de>
             <en><![CDATA[The user has accepted the Privacy Policy.]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.error.captcha_failed">
+            <de><![CDATA[Bitte absolvieren Sie die Sicherheitsprüfung (CAPTCHA).]]></de>
+            <en><![CDATA[Please complete the sequrity check (CAPTCHA).]]></en>
         </locale>
 
         <locale name="brick.control.navigation.title">
@@ -424,6 +437,12 @@
             <de><![CDATA[Desktop Slides]]></de>
             <en><![CDATA[Desktop slides]]></en>
         </locale>
+
+        <locale name="brick.control.promoslider.settings.isMobileSlidesEnabled">
+            <de><![CDATA[Separate Slides auf Mobilgeräten]]></de>
+            <en><![CDATA[Separate slides on mobile devices]]></en>
+        </locale>
+
         <locale name="brick.control.promoslider.settings.mobileslides">
             <de><![CDATA[Mobile Slides]]></de>
             <en><![CDATA[Mobile slides]]></en>
@@ -780,6 +799,22 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[The slide can not be restored]]></en>
         </locale>
 
+        <locale name="quiqqer.bricks.promoslider.button.text.enable">
+            <de><![CDATA[Aktivieren]]></de>
+            <en><![CDATA[Enable]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.button.text.disable">
+            <de><![CDATA[Deaktivieren]]></de>
+            <en><![CDATA[Disable]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.create.isDisabled">
+            <de><![CDATA[Slide deaktivieren]]></de>
+            <en><![CDATA[Deactivate slide]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.create.isDisabled.short">
+            <de><![CDATA[Deaktiviert]]></de>
+            <en><![CDATA[Deactivated]]></en>
+        </locale>
         <locale name="quiqqer.bricks.promoslider.create.image">
             <de><![CDATA[Bild]]></de>
             <en><![CDATA[Image]]></en>
@@ -787,6 +822,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="quiqqer.bricks.promoslider.create.url">
             <de><![CDATA[URL]]></de>
             <en><![CDATA[URL]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.create.newTab">
+            <de><![CDATA[Link in neuem Tab öffnen]]></de>
+            <en><![CDATA[Open link in new tab]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.create.newTab.short">
+            <de><![CDATA[Neuer Tab]]></de>
+            <en><![CDATA[New tab]]></en>
         </locale>
         <locale name="quiqqer.bricks.promoslider.create.title">
             <de><![CDATA[Titel]]></de>
@@ -799,6 +842,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="quiqqer.bricks.promoslider.create.align">
             <de><![CDATA[Ausrichtung]]></de>
             <en><![CDATA[Align]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.create.align.left">
+            <de><![CDATA[Text links platzieren]]></de>
+            <en><![CDATA[Place text on the left]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.create.align.right">
+            <de><![CDATA[Text rechts platzieren]]></de>
+            <en><![CDATA[Place text on the right]]></en>
         </locale>
 
         <locale name="quiqqer.bricks.promoslider.adddialog.title">
@@ -1268,6 +1319,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
         <locale name="tour.general.bricks.Step18.Text">
             <de><![CDATA[Hier wählen wir den Menü-Punkt <b>Bausteine</b>.]]></de>
+            <en><![CDATA[First Step]]></en>
+        </locale>
+        <locale name="tour.general.bricks.Step18_2.Text">
+            <de><![CDATA[Dieses Menü ermöglicht es Ihnen unterschiedliche Bausteine, an den rechts grafisch Dargestellten Positionen einzubinden.]]></de>
             <en><![CDATA[First Step]]></en>
         </locale>
         <locale name="tour.general.bricks.Step19.Text">

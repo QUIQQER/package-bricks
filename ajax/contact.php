@@ -4,16 +4,24 @@
  * This file contains package_quiqqer_bricks_ajax_contact
  */
 
+use QUI\Captcha\Handler as CaptchaHandler;
+
 /**
  * Returns the Brick data
  *
- * @param {String|Integer} $brickId - Brick-ID
+ * @param String|Integer $brickId - Brick-ID
+ * @param string $project
+ * @param int $siteId
+ * @param string $message
+ * @param string $email
+ * @param bool $privacyPolicyAccepted
+ * @param string $captchaResponse
  *
  * @return array
  */
 QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_contact',
-    function ($brickId, $project, $siteId, $message, $name, $email, $privacyPolicyAccepted) {
+    function ($brickId, $project, $siteId, $message, $name, $email, $privacyPolicyAccepted, $captchaResponse = null) {
         // check if email correct
         if (!QUI\Utils\Security\Orthos::checkMailSyntax($email)) {
             throw new QUI\Exception(
@@ -24,12 +32,19 @@ QUI::$Ajax->registerFunction(
             );
         }
 
-        $BrickManager               = QUI\Bricks\Manager::init();
-        $Project                    = QUI::getProjectManager()->decode($project);
-        $Site                       = $Project->get((int)$siteId);
-        $Brick                      = $BrickManager->getBrickByID($brickId);
-        $privacyPolicyCheckbox      = boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'));
-        $privacyPolicyCheckboxBrick = $Brick->getSetting('showPrivacyPolicyCheckbox');
+        // If SimpleContact was used in a brick
+        $privacyPolicyCheckboxBrick = false;
+
+        if (!empty($brickId)) {
+            $BrickManager               = QUI\Bricks\Manager::init();
+            $Brick                      = $BrickManager->getBrickByID($brickId);
+            $privacyPolicyCheckboxBrick = $Brick->getSetting('showPrivacyPolicyCheckbox');
+        }
+
+        $Project               = QUI::getProjectManager()->decode($project);
+        $Site                  = $Project->get((int)$siteId);
+        $privacyPolicyCheckbox = boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'));
+        $useCaptcha            = boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.useCaptcha'));
 
         if (($privacyPolicyCheckbox || $privacyPolicyCheckboxBrick) && !(int)$privacyPolicyAccepted) {
             throw new QUI\Exception(
@@ -38,6 +53,17 @@ QUI::$Ajax->registerFunction(
                     'brick.control.simpleContact.error.privacyPolicyRequired'
                 )
             );
+        }
+
+        if ($useCaptcha && QUI::getPackageManager()->isInstalled('quiqqer/captcha')) {
+            if (!CaptchaHandler::isResponseValid($captchaResponse)) {
+                throw new QUI\Exception(
+                    QUI::getLocale()->get(
+                        'quiqqer/bricks',
+                        'brick.control.simpleContact.error.captcha_failed'
+                    )
+                );
+            }
         }
 
         if ($Site->getAttribute('type') === 'quiqqer/sitetypes:types/contact') {
@@ -65,11 +91,12 @@ QUI::$Ajax->registerFunction(
         ";
 
         if ($privacyPolicyCheckbox) {
-            $body .= '<span style="font-weight: bold;">'
-                     .QUI::getLocale()->get(
-                         'quiqqer/bricks',
-                         'brick.control.simpleContact.mail.privacyPolicy_accepted'
-                     ).'</span><br/>';
+            $body .= '<span style="font-weight: bold;">';
+            $body .= QUI::getLocale()->get(
+                'quiqqer/bricks',
+                'brick.control.simpleContact.mail.privacyPolicy_accepted'
+            );
+            $body .= '</span><br/>';
         }
 
         $body .= "<span style=\"font-weight: bold;\">Message:</span><br /><br />
@@ -90,6 +117,6 @@ QUI::$Ajax->registerFunction(
 
         return true;
     },
-    ['brickId', 'project', 'siteId', 'message', 'name', 'email', 'privacyPolicyAccepted'],
+    ['brickId', 'project', 'siteId', 'message', 'name', 'email', 'privacyPolicyAccepted', 'captchaResponse'],
     false
 );

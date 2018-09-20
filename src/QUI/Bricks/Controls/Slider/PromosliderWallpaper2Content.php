@@ -23,22 +23,25 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      */
     public function __construct($attributes = array())
     {
-        parent::__construct($attributes);
+        parent::__construct();
 
-        // default options
-        $this->setAttributes(array(
-            'title'          => '',
-            'text'           => '',
-            'class'          => 'quiqqer-bricks-promoslider-wallpaper2Content',
-            'nodeName'       => 'section',
-            'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
-            'role'           => 'listbox',
-            'shownavigation' => true,
-            'showarrows'     => 'showHoverScale',
-            'autostart'      => false,
-            'delay'          => 5000,
-            'template'       => dirname(__FILE__) . '/PromosliderWallpaper2Content.html'
-        ));
+        $defaultAttributes = array(
+            'title'                 => '',
+            'text'                  => '',
+            'class'                 => 'quiqqer-bricks-promoslider-wallpaper2Content',
+            'nodeName'              => 'section',
+            'data-qui'              => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
+            'role'                  => 'listbox',
+            'shownavigation'        => true,
+            'showarrows'            => 'showHoverScale',
+            'autostart'             => false,
+            'delay'                 => 5000,
+            'template'              => dirname(__FILE__) . '/PromosliderWallpaper2Content.html',
+            'isMobileSlidesEnabled' => false
+        );
+
+        // merge default attributes with custom attributes (custom overwrites default values)
+        $this->setAttributes(array_merge($defaultAttributes, $attributes));
 
         $this->addCSSFile(dirname(__FILE__) . '/PromosliderWallpaper2Content.css');
 
@@ -55,10 +58,11 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param string $right - optional, right text
      * @param string|bool $type - optional, not exists, but we are from PromosliderWallpaper and AbstractPromoslider
      * @param string $url - index.php? or extern url
+     * @param boolean $newTab - should the url be opened in a new tab?
      */
-    public function addSlide($image, $left = '', $right = '', $type = false, $url = '')
+    public function addSlide($image, $left = '', $right = '', $type = false, $url = '', $newTab = false)
     {
-        $this->desktopSlides[] = $this->checkSlideParams($image, $left, $right, $url);
+        $this->desktopSlides[] = $this->checkSlideParams($image, $left, $right, $url, $newTab);
     }
 
     /**
@@ -68,10 +72,11 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param string $left - optional, left text
      * @param string $right - optional, right text
      * @param string $url - index.php? or extern url
+     * @param boolean $newTab - should the url be opened in a new tab?
      */
-    public function addMobileSlide($image, $left = '', $right = '', $url = '')
+    public function addMobileSlide($image, $left = '', $right = '', $url = '', $newTab = false)
     {
-        $this->mobileSlides[] = $this->checkSlideParams($image, $left, $right, $url);
+        $this->mobileSlides[] = $this->checkSlideParams($image, $left, $right, $url, $newTab);
     }
 
     /**
@@ -81,9 +86,10 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param string $left - Left text
      * @param string $right - Right text
      * @param string $url - index.php? or extern url
+     * @param boolean $newTab - should the url be opened in a new tab?
      * @return array
      */
-    protected function checkSlideParams($image, $left = '', $right = '', $url = '')
+    protected function checkSlideParams($image, $left = '', $right = '', $url = '', $newTab = false)
     {
         if (Utils::isMediaUrl($image)) {
             try {
@@ -103,10 +109,11 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
         }
 
         return array(
-            'image' => $image,
-            'left'  => $left,
-            'right' => $right,
-            'url'   => $url
+            'image'  => $image,
+            'left'   => $left,
+            'right'  => $right,
+            'url'    => $url,
+            'newTab' => $newTab
         );
     }
 
@@ -131,9 +138,13 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
             return;
         }
 
-        $attributes = array('image', 'left', 'right', 'url');
+        $attributes = array('image', 'left', 'right', 'url', 'newTab');
 
         foreach ($slides as $slide) {
+            if (isset($slide['isDisabled']) && $slide['isDisabled']) {
+                continue;
+            }
+
             foreach ($attributes as $attribute) {
                 if (!isset($slide[$attribute])) {
                     $slide[$attribute] = false;
@@ -147,7 +158,8 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
                         $slide['left'],
                         $slide['right'],
                         'desktop',
-                        $slide['url']
+                        $slide['url'],
+                        $slide['newTab']
                     );
                     break;
 
@@ -156,7 +168,8 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
                         $slide['image'],
                         $slide['left'],
                         $slide['right'],
-                        $slide['url']
+                        $slide['url'],
+                        $slide['newTab']
                     );
                     break;
             }

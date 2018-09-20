@@ -153,16 +153,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 self.next();
             });
 
-            // slide clicks
-            var slideClick = function () {
-                if (this.get('data-href') && this.get('data-href') !== '') {
-                    window.location = this.get('data-href');
-                }
-            };
-
-            desktopSlides.addEvent('click', slideClick);
-            mobileSlides.addEvent('click', slideClick);
-
 
             // touch events
             if (this.getAttribute('touch')) {

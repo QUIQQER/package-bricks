@@ -7,6 +7,16 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
+                        {{fieldIsDisabled}}
+                    </span>
+                    <span id="isDisabledWrapper" class="field-container-field"></span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
                         {{fieldTitle}}
                     </span>
                     <input type="text" name="title" class="field-container-field"/>
@@ -32,6 +42,16 @@
                     <input name="url" class="field-container-field"
                            data-qui="controls/projects/project/site/Input"
                            data-external="1" />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        {{fieldNewTab}}
+                    </span>
+                    <span id="newTabWrapper" class="field-container-field"></span>
                 </label>
             </td>
         </tr>

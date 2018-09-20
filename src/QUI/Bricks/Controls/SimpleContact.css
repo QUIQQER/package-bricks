@@ -97,3 +97,10 @@
     }
 }
 
+/** CAPTCHA **/
+.quiqqer-captcha-display {
+    float: left;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
