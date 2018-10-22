@@ -4,6 +4,10 @@ define('QUIQQER_SYSTEM', true);
 define('SYSTEM_INTERN', true);
 require dirname(dirname(dirname(dirname(__FILE__)))).'/header.php';
 
+if (!class_exists('QUI\Bricks\Manager')) {
+    exit;
+}
+
 // workaround for older patch
 $Bricks = QUI\Bricks\Manager::init();
 
@@ -29,7 +33,7 @@ $result = QUI::getDataBase()->fetch([
 if (!isset($result[0]) || !isset($result[0]['count']) || !$result[0]['count']) {
     echo 'Patch is not needed. No Bricks available'.PHP_EOL;
 
-    return;
+    exit;
 }
 
 
@@ -42,7 +46,7 @@ $result = QUI::getDataBase()->fetch([
 if (isset($result[0]) && isset($result[0]['count']) && $result[0]['count']) {
     echo 'Already executed'.PHP_EOL;
 
-    return;
+    exit;
 }
 
 $projects = QUI::getProjectManager()->getProjectList();
