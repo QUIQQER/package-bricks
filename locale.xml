@@ -911,9 +911,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             ]]></en>
         </locale>
 
-
-        <!-- Tour -->
-
+        <!--<editor-fold desc="Tour"-->
         <!-- General -->
         <locale name="tour.general.bricks.Step1.Title">
             <de><![CDATA[Bausteine]]></de>
@@ -1083,6 +1081,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Weiter]]></de>
             <en><![CDATA[Continue]]></en>
         </locale>
+        <!--</editor-fold>-->
     </groups>
 
     <groups name="quiqqer/bricks" datatype="js,php">
