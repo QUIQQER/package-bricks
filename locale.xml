@@ -1220,151 +1220,151 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="tour.general.bricks.Step1_1.Text">
             <de>
                 <![CDATA[Willkommen in der <b>Bausteine-Tour</b>. <br/><br/> Fertige Bausteine werden in Template-Zonen eingesetzt. Diese können sich von Template zu Template unterscheiden. <br/> <br/> Nehmen Sie sich die Zeit folgendes Bild kurz zu studieren. Es zeigt die Bezeichnung der einzelnen Zonen. Mit einem Klick darauf lässt es sich vergrößern. <br/>]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Welcome to the <b>Block Tour</b>. <br/><br/> Finished bricks are used in template zones. These may differ from template to template. <br/> <br/> Take the time to briefly study the following picture. It shows the names of the individual zones. With a click on it the picture can be enlarged. <br/>]]></en>
         </locale>
         <locale name="tour.general.bricks.Step1_2.Text">
             <de>
                 <![CDATA[<br/><br/> <a target="_blank" href="https://www.quiqqer.com/Entdecken/Was-kann-QUIQQER/Das-bringt-es-mit/Bausteine">FAQ - Bausteinzonen</a> ]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[<br/><br/> <a target="_blank" href="https://www.quiqqer.com/Entdecken/Was-kann-QUIQQER/Das-bringt-es-mit/Bausteine">FAQ - Block zones</a> ]]></en>
         </locale>
         <locale name="tour.general.bricks.Step2.Text">
             <de>
                 <![CDATA[Zunächst werden wir einen eigenen Baustein erstellen. <br/> Das Menü für die Verwaltung von Bausteinen finden sie unter <b>Verwaltung</b>]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[First we will create our own brick. <br/> The menu for the management of bricks can be found under <b>Administration</b>]]></en>
         </locale>
         <locale name="tour.general.bricks.Step3.Text">
             <de><![CDATA[Wählen Sie den Menüpunkt <b>Bausteine</b>...]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Select the menu item <b>Bricks-Manager</b>...]]></en>
         </locale>
         <locale name="tour.general.bricks.Step4.Text">
             <de>
                 <![CDATA[Willkommen im Baustein-Bedienungsfeld.<br/> Hier können Sie mittels einer Auflistung Ihre Bausteine verwalten.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Welcome to the bricks control panel.<br/> Here you can manage your bricks by means of a list.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step5.Text">
             <de><![CDATA[Klicken Sie auf <b>Baustein hinzufügen</b> um einen Baustein zu erstellen.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Click <b>Add brick </b> to create a brick.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step6.Text">
             <de>
                 <![CDATA[Wie Sie sehen hat sich ein Pop-Up geöffnet, das Sie auffordert <b>Titel</b> und <b>Typ</b> des Bausteins zu wählen...]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[As you can see, a pop-up has opened asking you to select <b>Title</b> and <b>Type</b> of the brick...]]></en>
         </locale>
         <locale name="tour.general.bricks.Step7.Text">
             <de><![CDATA[Wählen Sie aus der Liste z.B. den <b>Baustein:<br/> Einfaches Kontaktformular</b> ...]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Select from the list e.g. the <b>Brick:<br/> Simple contact form</b> ...]]></en>
         </locale>
         <locale name="tour.general.bricks.Step8.Text">
             <de><![CDATA[Wählen Sie nun einen eingängigen Titel für diesen Baustein]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Now select a catchy title for this brick]]></en>
         </locale>
         <locale name="tour.general.bricks.Step9.Text">
             <de><![CDATA[Mit einen Klick auf <b>Übernehmen</b> bestätigen Sie Ihre Eingaben.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Click <b> Accept</b> to confirm your entries.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step10.Text">
             <de>
                 <![CDATA[Abschließend werden Sie automatisch in das Bedienfeld des neu-erstellten Bausteins navigiert]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Finally, you are automatically navigated to the control panel of the newly created brick.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step11.Text">
             <de>
                 <![CDATA[Unter dem  Menüeintrag <b>Information</b> finden Sie: <ul> <li>erneut die Angabe zum <b>Titel</b> des Bausteins</li><li>die Möglichkeit eine <b>Beschreibung</b> zu hinterlegen</li><li>und einen Vermerk von welchem <b>Bausteintyp </b> der Baustein ist</li> </ul>]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Under the menu item <b>Information</b> you will find: <ul> <li>again the information about the <b>Title</b> of the brick</li><li>the possibility to store a <b>Description</b></li><li>and a note of which <b>Block type </b> the brick is</li> </ul>]]></en>
         </locale>
         <locale name="tour.general.bricks.Step12_1.Text">
             <de>
                 <![CDATA[Unter dem  Menüeintrag <b>Eigenschaften</b> können Sie festlegen: <ul> <li>Welche <b>Zonen</b> den Baustein aufnehmen können sollen</li><li>Welche Einstellungen von Benutzern des Inhaltsverwaltungssystem (CMS) geändert werden dürfen </li> </ul>]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Under the menu item <b>Properties</b> you can define: <ul> <li>Which <b>Areas</b> should be able to include the brick</li><li>Which settings can be changed by users of the Content Management System (CMS) </li> </ul>]]></en>
         </locale>
         <locale name="tour.general.bricks.Step12_2.Text">
             <de><![CDATA[Klicken sie auf <b>Bausteinzone hinzufügen</b> ...  ]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Click on <b>Add brick area</b>...]]></en>
         </locale>
         <locale name="tour.general.bricks.Step12_3.Text">
             <de>
                 <![CDATA[Das <b>Bausteinzonen-Popup</b> gibt ihnen eine Übersicht über alle verfügbaren Bausteinzonen. Mit gedrückter <b>STRG</b>-Taste ist eine Mehrfachauswahl möglich.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[The <b>brick areas popup</b> gives you an overview of all available brick areas. Press and hold the <b>CTRL</b> key to make multiple selections.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step12_4.Text">
             <de><![CDATA[Jedoch wählen wir für dieses Beispiel die <b>Footer Bausteinzone</b> ...]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[However, for this example we select <b>Footer brick area</b> ...]]></en>
         </locale>
         <locale name="tour.general.bricks.Step12_5.Text">
             <de><![CDATA[... und Bestätigen die Änderung mit <b>Übernehmen</b> ]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[... and confirm the change with <b>Apply</b>. ]]></en>
         </locale>
         <locale name="tour.general.bricks.Step13.Text">
             <de>
                 <![CDATA[Die <b>Einstellungen </b> sind bausteinspezifisch. D.h. je nach Bausteintyp sind verschiedene Einstellungen verfügbar. Diese beinhalten ua.: <ul> <li>den <b>Titel</b> benutzerseitig ändern</li><li>Die <b>Größe des Bausteins</b> über Höhe und Breite bestimmen</li><li>Spezielle <b>CSS</b> Klassen anfügen (besonders mächtig in Verbindung mit Custom CSS)</li>  <li>Bei Google-Maps Baustein: kommen  beispielsweise Einstellungen zu Straße PLZ und Stadt und Zoom hinzu.</li></ul>]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[The <b>Settings </b> are brick-specific. This means that different settings are available depending on the brick type. These include among others: <ul> <li>the <b>title</b></li><li>the <b>size of the brick</b> determine height and width</li><li>special <b>CSS</b> add classes (especially powerful in connection with Custom CSS)</li> <li>for Google Maps brick: for example, settings for street postcode and city and zoom are added.</li></ul>]]></en>
         </locale>
         <locale name="tour.general.bricks.Step14.Text">
             <de>
                 <![CDATA[Unter dem  Menüeintrag <b>Inhalt</b> befindet sich ein WYSIWYG-Editor mit dem Sie die Inhalte dieses Bausteins gestalten können.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[A WYSIWYG editor can be found under the <b>Content</b> menu item to design the contents of this brick.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step15.Text">
             <de><![CDATA[Vergessen Sie nicht Ihre Einstellungen abschließend zu <b>speichern</b> ...]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Don't forget to finally <b>save</b> your settings...]]></en>
         </locale>
         <locale name="tour.general.bricks.Step16.Text">
             <de><![CDATA[... und anschließend die Bearbeitungsoberfläche für diesen Baustein zu schließen.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[... and then close the editing interface for this brick.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step17.Text">
             <de>
                 <![CDATA[Jetzt können wir unser Kontaktformular in die festgelegten Zonen einer Website einfügen. <br/>Dazu begeben wir uns in die Startseite ihres Standart-Projektes (<b>Main-Project</b>)]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Now we can insert our contact form into the defined zones of a website. <br/>We go to the start page of your standard project (<b>Main-Project</b>).]]></en>
         </locale>
         <locale name="tour.general.bricks.Step18.Text">
             <de><![CDATA[Hier wählen wir den Menü-Punkt <b>Bausteine</b>.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Here we select the menu item <b>Bricks</b>.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step18_2.Text">
             <de><![CDATA[Dieses Menü ermöglicht es Ihnen unterschiedliche Bausteine, an den rechts grafisch Dargestellten Positionen einzubinden.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[This menu allows you to integrate different bricks in the positions shown graphically on the right.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step19.Text">
             <de>
                 <![CDATA[Um das erstellte Kontaktformular nun in die Fußzeile (Footer) der Startseite einzufügen, klicken Sie bitte hier. ]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[To add the created contact form to the footer of the start page, please click here. ]]></en>
         </locale>
         <locale name="tour.general.bricks.Step20.Text">
             <de><![CDATA[Wählen Sie hier ihr Kontaktformular aus indem Sie darauf klicken.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Please select your contact form here by clicking on it.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step21.Text">
             <de>
                 <![CDATA[Anschließend können wir noch die <b>Vererbungseinstellungen</b> des Bausteins bearbeiten.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Then we can edit the <b> Inheritance settings</b> of the brick.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step22.Text">
             <de>
                 <![CDATA[Wenn sie hier ein Häkchen setzten, erben alle Kinder dieser Seite diesen Baustein im Footer. <br/> In diesem Fall sind dies alle Seiten des Projektes, da Seiten des Projektes Unterseiten der Startseite sind.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[If you check this box, all children of this page will inherit this brick in the footer. <br/> In this case these are all pages of the project, because pages of the project are subpages of the home page.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step23.Text">
             <de><![CDATA[Übernehmen Sie die Einstellungen.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Confirm the settings.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step24.Text">
             <de><![CDATA[Hier können sie den Baustein wieder aus der Seite <b>entfernen</b>.]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[Here you can <b>remove</b> the brick from the page.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step25.Text">
             <de>
-                <![CDATA[Sie können die <b>Preview-Funktion</b> nutzen um zu sehen was sich an ihrer seite verändert hat ]]></de>
-            <en><![CDATA[First Step]]></en>
+                <![CDATA[Sie können die <b>Preview-Funktion</b> nutzen um zu sehen was sich an Ihrer Seite verändert hat.]]></de>
+            <en><![CDATA[You can use the <b>Preview function</b> to see what's changed on your page.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step26.Text">
             <de>
-                <![CDATA[Gefällt Ihnen die Implementation Ihres Bausteines?<br/> Dann vergessen Sie nicht die Änderungen zu <b>speichern</b> ]]></de>
-            <en><![CDATA[First Step]]></en>
+                <![CDATA[Gefällt Ihnen die Implementierung Ihres Bausteines?<br/> Dann vergessen Sie nicht die Änderungen zu <b>speichern</b> ]]></de>
+            <en><![CDATA[Do you like the implementation of your brick?<br/> Then don't forget to <b>save</b> the changes.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step26.Text">
             <de><![CDATA[<b>Gratulation</b>. <br/>Sie haben erfolgreich die Bausteine-Tour absolviert ]]></de>
-            <en><![CDATA[First Step]]></en>
+            <en><![CDATA[<b>Congratulations</b>. <br/>You have successfully completed the Brick Tour ]]></en>
         </locale>
 
         <!-- Bricks Buttons -->
