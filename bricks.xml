@@ -572,6 +572,27 @@
         </brick>
 
 
+        <!-- Customer reviews-->
+        <brick control="\QUI\Bricks\Controls\CustomerReviews">
+            <title>
+                <locale group="quiqqer/bricks" var="bricks.CustomerReviews.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="bricks.CustomerReviews.description"/>
+            </description>
+
+            <settings>
+                <setting name="title">
+                    <locale group="quiqqer/bricks" var="CustomerReviews.title"/>
+                </setting>
+
+                <setting name="entries" data-qui="package/quiqqer/bricks/bin/Controls/CustomerReviews">
+                    <locale group="quiqqer/bricks" var="CustomerReviews.entries"/>
+                </setting>
+            </settings>
+        </brick>
+
+
         <!-- Image Brick -->
         <brick control="\QUI\Bricks\Controls\Image">
             <title>

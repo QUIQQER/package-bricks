@@ -874,25 +874,54 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Edit Slide]]></en>
         </locale>
 
+        <!-- content switcher -->
         <locale name="contentSwitcher.entries.button.text">
             <de><![CDATA[Eintrag hinzufügen]]></de>
             <en><![CDATA[Add entry]]></en>
         </locale>
-
         <locale name="contentSwitcher.entries.entry.picture">
             <de><![CDATA[Bild]]></de>
             <en><![CDATA[Picture]]></en>
         </locale>
-
         <locale name="contentSwitcher.entries.entry.title">
             <de><![CDATA[Überschrift]]></de>
             <en><![CDATA[Title]]></en>
         </locale>
-
         <locale name="contentSwitcher.entries.entry.content">
             <de><![CDATA[Text]]></de>
             <en><![CDATA[Content]]></en>
         </locale>
+
+        <!-- Customer Reviews -->
+        <locale name="customerReviews.reviews.addButton">
+            <de><![CDATA[Kundenmeinung hinzufügen]]></de>
+            <en><![CDATA[Customer review hinzufügen]]></en>
+        </locale>
+        <locale name="customerReviews.reviews.entry.avatar">
+            <de><![CDATA[Avatar]]></de>
+            <en><![CDATA[Avatar]]></en>
+        </locale>
+        <locale name="customerReviews.reviews.entry.userName">
+            <de><![CDATA[Kunden- oder Unternehmensname]]></de>
+            <en><![CDATA[Customer or company name]]></en>
+        </locale>
+        <locale name="customerReviews.reviews.entry.userName.placeholder">
+            <de><![CDATA[Max Mustermann]]></de>
+            <en><![CDATA[John Doe]]></en>
+        </locale>
+        <locale name="customerReviews.reviews.entry.userTitle">
+            <de><![CDATA[Zusatz (z.B. Jobbezeichnung)]]></de>
+            <en><![CDATA[Addition (e.g. job title)]]></en>
+        </locale>
+        <locale name="customerReviews.reviews.entry.userTitle.placeholder">
+            <de><![CDATA[Geschäftsführer]]></de>
+            <en><![CDATA[CEO]]></en>
+        </locale>
+        <locale name="customerReviews.reviews.entry.content">
+            <de><![CDATA[Kurze Rezension]]></de>
+            <en><![CDATA[Short review]]></en>
+        </locale>
+
 
         <locale name="dialog.copy.title">
             <de><![CDATA[Baustein #[id] kopieren]]></de>
@@ -1164,6 +1193,16 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Einträge]]></de>
             <en><![CDATA[Entries]]></en>
             <pl><![CDATA[Wpisy]]></pl>
+        </locale>
+
+        <!-- Customer Reviews -->
+        <locale name="customerReviews.reviews.title">
+            <de><![CDATA[Bausteine: Kundenmeinungen]]></de>
+            <en><![CDATA[Bricks: Customer Reviews]]></en>
+        </locale>
+        <locale name="customerReviews.reviews.description">
+            <de><![CDATA[Ermöglicht Kundenmeinungen hinzuzufügen und auf der Seite zu präsentieren.]]></de>
+            <en><![CDATA[Allows you to add customer opinions and show them on the site.]]></en>
         </locale>
 
         <!-- Simple Google Maps -->
