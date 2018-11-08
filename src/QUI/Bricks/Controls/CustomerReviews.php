@@ -50,7 +50,8 @@ class CustomerReviews extends QUI\Control
                 $template = dirname(__FILE__) . '/CustomerReviews.SmallBoxes.html';
                 $this->addCSSFile(dirname(__FILE__) . '/CustomerReviews.SmallBoxes.css');
                 break;
-            case 'wideBoxes' :
+
+            case 'wideBoxes':
             default:
                 $template = dirname(__FILE__) . '/CustomerReviews.WideBoxes.html';
                 $this->addCSSFile(dirname(__FILE__) . '/CustomerReviews.WideBoxes.css');
