@@ -1,0 +1,49 @@
+{if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+<header class="control-header">
+    <h1>{$this->getAttribute('frontendTitle')}</h1>
+</header>
+{/if}
+
+{if $this->getAttribute('content') != ""}
+<div class="control-content">
+    {$this->getAttribute('content')}
+</div>
+{/if}
+
+<div class="customer-reviews-wrapper">
+    {foreach from=$entries item=entry key=key}
+    {assign var=modKey value=$key+1}
+
+    <div class="customer-review customer-review-{$modKey} control-template">
+        <div class="customer-review-content">
+            {$entry.content}
+        </div>
+        <div class="customer-review-footer">
+            <div class="customer-review-footer-image">
+                <div class="customer-review-footer-image-img"
+                     style="background-image: url({image src=$entry.avatar width=200 onlysrc=true})">
+                </div>
+            </div>
+
+            <div class="customer-review-footer-user">
+                {if $entry.userName}
+                <span class="customer-review-footer-user-name">
+                    {$entry.userName}
+                </span>
+                {/if}
+                {if $entry.jobTitle}
+                <span class="customer-review-footer-user-jobtitle">
+                    {$entry.jobTitle}
+                </span>
+                {/if}
+                {if $entry.url}
+                <span class="customer-review-footer-user-url">
+                    <a href="{$entry.url}/if}}"
+                       title="{$entry.url}">{$entry.url}</a>
+                </span>
+                {/if}
+            </div>
+        </div>
+    </div>
+    {/foreach}
+</div>

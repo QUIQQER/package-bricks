@@ -575,19 +575,25 @@
         <!-- Customer reviews-->
         <brick control="\QUI\Bricks\Controls\CustomerReviews">
             <title>
-                <locale group="quiqqer/bricks" var="bricks.CustomerReviews.title"/>
+                <locale group="quiqqer/bricks" var="bricks.customerReviews.title"/>
             </title>
             <description>
-                <locale group="quiqqer/bricks" var="bricks.CustomerReviews.description"/>
+                <locale group="quiqqer/bricks" var="bricks.customerReviews.description"/>
             </description>
 
             <settings>
-                <setting name="title">
-                    <locale group="quiqqer/bricks" var="CustomerReviews.title"/>
+                <setting name="template" type="select">
+                    <locale group="quiqqer/bricks" var="bricks.customerReviews.template"/>
+                    <option value="wideBoxes">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.template.wideBoxes"/>
+                    </option>
+                    <option value="smallBoxes">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.template.smallBoxes"/>
+                    </option>
                 </setting>
 
                 <setting name="entries" data-qui="package/quiqqer/bricks/bin/Controls/CustomerReviews">
-                    <locale group="quiqqer/bricks" var="CustomerReviews.entries"/>
+                    <locale group="quiqqer/bricks" var="bricks.customerReviews.entries"/>
                 </setting>
             </settings>
         </brick>

@@ -7,10 +7,12 @@ define('package/quiqqer/bricks/bin/Controls/CustomerReviews', [
     'qui/controls/elements/FormList',
     'utils/Controls',
     'Locale',
+    'Mustache',
 
+    'text!package/quiqqer/bricks/bin/Controls/CustomerReviews.Settings.html',
     'css!package/quiqqer/bricks/bin/Controls/ContentSwitcher.css' //todo needed css?
 
-], function (QUIFormList, QUIControls, QUILocale) {
+], function (QUIFormList, QUIControls, QUILocale, Mustache, templateSettings) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
@@ -35,34 +37,17 @@ define('package/quiqqer/bricks/bin/Controls/CustomerReviews', [
 
             this.setAttributes({
                 buttonText: QUILocale.get(lg, 'customerReviews.reviews.addButton'),
-                entry     : '<div class="quiqqer-bricks-ContentSwitcher-entry" style="display: none;">' +
-                    '<label class="entry-title">' +
-                    '<span class="entry-title">' +
-                    QUILocale.get(lg, 'customerReviews.reviews.entry.avatar') +
-                    '</span>' +
-                    '<input class="media-image" data-qui-options-selectable_types="image" name="avatar"/>' +
-                    '</label>' +
-                    '<label>' +
-                    '<span class="entry-title">' +
-                    QUILocale.get(lg, 'customerReviews.reviews.entry.userName') +
-                    '</span>' +
-                    '<input type="text" name="userName" placeholder="' + QUILocale.get(lg,
-                        'customerReviews.reviews.entry.userName.placeholder') + '"/>' +
-                    '</label>' +
-                    '<label>' +
-                    '<span class="entry-title">' +
-                    QUILocale.get(lg, 'customerReviews.reviews.entry.userTitle') +
-                    '</span>' +
-                    '<input type="text" name="userTitle" placeholder="' + QUILocale.get(lg,
-                        'customerReviews.reviews.entry.userTitle.placeholder') + '" />' +
-                    '</label>' +
-                    '<label>' +
-                    '<span class="entry-title">' +
-                    QUILocale.get(lg, 'customerReviews.reviews.entry.content') +
-                    '</span>' +
-                    '<input name="content" class="field-container-field field-description" data-qui="controls/editors/Input" />' +
-                    '</label>' +
-                    '</div>'
+                entry     : Mustache.render(templateSettings, {
+                    'avatar'             : QUILocale.get(lg, 'customerReviews.reviews.entry.avatar'),
+                    'userName'           : QUILocale.get(lg, 'customerReviews.reviews.entry.userName'),
+                    'userNamePlaceholder': QUILocale.get(lg, 'customerReviews.reviews.entry.userName.placeholder'),
+                    'jobTitle'           : QUILocale.get(lg, 'customerReviews.reviews.entry.jobTitle'),
+                    'jobTitlePlaceholder': QUILocale.get(lg, 'customerReviews.reviews.entry.jobTitle.placeholder'),
+                    'url'                : QUILocale.get(lg, 'customerReviews.reviews.entry.url'),
+                    'urlPlaceholder'     : QUILocale.get(lg, 'customerReviews.reviews.entry.url.placeholder'),
+                    'review'             : QUILocale.get(lg, 'customerReviews.reviews.entry.content')
+
+                })
             });
         },
 

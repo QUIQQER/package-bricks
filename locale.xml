@@ -909,13 +909,21 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Max Mustermann]]></de>
             <en><![CDATA[John Doe]]></en>
         </locale>
-        <locale name="customerReviews.reviews.entry.userTitle">
+        <locale name="customerReviews.reviews.entry.jobTitle">
             <de><![CDATA[Zusatz (z.B. Jobbezeichnung)]]></de>
             <en><![CDATA[Addition (e.g. job title)]]></en>
         </locale>
-        <locale name="customerReviews.reviews.entry.userTitle.placeholder">
+        <locale name="customerReviews.reviews.entry.jobTitle.placeholder">
             <de><![CDATA[Geschäftsführer]]></de>
             <en><![CDATA[CEO]]></en>
+        </locale>
+        <locale name="customerReviews.reviews.entry.url">
+            <de><![CDATA[Internet Adresse]]></de>
+            <en><![CDATA[Internet address]]></en>
+        </locale>
+        <locale name="customerReviews.reviews.entry.url.placeholder">
+            <de><![CDATA[https://www.beispiel-unternehmen.de]]></de>
+            <en><![CDATA[https://www.example-company.com]]></en>
         </locale>
         <locale name="customerReviews.reviews.entry.content">
             <de><![CDATA[Kurze Rezension]]></de>
@@ -1203,6 +1211,22 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="customerReviews.reviews.description">
             <de><![CDATA[Ermöglicht Kundenmeinungen hinzuzufügen und auf der Seite zu präsentieren.]]></de>
             <en><![CDATA[Allows you to add customer opinions and show them on the site.]]></en>
+        </locale>
+        <locale name="bricks.customerReviews.template">
+            <de><![CDATA[Template]]></de>
+            <en><![CDATA[Template]]></en>
+        </locale>
+            <locale name="bricks.customerReviews.template.wideBoxes">
+                <de><![CDATA[Breite Boxen]]></de>
+                <en><![CDATA[Wide boxes]]></en>
+            </locale>
+            <locale name="bricks.customerReviews.template.smallBoxes">
+                <de><![CDATA[Kleine Boxen]]></de>
+                <en><![CDATA[Small boxes]]></en>
+            </locale>
+        <locale name="bricks.customerReviews.entries">
+            <de><![CDATA[Meinungen / Rezensionen]]></de>
+            <en><![CDATA[Reviews]]></en>
         </locale>
 
         <!-- Simple Google Maps -->

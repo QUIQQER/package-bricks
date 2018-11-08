@@ -24,15 +24,11 @@ class CustomerReviews extends QUI\Control
     {
         // default options
         $this->setAttributes([
-//            'title'       => 'Content Switcher',
-            'entries' => []
+            'template' => 'wideBoxes',
+            'entries'  => []
         ]);
 
         parent::__construct($attributes);
-
-        $this->addCSSFile(
-            dirname(__FILE__) . '/CustomerReviews.css'
-        );
     }
 
     /**
@@ -49,12 +45,23 @@ class CustomerReviews extends QUI\Control
             $entries = json_decode($entries, true);
         }
 
+        switch ($this->getAttribute('template')) {
+            case 'smallBoxes':
+                $template = dirname(__FILE__) . '/CustomerReviews.SmallBoxes.html';
+                $this->addCSSFile(dirname(__FILE__) . '/CustomerReviews.SmallBoxes.css');
+                break;
+            case 'wideBoxes' :
+            default:
+                $template = dirname(__FILE__) . '/CustomerReviews.WideBoxes.html';
+                $this->addCSSFile(dirname(__FILE__) . '/CustomerReviews.WideBoxes.css');
+                break;
+        }
+
         $Engine->assign([
             'this'    => $this,
             'entries' => $entries
         ]);
 
-
-        return $Engine->fetch(dirname(__FILE__) . '/CustomerReviews.html');
+        return $Engine->fetch($template);
     }
 }
