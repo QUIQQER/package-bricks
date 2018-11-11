@@ -54,12 +54,13 @@
 .customer-review-footer-user {
     display: flex;
     flex-direction: column;
-    font-size: 0.9em;
+    font-size: 0.9rem;
     line-height: 130%;
 }
 
 .customer-review-footer-user-name {
     font-weight: bolder;
+    font-size: 1rem;
 }
 
 @media screen and (max-width: 1000px) {

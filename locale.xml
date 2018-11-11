@@ -925,6 +925,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[https://www.beispiel-unternehmen.de]]></de>
             <en><![CDATA[https://www.example-company.com]]></en>
         </locale>
+        <locale name="customerReviews.reviews.entry.urlTitle">
+            <de><![CDATA[Abweichender Titel für Internet Adresse]]></de>
+            <en><![CDATA[Different title for internet address]]></en>
+        </locale>
+        <locale name="customerReviews.reviews.entry.urlTitle.placeholder">
+            <de><![CDATA[beispiel-unternehmen.de]]></de>
+            <en><![CDATA[example-company.com]]></en>
+        </locale>
         <locale name="customerReviews.reviews.entry.content">
             <de><![CDATA[Kurze Rezension]]></de>
             <en><![CDATA[Short review]]></en>

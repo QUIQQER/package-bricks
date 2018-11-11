@@ -38,8 +38,13 @@
                 {/if}
                 {if $entry.url}
                 <span class="customer-review-footer-user-url">
-                    <a href="{$entry.url}/if}}"
-                       title="{$entry.url}">{$entry.url}</a>
+                    <a href="{$entry.url}" title="{$entry.url}" target="_blank">
+                        {if $entry.urlTitle}
+                            {$entry.urlTitle}
+                        {else}
+                            {$entry.url}
+                        {/if}
+                    </a>
                 </span>
                 {/if}
             </div>

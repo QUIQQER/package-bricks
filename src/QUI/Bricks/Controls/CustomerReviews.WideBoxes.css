@@ -43,24 +43,20 @@
     align-items: flex-end;
     display: flex;
     flex-direction: column;
-    font-size: 0.9em;
+    font-size: 0.8rem;
     margin-bottom: 10px;
     text-align: right;
+    line-height: 130%;
 }
 
 .customer-review-content-footer-username {
     display: block;
     font-weight: bolder;
+    font-size: 0.9rem;
 }
 
 .customer-review-content-footer-jobtitle {
-    font-size: 0.9em;
-    line-height: 100%;
     opacity: 0.8;
-}
-
-.customer-review-content-footer-url {
-    line-height: 100%;
 }
 
 @media screen and (max-width: 767px) {

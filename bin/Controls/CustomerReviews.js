@@ -45,8 +45,9 @@ define('package/quiqqer/bricks/bin/Controls/CustomerReviews', [
                     'jobTitlePlaceholder': QUILocale.get(lg, 'customerReviews.reviews.entry.jobTitle.placeholder'),
                     'url'                : QUILocale.get(lg, 'customerReviews.reviews.entry.url'),
                     'urlPlaceholder'     : QUILocale.get(lg, 'customerReviews.reviews.entry.url.placeholder'),
+                    'urlTitle'           : QUILocale.get(lg, 'customerReviews.reviews.entry.urlTitle'),
+                    'urlTitlePlaceholder': QUILocale.get(lg, 'customerReviews.reviews.entry.urlTitle.placeholder'),
                     'review'             : QUILocale.get(lg, 'customerReviews.reviews.entry.content')
-
                 })
             });
         },
