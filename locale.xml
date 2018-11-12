@@ -1212,11 +1212,11 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
 
         <!-- Customer Reviews -->
-        <locale name="customerReviews.reviews.title">
+        <locale name="bricks.customerReviews.title">
             <de><![CDATA[Bausteine: Kundenmeinungen]]></de>
             <en><![CDATA[Bricks: Customer Reviews]]></en>
         </locale>
-        <locale name="customerReviews.reviews.description">
+        <locale name="bricks.customerReviews.description">
             <de><![CDATA[Ermöglicht Kundenmeinungen hinzuzufügen und auf der Seite zu präsentieren.]]></de>
             <en><![CDATA[Allows you to add customer opinions and show them on the site.]]></en>
         </locale>
