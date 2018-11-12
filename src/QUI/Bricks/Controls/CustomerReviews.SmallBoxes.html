@@ -14,7 +14,16 @@
     {foreach from=$entries item=entry key=key}
     {assign var=modKey value=$key+1}
 
-    <div class="customer-review customer-review-{$modKey} control-template">
+    {assign var=title value=''}
+    {if $entry.userName && $entry.jobTitle}
+        {assign var=title value="`$entry.userName` - `$entry.jobTitle`"}
+    {elseif $entry.userName}
+        {assign var=title value=$entry.userName}
+    {elseif $entry.jobTitle}
+        {assign var=title value=$entry.jobTitle}
+    {/if}
+
+    <div class="customer-review customer-review-{$modKey} control-template" {if $title}title="{$title}"{/if}>
         <div class="customer-review-content">
             {$entry.content}
         </div>
@@ -38,7 +47,7 @@
                 {/if}
                 {if $entry.url}
                 <span class="customer-review-footer-user-url">
-                    <a href="{$entry.url}" title="{$entry.url}" target="_blank">
+                    <a href="{$entry.url}" title="{$entry.url}" target="_blank" rel="nofollow">
                         {if $entry.urlTitle}
                             {$entry.urlTitle}
                         {else}
