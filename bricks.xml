@@ -572,6 +572,33 @@
         </brick>
 
 
+        <!-- Customer reviews-->
+        <brick control="\QUI\Bricks\Controls\CustomerReviews">
+            <title>
+                <locale group="quiqqer/bricks" var="bricks.customerReviews.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="bricks.customerReviews.description"/>
+            </description>
+
+            <settings>
+                <setting name="template" type="select">
+                    <locale group="quiqqer/bricks" var="bricks.customerReviews.template"/>
+                    <option value="wideBoxes">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.template.wideBoxes"/>
+                    </option>
+                    <option value="smallBoxes">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.template.smallBoxes"/>
+                    </option>
+                </setting>
+
+                <setting name="entries" data-qui="package/quiqqer/bricks/bin/Controls/CustomerReviews">
+                    <locale group="quiqqer/bricks" var="bricks.customerReviews.entries"/>
+                </setting>
+            </settings>
+        </brick>
+
+
         <!-- Image Brick -->
         <brick control="\QUI\Bricks\Controls\Image">
             <title>

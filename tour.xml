@@ -8,6 +8,11 @@
                 <locale group="quiqqer/bricks" var="tour.general.BricksDescription"/>
             </description>
 
+            <languages>
+                <language>en</language>
+                <language>de</language>
+            </languages>
+
             <icon/>
         </tour>
     </tours>
