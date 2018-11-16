@@ -2,7 +2,7 @@
   "name": "quiqqer/bricks",
   "type": "quiqqer-module",
   "description": "The brick system allows you to design your website according to your wishes. You can quickly move, create, or remove bricks to different places in the template.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "GPL-3.0+",
   "authors": [
     {
