@@ -7,6 +7,7 @@
 namespace QUI\Bricks\Controls;
 
 use QUI;
+use QUI\Captcha\Handler as CaptchaHandler;
 
 /**
  * Mini contact control
@@ -63,6 +64,18 @@ class SimpleContact extends QUI\Control
             && isset($_POST['email'])
             && isset($_POST['message'])
         ) {
+            if ($useCaptcha && QUI::getPackageManager()->isInstalled('quiqqer/captcha')) {
+                if (empty($_POST['quiqqer-captcha-response'])
+                    || !CaptchaHandler::isResponseValid($_POST['quiqqer-captcha-response'])) {
+                    throw new QUI\Exception(
+                        QUI::getLocale()->get(
+                            'quiqqer/bricks',
+                            'brick.control.simpleContact.error.captcha_failed'
+                        )
+                    );
+                }
+            }
+
             if ($privacyPolicyCheckbox && empty($_POST['privacyPolicy'])) {
                 $Engine->assign([
                     'errorMessage' => QUI::getLocale()->get(
