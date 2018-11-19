@@ -32,7 +32,14 @@
         </div>
         <div class="customer-review-content">
             <div class="customer-review-content-text">
-                {$entry.content}
+                {* Fix content issue *}
+                {* https://dev.quiqqer.com/quiqqer/package-bricks/issues/97 *}
+                {if isset($entry['content']) && $entry['content']}
+                    {$entry['content']}
+                {else if isset($entry['customerReviewsContent']) && $entry['customerReviewsContent']}
+                    {$entry['customerReviewsContent']}
+                {/if}
+                {* end fix *}
             </div>
             <div class="customer-review-content-footer">
                 {if $entry.userName}
@@ -45,6 +52,7 @@
                     {$entry.jobTitle}
                 </span>
                 {/if}
+
                 {if $entry.url}
                 <span class="customer-review-content-footer-url">
                     <a href="{$entry.url}" title="{$entry.url}" target="_blank" rel="nofollow">
