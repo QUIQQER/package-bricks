@@ -53,6 +53,35 @@ define('package/quiqqer/bricks/bin/Controls/CustomerReviews', [
         },
 
         /**
+         * @event on import
+         *
+         * https://dev.quiqqer.com/quiqqer/package-bricks/issues/97
+         */
+        $onImport: function () {
+            // look if some value exist
+            var value = this.getElm().value;
+
+            if (value === '') {
+                return;
+            }
+
+            value = JSON.decode(value);
+
+            if (typeOf(value) !== 'array') {
+                return;
+            }
+
+            for (var i = 0, len = value.length; i < len; i++) {
+                if (typeof value[i].content !== 'undefined') {
+                    value[i].customerReviewsContent = value[i].content;
+                }
+            }
+
+            this.getElm().value = JSON.encode(value);
+            this.parent();
+        },
+
+        /**
          * set the project to the control
          *
          * @param Project

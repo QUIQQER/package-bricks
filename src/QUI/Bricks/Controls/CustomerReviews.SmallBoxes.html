@@ -25,7 +25,14 @@
 
     <div class="customer-review customer-review-{$modKey} control-template" {if $title}title="{$title}"{/if}>
         <div class="customer-review-content">
-            {$entry.content}
+            {* Fix content issue *}
+            {* https://dev.quiqqer.com/quiqqer/package-bricks/issues/97 *}
+            {if isset($entry['content']) && $entry['content']}
+                {$entry['content']}
+            {else if isset($entry['customerReviewsContent']) && $entry['customerReviewsContent']}
+                {$entry['customerReviewsContent']}
+            {/if}
+            {* end fix *}
         </div>
         <div class="customer-review-footer">
             <div class="customer-review-footer-image">

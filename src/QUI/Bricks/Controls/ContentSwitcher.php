@@ -55,7 +55,6 @@ class ContentSwitcher extends QUI\Control
             'entries' => $entries
         ));
 
-
         return $Engine->fetch(dirname(__FILE__) . '/ContentSwitcher.html');
     }
 }
