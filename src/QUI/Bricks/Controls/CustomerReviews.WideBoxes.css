@@ -39,20 +39,24 @@
     width: 100%;
 }
 
+.customer-review-content {
+    flex-grow: 1;
+}
+
 .customer-review-content-footer {
     align-items: flex-end;
     display: flex;
     flex-direction: column;
     font-size: 0.8rem;
+    line-height: 130%;
     margin-bottom: 10px;
     text-align: right;
-    line-height: 130%;
 }
 
 .customer-review-content-footer-username {
     display: block;
-    font-weight: bolder;
     font-size: 0.9rem;
+    font-weight: bolder;
 }
 
 .customer-review-content-footer-jobtitle {
@@ -72,5 +76,7 @@
 
     .customer-review-image {
         float: left;
+        height: 80px;
+        width: 80px;
     }
 }

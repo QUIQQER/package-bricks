@@ -25,6 +25,7 @@
     {/if}
 
     <div class="customer-review customer-review-{$modKey} control-template" {if $title}title="{$title}"{/if}>
+        {if $showAvatar}
         <div class="customer-review-image">
 
             {if $entry.avatar}
@@ -37,6 +38,7 @@
                  style="background-image: url({$avatarImage})">
             </div>
         </div>
+        {/if}
         <div class="customer-review-content">
             <div class="customer-review-content-text">
                 {* Fix content issue *}
