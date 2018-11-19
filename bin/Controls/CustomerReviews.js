@@ -62,12 +62,14 @@ define('package/quiqqer/bricks/bin/Controls/CustomerReviews', [
             var value = this.getElm().value;
 
             if (value === '') {
+                this.parent();
                 return;
             }
 
             value = JSON.decode(value);
 
             if (typeOf(value) !== 'array') {
+                this.parent();
                 return;
             }
 
