@@ -35,9 +35,14 @@
             {* end fix *}
         </div>
         <div class="customer-review-footer">
+            {if $entry.avatar}
+                {assign var=avatarImage value={image src=$entry.avatar width=200 onlysrc=true}}
+            {else}
+                {assign var=avatarImage value=URL_OPT_DIR|cat:"/quiqqer/bricks/bin/images/avatar-placeholder.svg"}
+            {/if}
             <div class="customer-review-footer-image">
                 <div class="customer-review-footer-image-img"
-                     style="background-image: url({image src=$entry.avatar width=200 onlysrc=true})">
+                     style="background-image: url({$avatarImage})">
                 </div>
             </div>
 
