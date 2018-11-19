@@ -27,18 +27,28 @@
     </div>
     <div class="content-switcher-content {if $modKey && $modKey % 2 !== 0 }pull-50 mobile-pull-100
                 pull-custom pull-custom-mobile{/if}">
-        {if $entry.title}
-        <h2 class="content-switcher-content-title">{$entry.title}</h2>
+
+        {* Fix content & title issue *}
+        {* https://dev.quiqqer.com/quiqqer/package-bricks/issues/97 *}
+        {if isset($entry['title']) && $entry['title']}
+            <h2 class="content-switcher-content-title">{$entry['title']}</h2>
+        {elseif isset($entry['content-switcher-title']) && $entry['content-switcher-title']}
+            <h2 class="content-switcher-content-title">{$entry['content-switcher-title']}</h2>
         {/if}
-        {if $entry.content}
+
+        {if isset($entry['content']) && $entry['content']}
         <div class="content-switcher-content-text">
             {$entry.content}
         </div>
+        {elseif isset($entry['content-switcher-content']) && $entry['content-switcher-content']}
+        <div class="content-switcher-content-text">
+            {$entry['content-switcher-content']}
+        </div>
         {/if}
+        {* end fix *}
     </div>
 
     {else}
-
 
     <div class="content-switcher-image {if $modKey && $modKey % 2 == 0 }push-50 mobile-pull-100{/if}"
          style="background-image: url('{$img}');"
@@ -50,14 +60,25 @@
 
     <div class="content-switcher-content {if $modKey && $modKey % 2 == 0 }pull-50 mobile-pull-100
                 pull-custom{/if}">
-        {if $entry.title}
-        <h2 class="content-switcher-content-title">{$entry.title}</h2>
+
+        {* Fix content & title issue *}
+        {* https://dev.quiqqer.com/quiqqer/package-bricks/issues/97 *}
+        {if isset($entry['title']) && $entry['title']}
+            <h2 class="content-switcher-content-title">{$entry['title']}</h2>
+        {elseif isset($entry['content-switcher-title']) && $entry['content-switcher-title']}
+            <h2 class="content-switcher-content-title">{$entry['content-switcher-title']}</h2>
         {/if}
-        {if $entry.content}
-        <div class="content-switcher-content-text">
-            {$entry.content}
-        </div>
+
+        {if isset($entry['content']) && $entry['content']}
+            <div class="content-switcher-content-text">
+                {$entry.content}
+            </div>
+        {elseif isset($entry['content-switcher-content']) && $entry['content-switcher-content']}
+            <div class="content-switcher-content-text">
+                {$entry['content-switcher-content']}
+            </div>
         {/if}
+        {* end fix *}
     </div>
 
     {/if}

@@ -44,16 +44,49 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
                                '<span class="entry-title">' +
                                  QUILocale.get(lg, 'contentSwitcher.entries.entry.title') +
                                '</span>' +
-                               '<input type="text" name="title" />' +
+                               '<input type="text" name="content-switcher-title" />' +
                            '</label>' +
                            '<label>' +
                                '<span class="entry-title">' +
                                   QUILocale.get(lg, 'contentSwitcher.entries.entry.content') +
                                '</span>' +
-                               '<input name="content" class="field-container-field field-description" data-qui="controls/editors/Input" />' +
+                               '<input name="content-switcher-content" class="field-container-field field-description" data-qui="controls/editors/Input" />' +
                            '</label>' +
                        '</div>'
             });
+        },
+
+        /**
+         * @event on import
+         *
+         * https://dev.quiqqer.com/quiqqer/package-bricks/issues/97
+         */
+        $onImport: function () {
+            // look if some value exist
+            var value = this.getElm().value;
+
+            if (value === '') {
+                return;
+            }
+
+            value = JSON.decode(value);
+
+            if (typeOf(value) !== 'array') {
+                return;
+            }
+
+            for (var i = 0, len = value.length; i < len; i++) {
+                if (typeof value[i].content !== 'undefined') {
+                    value[i]['content-switcher-content'] = value[i].content;
+                }
+
+                if (typeof value[i].title !== 'undefined') {
+                    value[i]['content-switcher-title'] = value[i].title;
+                }
+            }
+
+            this.getElm().value = JSON.encode(value);
+            this.parent();
         },
 
         /**
