@@ -35,6 +35,8 @@
             {* end fix *}
         </div>
         <div class="customer-review-footer">
+
+            {if $showAvatar}
             {if $entry.avatar}
                 {assign var=avatarImage value={image src=$entry.avatar width=200 onlysrc=true}}
             {else}
@@ -45,6 +47,7 @@
                      style="background-image: url({$avatarImage})">
                 </div>
             </div>
+            {/if}
 
             <div class="customer-review-footer-user">
                 {if $entry.userName}
