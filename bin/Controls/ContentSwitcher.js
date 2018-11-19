@@ -28,31 +28,31 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
             this.parent(options);
 
             this.addEvents({
-                onParsed  : this.$onParsed
+                onParsed: this.$onParsed
             });
 
             this.setAttributes({
                 buttonText: QUILocale.get(lg, 'contentSwitcher.entries.button.text'),
-                entry: '<div class="quiqqer-bricks-ContentSwitcher-entry" style="display: none;">' +
-                           '<label class="entry-image">' +
-                               '<span class="entry-title">' +
-                                 QUILocale.get(lg, 'contentSwitcher.entries.entry.picture') +
-                               '</span>' +
-                               '<input class="media-image" data-qui-options-selectable_types="image" name="img"/>' +
-                           '</label>' +
-                           '<label>' +
-                               '<span class="entry-title">' +
-                                 QUILocale.get(lg, 'contentSwitcher.entries.entry.title') +
-                               '</span>' +
-                               '<input type="text" name="content-switcher-title" />' +
-                           '</label>' +
-                           '<label>' +
-                               '<span class="entry-title">' +
-                                  QUILocale.get(lg, 'contentSwitcher.entries.entry.content') +
-                               '</span>' +
-                               '<input name="content-switcher-content" class="field-container-field field-description" data-qui="controls/editors/Input" />' +
-                           '</label>' +
-                       '</div>'
+                entry     : '<div class="quiqqer-bricks-ContentSwitcher-entry" style="display: none;">' +
+                    '<label class="entry-image">' +
+                    '<span class="entry-title">' +
+                    QUILocale.get(lg, 'contentSwitcher.entries.entry.picture') +
+                    '</span>' +
+                    '<input class="media-image" data-qui-options-selectable_types="image" name="img"/>' +
+                    '</label>' +
+                    '<label>' +
+                    '<span class="entry-title">' +
+                    QUILocale.get(lg, 'contentSwitcher.entries.entry.title') +
+                    '</span>' +
+                    '<input type="text" name="content-switcher-title" />' +
+                    '</label>' +
+                    '<label>' +
+                    '<span class="entry-title">' +
+                    QUILocale.get(lg, 'contentSwitcher.entries.entry.content') +
+                    '</span>' +
+                    '<input name="content-switcher-content" class="field-container-field field-description" data-qui="controls/editors/Input" />' +
+                    '</label>' +
+                    '</div>'
             });
         },
 
@@ -66,12 +66,14 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
             var value = this.getElm().value;
 
             if (value === '') {
+                this.parent();
                 return;
             }
 
             value = JSON.decode(value);
 
             if (typeOf(value) !== 'array') {
+                this.parent();
                 return;
             }
 
