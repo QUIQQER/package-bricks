@@ -1,3 +1,8 @@
+.brick-image {
+    height: 100%;
+    overflow: hidden;
+}
+
 .brick-image-picture-container {
     text-align: center;
 }

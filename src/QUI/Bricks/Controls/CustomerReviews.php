@@ -24,8 +24,9 @@ class CustomerReviews extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'template' => 'wideBoxes',
-            'entries'  => []
+            'template'  => 'wideBoxes',
+            'showAvatar' => true,
+            'entries'   => []
         ]);
 
         parent::__construct($attributes);
@@ -59,8 +60,9 @@ class CustomerReviews extends QUI\Control
         }
 
         $Engine->assign([
-            'this'    => $this,
-            'entries' => $entries
+            'this'      => $this,
+            'entries'   => $entries,
+            'showAvatar' => $this->getAttribute('showAvatar')
         ]);
 
         return $Engine->fetch($template);

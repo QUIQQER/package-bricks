@@ -3,7 +3,9 @@
     <ul class="hide-on-mobile">
         {foreach $desktopSlides as $key => $slide}
         <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}" data-newTab="{$slide.newTab}">
+            {if $slide.url}
             <a href="{$slide.url}" {if $slide.newTab} target="_blank" {/if}>
+            {/if}
             {assign var=extraClass value=""}
 
             {if isset($slide.pos) && $slide.pos == 'quiqqer-bricks-promoslider-slide-right'}
@@ -35,7 +37,9 @@
             {/if}
 
             &nbsp;
+            {if $slide.url}
             </a>
+            {/if}
         </li>
         {/foreach}
     </ul>
