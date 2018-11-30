@@ -589,9 +589,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
             }
 
             var self       = this,
-                Background = Slide.getElement('.quiqqer-bricks-promoslider-wallpaper-image'),
-                display    = Background.getStyle('display'),
-                image      = Slide.get('data-image');
+                Background = Slide.getElement('.quiqqer-bricks-promoslider-wallpaper-image');
+
+            if (!Background) {
+                Background = new Element('div');
+            }
+
+            var display = Background.getStyle('display'),
+                image   = Slide.get('data-image');
 
             if (display !== 'none') {
                 return;
