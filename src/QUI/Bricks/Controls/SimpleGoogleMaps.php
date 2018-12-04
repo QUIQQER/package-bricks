@@ -25,14 +25,11 @@ class SimpleGoogleMaps extends QUI\Control
         // default options
         $this->setAttributes([
             'title'          => '',
-            'preventLoadMap' => false
+            'preventLoadMap' => false,
+            'template'       => 'standard'
         ]);
 
         parent::__construct($attributes);
-
-        $this->addCSSFile(
-            dirname(__FILE__) . '/SimpleGoogleMaps.css'
-        );
     }
 
     /**
@@ -59,8 +56,8 @@ class SimpleGoogleMaps extends QUI\Control
             'q'   => "{$brickPlace},{$brickZip},{$brickStreet},{$brickCity}"
         ]);
 
+        // prevent load map
         $url = 'https://www.google.com/maps/embed/v1/place?' . $query . "&zoom=" . $zoom;
-
         if ($preventLoadMap) {
             $imgUrl = URL_OPT_DIR . 'quiqqer/bricks/bin/images/SimpleGoogleMapsBackground1.png';
 
@@ -71,12 +68,26 @@ class SimpleGoogleMaps extends QUI\Control
             ]);
         }
 
+        // template
+        switch ($this->getAttribute('template')) {
+            case 'nextToEachOther':
+                $template = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.html';
+                $css      = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.css';
+                break;
+            case 'default':
+            default:
+                $template = dirname(__FILE__) . '/SimpleGoogleMaps.Standard.html';
+                $css      = dirname(__FILE__) . '/SimpleGoogleMaps.Standard.css';
+        }
+
         $Engine->assign([
             'this'           => $this,
             'url'            => $url,
             'preventLoadMap' => $preventLoadMap
         ]);
 
-        return $Engine->fetch(dirname(__FILE__) . '/SimpleGoogleMaps.html');
+        $this->addCSSFile($css);
+
+        return $Engine->fetch($template);
     }
 }

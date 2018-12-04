@@ -1257,6 +1257,19 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Das automatische Laden von Google Maps verhindern. Der Benutzer muss sie manuell aktivieren.]]></de>
             <en><![CDATA[Prevent auto-load Google Maps. User must activate it manually.]]></en>
         </locale>
+        <locale name="brick.control.simplegooglemaps.settings.template">
+            <de><![CDATA[Template]]></de>
+            <en><![CDATA[Template]]></en>
+        </locale>
+            <locale name="brick.control.simplegooglemaps.settings.template.standard">
+                <de><![CDATA[Standard (Inhalt über der Karte)]]></de>
+                <en><![CDATA[Template (content above the map)]]></en>
+            </locale>
+            <locale name="brick.control.simplegooglemaps.settings.template.nextToEachOther">
+                <de><![CDATA[Nebeneinander (Text neben der Karte)]]></de>
+                <en><![CDATA[Next to each other (content next to the map)]]></en>
+            </locale>
+
         <locale name="brick.control.simplegooglemaps.settings.place">
             <de><![CDATA[Google Place]]></de>
             <en><![CDATA[Google Place]]></en>
