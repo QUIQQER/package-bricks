@@ -672,6 +672,21 @@
                 <setting name="preventLoadMap" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.preventLoadMap"/>
                 </setting>
+
+                <setting name="template" type="select">
+                    <locale group="quiqqer/bricks"
+                            var="brick.control.simplegooglemaps.settings.template"/>
+
+                    <option value="standard">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.simplegooglemaps.settings.template.standard"/>
+                    </option>
+                    <option value="nextToEachOther">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.simplegooglemaps.settings.template.nextToEachOther"/>
+                    </option>
+                </setting>
+
                 <setting name="place">
                     <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.place"/>
                 </setting>
