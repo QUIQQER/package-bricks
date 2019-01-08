@@ -140,7 +140,7 @@
             <en><![CDATA[I am aware of the [Privacy Policy].]]></en>
         </locale>
         <locale name="brick.control.simpleContact.mailTo">
-            <de><![CDATA[E-Mail Adresse, wo die Nachricht gesendet wird]]></de>
+            <de><![CDATA[E-Mail Adresse, an die die Nachricht gesendet wird]]></de>
             <en><![CDATA[Email where the message will send to]]></en>
             <pl><![CDATA[Adres mailowy, na który zostanie wysłania wiadomość]]></pl>
         </locale>
