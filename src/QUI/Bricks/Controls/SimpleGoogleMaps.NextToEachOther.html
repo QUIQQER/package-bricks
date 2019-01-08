@@ -1,0 +1,23 @@
+{if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+<header class="control-header">
+    <h1>{$this->getAttribute('frontendTitle')}</h1>
+</header>
+{/if}
+
+<div class="simpleGoogleMap-nextToEachOther">
+    <div class="simpleGoogleMap-nextToEachOther-mapContainer">
+        <div class="simpleGoogleMap-wrapper">
+            <div class="simpleGoogleMap">
+                {if !$preventLoadMap}
+                <iframe class="simpleGoogleMap-iframe" src="{$url}"></iframe>
+                {/if}
+            </div>
+        </div>
+    </div>
+
+    {if  $this->getAttribute('content') != ""}
+    <div class="simpleGoogleMap-nextToEachOther-contentContainer">
+        {$this->getAttribute('content')}
+    </div>
+    {/if}
+</div>
