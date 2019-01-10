@@ -1062,9 +1062,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
                 <![CDATA[Jetzt können wir unser Kontaktformular in die festgelegten Zonen einer Website einfügen. <br/>Dazu begeben wir uns in die Startseite ihres Standart-Projektes (<b>Main-Project</b>)]]></de>
             <en><![CDATA[Now we can insert our contact form into the defined zones of a website. <br/>We go to the start page of your standard project (<b>Main-Project</b>).]]></en>
         </locale>
+        <locale name="tour.general.bricks.Step17_2.Text">
+            <de>
+                <![CDATA[Sie können diesen Bausteine übrigens in jede ihrer Projektseiten einbauen]]></de>
+            <en><![CDATA[By the way, you can add these blocks to any of your project pages]]></en>
+        </locale>
         <locale name="tour.general.bricks.Step18.Text">
             <de><![CDATA[Hier wählen wir den Menü-Punkt <b>Bausteine</b>.]]></de>
-            <en><![CDATA[Here we select the menu item <b>Bricks</b>.]]></en>
+            <en><![CDATA[.. und Bestätigen die Änderung mit Übernehmen select the menu item <b>Bricks</b>.]]></en>
         </locale>
         <locale name="tour.general.bricks.Step18_2.Text">
             <de><![CDATA[Dieses Menü ermöglicht es Ihnen unterschiedliche Bausteine, an den rechts grafisch Dargestellten Positionen einzubinden.]]></de>
@@ -1072,7 +1077,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
         <locale name="tour.general.bricks.Step19.Text">
             <de>
-                <![CDATA[Um das erstellte Kontaktformular nun in die Fußzeile (Footer) der Startseite einzufügen, klicken Sie bitte hier. ]]></de>
+                <![CDATA[Um das erstellte Kontaktformular nun in die Fußzeile (Footer) der Startseite einzufügen, klicken Sie bitte auf "Baustein hinzufügen". ]]></de>
             <en><![CDATA[To add the created contact form to the footer of the start page, please click here. ]]></en>
         </locale>
         <locale name="tour.general.bricks.Step20.Text">
@@ -1110,6 +1115,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="tour.general.bricks.Step26.Text">
             <de><![CDATA[<b>Gratulation</b>. <br/>Sie haben erfolgreich die Bausteine-Tour absolviert ]]></de>
             <en><![CDATA[<b>Congratulations</b>. <br/>You have successfully completed the Brick Tour ]]></en>
+        </locale>
+        <locale name="tour.general.bricks.img.altText">
+            <de><![CDATA[Darstellung der verschiedenen Zonen in die Bausteine eingesetzt werden können.]]></de>
+            <en><![CDATA[representation of the different zones into which bricks can be inserted.]]></en>
         </locale>
 
         <!-- Bricks Buttons -->
