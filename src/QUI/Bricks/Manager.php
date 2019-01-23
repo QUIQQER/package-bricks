@@ -623,13 +623,26 @@ class Manager
             }
         }
 
+        $dataAttributes = [];
+
+        foreach ($Setting->attributes as $attribute) {
+            if ($attribute->nodeName === 'data-qui') {
+                continue;
+            }
+
+            if (strpos($attribute->nodeName, 'data-') !== false) {
+                $dataAttributes[$attribute->nodeName] = trim($attribute->nodeValue);
+            }
+        }
+
         return [
-            'name'     => $Setting->getAttribute('name'),
-            'text'     => QUI\Utils\DOM::getTextFromNode($Setting, false),
-            'type'     => $Setting->getAttribute('type'),
-            'class'    => $Setting->getAttribute('class'),
-            'data-qui' => $Setting->getAttribute('data-qui'),
-            'options'  => $options
+            'name'            => $Setting->getAttribute('name'),
+            'text'            => QUI\Utils\DOM::getTextFromNode($Setting, false),
+            'type'            => $Setting->getAttribute('type'),
+            'class'           => $Setting->getAttribute('class'),
+            'data-qui'        => $Setting->getAttribute('data-qui'),
+            'options'         => $options,
+            'data-attributes' => $dataAttributes
         ];
     }
 
