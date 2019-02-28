@@ -592,6 +592,44 @@
                     </option>
                 </setting>
 
+                <setting name="random" type="select">
+                    <locale group="quiqqer/bricks" var="bricks.customerReviews.random"/>
+                    <option value="off">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.random.off"/>
+                    </option>
+                    <option value="1">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.random.1"/>
+                    </option>
+                    <option value="2">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.random.2"/>
+                    </option>
+                    <option value="3">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.random.3"/>
+                    </option>
+                    <option value="4">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.random.4"/>
+                    </option>
+                    <option value="5">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.random.5"/>
+                    </option>
+                    <option value="6">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.random.6"/>
+                    </option>
+                    <option value="7">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.random.7"/>
+                    </option>
+                    <option value="8">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.random.8"/>
+                    </option>
+                    <option value="9">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.random.9"/>
+                    </option>
+                    <option value="10">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviews.random.10"/>
+                    </option>
+
+                </setting>
+
                 <setting name="showAvatar" type="checkbox">
                     <locale group="quiqqer/bricks" var="bricks.customerReviews.showAvatar"/>
                 </setting>

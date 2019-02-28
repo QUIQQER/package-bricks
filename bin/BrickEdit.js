@@ -26,7 +26,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
     'css!package/quiqqer/bricks/bin/BrickEdit.css'
 
 ], function (QUI, QUIPanel, QUIConfirm, BrickAreas, QUIAjax, QUILocale,
-             Projects, QUIFormUtils, ControlUtils, Template, Bricks) {
+    Projects, QUIFormUtils, ControlUtils, Template, Bricks
+) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
@@ -64,14 +65,14 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         initialize: function (options) {
             this.parent(options);
 
-            this.$availableBricks   = [];
+            this.$availableBricks = [];
             this.$availableSettings = [];
-            this.$customfields      = [];
-            this.$loaded            = false;
+            this.$customfields = [];
+            this.$loaded = false;
 
             this.$Container = null;
-            this.$Editor    = false;
-            this.$Areas     = false;
+            this.$Editor = false;
+            this.$Areas = false;
 
             this.addEvents({
                 onInject       : this.$onInject,
@@ -185,7 +186,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                  */
                 this.$availableBricks = bricks;
                 this.$availableSettings = brick.availableSettings;
-                this.$customfields      = brick.customfields;
+                this.$customfields = brick.customfields;
 
                 this.setAttribute('data', brick);
 
@@ -436,9 +437,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                         if (attributes.areas) {
                             areas = attributes.areas
-                                              .replace(/^,*/, '')
-                                              .replace(/,*$/, '')
-                                              .split(',');
+                                .replace(/^,*/, '')
+                                .replace(/,*$/, '')
+                                .split(',');
                         }
 
                         // areas
@@ -463,11 +464,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                             new Element('tr', {
                                 'class': i % 2 ? 'odd' : 'even',
                                 html   : '<td>' +
-                                '<label>' +
-                                '<input type="checkbox" name="flexible-' + data.name + '" />' +
-                                '<span>' + QUILocale.get(data.text[0], data.text[1]) + '</span>' +
-                                '</label>' +
-                                '</td>'
+                                    '<label>' +
+                                    '<input type="checkbox" name="flexible-' + data.name + '" />' +
+                                    '<span>' + QUILocale.get(data.text[0], data.text[1]) + '</span>' +
+                                    '</label>' +
+                                    '</td>'
                             }).inject(TBody);
                         }
 
@@ -682,7 +683,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                 TableExtra.setStyle('display', null);
 
-                var i, len, Row, text, Value, setting, extraFieldId;
+                var i, c, len, cLen, attr, Row, text, Value, setting,
+                    extraFieldId, dataAttributes;
 
                 var self = this,
                     id   = this.getId(),
@@ -690,8 +692,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                 // extra settings
                 for (i = 0, len = this.$availableSettings.length; i < len; i++) {
-                    setting      = this.$availableSettings[i];
+                    setting = this.$availableSettings[i];
                     extraFieldId = 'extraField_' + id + '_' + i;
+                    dataAttributes = setting['data-attributes'];
 
                     text = setting.text;
 
@@ -703,11 +706,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     Row = new Element('tr', {
                         'class': i % 2 ? 'odd' : 'even',
                         html   : '<td>' +
-                        '    <label class="quiqqer-bricks-areas" for="' + extraFieldId + '">' +
-                        text +
-                        '    </label>' +
-                        '</td>' +
-                        '<td></td>'
+                            '    <label class="quiqqer-bricks-areas" for="' + extraFieldId + '">' +
+                            text +
+                            '    </label>' +
+                            '</td>' +
+                            '<td></td>'
                     }).inject(TableBody);
 
                     if (setting.type !== 'select') {
@@ -722,6 +725,14 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                             Value.set('data-qui', setting['data-qui']);
                         }
 
+                        if (typeof dataAttributes === 'object') {
+                            for (attr in dataAttributes) {
+                                if (dataAttributes.hasOwnProperty(attr)) {
+                                    Value.set(attr, dataAttributes[attr]);
+                                }
+                            }
+                        }
+
                         continue;
                     }
 
@@ -732,7 +743,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     }).inject(Row.getElement('td:last-child'));
 
 
-                    for (var c = 0, clen = setting.options.length; c < clen; c++) {
+                    for (c = 0, cLen = setting.options.length; c < cLen; c++) {
                         text = setting.options[c].text;
 
                         if (typeOf(setting.options[c].text) === 'array') {
@@ -746,6 +757,14 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                             html : text,
                             value: setting.options[c].value
                         }).inject(Value);
+                    }
+
+                    if (typeof dataAttributes === 'object') {
+                        for (attr in dataAttributes) {
+                            if (dataAttributes.hasOwnProperty(attr)) {
+                                Value.set(attr, dataAttributes[attr]);
+                            }
+                        }
                     }
                 }
 

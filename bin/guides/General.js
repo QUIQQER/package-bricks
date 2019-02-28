@@ -20,7 +20,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
 
     var lg = 'quiqqer/bricks';
 
-    var Bricks     = new Tour();
+    var Bricks = new Tour();
     var FooterZone = null;
 
     var DropDownMenu,
@@ -30,24 +30,25 @@ define('package/quiqqer/bricks/bin/guides/General', [
         BrickPanel,
         BrickSettings,
         SitePanel,
+        PopupSubmitButtonControl,
         ProjectPanel;
 
     var step1Text = QUILocale.get(lg, 'tour.general.bricks.Step1_1.Text') +
         '<a target="_blank" href = "https://www.quiqqer.com/media/cache/quiqqer/zonen-bild.png">' +
-        '<img src="' + URL_OPT_DIR + 'quiqqer/tour/bin/img/zonen-bild.png"' +
+        '<img alt="" src="' + URL_OPT_DIR + 'quiqqer/tour/bin/img/zonen-bild.png"' +
         ' style="max-width: 100%; height: 200px;" /></a>'
         + QUILocale.get(lg, 'tour.general.bricks.Step1_2.Text');
 
-    var catchClicks = function(){
+    var catchClicks = function () {
         //make rest unclickable
         var clickCatcher = new Element('div', {
             'class': 'clickCatcher',
-            styles : {
-                width    : '100%',
-                height   : '100%',
+            styles: {
+                width: '100%',
+                height: '100%',
                 'z-index': 100001,
-                'top'    : '0px',
-                position : 'absolute',
+                'top': '0px',
+                position: 'absolute',
                 'opacity': '0'
             }
         });
@@ -55,7 +56,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
         clickCatcher.inject(document.getElement('body'));
     };
 
-    var stopCatching = function(){
+    var stopCatching = function () {
         var clickCatcher = document.getElement('.clickCatcher');
 
         //checking because event gets triggered double
@@ -65,21 +66,21 @@ define('package/quiqqer/bricks/bin/guides/General', [
     };
 
     Bricks.addStep({
-        title  : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text   : step1Text,
-        when   : {
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: step1Text,
+        when: {
             show: function () {
-                var quiId    = document.getElement('[data-name = "extras"]').getAttribute('data-quiid');
+                var quiId = document.getElement('[data-name = "extras"]').getAttribute('data-quiid');
                 DropDownMenu = QUI.Controls.getById(quiId);
             }
         },
         buttons: [{
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Abbruch'),
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Abbruch'),
             action: function () {
                 Bricks.cancel();
             }
         }, {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 Bricks.next();
             }
@@ -87,19 +88,19 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title        : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text         : QUILocale.get(lg, 'tour.general.bricks.Step2.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step2.Text'),
         tetherOptions: {
             constraints: null // this disables pinning (which breaks the arrows)
         },
-        buttons      : false,
-        attachTo     : {
+        buttons: false,
+        attachTo: {
             element: function () {
                 return DropDownMenu.getElm();
             },
-            on     : 'right'
+            on: 'right'
         },
-        when         : {
+        when: {
             show: function () {
                 DropDownMenu.getElm().addEvent('click', Bricks.next);
                 var Entries = DropDownMenu.getChildren();
@@ -116,16 +117,16 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step3.Text'),
-        buttons : false,
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step3.Text'),
+        buttons: false,
         attachTo: {
             element: function () {
                 return BricksMenuEntry.getElm();
             },
-            on     : 'right'
+            on: 'right'
         },
-        when    : {
+        when: {
             show: function () {
                 BricksMenuEntry.getElm().addEvent('click', Bricks.next);
             },
@@ -136,13 +137,13 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title        : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text         : QUILocale.get(lg, 'tour.general.bricks.Step4.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step4.Text'),
         tetherOptions: {
             constraints: null // this disables pinning (which breaks the arrows)
         },
-        buttons      : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 Bricks.next();
             }
@@ -150,16 +151,16 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step5.Text'),
-        buttons : false,
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step5.Text'),
+        buttons: false,
         attachTo: {
             element: function () {
                 return document.getElement('[name="brick-add"]');
             },
-            on     : 'right'
+            on: 'right'
         },
-        when    : {
+        when: {
             show: function () {
                 BrickPanel = QUI.Controls.getByType('package/quiqqer/bricks/bin/Manager')[0].getElm();
                 BrickPanel.getElement('[name="brick-add"]').addEvent('click', Bricks.next);
@@ -171,10 +172,10 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title  : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text   : QUILocale.get(lg, 'tour.general.bricks.Step6.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step6.Text'),
         buttons: {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 Bricks.next()
             }
@@ -182,19 +183,19 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step7.Text'),
-        buttons : false,
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step7.Text'),
+        buttons: false,
         attachTo: {
             element: function () {
                 PopupBox = document.getElement('.qui-window-popup.box');
 
                 return PopupBox.getElement('select')
             },
-            on     : 'right'
+            on: 'right'
 
         },
-        when    : {
+        when: {
             show: function () {
                 PopupBox.getElement('select').addEvent('click', Bricks.next)
             },
@@ -205,22 +206,22 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step8.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step8.Text'),
         attachTo: {
             element: function () {
                 return PopupBox.getElement('input[name = "title"]')
             },
-            on     : 'right'
+            on: 'right'
         },
-        buttons : false,
+        buttons: false,
         // {
         //     text: QUILocale.get(lg, 'Bricks.Button.Weiter'),
         //     action: function () {
         //         Bricks.next();
         //     }
         // },
-        when    : {
+        when: {
             show: function () {
                 PopupBox.getElement('input[name = "title"]').addEvent('keydown', Bricks.next)
             },
@@ -231,22 +232,22 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step9.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step9.Text'),
         attachTo: {
             element: function () {
                 return PopupBox.getElement('button[name = "submit"]')
             },
-            on     : 'right'
+            on: 'right'
         },
-        buttons : false,
+        buttons: false,
         // {
         //     text: QUILocale.get(lg, 'Bricks.Button.Weiter'),
         //     action: function () {
         //         Bricks.next();
         //     }
         // },
-        when    : {
+        when: {
             show: function () {
                 PopupBox.getElement('button[name = "submit"]').addEvent('click', Bricks.next)
             },
@@ -257,10 +258,10 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title  : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text   : QUILocale.get(lg, 'tour.general.bricks.Step10.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step10.Text'),
         buttons: {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 BrickSettings = QUI.Controls.getByType('package/quiqqer/bricks/bin/BrickEdit');
                 BrickSettings = BrickSettings[BrickSettings.length - 1];
@@ -270,16 +271,16 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step11.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step11.Text'),
         attachTo: {
             element: function () {
                 return BrickSettings.getElm().getElement('[name="information"]')
             },
-            on     : 'left'
+            on: 'left'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 BrickSettings.getElm().getElement('[name = "settings"]').fireEvent('click');
                 Bricks.next();
@@ -288,16 +289,16 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step12_1.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step12_1.Text'),
         attachTo: {
             element: function () {
                 return BrickSettings.getElm().getElement('[name="settings"]')
             },
-            on     : 'left'
+            on: 'left'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 Bricks.next();
             }
@@ -305,16 +306,16 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step12_2.Text'),
-        buttons : false,
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step12_2.Text'),
+        buttons: false,
         attachTo: {
             element: function () {
                 return BrickSettings.getElm().getElement('.quiqqer-bricks-brickareas-buttons button')
             },
-            on     : 'right'
+            on: 'right'
         },
-        when    : {
+        when: {
             show: function () {
                 BrickSettings.getElm().getElement('.quiqqer-bricks-brickareas-buttons button').addEvent('click', Bricks.next)
             },
@@ -325,16 +326,16 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title  : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text   : QUILocale.get(lg, 'tour.general.bricks.Step12_3.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step12_3.Text'),
         buttons: {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 PopupBox2 = QUI.Controls.getByType('package/quiqqer/bricks/bin/AreaWindow')[0].getElm();
                 Bricks.next();
             }
         },
-        when   : {
+        when: {
             show: function () {
                 //make rest unclickable
                 catchClicks();
@@ -343,8 +344,8 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step12_4.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step12_4.Text'),
         attachTo: {
             element: function () {
                 var Footer;
@@ -359,19 +360,20 @@ define('package/quiqqer/bricks/bin/guides/General', [
 
                 return Footer
             },
-            on     : 'right'
+            on: 'right'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 var Footer;
-
                 Footer = PopupBox2.getElements('.quiqqer-bricks-area.smooth');
+
                 Footer.forEach(function (Entry) {
                     if (Entry.getAttribute('data-area') === "footer") {
                         Footer = Entry;
                     }
                 });
+
                 if (!Footer.getAttribute('class').includes('quiqqer-bricks-area-selected')) {
                     Footer.fireEvent('click');
                 } else {
@@ -379,9 +381,12 @@ define('package/quiqqer/bricks/bin/guides/General', [
                 }
             }
         },
-        when    : {
+        when: {
             show: function () {
-                var Footer;
+                var Footer,
+                    submitButtonControlId,
+                    selector;
+
                 Footer = PopupBox2.getElements('.quiqqer-bricks-area.smooth');
                 Footer.forEach(function (Entry) {
                     if (Entry.getAttribute('data-area') === "footer") {
@@ -389,7 +394,13 @@ define('package/quiqqer/bricks/bin/guides/General', [
                     }
                 });
 
-                Footer.addEvent('click', Bricks.next)
+                Footer.addEvent('click', Bricks.next);
+
+                //disabling submit button
+                selector = 'button.qui-button[title="Übernehmen"]';
+                submitButtonControlId = PopupBox2.getElement(selector).getAttribute('data-quiid');
+                PopupSubmitButtonControl = QUI.Controls.getById(submitButtonControlId);
+                PopupSubmitButtonControl.disable();
             },
             hide: function () {
                 var Footer;
@@ -406,23 +417,24 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step12_5.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step12_5.Text'),
         attachTo: {
             element: function () {
                 return PopupBox2.getElement('[name = "submit"]');
             },
-            on     : 'right'
+            on: 'right'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 PopupBox2.getElement('[name = "submit"]').fireEvent('click');
             }
         },
-        when    : {
+        when: {
             show: function () {
-                PopupBox2.getElement('[name = "submit"]').addEvent('click', Bricks.next)
+                PopupBox2.getElement('[name = "submit"]').addEvent('click', Bricks.next);
+                PopupSubmitButtonControl.enable();
             },
 
             hide: function () {
@@ -434,22 +446,22 @@ define('package/quiqqer/bricks/bin/guides/General', [
 
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step13.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step13.Text'),
         attachTo: {
             element: function () {
                 return BrickSettings.getElm().getElement('[name="extra"]')
             },
-            on     : 'left'
+            on: 'left'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 BrickSettings.getElm().getElement('[name = "content"]').fireEvent('click');
                 Bricks.next();
             }
         },
-        when    : {
+        when: {
             show: function () {
                 BrickSettings.getElm().getElement('[name="extra"]').fireEvent('click');
             }
@@ -457,16 +469,16 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step14.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step14.Text'),
         attachTo: {
             element: function () {
                 return BrickSettings.getElm().getElement('[name="content"]')
             },
-            on     : 'left'
+            on: 'left'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 Bricks.next();
             }
@@ -474,22 +486,22 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step15.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step15.Text'),
         attachTo: {
             element: function () {
                 return BrickSettings.getElm().getElement('[name="save"]')
             },
-            on     : 'right'
+            on: 'right'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 BrickSettings.getElm().getElement('[name="save"]').click();
                 Bricks.next();
             }
         },
-        when    : {
+        when: {
             show: function () {
                 BrickSettings.getElm().getElement('[name="save"]').addEvent('click', Bricks.next)
             },
@@ -500,19 +512,19 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title        : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text         : QUILocale.get(lg, 'tour.general.bricks.Step16.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step16.Text'),
         tetherOptions: {
             constraints: null // this disables pinning (which breaks the arrows)
         },
-        attachTo     : {
+        attachTo: {
             element: function () {
                 return BrickSettings.getElm().getElement('[name="close"]')
             },
-            on     : 'left'
+            on: 'left'
         },
-        buttons      : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 if (BrickSettings.getElm().getElement('[name="close"]')) {
                     BrickSettings.getElm().getElement('[name="close"]').fireEvent('click')
@@ -521,7 +533,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
                 }
             }
         },
-        when         : {
+        when: {
             show: function () {
                 BrickSettings.getElm().getElement('[name="close"]').addEvent('click', Bricks.next);
             }
@@ -529,16 +541,16 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title  : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text   : QUILocale.get(lg, 'tour.general.bricks.Step17.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step17.Text'),
         buttons: {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 var ProjektBar = document.getElements('.project-container');
-                var Panel      = QUI.Controls.getById(
+                var Panel = QUI.Controls.getById(
                     ProjektBar.getParent('.qui-panel').get('data-quiid')
                 );
-                ProjectPanel   = Panel;
+                ProjectPanel = Panel;
                 Panel.open(function () {
                     Projects.getList(function (result) {
                         var keys        = Object.keys(result),
@@ -562,16 +574,10 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step18.Text'),
-        attachTo: {
-            element: function () {
-                return SitePanel.getElm().getElement('[name="quiqqer.bricks"]');
-            },
-            on     : 'left'
-        },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step17_2.Text'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 SitePanel.addEvent('onCategoryEnter', function () {
                     Bricks.next.delay(500)
@@ -579,7 +585,41 @@ define('package/quiqqer/bricks/bin/guides/General', [
                 SitePanel.getCategory('quiqqer.bricks').click();
             }
         },
-        when    : {
+        when: {
+            show: function () {
+                var Tab = SitePanel.getCategory('quiqqer.bricks').getElm();
+                var Bar = SitePanel.getCategoryBar().getElm();
+                var top = Tab.getPosition(Bar).y;
+
+                SitePanel.getCategoryBar().scrollDown(top);
+            }
+        }
+    });
+
+    Bricks.addStep({
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step18.Text'),
+        tetherOptions: {
+            constraints: null // this disables pinning (which breaks the arrows)
+        },
+        attachTo: {
+            element: function () {
+                return SitePanel.getElm().getElement('[name="quiqqer.bricks"]');
+            },
+            on: 'left'
+        },
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+            action: function () {
+                console.log('problem here');
+                Bricks.next();
+                // SitePanel.addEvent('onCategoryEnter', function () {
+                //     Bricks.next.delay(500)
+                // });
+                // SitePanel.getCategory('quiqqer.bricks').click();
+            }
+        },
+        when: {
             show: function () {
                 SitePanel.getElm().getElement('[name="quiqqer.bricks"]').addEvent('click', function () {
                     Bricks.next.delay(500)
@@ -597,8 +637,8 @@ define('package/quiqqer/bricks/bin/guides/General', [
         title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
         text: QUILocale.get(lg, 'tour.general.bricks.Step18_2.Text'),
         buttons: {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
-            action: function(){
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+            action: function () {
                 Bricks.next();
             }
         }
@@ -606,13 +646,12 @@ define('package/quiqqer/bricks/bin/guides/General', [
 
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step19.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step19.Text'),
         attachTo: {
             element: function () {
-                var rows    = SitePanel.getElm().getElements('.quiqqer-bricks-site-category-area');
+                var rows = SitePanel.getElm().getElements('.quiqqer-bricks-site-category-area');
                 var counter = 1;
-                var Buttons;
 
                 while (rows === null) {
                     counter++;
@@ -628,19 +667,17 @@ define('package/quiqqer/bricks/bin/guides/General', [
                     }
                 });
 
-                Buttons = FooterZone.getElements('button');
-
                 return FooterZone.getElement('button');
             },
-            on     : 'right'
+            on: 'right'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 FooterZone.getElement('button').fireEvent('click');
             }
         },
-        when    : {
+        when: {
             show: function () {
                 FooterZone.getElement('button').addEvent('click', function () {
                     Bricks.next.delay(500)
@@ -655,15 +692,15 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
     //
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step20.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step20.Text'),
         attachTo: {
             element: function () {
                 return document.getElement('.qui-window-popup.box')
             },
-            on     : 'right'
+            on: 'right'
         },
-        buttons : false,
+        buttons: false,
         // {
         // text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
         // action: function () {
@@ -680,7 +717,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
         //     Bricks.next.delay(1000);
         // }
         // },
-        when    : {
+        when: {
             show: function () {
                 document.getElements('.qui-window-popup.box .qui-window-popup-content.box .qui-elements-list-item.smooth').forEach(function (Item) {
                     Item.addEvent('click', Bricks.next)
@@ -692,24 +729,24 @@ define('package/quiqqer/bricks/bin/guides/General', [
     Bricks.addWaitingStepByCSSClass(document, 'button .fa.fa-gear', 0, 50);
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step21.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step21.Text'),
         attachTo: {
             element: function () {
                 return FooterZone.getElement('button .fa.fa-gear').getParent()
 
             },
-            on     : 'right'
+            on: 'right'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
-                FooterZone.getElement('button .fa.fa-gear').getParent().getParent().click()
+                FooterZone.getElement('button .fa.fa-gear').getParent().getParent().click();
                 Bricks.next();
 
             }
         },
-        when    : {
+        when: {
             show: function () {
                 FooterZone.getElement('button .fa.fa-gear').getParent().addEvent('click', function () {
                     Bricks.next.delay(500)
@@ -726,21 +763,21 @@ define('package/quiqqer/bricks/bin/guides/General', [
     Bricks.addWaitingStepByCSSClass(document, '.qui-window-popup.box [name="inheritance"]', 0, 50);
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step22.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step22.Text'),
         attachTo: {
             element: function () {
                 return document.getElement('.qui-window-popup.box [name="inheritance"]')
             },
-            on     : 'right'
+            on: 'right'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 Bricks.next();
             }
         },
-        when    : {
+        when: {
             show: function () {
                 catchClicks();
                 document.getElement('.qui-window-popup.box [name="inheritance"]').addEvent('click', Bricks.next)
@@ -752,21 +789,21 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step23.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step23.Text'),
         attachTo: {
             element: function () {
                 return document.getElement('.qui-window-popup.box [name="submit"]')
             },
-            on     : 'right'
+            on: 'right'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 document.getElement('.qui-window-popup.box [name="submit"]').fireEvent('click')
             }
         },
-        when    : {
+        when: {
             show: function () {
                 document.getElement('.qui-window-popup.box [name="submit"]').addEvent('click', Bricks.next)
             },
@@ -777,38 +814,38 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step24.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step24.Text'),
         attachTo: {
             element: function () {
                 return FooterZone.getElement('button .fa.fa-remove').getParent()
             },
-            on     : 'right'
+            on: 'right'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 Bricks.next()
             }
         },
-        when:{
-            show: function(){
+        when: {
+            show: function () {
                 stopCatching();
             }
         }
     });
 
     Bricks.addStep({
-        title   : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text    : QUILocale.get(lg, 'tour.general.bricks.Step25.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step25.Text'),
         attachTo: {
             element: function () {
                 return SitePanel.getElm().getElement('[name = "preview"]')
             },
-            on     : 'right'
+            on: 'right'
         },
-        buttons : {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
+        buttons: {
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
                 Bricks.next()
             }
@@ -816,10 +853,10 @@ define('package/quiqqer/bricks/bin/guides/General', [
     });
 
     Bricks.addStep({
-        title  : QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
-        text   : QUILocale.get(lg, 'tour.general.bricks.Step26.Text'),
+        title: QUILocale.get(lg, 'tour.general.bricks.Step1.Title'),
+        text: QUILocale.get(lg, 'tour.general.bricks.Step26.Text'),
         buttons: {
-            text  : QUILocale.get(lg, 'tour.general.bricks.Button.Ende'),
+            text: QUILocale.get(lg, 'tour.general.bricks.Button.Ende'),
             action: function () {
                 Bricks.cancel();
             }
