@@ -1245,6 +1245,55 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
                 <de><![CDATA[Kleine Boxen]]></de>
                 <en><![CDATA[Small boxes]]></en>
             </locale>
+        <locale name="bricks.customerReviews.random">
+            <de><![CDATA[Random]]></de>
+            <en><![CDATA[Random]]></en>
+        </locale>
+        <locale name="bricks.customerReviews.random.off">
+            <de><![CDATA[Aus (alle anzeigen)]]></de>
+            <en><![CDATA[Off (show all entries)]]></en>
+        </locale>
+            <locale name="bricks.customerReviews.random.1">
+                <de><![CDATA[Zeige maximal 1 Eintrag]]></de>
+                <en><![CDATA[Show max. 1 entry]]></en>
+            </locale>
+            <locale name="bricks.customerReviews.random.2">
+                <de><![CDATA[Zeige maximal 2 Einträge]]></de>
+                <en><![CDATA[Show max. 2 entries]]></en>
+            </locale>
+        <locale name="bricks.customerReviews.random.3">
+            <de><![CDATA[Zeige maximal 3 Einträge]]></de>
+            <en><![CDATA[Show max. 3 entries]]></en>
+        </locale>
+        <locale name="bricks.customerReviews.random.4">
+            <de><![CDATA[Zeige maximal 4 Einträge]]></de>
+            <en><![CDATA[Show max. 4 entries]]></en>
+        </locale>
+        <locale name="bricks.customerReviews.random.5">
+            <de><![CDATA[Zeige maximal 5 Einträge]]></de>
+            <en><![CDATA[Show max. 5 entries]]></en>
+        </locale>
+        <locale name="bricks.customerReviews.random.6">
+            <de><![CDATA[Zeige maximal 6 Einträge]]></de>
+            <en><![CDATA[Show max. 6 entries]]></en>
+        </locale>
+        <locale name="bricks.customerReviews.random.7">
+            <de><![CDATA[Zeige maximal 7 Einträge]]></de>
+            <en><![CDATA[Show max. 7 entries]]></en>
+        </locale>
+        <locale name="bricks.customerReviews.random.8">
+            <de><![CDATA[Zeige maximal 8 Einträge]]></de>
+            <en><![CDATA[Show max. 8 entries]]></en>
+        </locale>
+        <locale name="bricks.customerReviews.random.9">
+            <de><![CDATA[Zeige maximal 9 Einträge]]></de>
+            <en><![CDATA[Show max. 9 entries]]></en>
+        </locale>
+        <locale name="bricks.customerReviews.random.10">
+            <de><![CDATA[Zeige maximal 10 Einträge]]></de>
+            <en><![CDATA[Show max. 10 entries]]></en>
+        </locale>
+
         <locale name="bricks.customerReviews.entries">
             <de><![CDATA[Meinungen / Rezensionen]]></de>
             <en><![CDATA[Reviews]]></en>

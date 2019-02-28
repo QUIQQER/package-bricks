@@ -24,9 +24,10 @@ class CustomerReviews extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'template'  => 'wideBoxes',
+            'template'   => 'wideBoxes',
             'showAvatar' => true,
-            'entries'   => []
+            'entries'    => [],
+            'random'     => 'off'
         ]);
 
         parent::__construct($attributes);
@@ -46,6 +47,26 @@ class CustomerReviews extends QUI\Control
             $entries = json_decode($entries, true);
         }
 
+        if ($this->getAttribute('random') !== 'off') {
+            $random = $this->getAttribute('random');
+
+            if ($random > count($entries)) {
+                $random = count($entries);
+            }
+
+            $keys = array_rand($entries, $random);
+
+            if (!is_array($keys)) {
+                $keys = [$keys];
+            }
+
+            foreach ($keys as $key) {
+                $randomEntries[] = $entries[$key];
+            }
+
+            $entries = $randomEntries;
+        }
+
         switch ($this->getAttribute('template')) {
             case 'smallBoxes':
                 $template = dirname(__FILE__) . '/CustomerReviews.SmallBoxes.html';
@@ -60,8 +81,8 @@ class CustomerReviews extends QUI\Control
         }
 
         $Engine->assign([
-            'this'      => $this,
-            'entries'   => $entries,
+            'this'       => $this,
+            'entries'    => $entries,
             'showAvatar' => $this->getAttribute('showAvatar')
         ]);
 
