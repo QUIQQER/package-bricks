@@ -374,11 +374,7 @@ class Brick extends QUI\QDOM
     {
         foreach ($settings as $key => $value) {
             if ($key === 'classes') {
-                if (empty($value)) {
-                    $this->clearCSSClasses();
-                    continue;
-                }
-
+                $this->clearCSSClasses();
                 $this->addCSSClass($value);
                 continue;
             }
