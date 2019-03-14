@@ -253,7 +253,6 @@ class Brick extends QUI\QDOM
 
                 foreach ($classes as $class) {
                     $class = trim($class);
-                    $class = preg_replace('/[^a-zA-Z0-9\-]/', '', $class);
 
                     $_classes[] = $class;
                 }
@@ -432,7 +431,7 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * Add an exxtra CSS Class to the control
+     * Add an extra CSS Class to the control
      *
      * @param string $cssClass - Name of the CSS Class
      *
@@ -448,7 +447,7 @@ class Brick extends QUI\QDOM
             return;
         }
 
-        $classes = preg_replace('/[^_a-zA-Z0-9-]/', ' ', $cssClass);
+        $classes = QUI\ControlUtils::clearClassName($cssClass);
         $classes = explode(' ', $classes);
 
         $keys = array_flip($this->cssClasses);
