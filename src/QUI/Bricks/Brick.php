@@ -244,18 +244,38 @@ class Brick extends QUI\QDOM
                 'brick-'.$this->id
             );
 
+            //check if is json
+            if (is_string($this->cssClasses)) {
+                $jsonArray = json_decode($this->cssClasses);
+
+                if (is_array($jsonArray)) {
+                    $this->cssClasses = $jsonArray;
+                }
+            }
+
             foreach ($this->cssClasses as $cssClass) {
                 $_classes[] = $cssClass;
             }
 
-            if ($this->getAttribute('classes')) {
-                $classes = explode(' ', $this->getAttribute('classes'));
 
-                foreach ($classes as $class) {
-                    $class = trim($class);
+            $oldCssClasses = $this->getAttribute('classes');
 
-                    $_classes[] = $class;
-                }
+            $oldCssClassesJson = json_decode($oldCssClasses, true);
+
+            if (is_array($oldCssClassesJson)) {
+                $oldCssClasses = $oldCssClassesJson;
+            }
+
+            $classes = $oldCssClasses ;
+
+            if (is_string($oldCssClasses)) {
+                $classes = explode(' ', $oldCssClasses);
+            }
+
+            foreach ($classes as $class) {
+                $class = trim($class);
+
+                $_classes[] = $class;
             }
 
             $_classes   = array_unique($_classes);
