@@ -245,7 +245,7 @@ class Brick extends QUI\QDOM
             );
 
             //check if is json
-            if (is_string($this->cssClasses)){
+            if (is_string($this->cssClasses)) {
                 $jsonArray = json_decode($this->cssClasses);
 
                 if (is_array($jsonArray)) {
@@ -262,7 +262,7 @@ class Brick extends QUI\QDOM
 
             $oldCssClassesJson = json_decode($oldCssClasses, true);
 
-            if (is_array($oldCssClassesJson)){
+            if (is_array($oldCssClassesJson)) {
                 $oldCssClasses = $oldCssClassesJson;
             }
 
