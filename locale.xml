@@ -1517,6 +1517,12 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <pl><![CDATA[Pokaż godzinę]]></pl>
         </locale>
 
+        <!-- show pagination / sheets -->
+        <locale name="brick.showSheets">
+            <de><![CDATA[Seitennummerierung anzeigen]]></de>
+            <en><![CDATA[Show sheets (pagination)]]></en>
+        </locale>
+
         <!-- show images -->
         <locale name="brick.showImages">
             <de><![CDATA[Bild anzeigen]]></de>
