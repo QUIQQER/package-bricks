@@ -19,7 +19,7 @@ QUI::$Ajax->registerFunction(
         $BrickManager = QUI\Bricks\Manager::init();
 
         $bricks = $BrickManager->getBricksFromProject($Project);
-        $result = array();
+        $result = [];
 
         foreach ($bricks as $Brick) {
             /* @var $Brick QUI\Bricks\Brick */
@@ -30,13 +30,13 @@ QUI::$Ajax->registerFunction(
 
             $areas = $Brick->getAttribute('areas');
 
-            if (strpos($areas, ',' . $area . ',') !== false) {
+            if (\strpos($areas, ','.$area.',') !== false) {
                 $result[] = $Brick->getAttributes();
             }
         }
 
         return $result;
     },
-    array('project', 'area'),
+    ['project', 'area'],
     'Permission::checkAdminUser'
 );

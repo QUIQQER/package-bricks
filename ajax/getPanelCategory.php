@@ -12,6 +12,6 @@ QUI::$Ajax->registerFunction(
     function ($brickId, $category) {
         return QUI\Bricks\Panel::getInstance()->getCategoryFromBrick($brickId, $category);
     },
-    array('brickId', 'category'),
+    ['brickId', 'category'],
     'Permission::checkAdminUser'
 );

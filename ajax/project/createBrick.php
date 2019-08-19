@@ -22,6 +22,6 @@ QUI::$Ajax->registerFunction(
 
         return $BrickManager->createBrickForProject($Project, $Brick);
     },
-    array('project', 'data'),
+    ['project', 'data'],
     'Permission::checkAdminUser'
 );

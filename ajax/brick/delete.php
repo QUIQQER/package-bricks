@@ -13,12 +13,11 @@ QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_brick_delete',
     function ($brickIds) {
         $BrickManager = QUI\Bricks\Manager::init();
-        $brickIds     = json_decode($brickIds, true);
+        $brickIds     = \json_decode($brickIds, true);
 
         foreach ($brickIds as $brickId) {
             try {
                 $BrickManager->deleteBrick($brickId);
-
             } catch (QUI\Exception $Exception) {
                 QUI::getMessagesHandler()->addAttention(
                     $Exception->getMessage()
@@ -26,6 +25,6 @@ QUI::$Ajax->registerFunction(
             }
         }
     },
-    array('brickIds'),
+    ['brickIds'],
     'Permission::checkAdminUser'
 );

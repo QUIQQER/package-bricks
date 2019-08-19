@@ -43,8 +43,8 @@ QUI::$Ajax->registerFunction(
 
         $Project               = QUI::getProjectManager()->decode($project);
         $Site                  = $Project->get((int)$siteId);
-        $privacyPolicyCheckbox = boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'));
-        $useCaptcha            = boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.useCaptcha'));
+        $privacyPolicyCheckbox = \boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'));
+        $useCaptcha            = \boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.useCaptcha'));
 
         if (($privacyPolicyCheckbox || $privacyPolicyCheckboxBrick) && !(int)$privacyPolicyAccepted) {
             throw new QUI\Exception(

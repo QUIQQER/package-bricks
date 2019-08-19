@@ -17,15 +17,15 @@ QUI::$Ajax->registerFunction(
         $BrickManager = QUI\Bricks\Manager::init();
         $Brick        = $BrickManager->getBrickById($brickId);
 
-        return array(
+        return [
             'attributes'        => $Brick->getAttributes(),
             'settings'          => $Brick->getSettings(),
             'customfields'      => $Brick->getCustomFields(),
             'availableSettings' => $BrickManager->getAvailableBrickSettingsByBrickType(
                 $Brick->getAttribute('type')
             )
-        );
+        ];
     },
-    array('brickId'),
+    ['brickId'],
     'Permission::checkAdminUser'
 );

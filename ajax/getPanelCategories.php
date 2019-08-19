@@ -21,6 +21,6 @@ QUI::$Ajax->registerFunction(
 
         return $categories;
     },
-    array('brickId'),
+    ['brickId'],
     'Permission::checkAdminUser'
 );

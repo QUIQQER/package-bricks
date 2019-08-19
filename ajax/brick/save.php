@@ -16,12 +16,12 @@ QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_brick_save',
     function ($brickId, $data) {
         $BrickManager = QUI\Bricks\Manager::init();
-        $BrickManager->saveBrick($brickId, json_decode($data, true));
+        $BrickManager->saveBrick($brickId, \json_decode($data, true));
 
         $Brick = $BrickManager->getBrickById($brickId);
 
         return $Brick->getAttributes();
     },
-    array('brickId', 'data'),
+    ['brickId', 'data'],
     'Permission::checkAdminUser'
 );

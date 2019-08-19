@@ -21,10 +21,10 @@ class Promoslider extends AbstractPromoslider
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         // default options
-        $this->setAttributes(array(
+        $this->setAttributes([
             'title'                      => '',
             'text'                       => '',
             'class'                      => 'quiqqer-bricks-promoslider',
@@ -36,8 +36,9 @@ class Promoslider extends AbstractPromoslider
             'image-wallpaper-attachment' => false,
             'autostart'                  => false,
             'delay'                      => 5000,
-            'isMobileSlidesEnabled'      => false
-        ));
+            'isMobileSlidesEnabled'      => false,
+            'imageSize'                  => false // false = use original size, do not create srcset
+        ]);
 
         $this->addCSSFile(
             dirname(__FILE__) . '/Promoslider.css'
@@ -45,7 +46,6 @@ class Promoslider extends AbstractPromoslider
 
         $this->addCSSClass('grid-100');
         $this->addCSSClass('mobile-grid-100');
-
 
         parent::__construct($attributes);
     }
@@ -169,12 +169,13 @@ class Promoslider extends AbstractPromoslider
 
         $this->parseSlides($this->getAttribute('desktopslides'), 'desktop');
 
-        $options = array(
+        $options = [
             'this'          => $this,
             'desktopSlides' => $this->desktopSlides,
-            'Utils'         => new Utils()
-        );
-        
+            'Utils'         => new Utils(),
+            'imageSize'     => $this->getAttribute('imageSize')
+        ];
+
         if ($this->getAttribute('isMobileSlidesEnabled') === "true") {
             $this->parseSlides($this->getAttribute('mobileslides'), 'mobile');
 

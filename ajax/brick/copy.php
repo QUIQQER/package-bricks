@@ -20,11 +20,11 @@ QUI::$Ajax->registerFunction(
 
         $newId = $BrickManager->copyBrick(
             $brickId,
-            json_decode($params, true)
+            \json_decode($params, true)
         );
 
         return $BrickManager->getBrickById($newId)->getAttributes();
     },
-    array('brickId', 'params'),
+    ['brickId', 'params'],
     'Permission::checkAdminUser'
 );

@@ -1,8 +1,13 @@
 <div {$classesStr}>
-    {if $this->getAttribute('showTitle') && $this->getAttribute('title')}
-    <header>
-        <h2>{$this->getAttribute('title')}</h2>
+    {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+    <header class="control-header">
+        <h1>{$this->getAttribute('frontendTitle')}</h1>
     </header>
     {/if}
-    {$this->getAttribute('content')}
+
+    {if $this->getAttribute('content') != ""}
+    <div class="control-content">
+        {$this->getAttribute('content')}
+    </div>
+    {/if}
 </div>
