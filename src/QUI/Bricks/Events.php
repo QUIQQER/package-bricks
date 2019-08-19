@@ -17,7 +17,7 @@ use QUI\Projects\Site\Edit;
  */
 class Events
 {
-    protected static $saved = array();
+    protected static $saved = [];
 
     /**
      * Event : on site save
@@ -35,7 +35,7 @@ class Events
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.assign');
 
         $areas = $Site->getAttribute('quiqqer.bricks.areas');
-        $areas = json_decode($areas, true);
+        $areas = \json_decode($areas, true);
 
         if (!$areas || empty($areas)) {
             return;
@@ -49,7 +49,7 @@ class Events
         $projectTable = QUI::getDBProjectTableName(Manager::TABLE_CACHE, $Project);
 
         $uidTable           = QUI\Bricks\Manager::getUIDTable();
-        $availableUniqueIds = array();
+        $availableUniqueIds = [];
 
         foreach ($projectAreas as $area) {
             if (!$area['inheritance']) {
@@ -67,18 +67,18 @@ class Events
             $bricks = $areas[$area['name']];
 
             // clear area and new data set
-            QUI::getDataBase()->delete($projectTable, array(
+            QUI::getDataBase()->delete($projectTable, [
                 'id'   => $Site->getId(),
                 'area' => $area['name']
-            ));
+            ]);
 
             // check if deactivated
             if (isset($bricks[0]) && isset($bricks[0]['deactivate'])) {
-                QUI::getDataBase()->insert($projectTable, array(
+                QUI::getDataBase()->insert($projectTable, [
                     'id'    => $Site->getId(),
                     'area'  => $area['name'],
                     'brick' => -1
-                ));
+                ]);
 
                 continue;
             }
@@ -103,14 +103,14 @@ class Events
                 $availableUniqueIds[] = $uid;
 
 
-                $customFields = array();
+                $customFields = [];
 
                 // Custom data cache
-                if (isset($brick['customfields']) && is_string($brick['customfields'])) {
-                    $customFields = json_decode($brick['customfields'], true);
+                if (isset($brick['customfields']) && \is_string($brick['customfields'])) {
+                    $customFields = \json_decode($brick['customfields'], true);
                 }
 
-                if (isset($brick['customfields']) && is_array($brick['customfields'])) {
+                if (isset($brick['customfields']) && \is_array($brick['customfields'])) {
                     $customFields = $brick['customfields'];
                 }
 
@@ -118,45 +118,45 @@ class Events
                     continue;
                 }
 
-                QUI::getDataBase()->insert($projectTable, array(
+                QUI::getDataBase()->insert($projectTable, [
                     'id'    => $Site->getId(),
                     'area'  => $area['name'],
                     'brick' => (int)$brick['brickId']
-                ));
+                ]);
             }
         }
 
         // cleanup unique ids
-        $uniquerIdsInDataBase = QUI::getDataBase()->fetch(array(
+        $uniquerIdsInDataBase = QUI::getDataBase()->fetch([
             'select' => 'uid',
             'from'   => $uidTable,
-            'where'  => array(
+            'where'  => [
                 'project' => $Project->getName(),
                 'lang'    => $Project->getLang(),
                 'siteId'  => $Site->getId()
-            )
-        ));
+            ]
+        ]);
 
-        $uniquerIdsInDataBase = array_map(function ($uid) {
+        $uniquerIdsInDataBase = \array_map(function ($uid) {
             return $uid['uid'];
         }, $uniquerIdsInDataBase);
 
-        $availableUniqueIds = array_flip($availableUniqueIds);
+        $availableUniqueIds = \array_flip($availableUniqueIds);
 
         foreach ($uniquerIdsInDataBase as $uid) {
             if (isset($availableUniqueIds[$uid])) {
                 continue;
             }
 
-            QUI::getDataBase()->delete($uidTable, array(
+            QUI::getDataBase()->delete($uidTable, [
                 'uid' => $uid
-            ));
+            ]);
         }
 
         self::$saved[$Site->getId()] = true;
 
         // save bricks with unique ids
-        $Site->setAttribute('quiqqer.bricks.areas', json_encode($areas));
+        $Site->setAttribute('quiqqer.bricks.areas', \json_encode($areas));
         $Site->save();
     }
 
@@ -191,7 +191,7 @@ class Events
                 return '';
             }
 
-            $smarty->assign($params['assign'], array());
+            $smarty->assign($params['assign'], []);
 
             return '';
         }
@@ -224,12 +224,12 @@ class Events
 
         $php = 'php';
 
-        if (defined('PHP_BINARY')) {
+        if (\defined('PHP_BINARY')) {
             $php = PHP_BINARY;
         }
 
         try {
-            shell_exec($php.' '.OPT_DIR.'quiqqer/bricks/patches/uniqueIds.php');
+            \shell_exec($php.' '.OPT_DIR.'quiqqer/bricks/patches/uniqueIds.php');
         } catch (\Exception $Exception) {
             QUI\System\Log::writeException($Exception);
         }

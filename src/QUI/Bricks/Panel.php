@@ -71,11 +71,11 @@ class Panel extends QUI\Utils\Singleton
         $Settings = QUI\Utils\XML\Settings::getInstance();
         $Settings->setXMLPath($path);
 
-        $categories = array();
+        $categories = [];
 
         foreach ($xmlFiles as $file) {
             $panel      = $Settings->getPanel($file);
-            $categories = array_merge(
+            $categories = \array_merge(
                 $categories,
                 $panel['categories']->toArray()
             );
@@ -83,7 +83,7 @@ class Panel extends QUI\Utils\Singleton
 
         // locale
         foreach ($categories as $key => $category) {
-            if (isset($category['title']) && is_array($category['title'])) {
+            if (isset($category['title']) && \is_array($category['title'])) {
                 $categories[$key]['text'] = QUI::getLocale()->get(
                     $category['title'][0],
                     $category['title'][1]
@@ -112,7 +112,7 @@ class Panel extends QUI\Utils\Singleton
         $path = $this->getPath($Brick);
 
         $xmlFiles = Utils::getBricksXMLFiles();
-        $result   = array();
+        $result   = [];
 
         foreach ($xmlFiles as $xmlFile) {
             try {
@@ -138,7 +138,7 @@ class Panel extends QUI\Utils\Singleton
     protected function getPath(Brick $Brick)
     {
         $type = $Brick->getAttribute('type');
-        $type = '\\'.trim($type, '\\');
+        $type = '\\'.\trim($type, '\\');
         $path = '//quiqqer/bricks/brick[@control="'.$type.'"]';
 
         return $path;

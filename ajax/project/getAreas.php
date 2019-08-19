@@ -20,6 +20,6 @@ QUI::$Ajax->registerFunction(
 
         return $BrickManager->getAreasByProject($Project, $layout);
     },
-    array('project', 'layout'),
+    ['project', 'layout'],
     'Permission::checkAdminUser'
 );

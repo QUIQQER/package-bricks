@@ -156,8 +156,8 @@ class Manager
             $customFields = $brickData['customfields'];
         }
 
-        if (is_array($customFields)) {
-            $customFields = json_encode($customFields);
+        if (\is_array($customFields)) {
+            $customFields = \json_encode($customFields);
         }
 
         QUI::getDataBase()->update($this->getUIDTable(), [
@@ -191,7 +191,7 @@ class Manager
             'project'    => $Project->getName(),
             'lang'       => $Project->getLang(),
             'siteId'     => $Site->getId(),
-            'attributes' => json_encode($Brick->getAttributes())
+            'attributes' => \json_encode($Brick->getAttributes())
         ]);
 
         return $uuid;
@@ -298,6 +298,17 @@ class Manager
             $templates[] = $Project->getAttribute('template');
         }
 
+        // inheritance
+        try {
+            $Package = QUI::getPackage($Project->getAttribute('template'));
+            $Parent  = $Package->getTemplateParent();
+
+            if ($Parent) {
+                $templates[] = $Parent->getName();
+            }
+        } catch (QUI\Exception $Exception) {
+        }
+
         // get all vhosts, and the used templates of the project
         $vhosts = QUI::getRewrite()->getVHosts();
 
@@ -313,34 +324,36 @@ class Manager
             $templates[] = $vhost['template'];
         }
 
-        $templates = array_unique($templates);
+        $templates = \array_unique($templates);
 
         // get bricks
         foreach ($templates as $template) {
-            $brickXML = realpath(OPT_DIR.$template.'/bricks.xml');
+            $brickXML = \realpath(OPT_DIR.$template.'/bricks.xml');
 
             if (!$brickXML) {
                 continue;
             }
 
-            $bricks = array_merge(
+            $bricks = \array_merge(
                 $bricks,
                 Utils::getTemplateAreasFromXML($brickXML, $layoutType)
             );
         }
 
+
         // unique values
         $cleaned = [];
+
         foreach ($bricks as $val) {
             if (!isset($cleaned[$val['name']])) {
                 $cleaned[$val['name']] = $val;
             }
         }
 
-        $bricks = array_values($cleaned);
+        $bricks = \array_values($cleaned);
 
         // use @ because: https://bugs.php.net/bug.php?id=50688
-        @usort($bricks, function ($a, $b) {
+        @\usort($bricks, function ($a, $b) {
             if (isset($a['priority']) && isset($b['priority'])) {
                 if ($a['priority'] == $b['priority']) {
                     return 0;
@@ -401,10 +414,10 @@ class Manager
         ];
 
         foreach ($xmlFiles as $bricksXML) {
-            $result = array_merge($result, Utils::getBricksFromXML($bricksXML));
+            $result = \array_merge($result, Utils::getBricksFromXML($bricksXML));
         }
 
-        $result = array_filter($result, function ($brick) {
+        $result = \array_filter($result, function ($brick) {
             return !empty($brick['title']);
         });
 
@@ -489,7 +502,7 @@ class Manager
         $custom  = $data['customfields'];
 
         $attributes = $data['attributes'];
-        $attributes = json_decode($attributes, true);
+        $attributes = \json_decode($attributes, true);
 
         $real = QUI::getDataBase()->fetch([
             'from'  => $this->getTable(),
@@ -505,7 +518,7 @@ class Manager
         $Clone = clone $Original;
 
         if (!empty($custom)) {
-            $custom = json_decode($custom, true);
+            $custom = \json_decode($custom, true);
 
             if ($custom) {
                 $Clone->setSettings($custom);
@@ -531,7 +544,7 @@ class Manager
      */
     public function getAvailableBrickSettingsByBrickType($brickType)
     {
-        $cache = 'quiqqer/bricks/brickType/'.md5($brickType);
+        $cache = 'quiqqer/bricks/brickType/'.\md5($brickType);
 
         try {
             return QUI\Cache\Manager::get($cache);
@@ -630,8 +643,8 @@ class Manager
                 continue;
             }
 
-            if (strpos($attribute->nodeName, 'data-') !== false) {
-                $dataAttributes[$attribute->nodeName] = trim($attribute->nodeValue);
+            if (\strpos($attribute->nodeName, 'data-') !== false) {
+                $dataAttributes[$attribute->nodeName] = \trim($attribute->nodeValue);
             }
         }
 
@@ -661,7 +674,7 @@ class Manager
         }
 
         $brickAreas = $Site->getAttribute('quiqqer.bricks.areas');
-        $brickAreas = json_decode($brickAreas, true);
+        $brickAreas = \json_decode($brickAreas, true);
 
         if (!isset($brickAreas[$brickArea]) || empty($brickAreas[$brickArea])) {
             $bricks = $this->getInheritedBricks($brickArea, $Site);
@@ -695,10 +708,8 @@ class Manager
                 $Brick = $this->getBrickById($brickId);
                 $Clone = clone $Brick;
 
-                if (isset($brickData['customfields'])
-                    && !empty($brickData['customfields'])
-                ) {
-                    $custom = json_decode($brickData['customfields'], true);
+                if (isset($brickData['customfields']) && !empty($brickData['customfields'])) {
+                    $custom = \json_decode($brickData['customfields'], true);
 
                     if ($custom) {
                         $Clone->setSettings($custom);
@@ -802,7 +813,7 @@ class Manager
             $Brick->getAttribute('project')
         );
 
-        $availableAreas = array_map(function ($data) {
+        $availableAreas = \array_map(function ($data) {
             if (isset($data['name'])) {
                 return $data['name'];
             }
@@ -810,24 +821,22 @@ class Manager
             return '';
         }, $this->getAreasByProject($Project));
 
-        if (isset($brickData['attributes'])
-            && isset($brickData['attributes']['areas'])
-        ) {
+        if (isset($brickData['attributes']) && isset($brickData['attributes']['areas'])) {
             $brickData['areas'] = $brickData['attributes']['areas'];
         }
 
         if (isset($brickData['areas'])) {
-            $parts = explode(',', $brickData['areas']);
+            $parts = \explode(',', $brickData['areas']);
 
             foreach ($parts as $area) {
-                if (in_array($area, $availableAreas)) {
+                if (\in_array($area, $availableAreas)) {
                     $areas[] = $area;
                 }
             }
         }
 
         if (!empty($areas)) {
-            $areaString = ','.implode(',', $areas).',';
+            $areaString = ','.\implode(',', $areas).',';
         }
 
         $Brick->setAttributes($brickData);
@@ -865,7 +874,7 @@ class Manager
             $availableSettings['height'] = true;
 
             foreach ($brickData['customfields'] as $customfield) {
-                $customfield = str_replace('flexible-', '', $customfield);
+                $customfield = \str_replace('flexible-', '', $customfield);
 
                 if ($customfield == 'classes') {
                     $customfields[] = $customfield;
@@ -885,12 +894,12 @@ class Manager
             'description'   => $Brick->getAttribute('description'),
             'content'       => $Brick->getAttribute('content'),
             'type'          => $Brick->getAttribute('type'),
-            'settings'      => json_encode($Brick->getSettings()),
-            'customfields'  => json_encode($customfields),
+            'settings'      => \json_encode($Brick->getSettings()),
+            'customfields'  => \json_encode($customfields),
             'areas'         => $areaString,
             'height'        => $Brick->getAttribute('height'),
             'width'         => $Brick->getAttribute('width'),
-            'classes'       => json_encode($Brick->getCSSClasses())
+            'classes'       => \json_encode($Brick->getCSSClasses())
         ], [
             'id' => (int)$brickId
         ]);
@@ -906,7 +915,7 @@ class Manager
         ]);
 
         foreach ($uniqueBricks as $uniqueBrick) {
-            $customFieldsUniqueBrick = json_decode($uniqueBrick['customfields'], true);
+            $customFieldsUniqueBrick = \json_decode($uniqueBrick['customfields'], true);
             $attributes              = $Brick->getAttributes();
 
             if (isset($attributes['attributes'])) {
@@ -918,8 +927,8 @@ class Manager
             }
 
             QUI::getDataBase()->update(QUI\Bricks\Manager::getUIDTable(), [
-                'customfields' => json_encode($customFieldsUniqueBrick),
-                'attributes'   => json_encode($attributes)
+                'customfields' => \json_encode($customFieldsUniqueBrick),
+                'attributes'   => \json_encode($attributes)
             ], [
                 'uid' => $uniqueBrick['uid']
             ]);
@@ -951,12 +960,12 @@ class Manager
         }
 
         $allowed = ['project', 'lang', 'title', 'description'];
-        $allowed = array_flip($allowed);
+        $allowed = \array_flip($allowed);
         $data    = $result[0];
 
         unset($data['id']);
 
-        if (!is_array($params)) {
+        if (!\is_array($params)) {
             $params = [];
         }
 
@@ -1027,7 +1036,7 @@ class Manager
 
         $result    = [];
         $parentIds = $Site->getParentIdTree();
-        $parentIds = array_reverse($parentIds);
+        $parentIds = \array_reverse($parentIds);
 
         $projectCacheTable = QUI::getDBProjectTableName(
             self::TABLE_CACHE,
@@ -1043,7 +1052,7 @@ class Manager
                 ]
             ]);
 
-            if (empty($bricks) || !is_array($bricks)) {
+            if (empty($bricks) || !\is_array($bricks)) {
                 continue;
             }
 
@@ -1054,7 +1063,7 @@ class Manager
             }
 
             $parentAreas = $Parent->getAttribute('quiqqer.bricks.areas');
-            $parentAreas = json_decode($parentAreas, true);
+            $parentAreas = \json_decode($parentAreas, true);
 
 
             if (!isset($parentAreas[$brickArea])) {
@@ -1074,7 +1083,7 @@ class Manager
                     continue;
                 }
 
-                $customFields = json_decode($brick['customfields'], true);
+                $customFields = \json_decode($brick['customfields'], true);
 
                 if ($customFields
                     && isset($customFields['inheritance'])

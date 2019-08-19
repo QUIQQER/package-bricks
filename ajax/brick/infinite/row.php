@@ -23,7 +23,7 @@ QUI::$Ajax->registerFunction(
             $Brick = $BrickManager->getBrickById($brickId);
         }
 
-        $settings = array_merge(
+        $settings = \array_merge(
             $Brick->getAttributes(),
             $Brick->getSettings()
         );
@@ -48,12 +48,12 @@ QUI::$Ajax->registerFunction(
         $result = '';
 
         for ($i = 0; $i < $loadingRows; $i++) {
-            $Engine->assign(array(
+            $Engine->assign([
                 'children'  => $Infinite->getRow((int)$row),
                 'row'       => (int)$row,
                 'this'      => $Infinite,
                 'gridClass' => $Infinite->getAttribute('gridClass')
-            ));
+            ]);
 
             $result .= $Engine->fetch($Infinite->getRowTemplate());
             $row++;
@@ -61,6 +61,6 @@ QUI::$Ajax->registerFunction(
 
         return $result;
     },
-    array('brickId', 'brickUID', 'row'),
+    ['brickId', 'brickUID', 'row'],
     false
 );

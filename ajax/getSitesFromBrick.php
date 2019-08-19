@@ -10,12 +10,12 @@
 QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_getSitesFromBrick',
     function ($brickId, $options) {
-        $options = json_decode($options, true);
+        $options = \json_decode($options, true);
         $Bricks  = QUI\Bricks\Manager::init();
         $Brick   = $Bricks->getBrickById($brickId);
 
         $sites  = $Bricks->getSitesByBrick($Brick);
-        $result = array_map(function ($Site) {
+        $result = \array_map(function ($Site) {
             /* @var $Site \QUI\Projects\Site */
             return [
                 'project' => $Site->getProject()->getName(),
@@ -29,7 +29,7 @@ QUI::$Ajax->registerFunction(
 
         $Grid = new QUI\Utils\Grid();
 
-        return $Grid->parseResult($result, count($sites));
+        return $Grid->parseResult($result, \count($sites));
     },
     ['brickId', 'options'],
     'Permission::checkAdminUser'

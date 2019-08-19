@@ -28,7 +28,7 @@ class Utils
      */
     public static function getBricksFromXML($file)
     {
-        if (!file_exists($file)) {
+        if (!\file_exists($file)) {
             return [];
         }
 
@@ -64,7 +64,7 @@ class Utils
      */
     public static function getTemplateAreasFromXML($file, $layoutType = false)
     {
-        if (!file_exists($file)) {
+        if (!\file_exists($file)) {
             return [];
         }
 
@@ -174,7 +174,7 @@ class Utils
         $template = $Project->getAttribute('template');
 
         // getAreasByProject
-        $brickXML = realpath(OPT_DIR.$template.'/bricks.xml');
+        $brickXML = \realpath(OPT_DIR.$template.'/bricks.xml');
         $bricks   = self::getTemplateAreasFromXML($brickXML);
 
         foreach ($bricks as $brickData) {
@@ -215,7 +215,7 @@ class Utils
         foreach ($packages as $package) {
             $bricksXML = OPT_DIR.$package['name'].'/bricks.xml';
 
-            if (file_exists($bricksXML)) {
+            if (\file_exists($bricksXML)) {
                 $result[] = $bricksXML;
             }
         }
@@ -226,7 +226,7 @@ class Utils
         foreach ($projects as $project) {
             $bricksXML = USR_DIR.$project.'/bricks.xml';
 
-            if (file_exists($bricksXML)) {
+            if (\file_exists($bricksXML)) {
                 $result[] = $bricksXML;
             }
         }
@@ -250,10 +250,10 @@ class Utils
 
         // main path
         $type = $Brick->getAttribute('type');
-        $type = '\\'.trim($type, '\\');
+        $type = '\\'.\trim($type, '\\');
 
         $path  = '//quiqqer/bricks/brick[@control="'.$type.'"]';
-        $cache = 'quiqqer/bricks/'.md5($type).'/attributes';
+        $cache = 'quiqqer/bricks/'.\md5($type).'/attributes';
 
         try {
             return QUI\Cache\Manager::get($cache);
