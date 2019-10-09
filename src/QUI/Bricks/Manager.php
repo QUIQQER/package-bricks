@@ -922,7 +922,7 @@ class Manager
                 unset($attributes['attributes']);
             }
 
-            if (!is_array($customFieldsUniqueBrick)) {
+            if (!\is_array($customFieldsUniqueBrick)) {
                 $customFieldsUniqueBrick = [];
             }
 
@@ -933,6 +933,14 @@ class Manager
                 'uid' => $uniqueBrick['uid']
             ]);
         }
+
+        // clear project cache
+        $cache = Project::getProjectLanguageCachePath(
+            $Project->getName(),
+            $Project->getLang()
+        );
+
+        QUI\Cache\Manager::clear($cache);
     }
 
     /**
