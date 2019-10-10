@@ -887,13 +887,37 @@ class Manager
             }
         }
 
+        $type = $Brick->getAttribute('type');
+
+        $checkType = function ($type) {
+            if ($type === 'content') {
+                return true;
+            }
+
+            if (\is_callable($type)) {
+                return true;
+            }
+
+            if (\class_exists($type)) {
+                return true;
+            }
+
+            throw new QUI\Exception(
+                'quiqqer/bricks',
+                'exception.type.is.not.allowed'
+            );
+        };
+
+        $checkType($type);
+
+
         // update
         QUI::getDataBase()->update($this->getTable(), [
             'title'         => $Brick->getAttribute('title'),
             'frontendTitle' => $Brick->getAttribute('frontendTitle'),
             'description'   => $Brick->getAttribute('description'),
             'content'       => $Brick->getAttribute('content'),
-            'type'          => $Brick->getAttribute('type'),
+            'type'          => $type,
             'settings'      => \json_encode($Brick->getSettings()),
             'customfields'  => \json_encode($customfields),
             'areas'         => $areaString,
