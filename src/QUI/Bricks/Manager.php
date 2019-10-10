@@ -604,6 +604,23 @@ class Manager
             }
         }
 
+        // cleanup duplicated
+        // quiqqer/package-bricks#90
+        $exists = [];
+
+        $settings = \array_filter($settings, function ($entry) use (&$exists) {
+            $name = $entry['name'];
+
+            if (isset($exists[$name])) {
+                return false;
+            }
+
+            $exists[$name] = true;
+
+            return true;
+        });
+
+
         try {
             QUI\Cache\Manager::set($cache, $settings);
         } catch (\Exception $Exception) {
