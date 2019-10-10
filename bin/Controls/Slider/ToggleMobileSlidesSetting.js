@@ -13,8 +13,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
 ], function (QUI, QUIControl, QUISwitch) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
-
     return new Class({
 
         Extends: QUIControl,
@@ -47,7 +45,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
                 status: this.getElm().value === "true",
                 events: {
                     onChange: this.$switchToggled,
-                    onLoad: function() {
+                    onLoad  : function () {
                         if (!this.$Switch.getStatus()) {
                             this.hideMobileSlidesSetting();
                         }
@@ -74,7 +72,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
          * @return {HTMLElement | null}
          .*/
         getMobileSlidesSettingElement: function () {
-            return document.getElementsByName('mobileslides')[0].parentElement.parentElement.parentElement;
+            return this.getElm()
+                       .getParent('table')
+                       .getElement('[name="mobileslides"]')
+                       .getParent('label');
         },
 
 

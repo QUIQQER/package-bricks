@@ -258,7 +258,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
             data.customfields = self.$customfields;
 
-            return Bricks.saveBrick(self.getAttribute('id'), data).then(function (attributes) {
+            return Bricks.saveBrick(self.getAttribute('id'), data).then(function () {
                 QUI.getMessageHandler().then(function (MH) {
                     MH.addSuccess(
                         QUILocale.get(lg, 'message.brick.save.success')
@@ -455,22 +455,38 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         }).inject(Content.getElement('.quiqqer-bricks-areas'));
 
 
-                        // flexble settings
-                        var i, len, data;
+                        // flexible settings
+                        var i, len, data, description, Row;
                         var TBody = Content.getElement('.brick-table-flexible tbody');
 
                         for (i = 0, len = self.$availableSettings.length; i < len; i++) {
                             data = self.$availableSettings[i];
 
-                            new Element('tr', {
-                                'class': i % 2 ? 'odd' : 'even',
-                                html   : '<td>' +
-                                    '<label>' +
+                            Row = new Element('tr', {
+                                html: '<td>' +
+                                    '<label class="field-container">' +
+                                    '<span class="field-container-item">' +
+                                    QUILocale.get(data.text[0], data.text[1]) + '' +
+                                    '</span>' +
+                                    '<div class="field-container-field">' +
                                     '<input type="checkbox" name="flexible-' + data.name + '" />' +
-                                    '<span>' + QUILocale.get(data.text[0], data.text[1]) + '</span>' +
+                                    '</div>' +
                                     '</label>' +
                                     '</td>'
                             }).inject(TBody);
+
+                            description = data.description;
+
+                            if (typeOf(data.description) === 'array') {
+                                description = QUILocale.get(data.description[0], data.description[1]);
+                            }
+
+                            if (typeof description !== 'undefined' && description !== '') {
+                                new Element('div', {
+                                    'class': 'field-container-item-desc',
+                                    html   : description
+                                }).inject(Row.getElement('td'));
+                            }
                         }
 
                         if (customfields) {
@@ -684,7 +700,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                 TableExtra.setStyle('display', null);
 
-                var i, c, len, cLen, attr, Row, text, Value, setting,
+                var i, c, len, cLen, attr, Row, text, description, Value, setting,
                     extraFieldId, dataAttributes;
 
                 var self = this,
@@ -697,22 +713,32 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     extraFieldId   = 'extraField_' + id + '_' + i;
                     dataAttributes = setting['data-attributes'];
 
-                    text = setting.text;
+                    text        = setting.text;
+                    description = setting.description;
 
                     if (typeOf(setting.text) === 'array') {
                         text = QUILocale.get(setting.text[0], setting.text[1]);
                     }
 
+                    if (typeOf(setting.description) === 'array') {
+                        description = QUILocale.get(setting.description[0], setting.description[1]);
+                    }
+
 
                     Row = new Element('tr', {
-                        'class': i % 2 ? 'odd' : 'even',
-                        html   : '<td>' +
-                            '    <label class="quiqqer-bricks-areas" for="' + extraFieldId + '">' +
-                            text +
-                            '    </label>' +
-                            '</td>' +
-                            '<td></td>'
+                        html: '<td>' +
+                            '<label class="field-container" for="' + extraFieldId + '">' +
+                            '<span class="field-container-item">' + text + '</span>' +
+                            '</label>' +
+                            '</td>'
                     }).inject(TableBody);
+
+                    if (typeof description !== 'undefined' && description !== '') {
+                        new Element('div', {
+                            'class': 'field-container-item-desc',
+                            html   : description
+                        }).inject(Row.getElement('td'));
+                    }
 
                     if (setting.type !== 'select') {
                         Value = new Element('input', {
@@ -720,7 +746,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                             name   : setting.name,
                             'class': setting.class,
                             id     : extraFieldId
-                        }).inject(Row.getElement('td:last-child'));
+                        });
 
                         if (setting['data-qui'] !== '') {
                             Value.set('data-qui', setting['data-qui']);
@@ -734,6 +760,19 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                             }
                         }
 
+                        if (Value.type === 'checkbox' ||
+                            Value.type === 'radio' ||
+                            Value.type === 'hidden') {
+                            var Container = new Element('div', {
+                                'class': 'field-container-field'
+                            }).inject(Row.getElement('.field-container'));
+
+                            Value.inject(Container);
+                            continue;
+                        }
+
+                        Value.classList.add('field-container-field');
+                        Value.inject(Row.getElement('.field-container'));
                         continue;
                     }
 
@@ -741,7 +780,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         name   : setting.name,
                         'class': setting.class,
                         id     : extraFieldId
-                    }).inject(Row.getElement('td:last-child'));
+                    }).inject(Row.getElement('.field-container'));
+
+                    Value.addClass('field-container-field');
 
 
                     for (c = 0, cLen = setting.options.length; c < cLen; c++) {
@@ -796,9 +837,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     });
 
                     resolve();
-
                 }).catch(reject);
-
             }.bind(this));
         },
 

@@ -1,105 +1,32 @@
-
 <form class="quiqqer-bricks-brickedit">
-    <table class="data-table">
-    <thead>
+    <table class="data-table data-table-flexbox">
+        <thead>
         <tr>
             <th>
                 {locale group="quiqqer/bricks" var="brick.edit.allowed.areas"}
             </th>
         </tr>
-    </thead>
-    <tbody>
-        <tr class="{cycle values="odd,even"}">
+        </thead>
+        <tbody>
+        <tr>
             <td>
                 <div class="quiqqer-bricks-areas"></div>
             </td>
         </tr>
-    </tbody>
+        </tbody>
     </table>
 
-<!--
-    <table class="data-table">
-    <thead>
+    <table class="data-table data-table-flexbox brick-table-flexible">
+        <thead>
         <tr>
-            <th colspan="2">
-                {locale group="quiqqer/bricks" var="brick.edit.settings.proportion.header"}
+            <th>
+                {locale group="quiqqer/bricks" var="brick.edit.settings.flexible.header"}
+                <div class="description">
+                    {locale group="quiqqer/bricks" var="brick.edit.settings.flexible.header.description"}
+                </div>
             </th>
         </tr>
-    </thead>
-    <tbody>
-    <tr class="{cycle values="odd,even" reset=true}">
-        <td>
-            <label for="height">
-                {locale group="quiqqer/bricks" var="brick.edit.height"}
-            </label>
-        </td>
-        <td>
-            <input type="text" name="height" id="height" />
-        </td>
-    </tr>
-    <tr class="{cycle values="odd,even"}">
-        <td>
-            <label for="width">
-                {locale group="quiqqer/bricks" var="brick.edit.width"}
-            </label>
-        </td>
-        <td>
-            <input type="text" name="width" id="width" />
-        </td>
-    </tr>
-    <tr class="{cycle values="odd,even"}">
-    <td>
-        <label for="classes">
-            {locale group="quiqqer/bricks" var="brick.edit.classes"}
-        </label>
-    </td>
-    <td>
-        <input type="text" name="classes" id="classes" />
-    </td>
-    </tr>
-    </tbody>
+        </thead>
+        <tbody></tbody>
     </table>
--->
-
-    <table class="data-table brick-table-flexible">
-    <thead>
-    <tr>
-        <th>
-            {locale group="quiqqer/bricks" var="brick.edit.settings.flexible.header"}
-            <div class="description">
-                {locale group="quiqqer/bricks" var="brick.edit.settings.flexible.header.description"}
-            </div>
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    <!--
-        <tr class="{cycle values="odd,even" reset=true}">
-            <td>
-                <label>
-                    <input type="checkbox" name="flexible-height">
-                    <span>{locale group="quiqqer/bricks" var="brick.edit.height"}</span>
-                </label>
-            </td>
-        </tr>
-        <tr class="{cycle values="odd,even"}">
-            <td>
-                <label>
-                    <input type="checkbox" name="flexible-width">
-                    <span>{locale group="quiqqer/bricks" var="brick.edit.width"}</span>
-                </label>
-            </td>
-        </tr>
-        <tr class="{cycle values="odd,even"}">
-        <td>
-            <label>
-                <input type="checkbox" name="flexible-classes">
-                <span>{locale group="quiqqer/bricks" var="brick.edit.classes"}</span>
-            </label>
-        </td>
-        </tr>
-        -->
-    </tbody>
-    </table>
-
 </form>

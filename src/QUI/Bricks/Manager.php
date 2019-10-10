@@ -637,6 +637,7 @@ class Manager
         }
 
         $dataAttributes = [];
+        $description    = '';
 
         foreach ($Setting->attributes as $attribute) {
             if ($attribute->nodeName === 'data-qui') {
@@ -648,9 +649,16 @@ class Manager
             }
         }
 
+        $Description = $Setting->getElementsByTagName('description');
+
+        if ($Description->length) {
+            $description = QUI\Utils\DOM::getTextFromNode($Description->item(0), false);
+        }
+
         return [
             'name'            => $Setting->getAttribute('name'),
             'text'            => QUI\Utils\DOM::getTextFromNode($Setting, false),
+            'description'     => $description,
             'type'            => $Setting->getAttribute('type'),
             'class'           => $Setting->getAttribute('class'),
             'data-qui'        => $Setting->getAttribute('data-qui'),
