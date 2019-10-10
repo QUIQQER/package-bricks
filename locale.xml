@@ -1216,6 +1216,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Fügen Sie einen Titel hinzu!]]></de>
             <en><![CDATA[Add a title!]]></en>
         </locale>
+        <locale name="exception.brick.title.already.exists">
+            <de><![CDATA[
+            Ein Baustein mit dem Titel existiert bereits.
+            Bausteine mit gleichem Titel erschweren die Übersichtlichkeit.
+            Bitte wähle einen anderen Titel für diesen Baustein.
+            ]]></de>
+            <en><![CDATA[
+            A Brick with the title already exists.
+            Bricks with the same title make it difficult to keep track of them.
+            Please choose a different title for this Brick.
+            ]]></en>
+        </locale>
 
         <locale name="brick.control.googlemaps.title">
             <de><![CDATA[Bausteine: Maps-Karte]]></de>
