@@ -935,6 +935,26 @@ class Manager
 
         $checkType($type);
 
+        // check duplicated titles
+        $result = QUI::getDataBase()->fetch([
+            'from'  => $this->getTable(),
+            'where' => [
+                'title' => $Brick->getAttribute('title'),
+                'id'    => [
+                    'type'  => 'NOT',
+                    'value' => (int)$brickId
+                ]
+            ],
+            'limit' => 1
+        ]);
+
+        if (isset($result[0])) {
+            throw new QUI\Exception([
+                'quiqqer/bricks',
+                'exception.brick.title.already.exists'
+            ]);
+        }
+
 
         // update
         QUI::getDataBase()->update($this->getTable(), [

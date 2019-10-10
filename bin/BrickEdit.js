@@ -272,6 +272,12 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 }
 
                 self.Loader.hide();
+            }).catch(function (e) {
+                QUI.getMessageHandler().then(function (MH) {
+                    MH.addError(e.getMessage());
+                });
+
+                self.Loader.hide();
             });
         },
 
