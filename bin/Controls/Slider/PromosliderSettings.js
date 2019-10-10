@@ -70,20 +70,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 }
             }).wraps(this.$Input);
 
-            // exist label?
-            var id    = this.$Input.get('id'),
-                Label = document.getElement('label[for="' + id + '"]');
-
-            if (Label) {
-                var Cell    = Label.getParent('td'),
-                    OldCell = this.$Elm.getParent('td');
-
-                Cell.set('colspan', 2);
-
-                this.$Elm.inject(Cell);
-                OldCell.destroy();
-            }
-
             // grid and sizes
             var size = this.$Elm.getSize();
 
@@ -233,7 +219,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
          *
          * @param {Object} [caller] - the object calling this event
          */
-        $toggleSlideStatus: function(caller) {
+        $toggleSlideStatus: function (caller) {
             if (!caller) {
                 return;
             }
@@ -277,8 +263,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
                 insert.isDisabled = new QUISwitch({
                     status: entry.isDisabled === "1",
-                    name   : i,
-                    uid: i,
+                    name  : i,
+                    uid   : i,
                     events: {
                         onChange: this.$toggleSlideStatus
                     }
@@ -310,7 +296,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
                 if ("newTab" in entry) {
                     insert.newTab = new Element('span', {
-                        'class': entry.newTab === "1" ? 'fa fa-check' : 'fa fa-times',
+                        'class'       : entry.newTab === "1" ? 'fa fa-check' : 'fa fa-times',
                         'data-enabled': entry.newTab
                     });
                 }
@@ -392,7 +378,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 entry.url = params.url;
             }
 
-            if("newTab" in params) {
+            if ("newTab" in params) {
                 entry.newTab = params.newTab;
             }
 
@@ -652,13 +638,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var Content = Dialog.getContent();
                     var Form    = Content.getElement('form');
 
-                    var IsDisabled   = Form.elements.isDisabled;
-                    var Image        = Form.elements.image;
-                    var Title        = Form.elements.title;
-                    var Description  = Form.elements.description;
-                    var Type         = Form.elements.type;
-                    var Url          = Form.elements.url;
-                    var NewTab       = Form.elements.newTab;
+                    var IsDisabled  = Form.elements.isDisabled;
+                    var Image       = Form.elements.image;
+                    var Title       = Form.elements.title;
+                    var Description = Form.elements.description;
+                    var Type        = Form.elements.type;
+                    var Url         = Form.elements.url;
+                    var NewTab      = Form.elements.newTab;
 
                     self.add({
                         isDisabled: IsDisabled.value,
@@ -722,7 +708,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
 
                             this.IsDisabledSwitch = new QUISwitch({
-                                name: 'isDisabled',
+                                name  : 'isDisabled',
                                 status: false
                             });
                             this.IsDisabledSwitch.inject(Container.getElement('#isDisabledWrapper'));
@@ -732,7 +718,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                             });
                             this.NewTabSwitch.inject(Container.getElement('#newTabWrapper'));
 
-                            
+
                             QUI.parse(Container).then(function () {
                                 return ControlsUtils.parse(Container);
                             }).then(function () {

@@ -1,25 +1,23 @@
-
 <form class="quiqqer-bricks-brickedit">
-    <table class="data-table brick-edit-extra-header">
+    <table class="data-table data-table-flexbox brick-edit-extra-header">
         <thead>
         <tr>
-            <th colspan="2">
+            <th>
                 {locale group="quiqqer/bricks" var="brick.edit.extra.header"}
             </th>
         </tr>
         </thead>
 
         <tbody>
-
-        <tr class="{cycle values="odd,even"}">
-        <td>
-            <label for="frontendTitle">
-                {locale group="quiqqer/bricks" var="brick.edit.frontendTitle"}
-            </label>
-        </td>
-        <td>
-            <input type="text" name="frontendTitle" id="frontendTitle" />
-        </td>
+        <tr>
+            <td>
+                <label for="frontendTitle" class="field-container">
+                    <span class="field-container-item">
+                        {locale group="quiqqer/bricks" var="brick.edit.frontendTitle"}
+                    </span>
+                    <input type="text" name="frontendTitle" id="frontendTitle" class="field-container-field"/>
+                </label>
+            </td>
         </tr>
         </tbody>
     </table>

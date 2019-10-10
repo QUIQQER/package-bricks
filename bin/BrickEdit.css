@@ -14,7 +14,7 @@
 .brick-edit-content {
     margin-bottom: 0;
 }
-
+/*
 .quiqqer-bricks-brickedit label {
     clear: both;
     float: left;
@@ -30,7 +30,7 @@
     max-width: 300px;
     width: 100%;
 }
-
+*/
 .quiqqer-bricks-brickedit .cke_source {
     max-width: 100%;
 }
