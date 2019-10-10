@@ -258,9 +258,12 @@ class Brick extends QUI\QDOM
             }
 
 
-            $oldCssClasses = $this->getAttribute('classes');
+            $oldCssClasses     = $this->getAttribute('classes');
+            $oldCssClassesJson = null;
 
-            $oldCssClassesJson = \json_decode($oldCssClasses, true);
+            if (\is_string($oldCssClasses)) {
+                $oldCssClassesJson = \json_decode($oldCssClasses, true);
+            }
 
             if (\is_array($oldCssClassesJson)) {
                 $oldCssClasses = $oldCssClassesJson;
