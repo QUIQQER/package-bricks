@@ -205,13 +205,19 @@ class Manager
      */
     public function existsUniqueBrickId($uid)
     {
-        $result = QUI::getDataBase()->fetch([
-            'from'  => $this->getUIDTable(),
-            'where' => [
-                'uid' => $uid
-            ],
-            'limit' => 1
-        ]);
+        try {
+            $result = QUI::getDataBase()->fetch([
+                'from'  => $this->getUIDTable(),
+                'where' => [
+                    'uid' => $uid
+                ],
+                'limit' => 1
+            ]);
+        } catch (QUI\DataBase\Exception $Exception) {
+            QUI\System\Log::addError($Exception->getMessage());
+
+            return false;
+        }
 
         return isset($result[0]);
     }
@@ -787,22 +793,28 @@ class Manager
      */
     public function getSitesByBrick(Brick $Brick)
     {
+        try {
+            $list = QUI::getDataBase()->fetch([
+                'select' => ['brickId', 'project', 'lang', 'siteId'],
+                'from'   => $this->getUIDTable(),
+                'where'  => [
+                    'project' => $Brick->getAttribute('project'),
+                    'lang'    => $Brick->getAttribute('lang'),
+                    'brickId' => $Brick->getAttribute('id')
+                ]
+            ]);
+
+            $Project = QUI::getProject(
+                $Brick->getAttribute('project'),
+                $Brick->getAttribute('lang')
+            );
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::addError($Exception->getMessage());
+
+            return [];
+        }
+
         $result = [];
-
-        $list = QUI::getDataBase()->fetch([
-            'select' => ['brickId', 'project', 'lang', 'siteId'],
-            'from'   => $this->getUIDTable(),
-            'where'  => [
-                'project' => $Brick->getAttribute('project'),
-                'lang'    => $Brick->getAttribute('lang'),
-                'brickId' => $Brick->getAttribute('id')
-            ]
-        ]);
-
-        $Project = QUI::getProject(
-            $Brick->getAttribute('project'),
-            $Brick->getAttribute('lang')
-        );
 
         foreach ($list as $entry) {
             try {
@@ -1121,13 +1133,18 @@ class Manager
         );
 
         foreach ($parentIds as $parentId) {
-            $bricks = QUI::getDataBase()->fetch([
-                'from'  => $projectCacheTable,
-                'where' => [
-                    'id'   => $parentId,
-                    'area' => $brickArea
-                ]
-            ]);
+            try {
+                $bricks = QUI::getDataBase()->fetch([
+                    'from'  => $projectCacheTable,
+                    'where' => [
+                        'id'   => $parentId,
+                        'area' => $brickArea
+                    ]
+                ]);
+            } catch (QUI\DataBase\Exception $Exception) {
+                QUI\System\Log::addError($Exception->getMessage());
+                continue;
+            }
 
             if (empty($bricks) || !\is_array($bricks)) {
                 continue;

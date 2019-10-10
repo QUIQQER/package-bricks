@@ -24,9 +24,15 @@ class Panel extends QUI\Utils\Singleton
      */
     public function getCategoryFromBrick($brickId, $category)
     {
-        $BrickManager = QUI\Bricks\Manager::init();
-        $Brick        = $BrickManager->getBrickById($brickId);
-        $type         = $Brick->getAttribute('type');
+        try {
+            $BrickManager = QUI\Bricks\Manager::init();
+            $Brick        = $BrickManager->getBrickById($brickId);
+            $type         = $Brick->getAttribute('type');
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::addError($Exception->getMessage());
+
+            return '';
+        }
 
         $cacheName = 'quiqqer/bricks/categories/category/'.$type.'/'.$category;
 
@@ -34,7 +40,6 @@ class Panel extends QUI\Utils\Singleton
             return QUI\Cache\Manager::get($cacheName);
         } catch (QUI\Exception $Exception) {
         }
-
 
         $files = Utils::getBricksXMLFiles();
         $path  = $this->getPath($Brick);
@@ -61,8 +66,14 @@ class Panel extends QUI\Utils\Singleton
      */
     public function getCategoriesFromBrick($brickId)
     {
-        $BrickManager = QUI\Bricks\Manager::init();
-        $Brick        = $BrickManager->getBrickById($brickId);
+        try {
+            $BrickManager = QUI\Bricks\Manager::init();
+            $Brick        = $BrickManager->getBrickById($brickId);
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::addError($Exception->getMessage());
+
+            return [];
+        }
 
         $xmlFiles = $this->getXMLFilesForBricks($Brick);
         $path     = $this->getPath($Brick);
