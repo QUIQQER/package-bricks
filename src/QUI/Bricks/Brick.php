@@ -92,7 +92,7 @@ class Brick extends QUI\QDOM
         }
 
         if (isset($params['id'])) {
-            $this->id = $params['id'];
+            $this->id = (int)$params['id'];
         }
 
         if (isset($params['uniqueId'])) {
@@ -441,6 +441,30 @@ class Brick extends QUI\QDOM
     }
 
     /**
+     * @param string $name
+     * @return array|mixed
+     */
+    public function getAttribute($name)
+    {
+        if ($name === 'classes') {
+            return $this->getCSSClasses();
+        }
+
+        return parent::getAttribute($name);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes()
+    {
+        $attributes            = parent::getAttributes();
+        $attributes['classes'] = $this->getCSSClasses();
+
+        return $attributes;
+    }
+
+    /**
      * This fields can be overwritten by another user
      *
      * @return array
@@ -459,6 +483,10 @@ class Brick extends QUI\QDOM
      */
     public function addCSSClass($cssClass)
     {
+        if (\is_array($cssClass)) {
+            $cssClass = \implode($cssClass, ' ');
+        }
+
         if (!\is_string($cssClass)) {
             return;
         }
