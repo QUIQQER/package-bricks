@@ -26,7 +26,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
     'css!package/quiqqer/bricks/bin/BrickEdit.css'
 
 ], function (QUI, QUIPanel, QUIConfirm, BrickAreas, QUIAjax, QUILocale,
-    Projects, QUIFormUtils, ControlUtils, Template, Bricks
+             Projects, QUIFormUtils, ControlUtils, Template, Bricks
 ) {
     "use strict";
 
@@ -65,14 +65,14 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         initialize: function (options) {
             this.parent(options);
 
-            this.$availableBricks = [];
+            this.$availableBricks   = [];
             this.$availableSettings = [];
-            this.$customfields = [];
-            this.$loaded = false;
+            this.$customfields      = [];
+            this.$loaded            = false;
 
             this.$Container = null;
-            this.$Editor = false;
-            this.$Areas = false;
+            this.$Editor    = false;
+            this.$Areas     = false;
 
             this.addEvents({
                 onInject       : this.$onInject,
@@ -186,7 +186,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                  */
                 this.$availableBricks = bricks;
                 this.$availableSettings = brick.availableSettings;
-                this.$customfields = brick.customfields;
+                this.$customfields      = brick.customfields;
 
                 this.setAttribute('data', brick);
 
@@ -258,7 +258,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
             data.customfields = self.$customfields;
 
-            return Bricks.saveBrick(self.getAttribute('id'), data).then(function () {
+            return Bricks.saveBrick(self.getAttribute('id'), data).then(function (attributes) {
                 QUI.getMessageHandler().then(function (MH) {
                     MH.addSuccess(
                         QUILocale.get(lg, 'message.brick.save.success')
@@ -347,10 +347,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     break;
 
                 default:
-                    data.attributes = Object.merge(
-                        data.attributes,
-                        QUIFormUtils.getFormData(Form)
-                    );
+                    data.attributes = Object.merge(data.attributes, QUIFormUtils.getFormData(Form));
             }
 
             if (Form && Form.getElement('[name="frontendTitle"]')) {
@@ -382,10 +379,18 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             }
 
             if (unload === 'extra') {
-                data.settings = Object.merge(
-                    data.settings,
-                    QUIFormUtils.getFormData(Form)
-                );
+                var extra = QUIFormUtils.getFormData(Form);
+
+                // filter numbers
+                var isNumeric = function (n) {
+                    return !isNaN(parseFloat(n)) && isFinite(n);
+                };
+
+                extra = Object.filter(extra, function (value, key) {
+                    return !isNumeric(key);
+                });
+
+                data.settings = Object.merge(data.settings, extra);
             }
             if (unload === 'content' && this.$Editor) {
                 data.attributes.content = this.$Editor.getContent();
@@ -437,9 +442,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                         if (attributes.areas) {
                             areas = attributes.areas
-                                .replace(/^,*/, '')
-                                .replace(/,*$/, '')
-                                .split(',');
+                                              .replace(/^,*/, '')
+                                              .replace(/,*$/, '')
+                                              .split(',');
                         }
 
                         // areas
@@ -692,8 +697,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                 // extra settings
                 for (i = 0, len = this.$availableSettings.length; i < len; i++) {
-                    setting = this.$availableSettings[i];
-                    extraFieldId = 'extraField_' + id + '_' + i;
+                    setting        = this.$availableSettings[i];
+                    extraFieldId   = 'extraField_' + id + '_' + i;
                     dataAttributes = setting['data-attributes'];
 
                     text = setting.text;
