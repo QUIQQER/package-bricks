@@ -84,6 +84,31 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             this.$DotsDesktop = Elm.getElement('.quiqqer-bricks-promoslider-slide-desktop-dots');
             this.$DotsMobile  = Elm.getElement('.quiqqer-bricks-promoslider-slide-mobile-dots');
 
+            // Nav
+            this.$Next      = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-next');
+            this.$Previous  = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-prev');
+
+            // navigation
+            if (this.$Next) {
+                this.$Next.addEvent('click', function (event) {
+                    event.stop();
+                    this.$scrollOnMouseMove = false;
+                    this.$scrolling         = true;
+                    this.stop();
+                    this.next();
+                }.bind(this));
+            }
+
+            if (this.$Previous) {
+                this.$Previous.addEvent('click', function (event) {
+                    event.stop();
+                    this.$scrollOnMouseMove = false;
+                    this.$scrolling         = true;
+                    this.stop();
+                    this.prev();
+                }.bind(this));
+            }
+
             var click = function (event) {
                 if (self.$Timer) {
                     clearInterval(self.$Timer);
