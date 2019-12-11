@@ -275,16 +275,7 @@
     }
 }
 
-
-
-
-
-
-
-
-
-
-
+/* arrows */
 .quiqqer-bricks-promoslider-wallpaper-prev,
 .quiqqer-bricks-promoslider-wallpaper-next {
     color: rgba(255, 255, 255, 0.9);
@@ -298,6 +289,13 @@
     z-index: 2;
 }
 
+@media screen and (min-width: 1200px) {
+    .quiqqer-bricks-promoslider-wallpaper-prev,
+    .quiqqer-bricks-promoslider-wallpaper-next {
+        font-size: 40px;
+    }
+}
+
 .quiqqer-bricks-promoslider-wallpaper-prev .fa,
 .quiqqer-bricks-promoslider-wallpaper-next .fa {
     line-height: 4vw;
@@ -309,7 +307,7 @@
     transition: 0.2s all;
 }
 
-/* effect scale */
+    /* effect scale */
 .quiqqer-bricks-promoslider-wallpaper-prev.showHoverScale:hover .fa,
 .quiqqer-bricks-promoslider-wallpaper-next.showHoverScale:hover .fa {
     transform: scale(1.2);
