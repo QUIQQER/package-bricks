@@ -42,7 +42,8 @@ class SimpleContact extends QUI\Control
 
             if ($Site) {
                 $this->setAttribute(
-                    'showPrivacyPolicyCheckbox', $Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox')
+                    'showPrivacyPolicyCheckbox',
+                    $Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox')
                 );
             }
         }
