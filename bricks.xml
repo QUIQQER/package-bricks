@@ -169,6 +169,35 @@
                 <setting name="shownavigation" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.shownavigation"/>
                 </setting>
+                <setting type="select" name="showarrows">
+                    <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.showarrows"/>
+
+                    <option value="hide">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.hide"/>
+                    </option>
+                    <option value="showHoverScale">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverScale"/>
+                    </option>
+                    <option value="showHoverSlide">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverSlide"/>
+                    </option>
+                    <option value="showHoverBackgroundLight">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverBackgroundLight"/>
+                    </option>
+                    <option value="showHoverBackgroundDark">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverBackgroundDark"/>
+                    </option>
+                    <option value="showHoverOpacity">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.promoslider.settings.showarrows.showHoverOpacity"/>
+                    </option>
+                </setting>
+
 
                 <setting type="select" name="image-wallpaper-position">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.image-wallpaper-position"/>

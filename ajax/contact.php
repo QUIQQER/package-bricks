@@ -90,7 +90,7 @@ QUI::$Ajax->registerFunction(
             <span style=\"font-weight: bold;\">E-mail:</span> {$email}<br />
         ";
 
-        if ($privacyPolicyCheckbox) {
+        if ($privacyPolicyAccepted) {
             $body .= '<span style="font-weight: bold;">';
             $body .= QUI::getLocale()->get(
                 'quiqqer/bricks',

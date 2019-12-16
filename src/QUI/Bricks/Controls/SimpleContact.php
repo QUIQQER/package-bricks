@@ -35,8 +35,18 @@ class SimpleContact extends QUI\Control
             'useCaptcha'                => false
         ]);
 
-
         parent::__construct($attributes);
+
+        if (!isset($attributes['showPrivacyPolicyCheckbox'])) {
+            $Site = $this->getSite();
+
+            if ($Site) {
+                $this->setAttribute(
+                    'showPrivacyPolicyCheckbox',
+                    $Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox')
+                );
+            }
+        }
 
         $this->addCSSFile(
             dirname(__FILE__).'/SimpleContact.css'
@@ -46,8 +56,8 @@ class SimpleContact extends QUI\Control
     /**
      * (non-PHPdoc)
      *
-     * @see \QUI\Control::create()
      * @throws QUI\Exception
+     * @see \QUI\Control::create()
      */
     public function getBody()
     {

@@ -32,6 +32,7 @@ class Promoslider extends AbstractPromoslider
             'data-qui'                   => 'package/quiqqer/bricks/bin/Controls/Slider/Promoslider',
             'role'                       => 'listbox',
             'shownavigation'             => false,
+            'showarrows'                 => false,
             'image-as-wallpaper'         => false,
             'image-wallpaper-attachment' => false,
             'autostart'                  => false,
@@ -113,6 +114,10 @@ class Promoslider extends AbstractPromoslider
                 'data-qui-options-shownavigation',
                 $this->getAttribute('shownavigation')
             );
+        }
+
+        if (!$this->getAttribute('showarrows')) {
+            $this->setAttribute('showarrows', 'hide');
         }
 
         if ($this->getAttribute('image-as-wallpaper')) {
