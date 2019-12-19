@@ -46,7 +46,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
             this.$SlideSettingsElement = this.getMobileSlidesSettingElement();
 
             this.$Switch = new QUISwitch({
-                status: this.getElm().value === "true",
+                status: this.getElm().value === "1",
                 events: {
                     onChange: this.$switchToggled,
                     onLoad  : function () {
