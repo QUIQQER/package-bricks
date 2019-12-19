@@ -28,6 +28,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
         initialize: function (options) {
             this.parent(options);
 
+            this.$SlideSettingsElement = null;
+
             this.addEvents({
                 onImport: this.$onImport
             });
@@ -41,8 +43,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
                 id: 'ToggleMobileSlidesSettingWrapper'
             });
 
+            this.$SlideSettingsElement = this.getMobileSlidesSettingElement();
+
             this.$Switch = new QUISwitch({
-                status: this.getElm().value === "true",
+                status: this.getElm().value === "1",
                 events: {
                     onChange: this.$switchToggled,
                     onLoad  : function () {
@@ -72,10 +76,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
          * @return {HTMLElement | null}
          .*/
         getMobileSlidesSettingElement: function () {
-            return this.getElm()
-                       .getParent('table')
-                       .getElement('[name="mobileslides"]')
-                       .getParent('label');
+            var SlideSettingsElement = this.getElm().getParent('table').getElement('[name="mobileslides"]');
+
+            if (SlideSettingsElement) {
+                return SlideSettingsElement.getParent('label');
+            }
         },
 
 
@@ -83,7 +88,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
          * Hides the mobileslides-setting-section (CSS "visibility" and "display")
          */
         hideMobileSlidesSetting: function () {
-            this.getMobileSlidesSettingElement().setStyles({
+            if (!this.$SlideSettingsElement) {
+                return;
+            }
+
+            this.$SlideSettingsElement.setStyles({
                 visibility: 'hidden',
                 display   : 'none'
             });
@@ -94,7 +103,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
          * Shows the mobileslides-setting-section (CSS "visibility" and "display")
          */
         showMobileSlidesSetting: function () {
-            this.getMobileSlidesSettingElement().setStyles({
+            if (!this.$SlideSettingsElement) {
+                return;
+            }
+
+            this.$SlideSettingsElement.setStyles({
                 visibility: 'visible',
                 display   : null
             });

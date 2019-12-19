@@ -73,7 +73,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
 
             // exist label?
             var id    = this.$Input.get('id'),
-                Label = document.getElement('label[for="' + id + '"]');
+                Label = document.getElement('label[for="extraField_' + id + '"]');
 
             if (Label) {
                 var Cell    = Label.getParent('td'),

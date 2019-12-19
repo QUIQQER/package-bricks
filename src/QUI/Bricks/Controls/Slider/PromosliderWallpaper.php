@@ -227,7 +227,7 @@ class PromosliderWallpaper extends AbstractPromoslider
             'Utils'         => new Utils()
         );
 
-        if ($this->getAttribute('isMobileSlidesEnabled') === "true") {
+        if ($this->getAttribute('isMobileSlidesEnabled') == true) {
             $this->parseSlides($this->getAttribute('mobileslides'), 'mobile');
 
             $options['mobileSlides'] = $this->mobileSlides;
