@@ -132,9 +132,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 }],
                 columnModel: [{
                     header   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled.short'),
-                    dataIndex: 'isDisabled',
+                    dataIndex: 'isDisabledDisplay',
                     dataType : 'QUI',
                     width    : 60
+                }, {
+                    dataIndex: 'isDisabled',
+                    hidden   : true
                 }, {
                     header   : QUILocale.get('quiqqer/system', 'image'),
                     dataIndex: 'imagePreview',
@@ -217,23 +220,17 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
         /**
          * Toggles the slide's status between enabled and disabled
          *
-         * @param {Object} [caller] - the object calling this event
+         * @param {Object} [Caller] - the object calling this event
          */
-        $toggleSlideStatus: function (caller) {
-            if (!caller) {
+        $toggleSlideStatus: function (Caller) {
+            if (!Caller) {
                 return;
             }
 
-            var index = caller.options.name,
-                data  = this.$data[index];
+            // get cell number
+            var row = Caller.getElm().getParent('li').get('data-row');
 
-            if (data.isDisabled === "1") {
-                data.isDisabled = "0";
-            } else {
-                data.isDisabled = "1";
-            }
-
-            this.$data[index] = data;
+            this.$data[row].isDisabled = Caller.getStatus();
             this.update();
         },
 
@@ -261,8 +258,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                 entry  = this.$data[i];
                 insert = {};
 
-                insert.isDisabled = new QUISwitch({
-                    status: entry.isDisabled === "1",
+                entry.isDisabled = parseInt(entry.isDisabled);
+
+                insert.isDisabledDisplay = new QUISwitch({
+                    status: entry.isDisabled,
                     name  : i,
                     uid   : i,
                     events: {
@@ -355,7 +354,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             };
 
             if ("isDisabled" in params) {
-                entry.isDisabled = params.isDisabled;
+                entry.isDisabled = parseInt(params.isDisabled);
             }
 
             if ("image" in params) {
@@ -399,7 +398,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             }
 
             var entry = {
-                isDisabled: '',
+                isDisabled: 0,
                 image     : '',
                 title     : '',
                 text      : '',
@@ -409,7 +408,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
             };
 
             if ("isDisabled" in params) {
-                entry.isDisabled = params.isDisabled;
+                entry.isDisabled = parseInt(params.isDisabled);
             }
 
             if ("image" in params) {
@@ -493,7 +492,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
 
             for (var i = 0, len = gridData.length; i < len; i++) {
                 data.push({
-                    isDisabled: gridData[i].isDisabled,
+                    isDisabled: parseInt(gridData[i].isDisabled),
                     image     : gridData[i].image,
                     title     : gridData[i].title,
                     text      : gridData[i].text,
@@ -564,7 +563,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var Content = Dialog.getContent();
                     var Form    = Content.getElement('form');
 
-                    var IsDisabled  = Form.elements.isDisabled.$status;
+                    var IsDisabled  = Form.elements.isDisabled;
                     var Image       = Form.elements.image;
                     var Title       = Form.elements.title;
                     var Description = Form.elements.description;
@@ -596,7 +595,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var Type        = Form.elements.type;
                     var Url         = Form.elements.url;
 
-                    if (data.isDisabled.$status) {
+                    if (data.isDisabled) {
                         Dialog.IsDisabledSwitch.on();
                     } else {
                         Dialog.IsDisabledSwitch.off();
@@ -638,7 +637,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var Content = Dialog.getContent();
                     var Form    = Content.getElement('form');
 
-                    var IsDisabled  = Form.elements.isDisabled;
                     var Image       = Form.elements.image;
                     var Title       = Form.elements.title;
                     var Description = Form.elements.description;
@@ -647,7 +645,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                     var NewTab      = Form.elements.newTab;
 
                     self.add({
-                        isDisabled: IsDisabled.value,
+                        isDisabled: Dialog.IsDisabledSwitch.getStatus(),
                         image     : Image.value,
                         title     : Title.value,
                         text      : Description.value,
@@ -707,16 +705,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings', [
                             });
 
 
-                            this.IsDisabledSwitch = new QUISwitch({
+                            Win.IsDisabledSwitch = new QUISwitch({
                                 name  : 'isDisabled',
                                 status: false
-                            });
-                            this.IsDisabledSwitch.inject(Container.getElement('#isDisabledWrapper'));
+                            }).inject(Container.getElement('#isDisabledWrapper'))
 
-                            this.NewTabSwitch = new QUISwitch({
+                            Win.NewTabSwitch = new QUISwitch({
                                 name: 'newTab'
-                            });
-                            this.NewTabSwitch.inject(Container.getElement('#newTabWrapper'));
+                            }).inject(Container.getElement('#newTabWrapper'));
 
 
                             QUI.parse(Container).then(function () {
