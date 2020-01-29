@@ -17,6 +17,10 @@
             <field type="TEXT NULL">width</field>
             <field type="TEXT NULL">height</field>
             <field type="TEXT NULL">classes</field>
+
+            <primary>id</primary>
+            <index>project</index>
+            <index>lang</index>
         </table>
 
         <table name="bricksUID">
@@ -27,14 +31,19 @@
             <field type="BIGINT(20)">siteId</field>
             <field type="LONGTEXT NULL">customfields</field>
             <field type="LONGTEXT NULL">attributes</field>
+
+            <primary>uid</primary>
         </table>
     </global>
 
     <projects>
         <table name="bricksCache" no-auto-update="1" no-site-reference="1">
             <field type="BIGINT(20) NOT NULL">id</field>
-            <field type="VARCHAR(255) NULL">area</field>
+            <field type="VARCHAR(255) NOT NULL">area</field>
             <field type="TEXT NULL">brick</field>
+
+            <primary>id,area</primary>
+            <index>area</index>
         </table>
     </projects>
 
