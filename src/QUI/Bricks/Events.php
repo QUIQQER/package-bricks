@@ -222,6 +222,25 @@ class Events
             return;
         }
 
+        // unique bricks cache patch
+        $projects = QUI::getProjectManager()->getProjectList();
+
+        foreach ($projects as $Project) {
+            $projectCacheTable = QUI::getDBProjectTableName(
+                Manager::TABLE_CACHE,
+                $Project
+            );
+
+            try {
+                QUI::getDataBase()->fetchSQL(
+                    "`ALTER TABLE ``{$projectCacheTable}`` DROP PRIMARY KEY;`"
+                );
+            } catch (QUI\Exception $Exception) {
+                QUI\System\Log::addInfo($Exception->getMessage());
+            }
+        }
+
+        // unique id patch
         $php = 'php';
 
         if (\defined('PHP_BINARY')) {
