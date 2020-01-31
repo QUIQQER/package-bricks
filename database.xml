@@ -42,7 +42,6 @@
             <field type="VARCHAR(255) NOT NULL">area</field>
             <field type="TEXT NULL">brick</field>
 
-            <primary>id,area</primary>
             <index>area</index>
         </table>
     </projects>
