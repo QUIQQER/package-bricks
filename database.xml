@@ -40,8 +40,9 @@
         <table name="bricksCache" no-auto-update="1" no-site-reference="1">
             <field type="BIGINT(20) NOT NULL">id</field>
             <field type="VARCHAR(255) NOT NULL">area</field>
-            <field type="TEXT NULL">brick</field>
+            <field type="INT NULL">brick</field>
 
+            <index>id</index>
             <index>area</index>
         </table>
     </projects>
