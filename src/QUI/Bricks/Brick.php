@@ -282,7 +282,7 @@ class Brick extends QUI\QDOM
             }
 
             $_classes   = \array_unique($_classes);
-            $classesStr = \implode($_classes, ' ');
+            $classesStr = \implode(' ', $_classes);
             $classesStr = 'class="'.$classesStr.'"';
 
             $Engine = QUI::getTemplateManager()->getEngine();
