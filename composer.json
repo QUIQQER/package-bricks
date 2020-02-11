@@ -1,30 +1,31 @@
 {
-    "name": "quiqqer\/bricks",
-    "type": "quiqqer-module",
-    "description": "The brick system allows you to design your website according to your wishes. You can quickly move, create, or remove bricks to different places in the template.",
-    "license": "GPL-3.0+",
-    "authors": [
-        {
-            "name": "Henning Leutz",
-            "email": "leutz@pcsg.de",
-            "homepage": "http:\/\/www.pcsg.de",
-            "role": "Developer"
-        }
-    ],
-    "support": {
-        "email": "support@pcsg.de"
-    },
-    "require": {
-        "quiqqer\/quiqqer": "*@dev",
-        "quiqqer\/qui": ">=1|dev-master|dev-dev",
-        "quiqqer\/utils": ">=1.4|dev-dev",
-        "npm-asset\/hammerjs": "2.*",
-        "npm-asset\/mustache": "2.*",
-        "ramsey\/uuid": "3.*"
-    },
-    "autoload": {
-        "psr-4": {
-            "QUI\\Bricks\\": "src\/QUI\/Bricks"
-        }
+  "name": "quiqqer\/bricks",
+  "type": "quiqqer-module",
+  "description": "The brick system allows you to design your website according to your wishes. You can quickly move, create, or remove bricks to different places in the template.",
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "Henning Leutz",
+      "email": "leutz@pcsg.de",
+      "homepage": "http:\/\/www.pcsg.de",
+      "role": "Developer"
     }
+  ],
+  "support": {
+    "email": "support@pcsg.de"
+  },
+  "require": {
+    "quiqqer\/quiqqer": "*@dev",
+    "quiqqer\/qui": ">=1|dev-master|dev-dev",
+    "quiqqer\/utils": ">=1.4|dev-master|dev-dev",
+    "quiqqer\/mobile-detection": "1.*|dev-master|dev-dev",
+    "npm-asset\/hammerjs": "2.*",
+    "npm-asset\/mustache": "2.*",
+    "ramsey\/uuid": "3.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "QUI\\Bricks\\": "src\/QUI\/Bricks"
+    }
+  }
 }
