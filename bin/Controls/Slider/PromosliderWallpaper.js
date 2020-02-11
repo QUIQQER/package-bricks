@@ -3,9 +3,6 @@
  * @author www.pcsg.de (Henning Leutz)
  *
  * Wallpaper Slider
- *
- * @require qui/QUI
- * @require qui/controls/Control
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
 
