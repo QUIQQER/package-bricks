@@ -21,10 +21,10 @@ class PromosliderWallpaper extends AbstractPromoslider
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         // default options
-        $this->setAttributes(array(
+        $this->setAttributes([
             'title'                 => '',
             'text'                  => '',
             'class'                 => 'quiqqer-bricks-promoslider-wallpaper',
@@ -35,12 +35,12 @@ class PromosliderWallpaper extends AbstractPromoslider
             'showarrows'            => 'showHoverScale',
             'autostart'             => false,
             'delay'                 => 5000,
-            'template'              => dirname(__FILE__) . '/PromosliderWallpaper.html',
+            'template'              => \dirname(__FILE__).'/PromosliderWallpaper.html',
             'isMobileSlidesEnabled' => false
-        ));
+        ]);
 
         $this->addCSSFile(
-            dirname(__FILE__) . '/PromosliderWallpaper.css'
+            \dirname(__FILE__).'/PromosliderWallpaper.css'
         );
 
         $this->addCSSClass('grid-100');
@@ -69,7 +69,7 @@ class PromosliderWallpaper extends AbstractPromoslider
             $result .= '
                 <style>
                     .quiqqer-bricks-promoslider-wallpaper {
-                        height: calc(100vh - ' . $pagefit . 'px);
+                        height: calc(100vh - '.$pagefit.'px);
                     }
                 </style>';
         }
@@ -83,7 +83,7 @@ class PromosliderWallpaper extends AbstractPromoslider
                 <style>
                     @media screen and (max-width: 768px) {
                         .quiqqer-bricks-promoslider-wallpaper {
-                            height: calc(100vh - ' . $pagefit . 'px);
+                            height: calc(100vh - '.$pagefit.'px);
                         }
                     }
                 </style>';
@@ -187,7 +187,7 @@ class PromosliderWallpaper extends AbstractPromoslider
                 case "bottom":
                 case "bottom-right":
                     $this->addCSSClass(
-                        'quiqqer-bricks-promoslider-wallpaper__' . $this->getAttribute('position')
+                        'quiqqer-bricks-promoslider-wallpaper__'.$this->getAttribute('position')
                     );
                     break;
 
@@ -221,11 +221,11 @@ class PromosliderWallpaper extends AbstractPromoslider
 
         $this->parseSlides($this->getAttribute('desktopslides'), 'desktop');
 
-        $options = array(
+        $options = [
             'this'          => $this,
             'desktopSlides' => $this->desktopSlides,
             'Utils'         => new Utils()
-        );
+        ];
 
         if ($this->getAttribute('isMobileSlidesEnabled') == true) {
             $this->parseSlides($this->getAttribute('mobileslides'), 'mobile');
