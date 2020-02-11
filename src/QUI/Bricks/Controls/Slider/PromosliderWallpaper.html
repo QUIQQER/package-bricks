@@ -1,7 +1,7 @@
 <div class="quiqqer-bricks-promoslider-wallpaper-container">
-    {if $isDesktop}
+    {if $isMobile}
     {strip}
-    <ul class="hide-on-mobile">
+    <ul class="hide-on-mobile quiqqer-bricks-promoslider-mobileSlides">
         {foreach $desktopSlides as $key => $slide}
         <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}" data-newTab="{$slide.newTab}">
             {if $slide.url}<a href="{$slide.url}" {if $slide.newTab} target="_blank" {/if}>{/if}
@@ -42,9 +42,9 @@
     {/strip}
     {/if}
 
-    {if $isMobile}
+    {if $isDesktop}
     {strip}
-    <ul class="hide-on-desktop">
+    <ul class="hide-on-desktop quiqqer-bricks-promoslider-desktopSlides">
         {foreach $mobileSlides as $key => $slide}
         <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}" data-newTab="{$slide.newTab}">
             {if $slide.url}<a href="{$slide.url}" {if $slide.newTab} target="_blank" {/if}>{/if}
