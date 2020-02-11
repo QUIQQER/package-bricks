@@ -1,4 +1,5 @@
 <div class="quiqqer-bricks-promoslider-wallpaper-container">
+    {if $isDesktop}
     {strip}
     <ul class="hide-on-mobile">
         {foreach $desktopSlides as $key => $slide}
@@ -39,7 +40,9 @@
         {/foreach}
     </ul>
     {/strip}
+    {/if}
 
+    {if $isMobile}
     {strip}
     <ul class="hide-on-desktop">
         {foreach $mobileSlides as $key => $slide}
@@ -79,6 +82,7 @@
         {/foreach}
     </ul>
     {/strip}
+    {/if}
 </div>
 <div class="quiqqer-bricks-promoslider-wallpaper-dots"></div>
 

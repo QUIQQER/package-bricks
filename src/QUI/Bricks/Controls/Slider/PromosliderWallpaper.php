@@ -239,6 +239,11 @@ class PromosliderWallpaper extends AbstractPromoslider
 
         $Engine->assign($options);
 
+        $Engine->assign([
+            'isMobile'  => QUI\MobileDetection::isMobile(),
+            'isDesktop' => QUI\MobileDetection::isDesktop()
+        ]);
+
         return $Engine->fetch($this->getAttribute('template'));
     }
 }
