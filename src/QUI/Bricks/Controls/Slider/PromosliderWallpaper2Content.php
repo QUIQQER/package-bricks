@@ -21,11 +21,11 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         parent::__construct();
 
-        $defaultAttributes = array(
+        $defaultAttributes = [
             'title'                 => '',
             'text'                  => '',
             'class'                 => 'quiqqer-bricks-promoslider-wallpaper2Content',
@@ -36,14 +36,14 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
             'showarrows'            => 'showHoverScale',
             'autostart'             => false,
             'delay'                 => 5000,
-            'template'              => dirname(__FILE__) . '/PromosliderWallpaper2Content.html',
+            'template'              => \dirname(__FILE__).'/PromosliderWallpaper2Content.html',
             'isMobileSlidesEnabled' => false
-        );
+        ];
 
         // merge default attributes with custom attributes (custom overwrites default values)
-        $this->setAttributes(array_merge($defaultAttributes, $attributes));
+        $this->setAttributes(\array_merge($defaultAttributes, $attributes));
 
-        $this->addCSSFile(dirname(__FILE__) . '/PromosliderWallpaper2Content.css');
+        $this->addCSSFile(\dirname(__FILE__).'/PromosliderWallpaper2Content.css');
 
         $this->addCSSClass('grid-100');
         $this->addCSSClass('mobile-grid-100');
@@ -108,13 +108,13 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
             $image = false;
         }
 
-        return array(
+        return [
             'image'  => $image,
             'left'   => $left,
             'right'  => $right,
             'url'    => $url,
             'newTab' => $newTab
-        );
+        ];
     }
 
     /**
@@ -130,15 +130,15 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
         }
 
         // desktop slides
-        if (is_string($slides)) {
-            $slides = json_decode($slides, true);
+        if (\is_string($slides)) {
+            $slides = \json_decode($slides, true);
         }
 
-        if (!is_array($slides)) {
+        if (!\is_array($slides)) {
             return;
         }
 
-        $attributes = array('image', 'left', 'right', 'url', 'newTab');
+        $attributes = ['image', 'left', 'right', 'url', 'newTab'];
 
         foreach ($slides as $slide) {
             if (isset($slide['isDisabled']) && $slide['isDisabled']) {

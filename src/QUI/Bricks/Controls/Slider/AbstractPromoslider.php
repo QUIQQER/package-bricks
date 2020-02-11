@@ -21,12 +21,12 @@ class AbstractPromoslider extends QUI\Control
     /**
      * @var array
      */
-    protected $mobileSlides = array();
+    protected $mobileSlides = [];
 
     /**
      * @var array
      */
-    protected $desktopSlides = array();
+    protected $desktopSlides = [];
 
     /**
      * Add a slide for the desktop view
@@ -75,14 +75,14 @@ class AbstractPromoslider extends QUI\Control
             $pos = 'quiqqer-bricks-promoslider-slide-left';
         }
 
-        $this->desktopSlides[] = array(
+        $this->desktopSlides[] = [
             'image'  => $image,
             'title'  => $title,
             'text'   => $text,
             'pos'    => $pos,
             'url'    => $url,
             'newTab' => $newTab
-        );
+        ];
     }
 
     /**
@@ -125,13 +125,13 @@ class AbstractPromoslider extends QUI\Control
             }
         }
 
-        $this->mobileSlides[] = array(
+        $this->mobileSlides[] = [
             'image'  => $image,
             'title'  => $title,
             'text'   => $text,
             'url'    => $url,
             'newTab' => $newTab
-        );
+        ];
     }
 
     /**
@@ -147,15 +147,15 @@ class AbstractPromoslider extends QUI\Control
         }
 
         // desktop slides
-        if (is_string($slides)) {
-            $slides = json_decode($slides, true);
+        if (\is_string($slides)) {
+            $slides = \json_decode($slides, true);
         }
 
-        if (!is_array($slides)) {
+        if (!\is_array($slides)) {
             return;
         }
 
-        $attributes = array('image', 'title', 'text', 'type', 'url', 'newTab', 'isDisabled');
+        $attributes = ['image', 'title', 'text', 'type', 'url', 'newTab', 'isDisabled'];
 
         foreach ($slides as $slide) {
             if (isset($slide['isDisabled']) && $slide['isDisabled']) {
