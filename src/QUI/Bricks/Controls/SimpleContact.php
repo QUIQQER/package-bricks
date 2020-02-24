@@ -77,12 +77,14 @@ class SimpleContact extends QUI\Control
             if ($useCaptcha && QUI::getPackageManager()->isInstalled('quiqqer/captcha')) {
                 if (empty($_POST['quiqqer-captcha-response'])
                     || !CaptchaHandler::isResponseValid($_POST['quiqqer-captcha-response'])) {
-                    throw new QUI\Exception(
-                        QUI::getLocale()->get(
+                    $Engine->assign([
+                        'errorMessage' => QUI::getLocale()->get(
                             'quiqqer/bricks',
                             'brick.control.simpleContact.error.captcha_failed'
                         )
-                    );
+                    ]);
+
+                    $error = true;
                 }
             }
 
@@ -95,7 +97,9 @@ class SimpleContact extends QUI\Control
                 ]);
 
                 $error = true;
-            } else {
+            }
+
+            if (!$error) {
                 try {
                     $this->sendMail($Engine);
                 } catch (\Exception $Exception) {
