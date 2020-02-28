@@ -52,12 +52,6 @@
     width: 10%;
 }
 
-@media screen and (max-width: 767px) {
-    .quiqqer-boxContentAdvanced-entry-container {
-        flex: 1 0 280px;
-    }
-}
-
 /* general styling */
 .quiqqer-boxContentAdvanced-entry-img {
     margin-bottom: 2rem;
@@ -93,4 +87,14 @@
 
 .quiqqer-boxContentAdvanced-entry-content *:last-child {
     margin-bottom: 0;
+}
+
+@media screen and (max-width: 767px) {
+    .quiqqer-boxContentAdvanced-entry-container {
+        flex: 1 0 280px;
+    }
+
+    .quiqqer-boxContentAdvanced-entry-img picture {
+        height: auto;
+    }
 }

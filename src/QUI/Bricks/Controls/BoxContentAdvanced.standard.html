@@ -1,6 +1,7 @@
 <div class="quiqqer-boxContentAdvanced-entries quiqqer-boxContentAdvanced__standard">
     {foreach from=$entries item=entry}
-    <div class="quiqqer-boxContentAdvanced-entry-container quiqqer-boxContentAdvanced{$entriesPerLine}">
+    <div class="quiqqer-boxContentAdvanced-entry-container quiqqer-boxContentAdvanced{$entriesPerLine}"
+            {if $entry.entryOrder}style="order: {$entry.entryOrder}"{/if}>
         <div class="quiqqer-boxContentAdvanced-entry">
             {if $entry.entryImage}
             <div class="quiqqer-boxContentAdvanced-entry-img control-color">
