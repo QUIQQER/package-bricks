@@ -1,0 +1,101 @@
+.field-container-item {
+    flex-shrink: 0;
+}
+
+.qui-controls-formlist-boxContentAdvanced {
+    border: 1px solid #dedede;
+    border-left: none;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 15px;
+}
+
+.qui-controls-formlist-boxContentAdvanced .qui-controls-formlist-buttons {
+    order: 2;
+}
+
+.qui-controls-formlist-boxContentAdvanced .qui-controls-formlist-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    order: 1;
+}
+
+.qui-controls-formlist-boxContentAdvanced .qui-controls-formlist-container:after,
+.qui-controls-formlist-boxContentAdvanced-placeholderBox {
+    content: '';
+    flex-basis: 450px;
+    flex-grow: 1;
+    height: 0;
+    margin-right: 20px;
+    order: 2;
+    position: relative;
+    visibility: hidden;
+}
+
+.qui-controls-formlist-boxContentAdvanced .qui-controls-formlist-entry {
+    background: #e8edff;
+    border-bottom: none;
+    flex-basis: 450px;
+    flex-grow: 1;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding: 20px;
+    position: relative;
+}
+
+.qui-controls-formlist-boxContentAdvanced .qui-controls-formlist-entry-delete {
+    padding: 0 !important;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.qui-controls-formlist-boxContentAdvanced .qui-controls-formlist-entry-delete .qui-button {
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    color: #333;
+}
+
+.qui-controls-formlist-boxContentAdvanced .qui-controls-formlist-entry-delete .qui-button:hover {
+    background: #a6abbd;
+}
+
+
+.qui-controls-formlist-boxContentAdvanced .qui-controls-formlist-entry-data {
+    padding: 0;
+    width: 100%;
+}
+
+.quiqqer-bricks-boxContentAdvanced-entry label {
+    margin-bottom: 10px;
+    width: 100% !important;
+}
+
+.quiqqer-bricks-boxContentAdvanced-entry label:last-child {
+    margin-bottom: 0;
+}
+
+.quiqqer-bricks-boxContentAdvanced-entry span.entry-title {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.quiqqer-bricks-boxContentAdvanced-entry input,
+.quiqqer-bricks-boxContentAdvanced-entry textarea {
+    max-width: 100%;
+    width: 100%;
+}
+
+.quiqqer-bricks-boxContentAdvanced-entry .field-container-field {
+    border: none;
+    padding: 0;
+}
+
+.quiqqer-bricks-boxContentAdvanced-entry .control-editor-preview {
+    background: #fff;
+    height: 120px !important;
+}
