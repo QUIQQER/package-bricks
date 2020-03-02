@@ -1218,12 +1218,12 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
         <locale name="exception.brick.title.already.exists">
             <de><![CDATA[
-            Ein Baustein mit dem Titel existiert bereits.
+            Ein Baustein mit dem Titel "[brickTitle]" existiert bereits.
             Bausteine mit gleichem Titel erschweren die Übersichtlichkeit.
             Bitte wähle einen anderen Titel für diesen Baustein.
             ]]></de>
             <en><![CDATA[
-            A Brick with the title already exists.
+            A Brick with the title "[brickTitle]" already exists.
             Bricks with the same title make it difficult to keep track of them.
             Please choose a different title for this Brick.
             ]]></en>
