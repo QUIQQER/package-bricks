@@ -963,7 +963,8 @@ class Manager
         if (isset($result[0])) {
             throw new QUI\Exception([
                 'quiqqer/bricks',
-                'exception.brick.title.already.exists'
+                'exception.brick.title.already.exists',
+                ['brickTitle' => $Brick->getAttribute('title')]
             ]);
         }
 
