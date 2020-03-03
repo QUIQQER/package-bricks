@@ -1428,6 +1428,56 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Entries]]></en>
         </locale>
 
+        <!-- Box Content Advanced -->
+        <locale name="bricks.BoxContentAdvanced.title">
+            <de><![CDATA[Bausteine: Inhalt mit Bild in Boxen]]></de>
+            <en><![CDATA[Bricks: Text with image in boxes]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.description">
+            <de><![CDATA[Inhalte werden in Boxen nebeneinander gestellt und besitzen verschieden Templates und Einstellungsmöglichkeiten.]]></de>
+            <en><![CDATA[Show the contents in boxes next to each other. The brick has different templates..]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.template">
+            <de><![CDATA[Vorlage (Template)]]></de>
+            <en><![CDATA[Template]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.template.standard">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Standard]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.entriesPerLine">
+            <de><![CDATA[Anzahl der Boxen (Einträge) pro Linie]]></de>
+            <en><![CDATA[Number of boxes (entries) per line]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.entries">
+            <de><![CDATA[Einträge]]></de>
+            <en><![CDATA[Entries]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.entries.addButton">
+            <de><![CDATA[Eintrag hinzufügen]]></de>
+            <en><![CDATA[Add entry]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.entries.settings.entryImage">
+            <de><![CDATA[Bild]]></de>
+            <en><![CDATA[Image]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.entries.settings.entryOrder">
+            <de><![CDATA[Priorität]]></de>
+            <en><![CDATA[Priority]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.entries.settings.entryTitle">
+            <de><![CDATA[Titel]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.entries.settings.entrySubTitle">
+            <de><![CDATA[Untertitel]]></de>
+            <en><![CDATA[Subtitle]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.entries.settings.entryContent">
+            <de><![CDATA[Text]]></de>
+            <en><![CDATA[Text]]></en>
+        </locale>
+
         <!-- Image Brick -->
         <locale name="bricks.control.image.title">
             <de><![CDATA[Bausteine: Bild-Banner]]></de>

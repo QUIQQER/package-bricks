@@ -1,0 +1,17 @@
+{if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+<header class="control-header">
+    <h1>{$this->getAttribute('frontendTitle')}</h1>
+</header>
+{/if}
+
+{if $this->getAttribute('content') != ""}
+<div class="control-content">
+    {$this->getAttribute('content')}
+</div>
+{/if}
+
+<div class="quiqqer-boxContentAdvanced-wrapper grid-children">
+    <div class="grid-children-container">
+        {$entriesTemplate}
+    </div>
+</div>

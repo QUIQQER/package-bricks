@@ -1,0 +1,31 @@
+<div class="quiqqer-boxContentAdvanced-entries quiqqer-boxContentAdvanced__standard">
+    {foreach from=$entries item=entry}
+    <div class="quiqqer-boxContentAdvanced-entry-container quiqqer-boxContentAdvanced{$entriesPerLine}"
+            {if $entry.entryOrder}style="order: {$entry.entryOrder}"{/if}>
+        <div class="quiqqer-boxContentAdvanced-entry">
+            {if $entry.entryImage}
+            <div class="quiqqer-boxContentAdvanced-entry-img control-color">
+                {image src=$entry.entryImage width="500"}
+            </div>
+            {/if}
+
+            <header>
+                <h4 class="quiqqer-boxContentAdvanced-entry-title" title="{$entry.entryTitle|escape:'html'}">
+                    {$entry.entryTitle|escape:'html'}
+                </h4>
+                {if $entry.entrySubTitle}
+                <span class="quiqqer-boxContentAdvanced-entry-subTitle">
+                    {$entry.entrySubTitle|escape:'html'}
+                </span>
+                {/if}
+            </header>
+
+            {if $entry.entryContent}
+            <div class="quiqqer-boxContentAdvanced-entry-content">
+                {$entry.entryContent}
+            </div>
+            {/if}
+        </div>
+    </div>
+    {/foreach}
+</div>
