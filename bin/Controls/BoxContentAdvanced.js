@@ -41,7 +41,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentAdvanced', [
             this.getElm().addClass('qui-controls-formlist-boxContentAdvanced');
 
             this.setAttributes({
-                buttonText: QUILocale.get(lg, 'BoxContentAdvanced.entries.addButton'),
+                buttonText: QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.addButton'),
                 entry     : Mustache.render(template, {
                     'entryTitle'   : QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryTitle'),
                     'entrySubTitle': QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entrySubTitle'),
