@@ -718,11 +718,11 @@
             <settings>
                 <setting name="template" type="select">
                     <locale group="quiqqer/bricks"
-                            var="BoxContentAdvanced.template"/>
+                            var="bricks.BoxContentAdvanced.template"/>
 
                     <option value="standard">
                         <locale group="quiqqer/bricks"
-                                var="BoxContentAdvanced.template.standard"/>
+                                var="bricks.BoxContentAdvanced.template.standard"/>
                     </option>
                 </setting>
 
