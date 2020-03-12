@@ -334,7 +334,7 @@ class Manager
 
         // get bricks
         foreach ($templates as $template) {
-            $brickXML = \realpath(OPT_DIR . $template . '/bricks.xml');
+            $brickXML = \realpath(OPT_DIR.$template.'/bricks.xml');
 
             if (!$brickXML) {
                 continue;
@@ -550,7 +550,7 @@ class Manager
      */
     public function getAvailableBrickSettingsByBrickType($brickType)
     {
-        $cache = 'quiqqer/bricks/brickType/' . \md5($brickType);
+        $cache = 'quiqqer/bricks/brickType/'.\md5($brickType);
 
         try {
             return QUI\Cache\Manager::get($cache);
@@ -873,7 +873,7 @@ class Manager
         }
 
         if (!empty($areas)) {
-            $areaString = ',' . \implode(',', $areas) . ',';
+            $areaString = ','.\implode(',', $areas).',';
         }
 
         $Brick->setAttributes($brickData);
@@ -951,8 +951,10 @@ class Manager
         $result = QUI::getDataBase()->fetch([
             'from'  => $this->getTable(),
             'where' => [
-                'title' => $Brick->getAttribute('title'),
-                'id'    => [
+                'title'   => $Brick->getAttribute('title'),
+                'project' => $Brick->getAttribute('project'),
+                'lang'    => $Brick->getAttribute('lang'),
+                'id'      => [
                     'type'  => 'NOT',
                     'value' => (int)$brickId
                 ]
