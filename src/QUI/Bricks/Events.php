@@ -232,9 +232,12 @@ class Events
             );
 
             try {
-                QUI::getDataBase()->fetchSQL(
-                    "`ALTER TABLE ``{$projectCacheTable}`` DROP PRIMARY KEY;`"
-                );
+                // Only drop composite primary key if it exists
+                if (QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'id')
+                    && QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'area')) {
+                    // Primary key no longer exists and should be removed
+                    QUI::getDataBase()->execSQL("ALTER TABLE `{$projectCacheTable}` DROP PRIMARY KEY;");
+                }
             } catch (QUI\Exception $Exception) {
                 QUI\System\Log::addInfo($Exception->getMessage());
             }
