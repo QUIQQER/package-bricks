@@ -236,7 +236,7 @@ class Events
                 if (QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'id')
                     && QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'area')) {
                     // Primary key no longer exists and should be removed
-                    QUI::getDataBase()->getPDO()->exec("ALTER TABLE `{$projectCacheTable}` DROP PRIMARY KEY;");
+                    QUI::getDataBase()->execSQL("ALTER TABLE `{$projectCacheTable}` DROP PRIMARY KEY;");
                 }
             } catch (QUI\Exception $Exception) {
                 QUI\System\Log::addInfo($Exception->getMessage());
