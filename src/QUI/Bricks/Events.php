@@ -225,8 +225,6 @@ class Events
         // unique bricks cache patch
         $projects = QUI::getProjectManager()->getProjectList();
 
-        $databaseName = QUI::getDataBase()->getAttribute('dbname');
-
         foreach ($projects as $Project) {
             $projectCacheTable = QUI::getDBProjectTableName(
                 Manager::TABLE_CACHE,
@@ -234,18 +232,11 @@ class Events
             );
 
             try {
-                $primaryExists = QUI::getDataBase()->fetchSQL("
-                    SELECT COUNT(constraint_type) AS primary_key_count FROM information_schema.table_constraints
-                    WHERE constraint_type = 'PRIMARY KEY' 
-                    AND table_name = '{$projectCacheTable}'
-                    AND TABLE_SCHEMA = '{$databaseName}'
-                ");
-
-                $isPrimaryKeyExisting = \boolval($primaryExists[0]['primary_key_count']);
-
-                // Primary key should only be dropped if it exists
-                if ($isPrimaryKeyExisting) {
-                    QUI::getDataBase()->fetchSQL("ALTER TABLE `{$projectCacheTable}` DROP PRIMARY KEY;");
+                // Only drop composite primary key if it exists
+                if (QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'id')
+                    && QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'area')) {
+                    // Primary key no longer exists and should be removed
+                    QUI::getDataBase()->getPDO()->exec("ALTER TABLE `{$projectCacheTable}` DROP PRIMARY KEY;");
                 }
             } catch (QUI\Exception $Exception) {
                 QUI\System\Log::addInfo($Exception->getMessage());
