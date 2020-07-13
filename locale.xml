@@ -1446,7 +1446,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Standard]]></en>
         </locale>
         <locale name="bricks.BoxContentAdvanced.entriesPerLine">
-            <de><![CDATA[Anzahl der Boxen (Einträge) pro Linie]]></de>
+            <de><![CDATA[Anzahl der Boxen (Einträge) pro Zeile]]></de>
             <en><![CDATA[Number of boxes (entries) per line]]></en>
         </locale>
         <locale name="bricks.BoxContentAdvanced.entries">
