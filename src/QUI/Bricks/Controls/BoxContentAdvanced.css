@@ -51,3 +51,19 @@
 .quiqqer-boxContentAdvanced-10 {
     width: 10%;
 }
+
+@media screen and (max-width: 767px) {
+    .quiqqer-boxContentAdvanced-entries .quiqqer-boxContentAdvanced-entry-container {
+        flex: 1 0 280px;
+    }
+}
+
+.quiqqer-boxContentAdvanced-entry-img picture,
+.quiqqer-boxContentAdvanced-entry-img img {
+    width: auto;
+}
+
+.quiqqer-boxContentAdvanced-entry-img .fa {
+    font-size: 60px;
+    margin-bottom: 2rem;
+}

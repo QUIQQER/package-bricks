@@ -1,6 +1,10 @@
-<div class="quiqqer-boxContentAdvanced-entries quiqqer-boxContentAdvanced__standard">
+<div class="quiqqer-boxContentAdvanced-entries quiqqer-boxContentAdvanced-entries__boxWithShadow">
+    {assign var=centerTex value=''}
+    {if $centerText}
+        {assign var=centerText value='centerText'}
+    {/if}
     {foreach from=$entries item=entry}
-    <div class="quiqqer-boxContentAdvanced-entry-container quiqqer-boxContentAdvanced{$entriesPerLine}"
+    <div class="quiqqer-boxContentAdvanced-entry-container quiqqer-boxContentAdvanced{$entriesPerLine} {$centerText}"
             {if $entry.entryOrder}style="order: {$entry.entryOrder}"{/if}>
         <div class="quiqqer-boxContentAdvanced-entry">
             {if $entry.entryImage}

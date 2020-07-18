@@ -1,0 +1,37 @@
+.quiqqer-boxContentAdvanced-wrapper.template-boxWithShadow {
+    overflow: visible;
+}
+
+.quiqqer-boxContentAdvanced-entries__boxWithShadow {
+    padding: 2rem 0;
+}
+
+.quiqqer-boxContentAdvanced-entries__boxWithShadow .quiqqer-boxContentAdvanced-entry {
+    box-shadow: 0 20px 40px -12px rgba(0,0,0,0.13);
+    background-color: #fff;
+}
+
+.quiqqer-boxContentAdvanced-entries__boxWithShadow .quiqqer-boxContentAdvanced-entry-img {
+    background: #f8f8f8;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.quiqqer-boxContentAdvanced-entries__boxWithShadow header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.quiqqer-boxContentAdvanced-entries__boxWithShadow .quiqqer-boxContentAdvanced-entry-content {
+    padding: 1rem 1rem 0;
+}
+
+.quiqqer-boxContentAdvanced-entries__boxWithShadow .quiqqer-boxContentAdvanced-entry-img .fa {
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+}
+
+.quiqqer-boxContentAdvanced-entries__boxWithShadow .centerText header,
+.quiqqer-boxContentAdvanced-entries__boxWithShadow .centerText .quiqqer-boxContentAdvanced-entry-content {
+    text-align: center;
+}
