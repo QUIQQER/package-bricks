@@ -1469,6 +1469,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Bild]]></de>
             <en><![CDATA[Image]]></en>
         </locale>
+        <locale name="bricks.BoxContentAdvanced.entries.settings.entryUrl">
+            <de><![CDATA[Seiten-Url]]></de>
+            <en><![CDATA[Site url]]></en>
+        </locale>
         <locale name="bricks.BoxContentAdvanced.entries.settings.entryOrder">
             <de><![CDATA[Priorität]]></de>
             <en><![CDATA[Priority]]></en>

@@ -4,19 +4,41 @@
         {assign var=centerText value='centerText'}
     {/if}
     {foreach from=$entries item=entry}
+
+    {if $entry.entryUrl && QUI\Projects\Site\Utils::getSiteByLink($entry.entryUrl)}
+        {assign var=TargetSite value=QUI\Projects\Site\Utils::getSiteByLink($entry.entryUrl)}
+    {/if}
+
     <div class="quiqqer-boxContentAdvanced-entry-container quiqqer-boxContentAdvanced{$entriesPerLine} {$centerText}"
             {if $entry.entryOrder}style="order: {$entry.entryOrder}"{/if}>
         <div class="quiqqer-boxContentAdvanced-entry">
             {if $entry.entryImage}
-            <div class="quiqqer-boxContentAdvanced-entry-img control-color">
-                {image src=$entry.entryImage width="500"}
-            </div>
+                {if $entry.entryUrl}
+                <a href="{url site=$TargetSite rewrited=1}" title="{$TargetSite->getAttribute('title')}">
+                {/if}
+
+                <div class="quiqqer-boxContentAdvanced-entry-img control-color">
+                    {image src=$entry.entryImage width="500"}
+                </div>
+
+                {if $entry.entryUrl}
+                </a>
+                {/if}
             {/if}
 
             <header>
                 <h4 class="quiqqer-boxContentAdvanced-entry-title" title="{$entry.entryTitle|escape:'html'}">
+                    {if $entry.entryUrl}
+                    <a href="{url site=$TargetSite rewrited=1}" title="{$TargetSite->getAttribute('title')}">
+                    {/if}
+
                     {$entry.entryTitle|escape:'html'}
+
+                    {if $entry.entryUrl}
+                    </a>
+                    {/if}
                 </h4>
+                
                 {if $entry.entrySubTitle}
                 <span class="quiqqer-boxContentAdvanced-entry-subTitle">
                     {$entry.entrySubTitle|escape:'html'}
