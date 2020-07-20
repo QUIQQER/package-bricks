@@ -1445,8 +1445,16 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Standard]]></de>
             <en><![CDATA[Standard]]></en>
         </locale>
+        <locale name="bricks.BoxContentAdvanced.template.boxWithShadow">
+            <de><![CDATA[Moderne Boxen mit Schatten)]]></de>
+            <en><![CDATA[Modern boxes with shadow]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.centerText">
+            <de><![CDATA[Text zentrieren (Titel und Inhalt)]]></de>
+            <en><![CDATA[Centre text (title and content)]]></en>
+        </locale>
         <locale name="bricks.BoxContentAdvanced.entriesPerLine">
-            <de><![CDATA[Anzahl der Boxen (Einträge) pro Linie]]></de>
+            <de><![CDATA[Anzahl der Boxen (Einträge) pro Zeile]]></de>
             <en><![CDATA[Number of boxes (entries) per line]]></en>
         </locale>
         <locale name="bricks.BoxContentAdvanced.entries">
@@ -1460,6 +1468,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="bricks.BoxContentAdvanced.entries.settings.entryImage">
             <de><![CDATA[Bild]]></de>
             <en><![CDATA[Image]]></en>
+        </locale>
+        <locale name="bricks.BoxContentAdvanced.entries.settings.entryUrl">
+            <de><![CDATA[Seiten-Url]]></de>
+            <en><![CDATA[Site url]]></en>
         </locale>
         <locale name="bricks.BoxContentAdvanced.entries.settings.entryOrder">
             <de><![CDATA[Priorität]]></de>

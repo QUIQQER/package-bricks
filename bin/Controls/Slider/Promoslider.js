@@ -175,7 +175,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                     return;
                 }
 
-                self.next();
+                if (event.key === 'right') {
+                    self.next();
+                    return;
+                }
             });
 
 

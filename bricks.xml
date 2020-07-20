@@ -724,6 +724,15 @@
                         <locale group="quiqqer/bricks"
                                 var="bricks.BoxContentAdvanced.template.standard"/>
                     </option>
+                    <option value="boxWithShadow">
+                        <locale group="quiqqer/bricks"
+                                var="bricks.BoxContentAdvanced.template.boxWithShadow"/>
+                    </option>
+                </setting>
+
+                <setting name="centerText" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="bricks.BoxContentAdvanced.centerText"/>
                 </setting>
 
                 <setting name="entriesPerLine" type="select">

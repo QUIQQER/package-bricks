@@ -99,3 +99,7 @@
     background: #fff;
     height: 120px !important;
 }
+
+.quiqqer-bricks-boxContentAdvanced-entry .qui-controls-project-site-input {
+    display: flex;
+}
