@@ -365,6 +365,10 @@
             <en><![CDATA[Sort]]></en>
             <pl><![CDATA[Sortowanie]]></pl>
         </locale>
+        <locale name="brick.control.order.order_field">
+            <de><![CDATA[Manuell]]></de>
+            <en><![CDATA[Manual]]></en>
+        </locale>
 
         <locale name="site.area.window.settings.setting.width">
             <de><![CDATA[Breite]]></de>

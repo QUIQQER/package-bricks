@@ -1145,6 +1145,10 @@
                 <setting name="order" type="select">
                     <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
 
+                    <!-- manual -->
+                    <option value="order_field">
+                        <locale group="quiqqer/bricks" var="brick.control.order.order_field"/>
+                    </option>
                     <option value="name ASC">
                         <locale group="quiqqer/quiqqer" var="name_asc"/>
                     </option>
