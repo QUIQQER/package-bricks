@@ -100,6 +100,16 @@ class Manager
     }
 
     /**
+     * Return the long time cache namespace
+     *
+     * @return string
+     */
+    public static function getBrickCacheNamespace()
+    {
+        return 'quiqqer/package/quiqqer/bricks/';
+    }
+
+    /**
      * Creates a new brick for the project
      *
      * @param Project $Project
@@ -1025,6 +1035,10 @@ class Manager
         );
 
         QUI\Cache\Manager::clear($cache);
+
+        QUI\Cache\Manager::clear(
+            self::getBrickCacheNamespace().\md5($type)
+        );
     }
 
     /**

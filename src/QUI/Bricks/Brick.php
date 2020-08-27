@@ -61,6 +61,11 @@ class Brick extends QUI\QDOM
     protected $cssClasses = [];
 
     /**
+     * @var string
+     */
+    protected $hash;
+
+    /**
      * Constructor
      *
      * @param array $params - brick params
@@ -172,6 +177,8 @@ class Brick extends QUI\QDOM
                 $this->customfields = $customfields;
             }
         }
+
+        $this->hash = $this->createBrickHash();
     }
 
     /**
@@ -231,6 +238,31 @@ class Brick extends QUI\QDOM
     }
 
     /**
+     * Create a unique brick hash
+     * which is created from the brick data
+     *
+     * @return string
+     */
+    protected function createBrickHash()
+    {
+        $attributes = $this->getAttributes();
+        $hashParams = [];
+
+        foreach ($attributes as $name => $value) {
+            if (\is_object($value)) {
+                continue;
+            }
+
+            $hashParams[$name] = \serialize($value);
+        }
+
+        $hash = \serialize($hashParams);
+        $hash = \md5($hash);
+
+        return $hash;
+    }
+
+    /**
      * Return the HTML of the Brick
      *
      * @return string
@@ -239,6 +271,16 @@ class Brick extends QUI\QDOM
      */
     public function create()
     {
+        $cacheName = Manager::getBrickCacheNamespace()
+                     .\md5($this->getType())
+                     .'/'
+                     .$this->hash;
+
+        try {
+            return QUI\Cache\Manager::get($cacheName);
+        } catch (QUI\Exception $Exception) {
+        }
+
         if ($this->getAttribute('type') == 'content') {
             $_classes = [
                 'brick-'.$this->id
@@ -292,7 +334,10 @@ class Brick extends QUI\QDOM
                 'classesStr' => $classesStr
             ]);
 
-            return $Engine->fetch(\dirname(__FILE__).'/Brick.html');
+            $result = $Engine->fetch(\dirname(__FILE__).'/Brick.html');
+            QUI\Cache\Manager::set($cacheName, $result);
+
+            return $result;
         }
 
         $Control = $this->getControl();
@@ -324,7 +369,10 @@ class Brick extends QUI\QDOM
             $Control->addCSSClass($cssClass);
         }
 
-        return $Control->create();
+        $result = $Control->create();
+        QUI\Cache\Manager::set($cacheName, $result);
+
+        return $result;
     }
 
     /**
