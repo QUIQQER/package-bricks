@@ -46,6 +46,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentAdvanced', [
                     'entryTitle'   : QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryTitle'),
                     'entrySubTitle': QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entrySubTitle'),
                     'entryImage'   : QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryImage'),
+                    'entryUrl'     : QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryUrl'),
                     'entryOrder'   : QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryOrder'),
                     'entryContent' : QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryContent')
                 })

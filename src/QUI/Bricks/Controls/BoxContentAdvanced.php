@@ -27,6 +27,7 @@ class BoxContentAdvanced extends QUI\Control
             'title'          => 'Box Content Advanced',
             'entriesPerLine' => 3,
             'template'       => 'standard',
+            'centerText'     => false,
             'entries'        => []
         ]);
 
@@ -53,10 +54,24 @@ class BoxContentAdvanced extends QUI\Control
 
         $Engine->assign([
             'entries'        => $entries,
+            'centerText'     => $this->getAttribute('centerText'),
             'entriesPerLine' => '-' . $this->getAttribute('entriesPerLine')
         ]);
 
-        $entriesTemplate = $Engine->fetch(dirname(__FILE__) . '/BoxContentAdvanced.standard.html');
+        switch ($this->getAttribute('template')) {
+            case 'boxWithShadow':
+                $boxTemplate = '/BoxContentAdvanced.boxWithShadow.html';
+                $boxCss      = '/BoxContentAdvanced.boxWithShadow.css';
+                break;
+            case 'default':
+            default:
+                $boxTemplate = '/BoxContentAdvanced.standard.html';
+                $boxCss      = '/BoxContentAdvanced.standard.css';
+                break;
+        }
+
+        $entriesTemplate = $Engine->fetch(dirname(__FILE__) . $boxTemplate);
+        $this->addCSSFile(dirname(__FILE__) . $boxCss);
 
         $Engine->assign([
             'this'            => $this,

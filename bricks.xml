@@ -91,34 +91,34 @@
 
                     <option value=""/>
                     <option value="name ASC" selected="selected">
-                        <locale group="quiqqer/system" var="name_asc"/>
+                        <locale group="quiqqer/quiqqer" var="name_asc"/>
                     </option>
                     <option value="name DESC">
-                        <locale group="quiqqer/system" var="name_desc"/>
+                        <locale group="quiqqer/quiqqer" var="name_desc"/>
                     </option>
                     <option value="title ASC">
-                        <locale group="quiqqer/system" var="title_asc"/>
+                        <locale group="quiqqer/quiqqer" var="title_asc"/>
                     </option>
                     <option value="title DESC">
-                        <locale group="quiqqer/system" var="title_desc"/>
+                        <locale group="quiqqer/quiqqer" var="title_desc"/>
                     </option>
                     <option value="c_date ASC">
-                        <locale group="quiqqer/system" var="c_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_asc"/>
                     </option>
                     <option value="c_date DESC">
-                        <locale group="quiqqer/system" var="c_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_desc"/>
                     </option>
                     <option value="e_date ASC">
-                        <locale group="quiqqer/system" var="e_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_asc"/>
                     </option>
                     <option value="e_date DESC">
-                        <locale group="quiqqer/system" var="e_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_desc"/>
                     </option>
                     <option value="release_from ASC">
-                        <locale group="quiqqer/system" var="release_from_asc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_asc"/>
                     </option>
                     <option value="release_from DESC">
-                        <locale group="quiqqer/system" var="release_from_desc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_desc"/>
                     </option>
                     <option value="order_field ASC">
                         <locale group="quiqqer/quiqqer" var="order_field_asc"/>
@@ -204,31 +204,31 @@
 
                     <option value=""/>
                     <option value="top-left">
-                        <locale group="quiqqer/system" var="watermark.position.top.left"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.top.left"/>
                     </option>
                     <option value="top">
-                        <locale group="quiqqer/system" var="watermark.position.top"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.top"/>
                     </option>
                     <option value="top-right">
-                        <locale group="quiqqer/system" var="watermark.position.top.right"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.top.right"/>
                     </option>
                     <option value="left">
-                        <locale group="quiqqer/system" var="watermark.position.left"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.left"/>
                     </option>
                     <option value="center">
-                        <locale group="quiqqer/system" var="watermark.position.center"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.center"/>
                     </option>
                     <option value="right">
-                        <locale group="quiqqer/system" var="watermark.position.right"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.right"/>
                     </option>
                     <option value="bottom-left">
-                        <locale group="quiqqer/system" var="watermark.position.bottom.left"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.bottom.left"/>
                     </option>
                     <option value="bottom">
-                        <locale group="quiqqer/system" var="watermark.position.bottom"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.bottom"/>
                     </option>
                     <option value="bottom-right">
-                        <locale group="quiqqer/system" var="watermark.position.bottom.right"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.bottom.right"/>
                     </option>
                 </setting>
 
@@ -324,31 +324,31 @@
 
                     <option value=""/>
                     <option value="top-left">
-                        <locale group="quiqqer/system" var="watermark.position.top.left"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.top.left"/>
                     </option>
                     <option value="top">
-                        <locale group="quiqqer/system" var="watermark.position.top"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.top"/>
                     </option>
                     <option value="top-right">
-                        <locale group="quiqqer/system" var="watermark.position.top.right"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.top.right"/>
                     </option>
                     <option value="left">
-                        <locale group="quiqqer/system" var="watermark.position.left"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.left"/>
                     </option>
                     <option value="center">
-                        <locale group="quiqqer/system" var="watermark.position.center"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.center"/>
                     </option>
                     <option value="right">
-                        <locale group="quiqqer/system" var="watermark.position.right"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.right"/>
                     </option>
                     <option value="bottom-left">
-                        <locale group="quiqqer/system" var="watermark.position.bottom.left"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.bottom.left"/>
                     </option>
                     <option value="bottom">
-                        <locale group="quiqqer/system" var="watermark.position.bottom"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.bottom"/>
                     </option>
                     <option value="bottom-right">
-                        <locale group="quiqqer/system" var="watermark.position.bottom.right"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.bottom.right"/>
                     </option>
                 </setting>
 
@@ -448,31 +448,31 @@
 
                     <option value=""/>
                     <option value="top-left">
-                        <locale group="quiqqer/system" var="watermark.position.top.left"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.top.left"/>
                     </option>
                     <option value="top">
-                        <locale group="quiqqer/system" var="watermark.position.top"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.top"/>
                     </option>
                     <option value="top-right">
-                        <locale group="quiqqer/system" var="watermark.position.top.right"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.top.right"/>
                     </option>
                     <option value="left">
-                        <locale group="quiqqer/system" var="watermark.position.left"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.left"/>
                     </option>
                     <option value="center">
-                        <locale group="quiqqer/system" var="watermark.position.center"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.center"/>
                     </option>
                     <option value="right">
-                        <locale group="quiqqer/system" var="watermark.position.right"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.right"/>
                     </option>
                     <option value="bottom-left">
-                        <locale group="quiqqer/system" var="watermark.position.bottom.left"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.bottom.left"/>
                     </option>
                     <option value="bottom">
-                        <locale group="quiqqer/system" var="watermark.position.bottom"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.bottom"/>
                     </option>
                     <option value="bottom-right">
-                        <locale group="quiqqer/system" var="watermark.position.bottom.right"/>
+                        <locale group="quiqqer/quiqqer" var="watermark.position.bottom.right"/>
                     </option>
                 </setting>
 
@@ -523,34 +523,34 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
 
                     <option value="name ASC">
-                        <locale group="quiqqer/system" var="name_asc"/>
+                        <locale group="quiqqer/quiqqer" var="name_asc"/>
                     </option>
                     <option value="name DESC">
-                        <locale group="quiqqer/system" var="name_desc"/>
+                        <locale group="quiqqer/quiqqer" var="name_desc"/>
                     </option>
                     <option value="title ASC">
-                        <locale group="quiqqer/system" var="title_asc"/>
+                        <locale group="quiqqer/quiqqer" var="title_asc"/>
                     </option>
                     <option value="title DESC">
-                        <locale group="quiqqer/system" var="title_desc"/>
+                        <locale group="quiqqer/quiqqer" var="title_desc"/>
                     </option>
                     <option value="c_date ASC">
-                        <locale group="quiqqer/system" var="c_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_asc"/>
                     </option>
                     <option value="c_date DESC">
-                        <locale group="quiqqer/system" var="c_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_desc"/>
                     </option>
                     <option value="e_date ASC">
-                        <locale group="quiqqer/system" var="e_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_asc"/>
                     </option>
                     <option value="e_date DESC">
-                        <locale group="quiqqer/system" var="e_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_desc"/>
                     </option>
                     <option value="release_from ASC">
-                        <locale group="quiqqer/system" var="release_from_asc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_asc"/>
                     </option>
                     <option value="release_from DESC">
-                        <locale group="quiqqer/system" var="release_from_desc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_desc"/>
                     </option>
                 </setting>
 
@@ -724,6 +724,15 @@
                         <locale group="quiqqer/bricks"
                                 var="bricks.BoxContentAdvanced.template.standard"/>
                     </option>
+                    <option value="boxWithShadow">
+                        <locale group="quiqqer/bricks"
+                                var="bricks.BoxContentAdvanced.template.boxWithShadow"/>
+                    </option>
+                </setting>
+
+                <setting name="centerText" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="bricks.BoxContentAdvanced.centerText"/>
                 </setting>
 
                 <setting name="entriesPerLine" type="select">
@@ -834,34 +843,34 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
 
                     <option value="name ASC">
-                        <locale group="quiqqer/system" var="name_asc"/>
+                        <locale group="quiqqer/quiqqer" var="name_asc"/>
                     </option>
                     <option value="name DESC">
-                        <locale group="quiqqer/system" var="name_desc"/>
+                        <locale group="quiqqer/quiqqer" var="name_desc"/>
                     </option>
                     <option value="title ASC">
-                        <locale group="quiqqer/system" var="title_asc"/>
+                        <locale group="quiqqer/quiqqer" var="title_asc"/>
                     </option>
                     <option value="title DESC">
-                        <locale group="quiqqer/system" var="title_desc"/>
+                        <locale group="quiqqer/quiqqer" var="title_desc"/>
                     </option>
                     <option value="c_date ASC">
-                        <locale group="quiqqer/system" var="c_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_asc"/>
                     </option>
                     <option value="c_date DESC">
-                        <locale group="quiqqer/system" var="c_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_desc"/>
                     </option>
                     <option value="e_date ASC">
-                        <locale group="quiqqer/system" var="e_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_asc"/>
                     </option>
                     <option value="e_date DESC">
-                        <locale group="quiqqer/system" var="e_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_desc"/>
                     </option>
                     <option value="release_from ASC">
-                        <locale group="quiqqer/system" var="release_from_asc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_asc"/>
                     </option>
                     <option value="release_from DESC">
-                        <locale group="quiqqer/system" var="release_from_desc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_desc"/>
                     </option>
                 </setting>
                 <setting name="showImage" type="checkbox">
@@ -895,34 +904,34 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
 
                     <option value="name ASC">
-                        <locale group="quiqqer/system" var="name_asc"/>
+                        <locale group="quiqqer/quiqqer" var="name_asc"/>
                     </option>
                     <option value="name DESC">
-                        <locale group="quiqqer/system" var="name_desc"/>
+                        <locale group="quiqqer/quiqqer" var="name_desc"/>
                     </option>
                     <option value="title ASC">
-                        <locale group="quiqqer/system" var="title_asc"/>
+                        <locale group="quiqqer/quiqqer" var="title_asc"/>
                     </option>
                     <option value="title DESC">
-                        <locale group="quiqqer/system" var="title_desc"/>
+                        <locale group="quiqqer/quiqqer" var="title_desc"/>
                     </option>
                     <option value="c_date ASC">
-                        <locale group="quiqqer/system" var="c_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_asc"/>
                     </option>
                     <option value="c_date DESC">
-                        <locale group="quiqqer/system" var="c_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_desc"/>
                     </option>
                     <option value="e_date ASC">
-                        <locale group="quiqqer/system" var="e_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_asc"/>
                     </option>
                     <option value="e_date DESC">
-                        <locale group="quiqqer/system" var="e_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_desc"/>
                     </option>
                     <option value="release_from ASC">
-                        <locale group="quiqqer/system" var="release_from_asc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_asc"/>
                     </option>
                     <option value="release_from DESC">
-                        <locale group="quiqqer/system" var="release_from_desc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_desc"/>
                     </option>
                 </setting>
                 <setting name="showImage" type="checkbox">
@@ -953,34 +962,34 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
 
                     <option value="name ASC">
-                        <locale group="quiqqer/system" var="name_asc"/>
+                        <locale group="quiqqer/quiqqer" var="name_asc"/>
                     </option>
                     <option value="name DESC">
-                        <locale group="quiqqer/system" var="name_desc"/>
+                        <locale group="quiqqer/quiqqer" var="name_desc"/>
                     </option>
                     <option value="title ASC">
-                        <locale group="quiqqer/system" var="title_asc"/>
+                        <locale group="quiqqer/quiqqer" var="title_asc"/>
                     </option>
                     <option value="title DESC">
-                        <locale group="quiqqer/system" var="title_desc"/>
+                        <locale group="quiqqer/quiqqer" var="title_desc"/>
                     </option>
                     <option value="c_date ASC">
-                        <locale group="quiqqer/system" var="c_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_asc"/>
                     </option>
                     <option value="c_date DESC">
-                        <locale group="quiqqer/system" var="c_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_desc"/>
                     </option>
                     <option value="e_date ASC">
-                        <locale group="quiqqer/system" var="e_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_asc"/>
                     </option>
                     <option value="e_date DESC">
-                        <locale group="quiqqer/system" var="e_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_desc"/>
                     </option>
                     <option value="release_from ASC">
-                        <locale group="quiqqer/system" var="release_from_asc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_asc"/>
                     </option>
                     <option value="release_from DESC">
-                        <locale group="quiqqer/system" var="release_from_desc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_desc"/>
                     </option>
                 </setting>
                 <setting name="showImage" type="checkbox">
@@ -1014,34 +1023,34 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
 
                     <option value="name ASC">
-                        <locale group="quiqqer/system" var="name_asc"/>
+                        <locale group="quiqqer/quiqqer" var="name_asc"/>
                     </option>
                     <option value="name DESC">
-                        <locale group="quiqqer/system" var="name_desc"/>
+                        <locale group="quiqqer/quiqqer" var="name_desc"/>
                     </option>
                     <option value="title ASC">
-                        <locale group="quiqqer/system" var="title_asc"/>
+                        <locale group="quiqqer/quiqqer" var="title_asc"/>
                     </option>
                     <option value="title DESC">
-                        <locale group="quiqqer/system" var="title_desc"/>
+                        <locale group="quiqqer/quiqqer" var="title_desc"/>
                     </option>
                     <option value="c_date ASC">
-                        <locale group="quiqqer/system" var="c_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_asc"/>
                     </option>
                     <option value="c_date DESC">
-                        <locale group="quiqqer/system" var="c_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_desc"/>
                     </option>
                     <option value="e_date ASC">
-                        <locale group="quiqqer/system" var="e_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_asc"/>
                     </option>
                     <option value="e_date DESC">
-                        <locale group="quiqqer/system" var="e_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_desc"/>
                     </option>
                     <option value="release_from ASC">
-                        <locale group="quiqqer/system" var="release_from_asc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_asc"/>
                     </option>
                     <option value="release_from DESC">
-                        <locale group="quiqqer/system" var="release_from_desc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_desc"/>
                     </option>
                 </setting>
                 <setting name="showImage" type="checkbox">
@@ -1072,34 +1081,34 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
 
                     <option value="name ASC">
-                        <locale group="quiqqer/system" var="name_asc"/>
+                        <locale group="quiqqer/quiqqer" var="name_asc"/>
                     </option>
                     <option value="name DESC">
-                        <locale group="quiqqer/system" var="name_desc"/>
+                        <locale group="quiqqer/quiqqer" var="name_desc"/>
                     </option>
                     <option value="title ASC">
-                        <locale group="quiqqer/system" var="title_asc"/>
+                        <locale group="quiqqer/quiqqer" var="title_asc"/>
                     </option>
                     <option value="title DESC">
-                        <locale group="quiqqer/system" var="title_desc"/>
+                        <locale group="quiqqer/quiqqer" var="title_desc"/>
                     </option>
                     <option value="c_date ASC">
-                        <locale group="quiqqer/system" var="c_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_asc"/>
                     </option>
                     <option value="c_date DESC">
-                        <locale group="quiqqer/system" var="c_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_desc"/>
                     </option>
                     <option value="e_date ASC">
-                        <locale group="quiqqer/system" var="e_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_asc"/>
                     </option>
                     <option value="e_date DESC">
-                        <locale group="quiqqer/system" var="e_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_desc"/>
                     </option>
                     <option value="release_from ASC">
-                        <locale group="quiqqer/system" var="release_from_asc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_asc"/>
                     </option>
                     <option value="release_from DESC">
-                        <locale group="quiqqer/system" var="release_from_desc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_desc"/>
                     </option>
                 </setting>
                 <setting name="showImage" type="checkbox">
@@ -1136,35 +1145,39 @@
                 <setting name="order" type="select">
                     <locale group="quiqqer/bricks" var="brick.control.setting.order"/>
 
+                    <!-- manual -->
+                    <option value="order_field">
+                        <locale group="quiqqer/bricks" var="brick.control.order.order_field"/>
+                    </option>
                     <option value="name ASC">
-                        <locale group="quiqqer/system" var="name_asc"/>
+                        <locale group="quiqqer/quiqqer" var="name_asc"/>
                     </option>
                     <option value="name DESC">
-                        <locale group="quiqqer/system" var="name_desc"/>
+                        <locale group="quiqqer/quiqqer" var="name_desc"/>
                     </option>
                     <option value="title ASC">
-                        <locale group="quiqqer/system" var="title_asc"/>
+                        <locale group="quiqqer/quiqqer" var="title_asc"/>
                     </option>
                     <option value="title DESC">
-                        <locale group="quiqqer/system" var="title_desc"/>
+                        <locale group="quiqqer/quiqqer" var="title_desc"/>
                     </option>
                     <option value="c_date ASC">
-                        <locale group="quiqqer/system" var="c_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_asc"/>
                     </option>
                     <option value="c_date DESC">
-                        <locale group="quiqqer/system" var="c_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="c_date_desc"/>
                     </option>
                     <option value="e_date ASC">
-                        <locale group="quiqqer/system" var="e_date_asc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_asc"/>
                     </option>
                     <option value="e_date DESC">
-                        <locale group="quiqqer/system" var="e_date_desc"/>
+                        <locale group="quiqqer/quiqqer" var="e_date_desc"/>
                     </option>
                     <option value="release_from ASC">
-                        <locale group="quiqqer/system" var="release_from_asc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_asc"/>
                     </option>
                     <option value="release_from DESC">
-                        <locale group="quiqqer/system" var="release_from_desc"/>
+                        <locale group="quiqqer/quiqqer" var="release_from_desc"/>
                     </option>
                 </setting>
 
