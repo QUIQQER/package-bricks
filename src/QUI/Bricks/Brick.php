@@ -277,7 +277,23 @@ class Brick extends QUI\QDOM
                      .$this->hash;
 
         try {
-            return QUI\Cache\Manager::get($cacheName);
+            $data       = QUI\Cache\Manager::get($cacheName);
+            $cssFiles   = $data['cssFiles'];
+            $cssClasses = $data['cssClasses'];
+
+            if (\is_array($cssClasses)) {
+                foreach ($cssClasses as $cssClass) {
+                    $this->addCSSClass($cssClass);
+                }
+            }
+
+            if (\is_array($cssFiles)) {
+                foreach ($cssFiles as $cssFile) {
+                    QUI\Control\Manager::addCSSFile($cssFile);
+                }
+            }
+
+            return $data['html'];
         } catch (QUI\Exception $Exception) {
         }
 
@@ -335,7 +351,12 @@ class Brick extends QUI\QDOM
             ]);
 
             $result = $Engine->fetch(\dirname(__FILE__).'/Brick.html');
-            QUI\Cache\Manager::set($cacheName, $result);
+
+            QUI\Cache\Manager::set($cacheName, [
+                'html'       => $result,
+                'cssClasses' => $this->cssClasses,
+                'cssFiles'   => []
+            ]);
 
             return $result;
         }
@@ -370,7 +391,12 @@ class Brick extends QUI\QDOM
         }
 
         $result = $Control->create();
-        QUI\Cache\Manager::set($cacheName, $result);
+
+        QUI\Cache\Manager::set($cacheName, [
+            'result'     => $result,
+            'cssClasses' => $this->cssClasses,
+            'cssFiles'   => $Control->getCSSFiles()
+        ]);
 
         return $result;
     }
