@@ -393,7 +393,7 @@ class Brick extends QUI\QDOM
         $result = $Control->create();
 
         QUI\Cache\Manager::set($cacheName, [
-            'result'     => $result,
+            'html'       => $result,
             'cssClasses' => $this->cssClasses,
             'cssFiles'   => $Control->getCSSFiles()
         ]);
