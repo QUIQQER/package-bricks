@@ -293,8 +293,10 @@ class Brick extends QUI\QDOM
                 }
             }
 
-            return $data['html'];
-        } catch (QUI\Exception $Exception) {
+            if (!empty($data['html'])) {
+                return $data['html'];
+            }
+        } catch (\Exception $Exception) {
         }
 
         if ($this->getAttribute('type') == 'content') {
