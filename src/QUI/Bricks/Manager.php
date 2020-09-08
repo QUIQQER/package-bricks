@@ -1037,7 +1037,7 @@ class Manager
         QUI\Cache\Manager::clear($cache);
 
         QUI\Cache\Manager::clear(
-            self::getBrickCacheNamespace().\md5($type)
+            self::getBrickCacheNamespace().\md5($Brick->getType())
         );
     }
 
