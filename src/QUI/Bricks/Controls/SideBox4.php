@@ -20,10 +20,10 @@ class SideBox4 extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         // default options
-        $this->setAttributes(array(
+        $this->setAttributes([
             'showImage'       => true,
             'showTitle'       => true,
             'showDescription' => true,
@@ -31,9 +31,9 @@ class SideBox4 extends QUI\Control
             'site'            => false,
             'limit'           => 4,
             'order'           => 'release_from DESC'
-        ));
+        ]);
 
-        $this->addCSSFile(dirname(__FILE__) . '/SideBox4.css');
+        $this->addCSSFile(dirname(__FILE__).'/SideBox4.css');
 
         parent::__construct($attributes);
     }
@@ -75,17 +75,17 @@ class SideBox4 extends QUI\Control
         $children = QUI\Projects\Site\Utils::getSitesByInputList(
             $this->getProject(),
             $this->getAttribute('site'),
-            array(
+            [
                 'limit' => $limit,
                 'order' => $order
-            )
+            ]
         );
 
-        $Engine->assign(array(
+        $Engine->assign([
             'this'     => $this,
             'children' => $children
-        ));
+        ]);
 
-        return $Engine->fetch(dirname(__FILE__) . '/SideBox4.html');
+        return $Engine->fetch(dirname(__FILE__).'/SideBox4.html');
     }
 }

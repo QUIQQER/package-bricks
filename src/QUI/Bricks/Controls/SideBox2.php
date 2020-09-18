@@ -20,10 +20,10 @@ class SideBox2 extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         // default options
-        $this->setAttributes(array(
+        $this->setAttributes([
             'showImage'          => true,
             'showTitle'          => true,
             'showDescription'    => true,
@@ -35,7 +35,7 @@ class SideBox2 extends QUI\Control
             'order'              => 'release_from DESC',
             'grid-class-row'     => 'row',
             'grid-class-article' => '6u'
-        ));
+        ]);
 
         parent::__construct($attributes);
     }
@@ -77,17 +77,17 @@ class SideBox2 extends QUI\Control
         $children = QUI\Projects\Site\Utils::getSitesByInputList(
             $this->getProject(),
             $this->getAttribute('site'),
-            array(
+            [
                 'limit' => $limit,
                 'order' => $order
-            )
+            ]
         );
 
-        $Engine->assign(array(
+        $Engine->assign([
             'this'     => $this,
             'children' => $children
-        ));
+        ]);
 
-        return $Engine->fetch(dirname(__FILE__) . '/SideBox2.html');
+        return $Engine->fetch(dirname(__FILE__).'/SideBox2.html');
     }
 }
