@@ -262,6 +262,7 @@ class SimpleContact extends QUI\Control
             ]);
         } catch (\Exception $Exception) {
             QUI\System\Log::writeException($Exception);
+
             return false;
         }
 

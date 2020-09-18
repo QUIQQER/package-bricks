@@ -3,6 +3,7 @@
 /**
  * This file contains QUI\Bricks\Children\Listing
  */
+
 namespace QUI\Bricks\Controls\Children;
 
 use QUI;
@@ -19,10 +20,10 @@ class Listing extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         // default options
-        $this->setAttributes(array(
+        $this->setAttributes([
             'class'          => 'qui-control-brick',
             'limit'          => 2,
             'showSheets'     => false,
@@ -39,7 +40,7 @@ class Listing extends QUI\Control
             'child-itemprop' => 'itemListElement',
             'display'        => 'childrenlist',
             'order'          => 'c_date DESC'
-        ));
+        ]);
 
         parent::__construct($attributes);
     }
@@ -70,7 +71,10 @@ class Listing extends QUI\Control
 
         $Control->setAttribute('frontendTitle', $this->getAttribute('frontendTitle'));
         $Control->setAttribute('showTitle', $this->getAttribute('showTitle'));
+        $result = $Control->create();
 
-        return $Control->create();
+        $this->addCSSFiles($Control->getCSSFiles());
+
+        return $result;
     }
 }

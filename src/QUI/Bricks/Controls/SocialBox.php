@@ -20,18 +20,18 @@ class SocialBox extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         // default options
-        $this->setAttributes(array(
+        $this->setAttributes([
             'title'      => 'Social',
             'socialList' => false
-        ));
+        ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__) . '/SocialBox.css'
+            dirname(__FILE__).'/SocialBox.css'
         );
     }
 
@@ -49,11 +49,11 @@ class SocialBox extends QUI\Control
             $socialList = json_decode($socialList, true);
         }
 
-        $Engine->assign(array(
+        $Engine->assign([
             'this'       => $this,
             'socialList' => $socialList
-        ));
+        ]);
 
-        return $Engine->fetch(dirname(__FILE__) . '/SocialBox.html');
+        return $Engine->fetch(dirname(__FILE__).'/SocialBox.html');
     }
 }
