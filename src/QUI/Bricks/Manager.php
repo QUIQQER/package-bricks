@@ -739,9 +739,13 @@ class Manager
             $brickId = (int)$brickData['brickId'];
 
             try {
-                if (isset($brickData['uid'])) {
+                if (!empty($brickData['uid'])) {
                     $Brick    = $this->getBrickByUID($brickData['uid']);
                     $result[] = $Brick->check();
+                    continue;
+                }
+
+                if (!$brickId) {
                     continue;
                 }
 
