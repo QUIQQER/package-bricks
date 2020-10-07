@@ -85,7 +85,8 @@ class Brick extends QUI\QDOM
             'width'         => '',
             'classes'       => '',
             'frontendTitle' => '',
-            'hasContent'    => 1
+            'hasContent'    => 1,
+            'cacheable'     => 1    // if the brick is cacheable or not
         ];
 
         $this->setAttributes($default);
@@ -276,27 +277,29 @@ class Brick extends QUI\QDOM
                      .'/'
                      .$this->hash;
 
-        try {
-            $data       = QUI\Cache\Manager::get($cacheName);
-            $cssFiles   = $data['cssFiles'];
-            $cssClasses = $data['cssClasses'];
+        if ($this->getAttribute('cacheable')) {
+            try {
+                $data       = QUI\Cache\Manager::get($cacheName);
+                $cssFiles   = $data['cssFiles'];
+                $cssClasses = $data['cssClasses'];
 
-            if (\is_array($cssClasses)) {
-                foreach ($cssClasses as $cssClass) {
-                    $this->addCSSClass($cssClass);
+                if (\is_array($cssClasses)) {
+                    foreach ($cssClasses as $cssClass) {
+                        $this->addCSSClass($cssClass);
+                    }
                 }
-            }
 
-            if (\is_array($cssFiles)) {
-                foreach ($cssFiles as $cssFile) {
-                    QUI\Control\Manager::addCSSFile($cssFile);
+                if (\is_array($cssFiles)) {
+                    foreach ($cssFiles as $cssFile) {
+                        QUI\Control\Manager::addCSSFile($cssFile);
+                    }
                 }
-            }
 
-            if (!empty($data['html'])) {
-                return $data['html'];
+                if (!empty($data['html'])) {
+                    return $data['html'];
+                }
+            } catch (\Exception $Exception) {
             }
-        } catch (\Exception $Exception) {
         }
 
         if ($this->getAttribute('type') == 'content') {
@@ -336,9 +339,7 @@ class Brick extends QUI\QDOM
             }
 
             foreach ($classes as $class) {
-                $class = \trim($class);
-
-                $_classes[] = $class;
+                $_classes[] = \trim($class);
             }
 
             $_classes   = \array_unique($_classes);
@@ -373,6 +374,10 @@ class Brick extends QUI\QDOM
 
         if ($this->getAttribute('classes')) {
             $Control->addCSSClass($this->getAttribute('classes'));
+        }
+
+        if ($Control->existsAttribute('cacheable')) {
+            $Control->setAttribute('cacheable', $Control->getAttribute('cacheable'));
         }
 
         // workaround wegen title bug
@@ -446,6 +451,10 @@ class Brick extends QUI\QDOM
         }
 
         $this->Control = $Control;
+
+        if ($this->Control->existsAttribute('cacheable')) {
+            $this->setAttribute('cacheable', $this->Control->getAttribute('cacheable'));
+        }
 
         return $Control;
     }
