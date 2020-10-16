@@ -573,7 +573,7 @@ class Brick extends QUI\QDOM
     public function addCSSClass($cssClass)
     {
         if (\is_array($cssClass)) {
-            $cssClass = \implode($cssClass, ' ');
+            $cssClass = \implode(' ', $cssClass);
         }
 
         if (!\is_string($cssClass)) {
