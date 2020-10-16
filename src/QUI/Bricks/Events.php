@@ -168,17 +168,26 @@ class Events
     public static function onDeleteProject($project)
     {
         // delete uid entries
-        $uidTable = QUI\Bricks\Manager::getUIDTable();
-
         try {
-            QUI::getDataBase()->delete($uidTable, [
+            QUI::getDataBase()->delete(QUI\Bricks\Manager::getUIDTable(), [
                 'project' => $project
             ]);
         } catch (QUI\Exception $Exception) {
             QUI\System\Log::addError($Exception->getMessage());
         }
 
-        // delete brocks project tables
+
+        // delete project bricks
+        try {
+            QUI::getDataBase()->delete(QUI\Bricks\Manager::getTable(), [
+                'project' => $project
+            ]);
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::addError($Exception->getMessage());
+        }
+
+
+        // delete bricks project tables
         // Mainproject_de_bricksCache
         $Table  = QUI::getDataBase()->table();
         $tables = $Table->getTables();
