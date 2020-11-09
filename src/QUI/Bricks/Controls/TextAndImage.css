@@ -1,0 +1,45 @@
+.quiqqer-textImage {
+    display: flex;
+}
+
+.quiqqer-textImage-box:first-child {
+    padding-left: 0;
+}
+
+.quiqqer-textImage-box:last-child {
+    padding-right: 0;
+}
+
+.quiqqer-textImage-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiqqer-textImage-image img {
+    display: block;
+}
+
+.quiqqer-textImage-content {
+    display: flex;
+}
+
+@media screen and (max-width: 767px) {
+    .quiqqer-textImage {
+        flex-direction: column;
+    }
+
+    .quiqqer-textImage-box {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .quiqqer-textImage-image {
+        order: 1;
+        margin-bottom: 1rem;
+    }
+
+    .quiqqer-textImage-content {
+        order: 2;
+    }
+}

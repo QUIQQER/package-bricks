@@ -1648,5 +1648,44 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Bricks: Last News]]></en>
             <pl><![CDATA[Bricks: Ostatnie newsy]]></pl>
         </locale>
+
+
+        <!-- Text and image -->
+        <locale name="brick.textAndImage.title">
+            <de><![CDATA[Bausteine: Text neben dem Bild]]></de>
+            <en><![CDATA[Bricks: Text next to the image]]></en>
+        </locale>
+        <locale name="brick.textAndImage.description">
+            <de><![CDATA[Der Text wird neben dem Bild angezeigt wahlweise rechts oder links.]]></de>
+            <en><![CDATA[The text is displayed next to the image, either on the right or left.]]></en>
+        </locale>
+        <locale name="brick.textAndImage.image">
+            <de><![CDATA[Bild]]></de>
+            <en><![CDATA[Image]]></en>
+        </locale>
+        <locale name="brick.textAndImage.imageOnLeft">
+            <de><![CDATA[Bild auf der linken Seite]]></de>
+            <en><![CDATA[Image on the left side]]></en>
+        </locale>
+        <locale name="brick.textAndImage.maxImageWidth">
+            <de><![CDATA[Maximale Briete des Bildes]]></de>
+            <en><![CDATA[Maximum image width]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textPosition">
+            <de><![CDATA[Text Position]]></de>
+            <en><![CDATA[Text position]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textPosition.top">
+            <de><![CDATA[Oben]]></de>
+            <en><![CDATA[Top]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textPosition.center">
+            <de><![CDATA[Zentriert]]></de>
+            <en><![CDATA[Center]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textPosition.bottom">
+            <de><![CDATA[Unten]]></de>
+            <en><![CDATA[Bottom]]></en>
+        </locale>
     </groups>
 </locales>
