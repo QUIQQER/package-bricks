@@ -1263,5 +1263,53 @@
             </settings>
         </brick>
 
+        <brick control="\QUI\Bricks\Controls\TextAndImage">
+            <title>
+                <locale group="quiqqer/bricks"
+                        var="brick.textAndImage.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks"
+                        var="brick.textAndImage.description"/>
+            </description>
+
+            <settings>
+
+                <setting name="image" class="media-image">
+                    <locale group="quiqqer/bricks"
+                            var="brick.textAndImage.image"/>
+                </setting>
+
+                <setting name="imageOnLeft" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="brick.textAndImage.imageOnLeft"/>
+                </setting>
+
+                <setting name="maxImageWidth" type="number">
+                    <locale group="quiqqer/bricks"
+                            var="brick.textAndImage.maxImageWidth"/>
+                </setting>
+
+                <setting name="textPosition" type="select">
+                    <locale group="quiqqer/bricks"
+                            var="brick.textAndImage.textPosition"/>
+
+                    <option value="top">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.textPosition.top"/>
+                    </option>
+                    <option value="center">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.textPosition.center"/>
+                    </option>
+                    <option value="bottom">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.textPosition.bottom"/>
+                    </option>
+                </setting>
+
+            </settings>
+        </brick>
+
     </bricks>
 </quiqqer>

@@ -125,10 +125,16 @@ class Utils
         $name    = $Brick->getAttribute('name');
 
         $hasContent = 1;
+        $cacheable  = 1;
 
         if ($Brick->hasAttribute('hasContent')
             && (int)$Brick->getAttribute('hasContent') === 0) {
             $hasContent = 0;
+        }
+
+        if ($Brick->hasAttribute('cacheable')
+            && (int)$Brick->getAttribute('cacheable') === 0) {
+            $cacheable = 0;
         }
 
         $title       = [];
@@ -154,6 +160,7 @@ class Utils
         return [
             'control'     => $control,
             'hasContent'  => $hasContent,
+            'cacheable'   => $cacheable,
             'name'        => $name,
             'title'       => $title,
             'description' => $description,

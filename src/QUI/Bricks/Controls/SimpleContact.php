@@ -37,6 +37,8 @@ class SimpleContact extends QUI\Control
 
         parent::__construct($attributes);
 
+        $this->setAttribute('cacheable', 0);
+
         if (!isset($attributes['showPrivacyPolicyCheckbox'])) {
             $Site = $this->getSite();
 

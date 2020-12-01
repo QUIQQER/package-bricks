@@ -161,6 +161,51 @@ class Events
     }
 
     /**
+     * event: on project delete
+     *
+     * @param string $project
+     */
+    public static function onDeleteProject($project)
+    {
+        // delete uid entries
+        try {
+            QUI::getDataBase()->delete(QUI\Bricks\Manager::getUIDTable(), [
+                'project' => $project
+            ]);
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::addError($Exception->getMessage());
+        }
+
+
+        // delete project bricks
+        try {
+            QUI::getDataBase()->delete(QUI\Bricks\Manager::getTable(), [
+                'project' => $project
+            ]);
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::addError($Exception->getMessage());
+        }
+
+
+        // delete bricks project tables
+        // Mainproject_de_bricksCache
+        $Table  = QUI::getDataBase()->table();
+        $tables = $Table->getTables();
+
+        foreach ($tables as $table) {
+            if (\strpos($table, $project) !== 0) {
+                continue;
+            }
+
+            if (\strpos($table, '_bricksCache') === false) {
+                continue;
+            }
+
+            $Table->delete($table);
+        }
+    }
+
+    /**
      * Event : on smarty init
      * add new brickarea function
      *
