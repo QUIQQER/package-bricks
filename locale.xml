@@ -1450,7 +1450,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Standard]]></en>
         </locale>
         <locale name="bricks.BoxContentAdvanced.template.boxWithShadow">
-            <de><![CDATA[Moderne Boxen mit Schatten)]]></de>
+            <de><![CDATA[Moderne Boxen mit Schatten]]></de>
             <en><![CDATA[Modern boxes with shadow]]></en>
         </locale>
         <locale name="bricks.BoxContentAdvanced.centerText">
