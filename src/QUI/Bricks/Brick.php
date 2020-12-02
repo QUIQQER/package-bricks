@@ -478,7 +478,7 @@ class Brick extends QUI\QDOM
      *
      * @return void
      */
-    public function setSettings($settings)
+    public function setSettings(array $settings)
     {
         foreach ($settings as $key => $value) {
             if ($key === 'classes') {
