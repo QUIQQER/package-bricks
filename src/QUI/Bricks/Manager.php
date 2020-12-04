@@ -738,6 +738,11 @@ class Manager
 
         $result = [];
 
+        QUI::getEvents()->fireEvent(
+            'onQuiqqerBricksGetBricksByAreaBegin',
+            [$brickArea, $Site, &$result]
+        );
+
         foreach ($bricks as $key => $brickData) {
             $brickId = (int)$brickData['brickId'];
 
@@ -770,6 +775,11 @@ class Manager
                 QUI\System\Log::writeException($Exception);
             }
         }
+
+        QUI::getEvents()->fireEvent(
+            'onQuiqqerBricksGetBricksByAreaEnd',
+            [$brickArea, $Site, &$result]
+        );
 
         return $result;
     }
