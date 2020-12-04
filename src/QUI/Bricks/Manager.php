@@ -715,7 +715,10 @@ class Manager
         }
 
         $brickAreas = $Site->getAttribute('quiqqer.bricks.areas');
-        $brickAreas = \json_decode($brickAreas, true);
+
+        if (!\is_array($brickAreas)) {
+            $brickAreas = \json_decode($brickAreas, true);
+        }
 
         if (!isset($brickAreas[$brickArea]) || empty($brickAreas[$brickArea])) {
             $bricks = $this->getInheritedBricks($brickArea, $Site);
@@ -734,6 +737,11 @@ class Manager
 
 
         $result = [];
+
+        QUI::getEvents()->fireEvent(
+            'onQuiqqerBricksGetBricksByAreaBegin',
+            [$brickArea, $Site, &$result]
+        );
 
         foreach ($bricks as $key => $brickData) {
             $brickId = (int)$brickData['brickId'];
@@ -767,6 +775,11 @@ class Manager
                 QUI\System\Log::writeException($Exception);
             }
         }
+
+        QUI::getEvents()->fireEvent(
+            'onQuiqqerBricksGetBricksByAreaEnd',
+            [$brickArea, $Site, &$result]
+        );
 
         return $result;
     }
@@ -893,7 +906,7 @@ class Manager
         $Brick->setAttributes($brickData);
 
         // fields
-        if (isset($brickData['attributes'])) {
+        if (isset($brickData['attributes']) && \is_array($brickData['attributes'])) {
             foreach ($brickData['attributes'] as $key => $value) {
                 if ($key == 'areas') {
                     continue;
@@ -919,7 +932,7 @@ class Manager
         // custom fields
         $customfields = [];
 
-        if (isset($brickData['customfields'])) {
+        if (isset($brickData['customfields']) && \is_array($brickData['customfields'])) {
             $availableSettings           = $Brick->getSettings();
             $availableSettings['width']  = true;
             $availableSettings['height'] = true;
