@@ -5,12 +5,12 @@
 
 <div class="quiqqer-textImage {$imageOnLeftClass}">
     {if $imageOnLeft}
-    <div class="quiqqer-textImage-box quiqqer-textImage-image grid-50 mobile-grid-100">
+    <div class="quiqqer-textImage-box quiqqer-textImage-image {$imgWidthClass} mobile-grid-100">
         {if $img}
-        {image src=$img width=$maxImageWidth}
+        {image src=$img width=$maxImageWidth class={$imageShadow}}
         {/if}
     </div>
-    <div class="quiqqer-textImage-box quiqqer-textImage-content grid-50 mobile-grid-100"
+    <div class="quiqqer-textImage-box quiqqer-textImage-content {$textWidthClass} mobile-grid-100"
          style="align-items: {$textPosition};">
         <div class="quiqqer-textImage-content-inner">
             {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
@@ -23,7 +23,7 @@
         </div>
     </div>
     {else}
-    <div class="quiqqer-textImage-box quiqqer-textImage-content grid-50 mobile-grid-100"
+    <div class="quiqqer-textImage-box quiqqer-textImage-content {$textWidthClass} mobile-grid-100"
          style="align-items: {$textPosition};">
         <div class="quiqqer-textImage-content-inner">
             {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
@@ -35,9 +35,9 @@
             {$this->getAttribute('content')}
         </div>
     </div>
-    <div class="quiqqer-textImage-box quiqqer-textImage-image grid-50 mobile-grid-100">
+    <div class="quiqqer-textImage-box quiqqer-textImage-image {$imgWidthClass} mobile-grid-100">
         {if $img}
-        {image src=$img width=$maxImageWidth}
+        {image src=$img width=$maxImageWidth class={$imageShadow}}
         {/if}
     </div>
     {/if}

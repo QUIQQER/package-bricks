@@ -24,16 +24,18 @@ class TextAndImage extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'image'         => false,
-            'maxImageWidth' => false,
-            'imageRight'    => false,
-            'textPosition'  => 'top' // top, center, bottom
+            'image'           => false,
+            'maxImageWidth'   => false,
+            'imageRight'      => false,
+            'imageShadow'     => false,
+            'textPosition'    => 'top', // top, center, bottom
+            'textImageRatio' => 50 // 30,35,40,45,50,55,60,65,70
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__) . '/TextAndImage.css'
+            dirname(__FILE__).'/TextAndImage.css'
         );
     }
 
@@ -53,7 +55,7 @@ class TextAndImage extends QUI\Control
                 break;
 
             case 'bottom':
-                $textPosition = 'bottom';
+                $textPosition = 'flex-end';
                 break;
 
             case 'top':
@@ -61,15 +63,38 @@ class TextAndImage extends QUI\Control
                 $textPosition = 'flex-start';
         }
 
+        /* text width */
+        $textWidthClass = 'grid-50';
+        $imgWidthClass  = 'grid-50';
+
+        if ($this->getAttribute('textImageRatio')) {
+            $textWidth = intval($this->getAttribute('textImageRatio'));
+
+
+            if ($textWidth > 0 && $textWidth < 100) {
+                $imgWidth       = 100 - $textWidth;
+                $textWidthClass = 'grid-'.$textWidth;
+                $imgWidthClass  = 'grid-'.$imgWidth;
+            }
+        }
+
+        $shadow = '';
+        if ($this->getAttribute('imageShadow')) {
+            $shadow = 'shadow-xl';
+        }
+
         $Engine->assign([
             'this'              => $this,
             'img'               => $this->getAttribute('image'),
             'maxImageWidth'     => intval($this->getAttribute('maxImageWidth')),
             'imageOnLeft'       => $this->getAttribute('imageOnLeft'),
+            'imageShadow'       => $shadow,
             'imageAsBackground' => $this->getAttribute('imageAsBackground'),
-            'textPosition'      => $textPosition
+            'textPosition'      => $textPosition,
+            'textWidthClass'    => $textWidthClass,
+            'imgWidthClass'     => $imgWidthClass
         ]);
 
-        return $Engine->fetch(dirname(__FILE__) . '/TextAndImage.html');
+        return $Engine->fetch(dirname(__FILE__).'/TextAndImage.html');
     }
 }

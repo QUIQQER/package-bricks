@@ -1667,6 +1667,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Bild auf der linken Seite]]></de>
             <en><![CDATA[Image on the left side]]></en>
         </locale>
+        <locale name="brick.textAndImage.imageShadow">
+            <de><![CDATA[Bild hat einen Schatten]]></de>
+            <en><![CDATA[Image has a shadow]]></en>
+        </locale>
         <locale name="brick.textAndImage.maxImageWidth">
             <de><![CDATA[Maximale Briete des Bildes]]></de>
             <en><![CDATA[Maximum image width]]></en>
@@ -1686,6 +1690,46 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.textAndImage.textPosition.bottom">
             <de><![CDATA[Unten]]></de>
             <en><![CDATA[Bottom]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textImageRatio">
+            <de><![CDATA[Text und Bild Platzverhältnis]]></de>
+            <en><![CDATA[Text and image space ratio]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textImageRatio.30">
+            <de><![CDATA[Text 30% - Bild 70%]]></de>
+            <en><![CDATA[Text 30% - Image 70%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textImageRatio.35">
+            <de><![CDATA[Text 35% - Bild 65%]]></de>
+            <en><![CDATA[Text 35% - Image 65%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textImageRatio.40">
+            <de><![CDATA[Text 40% - Bild 60%]]></de>
+            <en><![CDATA[Text 40% - Image 60%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textImageRatio.45">
+            <de><![CDATA[Text 45% - Bild 55%]]></de>
+            <en><![CDATA[Text 45% - Image 55%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textImageRatio.50">
+            <de><![CDATA[Text 50% - Bild 50% (standard)]]></de>
+            <en><![CDATA[Text 50% - Image 50% (default)]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textImageRatio.55">
+            <de><![CDATA[Text 55% - Bild 45%]]></de>
+            <en><![CDATA[Text 55% - Image 45%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textImageRatio.60">
+            <de><![CDATA[Text 60% - Bild 40%]]></de>
+            <en><![CDATA[Text 60% - Image 40%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textImageRatio.65">
+            <de><![CDATA[Text 65% - Bild 35%]]></de>
+            <en><![CDATA[Text 65% - Image 35%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textImageRatio.70">
+            <de><![CDATA[Text 70% - Bild 30%]]></de>
+            <en><![CDATA[Text 70% - Image 30%]]></en>
         </locale>
     </groups>
 </locales>
