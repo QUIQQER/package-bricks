@@ -62,9 +62,16 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                         if (self.$captchaRequired && !self.$captchaResponse) {
                             QUI.getMessageHandler(function (MH) {
                                 MH.options.displayTimeMessages = 2000;
+
+                                var CaptchaElm = self.$Elm.getElement('.qui-contact-captcha');
+
+                                if (!CaptchaElm) {
+                                    CaptchaElm = undefined;
+                                }
+                                
                                 MH.addError(
                                     QUILocale.get(lg, 'brick.control.simpleContact.error.captcha_failed'),
-                                    self.$Elm.getElement('.qui-contact-captcha')
+                                    CaptchaElm
                                 );
                             });
 
