@@ -52,10 +52,6 @@ class Slider extends QUI\Control
             $this->setAttribute('slideHeight', $this->getAttribute('height'));
         }
 
-        if (!$this->getAttribute('slideHeight')) {
-            $this->setAttribute('slideHeight', 200);
-        }
-
         if ($this->getAttribute('moreLink')) {
             try {
                 $MoreLink = QUI\Projects\Site\Utils::getSiteByLink($this->getAttribute('moreLink'));
@@ -76,9 +72,13 @@ class Slider extends QUI\Control
                 $css      = dirname(__FILE__).'/Slider.ImageAndText.css';
 
                 if (!$this->getAttribute('slideHeight')) {
-                    $this->setAttribute('slideHeight', 500);
+                    $this->setAttribute('slideHeight', 600);
                 }
                 break;
+        }
+
+        if (!$this->getAttribute('slideHeight')) {
+            $this->setAttribute('slideHeight', 200);
         }
 
         $Engine->assign([

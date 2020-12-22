@@ -1,0 +1,67 @@
+{if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+<header class="control-header">
+    <h1>{$this->getAttribute('frontendTitle')}</h1>
+</header>
+{/if}
+
+{if $this->getAttribute('content') != ""}
+<div class="control-content">
+    {$this->getAttribute('content')}
+</div>
+{/if}
+
+<div class="quiqqer-bricks-children-slider-container-wrapper"
+     style="height: {$this->getAttribute('slideHeight')}px;">
+    <div class="quiqqer-bricks-children-slider-container">
+        <div class="quiqqer-bricks-children-slider-container-inner">
+            <ul class="quiqqer-bricks-children-slider-container-slide quiqqer-bricks-children-slider-container-slide__imageAndText"
+                style="height: {$this->getAttribute('slideHeight')}px;"
+            >
+            {strip}
+                {foreach from=$children item=Child}
+                <li class="quiqqer-bricks-children-slider-child">
+                    <article class="quiqqer-bricks-children-slider-child-display">
+                        <div class="quiqqer-bricks-children-slider-child-image">
+                            <a href="{url site=$Child}" title="{$Child->getAttribute('title')|escape:'html'}">
+                            {image src=$Child->getAttribute('image_site') title="{$Child->getAttribute('title')|escape:'html'}" width=600}
+                            </a>
+                        </div>
+                        <div class="quiqqer-bricks-children-slider-child-content">
+                            <h4 class="quiqqer-bricks-children-slider-child-content-title">
+                                <a href="{url site=$Child}" title="{$Child->getAttribute('title')|escape:'html'}">
+                                    {$Child->getAttribute('title')}
+                                </a>
+                            </h4>
+
+                            {if $Child->getAttribute('short')}
+                            <div class="quiqqer-bricks-children-slider-child-content-short">
+                                {$Child->getAttribute('short')}
+                            </div>
+                            {/if}
+
+                            <a href="{url site=$Child}" title="{$Child->getAttribute('title')|escape:'html'}">
+                                {locale group='quiqqer/bricks' var='brick.control.slider.button'}
+                            </a>
+                        </div>
+                    </article>
+                </li>
+                {/foreach}
+            {/strip}
+
+            {if $MoreLink}
+                <li class="quiqqer-bricks-children-slider-child">
+                    <article class="quiqqer-bricks-children-slider-child-display">
+                        <a href="{url site=$MoreLink}" title="{$MoreLink->getAttribute('title')|escape:'html'}"
+                        class="quiqqer-bricks-children-slider-child-display-moreLink">
+                            <span class="fa fa-angle-right"></span>
+                            <span class="quiqqer-bricks-children-slider-moreLink-text">
+                                {locale group='quiqqer/bricks' var='brick.control.slider.more'}
+                            </span>
+                        </a>
+                    </article>
+                </li>
+            {/if}
+            </ul>
+        </div>
+    </div>
+</div>

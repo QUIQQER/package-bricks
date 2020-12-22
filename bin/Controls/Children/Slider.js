@@ -76,7 +76,13 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
                 this.getElm().removeClass('quiqqer-bricks-children-slider-mobile');
             }
 
-            this.$scrollLength = (size.x / 1.2).round();
+            var Entry = SliderContainer.getElement('.quiqqer-bricks-children-slider-child'),
+                scrollLen = (size.x / 1.2).round();
+            if (Entry) {
+                scrollLen = Entry.getSize().x;
+            }
+
+            this.$scrollLength = scrollLen;
             this.$scrollMax    = this.$Inner.getScrollSize().x - size.x;
             this.$icons.setStyle('line-height', size.y);
             this.$onScroll();
@@ -123,7 +129,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
                 '.quiqqer-bricks-children-slider-container-inner'
             );
 
-            this.$SlideFX = new Fx.Scroll(this.$Inner);
+            this.$SlideFX = new Fx.Scroll(this.$Inner, {
+                duration: 200
+            });
+
             this.$icons   = Elm.getElements('article a .quiqqer-icon');
 
             var scrollSpy = QUIFunctionUtils.debounce(this.$onScroll, 200);
