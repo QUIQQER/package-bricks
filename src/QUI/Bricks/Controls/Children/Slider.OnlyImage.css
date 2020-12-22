@@ -82,6 +82,7 @@
     -webkit-transition: all 1s ease;
     max-height: calc(100% - 2px);
     width: auto;
+    max-width: initial;
 }
 
 .quiqqer-bricks-children-slider-child-display img:hover {

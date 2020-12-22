@@ -330,6 +330,30 @@
             <de><![CDATA[Seiten hinzufügen]]></de>
             <en><![CDATA[Add pages]]></en>
         </locale>
+        <locale name="brick.control.slider.template">
+            <de><![CDATA[Slider Vorlage (template)]]></de>
+            <en><![CDATA[Slider template]]></en>
+        </locale>
+        <locale name="brick.control.slider.template.onlyImages">
+            <de><![CDATA[Nur Bild (standard)]]></de>
+            <en><![CDATA[Only image (default)]]></en>
+        </locale>
+        <locale name="brick.control.slider.template.imageAndText">
+            <de><![CDATA[Bild, Titel und Beschreibung]]></de>
+            <en><![CDATA[Image, title and description]]></en>
+        </locale>
+        <locale name="brick.control.slider.template.slideHeight">
+            <de><![CDATA[Slider Höhe]]></de>
+            <en><![CDATA[Slider height]]></en>
+        </locale>
+        <locale name="brick.control.slider.button" html="true">
+            <de><![CDATA[Weiter <span class="fa fa-angle-right"></span>]]></de>
+            <en><![CDATA[More <span class="fa fa-angle-right"></span>]]></en>
+        </locale>
+        <locale name="brick.control.slider.more">
+            <de><![CDATA[Mehr]]></de>
+            <en><![CDATA[More]]></en>
+        </locale>
         <locale name="brick.control.setting.limit">
             <de><![CDATA[Limit]]></de>
             <en><![CDATA[Limit]]></en>
@@ -384,8 +408,8 @@
         </locale>
 
         <locale name="brick.control.slider.title">
-            <de><![CDATA[Bausteine: Seiten-Präsentation]]></de>
-            <en><![CDATA[Bricks: Site-Presentation]]></en>
+            <de><![CDATA[Bausteine: Seiten-Präsentation (Carousel)]]></de>
+            <en><![CDATA[Bricks: Site-Presentation (Carousel)]]></en>
         </locale>
         <locale name="brick.control.promosliderWallpaper.title">
             <de><![CDATA[Bausteine: Promoslider Wallpaper]]></de>

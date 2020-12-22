@@ -11,11 +11,11 @@
 {/if}
 
 <div class="quiqqer-bricks-children-slider-container-wrapper"
-     style="height: {$this->getAttribute('height')}px;">
+     style="height: {$this->getAttribute('slideHeight')}px;">
     <div class="quiqqer-bricks-children-slider-container">
         <div class="quiqqer-bricks-children-slider-container-inner">
             <ul class="quiqqer-bricks-children-slider-container-slide"
-                style="height: {$this->getAttribute('height')}px;"
+                style="height: {$this->getAttribute('slideHeight')}px;"
             >
             {strip}
                 {foreach from=$children item=Child}
@@ -32,7 +32,7 @@
                             </header>
                             {$Child->getAttribute('short')}
                         {else}
-                            {image src=$Child->getAttribute('image_site') height=$this->getAttribute('height')}
+                            {image src=$Child->getAttribute('image_site') height=$this->getAttribute('slideHeight')}
                         {/if}
                         </a>
                     </article>
