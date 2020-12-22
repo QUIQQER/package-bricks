@@ -132,11 +132,17 @@
                     <locale group="quiqqer/bricks" var="brick.control.setting.template"/>
 
                     <option value="onlyImage" selected="selected">
-                        <locale group="quiqqer/bricks" var="brick.control.setting.template.onlyImages"/>
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.setting.template.onlyImages"/>
                     </option>
                     <option value="imageAndText" selected="selected">
-                        <locale group="quiqqer/bricks" var="brick.control.setting.template.onlyImages"/>
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.setting.template.imageAndText"/>
                     </option>
+                </setting>
+
+                <setting name="slideHeight" type="number" min="1">
+                    <locale group="quiqqer/bricks" var="brick.control.setting.slideHeight"/>
                 </setting>
 
                 <setting name="limit" type="number" min="1">

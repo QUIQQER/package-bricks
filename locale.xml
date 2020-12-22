@@ -330,6 +330,22 @@
             <de><![CDATA[Seiten hinzufügen]]></de>
             <en><![CDATA[Add pages]]></en>
         </locale>
+        <locale name="brick.control.setting.template">
+            <de><![CDATA[Slider Vorlage (template)]]></de>
+            <en><![CDATA[Slider template]]></en>
+        </locale>
+        <locale name="brick.control.setting.template.onlyImages">
+            <de><![CDATA[Nur Bild (standard)]]></de>
+            <en><![CDATA[Only image (default)]]></en>
+        </locale>
+        <locale name="brick.control.setting.template.imageAndText">
+            <de><![CDATA[Bild, Titel und Beschreibung]]></de>
+            <en><![CDATA[Image, title and description]]></en>
+        </locale>
+        <locale name="brick.control.setting.slideHeight">
+            <de><![CDATA[Slider Höhe]]></de>
+            <en><![CDATA[Slider height]]></en>
+        </locale>
         <locale name="brick.control.setting.limit">
             <de><![CDATA[Limit]]></de>
             <en><![CDATA[Limit]]></en>
