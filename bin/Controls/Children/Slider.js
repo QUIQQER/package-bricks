@@ -58,7 +58,13 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          * resize the control and recalc all slide vars
          */
         resize: function () {
-            var size    = this.getElm().getSize(),
+            var SliderContainer = this.getElm().getElement('.quiqqer-bricks-children-slider-container-wrapper');
+
+            if (!SliderContainer) {
+                SliderContainer = this.getElm();
+            }
+
+            var size    = SliderContainer.getSize(),
                 winSize = QUI.getWindowSize();
 
             // display the buttons? if mobile, dont display it
@@ -81,7 +87,6 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
          */
         $onImport: function () {
             var Elm     = this.getElm(),
-                size    = Elm.getSize(),
                 wrapper = Elm.getElement('.quiqqer-bricks-children-slider-container-wrapper');
 
             if (wrapper) {
@@ -90,7 +95,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
                     html   : '<span class="fa fa-angle-right"></span>',
                     styles : {
                         display   : 'none',
-                        lineHeight: size.y,
+                        lineHeight: wrapper.getSize().y,
                         opacity   : 0,
                         right     : 0
                     },
@@ -105,7 +110,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Slider', [
                     styles : {
                         display   : 'none',
                         left      : 0,
-                        lineHeight: size.y,
+                        lineHeight: wrapper.getSize().y,
                         opacity   : 0
                     },
                     events : {
