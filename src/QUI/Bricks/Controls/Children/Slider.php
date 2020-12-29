@@ -35,6 +35,11 @@ class Slider extends QUI\Control
             'data-qui-options-usemobile' => false
         ]);
 
+        $this->addCSSFiles([
+            dirname(__FILE__).'/Slider.OnlyImage.css',
+            dirname(__FILE__).'/Slider.ImageAndText.css'
+        ]);
+
         parent::__construct($attributes);
     }
 
