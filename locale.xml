@@ -1616,6 +1616,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Cards]]></en>
             <pl><![CDATA[Cards]]></pl>
         </locale>
+        <locale name="brick.listTemplate.gallery">
+            <de><![CDATA[Galerie]]></de>
+            <en><![CDATA[Gallery]]></en>
+        </locale>
 
 
         <!-- max siten -->

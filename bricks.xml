@@ -1237,6 +1237,9 @@
                     <option value="cardRows">
                         <locale group="quiqqer/bricks" var="brick.listTemplate.cardRows"/>
                     </option>
+                    <option value="gallery">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.gallery"/>
+                    </option>
                 </setting>
 
                 <setting name="max" type="number">
