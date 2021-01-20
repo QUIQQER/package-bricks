@@ -38,21 +38,21 @@ class Manager
      *
      * @var array
      */
-    protected array $bricks = [];
+    protected $bricks = [];
 
     /**
      * Brick UID temp collector
      *
      * @var array
      */
-    protected array $brickUIDs = [];
+    protected $brickUIDs = [];
 
     /**
      * Initialized brick manager
      *
      * @var null|Manager
      */
-    public static ?Manager $BrickManager = null;
+    public static $BrickManager = null;
 
     /**
      * Return the global QUI\Bricks\Manager

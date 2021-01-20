@@ -37,33 +37,33 @@ class Brick extends QUI\QDOM
      *
      * @var array
      */
-    protected array $settings = [];
+    protected $settings = [];
 
     /**
      * Fields can be overwritten by another user
      *
      * @var array
      */
-    protected array $customfields = [];
+    protected $customfields = [];
 
     /**
      * Internal control
      *
      * @var null|QUI\Control
      */
-    protected ?QUI\Control $Control = null;
+    protected $Control = null;
 
     /**
      * List of extra css classes
      *
      * @var array
      */
-    protected array $cssClasses = [];
+    protected $cssClasses = [];
 
     /**
      * @var string
      */
-    protected string $hash;
+    protected $hash;
 
     /**
      * Constructor
