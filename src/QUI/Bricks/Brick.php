@@ -275,11 +275,8 @@ class Brick extends QUI\QDOM
         $cacheName = Manager::getBrickCacheNamespace()
                      .\md5($this->getType())
                      .'/'
-                     .$this->hash;
-
-        if ($this->uniqueId) {
-            $cacheName .= '/'.$this->uniqueId;
-        }
+                     .$this->hash
+                     .'/'.\md5(\serialize($this->getAttributes()));
 
         if ($this->getAttribute('cacheable')) {
             try {
