@@ -276,7 +276,7 @@ class Brick extends QUI\QDOM
                      .\md5($this->getType())
                      .'/'
                      .$this->hash
-                     .'/'.\md5(\serialize($this->getAttributes()));
+                     .'/'.\md5(\serialize($this->getSettings()));
 
         if ($this->getAttribute('cacheable')) {
             try {
@@ -567,11 +567,11 @@ class Brick extends QUI\QDOM
     /**
      * Add an extra CSS Class to the control
      *
-     * @param string $cssClass - Name of the CSS Class
+     * @param string|array $cssClass - Name of the CSS Class
      *
      * @return void
      */
-    public function addCSSClass(string $cssClass)
+    public function addCSSClass($cssClass)
     {
         if (\is_array($cssClass)) {
             $cssClass = \implode(' ', $cssClass);

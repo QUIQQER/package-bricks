@@ -183,11 +183,11 @@ class Manager
      *
      * @param integer $brickId - Brick ID
      * @param Site $Site - Current Site
-     * @return bool
+     * @return string
      *
      * @throws QUI\Exception
      */
-    protected function createUniqueBrickId(int $brickId, Site $Site): bool
+    protected function createUniqueBrickId(int $brickId, Site $Site): string
     {
         $Project = $Site->getProject();
         $uuid    = QUI\Utils\Uuid::get();
