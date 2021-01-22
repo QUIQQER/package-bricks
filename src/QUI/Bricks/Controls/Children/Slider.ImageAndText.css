@@ -78,7 +78,7 @@
 /* image */
 .quiqqer-bricks-children-slider-child-image {
     flex-shrink: 0;
-    /*height: 40%;*/
+    height: 100%;
     max-height: 40%;
     overflow: hidden;
 }
