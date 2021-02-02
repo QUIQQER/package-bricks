@@ -50,7 +50,7 @@ class Manager
     /**
      * Initialized brick manager
      *
-     * @var null
+     * @var null|Manager
      */
     public static $BrickManager = null;
 
@@ -59,10 +59,10 @@ class Manager
      *
      * @return Manager
      */
-    public static function init()
+    public static function init(): ?Manager
     {
         if (self::$BrickManager === null) {
-            self::$BrickManager = new QUI\Bricks\Manager(true);
+            self::$BrickManager = new Manager(true);
         }
 
         return self::$BrickManager;
@@ -86,7 +86,7 @@ class Manager
      *
      * @return String
      */
-    public static function getTable()
+    public static function getTable(): string
     {
         return QUI::getDBTableName(self::TABLE);
     }
@@ -94,7 +94,7 @@ class Manager
     /**
      * @return string
      */
-    public static function getUIDTable()
+    public static function getUIDTable(): string
     {
         return QUI::getDBTableName(self::TABLE_UID);
     }
@@ -104,7 +104,7 @@ class Manager
      *
      * @return string
      */
-    public static function getBrickCacheNamespace()
+    public static function getBrickCacheNamespace(): string
     {
         return 'quiqqer/package/quiqqer/bricks/';
     }
@@ -119,7 +119,7 @@ class Manager
      *
      * @throws QUI\Exception
      */
-    public function createBrickForProject(Project $Project, Brick $Brick)
+    public function createBrickForProject(Project $Project, Brick $Brick): int
     {
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.create');
 
@@ -134,9 +134,7 @@ class Manager
             ]
         );
 
-        $lastId = QUI::getPDO()->lastInsertId();
-
-        return $lastId;
+        return QUI::getPDO()->lastInsertId();
     }
 
     /**
@@ -185,11 +183,11 @@ class Manager
      *
      * @param integer $brickId - Brick ID
      * @param Site $Site - Current Site
-     * @return bool
+     * @return string
      *
      * @throws QUI\Exception
      */
-    protected function createUniqueBrickId($brickId, $Site)
+    protected function createUniqueBrickId(int $brickId, Site $Site): string
     {
         $Project = $Site->getProject();
         $uuid    = QUI\Utils\Uuid::get();
@@ -213,7 +211,7 @@ class Manager
      * @param string $uid - Brick Unique ID
      * @return bool
      */
-    public function existsUniqueBrickId($uid)
+    public function existsUniqueBrickId(string $uid): bool
     {
         try {
             $result = QUI::getDataBase()->fetch([
@@ -408,7 +406,7 @@ class Manager
      *
      * @return array
      */
-    public function getAvailableBricks()
+    public function getAvailableBricks(): array
     {
         $cache = 'quiqqer/bricks/availableBricks';
 
@@ -461,7 +459,7 @@ class Manager
      * @return Brick
      * @throws QUI\Exception
      */
-    public function getBrickById($id)
+    public function getBrickById($id): Brick
     {
         if (isset($this->bricks[$id])) {
             return $this->bricks[$id];
@@ -558,7 +556,7 @@ class Manager
      *
      * @return array
      */
-    public function getAvailableBrickSettingsByBrickType($brickType)
+    public function getAvailableBrickSettingsByBrickType($brickType): array
     {
         $cache = 'quiqqer/bricks/brickType/'.\md5($brickType);
 
@@ -653,7 +651,7 @@ class Manager
      * @param \DOMElement $Setting
      * @return array
      */
-    protected function parseSettingToBrickArray(\DOMElement $Setting)
+    protected function parseSettingToBrickArray(\DOMElement $Setting): array
     {
         /* @var $Option \DOMElement */
         $options = false;
@@ -708,7 +706,7 @@ class Manager
      *
      * @return array
      */
-    public function getBricksByArea($brickArea, QUI\Interfaces\Projects\Site $Site)
+    public function getBricksByArea($brickArea, QUI\Interfaces\Projects\Site $Site): array
     {
         if (empty($brickArea)) {
             return [];
@@ -792,7 +790,7 @@ class Manager
      *
      * @throws QUI\Exception
      */
-    public function getBricksFromProject(Project $Project)
+    public function getBricksFromProject(Project $Project): array
     {
         $result = [];
 
@@ -818,7 +816,7 @@ class Manager
      * @param Brick $Brick
      * @return array
      */
-    public function getSitesByBrick(Brick $Brick)
+    public function getSitesByBrick(Brick $Brick): array
     {
         try {
             $list = QUI::getDataBase()->fetch([
@@ -1067,7 +1065,7 @@ class Manager
      *
      * @throws QUI\Exception
      */
-    public function copyBrick($brickId, $params = [])
+    public function copyBrick($brickId, $params = []): int
     {
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.create');
 
@@ -1102,9 +1100,7 @@ class Manager
 
         QUI::getDataBase()->insert($this->getTable(), $data);
 
-        $lastId = QUI::getPDO()->lastInsertId();
-
-        return $lastId;
+        return QUI::getPDO()->lastInsertId();
     }
 
     /**
@@ -1112,7 +1108,7 @@ class Manager
      *
      * @return array
      */
-    protected function getBricksXMLFiles()
+    protected function getBricksXMLFiles(): array
     {
         return Utils::getBricksXMLFiles();
     }
@@ -1125,7 +1121,7 @@ class Manager
      *
      * @return array
      */
-    protected function getInheritedBricks($brickArea, QUI\Interfaces\Projects\Site $Site)
+    protected function getInheritedBricks($brickArea, QUI\Interfaces\Projects\Site $Site): array
     {
         // inheritance ( vererbung )
         $Project = $Site->getProject();

@@ -20,7 +20,7 @@ class Brick extends QUI\QDOM
     /**
      * internal brick id
      *
-     * @var
+     * @var int|bool
      */
     protected $id = false;
 
@@ -187,7 +187,7 @@ class Brick extends QUI\QDOM
      *
      * @return String
      */
-    public function getType()
+    public function getType(): string
     {
         $Control = $this->getControl();
 
@@ -204,7 +204,7 @@ class Brick extends QUI\QDOM
      * @param string $className
      * @return bool
      */
-    public function isInstanceOf($className)
+    public function isInstanceOf($className): bool
     {
         $Control = $this->getControl();
 
@@ -216,12 +216,12 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * Check, if control canbe created
+     * Check, if control can be created
      *
      * @return QUI\Bricks\Brick
      * @throws QUI\Exception
      */
-    public function check()
+    public function check(): Brick
     {
         if ($this->getAttribute('type') == 'content') {
             return $this;
@@ -244,18 +244,12 @@ class Brick extends QUI\QDOM
      *
      * @return string
      */
-    protected function createBrickHash()
+    protected function createBrickHash(): string
     {
         $attributes = $this->getAttributes();
-        $hashParams = [];
-
-        foreach ($attributes as $name => $value) {
-            if (\is_object($value)) {
-                continue;
-            }
-
-            $hashParams[$name] = \serialize($value);
-        }
+        $hashParams = \array_filter($attributes, function ($entry) {
+            return \is_object($entry) === false;
+        });
 
         $hash = \serialize($hashParams);
         $hash = \md5($hash);
@@ -270,12 +264,18 @@ class Brick extends QUI\QDOM
      *
      * @throws QUI\Exception
      */
-    public function create()
+    public function create(): string
     {
+        $settings = $this->getSettings();
+        $settings = \array_filter($settings, function ($entry) {
+            return \is_object($entry) === false;
+        });
+
         $cacheName = Manager::getBrickCacheNamespace()
                      .\md5($this->getType())
                      .'/'
-                     .$this->hash;
+                     .$this->hash
+                     .'/'.\md5(\serialize($settings));
 
         if ($this->getAttribute('cacheable')) {
             try {
@@ -446,7 +446,7 @@ class Brick extends QUI\QDOM
         }
 
 
-        if (!($Control instanceof QUI\Control) || !$Control) {
+        if (!($Control instanceof QUI\Control)) {
             return false;
         }
 
@@ -464,7 +464,7 @@ class Brick extends QUI\QDOM
      *
      * @return array
      */
-    public function getSettings()
+    public function getSettings(): array
     {
         $this->settings['classes'] = $this->getCSSClasses();
 
@@ -497,7 +497,7 @@ class Brick extends QUI\QDOM
      *
      * @return boolean|string|array
      */
-    public function getSetting($name)
+    public function getSetting(string $name)
     {
         if ($name === 'classes') {
             return $this->getCSSClasses();
@@ -514,11 +514,11 @@ class Brick extends QUI\QDOM
      * Set a brick setting
      *
      * @param string $name - name of the setting
-     * @param string $value - value of the setting
+     * @param mixed $value - value of the setting
      *
      * @return void
      */
-    public function setSetting($name, $value)
+    public function setSetting(string $name, $value)
     {
         if (isset($this->settings[$name])) {
             $this->settings[$name] = $value;
@@ -531,7 +531,7 @@ class Brick extends QUI\QDOM
 
     /**
      * @param string $name
-     * @return array|mixed
+     * @return mixed
      */
     public function getAttribute($name)
     {
@@ -545,7 +545,7 @@ class Brick extends QUI\QDOM
     /**
      * @return array
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         $attributes            = parent::getAttributes();
         $attributes['classes'] = $this->getCSSClasses();
@@ -558,7 +558,7 @@ class Brick extends QUI\QDOM
      *
      * @return array
      */
-    public function getCustomFields()
+    public function getCustomFields(): array
     {
         return $this->customfields;
     }
@@ -566,7 +566,7 @@ class Brick extends QUI\QDOM
     /**
      * Add an extra CSS Class to the control
      *
-     * @param string $cssClass - Name of the CSS Class
+     * @param string|array $cssClass - Name of the CSS Class
      *
      * @return void
      */
@@ -610,7 +610,7 @@ class Brick extends QUI\QDOM
      *
      * @return array
      */
-    public function getCSSClasses()
+    public function getCSSClasses(): array
     {
         return $this->cssClasses;
     }
@@ -622,7 +622,7 @@ class Brick extends QUI\QDOM
      *
      * @return boolean
      */
-    public function hasCSSClass($pattern)
+    public function hasCSSClass(string $pattern): bool
     {
         $cssClasses = $this->getAttribute('classes');
 
