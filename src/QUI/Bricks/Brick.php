@@ -247,15 +247,9 @@ class Brick extends QUI\QDOM
     protected function createBrickHash(): string
     {
         $attributes = $this->getAttributes();
-        $hashParams = [];
-
-        foreach ($attributes as $name => $value) {
-            if (\is_object($value)) {
-                continue;
-            }
-
-            $hashParams[$name] = \serialize($value);
-        }
+        $hashParams = \array_filter($attributes, function ($entry) {
+            return \is_object($entry) === false;
+        });
 
         $hash = \serialize($hashParams);
         $hash = \md5($hash);
@@ -272,11 +266,16 @@ class Brick extends QUI\QDOM
      */
     public function create(): string
     {
+        $settings = $this->getSettings();
+        $settings = \array_filter($settings, function ($entry) {
+            return \is_object($entry) === false;
+        });
+
         $cacheName = Manager::getBrickCacheNamespace()
                      .\md5($this->getType())
                      .'/'
                      .$this->hash
-                     .'/'.\md5(\serialize($this->getSettings()));
+                     .'/'.\md5(\serialize($settings));
 
         if ($this->getAttribute('cacheable')) {
             try {
