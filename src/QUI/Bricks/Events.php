@@ -301,4 +301,59 @@ class Events
             QUI\System\Log::writeException($Exception);
         }
     }
+
+    //region output filter
+
+    /**
+     * @param $content
+     */
+    public static function onOutputParseEnd(&$content)
+    {
+        if (\strpos($content, '{{brick id=') === false) {
+            return;
+        }
+
+        // search css files
+        $content = \preg_replace_callback(
+            '#{{brick ([^}}]*)}}#',
+            ['QUI\Bricks\Events', "outputParsing"],
+            $content
+        );
+    }
+
+    /**
+     * @param $match
+     */
+    public static function outputParsing($match)
+    {
+        $params = $match[0];
+        $params = \str_replace('{{brick', '', $params);
+        $params = \trim($params, '}}');
+        $params = \trim($params);
+        $params = \explode(' ', $params);
+
+        $attributes = [];
+
+        foreach ($params as $param) {
+            $a = \explode('=', $param);
+
+            $attributes[$a[0]] = $a[1];
+        }
+
+        if (!isset($attributes['id'])) {
+            return $match[0];
+        }
+
+        try {
+            $brickId = (int)$attributes['id'];
+            $Brick   = Manager::init()->getBrickById($brickId);
+
+            return $Brick->create();
+        } catch (\Exception $Exception) {
+        }
+
+        return $match[0];
+    }
+
+    //endregion
 }
