@@ -1054,6 +1054,8 @@ class Manager
         QUI\Cache\Manager::clear(
             self::getBrickCacheNamespace().\md5($Brick->getType())
         );
+
+        QUI::getEvents()->fireEvent('quiqqerBricksSave', [$brickId]);
     }
 
     /**
