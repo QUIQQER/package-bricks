@@ -165,7 +165,7 @@ class Events
      *
      * @param string $project
      */
-    public static function onDeleteProject($project)
+    public static function onDeleteProject(string $project)
     {
         // delete uid entries
         try {
@@ -324,7 +324,7 @@ class Events
     /**
      * @param $match
      */
-    public static function outputParsing($match)
+    public static function outputParsing($match): string
     {
         $params = $match[0];
         $params = \str_replace('{{brick', '', $params);
@@ -348,7 +348,7 @@ class Events
             $brickId = (int)$attributes['id'];
             $Brick   = Manager::init()->getBrickById($brickId);
 
-            return $Brick->create();
+            return QUI\Output::getInstance()->parse($Brick->create());
         } catch (\Exception $Exception) {
         }
 
