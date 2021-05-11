@@ -1197,6 +1197,11 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Continue]]></en>
         </locale>
         <!--</editor-fold>-->
+
+        <locale name="window.brick.select.title">
+            <de><![CDATA[Bausteinauswahl]]></de>
+            <en><![CDATA[Brick selection]]></en>
+        </locale>
     </groups>
 
     <groups name="quiqqer/bricks" datatype="js,php">
@@ -1462,7 +1467,8 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Bricks: Text with image in boxes]]></en>
         </locale>
         <locale name="bricks.BoxContentAdvanced.description">
-            <de><![CDATA[Inhalte werden in Boxen nebeneinander gestellt und besitzen verschieden Templates und Einstellungsmöglichkeiten.]]></de>
+            <de>
+                <![CDATA[Inhalte werden in Boxen nebeneinander gestellt und besitzen verschieden Templates und Einstellungsmöglichkeiten.]]></de>
             <en><![CDATA[Show the contents in boxes next to each other. The brick has different templates..]]></en>
         </locale>
         <locale name="bricks.BoxContentAdvanced.template">

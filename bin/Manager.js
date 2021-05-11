@@ -238,17 +238,17 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             this.$Grid = new Grid(Container, {
                 columnModel      : [{
-                    header   : QUILocale.get('quiqqer/system', 'id'),
+                    header   : QUILocale.get('quiqqer/quiqqer', 'id'),
                     dataIndex: 'id',
                     dataType : 'integer',
                     width    : 40
                 }, {
-                    header   : QUILocale.get('quiqqer/system', 'title'),
+                    header   : QUILocale.get('quiqqer/quiqqer', 'title'),
                     dataIndex: 'title',
                     dataType : 'string',
                     width    : 140
                 }, {
-                    header   : QUILocale.get('quiqqer/system', 'description'),
+                    header   : QUILocale.get('quiqqer/quiqqer', 'description'),
                     dataIndex: 'description',
                     dataType : 'string',
                     width    : 300
