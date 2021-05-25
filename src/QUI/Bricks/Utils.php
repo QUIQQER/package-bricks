@@ -26,7 +26,7 @@ class Utils
      *
      * @return array
      */
-    public static function getBricksFromXML($file)
+    public static function getBricksFromXML(string $file): array
     {
         if (!\file_exists($file)) {
             return [];
@@ -62,7 +62,7 @@ class Utils
      *
      * @return array
      */
-    public static function getTemplateAreasFromXML($file, $layoutType = false)
+    public static function getTemplateAreasFromXML(string $file, $layoutType = false): array
     {
         if (!\file_exists($file)) {
             return [];
@@ -119,7 +119,7 @@ class Utils
      *
      * @return array
      */
-    public static function parseAreaToArray(\DOMElement $Brick, \DOMXPath $Path)
+    public static function parseAreaToArray(\DOMElement $Brick, \DOMXPath $Path): array
     {
         $control = $Brick->getAttribute('control');
         $name    = $Brick->getAttribute('name');
@@ -176,8 +176,10 @@ class Utils
      *
      * @return bool
      */
-    public static function hasInheritance(Project $Project, $areaName)
-    {
+    public static function hasInheritance(
+        Project $Project,
+        string $areaName
+    ): bool {
         $template = $Project->getAttribute('template');
 
         // getAreasByProject
@@ -204,7 +206,7 @@ class Utils
      *
      * @return array
      */
-    public static function getBricksXMLFiles()
+    public static function getBricksXMLFiles(): array
     {
         $cache = 'quiqqer/bricks/availableBrickFiles';
 
@@ -228,7 +230,13 @@ class Utils
         }
 
         // project bricks
-        $projects = $Projects->getProjects();
+        try {
+            $projects = $Projects->getProjects();
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::addError($Exception->getMessage());
+
+            return [];
+        }
 
         foreach ($projects as $project) {
             $bricksXML = USR_DIR.$project.'/bricks.xml';
@@ -250,7 +258,7 @@ class Utils
      * @param Brick $Brick
      * @return array
      */
-    public static function getAttributesForBrick(Brick $Brick)
+    public static function getAttributesForBrick(Brick $Brick): array
     {
         $attributes = [];
         $files      = Panel::getInstance()->getXMLFilesForBricks($Brick);

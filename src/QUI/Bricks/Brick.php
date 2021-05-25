@@ -120,6 +120,10 @@ class Brick extends QUI\QDOM
         }
 
         // default settings from control
+        if (isset($params['Site'])) {
+            $this->setAttribute('Site', $params['Site']);
+        }
+
         $Control = $this->getControl();
         $Manager = Manager::init();
 
@@ -428,6 +432,17 @@ class Brick extends QUI\QDOM
 
         if (!\is_callable($Ctrl) && !\class_exists($Ctrl)) {
             return false;
+        }
+
+        $Site = $this->getAttribute('Site');
+
+        if ($Site instanceof QUI\Projects\Site) {
+            $Project = $Site->getProject();
+
+            $Ctrl = QUI\Bricks\Manager::init()->getAlternateClass(
+                $Ctrl,
+                $Project->getAttribute('template')
+            );
         }
 
         /* @var $Control \QUI\Control */
