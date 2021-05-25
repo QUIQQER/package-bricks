@@ -383,13 +383,15 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * @return {HTMLElement|Boolean} Brick-Node
          */
         addBrickById: function (brickId) {
+            brickId = parseInt(brickId);
+
             if (!this.$loaded) {
                 this.$brickIds.push(brickId);
                 return false;
             }
 
             var found = this.$availableBricks.filter(function (Item) {
-                return Item.id === brickId;
+                return parseInt(Item.id) === brickId;
             });
 
             if (!found.length) {
