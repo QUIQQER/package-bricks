@@ -459,7 +459,7 @@ class Manager
      * @return Brick
      * @throws QUI\Exception
      */
-    public function getBrickById($id): Brick
+    public function getBrickById(int $id): Brick
     {
         if (isset($this->bricks[$id])) {
             return $this->bricks[$id];
@@ -489,11 +489,12 @@ class Manager
      * Get a Brick by its unique ID
      *
      * @param string $uid - unique id
+     * @param Site|null $Site - unique id
      *
      * @return Brick
      * @throws QUI\Exception
      */
-    public function getBrickByUID($uid)
+    public function getBrickByUID(string $uid, $Site = null): Brick
     {
         if (isset($this->brickUIDs[$uid])) {
             return $this->brickUIDs[$uid];
@@ -525,6 +526,8 @@ class Manager
             ],
             'limit' => 1
         ]);
+
+        $real[0]['Site'] = $Site;
 
         $Original = new Brick($real[0]);
         $Original->setAttribute('id', $brickId);
@@ -706,8 +709,10 @@ class Manager
      *
      * @return array
      */
-    public function getBricksByArea($brickArea, QUI\Interfaces\Projects\Site $Site): array
-    {
+    public function getBricksByArea(
+        string $brickArea,
+        QUI\Interfaces\Projects\Site $Site
+    ): array {
         if (empty($brickArea)) {
             return [];
         }
@@ -746,7 +751,7 @@ class Manager
 
             try {
                 if (!empty($brickData['uid'])) {
-                    $Brick    = $this->getBrickByUID($brickData['uid']);
+                    $Brick    = $this->getBrickByUID($brickData['uid'], $Site);
                     $result[] = $Brick->check();
                     continue;
                 }
@@ -1123,8 +1128,10 @@ class Manager
      *
      * @return array
      */
-    protected function getInheritedBricks($brickArea, QUI\Interfaces\Projects\Site $Site): array
-    {
+    protected function getInheritedBricks(
+        string $brickArea,
+        QUI\Interfaces\Projects\Site $Site
+    ): array {
         // inheritance ( vererbung )
         $Project = $Site->getProject();
         $areas   = $this->getAreasByProject($Project);
@@ -1231,5 +1238,68 @@ class Manager
         }
 
         return $result;
+    }
+
+    /**
+     * @param $control
+     * @param bool|string $template - optional, name of the current template
+     * @return string
+     */
+    public function getAlternateClass($control, $template = false): string
+    {
+        $control = trim($control, '\\ ');
+
+        try {
+            $alternates = QUI\Cache\Manager::get('quiqqer/bricks/alternates');
+        } catch (QUI\Exception $Exception) {
+            $alternates = [];
+
+            $PKM      = QUI::getPackageManager();
+            $packages = $PKM->getInstalled();
+
+            // package bricks
+            foreach ($packages as $package) {
+                $packageName = $package['name'];
+                $bricksXML   = OPT_DIR.$packageName.'/bricks.xml';
+
+                if (!file_exists($bricksXML)) {
+                    continue;
+                }
+
+                $Dom  = XML::getDomFromXml($bricksXML);
+                $Path = new \DOMXPath($Dom);
+
+                $list = $Path->query('//quiqqer/bricks/overwrite/brick');
+
+                foreach ($list as $Overwrite) {
+                    $src = $Overwrite->getAttribute('parent');
+                    $alt = $Overwrite->getAttribute('alternate');
+
+                    $alternates[] = [
+                        'package'   => $packageName,
+                        'parent'    => trim($src, '\\ '),
+                        'alternate' => trim($alt, '\\ ')
+                    ];
+                }
+            }
+        }
+
+        $result = \array_filter($alternates, function ($entry) use ($control, $template) {
+            if ($control !== $entry['parent']) {
+                return false;
+            }
+
+            if (!$template) {
+                return true;
+            }
+
+            return $template === $entry['package'];
+        });
+
+        if (\count($result)) {
+            return $result[0]['alternate'];
+        }
+
+        return $control;
     }
 }

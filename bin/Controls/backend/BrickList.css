@@ -1,0 +1,4 @@
+.quiqqer-bricks-brickList {
+    display: flex;
+    flex-direction: column;
+}
