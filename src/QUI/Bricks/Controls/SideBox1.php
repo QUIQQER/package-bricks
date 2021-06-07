@@ -22,8 +22,10 @@ class SideBox1 extends QUI\Control
      */
     public function __construct($attributes = array())
     {
+        parent::__construct($attributes);
+
         // default options
-        $this->setAttributes(array(
+        $this->setAttributes([
             'showImage'       => true,
             'showTitle'       => true,
             'showDescription' => true,
@@ -31,10 +33,9 @@ class SideBox1 extends QUI\Control
             'class'           => 'quiqqer-bricks-sidebox1',
             'nodeName'        => 'article',
             'site'            => false,
-            'order'           => 'release_from DESC'
-        ));
-
-        parent::__construct($attributes);
+            'order'           => 'release_from DESC',
+            'cacheable'       => 0
+        ]);
     }
 
     /**
@@ -67,14 +68,12 @@ class SideBox1 extends QUI\Control
         if (is_numeric($site)) {
             try {
                 return $Project->get((int)$site);
-
             } catch (QUI\Exception $Exception) {
                 QUI\System\Log::addWarning($Exception->getMessage());
 
                 return $Project->firstChild();
             }
         }
-
 
         // order
         switch ($this->getAttribute('order')) {
