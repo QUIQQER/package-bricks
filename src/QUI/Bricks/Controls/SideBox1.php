@@ -68,14 +68,12 @@ class SideBox1 extends QUI\Control
         if (is_numeric($site)) {
             try {
                 return $Project->get((int)$site);
-
             } catch (QUI\Exception $Exception) {
                 QUI\System\Log::addWarning($Exception->getMessage());
 
                 return $Project->firstChild();
             }
         }
-
 
         // order
         switch ($this->getAttribute('order')) {
