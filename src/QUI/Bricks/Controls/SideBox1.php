@@ -22,8 +22,10 @@ class SideBox1 extends QUI\Control
      */
     public function __construct($attributes = array())
     {
+        parent::__construct($attributes);
+
         // default options
-        $this->setAttributes(array(
+        $this->setAttributes([
             'showImage'       => true,
             'showTitle'       => true,
             'showDescription' => true,
@@ -31,10 +33,9 @@ class SideBox1 extends QUI\Control
             'class'           => 'quiqqer-bricks-sidebox1',
             'nodeName'        => 'article',
             'site'            => false,
-            'order'           => 'release_from DESC'
-        ));
-
-        parent::__construct($attributes);
+            'order'           => 'release_from DESC',
+            'cacheable'       => 0
+        ]);
     }
 
     /**

@@ -20,6 +20,8 @@ class Infinite extends QUI\Control
      */
     public function __construct($attributes = array())
     {
+        parent::__construct($attributes);
+
         $childrenPerRow = $this->getAttribute('childrenPerRow');
         $rows           = $this->getAttribute('rows');
 
@@ -35,14 +37,13 @@ class Infinite extends QUI\Control
             'rows'           => $rows,
             'site'           => '',
             'order'          => false,
-            'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Children/Infinite'
+            'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Children/Infinite',
+            'cacheable'      => 0
         ));
 
         $this->addCSSFile(
             dirname(__FILE__) . '/Infinite.css'
         );
-
-        parent::__construct($attributes);
     }
 
     /**

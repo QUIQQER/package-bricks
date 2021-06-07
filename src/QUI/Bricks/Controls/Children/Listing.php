@@ -22,6 +22,8 @@ class Listing extends QUI\Control
      */
     public function __construct($attributes = [])
     {
+        parent::__construct($attributes);
+
         // default options
         $this->setAttributes([
             'class'          => 'qui-control-brick',
@@ -42,8 +44,6 @@ class Listing extends QUI\Control
             'order'          => 'c_date DESC',
             'cacheable'      => 0
         ]);
-
-        parent::__construct($attributes);
     }
 
     /**

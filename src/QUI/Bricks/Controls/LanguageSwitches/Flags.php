@@ -24,6 +24,8 @@ class Flags extends QUI\Control
      */
     public function __construct($attributes = array())
     {
+        parent::__construct($attributes);
+
         // defaults values
         $this->setAttributes(array(
             'Site' => false,
@@ -33,8 +35,6 @@ class Flags extends QUI\Control
             'data-qui' => 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags',
             'flagFolderPath' => URL_BIN_DIR . '16x16/flags/'
         ));
-
-        parent::__construct($attributes);
 
         $this->addCSSFile(
             dirname(__FILE__) . '/Flags.css'

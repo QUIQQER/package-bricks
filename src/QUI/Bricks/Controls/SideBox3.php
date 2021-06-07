@@ -22,6 +22,8 @@ class SideBox3 extends QUI\Control
      */
     public function __construct($attributes = [])
     {
+        parent::__construct($attributes);
+
         // default options
         $this->setAttributes([
             'showImage'       => true,
@@ -32,12 +34,11 @@ class SideBox3 extends QUI\Control
             'nodeName'        => 'section',
             'site'            => false,
             'limit'           => 3,
-            'order'           => 'release_from DESC'
+            'order'           => 'release_from DESC',
+            'cacheable'       => 0
         ]);
 
         $this->addCSSFile(dirname(__FILE__).'/SideBox3.css');
-
-        parent::__construct($attributes);
     }
 
     /**

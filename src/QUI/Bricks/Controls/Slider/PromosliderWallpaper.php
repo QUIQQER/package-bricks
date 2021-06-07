@@ -23,6 +23,8 @@ class PromosliderWallpaper extends AbstractPromoslider
      */
     public function __construct($attributes = [])
     {
+        parent::__construct($attributes);
+
         // default options
         $this->setAttributes([
             'title'                 => '',
@@ -45,8 +47,6 @@ class PromosliderWallpaper extends AbstractPromoslider
 
         $this->addCSSClass('grid-100');
         $this->addCSSClass('mobile-grid-100');
-
-        parent::__construct($attributes);
     }
 
     /**

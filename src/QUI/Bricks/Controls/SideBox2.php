@@ -22,6 +22,8 @@ class SideBox2 extends QUI\Control
      */
     public function __construct($attributes = [])
     {
+        parent::__construct($attributes);
+
         // default options
         $this->setAttributes([
             'showImage'          => true,
@@ -34,10 +36,9 @@ class SideBox2 extends QUI\Control
             'limit'              => 2,
             'order'              => 'release_from DESC',
             'grid-class-row'     => 'row',
-            'grid-class-article' => '6u'
+            'grid-class-article' => '6u',
+            'cacheable'          => 0
         ]);
-
-        parent::__construct($attributes);
     }
 
     /**
