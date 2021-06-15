@@ -22,8 +22,6 @@ class Listing extends QUI\Control
      */
     public function __construct($attributes = [])
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes([
             'class'          => 'qui-control-brick',
@@ -41,9 +39,12 @@ class Listing extends QUI\Control
             'child-itemtype' => 'https://schema.org/ListItem',
             'child-itemprop' => 'itemListElement',
             'display'        => 'childrenlist',
-            'order'          => 'c_date DESC',
-            'cacheable'      => 0
+            'order'          => 'c_date DESC'
         ]);
+
+        parent::__construct($attributes);
+
+        $this->setAttribute('cacheable', 0);
     }
 
     /**

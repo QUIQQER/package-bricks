@@ -23,8 +23,6 @@ class Promoslider extends AbstractPromoslider
      */
     public function __construct($attributes = [])
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes([
             'title'                      => '',
@@ -42,6 +40,8 @@ class Promoslider extends AbstractPromoslider
             'isMobileSlidesEnabled'      => false,
             'imageSize'                  => false // false = use original size, do not create srcset
         ]);
+
+        parent::__construct($attributes);
 
         $this->addCSSFile(
             \dirname(__FILE__).'/Promoslider.css'

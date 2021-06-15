@@ -21,8 +21,6 @@ class Slider extends QUI\Control
      */
     public function __construct($attributes = [])
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes([
             'class'                      => 'quiqqer-bricks-children-slider',
@@ -33,9 +31,12 @@ class Slider extends QUI\Control
             'moreLink'                   => false,
             'data-qui'                   => 'package/quiqqer/bricks/bin/Controls/Children/Slider',
             'template'                   => false, // default -> onlyImage
-            'data-qui-options-usemobile' => false,
-            'cacheable'                  => 0
+            'data-qui-options-usemobile' => false
         ]);
+
+        parent::__construct($attributes);
+
+        $this->setAttribute('cacheable', 0);
 
         $this->addCSSFiles([
             dirname(__FILE__).'/Slider.OnlyImage.css',

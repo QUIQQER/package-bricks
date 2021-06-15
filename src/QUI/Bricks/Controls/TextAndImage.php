@@ -22,8 +22,6 @@ class TextAndImage extends QUI\Control
      */
     public function __construct($attributes = [])
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes([
             'image'           => false,
@@ -33,6 +31,8 @@ class TextAndImage extends QUI\Control
             'textPosition'    => 'top', // top, center, bottom
             'textImageRatio' => 50 // 30,35,40,45,50,55,60,65,70
         ]);
+
+        parent::__construct($attributes);
 
         $this->addCSSFile(
             dirname(__FILE__).'/TextAndImage.css'
