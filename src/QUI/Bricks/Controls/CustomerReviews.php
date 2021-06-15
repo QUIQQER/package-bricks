@@ -22,8 +22,6 @@ class CustomerReviews extends QUI\Control
      */
     public function __construct($attributes = [])
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes([
             'template'   => 'wideBoxes',
@@ -31,6 +29,8 @@ class CustomerReviews extends QUI\Control
             'entries'    => [],
             'random'     => 'off'
         ]);
+
+        parent::__construct($attributes);
     }
 
     /**

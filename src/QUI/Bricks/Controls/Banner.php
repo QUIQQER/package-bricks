@@ -22,8 +22,6 @@ class Banner extends QUI\Control
      */
     public function __construct($attributes = array())
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes(array(
             'title'    => '',
@@ -31,6 +29,8 @@ class Banner extends QUI\Control
             'class'    => 'quiqqer-bricks-banner',
             'nodeName' => 'section'
         ));
+
+        parent::__construct($attributes);
 
         $this->addCSSFile(
             dirname(__FILE__).'/Banner.css'

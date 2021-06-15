@@ -22,14 +22,14 @@ class SimpleGoogleMaps extends QUI\Control
      */
     public function __construct($attributes = [])
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes([
             'title'          => '',
             'preventLoadMap' => false,
             'template'       => 'standard'
         ]);
+
+        parent::__construct($attributes);
     }
 
     /**

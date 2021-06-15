@@ -22,8 +22,6 @@ class SideBox4 extends QUI\Control
      */
     public function __construct($attributes = [])
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes([
             'showImage'       => true,
@@ -36,6 +34,9 @@ class SideBox4 extends QUI\Control
             'cacheable'       => 0
         ]);
 
+        parent::__construct($attributes);
+
+        $this->setAttribute('cacheable', 0);
         $this->addCSSFile(dirname(__FILE__).'/SideBox4.css');
     }
 

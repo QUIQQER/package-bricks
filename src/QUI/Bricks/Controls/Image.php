@@ -22,13 +22,13 @@ class Image extends QUI\Control
      */
     public function __construct($attributes = array())
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes(array(
             'title'       => 'Image Brick',
             'contentList' => false
         ));
+
+        parent::__construct($attributes);
 
         $this->addCSSFile(
             dirname(__FILE__) . '/Image.css'

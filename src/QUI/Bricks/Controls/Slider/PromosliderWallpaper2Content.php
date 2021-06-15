@@ -23,8 +23,6 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      */
     public function __construct($attributes = [])
     {
-        parent::__construct();
-
         $defaultAttributes = [
             'title'                 => '',
             'text'                  => '',
@@ -39,6 +37,8 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
             'template'              => \dirname(__FILE__).'/PromosliderWallpaper2Content.html',
             'isMobileSlidesEnabled' => false
         ];
+
+        parent::__construct();
 
         // merge default attributes with custom attributes (custom overwrites default values)
         $this->setAttributes(\array_merge($defaultAttributes, $attributes));

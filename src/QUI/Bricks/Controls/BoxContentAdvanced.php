@@ -22,8 +22,6 @@ class BoxContentAdvanced extends QUI\Control
      */
     public function __construct($attributes = [])
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes([
             'title'          => 'Box Content Advanced',
@@ -32,6 +30,8 @@ class BoxContentAdvanced extends QUI\Control
             'centerText'     => false,
             'entries'        => []
         ]);
+
+        parent::__construct($attributes);
 
         $this->addCSSFile(
             dirname(__FILE__) . '/BoxContentAdvanced.css'

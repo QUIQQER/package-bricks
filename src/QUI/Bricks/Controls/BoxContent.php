@@ -22,14 +22,14 @@ class BoxContent extends QUI\Control
      */
     public function __construct($attributes = array())
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes(array(
             'title'       => 'Box Content',
             'contentList' => false,
             'entries'     => array()
         ));
+
+        parent::__construct($attributes);
 
         $this->addCSSFile(
             dirname(__FILE__) . '/BoxContent.css'

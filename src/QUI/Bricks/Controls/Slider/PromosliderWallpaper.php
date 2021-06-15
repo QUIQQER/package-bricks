@@ -23,8 +23,6 @@ class PromosliderWallpaper extends AbstractPromoslider
      */
     public function __construct($attributes = [])
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes([
             'title'                 => '',
@@ -40,6 +38,8 @@ class PromosliderWallpaper extends AbstractPromoslider
             'template'              => \dirname(__FILE__).'/PromosliderWallpaper.html',
             'isMobileSlidesEnabled' => false
         ]);
+
+        parent::__construct($attributes);
 
         $this->addCSSFile(
             \dirname(__FILE__).'/PromosliderWallpaper.css'

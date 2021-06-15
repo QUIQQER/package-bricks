@@ -22,13 +22,13 @@ class SocialBox extends QUI\Control
      */
     public function __construct($attributes = [])
     {
-        parent::__construct($attributes);
-
         // default options
         $this->setAttributes([
             'title'      => 'Social',
             'socialList' => false
         ]);
+
+        parent::__construct($attributes);
 
         $this->addCSSFile(
             dirname(__FILE__).'/SocialBox.css'

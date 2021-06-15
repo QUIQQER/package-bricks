@@ -25,8 +25,6 @@ class SimpleContact extends QUI\Control
      */
     public function __construct($attributes = [])
     {
-        parent::__construct($attributes);
-
         $this->setAttributes([
             'class'                     => 'quiqqer-simple-contact',
             'qui-class'                 => 'package/quiqqer/bricks/bin/Controls/SimpleContact',
@@ -37,6 +35,7 @@ class SimpleContact extends QUI\Control
             'useCaptcha'                => false
         ]);
 
+        parent::__construct($attributes);
 
         $this->setAttribute('cacheable', 0);
 
