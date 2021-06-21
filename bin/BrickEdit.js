@@ -18,6 +18,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
     'Ajax',
     'Locale',
     'Projects',
+    'Mustache',
     'qui/utils/Form',
     'utils/Controls',
     'utils/Template',
@@ -26,7 +27,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
     'css!package/quiqqer/bricks/bin/BrickEdit.css'
 
 ], function (QUI, QUIPanel, QUIConfirm, BrickAreas, QUIAjax, QUILocale,
-             Projects, QUIFormUtils, ControlUtils, Template, Bricks
+             Projects, Mustache, QUIFormUtils, ControlUtils, Template, Bricks
 ) {
     "use strict";
 
@@ -89,6 +90,46 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 }.bind(this),
                 onCategoryEnter: this.$onCategoryEnter,
                 onCategoryLeave: this.$onCategoryLeave
+            });
+        },
+
+        /**
+         * Tooltip for bricks
+         *
+         * @return {Promise}
+         */
+        getToolTipText: function () {
+            return new Promise((resolve) => {
+                const project = this.getAttribute('projectName'),
+                      lang    = this.getAttribute('projectLang');
+
+                var tpl = '<table>' +
+                    '<tr>' +
+                    '   <td>{{localeProject}}</td>' +
+                    '   <td>{{project}}</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '   <td>{{localeLang}}</td>' +
+                    '   <td><img src="' + window.URL_OPT_DIR + 'quiqqer/quiqqer/bin/16x16/flags/{{lang}}.png" alt="" /> {{lang}}</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '   <td>{{localeID}}</td>' +
+                    '   <td>{{id}}</td>' +
+                    '</tr>' +
+                    '</table>';
+
+                var result = Mustache.render(tpl, {
+                    localeProject: QUILocale.get('quiqqer/quiqqer', 'project'),
+                    localeLang   : QUILocale.get('quiqqer/quiqqer', 'language'),
+                    localeID     : QUILocale.get('quiqqer/bricks', 'brickId'),
+
+                    project: project,
+                    lang   : lang,
+                    id     : this.getAttribute('id')
+                });
+
+
+                resolve(result);
             });
         },
 
