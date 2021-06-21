@@ -41,14 +41,14 @@ class Promoslider extends AbstractPromoslider
             'imageSize'                  => false // false = use original size, do not create srcset
         ]);
 
+        parent::__construct($attributes);
+
         $this->addCSSFile(
             \dirname(__FILE__).'/Promoslider.css'
         );
 
         $this->addCSSClass('grid-100');
         $this->addCSSClass('mobile-grid-100');
-
-        parent::__construct($attributes);
     }
 
     /**

@@ -39,14 +39,14 @@ class PromosliderWallpaper extends AbstractPromoslider
             'isMobileSlidesEnabled' => false
         ]);
 
+        parent::__construct($attributes);
+
         $this->addCSSFile(
             \dirname(__FILE__).'/PromosliderWallpaper.css'
         );
 
         $this->addCSSClass('grid-100');
         $this->addCSSClass('mobile-grid-100');
-
-        parent::__construct($attributes);
     }
 
     /**

@@ -38,11 +38,13 @@ class Infinite extends QUI\Control
             'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Children/Infinite'
         ));
 
+        parent::__construct($attributes);
+
+        $this->setAttribute('cacheable', 0);
+
         $this->addCSSFile(
             dirname(__FILE__) . '/Infinite.css'
         );
-
-        parent::__construct($attributes);
     }
 
     /**

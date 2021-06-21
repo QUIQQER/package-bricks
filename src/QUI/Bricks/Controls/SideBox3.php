@@ -35,9 +35,10 @@ class SideBox3 extends QUI\Control
             'order'           => 'release_from DESC'
         ]);
 
-        $this->addCSSFile(dirname(__FILE__).'/SideBox3.css');
-
         parent::__construct($attributes);
+
+        $this->setAttribute('cacheable', 0);
+        $this->addCSSFile(dirname(__FILE__).'/SideBox3.css');
     }
 
     /**

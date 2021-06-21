@@ -23,7 +23,7 @@ class SideBox1 extends QUI\Control
     public function __construct($attributes = array())
     {
         // default options
-        $this->setAttributes(array(
+        $this->setAttributes([
             'showImage'       => true,
             'showTitle'       => true,
             'showDescription' => true,
@@ -32,9 +32,11 @@ class SideBox1 extends QUI\Control
             'nodeName'        => 'article',
             'site'            => false,
             'order'           => 'release_from DESC'
-        ));
+        ]);
 
         parent::__construct($attributes);
+
+        $this->setAttribute('cacheable', 0);
     }
 
     /**
@@ -67,14 +69,12 @@ class SideBox1 extends QUI\Control
         if (is_numeric($site)) {
             try {
                 return $Project->get((int)$site);
-
             } catch (QUI\Exception $Exception) {
                 QUI\System\Log::addWarning($Exception->getMessage());
 
                 return $Project->firstChild();
             }
         }
-
 
         // order
         switch ($this->getAttribute('order')) {

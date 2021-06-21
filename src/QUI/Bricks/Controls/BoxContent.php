@@ -84,7 +84,6 @@ class BoxContent extends QUI\Control
             case 10:
                 $extraClass = ' box-content-entry-10';
                 break;
-
         }
 
         $Engine->assign(array(

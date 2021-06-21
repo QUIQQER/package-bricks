@@ -30,12 +30,14 @@ class SideBox4 extends QUI\Control
             'showContent'     => false,
             'site'            => false,
             'limit'           => 4,
-            'order'           => 'release_from DESC'
+            'order'           => 'release_from DESC',
+            'cacheable'       => 0
         ]);
 
-        $this->addCSSFile(dirname(__FILE__).'/SideBox4.css');
-
         parent::__construct($attributes);
+
+        $this->setAttribute('cacheable', 0);
+        $this->addCSSFile(dirname(__FILE__).'/SideBox4.css');
     }
 
     /**
