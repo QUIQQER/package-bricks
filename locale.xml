@@ -668,8 +668,12 @@
         </locale>
 
         <locale name="panel.title">
-            <de><![CDATA[Baustein: #[brickId] - [brickTitle]]]></de>
-            <en><![CDATA[Brick: #[brickId] - [brickTitle]]]></en>
+            <de><![CDATA[#[brickId] - [brickTitle] : Baustein]]></de>
+            <en><![CDATA[#[brickId] - [brickTitle] : Brick]]></en>
+        </locale>
+        <locale name="brickId">
+            <de><![CDATA[Baustein-ID]]></de>
+            <en><![CDATA[Brick ID]]></en>
         </locale>
 
         <locale name="window.brick.delete.title">
