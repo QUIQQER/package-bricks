@@ -31,6 +31,12 @@
     transform-style: preserve-3d;
     width: 100%;
     white-space: nowrap;
+
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    background-position: center center;
 }
 
 .quiqqer-bricks-promoslider-wallpaper li {
@@ -203,6 +209,12 @@
     .quiqqer-bricks-promoslider-wallpaper-text {
         width: 100%;
     }
+}
+
+/** Loader
+ ================================================ */
+.quiqqer-bricks-promoslider-wallpaper .qui-loader {
+    background: none;
 }
 
 /** Wallpaper classes
