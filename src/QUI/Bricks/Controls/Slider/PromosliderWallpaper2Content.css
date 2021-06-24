@@ -23,3 +23,9 @@
     top: 0;
     width: 100%;
 }
+
+/** Loader
+ ================================================ */
+.quiqqer-bricks-promoslider-wallpaper-container .qui-loader {
+    background: none;
+}

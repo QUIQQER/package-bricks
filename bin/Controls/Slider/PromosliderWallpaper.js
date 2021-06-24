@@ -602,12 +602,17 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper', [
                 var ending = image.substr(image.lastIndexOf('.'));
                 var split  = image.substr(0, image.lastIndexOf('.')).split('__')[0];
                 var width  = parseInt(this.getElm().getSize().x);
+                var height = parseInt(this.getElm().getSize().y);
 
                 if (split === '' || !width) {
                     return;
                 }
 
                 image = split + '__' + width + ending;
+
+                if (height > width) {
+                    image = split + '__x' + height + ending;
+                }
             }
 
             Background.setStyle('opacity', 0);
