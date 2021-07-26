@@ -1721,6 +1721,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Bild hat einen Schatten]]></de>
             <en><![CDATA[Image has a shadow]]></en>
         </locale>
+        <locale name="brick.textAndImage.fullImageHeight">
+            <de><![CDATA[Bild hochskallieren]]></de>
+            <en><![CDATA[Upscale image]]></en>
+        </locale>
+        <locale name="brick.textAndImage.fullImageHeight.desc">
+            <de><![CDATA[Wenn der Text größer ist als Bild, wird die Höhe des Bildes dem Text entsprechen.]]></de>
+            <en><![CDATA[If the text is larger than image, the height of the image will match the text.]]></en>
+        </locale>
         <locale name="brick.textAndImage.maxImageWidth">
             <de><![CDATA[Maximale Briete des Bildes]]></de>
             <en><![CDATA[Maximum image width]]></en>
