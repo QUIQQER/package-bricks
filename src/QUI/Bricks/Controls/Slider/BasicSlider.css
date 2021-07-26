@@ -1,0 +1,17 @@
+.basic-slider-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.basic-slider-wrapper li {
+    list-style: none;
+}
+
+.basic-slider-content,
+.basic-slider-image-wrapper {
+    width: 50%;
+}
+
+.basic-slider-content {
+    padding-right: 20px;
+}

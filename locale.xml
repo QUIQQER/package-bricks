@@ -411,6 +411,18 @@
             <de><![CDATA[Bausteine: Seiten-Präsentation (Carousel)]]></de>
             <en><![CDATA[Bricks: Site-Presentation (Carousel)]]></en>
         </locale>
+        <locale name="brick.control.basicSlider.title">
+            <de><![CDATA[Bausteine: Basic Slider]]></de>
+            <en><![CDATA[Bricks: Basic slider]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.mediaFolder">
+            <de><![CDATA[Images folder]]></de>
+            <en><![CDATA[Images folder]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.sliderContent">
+            <de><![CDATA[Slider content]]></de>
+            <en><![CDATA[Slider content]]></en>
+        </locale>
         <locale name="brick.control.promosliderWallpaper.title">
             <de><![CDATA[Bausteine: Promoslider Wallpaper]]></de>
             <en><![CDATA[Bricks: Promoslider Wallpaper]]></en>
