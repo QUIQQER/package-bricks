@@ -7,7 +7,12 @@
     {if $imageOnLeft}
     <div class="quiqqer-textImage-box quiqqer-textImage-image {$fullImageHeight} {$imgWidthClass} mobile-grid-100">
         {if $img}
-        {image src=$img width=$maxImageWidth class={$imageShadow}}
+            {assign var=inlineStyle value=''}
+            {if $maxImageWidth}
+                {assign var=inlineStyle value="max-width: {$maxImageWidth}px; width: 100%;"}
+            {/if}
+
+            {image src=$img width=$maxImageWidth style=$inlineStyle class={$imageShadow}}
         {/if}
     </div>
     <div class="quiqqer-textImage-box quiqqer-textImage-content {$textWidthClass} mobile-grid-100"
@@ -37,7 +42,12 @@
     </div>
     <div class="quiqqer-textImage-box quiqqer-textImage-image {$fullImageHeight} {$imgWidthClass} mobile-grid-100">
         {if $img}
-        {image src=$img width=$maxImageWidth class={$imageShadow}}
+            {assign var=inlineStyle value=''}
+            {if $maxImageWidth}
+                {assign var=inlineStyle value="max-width: {$maxImageWidth}px; width: 100%;"}
+            {/if}
+
+            {image src=$img width=$maxImageWidth style=$inlineStyle class={$imageShadow}}
         {/if}
     </div>
     {/if}
