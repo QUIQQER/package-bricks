@@ -15,12 +15,12 @@
     "email": "support@pcsg.de"
   },
   "require": {
-    "quiqqer\/quiqqer": "*@dev",
-    "quiqqer\/qui": ">=1|*@dev",
+    "quiqqer\/quiqqer": ">=1.6|dev-master|dev-dev",
+    "quiqqer\/qui": ">=1|dev-master|dev-dev",
     "quiqqer\/utils": ">=1.19.2|dev-master|dev-dev",
     "quiqqer\/mobile-detection": "1.*|dev-master|dev-dev",
-    "npm-asset\/hammerjs": "2.*",
-    "npm-asset\/mustache": "2.*",
+    "quiqqer-asset\/hammerjs": "2.*",
+    "quiqqer-asset\/mustache": "*",
     "ramsey\/uuid": "3.*"
   },
   "autoload": {

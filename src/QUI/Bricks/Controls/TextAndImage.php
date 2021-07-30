@@ -28,8 +28,9 @@ class TextAndImage extends QUI\Control
             'maxImageWidth'   => false,
             'imageRight'      => false,
             'imageShadow'     => false,
+            'fullImageHeight' => false,
             'textPosition'    => 'top', // top, center, bottom
-            'textImageRatio' => 50 // 30,35,40,45,50,55,60,65,70
+            'textImageRatio'  => 50 // 30,35,40,45,50,55,60,65,70
         ]);
 
         parent::__construct($attributes);
@@ -83,12 +84,23 @@ class TextAndImage extends QUI\Control
             $shadow = 'shadow-xl';
         }
 
+        $fullImageHeight = '';
+        if ($this->getAttribute('fullImageHeight')) {
+            $fullImageHeight = 'quiqqer-textImage-image__fullImageHeight';
+        }
+
+        $maxImageWidth = false;
+        if (intval($this->getAttribute('maxImageWidth')) > 0) {
+            $maxImageWidth = intval($this->getAttribute('maxImageWidth'));
+        }
+
         $Engine->assign([
             'this'              => $this,
             'img'               => $this->getAttribute('image'),
-            'maxImageWidth'     => intval($this->getAttribute('maxImageWidth')),
+            'maxImageWidth'     => $maxImageWidth,
             'imageOnLeft'       => $this->getAttribute('imageOnLeft'),
             'imageShadow'       => $shadow,
+            'fullImageHeight'   => $fullImageHeight,
             'imageAsBackground' => $this->getAttribute('imageAsBackground'),
             'textPosition'      => $textPosition,
             'textWidthClass'    => $textWidthClass,
