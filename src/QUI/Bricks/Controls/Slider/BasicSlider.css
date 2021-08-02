@@ -3,13 +3,26 @@
     flex-direction: row;
 }
 
-.basic-slider-wrapper li {
-    list-style: none;
-}
-
 .basic-slider-content,
 .basic-slider-image-wrapper {
     width: 50%;
+}
+
+.basic-slider-image-wrapper {
+    position: relative;
+}
+
+.basic-slider-image-wrapper li {
+    list-style: none;
+    position: absolute;
+    top: 0;
+    left: -50px;
+    opacity: 0;
+}
+
+.basic-slider-image-wrapper li:nth-child(1) {
+    opacity: 1;
+    left: 0;
 }
 
 .basic-slider-content {

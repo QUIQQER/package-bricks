@@ -9,7 +9,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
     'qui/QUI',
     'qui/controls/Control',
 
-], function (QUI, QUIControl, Hammer) {
+], function (QUI, QUIControl) {
     "use strict";
 
     return new Class({
@@ -33,7 +33,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
             this.parent(options);
 
             this.List = false;
-            this.ListLength = false;
 
             this.addEvents({
                 onImport: this.$onImport
@@ -46,23 +45,94 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          * event : on import
          */
         $onImport: function () {
-            var self = this,
-                Elm  = this.getElm();
+            var Elm  = this.getElm();
 
             this.List = Elm.getElement(".basic-slider-images");
-            this.ListLength = this.List.getElements('li').length;
+            this.Slide = this.List.getFirst('li');
 
-            this.$change(2);
+            this.$next();
         },
 
-        $change: function (slideNr) {
+        $next: function () {
+            var self = this;
+            var NextSlide = this.Slide.getNext();
+            var Image = false;
 
-            console.log();
+            if(!NextSlide) {
+                NextSlide = this.List.getFirst('li');
+            }
 
-            var Slide = this.List.getElement('li:nth-child(' + slideNr + ')');
+            if(!NextSlide.getElement('img')) {
+                var url = NextSlide.get('data-image');
 
-            var image = Slide.get('data-image');
+                Image = self.$createImage(url);
+            }
 
+            (function () {
+                if (!Image) {
+                    self.$change(NextSlide).then(function () {
+                        self.$next();
+                    });
+                    return;
+                }
+
+                Image.then(function (resolve) {
+
+                    resolve.inject(NextSlide);
+                    self.$change(NextSlide).then(function () {
+                        self.$next();
+                    });
+                });
+            }).delay(this.getAttribute('delay'));
+        },
+
+        $change: function (NextSlide) {
+            var self = this;
+
+            return new Promise(function (resolve){
+                self.$hide(self.Slide).then(function () {
+                    self.$show(NextSlide);
+                    self.Slide = NextSlide;
+                    resolve();
+                });
+            });
+        },
+
+        $hide: function (PreviousSlide) {
+            return new Promise(function (resolve){
+                moofx(PreviousSlide).animate({
+                    'left': '-50',
+                    'opacity' : '0'
+                }, {
+                    duration: 250,
+                    callback: resolve
+                });
+            });
+        },
+
+        $show: function (Slide) {
+            return new Promise(function (resolve) {
+                moofx(Slide).animate({
+                    'left': '0',
+                    'opacity' : '1'
+                }, {
+                    duration: 500,
+                    callback: resolve
+                });
+            });
+        },
+
+        $createImage: function (url) {
+            return new Promise(function (resolve) {
+
+                var Img = new Element('img', {
+                    'src': url
+                });
+
+                Img.addEventListener('load', () => {
+                    resolve(Img);
+                });
+            });
         }
     });
 });

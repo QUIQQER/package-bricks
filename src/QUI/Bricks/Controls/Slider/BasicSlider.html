@@ -20,7 +20,7 @@
 
         <ul class="basic-slider-images">
         {foreach from=$images item=Image}
-            <li data-image="{image image=$Image onlysrc=1 host=1}">
+            <li data-image="{image image=$Image onlysrc=1 width=500}" class="test">
 
                 {if $Image==$images[0]}
                 {image image=$Image}
