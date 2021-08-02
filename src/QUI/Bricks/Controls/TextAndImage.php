@@ -88,10 +88,16 @@ class TextAndImage extends QUI\Control
         if ($this->getAttribute('fullImageHeight')) {
             $fullImageHeight = 'quiqqer-textImage-image__fullImageHeight';
         }
+
+        $maxImageWidth = false;
+        if (intval($this->getAttribute('maxImageWidth')) > 0) {
+            $maxImageWidth = intval($this->getAttribute('maxImageWidth'));
+        }
+
         $Engine->assign([
             'this'              => $this,
             'img'               => $this->getAttribute('image'),
-            'maxImageWidth'     => intval($this->getAttribute('maxImageWidth')),
+            'maxImageWidth'     => $maxImageWidth,
             'imageOnLeft'       => $this->getAttribute('imageOnLeft'),
             'imageShadow'       => $shadow,
             'fullImageHeight'   => $fullImageHeight,
