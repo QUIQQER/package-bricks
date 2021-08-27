@@ -35,7 +35,8 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
             'autostart'             => false,
             'delay'                 => 5000,
             'template'              => \dirname(__FILE__).'/PromosliderWallpaper2Content.html',
-            'isMobileSlidesEnabled' => false
+            'isMobileSlidesEnabled' => false,
+            'preloadFirstSlide'     => true // load first slide as background in low quality to improve UX
         ];
 
         parent::__construct();

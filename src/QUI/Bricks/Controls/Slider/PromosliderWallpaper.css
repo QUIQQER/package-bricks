@@ -36,7 +36,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     -webkit-background-size: cover;
-    background-position: center center;
 }
 
 .quiqqer-bricks-promoslider-wallpaper li {
@@ -220,42 +219,52 @@
 /** Wallpaper classes
  ================================================ */
 
-.quiqqer-bricks-promoslider-wallpaper__contain .quiqqer-bricks-promoslider-wallpaper-image {
+.quiqqer-bricks-promoslider-wallpaper__contain .quiqqer-bricks-promoslider-wallpaper-image,
+.quiqqer-bricks-promoslider-wallpaper__contain ul {
     background-size: contain;
 }
 
-.quiqqer-bricks-promoslider-wallpaper__top .quiqqer-bricks-promoslider-wallpaper-image {
+.quiqqer-bricks-promoslider-wallpaper__top .quiqqer-bricks-promoslider-wallpaper-image,
+.quiqqer-bricks-promoslider-wallpaper__top ul {
     background-position: top center;
 }
 
-.quiqqer-bricks-promoslider-wallpaper__top-left .quiqqer-bricks-promoslider-wallpaper-image {
+.quiqqer-bricks-promoslider-wallpaper__top-left .quiqqer-bricks-promoslider-wallpaper-image,
+.quiqqer-bricks-promoslider-wallpaper__top-left ul {
     background-position: top left;
 }
 
-.quiqqer-bricks-promoslider-wallpaper__top-right .quiqqer-bricks-promoslider-wallpaper-image {
+.quiqqer-bricks-promoslider-wallpaper__top-right .quiqqer-bricks-promoslider-wallpaper-image,
+.quiqqer-bricks-promoslider-wallpaper__top-right ul {
     background-position: top right;
 }
 
-.quiqqer-bricks-promoslider-wallpaper__left .quiqqer-bricks-promoslider-wallpaper-image {
+.quiqqer-bricks-promoslider-wallpaper__left .quiqqer-bricks-promoslider-wallpaper-image,
+.quiqqer-bricks-promoslider-wallpaper__left ul {
     background-position: left center;
 }
 
-.quiqqer-bricks-promoslider-wallpaper__right .quiqqer-bricks-promoslider-wallpaper-image {
+.quiqqer-bricks-promoslider-wallpaper__right .quiqqer-bricks-promoslider-wallpaper-image,
+.quiqqer-bricks-promoslider-wallpaper__right ul {
     background-position: right center;
 }
 
-.quiqqer-bricks-promoslider-wallpaper__center .quiqqer-bricks-promoslider-wallpaper-image {
+.quiqqer-bricks-promoslider-wallpaper__center .quiqqer-bricks-promoslider-wallpaper-image,
+.quiqqer-bricks-promoslider-wallpaper__center ul {
     background-position: center center;
 }
 
-.quiqqer-bricks-promoslider-wallpaper__bottom .quiqqer-bricks-promoslider-wallpaper-image {
+.quiqqer-bricks-promoslider-wallpaper__bottom .quiqqer-bricks-promoslider-wallpaper-image,
+.quiqqer-bricks-promoslider-wallpaper__bottom ul {
     background-position: bottom center;
 }
 
-.quiqqer-bricks-promoslider-wallpaper__bottom-left .quiqqer-bricks-promoslider-wallpaper-image {
+.quiqqer-bricks-promoslider-wallpaper__bottom-left .quiqqer-bricks-promoslider-wallpaper-image,
+.quiqqer-bricks-promoslider-wallpaper__bottom-left ul {
     background-position: bottom right;
 }
 
-.quiqqer-bricks-promoslider-wallpaper__bottom-right .quiqqer-bricks-promoslider-wallpaper-image {
+.quiqqer-bricks-promoslider-wallpaper__bottom-right .quiqqer-bricks-promoslider-wallpaper-image,
+.quiqqer-bricks-promoslider-wallpaper__bottom-right ul {
     background-position: bottom right;
 }
