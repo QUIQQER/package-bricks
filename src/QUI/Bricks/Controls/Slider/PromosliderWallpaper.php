@@ -37,7 +37,7 @@ class PromosliderWallpaper extends AbstractPromoslider
             'delay'                 => 5000,
             'template'              => \dirname(__FILE__).'/PromosliderWallpaper.html',
             'isMobileSlidesEnabled' => false,
-            'preloadFirstSlide'     => true // load first slide as background in low quality to improve UX
+            'preloadFirstImage'     => false // load first slide as background in low quality to improve UX
         ]);
 
         parent::__construct($attributes);
@@ -243,7 +243,7 @@ class PromosliderWallpaper extends AbstractPromoslider
         $Engine->assign([
             'isMobile'          => QUI\MobileDetection::isMobile(),
             'isDesktop'         => QUI\MobileDetection::isDesktop(),
-            'preloadFirstSlide' => $this->getAttribute('preloadFirstSlide')
+            'preloadFirstImage' => $this->getAttribute('preloadFirstImage')
         ]);
 
         return $Engine->fetch($this->getAttribute('template'));

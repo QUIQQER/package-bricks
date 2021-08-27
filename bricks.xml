@@ -307,6 +307,12 @@
                 <setting name="shownavigation" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.shownavigation"/>
                 </setting>
+                <setting name="preloadFirstImage" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.promosliderWallpaper.settings.preloadFirstImage"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.promosliderWallpaper.settings.preloadFirstImage.desc"/>
+                    </description>
+                </setting>
                 <setting type="select" name="showarrows">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.showarrows"/>
 
@@ -430,6 +436,12 @@
                 <!--<setting name="showarrows" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.showarrows"/>
                 </setting>-->
+                <setting name="preloadFirstImage" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.promosliderWallpaper.settings.preloadFirstImage"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.promosliderWallpaper.settings.preloadFirstImage.desc"/>
+                    </description>
+                </setting>
 
                 <setting type="select" name="showarrows">
                     <locale group="quiqqer/bricks" var="brick.control.promoslider.settings.showarrows"/>
