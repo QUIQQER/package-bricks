@@ -17,7 +17,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
         Extends: QUIControl,
         Type   : 'package/quiqqer/bricks/bin/Controls/Slider/BasicSlider',
 
-        // binds uzywasz, zeby w srodku moc uzyc $this -> ale tylko wtedy kiedy THIS sie zmienia (haha)
         Binds: [
             '$onImport',
             'prev',
@@ -26,19 +25,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
         ],
 
         options: {
-            delay: 5000 // jakies opcje, na razie puste
+            delay: 5000
         },
 
         initialize: function (options) {
             this.parent(options);
 
-            this.List = false;
+            this.List = null;
+            this.Slide = null;
+            this.NextSlide = null;
 
             this.addEvents({
                 onImport: this.$onImport
             });
-
-//            QUI.addEvent('resize', this.resize);
         },
 
         /**
@@ -50,70 +49,95 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
             this.List = Elm.getElement(".basic-slider-images");
             this.Slide = this.List.getFirst('li');
 
-            this.$next();
+            this.$start();
         },
 
-        $next: function () {
+        /**
+         * Start countdown to change slide
+         */
+        $start: function () {
+            this.NextSlide = this.$getNextSlide();
+            var Image = this.$prepareImg(this.NextSlide);
+
+            this.$next.delay(this.getAttribute('delay'), this, Image);
+        },
+
+        /**
+         *  Get next slide
+         *
+         * @param Image
+         */
+        $next: function (Image) {
             var self = this;
-            var NextSlide = this.Slide.getNext();
-            var Image = false;
 
-            if(!NextSlide) {
-                NextSlide = this.List.getFirst('li');
-            }
-
-            if(!NextSlide.getElement('img')) {
-                var url = NextSlide.get('data-image');
-
-                Image = self.$createImage(url);
-            }
-
-            (function () {
-                if (!Image) {
-                    self.$change(NextSlide).then(function () {
-                        self.$next();
+            Image.then(function (resolve) {
+                if(resolve === true) {
+                    self.$toggle().then(function () {
+                        self.$start();
                     });
                     return;
                 }
 
-                Image.then(function (resolve) {
-
-                    resolve.inject(NextSlide);
-                    self.$change(NextSlide).then(function () {
-                        self.$next();
-                    });
+                resolve.inject(self.NextSlide);
+                self.$toggle().then(function () {
+                    self.$start();
                 });
-            }).delay(this.getAttribute('delay'));
+            });
         },
 
-        $change: function (NextSlide) {
+        /**
+         *  Change slide
+         *
+         * @returns {*}
+         */
+        $toggle: function () {
             var self = this;
 
             return new Promise(function (resolve){
-                self.$hide(self.Slide).then(function () {
-                    self.$show(NextSlide);
-                    self.Slide = NextSlide;
+                self.$hide().then(function () {
+                    self.$show();
+                    self.Slide = self.NextSlide;
                     resolve();
                 });
             });
         },
 
-        $hide: function (PreviousSlide) {
+        /**
+         * Hide slide
+         *
+         * @returns {Promise}
+         */
+        $hide: function () {
+            var self = this;
+
             return new Promise(function (resolve){
-                moofx(PreviousSlide).animate({
-                    'left': '-50',
+                moofx(self.Slide).animate({
+                    'transform': 'translateX(-40px)',
                     'opacity' : '0'
                 }, {
                     duration: 250,
-                    callback: resolve
+                    callback: function () {
+                        self.Slide.setStyle('display', "none");
+                        resolve();
+                    }
                 });
             });
         },
 
-        $show: function (Slide) {
+        /**
+         * Show slide
+         *
+         * @returns {Promise}
+         */
+        $show: function () {
+            var self = this;
+
             return new Promise(function (resolve) {
-                moofx(Slide).animate({
-                    'left': '0',
+
+                self.NextSlide.setStyle('display', "block");
+
+                moofx(self.NextSlide).animate({
+                    'transform': 'translateX(0px)',
                     'opacity' : '1'
                 }, {
                     duration: 500,
@@ -122,7 +146,15 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
             });
         },
 
-        $createImage: function (url) {
+        /**
+         * Create img elemnt
+         *
+         * @param {HTML Node} Slide
+         * @returns {*}
+         */
+        $createImage: function (Slide) {
+            var url = Slide.get('data-image');
+
             return new Promise(function (resolve) {
 
                 var Img = new Element('img', {
@@ -132,6 +164,39 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
                 Img.addEventListener('load', () => {
                     resolve(Img);
                 });
+            });
+        },
+
+        /**
+         * Get next slide
+         *
+         * @returns {*}
+         */
+        $getNextSlide: function () {
+            if(!this.Slide.getNext()) {
+                return this.List.getFirst('li');
+            }
+
+            return this.Slide.getNext();
+        },
+
+        /**
+         *  Prepare image element
+         *  Check if the image has been previously loaded
+         *
+         * @param {HTML Node} Slide
+         * @returns {Promise}
+         */
+        $prepareImg: function (Slide) {
+            var self = this;
+
+            return new Promise(function (resolve) {
+                if(!Slide.getElement('img')) {
+                    resolve(self.$createImage(Slide));
+                    return;
+                }
+
+                resolve(true);
             });
         }
     });
