@@ -16,24 +16,23 @@ use QUI\Projects\Media\Utils;
  */
 class BasicSlider extends AbstractPromoslider
 {
-
     public function __construct($attributes = [])
     {
         // default options
         $this->setAttributes([
-            'title'                      => '',
-            'text'                       => '',
-            'mediaFolder'                => false,
-            'sliderContent'              => '',
-            'class'                      => 'quiqqer-bricks-basic-slider',
-            'nodeName'                   => 'section',
-            'data-qui'                   => 'package/quiqqer/bricks/bin/Controls/Slider/BasicSlider',
+            'title'         => '',
+            'text'          => '',
+            'mediaFolder'   => false,
+            'sliderContent' => '',
+            'class'         => 'quiqqer-bricks-basic-slider',
+            'nodeName'      => 'section',
+            'data-qui'      => 'package/quiqqer/bricks/bin/Controls/Slider/BasicSlider',
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            \dirname(__FILE__).'/BasicSlider.css'
+            \dirname(__FILE__) . '/BasicSlider.css'
         );
 
         $this->addCSSClass('grid-100');
@@ -45,21 +44,18 @@ class BasicSlider extends AbstractPromoslider
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
-        $mediaFolder = $this->getAttribute('mediaFolder');
-        $Folder = false;
-        $images = [];
+        $mediaFolder   = $this->getAttribute('mediaFolder');
+        $Folder        = false;
+        $images        = [];
         $sliderContent = $this->getAttribute('sliderContent');
 
-        if(!$mediaFolder) {
+        if (!$mediaFolder) {
             return '';
         }
 
-        if(!$sliderContent) {
+        if (!$sliderContent) {
             return '';
         }
-
-        QUI\System\Log::writeRecursive('------------');
-        QUI\System\Log::writeRecursive($this->getAttribute('sliderContent'));
 
         /* @var $Folder \QUI\Projects\Media\Folder */
         if (\strpos($mediaFolder, 'image.php') !== false) {
@@ -82,16 +78,11 @@ class BasicSlider extends AbstractPromoslider
             'this'          => $this,
             'Folder'        => $Folder,
             'images'        => $images,
-            'sliderContent'        => $sliderContent,
-//            'Utils'         => new Utils(),
-//            'imageSize'     => $this->getAttribute('imageSize')
+            'sliderContent' => $sliderContent
         ];
-
-
 
         $Engine->assign($options);
 
-
-        return $Engine->fetch(\dirname(__FILE__).'/BasicSlider.html');
+        return $Engine->fetch(\dirname(__FILE__) . '/BasicSlider.html');
     }
 }
