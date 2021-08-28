@@ -1,6 +1,6 @@
 <div class="quiqqer-bricks-promoslider-wallpaper-container">
     {strip}
-    <ul class="hide-on-mobile quiqqer-bricks-promoslider-mobileSlides" {if $desktopSlides && isset($desktopSlides.0) && $desktopSlides.0.image}style="background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5)), url({image image=$desktopSlides.0.image onlysrc=1 width=800});"{/if}>
+    <ul class="hide-on-mobile quiqqer-bricks-promoslider-mobileSlides" {if $preloadFirstImage && $desktopSlides && isset($desktopSlides.0) && $desktopSlides.0.image}style="background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5)), url({image image=$desktopSlides.0.image onlysrc=1 width=800});"{/if}>
         {foreach $desktopSlides as $key => $slide}
         <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}" data-newTab="{$slide.newTab}">
             {if $slide.url}<a href="{$slide.url}" {if $slide.newTab} target="_blank" {/if}>{/if}
@@ -33,7 +33,7 @@
     {/strip}
 
     {strip}
-    <ul class="hide-on-desktop quiqqer-bricks-promoslider-desktopSlides" {if $mobileSlides && isset($mobileSlides.0) && $mobileSlides.0.image}style="background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5)), url({image image=$desktopSlides.0.image onlysrc=1 width=800});"{/if}>
+    <ul class="hide-on-desktop quiqqer-bricks-promoslider-desktopSlides" {if $preloadFirstImage && $mobileSlides && isset($mobileSlides.0) && $mobileSlides.0.image}style="background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5)), url({image image=$desktopSlides.0.image onlysrc=1 width=800});"{/if}>
         {foreach $mobileSlides as $key => $slide}
         <li data-image="{image image=$slide.image onlysrc=1}" data-href="{$slide.url}" data-newTab="{$slide.newTab}">
             {if $slide.url}<a href="{$slide.url}" {if $slide.newTab} target="_blank" {/if}>{/if}

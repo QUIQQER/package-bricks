@@ -427,6 +427,14 @@
             <de><![CDATA[Bausteine: Promoslider Wallpaper]]></de>
             <en><![CDATA[Bricks: Promoslider Wallpaper]]></en>
         </locale>
+        <locale name="brick.control.promosliderWallpaper.settings.preloadFirstImage">
+            <de><![CDATA[Erstes Bild vorladen]]></de>
+            <en><![CDATA[Preload first image]]></en>
+        </locale>
+        <locale name="brick.control.promosliderWallpaper.settings.preloadFirstImage.desc">
+            <de><![CDATA[Das Bild vom ersten Slide in niedriger Qualität als Hintergrundbild preloaden.]]></de>
+            <en><![CDATA[Preload the image from the first slide in low quality as background image.]]></en>
+        </locale>
         <locale name="brick.control.promosliderWallpaper2Content.title">
             <de><![CDATA[Bausteine: Promoslider Wallpaper mit 2 Inhaltsbereichen]]></de>
             <en><![CDATA[Bricks: Promoslider Wallpaper with two content areas]]></en>
