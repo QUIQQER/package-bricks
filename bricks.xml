@@ -156,6 +156,27 @@
 
         </brick>
 
+        <brick control="\QUI\Bricks\Controls\Slider\BasicSlider">
+
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.basicSlider.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.basicSlider.description"/>
+            </description>
+
+            <settings>
+                <setting name="mediaFolder" type="text" class="media-folder">
+                    <locale group="quiqqer/bricks" var="brick.control.basicSlider.mediaFolder"/>
+                </setting>
+
+                <setting name="sliderContent" data-qui="controls/editors/Input" type="text">
+                    <locale group="quiqqer/bricks" var="brick.control.basicSlider.sliderContent"/>
+                </setting>
+            </settings>
+
+        </brick>
+
         <brick control="\QUI\Bricks\Controls\Slider\Promoslider">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.promoslider.title"/>
