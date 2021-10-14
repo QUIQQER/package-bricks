@@ -1421,5 +1421,112 @@
             </settings>
         </brick>
 
+        <brick control="\QUI\Bricks\Controls\TextAndImageMultiple">
+            <title>
+                <locale group="quiqqer/bricks"
+                        var="brick.textAndImageMultiple.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks"
+                        var="brick.textAndImageMultiple.description"/>
+            </description>
+
+            <settings>
+
+                <setting name="textPosition" type="select">
+                    <locale group="quiqqer/bricks"
+                            var="brick.textAndImageMultiple.textPosition"/>
+
+                    <option value="top">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImageMultiple.textPosition.top"/>
+                    </option>
+                    <option value="center">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImageMultiple.textPosition.center"/>
+                    </option>
+                    <option value="bottom">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImageMultiple.textPosition.bottom"/>
+                    </option>
+                </setting>
+
+                <setting name="imagePosition" type="select">
+                    <locale group="quiqqer/bricks"
+                            var="brick.textAndImageMultiple.imagePosition"/>
+
+                    <option value="imageLeft">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImageMultiple.imagePosition.imageLeft"/>
+                    </option>
+                    <option value="imageRight">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImageMultiple.imagePosition.imageRight"/>
+                    </option>
+                    <option value="imageLeftAlternately">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImageMultiple.imagePosition.imageLeftAlternately"/>
+                    </option>
+                    <option value="imageRightAlternately">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImageMultiple.imagePosition.imageRightAlternately"/>
+                    </option>
+                </setting>
+
+                <setting name="textRatio" type="select">
+                    <locale group="quiqqer/bricks"
+                            var="brick.textAndImage.textRatio"/>
+
+                    <option value="30">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.textRatio.30"/>
+                    </option>
+                    <option value="35">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.textRatio.35"/>
+                    </option>
+                    <option value="40">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.textRatio.40"/>
+                    </option>
+                    <option value="45">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.textRatio.45"/>
+                    </option>
+                    <option value="50" default="1">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.textRatio.50"/>
+                    </option>
+                    <option value="55">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.textRatio.55"/>
+                    </option>
+                    <option value="60">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.textRatio.60"/>
+                    </option>
+                    <option value="65">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.textRatio.65"/>
+                    </option>
+                    <option value="70">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.textRatio.70"/>
+                    </option>
+                </setting>
+                <setting name="maxImageWidth" type="number">
+                    <locale group="quiqqer/bricks"
+                            var="brick.textAndImage.maxImageWidth"/>
+                </setting>
+
+                <setting name="entries" type="hidden"
+                         data-qui="package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings"
+                >
+                    <locale group="quiqqer/bricks" var="brick.textAndImageMultiple.settings.entries"/>
+                </setting>
+
+            </settings>
+        </brick>
+
     </bricks>
 </quiqqer>
