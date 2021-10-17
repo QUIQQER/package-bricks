@@ -24,19 +24,19 @@ class TextAndImageMultiple extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'textPosition' => 'top',
+            'textPosition'  => 'top',
 //            'imagePosition' => 'left',
-            'textRatio' => false,
-            'maxImageWidth'   => false,
-            'title' => false,
-            'text' => false,
-            'image' => false,
+            'textRatio'     => false,
+            'maxImageWidth' => false,
+            'title'         => false,
+            'text'          => false,
+            'image'         => false,
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/TextAndImageMultiple.css'
+            dirname(__FILE__) . '/TextAndImageMultiple.css'
         );
     }
 
@@ -47,14 +47,14 @@ class TextAndImageMultiple extends QUI\Control
      */
     public function getBody()
     {
-        $Engine = QUI::getTemplateManager()->getEngine();
-        $entries = json_decode($this->getAttribute('entries'), true);
-        $textRatio = $this->getAttribute('textRatio');
+        $Engine        = QUI::getTemplateManager()->getEngine();
+        $entries       = json_decode($this->getAttribute('entries'), true);
+        $textRatio     = $this->getAttribute('textRatio');
         $imagePosition = $this->getAttribute('imagePosition');
 
         $html = '';
 
-        foreach ($entries as $key=>$entry) {
+        foreach ($entries as $key => $entry) {
 
             if ($entry['isDisabled'] === 1) {
                 continue;
@@ -72,7 +72,7 @@ class TextAndImageMultiple extends QUI\Control
                 case "imageLeftAlternately":
                     $imageOnLeft = true;
 
-                    if($key % 2 !== 0) {
+                    if ($key % 2 !== 0) {
                         $imageOnLeft = false;
                     }
                     break;
@@ -80,7 +80,7 @@ class TextAndImageMultiple extends QUI\Control
                 case "imageRightAlternately":
                     $imageOnLeft = false;
 
-                    if($key % 2 !== 0) {
+                    if ($key % 2 !== 0) {
                         $imageOnLeft = true;
                     }
                     break;
