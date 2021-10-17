@@ -55,7 +55,6 @@ class TextAndImageMultiple extends QUI\Control
         $html = '';
 
         foreach ($entries as $key => $entry) {
-
             if ($entry['isDisabled'] === 1) {
                 continue;
             }
