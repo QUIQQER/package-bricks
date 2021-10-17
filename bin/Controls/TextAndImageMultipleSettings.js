@@ -148,24 +148,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     dataType : 'string',
                     width    : 300
                 },
-                //     {
-                //     header   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.align'),
-                //     dataIndex: 'type',
-                //     dataType : 'string',
-                //     width    : 200
-                // },
-                //     {
-                //     header   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url'),
-                //     dataIndex: 'url',
-                //     dataType : 'string',
-                //     width    : 300
-                // },
-                //     {
-                //     header   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.newTab.short'),
-                //     dataIndex: 'newTabDisplay',
-                //     dataType : 'node',
-                //     width    : 60
-                // },
                     {
                     dataIndex: 'newTab',
                     hidden   : true
@@ -290,21 +272,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     insert.text = entry.text;
                 }
 
-                // if ("type" in entry) {
-                //     insert.type = entry.type;
-                // }
-                //
-                // if ("url" in entry) {
-                //     insert.url = entry.url;
-                // }
-                //
-                // if ("newTab" in entry) {
-                //     insert.newTabDisplay = new Element('span', {
-                //         'class'       : entry.newTab === "1" ? 'fa fa-check' : 'fa fa-times',
-                //         'data-enabled': entry.newTab
-                //     });
-                // }
-
                 data.push(insert);
             }
 
@@ -341,9 +308,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
          */
         update: function () {
             this.$Input.value = JSON.encode(this.$data);
-
-            console.log(this.$Input.value);
-            console.log(this.$Input);
         },
 
         /**
@@ -356,10 +320,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                 image     : '',
                 title     : '',
                 text      : '',
-                // type      : '',
-                // url       : '',
                 isDisabled: 0,
-                // newTab    : 1
             };
 
             if ("isDisabled" in params) {
@@ -377,18 +338,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
             if ("text" in params) {
                 entry.text = params.text;
             }
-
-            // if ("type" in params) {
-            //     entry.type = params.type;
-            // }
-            //
-            // if ("url" in params) {
-            //     entry.url = params.url;
-            // }
-            //
-            // if ("newTab" in params) {
-            //     entry.newTab = parseInt(params.newTab);
-            // }
 
             this.$data.push(entry);
             this.refresh();
@@ -410,9 +359,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                 image     : '',
                 title     : '',
                 text      : '',
-                // type      : '',
-                // url       : '',
-                // newTab    : '',
                 isDisabled: 0
             };
 
@@ -431,18 +377,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
             if ("text" in params) {
                 entry.text = params.text;
             }
-
-            // if ("type" in params) {
-            //     entry.type = params.type;
-            // }
-            //
-            // if ("url" in params) {
-            //     entry.url = params.url;
-            // }
-            //
-            // if ("newTab" in params) {
-            //     entry.newTab = parseInt(params.newTab);
-            // }
 
             this.$data[index] = entry;
 
@@ -505,8 +439,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     image     : gridData[i].image,
                     title     : gridData[i].title,
                     text      : gridData[i].text,
-                    // type      : gridData[i].type,
-                    // url       : gridData[i].url
                 });
             }
 
@@ -575,16 +507,11 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     var Image       = Form.elements.image;
                     var Title       = Form.elements.title;
                     var Description = Form.elements.description;
-                    // var Type        = Form.elements.type;
-                    // var Url         = Form.elements.url;
 
                     self.edit(index, {
                         image     : Image.value,
                         title     : Title.value,
                         text      : Description.value,
-                        // type      : Type.value,
-                        // url       : Url.value,
-                        // newTab    : Dialog.NewTabSwitch.getStatus(),
                         isDisabled: Dialog.IsDisabledSwitch.getStatus()
                     });
 
@@ -599,8 +526,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     var Image       = Form.elements.image;
                     var Title       = Form.elements.title;
                     var Description = Form.elements.description;
-                    var Type        = Form.elements.type;
-                    var Url         = Form.elements.url;
 
                     if (data.isDisabled) {
                         Dialog.IsDisabledSwitch.on();
@@ -611,8 +536,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     Image.value       = data.image;
                     Title.value       = data.title;
                     Description.value = data.text;
-                    // Type.value        = data.type;
-                    // Url.value         = data.url;
 
                     if (data.newTab && data.newTab.getAttribute('data-enabled') === "1") {
                         Dialog.NewTabSwitch.on();
@@ -647,16 +570,11 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     var Image       = Form.elements.image;
                     var Title       = Form.elements.title;
                     var Description = Form.elements.description;
-                    // var Type        = Form.elements.type;
-                    // var Url         = Form.elements.url;
 
                     self.add({
                         image     : Image.value,
                         title     : Title.value,
                         text      : Description.value,
-                        // type      : Type.value,
-                        // url       : Url.value,
-                        // newTab    : Dialog.NewTabSwitch.getStatus(),
                         isDisabled: Dialog.IsDisabledSwitch.getStatus()
                     });
 
@@ -693,13 +611,8 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                                 html   : Mustache.render(templateEntry, {
                                     fieldIsDisabled : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled'),
                                     fieldImage      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.image'),
-                                    // fieldUrl        : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url'),
-                                    // fieldNewTab     : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.newTab'),
                                     fieldTitle      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.title'),
                                     fieldDescription: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.text'),
-                                    // fieldType       : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.align'),
-                                    // fieldTypeLeft   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.align.left'),
-                                    // fieldTypeRight  : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.align.right')
                                 }),
                                 'class': 'quiqqer-bricks-promoslider-settings-entry'
                             }).inject(Win.getContent());
