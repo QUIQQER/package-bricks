@@ -243,7 +243,10 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
 
             for (i = 0, len = this.$data.length; i < len; i++) {
                 entry  = this.$data[i];
-                insert = {};
+                insert = {
+                    image       : '',
+                    imagePreview: new Element('span', {html: '&nbsp;'})
+                };
 
                 entry.isDisabled = parseInt(entry.isDisabled);
 
