@@ -1797,5 +1797,52 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Text 70% - Bild 30%]]></de>
             <en><![CDATA[Text 70% - Image 30%]]></en>
         </locale>
+
+        <!-- Accordion -->
+        <locale name="brick.accordion.title">
+            <de><![CDATA[Bausteine: Akkorden Menü (Accordion)]]></de>
+            <en><![CDATA[Bricks: Accordion menu]]></en>
+        </locale>
+        <locale name="brick.accordion.description">
+            <de><![CDATA[Baustein mit ausklappbaren Elementen. Es kann zum Bauen der Hilfe oder FAQ Einträge benutzt werden.]]></de>
+            <en><![CDATA[Brick with fold-out elements. It can be used to build help or FAQ entries.]]></en>
+        </locale>
+        <locale name="brick.accordion.stayOpen">
+            <de><![CDATA[Einträge bleiben auf]]></de>
+            <en><![CDATA[Entries stay open]]></en>
+        </locale>
+        <locale name="brick.accordion.stayOpen.desc">
+            <de><![CDATA[Akkordeon-Elemente bleiben geöffnet, wenn ein anderes Element geöffnet wird.]]></de>
+            <en><![CDATA[Accordion items stay open when another item is opened.]]></en>
+        </locale>
+        <locale name="brick.accordion.openFirst">
+            <de><![CDATA[Der erste Eintrag ist initial aufgemacht]]></de>
+            <en><![CDATA[The first entry is initial open]]></en>
+        </locale>
+        <locale name="brick.accordion.listMaxWidth">
+            <de><![CDATA[Maximalae Akkordeon Breite]]></de>
+            <en><![CDATA[Max accordion width]]></en>
+        </locale>
+        <locale name="brick.accordion.listMaxWidth.desc">
+            <de><![CDATA[Diese Einstellung betrifft nur die Liste mit Akkordeon-Elementen.]]></de>
+            <en><![CDATA[This setting affects only the list with accordion elements.]]></en>
+        </locale>
+        <locale name="brick.accordion.entries">
+            <de><![CDATA[Akkordeon-Elemente]]></de>
+            <en><![CDATA[Accordion items]]></en>
+        </locale>
+        <locale name="bricks.accordion.settings.addButton">
+            <de><![CDATA[Element hinzufügen]]></de>
+            <en><![CDATA[Add items]]></en>
+        </locale>
+        <locale name="brick.accordion.settings.title">
+            <de><![CDATA[Titel]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="brick.accordion.settings.content">
+            <de><![CDATA[Inhalt]]></de>
+            <en><![CDATA[Content]]></en>
+        </locale>
+
     </groups>
 </locales>
