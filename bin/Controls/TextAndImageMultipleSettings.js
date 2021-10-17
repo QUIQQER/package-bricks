@@ -274,7 +274,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     }
                 });
 
-                if ("image" in entry && entry.image !== '' && entry.image !== 'test;') {
+                if ("image" in entry && entry.image !== '') {
                     insert.image = entry.image;
 
                     insert.imagePreview = new Element('img', {

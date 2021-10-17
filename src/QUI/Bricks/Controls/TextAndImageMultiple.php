@@ -86,15 +86,21 @@ class TextAndImageMultiple extends QUI\Control
                     break;
             }
 
+            $fullImageHeight = '';
+            if ($this->getAttribute('fullImageHeight')) {
+                $fullImageHeight = 'quiqqer-textImage-image__fullImageHeight';
+            }
+
             $TextAndImage = new QUI\Bricks\Controls\TextAndImage();
             $TextAndImage->setAttribute('image', $entry['image']);
-            $TextAndImage->setAttribute('textImageRatio', $textRatio);
             $TextAndImage->setAttribute('maxImageWidth', $this->getAttribute('maxImageWidth'));
-
             $TextAndImage->setAttribute('imageOnLeft', $imageOnLeft);
-
+            $TextAndImage->setAttribute('fullImageHeight', $fullImageHeight);
+            $TextAndImage->setAttribute('textPosition', $this->getAttribute('textPosition'));
+            $TextAndImage->setAttribute('textImageRatio', $textRatio);
             $TextAndImage->setAttribute('content', $entry['text']);
-            $TextAndImage->addCSSClass('test');
+
+            $TextAndImage->addCSSClass('textImageMultiple');
 
             $html .= $TextAndImage->create();
 

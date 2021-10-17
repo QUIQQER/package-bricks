@@ -1518,6 +1518,14 @@
                     <locale group="quiqqer/bricks"
                             var="brick.textAndImage.maxImageWidth"/>
                 </setting>
+                <setting name="fullImageHeight" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="brick.textAndImage.fullImageHeight"/>
+                    <description>
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.fullImageHeight.desc"/>
+                    </description>
+                </setting>
 
                 <setting name="entries" type="hidden"
                          data-qui="package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings"
