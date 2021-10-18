@@ -51,38 +51,25 @@ class TextAndImageMultiple extends QUI\Control
         $entries       = json_decode($this->getAttribute('entries'), true);
         $textRatio     = $this->getAttribute('textRatio');
         $imagePosition = $this->getAttribute('imagePosition');
+        $imageOnLeft = true;
 
         $html = '';
+
+        if ($imagePosition === "imageLeft" ||
+            $imagePosition === "imageLeftAlternately") {
+
+            $imageOnLeft = true;
+        }
+
+        if ($imagePosition === "imageRight" ||
+            $imagePosition === "imageRightAlternately") {
+
+            $imageOnLeft = false;
+        }
 
         foreach ($entries as $key => $entry) {
             if ($entry['isDisabled'] === 1) {
                 continue;
-            }
-
-            switch ($imagePosition) {
-                case "imageLeft":
-                    $imageOnLeft = true;
-                    break;
-
-                case "imageRight":
-                    $imageOnLeft = false;
-                    break;
-
-                case "imageLeftAlternately":
-                    $imageOnLeft = true;
-
-                    if ($key % 2 !== 0) {
-                        $imageOnLeft = false;
-                    }
-                    break;
-
-                case "imageRightAlternately":
-                    $imageOnLeft = false;
-
-                    if ($key % 2 !== 0) {
-                        $imageOnLeft = true;
-                    }
-                    break;
             }
 
             $fullImageHeight = '';
@@ -104,6 +91,12 @@ class TextAndImageMultiple extends QUI\Control
             $html .= $TextAndImage->create();
 
             $this->addCSSFiles($TextAndImage->getCSSFiles());
+
+            if ($imagePosition === "imageLeftAlternately" ||
+                $imagePosition === "imageRightAlternately") {
+
+                $imageOnLeft = $imageOnLeft ? false : true;
+            }
         }
 
         return $html;
