@@ -50,19 +50,17 @@ class TextAndImageMultiple extends QUI\Control
         $entries       = json_decode($this->getAttribute('entries'), true);
         $textRatio     = $this->getAttribute('textRatio');
         $imagePosition = $this->getAttribute('imagePosition');
-        $imageOnLeft = true;
+        $imageOnLeft   = true;
 
         $html = '';
 
         if ($imagePosition === "imageLeft" ||
             $imagePosition === "imageLeftAlternately") {
-
             $imageOnLeft = true;
         }
 
         if ($imagePosition === "imageRight" ||
             $imagePosition === "imageRightAlternately") {
-
             $imageOnLeft = false;
         }
 
@@ -93,7 +91,6 @@ class TextAndImageMultiple extends QUI\Control
 
             if ($imagePosition === "imageLeftAlternately" ||
                 $imagePosition === "imageRightAlternately") {
-
                 $imageOnLeft = $imageOnLeft ? false : true;
             }
         }
