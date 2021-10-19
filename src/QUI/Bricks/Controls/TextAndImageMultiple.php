@@ -25,7 +25,7 @@ class TextAndImageMultiple extends QUI\Control
         // default options
         $this->setAttributes([
             'textPosition'  => 'top',
-//            'imagePosition' => 'left',
+            'imagePosition' => 'imageLeft',
             'textRatio'     => false,
             'maxImageWidth' => false,
             'title'         => false,
@@ -64,24 +64,26 @@ class TextAndImageMultiple extends QUI\Control
             $imageOnLeft = false;
         }
 
-        foreach ($entries as $key => $entry) {
+        foreach ($entries as $entry) {
             if ($entry['isDisabled'] === 1) {
                 continue;
             }
 
             $fullImageHeight = '';
+
             if ($this->getAttribute('fullImageHeight')) {
                 $fullImageHeight = 'quiqqer-textImage-image__fullImageHeight';
             }
 
-            $TextAndImage = new QUI\Bricks\Controls\TextAndImage();
-            $TextAndImage->setAttribute('image', $entry['image']);
-            $TextAndImage->setAttribute('maxImageWidth', $this->getAttribute('maxImageWidth'));
-            $TextAndImage->setAttribute('imageOnLeft', $imageOnLeft);
-            $TextAndImage->setAttribute('fullImageHeight', $fullImageHeight);
-            $TextAndImage->setAttribute('textPosition', $this->getAttribute('textPosition'));
-            $TextAndImage->setAttribute('textImageRatio', $textRatio);
-            $TextAndImage->setAttribute('content', $entry['text']);
+            $TextAndImage = new QUI\Bricks\Controls\TextAndImage([
+                'image'           => $entry['image'],
+                'maxImageWidth'   => $this->getAttribute('maxImageWidth'),
+                'imageOnLeft'     => $imageOnLeft,
+                'fullImageHeight' => $fullImageHeight,
+                'textPosition'    => $this->getAttribute('textPosition'),
+                'textImageRatio'  => $textRatio,
+                'content'         => $entry['text']
+            ]);
 
             $TextAndImage->addCSSClass('textImageMultiple');
 
@@ -91,7 +93,7 @@ class TextAndImageMultiple extends QUI\Control
 
             if ($imagePosition === "imageLeftAlternately" ||
                 $imagePosition === "imageRightAlternately") {
-                $imageOnLeft = $imageOnLeft ? false : true;
+                $imageOnLeft = !$imageOnLeft;
             }
         }
 
