@@ -10,8 +10,9 @@ use QUI;
 use QUI\Projects\Media\Utils;
 
 /**
- * Class BricSlkider
+ * Class BrickSlider
  *
+ * @author  Dominik Chrzanowski
  * @package QUI\Bricks\Controls
  */
 class BasicSlider extends AbstractPromoslider
@@ -23,6 +24,9 @@ class BasicSlider extends AbstractPromoslider
             'title'         => '',
             'text'          => '',
             'mediaFolder'   => false,
+            'delay'         => 5000,
+            'imgLeft'       => false,
+            'maxImageWidth' => false,
             'sliderContent' => '',
             'class'         => 'quiqqer-bricks-basic-slider',
             'nodeName'      => 'section',
@@ -34,9 +38,6 @@ class BasicSlider extends AbstractPromoslider
         $this->addCSSFile(
             \dirname(__FILE__) . '/BasicSlider.css'
         );
-
-        $this->addCSSClass('grid-100');
-        $this->addCSSClass('mobile-grid-100');
     }
 
 
@@ -48,6 +49,7 @@ class BasicSlider extends AbstractPromoslider
         $Folder        = false;
         $images        = [];
         $sliderContent = $this->getAttribute('sliderContent');
+        $imgLeft       = false;
 
         if (!$mediaFolder) {
             return '';
@@ -74,11 +76,44 @@ class BasicSlider extends AbstractPromoslider
             $images = $this->ownImages;
         }
 
+        $delay = 5000;
+        if (intval($this->getAttribute('delay')) > 0) {
+            $delay = $this->getAttribute('delay');
+        }
+
+        $this->setJavaScriptControlOption('delay', $delay);
+
+        if ($this->getAttribute('imgLeft')) {
+            $imgLeft = $this->getAttribute('imgLeft');
+        }
+
+        $maxImageWidth = false;
+        if (intval($this->getAttribute('maxImageWidth')) > 0) {
+            $maxImageWidth = intval($this->getAttribute('maxImageWidth'));
+        }
+
+        // text position
+        switch ($this->getAttribute('textPosition')) {
+            case 'center':
+                $textPosition = 'center';
+                break;
+
+            case 'bottom':
+                $textPosition = 'flex-end';
+                break;
+
+            case 'top':
+            default:
+                $textPosition = 'flex-start';
+        }
+
         $options = [
             'this'          => $this,
-            'Folder'        => $Folder,
             'images'        => $images,
-            'sliderContent' => $sliderContent
+            'sliderContent' => $sliderContent,
+            'imgLeft'       => $imgLeft,
+            'maxImageWidth' => $maxImageWidth,
+            'textPosition'  => $textPosition
         ];
 
         $Engine->assign($options);

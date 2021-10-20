@@ -407,21 +407,55 @@
             <en><![CDATA[CSS classes]]></en>
         </locale>
 
-        <locale name="brick.control.slider.title">
-            <de><![CDATA[Bausteine: Seiten-Präsentation (Carousel)]]></de>
-            <en><![CDATA[Bricks: Site-Presentation (Carousel)]]></en>
-        </locale>
+        <!-- Basic slider -->
         <locale name="brick.control.basicSlider.title">
             <de><![CDATA[Bausteine: Basic Slider]]></de>
             <en><![CDATA[Bricks: Basic slider]]></en>
         </locale>
+        <locale name="brick.control.basicSlider.description">
+            <de><![CDATA[Ein einfaches Bilder-Slider. Der Slider wird neben dem Text angezeigt (wahlweise links oder rechts).]]></de>
+            <en><![CDATA[A simple image slider. The slider is displayed next to the text (optionally on the left or right).]]></en>
+        </locale>
         <locale name="brick.control.basicSlider.mediaFolder">
-            <de><![CDATA[Images folder]]></de>
+            <de><![CDATA[Media-Ordner auswählen]]></de>
             <en><![CDATA[Images folder]]></en>
         </locale>
+        <locale name="brick.control.basicSlider.settings.delay">
+            <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>
+            <en><![CDATA[Time to start next slide (Delay)]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.imgLeft">
+            <de><![CDATA[Bilder auf der linken Seite]]></de>
+            <en><![CDATA[Show images on left]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.maxImageWidth">
+            <de><![CDATA[Maximale Briete des Bildes]]></de>
+            <en><![CDATA[Maximum image width]]></en>
+        </locale>
+        <locale name="brick.basicSlider.textPosition">
+            <de><![CDATA[Text Position]]></de>
+            <en><![CDATA[Text position]]></en>
+        </locale>
+        <locale name="brick.basicSlider.textPosition.top">
+            <de><![CDATA[Oben]]></de>
+            <en><![CDATA[Top]]></en>
+        </locale>
+        <locale name="brick.basicSlider.textPosition.center">
+            <de><![CDATA[Zentriert]]></de>
+            <en><![CDATA[Center]]></en>
+        </locale>
+        <locale name="brick.basicSlider.textPosition.bottom">
+            <de><![CDATA[Unten]]></de>
+            <en><![CDATA[Bottom]]></en>
+        </locale>
         <locale name="brick.control.basicSlider.sliderContent">
-            <de><![CDATA[Slider content]]></de>
-            <en><![CDATA[Slider content]]></en>
+            <de><![CDATA[Inhalt]]></de>
+            <en><![CDATA[Text]]></en>
+        </locale>
+
+        <locale name="brick.control.slider.title">
+            <de><![CDATA[Bausteine: Seiten-Präsentation (Carousel)]]></de>
+            <en><![CDATA[Bricks: Site-Presentation (Carousel)]]></en>
         </locale>
         <locale name="brick.control.promosliderWallpaper.title">
             <de><![CDATA[Bausteine: Promoslider Wallpaper]]></de>
@@ -1797,5 +1831,188 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Text 70% - Bild 30%]]></de>
             <en><![CDATA[Text 70% - Image 30%]]></en>
         </locale>
+
+        <!-- Text and image multiple -->
+        <locale name="brick.textAndImageMultiple.title">
+            <de><![CDATA[Bausteine: Text neben dem Bild (mehrfache Version)]]></de>
+            <en><![CDATA[Bricks: Text next to the image (multiple version)]]></en>
+        </locale>
+        <locale name="brick.textAndImageMultiple.description">
+            <de><![CDATA[Mehrere Abschnitte bestehend aus Text neben einem Bild.]]></de>
+            <en><![CDATA[Multiple sections composed of text placed next to an image.]]></en>
+        </locale>
+        <locale name="brick.textAndImageMultiple.textPosition">
+            <de><![CDATA[Text Position]]></de>
+            <en><![CDATA[Text position]]></en>
+        </locale>
+        <locale name="brick.textAndImageMultiple.textPosition.top">
+            <de><![CDATA[Oben]]></de>
+            <en><![CDATA[Top]]></en>
+        </locale>
+        <locale name="brick.textAndImageMultiple.textPosition.center">
+            <de><![CDATA[Zentriert]]></de>
+            <en><![CDATA[Center]]></en>
+        </locale>
+        <locale name="brick.textAndImageMultiple.textPosition.bottom">
+            <de><![CDATA[Unten]]></de>
+            <en><![CDATA[Bottom]]></en>
+        </locale>
+        <locale name="brick.textAndImageMultiple.imagePosition">
+            <de><![CDATA[Bildposition]]></de>
+            <en><![CDATA[Image position]]></en>
+        </locale>
+        <locale name="brick.textAndImageMultiple.imagePosition.imageLeft">
+            <de><![CDATA[Alle Bilder links]]></de>
+            <en><![CDATA[All images on the left]]></en>
+        </locale>
+        <locale name="brick.textAndImageMultiple.imagePosition.imageRight">
+            <de><![CDATA[Alle Bilder rechts]]></de>
+            <en><![CDATA[All images on the right]]></en>
+        </locale>
+        <locale name="brick.textAndImageMultiple.imagePosition.imageLeftAlternately">
+            <de><![CDATA[Abwechselnde Bilder - von links beginnend]]></de>
+            <en><![CDATA[Alternating images - starting from the left]]></en>
+        </locale>
+        <locale name="brick.textAndImageMultiple.imagePosition.imageRightAlternately">
+            <de><![CDATA[Abwechselnde Bilder - von rechts beginnend]]></de>
+            <en><![CDATA[Alternating images - starting from the right]]></en>
+        </locale>
+        <locale name="brick.textAndImageMultiple.settings.entries">
+            <de><![CDATA[Entries]]></de>
+            <en><![CDATA[Entries]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.textAndImageMultiple.create.isDisabled">
+            <de><![CDATA[Einträge deaktivieren]]></de>
+            <en><![CDATA[Deactivate entries]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.textAndImageMultiple.create.isDisabled.short">
+            <de><![CDATA[Deaktiviert]]></de>
+            <en><![CDATA[Deactivated]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.textAndImageMultiple.settings.createPopup.disable">
+            <de><![CDATA[Eintrag deaktivieren]]></de>
+            <en><![CDATA[Disable entry]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.textAndImageMultiple.settings.createPopup.image">
+            <de><![CDATA[Bild]]></de>
+            <en><![CDATA[Image]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.textAndImageMultiple.settings.createPopup.title">
+            <de><![CDATA[Titel]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.textAndImageMultiple.settings.createPopup.content">
+            <de><![CDATA[Inhalt]]></de>
+            <en><![CDATA[Text]]></en>
+        </locale>
+
+        <locale name="brick.textAndImage.textRatio">
+            <de><![CDATA[Text und Bild Platzverhältnis]]></de>
+            <en><![CDATA[Text ratio]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textRatio.30">
+            <de><![CDATA[Text 30% - Bild 70%]]></de>
+            <en><![CDATA[Text 30% - Image 70%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textRatio.35">
+            <de><![CDATA[Text 35% - Bild 65%]]></de>
+            <en><![CDATA[Text 35% - Image 65%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textRatio.40">
+            <de><![CDATA[Text 40% - Bild 60%]]></de>
+            <en><![CDATA[Text 40% - Image 60%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textRatio.45">
+            <de><![CDATA[Text 45% - Bild 55%]]></de>
+            <en><![CDATA[Text 45% - Image 55%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textRatio.50">
+            <de><![CDATA[Text 50% - Bild 50% (standard)]]></de>
+            <en><![CDATA[Text 50% - Image 50% (default)]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textRatio.55">
+            <de><![CDATA[Text 55% - Bild 45%]]></de>
+            <en><![CDATA[Text 55% - Image 45%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textRatio.60">
+            <de><![CDATA[Text 60% - Bild 40%]]></de>
+            <en><![CDATA[Text 60% - Image 40%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textRatio.65">
+            <de><![CDATA[Text 65% - Bild 35%]]></de>
+            <en><![CDATA[Text 65% - Image 35%]]></en>
+        </locale>
+        <locale name="brick.textAndImage.textRatio.70">
+            <de><![CDATA[Text 70% - Bild 30%]]></de>
+            <en><![CDATA[Text 70% - Image 30%]]></en>
+        </locale>
+
+        <locale name="quiqqer.bricks.entires.adddialog.title">
+            <de><![CDATA[Eintrag hinzufügen]]></de>
+            <en><![CDATA[Add Entry]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.entires.editdialog.title">
+            <de><![CDATA[Eintrag bearbeiten]]></de>
+            <en><![CDATA[Edit Entry]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.entires.delete.title">
+            <de><![CDATA[Möchten Sie diesen Eintrag wirklich entfernen?]]></de>
+            <en><![CDATA[Do you really want to remove this entry?]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.entires.delete.text">
+            <de><![CDATA[Möchten Sie diesen Eintrag wirklich entfernen?]]></de>
+            <en><![CDATA[Do you really want to remove this entry?]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.entires.delete.information">
+            <de><![CDATA[Der Eintrag kann nicht wiederhergestellt werden]]></de>
+            <en><![CDATA[The entries can not be restored]]></en>
+        </locale>
+
+        <!-- Accordion -->
+        <locale name="brick.accordion.title">
+            <de><![CDATA[Bausteine: Akkorden Menü (Accordion)]]></de>
+            <en><![CDATA[Bricks: Accordion menu]]></en>
+        </locale>
+        <locale name="brick.accordion.description">
+            <de><![CDATA[Baustein mit ausklappbaren Elementen. Es kann zum Bauen der Hilfe oder FAQ Einträge benutzt werden.]]></de>
+            <en><![CDATA[Brick with fold-out elements. It can be used to build help or FAQ entries.]]></en>
+        </locale>
+        <locale name="brick.accordion.stayOpen">
+            <de><![CDATA[Einträge bleiben auf]]></de>
+            <en><![CDATA[Entries stay open]]></en>
+        </locale>
+        <locale name="brick.accordion.stayOpen.desc">
+            <de><![CDATA[Akkordeon-Elemente bleiben geöffnet, wenn ein anderes Element geöffnet wird.]]></de>
+            <en><![CDATA[Accordion items stay open when another item is opened.]]></en>
+        </locale>
+        <locale name="brick.accordion.openFirst">
+            <de><![CDATA[Der erste Eintrag ist initial aufgemacht]]></de>
+            <en><![CDATA[The first entry is initial open]]></en>
+        </locale>
+        <locale name="brick.accordion.listMaxWidth">
+            <de><![CDATA[Maximalae Akkordeon Breite]]></de>
+            <en><![CDATA[Max accordion width]]></en>
+        </locale>
+        <locale name="brick.accordion.listMaxWidth.desc">
+            <de><![CDATA[Diese Einstellung betrifft nur die Liste mit Akkordeon-Elementen.]]></de>
+            <en><![CDATA[This setting affects only the list with accordion elements.]]></en>
+        </locale>
+        <locale name="brick.accordion.entries">
+            <de><![CDATA[Akkordeon-Elemente]]></de>
+            <en><![CDATA[Accordion items]]></en>
+        </locale>
+        <locale name="bricks.accordion.settings.addButton">
+            <de><![CDATA[Element hinzufügen]]></de>
+            <en><![CDATA[Add items]]></en>
+        </locale>
+        <locale name="brick.accordion.settings.title">
+            <de><![CDATA[Titel]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="brick.accordion.settings.content">
+            <de><![CDATA[Inhalt]]></de>
+            <en><![CDATA[Content]]></en>
+        </locale>
+
     </groups>
 </locales>
