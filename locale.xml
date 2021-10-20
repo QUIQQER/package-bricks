@@ -420,6 +420,10 @@
             <de><![CDATA[Images folder]]></de>
             <en><![CDATA[Media-Ordner auswählen]]></en>
         </locale>
+        <locale name="brick.control.basicSlider.settings.delay">
+            <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>
+            <en><![CDATA[Time to start next slide (Delay)]]></en>
+        </locale>
         <locale name="brick.textAndImage.maxImageWidth">
             <de><![CDATA[Maximale Briete des Bildes]]></de>
             <en><![CDATA[Maximum image width]]></en>

@@ -48,6 +48,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
 
             this.List = Elm.getElement(".basic-slider-images");
             this.Slide = this.List.getFirst('li');
+            this.delay = this.getAttribute('delay');
 
             this.$start();
         },
@@ -59,7 +60,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
             this.NextSlide = this.$getNextSlide();
             var Image = this.$prepareImg(this.NextSlide);
 
-            this.$next.delay(this.getAttribute('delay'), this, Image);
+            this.$next.delay(this.delay, this, Image);
         },
 
         /**

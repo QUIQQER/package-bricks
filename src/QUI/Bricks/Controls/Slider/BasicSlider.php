@@ -23,6 +23,7 @@ class BasicSlider extends AbstractPromoslider
             'title'         => '',
             'text'          => '',
             'mediaFolder'   => false,
+            'delay'         => 5000,
             'sliderContent' => '',
             'class'         => 'quiqqer-bricks-basic-slider',
             'nodeName'      => 'section',
@@ -73,6 +74,13 @@ class BasicSlider extends AbstractPromoslider
         } elseif (!empty($this->ownImages)) {
             $images = $this->ownImages;
         }
+
+        $delay = 5000;
+        if (intval($this->getAttribute('delay')) > 0) {
+            $delay = $this->getAttribute('delay');
+        }
+
+        $this->setJavaScriptControlOption('delay', $delay);
 
         $options = [
             'this'          => $this,

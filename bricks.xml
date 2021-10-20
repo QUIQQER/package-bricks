@@ -170,6 +170,10 @@
                     <locale group="quiqqer/bricks" var="brick.control.basicSlider.mediaFolder"/>
                 </setting>
 
+                <setting name="delay" type="number">
+                    <locale group="quiqqer/bricks" var="brick.control.basicSlider.settings.delay"/>
+                </setting>
+
                 <setting name="maxImageWidth" type="number">
                     <locale group="quiqqer/bricks"
                             var="brick.control.basicSlider.maxImageWidth"/>
