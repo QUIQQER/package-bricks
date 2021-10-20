@@ -18,7 +18,17 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
     'text!package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettingsEntry.html',
     'css!package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings.css'
 
-], function (QUI, QUIControl, QUIConfirm, QUIButton, QUISwitch, QUILocale, Mustache, Grid, ControlsUtils, templateEntry) {
+], function (QUI,
+    QUIControl,
+    QUIConfirm,
+    QUIButton,
+    QUISwitch,
+    QUILocale,
+    Mustache,
+    Grid,
+    ControlsUtils,
+    templateEntry
+) {
     "use strict";
 
     var lg = 'quiqqer/bricks';
@@ -81,81 +91,85 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
             this.$Grid = new Grid(Desktop, {
                 height     : 400,
                 width      : size.x,
-                buttons    : [{
-                    name    : 'up',
-                    icon    : 'fa fa-angle-up',
-                    disabled: true,
-                    events  : {
-                        onClick: function () {
-                            this.$Grid.moveup();
-                            this.$refreshSorting();
-                        }.bind(this)
-                    }
-                }, {
-                    name    : 'down',
-                    icon    : 'fa fa-angle-down',
-                    disabled: true,
-                    events  : {
-                        onClick: function () {
-                            this.$Grid.movedown();
-                            this.$refreshSorting();
-                        }.bind(this)
-                    }
-                }, {
-                    type: 'separator'
-                }, {
-                    name     : 'add',
-                    textimage: 'fa fa-plus',
-                    text     : QUILocale.get('quiqqer/system', 'add'),
-                    events   : {
-                        onClick: this.$openAddDialog
-                    }
-                }, {
-                    type: 'separator'
-                }, {
-                    name     : 'edit',
-                    textimage: 'fa fa-edit',
-                    text     : QUILocale.get('quiqqer/system', 'edit'),
-                    disabled : true,
-                    events   : {
-                        onClick: this.$openEditDialog
-                    }
-                }, {
-                    name     : 'delete',
-                    textimage: 'fa fa-trash',
-                    text     : QUILocale.get('quiqqer/system', 'delete'),
-                    disabled : true,
-                    events   : {
-                        onClick: this.$openDeleteDialog
-                    }
-                }],
-                columnModel: [{
-                    header   : QUILocale.get(lg, 'quiqqer.bricks.textAndImageMultiple.create.isDisabled.short'),
-                    dataIndex: 'isDisabledDisplay',
-                    dataType : 'QUI',
-                    width    : 70
-                }, {
-                    dataIndex: 'isDisabled',
-                    hidden   : true
-                }, {
-                    header   : QUILocale.get('quiqqer/system', 'image'),
-                    dataIndex: 'imagePreview',
-                    dataType : 'node',
-                    width    : 60
-                }, {
-                    header   : QUILocale.get('quiqqer/system', 'title'),
-                    dataIndex: 'title',
-                    dataType : 'string',
-                    width    : 300
-                },
+                buttons    : [
                     {
-                    dataIndex: 'newTab',
-                    hidden   : true
-                }, {
-                    dataIndex: 'image',
-                    dataType : 'string',
-                    hidden   : true
-                }]
+                        name    : 'up',
+                        icon    : 'fa fa-angle-up',
+                        disabled: true,
+                        events  : {
+                            onClick: function () {
+                                this.$Grid.moveup();
+                                this.$refreshSorting();
+                            }.bind(this)
+                        }
+                    }, {
+                        name    : 'down',
+                        icon    : 'fa fa-angle-down',
+                        disabled: true,
+                        events  : {
+                            onClick: function () {
+                                this.$Grid.movedown();
+                                this.$refreshSorting();
+                            }.bind(this)
+                        }
+                    }, {
+                        type: 'separator'
+                    }, {
+                        name     : 'add',
+                        textimage: 'fa fa-plus',
+                        text     : QUILocale.get('quiqqer/quiqqer', 'add'),
+                        events   : {
+                            onClick: this.$openAddDialog
+                        }
+                    }, {
+                        type: 'separator'
+                    }, {
+                        name     : 'edit',
+                        textimage: 'fa fa-edit',
+                        text     : QUILocale.get('quiqqer/quiqqer', 'edit'),
+                        disabled : true,
+                        events   : {
+                            onClick: this.$openEditDialog
+                        }
+                    }, {
+                        name     : 'delete',
+                        textimage: 'fa fa-trash',
+                        text     : QUILocale.get('quiqqer/quiqqer', 'delete'),
+                        disabled : true,
+                        events   : {
+                            onClick: this.$openDeleteDialog
+                        }
+                    }
+                ],
+                columnModel: [
+                    {
+                        header   : QUILocale.get(lg, 'quiqqer.bricks.textAndImageMultiple.create.isDisabled.short'),
+                        dataIndex: 'isDisabledDisplay',
+                        dataType : 'QUI',
+                        width    : 70
+                    }, {
+                        dataIndex: 'isDisabled',
+                        hidden   : true
+                    }, {
+                        header   : QUILocale.get('quiqqer/quiqqer', 'image'),
+                        dataIndex: 'imagePreview',
+                        dataType : 'node',
+                        width    : 60
+                    }, {
+                        header   : QUILocale.get('quiqqer/quiqqer', 'title'),
+                        dataIndex: 'title',
+                        dataType : 'string',
+                        width    : 300
+                    },
+                    {
+                        dataIndex: 'newTab',
+                        hidden   : true
+                    }, {
+                        dataIndex: 'image',
+                        dataType : 'string',
+                        hidden   : true
+                    }
+                ]
             });
 
             this.$Grid.addEvents({
@@ -468,7 +482,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                 maxWidth   : 600,
                 maxHeight  : 400,
                 ok_button  : {
-                    text     : QUILocale.get('quiqqer/system', 'delete'),
+                    text     : QUILocale.get('quiqqer/quiqqer', 'delete'),
                     textimage: 'fa fa-trash'
                 },
                 events     : {
@@ -610,15 +624,17 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                             Win.Loader.show();
                             Win.getContent().set('html', '');
 
-                            var Container = new Element('div', {
-                                html   : Mustache.render(templateEntry, {
-                                    fieldIsDisabled : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled'),
-                                    fieldImage      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.image'),
-                                    fieldTitle      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.title'),
-                                    fieldDescription: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.text'),
-                                }),
-                                'class': 'quiqqer-bricks-promoslider-settings-entry'
-                            }).inject(Win.getContent());
+
+                            var prefix    = 'quiqqer.bricks.textAndImageMultiple.settings.createPopup.',
+                                Container = new Element('div', {
+                                    html   : Mustache.render(templateEntry, {
+                                        fieldIsDisabled : QUILocale.get(lg, prefix + 'disable'),
+                                        fieldImage      : QUILocale.get(lg, prefix + 'image'),
+                                        fieldTitle      : QUILocale.get(lg, prefix + 'title'),
+                                        fieldDescription: QUILocale.get(lg, prefix + 'content'),
+                                    }),
+                                    'class': 'quiqqer-bricks-promoslider-settings-entry'
+                                }).inject(Win.getContent());
 
                             var Text = Container.getElement('.field-description');
 
