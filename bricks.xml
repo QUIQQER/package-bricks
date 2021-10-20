@@ -1467,7 +1467,7 @@
                         <locale group="quiqqer/bricks"
                                 var="brick.textAndImageMultiple.imagePosition.imageLeftAlternately"/>
                     </option>
-                    <option value="imageRightAlternately">
+                    <option value="imageRightAlternately" default="1">
                         <locale group="quiqqer/bricks"
                                 var="brick.textAndImageMultiple.imagePosition.imageRightAlternately"/>
                     </option>

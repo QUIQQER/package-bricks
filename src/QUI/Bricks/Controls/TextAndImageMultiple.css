@@ -1,3 +1,4 @@
-.textImageMultiple > .quiqqer-textImage {
-    margin-bottom: 100px;
+.quiqqer-textImageMultiple .quiqqer-textImage {
+    margin-bottom: 5rem;
+    margin-top: 5rem;
 }

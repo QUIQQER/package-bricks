@@ -87,9 +87,9 @@ class TextAndImageMultiple extends QUI\Control
                 'content'         => $entry['text']
             ]);
 
-            $TextAndImage->addCSSClass('textImageMultiple');
+            $TextAndImage->addCSSClass('grid-container');
 
-            $html .= $TextAndImage->create();
+            $html .='<div class="quiqqer-textImageMultiple">' . $TextAndImage->create() . '</div>';
 
             $this->addCSSFiles($TextAndImage->getCSSFiles());
 

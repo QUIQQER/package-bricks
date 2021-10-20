@@ -1798,10 +1798,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Text 70% - Image 30%]]></en>
         </locale>
 
-        <!-- Text and image mulitple -->
+        <!-- Text and image multiple -->
         <locale name="brick.textAndImageMultiple.title">
-            <de><![CDATA[Bausteine: Text neben dem Bild - mehrere]]></de>
-            <en><![CDATA[Bricks: Text next to the image - multiple]]></en>
+            <de><![CDATA[Bausteine: Text neben dem Bild (mehrfache Version)]]></de>
+            <en><![CDATA[Bricks: Text next to the image (multiple version)]]></en>
         </locale>
         <locale name="brick.textAndImageMultiple.description">
             <de><![CDATA[Mehrere Abschnitte bestehend aus Text neben einem Bild.]]></de>
@@ -1843,6 +1843,34 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Abwechselnde Bilder - von rechts beginnend]]></de>
             <en><![CDATA[Alternating images - starting from the right]]></en>
         </locale>
+        <locale name="brick.textAndImageMultiple.settings.entries">
+            <de><![CDATA[Entries]]></de>
+            <en><![CDATA[Entries]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.textAndImageMultiple.create.isDisabled">
+            <de><![CDATA[Einträge deaktivieren]]></de>
+            <en><![CDATA[Deactivate entries]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.textAndImageMultiple.create.isDisabled.short">
+            <de><![CDATA[Deaktiviert]]></de>
+            <en><![CDATA[Deactivated]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.textAndImageMultiple.settings.createPopup.disable">
+            <de><![CDATA[Eintrag deaktivieren]]></de>
+            <en><![CDATA[Disable entry]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.textAndImageMultiple.settings.createPopup.image">
+            <de><![CDATA[Bild]]></de>
+            <en><![CDATA[Image]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.textAndImageMultiple.settings.createPopup.title">
+            <de><![CDATA[Titel]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.textAndImageMultiple.settings.createPopup.content">
+            <de><![CDATA[Inhalt]]></de>
+            <en><![CDATA[Text]]></en>
+        </locale>
 
         <locale name="brick.textAndImage.textRatio">
             <de><![CDATA[Text und Bild Platzverhältnis]]></de>
@@ -1883,19 +1911,6 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.textAndImage.textRatio.70">
             <de><![CDATA[Text 70% - Bild 30%]]></de>
             <en><![CDATA[Text 70% - Image 30%]]></en>
-        </locale>
-
-        <locale name="brick.textAndImageMultiple.settings.entries">
-            <de><![CDATA[Entries]]></de>
-            <en><![CDATA[Entries]]></en>
-        </locale>
-        <locale name="quiqqer.bricks.textAndImageMultiple.create.isDisabled">
-            <de><![CDATA[Einträge deaktivieren]]></de>
-            <en><![CDATA[Deactivate entries]]></en>
-        </locale>
-        <locale name="quiqqer.bricks.textAndImageMultiple.create.isDisabled.short">
-            <de><![CDATA[Deaktiviert]]></de>
-            <en><![CDATA[Deactivated]]></en>
         </locale>
 
         <locale name="quiqqer.bricks.entires.adddialog.title">
