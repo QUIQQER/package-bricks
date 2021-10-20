@@ -407,21 +407,39 @@
             <en><![CDATA[CSS classes]]></en>
         </locale>
 
-        <locale name="brick.control.slider.title">
-            <de><![CDATA[Bausteine: Seiten-Präsentation (Carousel)]]></de>
-            <en><![CDATA[Bricks: Site-Presentation (Carousel)]]></en>
-        </locale>
+        <!-- Basic slider -->
         <locale name="brick.control.basicSlider.title">
             <de><![CDATA[Bausteine: Basic Slider]]></de>
             <en><![CDATA[Bricks: Basic slider]]></en>
         </locale>
+        <locale name="brick.control.basicSlider.description">
+            <de><![CDATA[Ein einfaches Bilder-Slider. Der Slider wird neben dem Text angezeigt (wahlweise links oder rechts).]]></de>
+            <en><![CDATA[A simple image slider. The slider is displayed next to the text (optionally on the left or right).]]></en>
+        </locale>
         <locale name="brick.control.basicSlider.mediaFolder">
             <de><![CDATA[Images folder]]></de>
-            <en><![CDATA[Images folder]]></en>
+            <en><![CDATA[Media-Ordner auswählen]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.settings.delay">
+            <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>
+            <en><![CDATA[Time to start next slide (Delay)]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.imgLeft">
+            <de><![CDATA[Bilder auf der linken Seite]]></de>
+            <en><![CDATA[Show images on left]]></en>
+        </locale>
+        <locale name="brick.textAndImage.maxImageWidth">
+            <de><![CDATA[Maximale Briete des Bildes]]></de>
+            <en><![CDATA[Maximum image width]]></en>
         </locale>
         <locale name="brick.control.basicSlider.sliderContent">
-            <de><![CDATA[Slider content]]></de>
-            <en><![CDATA[Slider content]]></en>
+            <de><![CDATA[Inhalt]]></de>
+            <en><![CDATA[Text]]></en>
+        </locale>
+
+        <locale name="brick.control.slider.title">
+            <de><![CDATA[Bausteine: Seiten-Präsentation (Carousel)]]></de>
+            <en><![CDATA[Bricks: Site-Presentation (Carousel)]]></en>
         </locale>
         <locale name="brick.control.promosliderWallpaper.title">
             <de><![CDATA[Bausteine: Promoslider Wallpaper]]></de>
@@ -1933,5 +1951,52 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Der Eintrag kann nicht wiederhergestellt werden]]></de>
             <en><![CDATA[The entries can not be restored]]></en>
         </locale>
+
+        <!-- Accordion -->
+        <locale name="brick.accordion.title">
+            <de><![CDATA[Bausteine: Akkorden Menü (Accordion)]]></de>
+            <en><![CDATA[Bricks: Accordion menu]]></en>
+        </locale>
+        <locale name="brick.accordion.description">
+            <de><![CDATA[Baustein mit ausklappbaren Elementen. Es kann zum Bauen der Hilfe oder FAQ Einträge benutzt werden.]]></de>
+            <en><![CDATA[Brick with fold-out elements. It can be used to build help or FAQ entries.]]></en>
+        </locale>
+        <locale name="brick.accordion.stayOpen">
+            <de><![CDATA[Einträge bleiben auf]]></de>
+            <en><![CDATA[Entries stay open]]></en>
+        </locale>
+        <locale name="brick.accordion.stayOpen.desc">
+            <de><![CDATA[Akkordeon-Elemente bleiben geöffnet, wenn ein anderes Element geöffnet wird.]]></de>
+            <en><![CDATA[Accordion items stay open when another item is opened.]]></en>
+        </locale>
+        <locale name="brick.accordion.openFirst">
+            <de><![CDATA[Der erste Eintrag ist initial aufgemacht]]></de>
+            <en><![CDATA[The first entry is initial open]]></en>
+        </locale>
+        <locale name="brick.accordion.listMaxWidth">
+            <de><![CDATA[Maximalae Akkordeon Breite]]></de>
+            <en><![CDATA[Max accordion width]]></en>
+        </locale>
+        <locale name="brick.accordion.listMaxWidth.desc">
+            <de><![CDATA[Diese Einstellung betrifft nur die Liste mit Akkordeon-Elementen.]]></de>
+            <en><![CDATA[This setting affects only the list with accordion elements.]]></en>
+        </locale>
+        <locale name="brick.accordion.entries">
+            <de><![CDATA[Akkordeon-Elemente]]></de>
+            <en><![CDATA[Accordion items]]></en>
+        </locale>
+        <locale name="bricks.accordion.settings.addButton">
+            <de><![CDATA[Element hinzufügen]]></de>
+            <en><![CDATA[Add items]]></en>
+        </locale>
+        <locale name="brick.accordion.settings.title">
+            <de><![CDATA[Titel]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="brick.accordion.settings.content">
+            <de><![CDATA[Inhalt]]></de>
+            <en><![CDATA[Content]]></en>
+        </locale>
+
     </groups>
 </locales>

@@ -10,8 +10,9 @@ use QUI;
 use QUI\Projects\Media\Utils;
 
 /**
- * Class BricSlkider
+ * Class BrickSlider
  *
+ * @author  Dominik Chrzanowski
  * @package QUI\Bricks\Controls
  */
 class BasicSlider extends AbstractPromoslider
@@ -23,6 +24,8 @@ class BasicSlider extends AbstractPromoslider
             'title'         => '',
             'text'          => '',
             'mediaFolder'   => false,
+            'delay'         => 5000,
+            'imgLeft'       => false,
             'sliderContent' => '',
             'class'         => 'quiqqer-bricks-basic-slider',
             'nodeName'      => 'section',
@@ -48,6 +51,7 @@ class BasicSlider extends AbstractPromoslider
         $Folder        = false;
         $images        = [];
         $sliderContent = $this->getAttribute('sliderContent');
+        $imgLeft       = false;
 
         if (!$mediaFolder) {
             return '';
@@ -74,11 +78,22 @@ class BasicSlider extends AbstractPromoslider
             $images = $this->ownImages;
         }
 
+        $delay = 5000;
+        if (intval($this->getAttribute('delay')) > 0) {
+            $delay = $this->getAttribute('delay');
+        }
+
+        $this->setJavaScriptControlOption('delay', $delay);
+
+        if ($this->getAttribute('imgLeft')) {
+            $imgLeft = $this->getAttribute('imgLeft');
+        }
+
         $options = [
             'this'          => $this,
-            'Folder'        => $Folder,
             'images'        => $images,
-            'sliderContent' => $sliderContent
+            'sliderContent' => $sliderContent,
+            'imgLeft'       => $imgLeft
         ];
 
         $Engine->assign($options);

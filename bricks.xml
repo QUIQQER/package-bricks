@@ -170,6 +170,19 @@
                     <locale group="quiqqer/bricks" var="brick.control.basicSlider.mediaFolder"/>
                 </setting>
 
+                <setting name="delay" type="number">
+                    <locale group="quiqqer/bricks" var="brick.control.basicSlider.settings.delay"/>
+                </setting>
+
+                <setting name="imgLeft" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.basicSlider.imgLeft"/>
+                </setting>
+
+                <setting name="maxImageWidth" type="number">
+                    <locale group="quiqqer/bricks"
+                            var="brick.control.basicSlider.maxImageWidth"/>
+                </setting>
+
                 <setting name="sliderContent" data-qui="controls/editors/Input" type="text">
                     <locale group="quiqqer/bricks" var="brick.control.basicSlider.sliderContent"/>
                 </setting>
@@ -1533,6 +1546,41 @@
                     <locale group="quiqqer/bricks" var="brick.textAndImageMultiple.settings.entries"/>
                 </setting>
 
+            </settings>
+        </brick>
+
+        <!-- Accordion -->
+        <brick control="\QUI\Bricks\Controls\Accordion">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.accordion.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.accordion.description"/>
+            </description>
+
+            <settings>
+                <setting name="stayOpen" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.accordion.stayOpen"/>
+
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.accordion.stayOpen.desc"/>
+                    </description>
+                </setting>
+
+                <setting name="openFirst" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.accordion.openFirst"/>
+                </setting>
+
+                <setting name="listMaxWidth" type="number" min="0" max="1920">
+                    <locale group="quiqqer/bricks" var="brick.accordion.listMaxWidth"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.accordion.listMaxWidth.desc"/>
+                    </description>
+                </setting>
+
+                <setting name="entries" data-qui="package/quiqqer/bricks/bin/Controls/backend/AccordionSettings">
+                    <locale group="quiqqer/bricks" var="brick.accordion.entries"/>
+                </setting>
             </settings>
         </brick>
 

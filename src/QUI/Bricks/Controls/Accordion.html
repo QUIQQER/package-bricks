@@ -1,0 +1,40 @@
+<style>
+    {if $listMaxWidth}
+    .quiqqer-accordion-list {
+        --quiqqer-accordion-list-maxWidth: {$listMaxWidth}px;
+    }
+    {/if}
+</style>
+
+{if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+    <header class="control-header">
+        <h1>{$this->getAttribute('frontendTitle')}</h1>
+    </header>
+{/if}
+
+{if $this->getAttribute('content') != ""}
+    <div class="control-content">
+        {$this->getAttribute('content')}
+    </div>
+{/if}
+
+<div class="quiqqer-accordion-list">
+    {foreach from=$entries item=entry key=key}
+        <div class="quiqqer-accordion-item" data-open="{if $openFirst && $key == 0}1{else}0{/if}">
+            {if isset($entry['entryTitle'])}
+                <header class="quiqqer-accordion-item-header">
+                    <span class="quiqqer-accordion-item-header-text">{$entry['entryTitle']}</span>
+                    <span class="quiqqer-accordion-item-header-icon fa fa-angle-down" {if $openFirst && $key == 0}style="transform: rotate(180deg);"{/if}></span>
+                </header>
+            {/if}
+
+            {if isset($entry['entryContent'])}
+                <div class="quiqqer-accordion-item-content-wrapper">
+                    <div class="quiqqer-accordion-item-content">
+                        {$entry['entryContent']}
+                    </div>
+                </div>
+            {/if}
+        </div>
+    {/foreach}
+</div>
