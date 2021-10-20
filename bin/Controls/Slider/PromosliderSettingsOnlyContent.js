@@ -17,7 +17,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
     'utils/Controls',
 
     'text!package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContentEntry.html',
-    'css!package/quiqqer/bricks/bin/Controls/Slider/TextAndImageMultipleSettings.css'
+    'css!package/quiqqer/bricks/bin/Controls/Slider/PromoSliderSettings.css'
 
 ], function (QUI, QUIControl, QUIConfirm, QUIButton, QUISwitch, QUILocale,
              Mustache, Grid, ControlsUtils, templateEntry) {
