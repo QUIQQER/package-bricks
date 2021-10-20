@@ -84,7 +84,6 @@ class BasicSlider extends AbstractPromoslider
 
         $options = [
             'this'          => $this,
-            'Folder'        => $Folder,
             'images'        => $images,
             'sliderContent' => $sliderContent
         ];
