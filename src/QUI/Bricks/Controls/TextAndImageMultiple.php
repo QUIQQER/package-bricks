@@ -11,6 +11,7 @@ use QUI;
 /**
  * Class TextAndImageMultiple
  *
+ * @author  Dominik Chrzanowski
  * @package quiqqer/bricks
  */
 class TextAndImageMultiple extends QUI\Control
