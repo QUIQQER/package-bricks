@@ -12,6 +12,7 @@ use QUI\Projects\Media\Utils;
 /**
  * Class BricSlkider
  *
+ * @author  Dominik Chrzanowski
  * @package QUI\Bricks\Controls
  */
 class BasicSlider extends AbstractPromoslider
