@@ -33,6 +33,16 @@
     padding-right: 20px;
 }
 
+.basic-slider__imageLeft {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.basic-slider__imageLeft .basic-slider-content{
+    padding-right: 0;
+    padding-left: 20px;
+}
+
 @media screen and (max-width: 768px) {
     .basic-slider-wrapper {
         flex-direction: column;
