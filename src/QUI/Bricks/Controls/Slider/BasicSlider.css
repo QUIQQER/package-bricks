@@ -10,6 +10,7 @@
 
 .basic-slider-image-wrapper {
     position: relative;
+    text-align: center;
 }
 
 .basic-slider-image-wrapper li {

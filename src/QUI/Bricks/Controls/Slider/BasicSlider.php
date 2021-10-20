@@ -26,6 +26,7 @@ class BasicSlider extends AbstractPromoslider
             'mediaFolder'   => false,
             'delay'         => 5000,
             'imgLeft'       => false,
+            'maxImageWidth'   => false,
             'sliderContent' => '',
             'class'         => 'quiqqer-bricks-basic-slider',
             'nodeName'      => 'section',
@@ -89,11 +90,17 @@ class BasicSlider extends AbstractPromoslider
             $imgLeft = $this->getAttribute('imgLeft');
         }
 
+        $maxImageWidth = false;
+        if (intval($this->getAttribute('maxImageWidth')) > 0) {
+            $maxImageWidth = intval($this->getAttribute('maxImageWidth'));
+        }
+
         $options = [
             'this'          => $this,
             'images'        => $images,
             'sliderContent' => $sliderContent,
-            'imgLeft'       => $imgLeft
+            'imgLeft'       => $imgLeft,
+            'maxImageWidth' => $maxImageWidth
         ];
 
         $Engine->assign($options);

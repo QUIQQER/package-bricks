@@ -428,7 +428,7 @@
             <de><![CDATA[Bilder auf der linken Seite]]></de>
             <en><![CDATA[Show images on left]]></en>
         </locale>
-        <locale name="brick.textAndImage.maxImageWidth">
+        <locale name="brick.control.basicSlider.maxImageWidth">
             <de><![CDATA[Maximale Briete des Bildes]]></de>
             <en><![CDATA[Maximum image width]]></en>
         </locale>

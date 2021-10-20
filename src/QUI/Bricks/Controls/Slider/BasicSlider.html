@@ -19,9 +19,9 @@
         <ul class="basic-slider-images">
             {assign var=showFirstImage value=true}
             {foreach from=$images item=Image}
-                <li data-image="{image image=$Image onlysrc=1 width="500"}">
+                <li data-image="{image image=$Image onlysrc=1 width=$maxImageWidth}">
                     {if $showFirstImage}
-                        {image image=$Image width="500"}
+                        {image image=$Image width="{$maxImageWidth}"}
                         {assign var=showFirstImage value=false}
                     {/if}
                 </li>
