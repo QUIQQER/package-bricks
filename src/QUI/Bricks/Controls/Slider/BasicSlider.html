@@ -12,16 +12,18 @@
 
 <div class="basic-slider-wrapper {if $imgLeft} basic-slider__imageLeft {/if}">
     <div class="basic-slider-content" style="align-items: {$textPosition};">
-        {$sliderContent}
+        <div class="basic-slider-content-container">
+            {$sliderContent}
+        </div>
     </div>
 
     <div class="basic-slider-image-wrapper">
         <ul class="basic-slider-images">
             {assign var=showFirstImage value=true}
             {foreach from=$images item=Image}
-                <li data-image="{image image=$Image onlysrc=1 width=$maxImageWidth}">
+                <li data-image="{image image=$Image onlysrc=1 width="$maxImageWidth"}">
                     {if $showFirstImage}
-                        {image image=$Image width="{$maxImageWidth}"}
+                        {image image=$Image width="$maxImageWidth"}
                         {assign var=showFirstImage value=false}
                     {/if}
                 </li>
