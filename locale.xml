@@ -432,6 +432,22 @@
             <de><![CDATA[Maximale Briete des Bildes]]></de>
             <en><![CDATA[Maximum image width]]></en>
         </locale>
+        <locale name="brick.basicSlider.textPosition">
+            <de><![CDATA[Text Position]]></de>
+            <en><![CDATA[Text position]]></en>
+        </locale>
+        <locale name="brick.basicSlider.textPosition.top">
+            <de><![CDATA[Oben]]></de>
+            <en><![CDATA[Top]]></en>
+        </locale>
+        <locale name="brick.basicSlider.textPosition.center">
+            <de><![CDATA[Zentriert]]></de>
+            <en><![CDATA[Center]]></en>
+        </locale>
+        <locale name="brick.basicSlider.textPosition.bottom">
+            <de><![CDATA[Unten]]></de>
+            <en><![CDATA[Bottom]]></en>
+        </locale>
         <locale name="brick.control.basicSlider.sliderContent">
             <de><![CDATA[Inhalt]]></de>
             <en><![CDATA[Text]]></en>
