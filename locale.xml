@@ -417,8 +417,8 @@
             <en><![CDATA[A simple image slider. The slider is displayed next to the text (optionally on the left or right).]]></en>
         </locale>
         <locale name="brick.control.basicSlider.mediaFolder">
-            <de><![CDATA[Images folder]]></de>
-            <en><![CDATA[Media-Ordner auswählen]]></en>
+            <de><![CDATA[Media-Ordner auswählen]]></de>
+            <en><![CDATA[Images folder]]></en>
         </locale>
         <locale name="brick.control.basicSlider.settings.delay">
             <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>

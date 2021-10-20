@@ -38,9 +38,6 @@ class BasicSlider extends AbstractPromoslider
         $this->addCSSFile(
             \dirname(__FILE__) . '/BasicSlider.css'
         );
-
-        $this->addCSSClass('grid-100');
-        $this->addCSSClass('mobile-grid-100');
     }
 
 
