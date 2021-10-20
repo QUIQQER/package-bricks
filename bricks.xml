@@ -183,6 +183,24 @@
                             var="brick.control.basicSlider.maxImageWidth"/>
                 </setting>
 
+                <setting name="textPosition" type="select">
+                    <locale group="quiqqer/bricks"
+                            var="brick.basicSlider.textPosition"/>
+
+                    <option value="top">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.textPosition.top"/>
+                    </option>
+                    <option value="center">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.textPosition.center"/>
+                    </option>
+                    <option value="bottom">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.textPosition.bottom"/>
+                    </option>
+                </setting>
+
                 <setting name="sliderContent" data-qui="controls/editors/Input" type="text">
                     <locale group="quiqqer/bricks" var="brick.control.basicSlider.sliderContent"/>
                 </setting>
