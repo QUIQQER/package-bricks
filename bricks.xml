@@ -170,6 +170,11 @@
                     <locale group="quiqqer/bricks" var="brick.control.basicSlider.mediaFolder"/>
                 </setting>
 
+                <setting name="maxImageWidth" type="number">
+                    <locale group="quiqqer/bricks"
+                            var="brick.control.basicSlider.maxImageWidth"/>
+                </setting>
+
                 <setting name="sliderContent" data-qui="controls/editors/Input" type="text">
                     <locale group="quiqqer/bricks" var="brick.control.basicSlider.sliderContent"/>
                 </setting>

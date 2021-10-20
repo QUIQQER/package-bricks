@@ -1,33 +1,31 @@
 {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
-<header class="control-header">
-    <h1>{$this->getAttribute('frontendTitle')}</h1>
-</header>
+    <header class="control-header">
+        <h1>{$this->getAttribute('frontendTitle')}</h1>
+    </header>
 {/if}
 
 {if $this->getAttribute('content') != ""}
-<div class="control-content">
-    {$this->getAttribute('content')}
-</div>
+    <div class="control-content">
+        {$this->getAttribute('content')}
+    </div>
 {/if}
 
 <div class="basic-slider-wrapper">
-
     <div class="basic-slider-content">
         {$sliderContent}
     </div>
 
     <div class="basic-slider-image-wrapper">
-
         <ul class="basic-slider-images">
-        {foreach from=$images item=Image}
-            <li data-image="{image image=$Image onlysrc=1 width=500}" class="test">
-
-                {if $Image==$images[0]}
-                {image image=$Image}
-                {/if}
-
-            </li>
-        {/foreach}
+            {assign var=showFirstImage value=true}
+            {foreach from=$images item=Image}
+                <li data-image="{image image=$Image onlysrc=1 host=1 width="500"}" class="test">
+                    {if $showFirstImage}
+                        {image image=$Image width="500"}
+                        {assign var=showFirstImage value=false}
+                    {/if}
+                </li>
+            {/foreach}
         </ul>
 
     </div>

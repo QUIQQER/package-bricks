@@ -26,7 +26,7 @@
 }
 
 .basic-slider-image-wrapper li img {
-    width: 100%;
+    max-width: 100%;
 }
 
 .basic-slider-content {

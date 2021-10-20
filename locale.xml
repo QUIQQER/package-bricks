@@ -407,21 +407,31 @@
             <en><![CDATA[CSS classes]]></en>
         </locale>
 
-        <locale name="brick.control.slider.title">
-            <de><![CDATA[Bausteine: Seiten-Präsentation (Carousel)]]></de>
-            <en><![CDATA[Bricks: Site-Presentation (Carousel)]]></en>
-        </locale>
+        <!-- Basic slider -->
         <locale name="brick.control.basicSlider.title">
             <de><![CDATA[Bausteine: Basic Slider]]></de>
             <en><![CDATA[Bricks: Basic slider]]></en>
         </locale>
+        <locale name="brick.control.basicSlider.description">
+            <de><![CDATA[Ein einfaches Bilder-Slider. Der Slider wird neben dem Text angezeigt (wahlweise links oder rechts).]]></de>
+            <en><![CDATA[A simple image slider. The slider is displayed next to the text (optionally on the left or right).]]></en>
+        </locale>
         <locale name="brick.control.basicSlider.mediaFolder">
             <de><![CDATA[Images folder]]></de>
-            <en><![CDATA[Images folder]]></en>
+            <en><![CDATA[Media-Ordner auswählen]]></en>
+        </locale>
+        <locale name="brick.textAndImage.maxImageWidth">
+            <de><![CDATA[Maximale Briete des Bildes]]></de>
+            <en><![CDATA[Maximum image width]]></en>
         </locale>
         <locale name="brick.control.basicSlider.sliderContent">
-            <de><![CDATA[Slider content]]></de>
-            <en><![CDATA[Slider content]]></en>
+            <de><![CDATA[Inhalt]]></de>
+            <en><![CDATA[Text]]></en>
+        </locale>
+
+        <locale name="brick.control.slider.title">
+            <de><![CDATA[Bausteine: Seiten-Präsentation (Carousel)]]></de>
+            <en><![CDATA[Bricks: Site-Presentation (Carousel)]]></en>
         </locale>
         <locale name="brick.control.promosliderWallpaper.title">
             <de><![CDATA[Bausteine: Promoslider Wallpaper]]></de>
