@@ -47,6 +47,7 @@ class TextAndImageMultiple extends QUI\Control
      */
     public function getBody()
     {
+        $Engine        = QUI::getTemplateManager()->getEngine();
         $entries       = json_decode($this->getAttribute('entries'), true);
         $textRatio     = $this->getAttribute('textRatio');
         $imagePosition = $this->getAttribute('imagePosition');
@@ -97,6 +98,11 @@ class TextAndImageMultiple extends QUI\Control
             }
         }
 
-        return $html;
+        $Engine->assign([
+            'this' => $this,
+            'html' => $html
+        ]);
+
+        return $Engine->fetch(dirname(__FILE__) . '/TextAndImageMultiple.html');
     }
 }
