@@ -6,3 +6,8 @@
     padding-left: 0;
     padding-right: 0;
 }
+
+.quiqqer-bricks-textAndImageMultiple-settings img {
+    max-width: 50px;
+    max-height: 50px;
+}
