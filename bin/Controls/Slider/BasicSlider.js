@@ -48,9 +48,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
 
             this.List = Elm.getElement(".basic-slider-images");
             this.Slide = this.List.getFirst('li');
+            this.Dots = null;
 
-            this.Dots = Elm.getElement(".basic-slider-dots");
-            this.Dot = this.Dots.getFirst('li');
+            if (Elm.getElement(".basic-slider-dots") !== null) {
+                this.Dots = Elm.getElement(".basic-slider-dots");
+                this.Dot = this.Dots.getFirst('li');
+            }
+
             this.delay = this.getAttribute('delay');
 
             this.$start();
@@ -129,11 +133,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
                     }
                 });
 
-                moofx(self.Dot).animate({
-                    'background-color': 'rgba(0,0,0,0)',
-                    'border-color': '#e2e2e2'
+                if (self.Dots) {
+                    moofx(self.Dot).animate({
+                        'background-color': 'rgba(0,0,0,0)',
+                        'border-color': '#e2e2e2'
+                    });
                 }
-                );
             });
         },
 
@@ -157,10 +162,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
                     callback: resolve
                 });
 
-                moofx(self.NextDot).animate({
-                    'background-color': '#2681da',
-                    'border-color': '#2681da'
-                });
+                if (self.Dots) {
+                    moofx(self.NextDot).animate({
+                        'background-color': '#2681da',
+                        'border-color': '#2681da'
+                    });
+                }
             });
         },
 
@@ -204,6 +211,11 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          * @returns {*}
          */
         $getNextDot: function () {
+
+            if (this.Dots === null) {
+                return null;
+            }
+
             if(!this.Dot.getNext()) {
                 return this.Dots.getFirst('li');
             }

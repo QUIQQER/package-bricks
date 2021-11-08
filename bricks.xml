@@ -178,6 +178,10 @@
                     <locale group="quiqqer/bricks" var="brick.control.basicSlider.imgLeft"/>
                 </setting>
 
+                <setting name="navigationDotsShow" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.basicSlider.navigationDotsShow"/>
+                </setting>
+
                 <setting name="maxImageWidth" type="number">
                     <locale group="quiqqer/bricks"
                             var="brick.control.basicSlider.maxImageWidth"/>

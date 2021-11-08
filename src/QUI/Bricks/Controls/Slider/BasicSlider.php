@@ -31,6 +31,7 @@ class BasicSlider extends AbstractPromoslider
             'class'         => 'quiqqer-bricks-basic-slider',
             'nodeName'      => 'section',
             'data-qui'      => 'package/quiqqer/bricks/bin/Controls/Slider/BasicSlider',
+            'dotsNavi'      => false,
         ]);
 
         parent::__construct($attributes);
@@ -92,6 +93,8 @@ class BasicSlider extends AbstractPromoslider
             $maxImageWidth = intval($this->getAttribute('maxImageWidth'));
         }
 
+        $dotsNav = $this->getAttribute('navigationDotsShow');
+
         // text position
         switch ($this->getAttribute('textPosition')) {
             case 'center':
@@ -113,7 +116,8 @@ class BasicSlider extends AbstractPromoslider
             'sliderContent' => $sliderContent,
             'imgLeft'       => $imgLeft,
             'maxImageWidth' => $maxImageWidth,
-            'textPosition'  => $textPosition
+            'textPosition'  => $textPosition,
+            'dotsNav'       => $dotsNav,
         ];
 
         $Engine->assign($options);
