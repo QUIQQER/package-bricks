@@ -39,6 +39,11 @@
     flex-direction: row-reverse;
 }
 
+.basic-slider-dots {
+    text-align: center;
+    padding: 0;
+}
+
 .basic-slider-dots li {
     display: inline-block;
     width: 15px;
