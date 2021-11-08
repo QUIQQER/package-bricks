@@ -31,7 +31,7 @@ class BasicSlider extends AbstractPromoslider
             'class'         => 'quiqqer-bricks-basic-slider',
             'nodeName'      => 'section',
             'data-qui'      => 'package/quiqqer/bricks/bin/Controls/Slider/BasicSlider',
-            'dotsNavi'      => false,
+            'dotsNav'       => false,
         ]);
 
         parent::__construct($attributes);
@@ -51,6 +51,7 @@ class BasicSlider extends AbstractPromoslider
         $images        = [];
         $sliderContent = $this->getAttribute('sliderContent');
         $imgLeft       = false;
+        $dotsNav       = false;
 
         if (!$mediaFolder) {
             return '';
