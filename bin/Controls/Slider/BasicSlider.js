@@ -134,10 +134,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
                 });
 
                 if (self.Dots) {
-                    moofx(self.Dot).animate({
-                        'background-color': 'rgba(0,0,0,0)',
-                        'border-color': '#e2e2e2'
-                    });
+                    self.Dot.classList.remove('active');
                 }
             });
         },
@@ -163,10 +160,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
                 });
 
                 if (self.Dots) {
-                    moofx(self.NextDot).animate({
-                        'background-color': '#2681da',
-                        'border-color': '#2681da'
-                    });
+                    self.NextDot.classList.add('active');
                 }
             });
         },

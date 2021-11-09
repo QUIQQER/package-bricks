@@ -51,9 +51,10 @@
     border: 2px solid #e2e2e2;
     border-radius: 50%;
     margin: 0 5px;
+    transition: all 0.2s ease-in-out;
 }
 
-.basic-slider-dots li:first-child {
+.basic-slider-dots li.active {
     background-color: #2681da;
     border-color: #2681da;
 }

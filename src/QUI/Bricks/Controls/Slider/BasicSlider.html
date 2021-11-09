@@ -34,7 +34,7 @@
         <ul class="basic-slider-dots">
             {foreach from=$images item=Image key=key}
 
-            <li class="basic-slider-dot"></li>
+                <li class="basic-slider-dot {if $key===0}active{/if}"></li>
 
             {/foreach}
         </ul>
