@@ -14,16 +14,6 @@
     <div class="basic-slider-content" style="align-items: {$textPosition};">
         <div class="basic-slider-content-container">
             {$sliderContent}
-
-            {if $dotsNav && $dotsPosition === 'underText'}
-            <ul class="basic-slider-dots">
-                {foreach from=$images item=Image key=key}
-
-                <li class="basic-slider-dot"></li>
-
-                {/foreach}
-            </ul>
-            {/if}
         </div>
     </div>
 
@@ -40,7 +30,7 @@
             {/foreach}
         </ul>
 
-        {if $dotsNav && $dotsPosition === 'underSlide'}
+        {if $dotsNav}
         <ul class="basic-slider-dots">
             {foreach from=$images item=Image key=key}
 

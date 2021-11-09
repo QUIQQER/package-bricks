@@ -182,20 +182,6 @@
                     <locale group="quiqqer/bricks" var="brick.control.basicSlider.navigationDotsShow"/>
                 </setting>
 
-                <setting name="navigationDotPosition" type="select">
-                    <locale group="quiqqer/bricks"
-                            var="brick.basicSlider.navigationDotPosition"/>
-
-                    <option value="underSlide">
-                        <locale group="quiqqer/bricks"
-                                var="brick.basicSlider.navigationDotPosition.underSlide"/>
-                    </option>
-                    <option value="underText">
-                        <locale group="quiqqer/bricks"
-                                var="brick.basicSlider.navigationDotPosition.underText"/>
-                    </option>
-                </setting>
-
                 <setting name="maxImageWidth" type="number">
                     <locale group="quiqqer/bricks"
                             var="brick.control.basicSlider.maxImageWidth"/>

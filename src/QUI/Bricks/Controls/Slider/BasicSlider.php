@@ -52,7 +52,6 @@ class BasicSlider extends AbstractPromoslider
         $sliderContent = $this->getAttribute('sliderContent');
         $imgLeft       = false;
         $dotsNav       = false;
-        $dotsPosition  = 'underSlide';
 
         if (!$mediaFolder) {
             return '';
@@ -96,7 +95,6 @@ class BasicSlider extends AbstractPromoslider
         }
 
         $dotsNav      = $this->getAttribute('navigationDotsShow');
-        $dotsPosition = $this->getAttribute('navigationDotPosition');
 
         // text position
         switch ($this->getAttribute('textPosition')) {
@@ -121,7 +119,6 @@ class BasicSlider extends AbstractPromoslider
             'maxImageWidth' => $maxImageWidth,
             'textPosition'  => $textPosition,
             'dotsNav'       => $dotsNav,
-            'dotsPosition'  => $dotsPosition,
         ];
 
         $Engine->assign($options);

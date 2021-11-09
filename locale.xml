@@ -432,18 +432,6 @@
             <de><![CDATA[Punktnavigation anzeigen]]></de>
             <en><![CDATA[Show dots navigation]]></en>
         </locale>
-        <locale name="brick.basicSlider.navigationDotPosition">
-            <de><![CDATA[Punktnavigation anzeigen]]></de>
-            <en><![CDATA[Navigation position]]></en>
-        </locale>
-        <locale name="brick.basicSlider.navigationDotPosition.underSlide">
-            <de><![CDATA[Unter Folie]]></de>
-            <en><![CDATA[Under slide]]></en>
-        </locale>
-        <locale name="brick.basicSlider.navigationDotPosition.underText">
-            <de><![CDATA[Unter Text]]></de>
-            <en><![CDATA[Under text]]></en>
-        </locale>
         <locale name="brick.control.basicSlider.maxImageWidth">
             <de><![CDATA[Maximale Briete des Bildes]]></de>
             <en><![CDATA[Maximum image width]]></en>
