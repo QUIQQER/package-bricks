@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains QUI\Bricks\Controls\Slider\Promoslider
+ * This file contains QUI\Bricks\Controls\Slider\BasicSlider
  */
 
 namespace QUI\Bricks\Controls\Slider;
@@ -24,7 +24,7 @@ class BasicSlider extends AbstractPromoslider
             'title'         => '',
             'text'          => '',
             'mediaFolder'   => false,
-            'delay'         => 5000,
+            'delay'         => 7000,
             'imgLeft'       => false,
             'maxImageWidth' => false,
             'sliderContent' => '',
