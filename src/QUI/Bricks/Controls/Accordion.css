@@ -17,7 +17,7 @@
     margin-bottom: 0;
     padding-top: var(--spacing, 1rem);
     padding-bottom: var(--spacing, 1rem);
-    font-size: var(--accordion-header-font-size, 1.5rem);
+    font-size: var(--accordion-header-font-size, 1.25rem);
 }
 
 .quiqqer-accordion-item-header-icon {
