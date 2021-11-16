@@ -83,7 +83,7 @@ class Flags extends QUI\Control
      *
      * @return QUI\Projects\Site
      */
-    protected function getSite()
+    public function getSite()
     {
         if ($this->getAttribute('Site')) {
             return $this->getAttribute('Site');
