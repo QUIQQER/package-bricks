@@ -61,7 +61,7 @@ class SideBox1 extends QUI\Control
      *
      * @return QUI\Projects\Site
      */
-    protected function getSite()
+    public function getSite()
     {
         $Project = $this->getProject();
         $site    = $this->getAttribute('site');

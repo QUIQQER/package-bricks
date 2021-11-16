@@ -280,7 +280,7 @@ class SimpleContact extends QUI\Control
      *
      * @throws QUI\Exception
      */
-    protected function getSite()
+    public function getSite()
     {
         if ($this->getAttribute('Site')) {
             return $this->getAttribute('Site');
