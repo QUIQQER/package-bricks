@@ -155,10 +155,11 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                         dataIndex: 'imagePreview',
                         dataType : 'node',
                         width    : 60
-                    }, {
-                        header   : QUILocale.get('quiqqer/quiqqer', 'title'),
-                        dataIndex: 'title',
-                        dataType : 'string',
+                    },
+                    {
+                        header   : QUILocale.get('quiqqer/quiqqer', 'content'),
+                        dataIndex: 'text',
+                        dataType : 'code',
                         width    : 300
                     },
                     {
@@ -281,10 +282,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     });
                 }
 
-                if ("title" in entry) {
-                    insert.title = entry.title;
-                }
-
                 if ("text" in entry) {
                     insert.text = entry.text;
                 }
@@ -335,7 +332,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
         add: function (params) {
             var entry = {
                 image     : '',
-                title     : '',
                 text      : '',
                 isDisabled: 0,
             };
@@ -346,10 +342,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
 
             if ("image" in params && params.image !== '') {
                 entry.image = params.image;
-            }
-
-            if ("title" in params) {
-                entry.title = params.title;
             }
 
             if ("text" in params) {
@@ -374,7 +366,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
 
             var entry = {
                 image     : '',
-                title     : '',
                 text      : '',
                 isDisabled: 0
             };
@@ -385,10 +376,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
 
             if ("image" in params) {
                 entry.image = params.image;
-            }
-
-            if ("title" in params) {
-                entry.title = params.title;
             }
 
             if ("text" in params) {
@@ -454,7 +441,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                 data.push({
                     isDisabled: parseInt(gridData[i].isDisabled),
                     image     : gridData[i].image,
-                    title     : gridData[i].title,
                     text      : gridData[i].text,
                 });
             }
@@ -475,7 +461,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
         $openDeleteDialog: function () {
             new QUIConfirm({
                 icon       : 'fa fa-icon',
-                title      : QUILocale.get(lg, 'quiqqer.bricks.entires.delete.title'),
                 text       : QUILocale.get(lg, 'quiqqer.bricks.entires.delete.text'),
                 information: QUILocale.get(lg, 'quiqqer.bricks.entires.delete.information'),
                 texticon   : false,
@@ -522,12 +507,10 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     var Form    = Content.getElement('form');
 
                     var Image       = Form.elements.image;
-                    var Title       = Form.elements.title;
                     var Description = Form.elements.description;
 
                     self.edit(index, {
                         image     : Image.value,
-                        title     : Title.value,
                         text      : Description.value,
                         isDisabled: Dialog.IsDisabledSwitch.getStatus()
                     });
@@ -541,7 +524,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     var Form    = Content.getElement('form');
 
                     var Image       = Form.elements.image;
-                    var Title       = Form.elements.title;
                     var Description = Form.elements.description;
 
                     if (data.isDisabled) {
@@ -551,7 +533,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     }
 
                     Image.value       = data.image;
-                    Title.value       = data.title;
                     Description.value = data.text;
 
                     if (data.newTab && data.newTab.getAttribute('data-enabled') === "1") {
@@ -585,12 +566,10 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     var Form    = Content.getElement('form');
 
                     var Image       = Form.elements.image;
-                    var Title       = Form.elements.title;
                     var Description = Form.elements.description;
 
                     self.add({
                         image     : Image.value,
-                        title     : Title.value,
                         text      : Description.value,
                         isDisabled: Dialog.IsDisabledSwitch.getStatus()
                     });
@@ -630,7 +609,6 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                                     html   : Mustache.render(templateEntry, {
                                         fieldIsDisabled : QUILocale.get(lg, prefix + 'disable'),
                                         fieldImage      : QUILocale.get(lg, prefix + 'image'),
-                                        fieldTitle      : QUILocale.get(lg, prefix + 'title'),
                                         fieldDescription: QUILocale.get(lg, prefix + 'content'),
                                     }),
                                     'class': 'quiqqer-bricks-promoslider-settings-entry'
