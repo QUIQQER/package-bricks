@@ -53,37 +53,34 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
             this.Loader.inject(this.$Elm);
             this.Form = this.$Elm.getElement('form');
 
-            var Button = new Element('button', {
-                'class': 'quiqqer-simple-contact-button',
-                'type' : 'button',
-                'html' : QUILocale.get('quiqqer/bricks', 'control.simpleContact.sendButton'),
-                events : {
-                    click: function () {
-                        if (self.$captchaRequired && !self.$captchaResponse) {
-                            QUI.getMessageHandler(function (MH) {
-                                MH.options.displayTimeMessages = 2000;
+            var Button = this.Form.getElement('.quiqqer-simple-contact-button');
 
-                                var CaptchaElm = self.$Elm.getElement('.qui-contact-captcha');
+            if (Button) {
+                Button.addEvent('click', function () {
+                    if (self.$captchaRequired && !self.$captchaResponse) {
+                        QUI.getMessageHandler(function (MH) {
+                            MH.options.displayTimeMessages = 2000;
 
-                                if (!CaptchaElm) {
-                                    CaptchaElm = undefined;
-                                }
-                                
-                                MH.addError(
-                                    QUILocale.get(lg, 'brick.control.simpleContact.error.captcha_failed'),
-                                    CaptchaElm
-                                );
-                            });
+                            var CaptchaElm = self.$Elm.getElement('.qui-contact-captcha');
 
-                            return;
-                        }
+                            if (!CaptchaElm) {
+                                CaptchaElm = undefined;
+                            }
 
-                        self.$Elm.getElement('form').fireEvent('submit');
+                            MH.addError(
+                                QUILocale.get(lg, 'brick.control.simpleContact.error.captcha_failed'),
+                                CaptchaElm
+                            );
+                        });
+
+                        return;
                     }
-                }
-            });
 
-            Button.inject(this.Form);
+                    self.$Elm.getElement('form').fireEvent('submit');
+                });
+
+                Button.removeAttribute('disabled');
+            }
 
             this.$Elm.getElement('form').addEvent('submit', function (event) {
                 if (typeof event !== 'undefined') {
