@@ -20,6 +20,10 @@
     width: 100%;
 }
 
+.quiqqer-bricks-site-category-area-brick:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
 .quiqqer-bricks-site-category-area-buttons {
     position: absolute;
     right: 4px;
@@ -40,7 +44,7 @@
 }
 
 .quiqqer-bricks-site-category-area-brick select {
-    background: #fff;
+    background: transparent;
     line-height: 20px;
     margin: 2px;
     padding: 2px;
