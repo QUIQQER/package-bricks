@@ -1391,6 +1391,14 @@
                     <locale group="quiqqer/bricks"
                             var="brick.textAndImage.maxImageWidth"/>
                 </setting>
+                <setting name="imageZoom" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="brick.textAndImage.imageZoom"/>
+                    <description>
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.imageZoom.desc"/>
+                    </description>
+                </setting>
 
                 <setting name="textPosition" type="select">
                     <locale group="quiqqer/bricks"
@@ -1559,6 +1567,14 @@
                     <description>
                         <locale group="quiqqer/bricks"
                                 var="brick.textAndImage.fullImageHeight.desc"/>
+                    </description>
+                </setting>
+                <setting name="imageZoom" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="brick.textAndImage.imageZoom"/>
+                    <description>
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.imageZoom.desc"/>
                     </description>
                 </setting>
 
