@@ -30,7 +30,8 @@ class TextAndImage extends QUI\Control
             'imageShadow'     => false,
             'fullImageHeight' => false,
             'textPosition'    => 'top', // top, center, bottom
-            'textImageRatio'  => 50 // 30,35,40,45,50,55,60,65,70
+            'textImageRatio'  => 50, // 30,35,40,45,50,55,60,65,70
+            'imageZoom'       => false
         ]);
 
         parent::__construct($attributes);
@@ -94,6 +95,13 @@ class TextAndImage extends QUI\Control
             $maxImageWidth = intval($this->getAttribute('maxImageWidth'));
         }
 
+        // zoom
+        $imageZoom = 0;
+        if ($this->getAttribute('imageZoom') &&
+            QUI::getPackageManager()->isInstalled('quiqqer/gallery')) {
+            $imageZoom = 1;
+        }
+
         $Engine->assign([
             'this'              => $this,
             'img'               => $this->getAttribute('image'),
@@ -104,7 +112,8 @@ class TextAndImage extends QUI\Control
             'imageAsBackground' => $this->getAttribute('imageAsBackground'),
             'textPosition'      => $textPosition,
             'textWidthClass'    => $textWidthClass,
-            'imgWidthClass'     => $imgWidthClass
+            'imgWidthClass'     => $imgWidthClass,
+            'imageZoom'         => $imageZoom
         ]);
 
         return $Engine->fetch(dirname(__FILE__).'/TextAndImage.html');

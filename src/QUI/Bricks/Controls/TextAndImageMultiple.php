@@ -32,12 +32,13 @@ class TextAndImageMultiple extends QUI\Control
             'title'         => false,
             'text'          => false,
             'image'         => false,
+            'imageZoom'     => false
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__) . '/TextAndImageMultiple.css'
+            dirname(__FILE__).'/TextAndImageMultiple.css'
         );
     }
 
@@ -84,12 +85,13 @@ class TextAndImageMultiple extends QUI\Control
                 'fullImageHeight' => $fullImageHeight,
                 'textPosition'    => $this->getAttribute('textPosition'),
                 'textImageRatio'  => $textRatio,
-                'content'         => $entry['text']
+                'content'         => $entry['text'],
+                'imageZoom'       => $this->getAttribute('imageZoom')
             ]);
 
             $TextAndImage->addCSSClass('grid-container');
 
-            $html .='<div class="quiqqer-textImageMultiple">' . $TextAndImage->create() . '</div>';
+            $html .= '<div class="quiqqer-textImageMultiple">'.$TextAndImage->create().'</div>';
 
             $this->addCSSFiles($TextAndImage->getCSSFiles());
 
@@ -104,6 +106,6 @@ class TextAndImageMultiple extends QUI\Control
             'html' => $html
         ]);
 
-        return $Engine->fetch(dirname(__FILE__) . '/TextAndImageMultiple.html');
+        return $Engine->fetch(dirname(__FILE__).'/TextAndImageMultiple.html');
     }
 }

@@ -23,6 +23,9 @@
     "quiqqer-asset\/mustache": "*",
     "ramsey\/uuid": "3.*"
   },
+  "suggest": {
+    "quiqqer\/gallery": "Present your photos, products and pictures in elaborate and beautiful galleries."
+  },
   "autoload": {
     "psr-4": {
       "QUI\\Bricks\\": "src\/QUI\/Bricks"
