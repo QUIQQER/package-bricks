@@ -14,10 +14,41 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    position: relative;
 }
 
-.quiqqer-textImage-image img {
+.quiqqer-textImage-image__imageZoom picture {
+    position: relative;
+}
+
+.quiqqer-textImage-image__imageZoom picture:after {
+    content: "\f002";
+    font-family: "FontAwesome";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -35%);
+    font-size: 5rem;
+    color: #fff;
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.3s transform ease, 0.3s opacity ease;
+    z-index: 1;
+}
+
+.quiqqer-textImage-image__imageZoom picture:hover:after {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+.quiqqer-textImage-image__imageZoom img {
     display: block;
+    cursor: zoom-in !important;
+    transition: 0.3s filter ease, 0.3s clip-path ease;
+}
+
+.quiqqer-textImage-image__imageZoom picture:hover img {
+    filter: brightness(0.5);
 }
 
 .quiqqer-textImage-content {

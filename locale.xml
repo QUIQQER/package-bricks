@@ -1776,12 +1776,12 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[If the text is larger than image, the height of the image will match the text.]]></en>
         </locale>
         <locale name="brick.textAndImage.imageZoom">
-            <de><![CDATA[Klickbare bilder]]></de>
+            <de><![CDATA[Klickbare Bilder]]></de>
             <en><![CDATA[Clickable images]]></en>
         </locale>
         <locale name="brick.textAndImage.imageZoom.desc" html="true">
-            <de><![CDATA[Wenn aktiviert, kann man die Bilder klicken um sie zu vergrößern. Bitte beachte, das funktioniert nur, wenn das QUIQQER Paket <code>quiqqer/gallery</code> installiert ist.]]></de>
-            <en><![CDATA[If activated, you can click on the images to enlarge them. Please note, this only works if the QUIQQER package <code>quiqqer/gallery</code> is installed.]]></en>
+            <de><![CDATA[Wenn aktiviert, kann man die Bilder klicken um sie zu vergrößern. Bitte beachte: das funktioniert nur, wenn das QUIQQER Paket <code>quiqqer/gallery</code> installiert ist.]]></de>
+            <en><![CDATA[If activated, you can click on the images to enlarge them. Please note: this only works if the QUIQQER package <code>quiqqer/gallery</code> is installed.]]></en>
         </locale>
         <locale name="brick.textAndImage.maxImageWidth">
             <de><![CDATA[Maximale Briete des Bildes]]></de>
