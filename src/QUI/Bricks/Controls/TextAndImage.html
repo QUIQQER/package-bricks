@@ -1,11 +1,18 @@
 {assign var=imageOnLeftClass value='quiqqer-textImage__imageOnRight'}
 {if $imageOnLeft}
-{assign var=imageOnLeftClass value='quiqqer-textImage__imageOnLeft'}
+    {assign var=imageOnLeftClass value='quiqqer-textImage__imageOnLeft'}
 {/if}
+
+{assign var=imageZoomClass value=''}
+{if $imageZoom}
+    {assign var=imageZoomClass value='quiqqer-textImage-image__imageZoom'}
+{/if}
+
+
 
 <div class="quiqqer-textImage {$imageOnLeftClass}">
     {if $imageOnLeft}
-    <div class="quiqqer-textImage-box quiqqer-textImage-image {$fullImageHeight} {$imgWidthClass} mobile-grid-100">
+    <div class="quiqqer-textImage-box quiqqer-textImage-image {$fullImageHeight} {$imgWidthClass} {$imageZoomClass} mobile-grid-100">
         {if $img}
             {assign var=inlineStyle value=''}
             {if $maxImageWidth}
@@ -40,7 +47,7 @@
             {$this->getAttribute('content')}
         </div>
     </div>
-    <div class="quiqqer-textImage-box quiqqer-textImage-image {$fullImageHeight} {$imgWidthClass} mobile-grid-100">
+    <div class="quiqqer-textImage-box quiqqer-textImage-image {$fullImageHeight} {$imgWidthClass} {$imageZoomClass} mobile-grid-100">
         {if $img}
             {assign var=inlineStyle value=''}
             {if $maxImageWidth}
