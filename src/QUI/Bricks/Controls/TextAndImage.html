@@ -19,7 +19,7 @@
                 {assign var=inlineStyle value="max-width: {$maxImageWidth}px; width: 100%;"}
             {/if}
 
-            {image src=$img width=$maxImageWidth style=$inlineStyle class={$imageShadow} loading="lazy" data-zoom="$imageZoom"}
+            {image src=$img width=$maxImageWidth style=$inlineStyle class="{$imageShadow}" loading="lazy" data-zoom="$imageZoom" data-src="{$img}"}
         {/if}
     </div>
     <div class="quiqqer-textImage-box quiqqer-textImage-content {$textWidthClass} mobile-grid-100"
@@ -54,7 +54,7 @@
                 {assign var=inlineStyle value="max-width: {$maxImageWidth}px; width: 100%;"}
             {/if}
 
-            {image src=$img width=$maxImageWidth style=$inlineStyle class={$imageShadow} loading="lazy" data-zoom="$imageZoom"}
+            {image src=$img width=$maxImageWidth style=$inlineStyle class={$imageShadow} loading="lazy" data-zoom="$imageZoom" data-src="{$img}"}
         {/if}
     </div>
     {/if}
