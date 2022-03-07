@@ -56,7 +56,9 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
             var Button = this.Form.getElement('.quiqqer-simple-contact-button');
 
             if (Button) {
-                Button.addEvent('click', function () {
+                Button.addEvent('click', function (event) {
+                    event.stop();
+
                     if (self.$captchaRequired && !self.$captchaResponse) {
                         QUI.getMessageHandler(function (MH) {
                             MH.options.displayTimeMessages = 2000;
