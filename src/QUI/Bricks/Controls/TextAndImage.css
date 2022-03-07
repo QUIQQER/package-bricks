@@ -28,7 +28,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -35%);
-    font-size: 5rem;
+    font-size: 4rem;
     color: #fff;
     pointer-events: none;
     opacity: 0;
@@ -44,7 +44,7 @@
 .quiqqer-textImage-image__imageZoom img {
     display: block;
     cursor: zoom-in !important;
-    transition: 0.3s filter ease, 0.3s clip-path ease;
+    transition: 0.3s filter ease;
 }
 
 .quiqqer-textImage-image__imageZoom picture:hover img {
