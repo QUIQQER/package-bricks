@@ -37,4 +37,8 @@
             {/if}
         </div>
     {/foreach}
+
+    {if $useFaqStructuredData}
+        {$this->createJSONLDFAQSchemaCode()}
+    {/if}
 </div>
