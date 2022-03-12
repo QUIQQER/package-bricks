@@ -1,0 +1,22 @@
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {foreach from=$entries item=entry}
+            {if isset($entry['entryTitle']) && isset($entry['entryContent'])}
+
+            {
+                "@type": "Question",
+                "name": "{$entry['entryTitle']}",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "{$entry['entryContent']|escape:"htmlall"}"
+                }
+
+            }{if !($entry@last)},{/if}
+            {/if}
+            {/foreach}
+        ]
+    }
+</script>
