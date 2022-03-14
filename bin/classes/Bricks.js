@@ -49,10 +49,15 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
          * @return Promise
          */
         saveBrick: function (brickId, data) {
-            var self = this;
+            const self = this;
+
             return new Promise(function (resolve, reject) {
                 QUIAjax.get('package_quiqqer_bricks_ajax_brick_save', function (result) {
-                    self.fireEvent('brickSave', [brickId, data, result]);
+                    self.fireEvent('brickSave', [
+                        brickId,
+                        data,
+                        result
+                    ]);
                     resolve(result);
                 }, {
                     'package': 'quiqqer/bricks',
@@ -71,13 +76,17 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
          * @return Promise
          */
         copyBrick: function (brickId, params) {
-            var self = this;
+            const self = this;
 
             params = params || {};
 
             return new Promise(function (resolve, reject) {
                 QUIAjax.get('package_quiqqer_bricks_ajax_brick_copy', function (result) {
-                    self.fireEvent('brickCopy', [brickId, params, result]);
+                    self.fireEvent('brickCopy', [
+                        brickId,
+                        params,
+                        result
+                    ]);
                     resolve(result);
                 }, {
                     'package': 'quiqqer/bricks',
@@ -133,11 +142,16 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
          * @return Promise
          */
         createBrick: function (project, lang, data) {
-            var self = this;
+            const self = this;
 
             return new Promise(function (resolve, reject) {
                 QUIAjax.post('package_quiqqer_bricks_ajax_project_createBrick', function (brick) {
-                    self.fireEvent('brickCreate', [brick, project, lang, data]);
+                    self.fireEvent('brickCreate', [
+                        brick,
+                        project,
+                        lang,
+                        data
+                    ]);
                     resolve(brick);
                 }, {
                     'package': 'quiqqer/bricks',
@@ -158,16 +172,16 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
          * @return Promise
          */
         deleteBricks: function (brickIds) {
-            var self = this;
+            const self = this;
 
-            var panels = QUI.Controls.getByType(
+            let panels = QUI.Controls.getByType(
                 'package/quiqqer/bricks/bin/BrickEdit'
             );
 
             return new Promise(function (resolve, reject) {
                 QUIAjax.post('package_quiqqer_bricks_ajax_brick_delete', function () {
                     // exist brick panels?
-                    var c, i, len, clen, brickId;
+                    let c, i, len, clen, brickId;
 
                     for (i = 0, len = brickIds.length; i < len; i++) {
                         brickId = brickIds[i];
