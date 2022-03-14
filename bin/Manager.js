@@ -569,7 +569,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
                             for (var i = 0, len = langs.length; i < len; i++) {
                                 Select.appendChild(
-                                    QUILocale.get('quiqqer/system', 'language.' + langs[i]),
+                                    QUILocale.get('quiqqer/quiqqer', 'language.' + langs[i]),
                                     langs[i],
                                     URL_BIN_DIR + '16x16/flags/' + langs[i] + '.png'
                                 );
