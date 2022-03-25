@@ -72,7 +72,7 @@ class Accordion extends QUI\Control
             $entries = \str_replace("\n", "", $entries);
 
             try {
-                (new JsonParser())->parse($entries, JsonParser::PARSE_TO_ASSOC);
+                $entries = (new JsonParser())->parse($entries, JsonParser::PARSE_TO_ASSOC);
             } catch (\Exception $Exception) {
                 QUI\System\Log::writeException($Exception);
                 $entries = [];
