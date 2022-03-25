@@ -1,12 +1,9 @@
 <?php
 
-/**
- * This file contains QUI\Bricks\Controls\Accordion
- */
-
 namespace QUI\Bricks\Controls;
 
 use QUI;
+use Seld\JsonLint\JsonParser;
 
 /**
  * Class Accordion
@@ -72,7 +69,18 @@ class Accordion extends QUI\Control
         }
 
         if (is_string($entries)) {
-            $entries = json_decode($entries, true);
+            $entries = \str_replace("\n", "", $entries);
+
+            try {
+                (new JsonParser())->parse($entries, JsonParser::PARSE_TO_ASSOC);
+            } catch (\Exception $Exception) {
+                QUI\System\Log::writeException($Exception);
+                $entries = [];
+            }
+        }
+
+        if (!\is_array($entries)) {
+            $entries = [];
         }
 
         $this->entries = $entries;
