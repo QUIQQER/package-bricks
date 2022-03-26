@@ -18,7 +18,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
 ], function (QUI, QUIControl, ProjectSelect, Grid, QUILocale, Projects, QUIAjax, Bricks) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
     return new Class({
 
@@ -42,7 +42,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
         initialize: function (options) {
             this.parent(options);
 
-            this.$isLoaded  = false;
+            this.$isLoaded = false;
             this.$Container = null;
 
             this.addEvents({
@@ -51,7 +51,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
         },
 
         create: function () {
-            var Elm = this.parent();
+            const Elm = this.parent();
 
             Elm.set({
                 'data-quiid': this.getId(),
@@ -91,27 +91,32 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
             }
 
             this.$Grid = new Grid(this.$Container, {
-                columnModel      : [{
-                    header   : QUILocale.get('quiqqer/quiqqer', 'id'),
-                    dataIndex: 'id',
-                    dataType : 'integer',
-                    width    : 40
-                }, {
-                    header   : QUILocale.get('quiqqer/quiqqer', 'title'),
-                    dataIndex: 'title',
-                    dataType : 'string',
-                    width    : 140
-                }, {
-                    header   : QUILocale.get('quiqqer/quiqqer', 'description'),
-                    dataIndex: 'description',
-                    dataType : 'string',
-                    width    : 300
-                }, {
-                    header   : QUILocale.get(lg, 'brick.type'),
-                    dataIndex: 'type',
-                    dataType : 'string',
-                    width    : 200
-                }],
+                columnModel      : [
+                    {
+                        header   : QUILocale.get('quiqqer/quiqqer', 'id'),
+                        dataIndex: 'id',
+                        dataType : 'integer',
+                        width    : 40
+                    },
+                    {
+                        header   : QUILocale.get('quiqqer/quiqqer', 'title'),
+                        dataIndex: 'title',
+                        dataType : 'string',
+                        width    : 140
+                    },
+                    {
+                        header   : QUILocale.get('quiqqer/quiqqer', 'description'),
+                        dataIndex: 'description',
+                        dataType : 'string',
+                        width    : 300
+                    },
+                    {
+                        header   : QUILocale.get(lg, 'brick.type'),
+                        dataIndex: 'type',
+                        dataType : 'string',
+                        width    : 200
+                    }
+                ],
                 multipleSelection: this.getAttribute('multiple'),
                 pagination       : true
             });
@@ -143,15 +148,20 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
                 return Promise.resolve();
             }
 
-            var self  = this,
-                value = this.$ProjectSelect.getValue().split(',');
+            const self = this;
+            let value = this.$ProjectSelect.getValue();
 
+            if (value === null || value === '') {
+                return;
+            }
+
+            value = value.split(',');
 
             this.$ProjectSelect.disable();
             this.$Grid.showLoader();
 
             return Bricks.getBricksFromProject(value[0], value[1]).then(function (result) {
-                var options = self.$Grid.options,
+                let options = self.$Grid.options,
                     page    = parseInt(options.page),
                     perPage = parseInt(options.perPage),
                     start   = (page - 1) * perPage;
