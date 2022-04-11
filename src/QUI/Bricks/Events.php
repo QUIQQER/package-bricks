@@ -6,9 +6,24 @@
 
 namespace QUI\Bricks;
 
+use Exception;
 use QUI;
 use QUI\Projects\Site;
 use QUI\Projects\Site\Edit;
+use Smarty;
+use SmartyException;
+
+use function array_flip;
+use function array_map;
+use function explode;
+use function is_array;
+use function is_string;
+use function json_decode;
+use function json_encode;
+use function preg_replace_callback;
+use function str_replace;
+use function strpos;
+use function trim;
 
 /**
  * Class Events
@@ -17,7 +32,7 @@ use QUI\Projects\Site\Edit;
  */
 class Events
 {
-    protected static $saved = [];
+    protected static array $saved = [];
 
     /**
      * Event : on site save
@@ -35,7 +50,7 @@ class Events
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.assign');
 
         $areas = $Site->getAttribute('quiqqer.bricks.areas');
-        $areas = \json_decode($areas, true);
+        $areas = json_decode($areas, true);
 
         if (!$areas || empty($areas)) {
             return;
@@ -106,11 +121,11 @@ class Events
                 $customFields = [];
 
                 // Custom data cache
-                if (isset($brick['customfields']) && \is_string($brick['customfields'])) {
-                    $customFields = \json_decode($brick['customfields'], true);
+                if (isset($brick['customfields']) && is_string($brick['customfields'])) {
+                    $customFields = json_decode($brick['customfields'], true);
                 }
 
-                if (isset($brick['customfields']) && \is_array($brick['customfields'])) {
+                if (isset($brick['customfields']) && is_array($brick['customfields'])) {
                     $customFields = $brick['customfields'];
                 }
 
@@ -137,11 +152,11 @@ class Events
             ]
         ]);
 
-        $uniquerIdsInDataBase = \array_map(function ($uid) {
+        $uniquerIdsInDataBase = array_map(function ($uid) {
             return $uid['uid'];
         }, $uniquerIdsInDataBase);
 
-        $availableUniqueIds = \array_flip($availableUniqueIds);
+        $availableUniqueIds = array_flip($availableUniqueIds);
 
         foreach ($uniquerIdsInDataBase as $uid) {
             if (isset($availableUniqueIds[$uid])) {
@@ -156,7 +171,7 @@ class Events
         self::$saved[$Site->getId()] = true;
 
         // save bricks with unique ids
-        $Site->setAttribute('quiqqer.bricks.areas', \json_encode($areas));
+        $Site->setAttribute('quiqqer.bricks.areas', json_encode($areas));
         $Site->save();
     }
 
@@ -193,11 +208,11 @@ class Events
         $tables = $Table->getTables();
 
         foreach ($tables as $table) {
-            if (\strpos($table, $project) !== 0) {
+            if (strpos($table, $project) !== 0) {
                 continue;
             }
 
-            if (\strpos($table, '_bricksCache') === false) {
+            if (strpos($table, '_bricksCache') === false) {
                 continue;
             }
 
@@ -209,10 +224,10 @@ class Events
      * Event : on smarty init
      * add new brickarea function
      *
-     * @param \Smarty $Smarty
-     * @throws \SmartyException
+     * @param Smarty $Smarty
+     * @throws SmartyException
      */
-    public static function onSmartyInit($Smarty)
+    public static function onSmartyInit(Smarty $Smarty)
     {
         // {brickarea}
         if (!isset($Smarty->registered_plugins['function'])
@@ -226,7 +241,7 @@ class Events
      * Smarty brickarea function {brickarea}
      *
      * @param array $params - function parameter
-     * @param \Smarty $smarty
+     * @param Smarty $smarty
      * @return string|array
      */
     public static function brickarea($params, $smarty)
@@ -296,12 +311,12 @@ class Events
      */
     public static function onOutputParseEnd(&$content)
     {
-        if (\strpos($content, '{{brick id=') === false) {
+        if (strpos($content, '{{brick id=') === false) {
             return;
         }
 
         // search css files
-        $content = \preg_replace_callback(
+        $content = preg_replace_callback(
             '#{{brick ([^}}]*)}}#',
             ['QUI\Bricks\Events', "outputParsing"],
             $content
@@ -314,15 +329,15 @@ class Events
     public static function outputParsing($match): string
     {
         $params = $match[0];
-        $params = \str_replace('{{brick', '', $params);
-        $params = \trim($params, '}}');
-        $params = \trim($params);
-        $params = \explode(' ', $params);
+        $params = str_replace('{{brick', '', $params);
+        $params = trim($params, '}}');
+        $params = trim($params);
+        $params = explode(' ', $params);
 
         $attributes = [];
 
         foreach ($params as $param) {
-            $a = \explode('=', $param);
+            $a = explode('=', $param);
 
             $attributes[$a[0]] = $a[1];
         }
@@ -336,7 +351,7 @@ class Events
             $Brick   = Manager::init()->getBrickById($brickId);
 
             return QUI\Output::getInstance()->parse($Brick->create());
-        } catch (\Exception $Exception) {
+        } catch (Exception $Exception) {
         }
 
         return $match[0];

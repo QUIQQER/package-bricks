@@ -30,7 +30,7 @@ QUI::$Ajax->registerFunction(
 
             $areas = $Brick->getAttribute('areas');
 
-            if (\strpos($areas, ','.$area.',') !== false) {
+            if (strpos($areas, ',' . $area . ',') !== false) {
                 $result[] = $Brick->getAttributes();
             }
         }

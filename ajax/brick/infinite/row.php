@@ -23,7 +23,7 @@ QUI::$Ajax->registerFunction(
             $Brick = $BrickManager->getBrickById($brickId);
         }
 
-        $settings = \array_merge(
+        $settings = array_merge(
             $Brick->getAttributes(),
             $Brick->getSettings()
         );
