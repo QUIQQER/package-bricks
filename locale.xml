@@ -1439,6 +1439,16 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Reviews]]></en>
         </locale>
 
+        <!-- Customer Reviews Slider -->
+        <locale name="bricks.customerReviewsSlider.title">
+            <de><![CDATA[Bausteine: Schieberegler für Kundenrezensionen]]></de>
+            <en><![CDATA[Bricks: Customer reviews slider]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.description">
+            <de><![CDATA[Allows you to add slider with customer opinions and show them on the site.]]></de>
+            <en><![CDATA[Ermöglicht das Hinzufügen von Schiebereglern mit Kundenmeinungen und deren Anzeige auf der Website.]]></en>
+        </locale>
+
         <!-- Simple Google Maps -->
         <locale name="brick.control.simplegooglemaps.title">
             <de><![CDATA[Bausteine: Einfache Google Maps Karte]]></de>
