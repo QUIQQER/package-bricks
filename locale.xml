@@ -1448,6 +1448,63 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Allows you to add slider with customer opinions and show them on the site.]]></de>
             <en><![CDATA[Ermöglicht das Hinzufügen von Schiebereglern mit Kundenmeinungen und deren Anzeige auf der Website.]]></en>
         </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.disable">
+            <de><![CDATA[Eintrag deaktivieren]]></de>
+            <en><![CDATA[Disable entry]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.avatar">
+            <de><![CDATA[Benutzerbild]]></de>
+            <en><![CDATA[Avatar]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.customerName">
+            <de><![CDATA[Kunden oder Firmenname]]></de>
+            <en><![CDATA[Customer or company name]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.addition">
+            <de><![CDATA[Zusatz (z. B. Berufsbezeichnung)]]></de>
+            <en><![CDATA[Addition (e.g. job title)]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.url">
+            <de><![CDATA[Internetadresse]]></de>
+            <en><![CDATA[Internet address]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.urlTitle">
+            <de><![CDATA[Abweichender Titel für Internetadresse (optional)]]></de>
+            <en><![CDATA[Different title for internet address (optional)]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.review">
+            <de><![CDATA[Kurze Review]]></de>
+            <en><![CDATA[Short review]]></en>
+        </locale>
+
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.isDisabled.short">
+            <de><![CDATA[Eintrag deaktivieren]]></de>
+            <en><![CDATA[Disable entry]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.avatar.short">
+            <de><![CDATA[Benutzerbild]]></de>
+            <en><![CDATA[Avatar]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.customerName.short">
+            <de><![CDATA[Kunden / Firmenname]]></de>
+            <en><![CDATA[Customer / company name]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.addition.short">
+            <de><![CDATA[Zusatz]]></de>
+            <en><![CDATA[Addition]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.url.short">
+            <de><![CDATA[Internetadresse]]></de>
+            <en><![CDATA[Internet address]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.urlTitle.short">
+            <de><![CDATA[Internetadresse (Titel)]]></de>
+            <en><![CDATA[Internet address (title)]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.review.short">
+            <de><![CDATA[Kurze Review]]></de>
+            <en><![CDATA[Short review]]></en>
+        </locale>
 
         <!-- Simple Google Maps -->
         <locale name="brick.control.simplegooglemaps.title">
