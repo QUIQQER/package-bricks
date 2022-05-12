@@ -6,7 +6,13 @@
 
 namespace QUI\Bricks;
 
+use DOMXPath;
+use Exception;
 use QUI;
+
+use function array_merge;
+use function is_array;
+use function trim;
 
 /**
  * Class Panel
@@ -34,7 +40,7 @@ class Panel extends QUI\Utils\Singleton
             return '';
         }
 
-        $cacheName = 'quiqqer/bricks/categories/category/'.$type.'/'.$category;
+        $cacheName = 'quiqqer/bricks/categories/category/' . $type . '/' . $category;
 
         try {
             return QUI\Cache\Manager::get($cacheName);
@@ -43,7 +49,7 @@ class Panel extends QUI\Utils\Singleton
 
         $files = Utils::getBricksXMLFiles();
         $path  = $this->getPath($Brick);
-        $path  = $path.'/window';
+        $path  = $path . '/window';
 
         $Settings = QUI\Utils\XML\Settings::getInstance();
         $Settings->setXMLPath($path);
@@ -53,7 +59,7 @@ class Panel extends QUI\Utils\Singleton
         try {
             $result = $Settings->getCategoriesHtml($files, $category);
             QUI\Cache\Manager::set($cacheName, $result);
-        } catch (\Exception $Exception) {
+        } catch (Exception $Exception) {
             QUI\System\Log::writeException($Exception);
         }
 
@@ -77,7 +83,7 @@ class Panel extends QUI\Utils\Singleton
 
         $xmlFiles = $this->getXMLFilesForBricks($Brick);
         $path     = $this->getPath($Brick);
-        $path     = $path.'/window';
+        $path     = $path . '/window';
 
         $Settings = QUI\Utils\XML\Settings::getInstance();
         $Settings->setXMLPath($path);
@@ -86,7 +92,7 @@ class Panel extends QUI\Utils\Singleton
 
         foreach ($xmlFiles as $file) {
             $panel      = $Settings->getPanel($file);
-            $categories = \array_merge(
+            $categories = array_merge(
                 $categories,
                 $panel['categories']->toArray()
             );
@@ -94,7 +100,7 @@ class Panel extends QUI\Utils\Singleton
 
         // locale
         foreach ($categories as $key => $category) {
-            if (isset($category['title']) && \is_array($category['title'])) {
+            if (isset($category['title']) && is_array($category['title'])) {
                 $categories[$key]['text'] = QUI::getLocale()->get(
                     $category['title'][0],
                     $category['title'][1]
@@ -128,7 +134,7 @@ class Panel extends QUI\Utils\Singleton
         foreach ($xmlFiles as $xmlFile) {
             try {
                 $Dom    = QUI\Utils\Text\XML::getDomFromXml($xmlFile);
-                $Path   = new \DOMXPath($Dom);
+                $Path   = new DOMXPath($Dom);
                 $bricks = $Path->query($path);
 
                 if ($bricks->length) {
@@ -149,8 +155,8 @@ class Panel extends QUI\Utils\Singleton
     protected function getPath(Brick $Brick)
     {
         $type = $Brick->getAttribute('type');
-        $type = '\\'.\trim($type, '\\');
-        $path = '//quiqqer/bricks/brick[@control="'.$type.'"]';
+        $type = '\\' . trim($type, '\\');
+        $path = '//quiqqer/bricks/brick[@control="' . $type . '"]';
 
         return $path;
     }

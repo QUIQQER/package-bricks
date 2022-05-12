@@ -6,9 +6,16 @@
 
 namespace QUI\Bricks;
 
+use DOMElement;
+use DOMXPath;
 use QUI;
-use QUI\Utils\Text\XML;
 use QUI\Projects\Project;
+use QUI\Utils\Text\XML;
+
+use function file_exists;
+use function md5;
+use function realpath;
+use function trim;
 
 /**
  * Class Utils
@@ -28,12 +35,12 @@ class Utils
      */
     public static function getBricksFromXML(string $file): array
     {
-        if (!\file_exists($file)) {
+        if (!file_exists($file)) {
             return [];
         }
 
         $Dom  = XML::getDomFromXml($file);
-        $Path = new \DOMXPath($Dom);
+        $Path = new DOMXPath($Dom);
 
         $bricks = $Path->query("//quiqqer/bricks/brick");
         $list   = [];
@@ -42,7 +49,7 @@ class Utils
             return $list;
         }
 
-        /* @var $Brick \DOMElement */
+        /* @var $Brick DOMElement */
         foreach ($bricks as $Brick) {
             if ($Brick->getAttribute('control') == '*') {
                 continue;
@@ -64,12 +71,12 @@ class Utils
      */
     public static function getTemplateAreasFromXML(string $file, $layoutType = false): array
     {
-        if (!\file_exists($file)) {
+        if (!file_exists($file)) {
             return [];
         }
 
         $Dom  = XML::getDomFromXml($file);
-        $Path = new \DOMXPath($Dom);
+        $Path = new DOMXPath($Dom);
 
         $globalAreas = $Path->query("//quiqqer/bricks/templateAreas/areas/area");
 
@@ -114,12 +121,12 @@ class Utils
     /**
      * parse a <area> xml node to an array
      *
-     * @param \DOMElement $Brick
-     * @param \DOMXPath $Path
+     * @param DOMElement $Brick
+     * @param DOMXPath $Path
      *
      * @return array
      */
-    public static function parseAreaToArray(\DOMElement $Brick, \DOMXPath $Path): array
+    public static function parseAreaToArray(DOMElement $Brick, DOMXPath $Path): array
     {
         $control = $Brick->getAttribute('control');
         $name    = $Brick->getAttribute('name');
@@ -183,7 +190,7 @@ class Utils
         $template = $Project->getAttribute('template');
 
         // getAreasByProject
-        $brickXML = \realpath(OPT_DIR.$template.'/bricks.xml');
+        $brickXML = realpath(OPT_DIR . $template . '/bricks.xml');
         $bricks   = self::getTemplateAreasFromXML($brickXML);
 
         foreach ($bricks as $brickData) {
@@ -222,9 +229,9 @@ class Utils
 
         // package bricks
         foreach ($packages as $package) {
-            $bricksXML = OPT_DIR.$package['name'].'/bricks.xml';
+            $bricksXML = OPT_DIR . $package['name'] . '/bricks.xml';
 
-            if (\file_exists($bricksXML)) {
+            if (file_exists($bricksXML)) {
                 $result[] = $bricksXML;
             }
         }
@@ -239,9 +246,9 @@ class Utils
         }
 
         foreach ($projects as $project) {
-            $bricksXML = USR_DIR.$project.'/bricks.xml';
+            $bricksXML = USR_DIR . $project . '/bricks.xml';
 
-            if (\file_exists($bricksXML)) {
+            if (file_exists($bricksXML)) {
                 $result[] = $bricksXML;
             }
         }
@@ -265,10 +272,10 @@ class Utils
 
         // main path
         $type = $Brick->getAttribute('type');
-        $type = '\\'.\trim($type, '\\');
+        $type = '\\' . trim($type, '\\');
 
-        $path  = '//quiqqer/bricks/brick[@control="'.$type.'"]';
-        $cache = 'quiqqer/bricks/'.\md5($type).'/attributes';
+        $path  = '//quiqqer/bricks/brick[@control="' . $type . '"]';
+        $cache = 'quiqqer/bricks/' . md5($type) . '/attributes';
 
         try {
             return QUI\Cache\Manager::get($cache);
@@ -276,17 +283,17 @@ class Utils
         }
 
 
-        $settingsPath   = $path.'/settings/setting';
-        $categoriesPath = $path.'/window/categories/category/settings';
+        $settingsPath   = $path . '/settings/setting';
+        $categoriesPath = $path . '/window/categories/category/settings';
 
         foreach ($files as $file) {
             $Dom  = QUI\Utils\Text\XML::getDomFromXml($file);
-            $Path = new \DOMXPath($Dom);
+            $Path = new DOMXPath($Dom);
 
             // settings
             $settings = $Path->query($settingsPath);
 
-            /* @var $Setting \DOMElement */
+            /* @var $Setting DOMElement */
             foreach ($settings as $Setting) {
                 $attributes[] = $Setting->getAttribute('name');
             }
@@ -294,11 +301,11 @@ class Utils
             // categories
             $categories = $Path->query($categoriesPath);
 
-            /* @var $Settings \DOMElement */
+            /* @var $Settings DOMElement */
             foreach ($categories as $Settings) {
                 $children = $Settings->childNodes;
 
-                /* @var $Child \DOMElement */
+                /* @var $Child DOMElement */
                 foreach ($children as $Child) {
                     switch ($Child->nodeName) {
                         case 'input':
