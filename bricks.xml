@@ -756,7 +756,7 @@
 
         <!-- Customer reviews slider -->
 
-        <brick control="\QUI\Bricks\Controls\CustomerReviewsSlider">
+        <brick control="\QUI\Bricks\Controls\Slider\CustomerReviewsSlider">
             <title>
                 <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.title"/>
             </title>
@@ -766,9 +766,9 @@
 
             <settings>
                 <setting name="entries" type="hidden"
-                         data-qui="package/quiqqer/bricks/bin/Controls/CustomerReviewsSliderSettings"
+                         data-qui="package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings"
                 >
-                    <locale group="quiqqer/bricks" var="brick.textAndImageMultiple.settings.entries"/>
+                    <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.settings.entries"/>
                 </setting>
             </settings>
         </brick>

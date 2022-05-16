@@ -1,9 +1,9 @@
 /**
- * @module package/quiqqer/bricks/bin/Controls/Slider/TextAndImageMultipleSettings
+ * @module package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
  * @author Dominik Chrzanowski
  *
  */
-define('package/quiqqer/bricks/bin/Controls/CustomerReviewsSliderSettings', [
+define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings', [
 
     'qui/QUI',
     'qui/controls/Control',
@@ -15,8 +15,8 @@ define('package/quiqqer/bricks/bin/Controls/CustomerReviewsSliderSettings', [
     'controls/grid/Grid',
     'utils/Controls',
 
-    'text!package/quiqqer/bricks/bin/Controls/CustomerReviewsSliderSettingsEntry.html',
-    'css!package/quiqqer/bricks/bin/Controls/CustomerReviewsSliderSettings.css'
+    'text!package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettingsEntry.html',
+    'css!package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings.css'
 
 ], function (QUI,
              QUIControl,
