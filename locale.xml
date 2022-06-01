@@ -1448,6 +1448,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Allows you to add slider with customer opinions and show them on the site.]]></de>
             <en><![CDATA[Ermöglicht das Hinzufügen von Schiebereglern mit Kundenmeinungen und deren Anzeige auf der Website.]]></en>
         </locale>
+        <locale name="bricks.customerReviewsSlider.template">
+            <de><![CDATA[Schablone]]></de>
+            <en><![CDATA[Template]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.template.default">
+            <de><![CDATA[Ursprünglich]]></de>
+            <en><![CDATA[Default]]></en>
+        </locale>
 
         <locale name="bricks.customerReviewsSlider.settings.entries">
             <de><![CDATA[Meinungen / Rezensionen]]></de>
