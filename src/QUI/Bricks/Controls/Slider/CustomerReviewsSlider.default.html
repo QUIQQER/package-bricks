@@ -1,0 +1,57 @@
+{if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+    <header class="control-header">
+        <h1>{$this->getAttribute('frontendTitle')}</h1>
+    </header>
+{/if}
+
+{if $this->getAttribute('content') != ""}
+    <div class="control-content">
+        {$this->getAttribute('content')}
+    </div>
+{/if}
+
+<div class="customerReviewsSlider">
+
+    <div class="arrow-left">
+        <span class="arrow fa fa-arrow-left"></span>
+    </div>
+
+    <div class="glide customerReviewsSlider-slider-wrapper">
+        <div data-glide-el="track" class="glide__track">
+            <ul class="glide__slides customerReviewsSlider-slider">
+
+                {foreach from=$entries item=entry}
+
+                <li class="glide__slide customerReviewsSlider-slide">
+
+                    <div class="customerReviewsSlider-review">
+                        {$entry['review']}
+                    </div>
+
+                    <div class="customerReviewsSlider-client">
+
+                        <div class="customerReviewsSlider-client-img">
+                            {image src=$entry['image'] loading="lazy" data-src="{$entry['image']}"}
+                        </div>
+
+                        <div class="customerReviewsSlider-client-content">
+                            {$entry['customerName']}
+                            {$entry['addition']}
+                            <a href="{$entry['url']}">{$entry['url']}</a>
+
+                        </div>
+
+                    </div>
+
+                </li>
+
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="arrow-right">
+        <span class="arrow fa fa-arrow-right"></span>
+    </div>
+</div>
