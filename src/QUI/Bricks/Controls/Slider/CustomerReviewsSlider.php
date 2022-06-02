@@ -32,9 +32,9 @@ class CustomerReviewsSlider extends AbstractPromoslider
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
-        $entries = json_decode($this->getAttribute('entries'), true);
+        $entries  = json_decode($this->getAttribute('entries'), true);
         $template = $this->getAttribute('template');
-        $path = \dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.html';
+        $path     = \dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.html';
 
         $options = [
             'this'    => $this,
