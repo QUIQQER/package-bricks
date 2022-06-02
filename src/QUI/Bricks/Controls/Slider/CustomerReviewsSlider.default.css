@@ -1,0 +1,51 @@
+.glide__track {
+    margin: auto;
+    width: 80%;
+}
+
+.customerReviewsSlider-arrows .customerReviewsSlider-arrow {
+    color: #b0b0b0;
+    border: 2px solid #b0b0b0;
+    min-width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    transition: all .2s ease-in-out;
+}
+
+.customerReviewsSlider-arrows .customerReviewsSlider-arrow:hover {
+    color: #797979;
+    border-color: #797979;
+}
+
+.customerReviewsSlider-review {
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.customerReviewsSlider-client {
+    display: flex;
+    flex-direction: row;
+}
+
+.customerReviewsSlider-client-img {
+    width: 100px;
+    height: 100px;
+    margin-right: 2rem;
+}
+
+.customerReviewsSlider-client-img img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.customerReviewsSlider-client-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.customerReviewsSlider-client-name,
+.customerReviewsSlider-client-addition {
+    font-size: 0.975rem;
+}
