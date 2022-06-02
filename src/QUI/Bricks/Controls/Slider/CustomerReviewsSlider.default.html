@@ -12,10 +12,6 @@
 
 <div class="customerReviewsSlider">
 
-    <div class="arrow-left">
-        <span class="arrow fa fa-arrow-left"></span>
-    </div>
-
     <div class="glide customerReviewsSlider-slider-wrapper">
         <div data-glide-el="track" class="glide__track">
             <ul class="glide__slides customerReviewsSlider-slider">
@@ -24,20 +20,37 @@
 
                 <li class="glide__slide customerReviewsSlider-slide">
 
-                    <div class="customerReviewsSlider-review">
-                        {$entry['review']}
-                    </div>
+                    {if $entry['review']}
+                        <div class="customerReviewsSlider-review">
+                            {$entry['review']}
+                        </div>
+                    {/if}
 
                     <div class="customerReviewsSlider-client">
 
                         <div class="customerReviewsSlider-client-img">
-                            {image src=$entry['image'] loading="lazy" data-src="{$entry['image']}"}
+                            {if $entry['image']}
+                                {image src=$entry['image'] loading="lazy" data-src="{$entry['image']}"}
+                            {/if}
                         </div>
 
                         <div class="customerReviewsSlider-client-content">
-                            {$entry['customerName']}
-                            {$entry['addition']}
-                            <a href="{$entry['url']}">{$entry['url']}</a>
+                            {if $entry['customerName']}
+                                <p class="customerReviewsSlider-client-name">{$entry['customerName']}</p>
+                            {/if}
+                            {if $entry['addition']}
+                                <p class="customerReviewsSlider-client-addition">{$entry['addition']}</p>
+                            {/if}
+
+                            {if $entry['url']}
+                                <a href="{$entry['url']}" class="customerReviewsSlider-url">
+                                    {if $entry['urlTitle']}
+                                    {$entry['urlTitle']}
+                                    {else}
+                                    {$entry['url']}
+                                    {/if}
+                                </a>
+                            {/if}
 
                         </div>
 
@@ -48,10 +61,10 @@
                 {/foreach}
             </ul>
         </div>
+        <div class="glide__arrows customerReviewsSlider-arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left customerReviewsSlider-arrow customerReviewsSlider-arrow-left" data-glide-dir="<"><span class="arrow fa fa-arrow-left"></span></button>
+            <button class="glide__arrow glide__arrow--right customerReviewsSlider-arrow customerReviewsSlider-arrow-right" data-glide-dir=">"><span class="arrow fa fa-arrow-right"></span></button>
+        </div>
     </div>
 
-
-    <div class="arrow-right">
-        <span class="arrow fa fa-arrow-right"></span>
-    </div>
 </div>
