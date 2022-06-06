@@ -1,18 +1,23 @@
 {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
-    <header class="control-header">
-        <h1>{$this->getAttribute('frontendTitle')}</h1>
-    </header>
+<header class="control-header">
+    <h1>{$this->getAttribute('frontendTitle')}</h1>
+</header>
 {/if}
 
 {if $this->getAttribute('content') != ""}
-    <div class="control-content">
-        {$this->getAttribute('content')}
-    </div>
+<div class="control-content">
+    {$this->getAttribute('content')}
+</div>
 {/if}
 
 <div class="customerReviewsSlider">
 
     <div class="glide customerReviewsSlider-slider-wrapper">
+
+        <div class="customerReviewsSlider-arrows" data-glide-el="controls">
+            <button class="customerReviewsSlider-arrow customerReviewsSlider-arrow-left button" data-glide-dir="<">
+            <span class="arrow fa fa-arrow-left"></span></button>
+        </div>
         <div data-glide-el="track" class="glide__track">
             <ul class="glide__slides customerReviewsSlider-slider">
 
@@ -21,35 +26,35 @@
                 <li class="glide__slide customerReviewsSlider-slide">
 
                     {if $entry['review']}
-                        <div class="customerReviewsSlider-review">
-                            {$entry['review']}
-                        </div>
+                    <div class="customerReviewsSlider-review">
+                        {$entry['review']}
+                    </div>
                     {/if}
 
                     <div class="customerReviewsSlider-client">
 
                         <div class="customerReviewsSlider-client-img">
                             {if $entry['image']}
-                                {image src=$entry['image'] loading="lazy" data-src="{$entry['image']}"}
+                            {image src=$entry['image'] loading="lazy" data-src="{$entry['image']}"}
                             {/if}
                         </div>
 
                         <div class="customerReviewsSlider-client-content">
                             {if $entry['customerName']}
-                                <p class="customerReviewsSlider-client-name">{$entry['customerName']}</p>
+                            <p class="customerReviewsSlider-client-name">{$entry['customerName']}</p>
                             {/if}
                             {if $entry['addition']}
-                                <p class="customerReviewsSlider-client-addition">{$entry['addition']}</p>
+                            <p class="customerReviewsSlider-client-addition">{$entry['addition']}</p>
                             {/if}
 
                             {if $entry['url']}
-                                <a href="{$entry['url']}" class="customerReviewsSlider-url">
-                                    {if $entry['urlTitle']}
-                                    {$entry['urlTitle']}
-                                    {else}
-                                    {$entry['url']}
-                                    {/if}
-                                </a>
+                            <a href="{$entry['url']}" class="customerReviewsSlider-url">
+                                {if $entry['urlTitle']}
+                                {$entry['urlTitle']}
+                                {else}
+                                {$entry['url']}
+                                {/if}
+                            </a>
                             {/if}
 
                         </div>
@@ -61,10 +66,18 @@
                 {/foreach}
             </ul>
         </div>
-        <div class="glide__arrows customerReviewsSlider-arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left customerReviewsSlider-arrow customerReviewsSlider-arrow-left" data-glide-dir="<"><span class="arrow fa fa-arrow-left"></span></button>
-            <button class="glide__arrow glide__arrow--right customerReviewsSlider-arrow customerReviewsSlider-arrow-right" data-glide-dir=">"><span class="arrow fa fa-arrow-right"></span></button>
+
+        <div class="customerReviewsSlider-arrows" data-glide-el="controls">
+            <button class="customerReviewsSlider-arrow customerReviewsSlider-arrow-right button" data-glide-dir=">">
+                <span class="arrow fa fa-arrow-right"></span></button>
         </div>
+
+        <div class="customerReviewsSlider-dots" data-glide-el="controls[nav]">
+            <button class="customerReviewsSlider-dot" data-glide-dir="=1"></button>
+            <button class="customerReviewsSlider-dot" data-glide-dir="=0"></button>
+            <button class="customerReviewsSlider-dot" data-glide-dir="=2"></button>
+        </div>
+
     </div>
 
 </div>
