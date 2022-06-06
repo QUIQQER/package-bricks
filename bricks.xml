@@ -772,6 +772,10 @@
                     </option>
                 </setting>
 
+                <setting name="delay" type="number">
+                    <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.delay"/>
+                </setting>
+
                 <setting name="entries" type="hidden"
                          data-qui="package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings"
                 >

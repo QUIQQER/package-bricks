@@ -31,13 +31,30 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
             delay: 5000
         },
 
-        initialize: function () {
+        initialize: function (options) {
+            this.parent(options);
 
-            new Glide('.glide', {
+            this.addEvents({
+                onImport: this.$onImport
+            });
+        },
+
+        /**
+         * event : on import
+         */
+        $onImport: function () {
+            var delay = this.getAttribute('delay');
+
+            var options = {
                 type: 'carousel',
                 perView: 1,
-                autoplay: 5000
-            }).mount();
+            };
+
+            if (delay >= 1000) {
+                options['autoplay'] = delay;
+            }
+
+            new Glide('.glide', options).mount();
         }
     });
 });

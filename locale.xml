@@ -1456,6 +1456,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Ursprünglich]]></de>
             <en><![CDATA[Default]]></en>
         </locale>
+        <locale name="bricks.customerReviewsSlider.delay">
+            <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>
+            <en><![CDATA[Time to start next slide (Delay)]]></en>
+        </locale>
 
         <locale name="bricks.customerReviewsSlider.settings.entries">
             <de><![CDATA[Meinungen / Rezensionen]]></de>

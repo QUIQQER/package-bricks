@@ -22,6 +22,7 @@ class CustomerReviewsSlider extends AbstractPromoslider
         $this->setAttributes([
             'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider',
             'template' => 'default',
+            'delay'    => 5000
         ]);
 
         parent::__construct($attributes);
@@ -35,6 +36,8 @@ class CustomerReviewsSlider extends AbstractPromoslider
         $entries  = json_decode($this->getAttribute('entries'), true);
         $template = $this->getAttribute('template');
         $path     = \dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.html';
+
+        $this->setJavaScriptControlOption('delay', $this->getAttribute('delay'));
 
         $options = [
             'this'    => $this,
