@@ -44,6 +44,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
          */
         $onImport: function () {
             var delay = this.getAttribute('delay');
+            var self = this;
 
             var options = {
                 type: 'carousel',
@@ -54,7 +55,37 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
                 options['autoplay'] = delay;
             }
 
-            new Glide('.glide', options).mount();
+            var glide = new Glide('.glide', options);
+
+            var GlideElem = document.querySelector('.customerReviewsSlider-slider-wrapper');
+
+            if (GlideElem) {
+
+                // Automated height on Carousel build
+                glide.on('build.after', function () {
+                    self.glideHandleHeight();
+                });
+
+                // Automated height on Carousel change
+                glide.on('run.after', function () {
+                    self.glideHandleHeight();
+                });
+
+
+                glide.mount();
+            }
+        },
+
+        glideHandleHeight: function () {
+            const activeSlide = document.querySelector('.glide__slide--active');
+            const activeSlideHeight = activeSlide ? activeSlide.offsetHeight + 50 : 0;
+
+            const glideTrack = document.querySelector('.customerReviewsSlider-track');
+            const glideTrackHeight = glideTrack ? glideTrack.offsetHeight : 0;
+
+            if (activeSlideHeight !== glideTrackHeight) {
+                glideTrack.style.height = `${activeSlideHeight}px`;
+            }
         }
     });
 });
