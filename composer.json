@@ -21,7 +21,8 @@
     "quiqqer\/mobile-detection": "1.*|dev-master|dev-dev",
     "quiqqer-asset\/hammerjs": "2.*",
     "quiqqer-asset\/mustache": "*",
-    "ramsey\/uuid": "3.*"
+    "ramsey\/uuid": "3.*",
+    "quiqqer-asset\/glidejs-glide": "3.*"
   },
   "suggest": {
     "quiqqer\/gallery": "Present your photos, products and pictures in elaborate and beautiful galleries."
