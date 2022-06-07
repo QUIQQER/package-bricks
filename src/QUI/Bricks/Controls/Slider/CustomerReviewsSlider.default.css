@@ -1,6 +1,6 @@
-.glide__track {
-    margin: auto;
-    width: 80%;
+.customerReviewsSlider-track {
+    margin: 0 50px;
+    transition: height .2s ease-in-out;
 }
 
 .customerReviewsSlider-arrows {
@@ -48,7 +48,9 @@
 }
 
 .customerReviewsSlider-dots {
-    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
 }
 
 .customerReviewsSlider-dot {
@@ -68,6 +70,10 @@
 }
 
 @media screen and (max-width: 768px) {
+
+    .customerReviewsSlider-track {
+        margin: 0;
+    }
 
     .customerReviewsSlider-arrows {
         display: none;
