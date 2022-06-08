@@ -15,8 +15,9 @@
     <div class="glide customerReviewsSlider-slider-wrapper">
 
         <div class="customerReviewsSlider-arrows" data-glide-el="controls">
-            <button class="customerReviewsSlider-arrow customerReviewsSlider-arrow-left button" data-glide-dir="<">
-                <span class="arrow fa fa-arrow-left"></span></button>
+            <span class="customerReviewsSlider-arrow customerReviewsSlider-arrow-left" data-glide-dir="<">
+                <span class="arrow fa fa-arrow-left"></span>
+            </span>
         </div>
         <div data-glide-el="track" class="glide__track customerReviewsSlider-track">
             <ul class="glide__slides customerReviewsSlider-slider">
@@ -41,18 +42,18 @@
 
                         <div class="customerReviewsSlider-client-content">
                             {if $entry['customerName']}
-                            <p class="customerReviewsSlider-client-name">{$entry['customerName']}</p>
+                            <span class="customerReviewsSlider-client-name">{$entry['customerName']}</span>
                             {/if}
                             {if $entry['addition']}
-                            <p class="customerReviewsSlider-client-addition">{$entry['addition']}</p>
+                            <span class="customerReviewsSlider-client-addition">{$entry['addition']}</span>
                             {/if}
 
                             {if $entry['url']}
                             <a href="{$entry['url']}" class="customerReviewsSlider-url">
                                 {if $entry['urlTitle']}
-                                {$entry['urlTitle']}
+                                    {$entry['urlTitle']}
                                 {else}
-                                {$entry['url']}
+                                    {$entry['url']}
                                 {/if}
                             </a>
                             {/if}
@@ -68,14 +69,15 @@
         </div>
 
         <div class="customerReviewsSlider-arrows" data-glide-el="controls">
-            <button class="customerReviewsSlider-arrow customerReviewsSlider-arrow-right button" data-glide-dir=">">
-                <span class="arrow fa fa-arrow-right"></span></button>
+            <span class="customerReviewsSlider-arrow customerReviewsSlider-arrow-right" data-glide-dir=">">
+                <span class="arrow fa fa-arrow-right"></span>
+            </span>
         </div>
 
         <div class="customerReviewsSlider-dots" data-glide-el="controls[nav]">
             {assign var=counter value=0}
             {foreach from=$entries item=entry}
-                <button class="customerReviewsSlider-dot" data-glide-dir="={$counter}"></button>
+                <span class="customerReviewsSlider-dot" data-glide-dir="={$counter}"></span>
                 {assign var=counter value=$counter+1}
             {/foreach}
         </div>

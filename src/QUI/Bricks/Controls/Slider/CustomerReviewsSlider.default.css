@@ -9,14 +9,23 @@
 }
 
 .customerReviewsSlider-arrows .customerReviewsSlider-arrow {
-    min-width: 40px;
+    width: 40px;
     height: 40px;
-    padding: 0;
     border-radius: 50%;
+    border: 2px solid #aaa;
+    color: #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s ease-in-out;
+}
+
+.customerReviewsSlider-arrows .customerReviewsSlider-arrow:hover {
+    border-color: #333;
+    color: #333;
 }
 
 .customerReviewsSlider-review {
-    font-weight: 700;
     font-size: 1.125rem;
 }
 
@@ -32,7 +41,9 @@
 }
 
 .customerReviewsSlider-client-img img {
-    width: 100%;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -47,18 +58,30 @@
     font-size: 0.975rem;
 }
 
+.customerReviewsSlider-client-name {
+    font-weight: 700;
+}
+
 .customerReviewsSlider-dots {
     position: absolute;
     left: 50%;
     bottom: 0;
+    display: flex;
 }
 
 .customerReviewsSlider-dot {
-    min-width: 10px;
+    width: 10px;
     height: 10px;
-    padding: 0;
+    border: 2px solid rgba(0,0,0,0);
     border-radius: 50%;
     margin: 0 5px;
+    display: block;
+    background-color: #aaa;
+    transition: all .2s ease-in-out;
+}
+
+.customerReviewsSlider-dot.glide__bullet--active {
+    border-color: #aaa;
 }
 
 .customerReviewsSlider-dot:hover {
