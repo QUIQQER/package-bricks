@@ -1,11 +1,19 @@
 .customerReviewsSlider-track {
-    margin: 0 50px;
+    margin: auto;
     transition: height .2s ease-in-out;
 }
 
 .customerReviewsSlider-arrows {
     display: flex;
     align-items: center;
+}
+
+.customerReviewsSlider-arrow-left {
+    margin-right: 2rem;
+}
+
+.customerReviewsSlider-arrow-right {
+    margin-left: 2rem;
 }
 
 .customerReviewsSlider-arrows .customerReviewsSlider-arrow {

@@ -771,9 +771,25 @@
                         <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.template.default"/>
                     </option>
                 </setting>
-
                 <setting name="delay" type="number">
                     <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.delay"/>
+                </setting>
+                <setting name="showArrows" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="bricks.customerReviewsSlider.arrows"/>
+                </setting>
+                <setting name="autoplay" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="bricks.customerReviewsSlider.autoplay"/>
+                </setting>
+                <setting name="sliderHeight" type="select">
+                    <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.height"/>
+                    <option value="const">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.height.const"/>
+                    </option>
+                    <option value="variable">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.height.variable"/>
+                    </option>
                 </setting>
 
                 <setting name="entries" type="hidden"

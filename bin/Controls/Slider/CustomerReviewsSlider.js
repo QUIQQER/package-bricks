@@ -28,7 +28,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
         ],
 
         options: {
-            delay: 5000
+            delay: 5000,
+            height: 'const',
+            autoplay: false,
         },
 
         initialize: function (options) {
@@ -44,18 +46,29 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
          */
         $onImport: function () {
             var delay = this.getAttribute('delay');
-            var self = this;
+            var autoplay = this.getAttribute('autoplay');
+            var sliderHeight = this.getAttribute('height');
 
             var options = {
                 type: 'carousel',
                 perView: 1,
             };
 
-            if (delay >= 1000) {
+            if (delay >= 1000 && autoplay == true) {
                 options['autoplay'] = delay;
             }
 
             var glide = new Glide('.glide', options);
+
+            if (sliderHeight === 'variable') {
+                this.sliderHandleHeight(glide);
+            }
+
+            glide.mount();
+        },
+
+        sliderHandleHeight: function (glide) {
+            var self = this;
 
             var GlideElem = document.querySelector('.customerReviewsSlider-slider-wrapper');
 
@@ -63,20 +76,18 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
 
                 // Automated height on Carousel build
                 glide.on('build.after', function () {
-                    self.glideHandleHeight();
+                    self.changeSliderHeight();
                 });
 
                 // Automated height on Carousel change
                 glide.on('run.after', function () {
-                    self.glideHandleHeight();
+                    self.changeSliderHeight();
                 });
 
-
-                glide.mount();
             }
         },
 
-        glideHandleHeight: function () {
+        changeSliderHeight: function () {
             const activeSlide = document.querySelector('.glide__slide--active');
             const activeSlideHeight = activeSlide ? activeSlide.offsetHeight + 50 : 0;
 

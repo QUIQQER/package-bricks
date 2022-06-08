@@ -38,10 +38,14 @@ class CustomerReviewsSlider extends AbstractPromoslider
         $path     = \dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.html';
 
         $this->setJavaScriptControlOption('delay', $this->getAttribute('delay'));
+        $this->setJavaScriptControlOption('autoplay', $this->getAttribute('autoplay'));
+        $this->setJavaScriptControlOption('height', $this->getAttribute('sliderHeight'));
+
 
         $options = [
             'this'    => $this,
-            'entries' => $entries
+            'entries' => $entries,
+            'arrows'  => $this->getAttribute('showArrows')
         ];
 
         $this->addCSSFile(

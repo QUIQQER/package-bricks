@@ -1460,6 +1460,26 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>
             <en><![CDATA[Time to start next slide (Delay)]]></en>
         </locale>
+        <locale name="bricks.customerReviewsSlider.arrows">
+            <de><![CDATA[Pfeile zeigen]]></de>
+            <en><![CDATA[Show arrows]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.autoplay">
+            <de><![CDATA[Automatisches Abspielen]]></de>
+            <en><![CDATA[Autoplay]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.height">
+            <de><![CDATA[Schieberhöhe]]></de>
+            <en><![CDATA[Slider height]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.height.const">
+            <de><![CDATA[Konst]]></de>
+            <en><![CDATA[Const]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.height.variable">
+            <de><![CDATA[Variable]]></de>
+            <en><![CDATA[Variable]]></en>
+        </locale>
 
         <locale name="bricks.customerReviewsSlider.settings.entries">
             <de><![CDATA[Meinungen / Rezensionen]]></de>

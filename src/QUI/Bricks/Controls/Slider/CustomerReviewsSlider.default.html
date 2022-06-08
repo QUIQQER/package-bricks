@@ -14,11 +14,14 @@
 
     <div class="glide customerReviewsSlider-slider-wrapper">
 
-        <div class="customerReviewsSlider-arrows" data-glide-el="controls">
-            <span class="customerReviewsSlider-arrow customerReviewsSlider-arrow-left" data-glide-dir="<">
-                <span class="arrow fa fa-arrow-left"></span>
-            </span>
-        </div>
+        {if $arrows}
+            <div class="customerReviewsSlider-arrows" data-glide-el="controls">
+                <span class="customerReviewsSlider-arrow customerReviewsSlider-arrow-left" data-glide-dir="<">
+                    <span class="arrow fa fa-arrow-left"></span>
+                </span>
+            </div>
+        {/if}
+
         <div data-glide-el="track" class="glide__track customerReviewsSlider-track">
             <ul class="glide__slides customerReviewsSlider-slider">
 
@@ -68,11 +71,13 @@
             </ul>
         </div>
 
-        <div class="customerReviewsSlider-arrows" data-glide-el="controls">
-            <span class="customerReviewsSlider-arrow customerReviewsSlider-arrow-right" data-glide-dir=">">
-                <span class="arrow fa fa-arrow-right"></span>
-            </span>
-        </div>
+        {if $arrows}
+            <div class="customerReviewsSlider-arrows" data-glide-el="controls">
+                <span class="customerReviewsSlider-arrow customerReviewsSlider-arrow-right" data-glide-dir=">">
+                    <span class="arrow fa fa-arrow-right"></span>
+                </span>
+            </div>
+        {/if}
 
         <div class="customerReviewsSlider-dots" data-glide-el="controls[nav]">
             {assign var=counter value=0}
