@@ -10,53 +10,54 @@
 </div>
 {/if}
 
-<div class="customerReviewsSlider">
+<div class="customerReviewsSlider-default">
 
-    <div class="glide customerReviewsSlider-slider-wrapper">
+    <div class="glide customerReviewsSlider-default-slider-wrapper customerReviewsSlider-slider-wrapper">
 
         {if $arrows}
-            <div class="customerReviewsSlider-arrows" data-glide-el="controls">
-                <span class="customerReviewsSlider-arrow customerReviewsSlider-arrow-left" data-glide-dir="<">
+        <div class="customerReviewsSlider-default-arrows" data-glide-el="controls">
+                <span class="customerReviewsSlider-default-arrow customerReviewsSlider-default-arrow-left"
+                      data-glide-dir="<">
                     <span class="arrow fa fa-arrow-left"></span>
                 </span>
-            </div>
+        </div>
         {/if}
 
-        <div data-glide-el="track" class="glide__track customerReviewsSlider-track">
-            <ul class="glide__slides customerReviewsSlider-slider">
+        <div data-glide-el="track" class="glide__track customerReviewsSlider-default-track customerReviewsSlider-track">
+            <ul class="glide__slides customerReviewsSlider-default-slider customerReviewsSlider-slider">
 
                 {foreach from=$entries item=entry}
 
-                <li class="glide__slide customerReviewsSlider-slide">
+                <li class="glide__slide customerReviewsSlider-default-slide">
 
                     {if $entry['review']}
-                    <div class="customerReviewsSlider-review">
+                    <div class="customerReviewsSlider-default-review">
                         {$entry['review']}
                     </div>
                     {/if}
 
-                    <div class="customerReviewsSlider-client">
+                    <div class="customerReviewsSlider-default-client">
 
-                        <div class="customerReviewsSlider-client-img">
+                        <div class="customerReviewsSlider-default-client-img">
                             {if $entry['image']}
                             {image src=$entry['image'] loading="lazy" data-src="{$entry['image']}"}
                             {/if}
                         </div>
 
-                        <div class="customerReviewsSlider-client-content">
+                        <div class="customerReviewsSlider-default-client-content">
                             {if $entry['customerName']}
-                            <span class="customerReviewsSlider-client-name">{$entry['customerName']}</span>
+                            <span class="customerReviewsSlider-default-client-name">{$entry['customerName']}</span>
                             {/if}
                             {if $entry['addition']}
-                            <span class="customerReviewsSlider-client-addition">{$entry['addition']}</span>
+                            <span class="customerReviewsSlider-default-client-addition">{$entry['addition']}</span>
                             {/if}
 
                             {if $entry['url']}
-                            <a href="{$entry['url']}" class="customerReviewsSlider-url">
+                            <a href="{$entry['url']}" class="customerReviewsSlider-default-url">
                                 {if $entry['urlTitle']}
-                                    {$entry['urlTitle']}
+                                {$entry['urlTitle']}
                                 {else}
-                                    {$entry['url']}
+                                {$entry['url']}
                                 {/if}
                             </a>
                             {/if}
@@ -72,18 +73,19 @@
         </div>
 
         {if $arrows}
-            <div class="customerReviewsSlider-arrows" data-glide-el="controls">
-                <span class="customerReviewsSlider-arrow customerReviewsSlider-arrow-right" data-glide-dir=">">
+        <div class="customerReviewsSlider-default-arrows" data-glide-el="controls">
+                <span class="customerReviewsSlider-default-arrow customerReviewsSlider-default-arrow-right"
+                      data-glide-dir=">">
                     <span class="arrow fa fa-arrow-right"></span>
                 </span>
-            </div>
+        </div>
         {/if}
 
-        <div class="customerReviewsSlider-dots" data-glide-el="controls[nav]">
+        <div class="customerReviewsSlider-default-dots" data-glide-el="controls[nav]">
             {assign var=counter value=0}
             {foreach from=$entries item=entry}
-                <span class="customerReviewsSlider-dot" data-glide-dir="={$counter}"></span>
-                {assign var=counter value=$counter+1}
+            <span class="customerReviewsSlider-default-dot" data-glide-dir="={$counter}"></span>
+            {assign var=counter value=$counter+1}
             {/foreach}
         </div>
 

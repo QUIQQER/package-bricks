@@ -1,22 +1,22 @@
-.customerReviewsSlider-track {
+.customerReviewsSlider-default-track {
     margin: auto;
     transition: height .2s ease-in-out;
 }
 
-.customerReviewsSlider-arrows {
+.customerReviewsSlider-default-arrows {
     display: flex;
     align-items: center;
 }
 
-.customerReviewsSlider-arrow-left {
+.customerReviewsSlider-default-arrow-left {
     margin-right: 2rem;
 }
 
-.customerReviewsSlider-arrow-right {
+.customerReviewsSlider-default-arrow-right {
     margin-left: 2rem;
 }
 
-.customerReviewsSlider-arrows .customerReviewsSlider-arrow {
+.customerReviewsSlider-default-arrows .customerReviewsSlider-default-arrow {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -28,56 +28,56 @@
     transition: all .2s ease-in-out;
 }
 
-.customerReviewsSlider-arrows .customerReviewsSlider-arrow:hover {
+.customerReviewsSlider-default-arrows .customerReviewsSlider-default-arrow:hover {
     border-color: #333;
     color: #333;
 }
 
-.customerReviewsSlider-review {
+.customerReviewsSlider-default-review {
     font-size: 1.125rem;
 }
 
-.customerReviewsSlider-client {
+.customerReviewsSlider-default-client {
     display: flex;
     flex-direction: row;
 }
 
-.customerReviewsSlider-client-img {
+.customerReviewsSlider-default-client-img {
     width: 100px;
     height: 100px;
     margin-right: 2rem;
 }
 
-.customerReviewsSlider-client-img img {
+.customerReviewsSlider-default-client-img img {
     aspect-ratio: 1 / 1;
     height: auto;
     object-fit: cover;
     border-radius: 50%;
 }
 
-.customerReviewsSlider-client-content {
+.customerReviewsSlider-default-client-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.customerReviewsSlider-client-name,
-.customerReviewsSlider-client-addition {
+.customerReviewsSlider-default-client-name,
+.customerReviewsSlider-default-client-addition {
     font-size: 0.975rem;
 }
 
-.customerReviewsSlider-client-name {
+.customerReviewsSlider-default-client-name {
     font-weight: 700;
 }
 
-.customerReviewsSlider-dots {
+.customerReviewsSlider-default-dots {
     position: absolute;
     left: 50%;
     bottom: 0;
     display: flex;
 }
 
-.customerReviewsSlider-dot {
+.customerReviewsSlider-default-dot {
     width: 10px;
     height: 10px;
     border: 2px solid rgba(0,0,0,0);
@@ -88,34 +88,33 @@
     transition: all .2s ease-in-out;
 }
 
-.customerReviewsSlider-dot.glide__bullet--active {
+.customerReviewsSlider-default-dot.glide__bullet--active {
     border-color: #aaa;
 }
 
-.customerReviewsSlider-dot:hover {
+.customerReviewsSlider-default-dot:hover {
     border-radius: 50%;
 }
 
-.customerReviewsSlider-slider-wrapper {
+.customerReviewsSlider-default-slider-wrapper {
     display: flex;
 }
 
 @media screen and (max-width: 768px) {
 
-    .customerReviewsSlider-track {
+    .customerReviewsSlider-default-track {
         margin: 0;
     }
 
-    .customerReviewsSlider-arrows {
+    .customerReviewsSlider-default-arrows {
         display: none;
     }
 
-    .customerReviewsSlider-dots {
-        display: block;
+    .customerReviewsSlider-default-dots {
         margin: 1rem auto;
     }
 
-    .customerReviewsSlider-slider-wrapper {
+    .customerReviewsSlider-default-slider-wrapper {
         flex-direction: column;
     }
 }
