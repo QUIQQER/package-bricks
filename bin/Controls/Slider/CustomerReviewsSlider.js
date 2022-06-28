@@ -10,7 +10,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
     'qui/controls/Control',
     URL_OPT_DIR + 'bin/quiqqer-asset/glidejs-glide/@glidejs/glide/dist/glide.js',
     'css!' + URL_OPT_DIR + 'bin/quiqqer-asset/glidejs-glide/@glidejs/glide/dist/css/glide.core.css',
-    'css!' + URL_OPT_DIR + 'bin/quiqqer-asset/glidejs-glide/@glidejs/glide/dist/css/glide.theme.css'
+    // 'css!' + URL_OPT_DIR + 'bin/quiqqer-asset/glidejs-glide/@glidejs/glide/dist/css/glide.theme.css'
 
 ], function (QUI, QUIControl, Glide) {
     "use strict";
@@ -31,7 +31,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
             delay: 5000,
             height: 'const',
             autoplay: false,
+            perview: 1
         },
+
+        glideTrack: null,
 
         initialize: function (options) {
             this.parent(options);
@@ -48,10 +51,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
             var delay = this.getAttribute('delay');
             var autoplay = this.getAttribute('autoplay');
             var sliderHeight = this.getAttribute('height');
+            var perView = this.getAttribute('perview');
+
+            this.glideTrack = document.querySelector('.customerReviewsSlider-track');
 
             var options = {
                 type: 'carousel',
-                perView: 1,
+                perView: perView
             };
 
             if (delay >= 1000 && autoplay == true) {
@@ -70,13 +76,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
         sliderHandleHeight: function (glide) {
 
             var self = this;
-
             var GlideElem = document.querySelector('.customerReviewsSlider-slider-wrapper');
 
             if (GlideElem) {
 
                 // Automated height on Carousel build
                 glide.on('build.after', function () {
+                    self.showSlider();
                     self.setSliderHeight();
                 });
 
@@ -88,47 +94,100 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
             }
         },
 
+        showSlider: function () {
+            var Wrapper = document.querySelector('.customerReviewsSlider-track');
+            Wrapper.style.opacity = 1;
+        },
+
         changeSliderHeight: function (direction) {
 
-            const slider = document.querySelector('.customerReviewsSlider-slider').children;
+            var activeSlide = document.querySelector('.glide__slide--active');
+            var actvieSlideWidth = activeSlide.offsetWidth;
+            var glideTrackWidth = this.glideTrack.offsetWidth;
+            var howMany = Math.round(glideTrackWidth/actvieSlideWidth);
 
-            var i = 0;
-            var nextSlide = null;
+            var slides = this.getSlides(howMany, direction);
+            var highestSlide = this.getHeight(slides);
 
-            for (i; i<slider.length; i++) {
+            var glideTrackHeight = this.glideTrack.offsetHeight;
 
-                if (slider[i].className.includes('glide__slide--active')) {
 
-                    if (direction === ">") {
-                        nextSlide = slider[i+1];
-                        break;
-                    }
-                    nextSlide = slider[i-1];
-                    break;
-                }
-            }
-
-            const nextSlideHeight = nextSlide ? nextSlide.offsetHeight + 50 : 0;
-
-            const glideTrack = document.querySelector('.customerReviewsSlider-track');
-            const glideTrackHeight = glideTrack ? glideTrack.offsetHeight : 0;
-
-            if (nextSlideHeight !== glideTrackHeight) {
-                glideTrack.style.height = `${nextSlideHeight}px`;
+            if (highestSlide !== glideTrackHeight) {
+                this.glideTrack.style.height = `${highestSlide+50}px`;
             }
 
         },
 
         setSliderHeight: function () {
-            const activeSlide = document.querySelector('.glide__slide--active');
-            const activeSlideHeight = activeSlide ? activeSlide.offsetHeight + 50 : 0;
+            var activeSlide = document.querySelector('.glide__slide--active');
+            var actvieSlideWidth = activeSlide.offsetWidth;
+            var glideTrackWidth = this.glideTrack.offsetWidth;
+            var howMany = Math.round(glideTrackWidth/actvieSlideWidth);
 
-            const glideTrack = document.querySelector('.customerReviewsSlider-track');
-            const glideTrackHeight = glideTrack ? glideTrack.offsetHeight : 0;
+            var slides = this.getSlides(howMany);
+            var highestSlide = this.getHeight(slides);
 
-            if (activeSlideHeight !== glideTrackHeight) {
-                glideTrack.style.height = `${activeSlideHeight}px`;
+            var glideTrackHeight = this.glideTrack.offsetHeight;
+
+
+            if (highestSlide !== glideTrackHeight) {
+                this.glideTrack.style.height = `${highestSlide+50}px`;
             }
+        },
+
+        getSlides: function (howMany, direction = null) {
+            var i = 0;
+            var Slider = document.querySelector('.customerReviewsSlider-slider');
+            var SliderChildren = Slider.children;
+            var len = SliderChildren.length;
+            var activeSlideIndex = null;
+            var firstNewIndex = null;
+            var lastNewIndex = null;
+            var visibleSlides = [];
+
+            for (i; i<len; i++) {
+                if (SliderChildren[i].className.includes('glide__slide--active')) {
+                    activeSlideIndex = i;
+                    break;
+                }
+            }
+
+            if (direction === ">") {
+                firstNewIndex = activeSlideIndex + 1;
+                lastNewIndex = activeSlideIndex + this.getAttribute('perview'); //change to preView option
+            }
+
+            if (direction === "<") {
+                firstNewIndex = activeSlideIndex - 1;
+                lastNewIndex = firstNewIndex + this.getAttribute('perview') - 1; //change to preView option
+            }
+
+            if (direction === null) {
+                firstNewIndex = activeSlideIndex;
+                lastNewIndex = firstNewIndex + this.getAttribute('perview') - 1; //change to preView option
+            }
+
+            for (i = firstNewIndex; i<=lastNewIndex; i++) {
+                visibleSlides.push(SliderChildren[i]);
+            }
+
+            return visibleSlides;
+        },
+
+        getHeight: function (slides) {
+            var newHeight = 0;
+            var i = 0;
+            var len = slides.length;
+
+            for (i; i<len; i++) {
+                var slideHeight = slides[i].offsetHeight;
+                
+                if(slideHeight>newHeight) {
+                    newHeight = slideHeight;
+                }
+            }
+
+            return newHeight;
         }
     });
 });
