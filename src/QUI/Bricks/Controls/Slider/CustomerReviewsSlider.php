@@ -22,7 +22,8 @@ class CustomerReviewsSlider extends AbstractPromoslider
         $this->setAttributes([
             'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider',
             'template' => 'default',
-            'delay'    => 5000
+            'delay'    => 5000,
+            'perview'  => 1
         ]);
 
         parent::__construct($attributes);
@@ -41,6 +42,11 @@ class CustomerReviewsSlider extends AbstractPromoslider
         $this->setJavaScriptControlOption('autoplay', $this->getAttribute('autoplay'));
         $this->setJavaScriptControlOption('height', $this->getAttribute('sliderHeight'));
 
+        switch ($template) {
+            case 'templateOne':
+                $this->setJavaScriptControlOption('perview', 2);
+                break;
+        }
 
         $options = [
             'this'    => $this,

@@ -770,6 +770,9 @@
                     <option value="default">
                         <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.template.default"/>
                     </option>
+                    <option value="templateOne">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.template.templateOne"/>
+                    </option>
                 </setting>
                 <setting name="delay" type="number">
                     <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.delay"/>
