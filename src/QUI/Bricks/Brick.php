@@ -8,13 +8,13 @@ namespace QUI\Bricks;
 
 use Exception;
 use QUI;
-
 use QUI\Control;
 
 use function array_filter;
 use function array_flip;
 use function array_merge;
 use function array_unique;
+use function array_values;
 use function class_exists;
 use function dirname;
 use function explode;
@@ -108,7 +108,8 @@ class Brick extends QUI\QDOM
             'classes'       => '',
             'frontendTitle' => '',
             'hasContent'    => 1,
-            'cacheable'     => 1    // if the brick is cacheable or not
+            'cacheable'     => 1, // if the brick is cacheable or not
+            'deprecated'    => 0
         ];
 
         $this->setAttributes($default);
@@ -202,6 +203,26 @@ class Brick extends QUI\QDOM
 
             if (is_array($customfields)) {
                 $this->customfields = $customfields;
+            }
+        }
+
+        // deprecated
+        $BricksManager = QUI\Bricks\Manager::init();
+        $type          = $this->getAttribute('type');
+
+        $brick = array_filter($BricksManager->getAvailableBricks(), function ($brick) use ($type) {
+            if (!isset($brick['control'])) {
+                return false;
+            }
+
+            return $brick['control'] === $type;
+        });
+
+        if ($brick) {
+            $brick = array_values($brick)[0];
+
+            if (!empty($brick['deprecated'])) {
+                $this->setAttribute('deprecated', 1);
             }
         }
 

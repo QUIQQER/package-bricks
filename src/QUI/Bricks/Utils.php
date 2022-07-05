@@ -133,6 +133,12 @@ class Utils
 
         $hasContent = 1;
         $cacheable  = 1;
+        $deprecated = 0;
+
+        if ($Brick->hasAttribute('deprecated')
+            && (int)$Brick->getAttribute('deprecated') === 1) {
+            $deprecated = 1;
+        }
 
         if ($Brick->hasAttribute('hasContent')
             && (int)$Brick->getAttribute('hasContent') === 0) {
@@ -172,7 +178,8 @@ class Utils
             'title'       => $title,
             'description' => $description,
             'inheritance' => $Brick->getAttribute('inheritance'),
-            'priority'    => $Brick->getAttribute('priority')
+            'priority'    => $Brick->getAttribute('priority'),
+            'deprecated'  => $deprecated
         ];
     }
 
