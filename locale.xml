@@ -273,6 +273,10 @@
             <de><![CDATA[Bausteintyp]]></de>
             <en><![CDATA[Brick type]]></en>
         </locale>
+        <locale name="brick.edit.type.title">
+            <de><![CDATA[Titel des Bausteintyps]]></de>
+            <en><![CDATA[Title of the brick type]]></en>
+        </locale>
         <locale name="brick.edit.allowed.areas">
             <de><![CDATA[Erlaubte Bausteinzonen]]></de>
             <en><![CDATA[Allowed Brick areas]]></en>
@@ -413,8 +417,10 @@
             <en><![CDATA[Bricks: Basic slider]]></en>
         </locale>
         <locale name="brick.control.basicSlider.description">
-            <de><![CDATA[Ein einfaches Bilder-Slider. Der Slider wird neben dem Text angezeigt (wahlweise links oder rechts).]]></de>
-            <en><![CDATA[A simple image slider. The slider is displayed next to the text (optionally on the left or right).]]></en>
+            <de>
+                <![CDATA[Ein einfaches Bilder-Slider. Der Slider wird neben dem Text angezeigt (wahlweise links oder rechts).]]></de>
+            <en>
+                <![CDATA[A simple image slider. The slider is displayed next to the text (optionally on the left or right).]]></en>
         </locale>
         <locale name="brick.control.basicSlider.mediaFolder">
             <de><![CDATA[Media-Ordner auswählen]]></de>
@@ -1780,8 +1786,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Clickable images]]></en>
         </locale>
         <locale name="brick.textAndImage.imageZoom.desc" html="true">
-            <de><![CDATA[Wenn aktiviert, kann man die Bilder klicken um sie zu vergrößern. Bitte beachte: das funktioniert nur, wenn das QUIQQER Paket <code>quiqqer/gallery</code> installiert ist.]]></de>
-            <en><![CDATA[If activated, you can click on the images to enlarge them. Please note: this only works if the QUIQQER package <code>quiqqer/gallery</code> is installed.]]></en>
+            <de>
+                <![CDATA[Wenn aktiviert, kann man die Bilder klicken um sie zu vergrößern. Bitte beachte: das funktioniert nur, wenn das QUIQQER Paket <code>quiqqer/gallery</code> installiert ist.]]></de>
+            <en>
+                <![CDATA[If activated, you can click on the images to enlarge them. Please note: this only works if the QUIQQER package <code>quiqqer/gallery</code> is installed.]]></en>
         </locale>
         <locale name="brick.textAndImage.maxImageWidth">
             <de><![CDATA[Maximale Briete des Bildes]]></de>
@@ -1986,7 +1994,8 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Bricks: Accordion menu]]></en>
         </locale>
         <locale name="brick.accordion.description">
-            <de><![CDATA[Baustein mit ausklappbaren Elementen. Es kann zum Bauen der Hilfe oder FAQ Einträge benutzt werden.]]></de>
+            <de>
+                <![CDATA[Baustein mit ausklappbaren Elementen. Es kann zum Bauen der Hilfe oder FAQ Einträge benutzt werden.]]></de>
             <en><![CDATA[Brick with fold-out elements. It can be used to build help or FAQ entries.]]></en>
         </locale>
         <locale name="brick.accordion.stayOpen">
