@@ -724,6 +724,16 @@
             Error in brick type. The block type is not permitted and is therefore not saved.
             ]]></en>
         </locale>
+        <locale name="brick.deprecated">
+            <de><![CDATA[
+            Dieser Brick ist deprecated und sollte nicht mehr genutzt werden.
+            Beachte das in neueren Version dieser Brick nicht mehr einwandfrei funktionieren kann.
+            ]]></de>
+            <en><![CDATA[
+            This brick is deprecated and should not be used anymore.
+            Note that in newer versions this brick may not work properly.
+            ]]></en>
+        </locale>
     </groups>
     <groups name="quiqqer/bricks" datatype="js">
         <locale name="brick.type">

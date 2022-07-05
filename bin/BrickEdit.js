@@ -451,7 +451,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          * @returns {Promise}
          */
         showInformation: function () {
-            const self = this;
+            const self = this,
+                  data = self.getAttribute('data');
 
             return this.$hideCategory().then(function () {
                 return Template.get('ajax/brick/templates/information', false, {
@@ -460,6 +461,10 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             }).then(function (html) {
                 self.$Container.set('html', html);
                 self.$load();
+
+                if (typeof data.attributes.deprecated !== 'undefined' && data.attributes.deprecated) {
+                    self.$Container.getElements('.deprecated-messages').setStyle('display', 'inline-block');
+                }
             }).then(function () {
                 return Bricks.getAvailableBricks();
             }).then(function (bricks) {

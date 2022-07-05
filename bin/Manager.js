@@ -56,9 +56,9 @@ define('package/quiqqer/bricks/bin/Manager', [
         initialize: function (options) {
             this.parent(options);
 
-            this.$Grid          = false;
+            this.$Grid = false;
             this.$ProjectSelect = false;
-            this.$ProjectLangs  = false;
+            this.$ProjectLangs = false;
 
             this.addEvents({
                 onCreate : this.$onCreate,
@@ -237,27 +237,32 @@ define('package/quiqqer/bricks/bin/Manager', [
             );
 
             this.$Grid = new Grid(Container, {
-                columnModel      : [{
-                    header   : QUILocale.get('quiqqer/quiqqer', 'id'),
-                    dataIndex: 'id',
-                    dataType : 'integer',
-                    width    : 40
-                }, {
-                    header   : QUILocale.get('quiqqer/quiqqer', 'title'),
-                    dataIndex: 'title',
-                    dataType : 'string',
-                    width    : 140
-                }, {
-                    header   : QUILocale.get('quiqqer/quiqqer', 'description'),
-                    dataIndex: 'description',
-                    dataType : 'string',
-                    width    : 300
-                }, {
-                    header   : QUILocale.get(lg, 'brick.type'),
-                    dataIndex: 'type',
-                    dataType : 'string',
-                    width    : 200
-                }],
+                columnModel      : [
+                    {
+                        header   : QUILocale.get('quiqqer/quiqqer', 'id'),
+                        dataIndex: 'id',
+                        dataType : 'integer',
+                        width    : 40
+                    },
+                    {
+                        header   : QUILocale.get('quiqqer/quiqqer', 'title'),
+                        dataIndex: 'title',
+                        dataType : 'string',
+                        width    : 140
+                    },
+                    {
+                        header   : QUILocale.get('quiqqer/quiqqer', 'description'),
+                        dataIndex: 'description',
+                        dataType : 'string',
+                        width    : 300
+                    },
+                    {
+                        header   : QUILocale.get(lg, 'brick.type'),
+                        dataIndex: 'type',
+                        dataType : 'string',
+                        width    : 200
+                    }
+                ],
                 multipleSelection: true,
                 pagination       : true
             });
@@ -366,7 +371,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                     }
 
                     var langs = projects[project].langs;
-                    langs     = langs.split(',');
+                    langs = langs.split(',');
 
                     self.$ProjectLangs.clear();
 
@@ -424,7 +429,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                                 return;
                             }
 
-                            var i, len, group, title, val;
+                            var i, len, group, title, val, text;
                             var Select = Body.getElement('select'),
                                 Title  = Body.getElement('[name="title"]');
 
@@ -433,15 +438,21 @@ define('package/quiqqer/bricks/bin/Manager', [
 
                                 if ('group' in title) {
                                     group = title.group;
-                                    val   = title.var;
+                                    val = title.var;
                                 } else {
                                     group = title[0];
-                                    val   = title[1];
+                                    val = title[1];
+                                }
+
+                                text = QUILocale.get(group, val);
+
+                                if (bricklist[i].deprecated) {
+                                    text = text + ' (deprecated)';
                                 }
 
                                 new Element('option', {
                                     value: bricklist[i].control,
-                                    html : QUILocale.get(group, val)
+                                    html : text
                                 }).inject(Select);
                             }
 
@@ -584,7 +595,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                             Bricks.getBrick(brickId).then(function (data) {
                                 var Form = Content.getElement('form');
 
-                                Form.elements.title.value       = data.attributes.title;
+                                Form.elements.title.value = data.attributes.title;
                                 Form.elements.description.value = data.attributes.description;
 
                                 Win.Loader.hide();
@@ -598,7 +609,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                         var Content = Win.getContent(),
                             Form    = Content.getElement('form');
 
-                        var Select   = Content.getElement('.dialog-bricks-copy-languages [data-quiid]');
+                        var Select = Content.getElement('.dialog-bricks-copy-languages [data-quiid]');
                         var Language = QUI.Controls.getById(Select.get('data-quiid'));
 
                         Bricks.copyBrick(brickId, {
