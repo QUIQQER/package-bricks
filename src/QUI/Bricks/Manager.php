@@ -689,6 +689,10 @@ class Manager
             $optionElements = $Setting->getElementsByTagName('option');
 
             foreach ($optionElements as $Option) {
+                if (!$options) {
+                    $options = [];
+                }
+
                 $options[] = [
                     'value' => $Option->getAttribute('value'),
                     'text'  => QUI\Utils\DOM::getTextFromNode($Option, false)
@@ -1093,7 +1097,7 @@ class Manager
         QUI\Cache\Manager::clear(
             self::getBrickCacheNamespace() . md5($Brick->getType())
         );
- 
+
         QUI::getEvents()->fireEvent('quiqqerBricksSave', [$brickId]);
     }
 
