@@ -277,6 +277,8 @@ class Manager
         // check if brick exist
         $Brick = $this->getBrickById($brickId);
 
+        QUI::getEvents()->fireEvent('quiqqerBricksBrickDeleteBefore', [$Brick]);
+
         QUI::getDataBase()->delete($this->getTable(), [
             'id' => $brickId
         ]);
@@ -284,7 +286,6 @@ class Manager
         if (isset($this->bricks[$brickId])) {
             unset($this->bricks[$brickId]);
         }
-
 
         $uniqueBrickIds = QUI::getDataBase()->fetch([
             'select' => 'siteId, project, lang',
@@ -316,6 +317,8 @@ class Manager
             'project' => $Brick->getAttribute('project'),
             'lang'    => $Brick->getAttribute('lang')
         ]);
+
+        QUI::getEvents()->fireEvent('quiqqerBricksBrickDeleteAfter', [$brickId]);
     }
 
     /**
@@ -368,7 +371,7 @@ class Manager
 
         // get bricks
         foreach ($templates as $template) {
-            $brickXML = realpath(OPT_DIR . $template . '/bricks.xml');
+            $brickXML = realpath(OPT_DIR.$template.'/bricks.xml');
 
             if (!$brickXML) {
                 continue;
@@ -587,7 +590,7 @@ class Manager
      */
     public function getAvailableBrickSettingsByBrickType($brickType): array
     {
-        $cache = 'quiqqer/bricks/brickType/' . md5($brickType);
+        $cache = 'quiqqer/bricks/brickType/'.md5($brickType);
 
         try {
             return QUI\Cache\Manager::get($cache);
@@ -941,7 +944,7 @@ class Manager
         }
 
         if (!empty($areas)) {
-            $areaString = ',' . implode(',', $areas) . ',';
+            $areaString = ','.implode(',', $areas).',';
         }
 
         $Brick->setAttributes($brickData);
@@ -1095,7 +1098,7 @@ class Manager
         QUI\Cache\Manager::clear($cache);
 
         QUI\Cache\Manager::clear(
-            self::getBrickCacheNamespace() . md5($Brick->getType())
+            self::getBrickCacheNamespace().md5($Brick->getType())
         );
 
         QUI::getEvents()->fireEvent('quiqqerBricksSave', [$brickId]);
@@ -1298,7 +1301,7 @@ class Manager
             // package bricks
             foreach ($packages as $package) {
                 $packageName = $package['name'];
-                $bricksXML   = OPT_DIR . $packageName . '/bricks.xml';
+                $bricksXML   = OPT_DIR.$packageName.'/bricks.xml';
 
                 if (!file_exists($bricksXML)) {
                     continue;

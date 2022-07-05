@@ -5,6 +5,7 @@
  * @module package/quiqqer/bricks/bin/BrickEdit
  * @author www.pcsg.de (Henning Leutz)
  *
+ * @event onQuiqqerBricksEditPanelCreate [this] (global)
  * @event onLoaded [ this ]
  * @event onSave [ this ]
  * @event onDelete [ this ]
@@ -207,6 +208,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     onClick: this.showUsage
                 }
             });
+
+            QUI.fireEvent('quiqqerBricksEditPanelCreate', [this]);
         },
 
         /**
