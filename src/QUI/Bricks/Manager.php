@@ -23,6 +23,7 @@ use function array_unique;
 use function array_values;
 use function class_exists;
 use function count;
+use function defined;
 use function explode;
 use function implode;
 use function in_array;
@@ -934,10 +935,16 @@ class Manager
             $brickData['areas'] = $brickData['attributes']['areas'];
         }
 
+
         if (isset($brickData['areas'])) {
             $parts = explode(',', $brickData['areas']);
 
             foreach ($parts as $area) {
+                if (defined('QUIQQER_BRICKS_IGNORE_AREA_CHECK')) {
+                    $areas[] = $area;
+                    continue;
+                }
+
                 if (in_array($area, $availableAreas)) {
                     $areas[] = $area;
                 }
