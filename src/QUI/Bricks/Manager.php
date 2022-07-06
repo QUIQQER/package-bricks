@@ -8,7 +8,6 @@ namespace QUI\Bricks;
 
 use DOMElement;
 use DOMXPath;
-use Exception;
 use QUI;
 use QUI\Projects\Project;
 use QUI\Projects\Site;
@@ -23,7 +22,6 @@ use function array_unique;
 use function array_values;
 use function class_exists;
 use function count;
-use function defined;
 use function explode;
 use function implode;
 use function in_array;
@@ -109,7 +107,7 @@ class Manager
     }
 
     /**
-     * Returns the brick's table name
+     * Returns the bricks table name
      *
      * @return String
      */
@@ -278,8 +276,6 @@ class Manager
         // check if brick exist
         $Brick = $this->getBrickById($brickId);
 
-        QUI::getEvents()->fireEvent('quiqqerBricksBrickDeleteBefore', [$Brick]);
-
         QUI::getDataBase()->delete($this->getTable(), [
             'id' => $brickId
         ]);
@@ -287,6 +283,7 @@ class Manager
         if (isset($this->bricks[$brickId])) {
             unset($this->bricks[$brickId]);
         }
+
 
         $uniqueBrickIds = QUI::getDataBase()->fetch([
             'select' => 'siteId, project, lang',
@@ -318,8 +315,6 @@ class Manager
             'project' => $Brick->getAttribute('project'),
             'lang'    => $Brick->getAttribute('lang')
         ]);
-
-        QUI::getEvents()->fireEvent('quiqqerBricksBrickDeleteAfter', [$brickId]);
     }
 
     /**
@@ -454,8 +449,7 @@ class Manager
                 'quiqqer/bricks',
                 'brick.content.description'
             ],
-            'control'     => 'content',
-            'deprecated'  => 0
+            'control'     => 'content'
         ];
 
         foreach ($xmlFiles as $bricksXML) {
@@ -475,7 +469,7 @@ class Manager
 
         try {
             QUI\Cache\Manager::set($cache, $list);
-        } catch (Exception $Exception) {
+        } catch (\Exception $Exception) {
             QUI\System\Log::writeException($Exception);
         }
 
@@ -520,12 +514,12 @@ class Manager
      * Get a Brick by its unique ID
      *
      * @param string $uid - unique id
-     * @param QUI\Interfaces\Projects\Site|null $Site - unique id
+     * @param Site|null $Site - unique id
      *
      * @return Brick
      * @throws QUI\Exception
      */
-    public function getBrickByUID(string $uid, ?QUI\Interfaces\Projects\Site $Site = null): Brick
+    public function getBrickByUID(string $uid, $Site = null): Brick
     {
         if (isset($this->brickUIDs[$uid])) {
             return $this->brickUIDs[$uid];
@@ -672,7 +666,7 @@ class Manager
 
         try {
             QUI\Cache\Manager::set($cache, $settings);
-        } catch (Exception $Exception) {
+        } catch (\Exception $Exception) {
             QUI\System\Log::writeException($Exception);
         }
 
@@ -682,22 +676,18 @@ class Manager
     /**
      * Parse a xml setting element to a brick array
      *
-     * @param DOMElement $Setting
+     * @param \DOMElement $Setting
      * @return array
      */
     protected function parseSettingToBrickArray(DOMElement $Setting): array
     {
-        /* @var $Option DOMElement */
+        /* @var $Option \DOMElement */
         $options = false;
 
         if ($Setting->getAttribute('type') == 'select') {
             $optionElements = $Setting->getElementsByTagName('option');
 
             foreach ($optionElements as $Option) {
-                if (!$options) {
-                    $options = [];
-                }
-
                 $options[] = [
                     'value' => $Option->getAttribute('value'),
                     'text'  => QUI\Utils\DOM::getTextFromNode($Option, false)
@@ -776,14 +766,10 @@ class Manager
 
         $result = [];
 
-        try {
-            QUI::getEvents()->fireEvent(
-                'onQuiqqerBricksGetBricksByAreaBegin',
-                [$brickArea, $Site, &$result]
-            );
-        } catch (QUI\Exception $e) {
-            QUI\System\Log::addError($e->getMessage());
-        }
+        QUI::getEvents()->fireEvent(
+            'onQuiqqerBricksGetBricksByAreaBegin',
+            [$brickArea, $Site, &$result]
+        );
 
         foreach ($bricks as $brickData) {
             $brickId = (int)$brickData['brickId'];
@@ -794,7 +780,10 @@ class Manager
                     $result[] = $Brick->check();
                     continue;
                 }
+            } catch (QUI\Exception $Exception) {
+            }
 
+            try {
                 if (!$brickId) {
                     continue;
                 }
@@ -818,14 +807,10 @@ class Manager
             }
         }
 
-        try {
-            QUI::getEvents()->fireEvent(
-                'onQuiqqerBricksGetBricksByAreaEnd',
-                [$brickArea, $Site, &$result]
-            );
-        } catch (QUI\Exception $e) {
-            QUI\System\Log::addError($e->getMessage());
-        }
+        QUI::getEvents()->fireEvent(
+            'onQuiqqerBricksGetBricksByAreaEnd',
+            [$brickArea, $Site, &$result]
+        );
 
         return $result;
     }
@@ -934,7 +919,6 @@ class Manager
         if (isset($brickData['attributes']) && isset($brickData['attributes']['areas'])) {
             $brickData['areas'] = $brickData['attributes']['areas'];
         }
-
 
         if (isset($brickData['areas'])) {
             $parts = explode(',', $brickData['areas']);
@@ -1234,7 +1218,7 @@ class Manager
                 continue;
             }
 
-            if (empty($bricks) || !is_array($bricks)) {
+            if (empty($bricks)) {
                 continue;
             }
 
