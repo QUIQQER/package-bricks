@@ -43,8 +43,10 @@ QUI::$Ajax->registerFunction(
 
         $Project               = QUI::getProjectManager()->decode($project);
         $Site                  = $Project->get((int)$siteId);
-        $privacyPolicyCheckbox = \boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'));
-        $useCaptcha            = \boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.useCaptcha'));
+        $privacyPolicyCheckbox = boolval(
+            $Site->getAttribute('quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox')
+        );
+        $useCaptcha            = boolval($Site->getAttribute('quiqqer.settings.sitetypes.contact.useCaptcha'));
 
         if (($privacyPolicyCheckbox || $privacyPolicyCheckboxBrick) && !(int)$privacyPolicyAccepted) {
             throw new QUI\Exception(
@@ -83,7 +85,7 @@ QUI::$Ajax->registerFunction(
 
         $Mailer->addRecipient($receiver);
         $Mailer->addReplyTo($email);
-        $Mailer->setSubject($Site->getAttribute('title').' '.$Site->getUrlRewritten());
+        $Mailer->setSubject($Site->getAttribute('title') . ' ' . $Site->getUrlRewritten());
 
         $body = "
             <span style=\"font-weight: bold;\">From:</span> {$name}<br />
@@ -107,7 +109,7 @@ QUI::$Ajax->registerFunction(
 
         try {
             $Mailer->send();
-        } catch (\Exception $Exception) {
+        } catch (Exception $Exception) {
             QUI\System\Log::writeException($Exception);
 
             throw new QUI\Exception(
