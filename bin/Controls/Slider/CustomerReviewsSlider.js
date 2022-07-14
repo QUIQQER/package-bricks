@@ -105,6 +105,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
         showSlider: function () {
             var Track = document.querySelector('.customerReviewsSlider-track');
             Track.style.opacity = 1;
+            Track.style.visibility = 'visible';
         },
 
         changeSliderHeight: function (direction, steps) {
