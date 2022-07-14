@@ -54,8 +54,11 @@ class CustomerReviewsSlider extends AbstractPromoslider
             'arrows'  => $this->getAttribute('showArrows')
         ];
 
-        $this->addCSSFile(
-            \dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.css'
+        $this->addCSSFiles(
+            [
+                \dirname(__FILE__) . '/CustomerReviewsSlider.css',
+                \dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.css'
+            ]
         );
 
         $Engine->assign($options);

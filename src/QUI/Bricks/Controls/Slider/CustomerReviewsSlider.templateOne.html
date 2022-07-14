@@ -16,7 +16,7 @@
 
         {if $arrows}
         <div class="customerReviewsSlider-templateOne-arrows" data-glide-el="controls">
-                <span class="customerReviewsSlider-templateOne-arrow customerReviewsSlider-templateOne-arrow-left"
+                <span class="customerReviewsSlider-arrow customerReviewsSlider-templateOne-arrow customerReviewsSlider-templateOne-arrow-left"
                       data-glide-dir="<">
                     <span class="arrow"> &lt; </span>
                 </span>
@@ -95,17 +95,17 @@
 
         {if $arrows}
         <div class="customerReviewsSlider-templateOne-arrows" data-glide-el="controls">
-                <span class="customerReviewsSlider-templateOne-arrow customerReviewsSlider-templateOne-arrow-right"
+                <span class="customerReviewsSlider-arrow customerReviewsSlider-templateOne-arrow customerReviewsSlider-templateOne-arrow-right"
                       data-glide-dir=">">
                     <span class="arrow"> &gt; </span>
                 </span>
         </div>
         {/if}
 
-        <div class="customerReviewsSlider-templateOne-dots" data-glide-el="controls[nav]">
+        <div class="customerReviewsSlider-dots customerReviewsSlider-templateOne-dots" data-glide-el="controls[nav]">
             {assign var=counter value=0}
             {foreach from=$entries item=entry}
-            <span class="customerReviewsSlider-templateOne-dot" data-glide-dir="={$counter}"></span>
+            <span class="customerReviewsSlider-dot customerReviewsSlider-templateOne-dot" data-glide-dir="={$counter}"></span>
             {assign var=counter value=$counter+1}
             {/foreach}
         </div>
