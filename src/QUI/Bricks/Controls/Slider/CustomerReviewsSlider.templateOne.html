@@ -18,7 +18,7 @@
         <div class="customerReviewsSlider-templateOne-arrows" data-glide-el="controls">
                 <span class="customerReviewsSlider-templateOne-arrow customerReviewsSlider-templateOne-arrow-left"
                       data-glide-dir="<">
-                    <span class="arrow fa fa-arrow-left"></span>
+                    <span class="arrow"> &lt; </span>
                 </span>
         </div>
         {/if}
@@ -30,40 +30,61 @@
 
                 <li class="glide__slide customerReviewsSlider-templateOne-slide">
 
-                    {if $entry['review']}
-                    <div class="customerReviewsSlider-templateOne-review">
-                        {$entry['review']}
-                    </div>
-                    {/if}
-
-                    <div class="customerReviewsSlider-templateOne-client">
-
-                        <div class="customerReviewsSlider-templateOne-client-img">
-                            {if $entry['image']}
-                            {image src=$entry['image'] loading="lazy" data-src="{$entry['image']}"}
-                            {/if}
+                    <div class="customerReviewsSlider-content-wrapper">
+                        <div class="customerReviewsSlider-quote">
+                            <svg width="192" height="192" version="1.1" viewBox="0 0 50.8 50.8" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                                <metadata>
+                                    <rdf:RDF>
+                                        <cc:Work rdf:about="">
+                                            <dc:format>image/svg+xml</dc:format>
+                                            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                                            <dc:title/>
+                                        </cc:Work>
+                                    </rdf:RDF>
+                                </metadata>
+                                <g transform="translate(0 -246.2)">
+                                    <g transform="scale(.97499 1.0257)" aria-label='"'>
+                                        <path d="m9.2646 271.8q3.2283-4.0891 4.3761-7.1022l-4.1609-6.2413q0-1.65 0.86087-3.2283 0.93261-1.65 2.5826-2.6543 1.65-1.0044 3.7304-1.0044 3.0848 0 5.237 2.2239 2.1522 2.1522 2.1522 5.5239 0 3.9456-3.1565 8.9674t-9.9 9.7565zm18.796 0q3.2283-4.0891 4.3761-7.1022l-4.1609-6.2413q0-1.65 0.86087-3.2283 0.93261-1.65 2.5826-2.6543 1.65-1.0044 3.7304-1.0044 3.0848 0 5.237 2.2239 2.1522 2.1522 2.1522 5.5239 0 3.9456-3.1565 8.9674t-9.9 9.7565z" stroke-width="1.7935" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal"/>
+                                    </g>
+                                </g>
+                            </svg>
                         </div>
 
-                        <div class="customerReviewsSlider-templateOne-client-content">
-                            {if $entry['customerName']}
-                            <span class="customerReviewsSlider-templateOne-client-name">{$entry['customerName']}</span>
-                            {/if}
-                            {if $entry['addition']}
-                            <span class="customerReviewsSlider-templateOne-client-addition">{$entry['addition']}</span>
-                            {/if}
+                        {if $entry['review']}
+                        <div class="customerReviewsSlider-templateOne-review">
+                            {$entry['review']}
+                        </div>
+                        {/if}
 
-                            {if $entry['url']}
-                            <a href="{$entry['url']}" class="customerReviewsSlider-templateOne-url">
-                                {if $entry['urlTitle']}
-                                {$entry['urlTitle']}
-                                {else}
-                                {$entry['url']}
+                        <div class="customerReviewsSlider-templateOne-client">
+
+                            <div class="customerReviewsSlider-templateOne-client-img">
+                                {if $entry['image']}
+                                {image src=$entry['image'] loading="lazy" data-src="{$entry['image']}"}
                                 {/if}
-                            </a>
-                            {/if}
+                            </div>
+
+                            <div class="customerReviewsSlider-templateOne-client-content">
+                                {if $entry['customerName']}
+                                <span class="customerReviewsSlider-templateOne-client-name">{$entry['customerName']}</span>
+                                {/if}
+                                {if $entry['addition']}
+                                <span class="customerReviewsSlider-templateOne-client-addition">{$entry['addition']}</span>
+                                {/if}
+
+                                {if $entry['url']}
+                                <a href="{$entry['url']}" class="customerReviewsSlider-templateOne-url">
+                                    {if $entry['urlTitle']}
+                                    {$entry['urlTitle']}
+                                    {else}
+                                    {$entry['url']}
+                                    {/if}
+                                </a>
+                                {/if}
+
+                            </div>
 
                         </div>
-
                     </div>
 
                 </li>
@@ -76,7 +97,7 @@
         <div class="customerReviewsSlider-templateOne-arrows" data-glide-el="controls">
                 <span class="customerReviewsSlider-templateOne-arrow customerReviewsSlider-templateOne-arrow-right"
                       data-glide-dir=">">
-                    <span class="arrow fa fa-arrow-right"></span>
+                    <span class="arrow"> &gt; </span>
                 </span>
         </div>
         {/if}
