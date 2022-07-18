@@ -37,6 +37,7 @@ class CustomerReviewsSlider extends AbstractPromoslider
         $entries  = json_decode($this->getAttribute('entries'), true);
         $template = $this->getAttribute('template');
         $path     = \dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.html';
+        $enabledEntries = [];
 
         $this->setJavaScriptControlOption('delay', $this->getAttribute('delay'));
         $this->setJavaScriptControlOption('autoplay', $this->getAttribute('autoplay'));
@@ -48,9 +49,17 @@ class CustomerReviewsSlider extends AbstractPromoslider
                 break;
         }
 
+        foreach ($entries as $entry) {
+            if ($entry['isDisabled'] === 1) {
+                continue;
+            }
+
+            array_push($enabledEntries, $entry);
+        }
+
         $options = [
             'this'    => $this,
-            'entries' => $entries,
+            'entries' => $enabledEntries,
             'arrows'  => $this->getAttribute('showArrows')
         ];
 
