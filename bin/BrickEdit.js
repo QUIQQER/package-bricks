@@ -479,10 +479,17 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 }
 
                 if (brick) {
-                    self.getElm().getElement('#typeTitle').value = QUILocale.get(
-                        brick.title.group,
-                        brick.title.var
-                    );
+                    if (typeof brick.title[1] !== 'undefined') {
+                        self.getElm().getElement('#typeTitle').value = QUILocale.get(
+                            brick.title[0],
+                            brick.title[1]
+                        );
+                    } else {
+                        self.getElm().getElement('#typeTitle').value = QUILocale.get(
+                            brick.title.group,
+                            brick.title.var
+                        );
+                    }
                 }
 
                 return self.$showCategory();
