@@ -932,6 +932,10 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 return Promise.resolve();
             }
 
+            if (typeof Category.getAttribute('click') === 'function') {
+                return Promise.resolve();
+            }
+
             switch (Category.getAttribute('name')) {
                 case 'information':
                 case 'extra':
