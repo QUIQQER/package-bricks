@@ -1704,9 +1704,13 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Galerie]]></de>
             <en><![CDATA[Gallery]]></en>
         </locale>
+        <locale name="brick.listTemplate.bigBanner">
+            <de><![CDATA[Großes Banner]]></de>
+            <en><![CDATA[Big banner]]></en>
+        </locale>
 
 
-        <!-- max siten -->
+        <!-- max sites -->
         <locale name="brick.max">
             <de><![CDATA[Anzahl der Seiten]]></de>
             <en><![CDATA[Number of sites]]></en>

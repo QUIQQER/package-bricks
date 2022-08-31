@@ -1310,6 +1310,9 @@
                     <option value="gallery">
                         <locale group="quiqqer/bricks" var="brick.listTemplate.gallery"/>
                     </option>
+                    <option value="bigBanner">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.bigBanner"/>
+                    </option>
                 </setting>
 
                 <setting name="max" type="number">
