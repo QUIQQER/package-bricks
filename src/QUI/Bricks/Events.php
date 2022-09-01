@@ -44,8 +44,9 @@ class Events
 
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.assign');
 
-        $areas = $Site->getAttribute('quiqqer.bricks.areas');
-        $areas = json_decode($areas, true);
+        $areas         = $Site->getAttribute('quiqqer.bricks.areas');
+        $oldAreaString = $areas;
+        $areas         = json_decode($areas, true);
 
         if (empty($areas)) {
             return;
@@ -166,8 +167,10 @@ class Events
         self::$saved[$Site->getId()] = true;
 
         // save bricks with unique ids
-        $Site->setAttribute('quiqqer.bricks.areas', json_encode($areas));
-        $Site->save();
+        if ($oldAreaString !== json_encode($areas)) {
+            $Site->setAttribute('quiqqer.bricks.areas', json_encode($areas));
+            $Site->save();
+        }
     }
 
     /**
