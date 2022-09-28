@@ -5,7 +5,7 @@
 {/if}
 
 {if $this->getAttribute('content') != ""}
-<div class="control-content">
+<div class="control-content default-content">
     {$this->getAttribute('content')}
 </div>
 {/if}
@@ -51,7 +51,7 @@
                         </div>
 
                         {if $entry['review']}
-                        <div class="customerReviewsSlider-templateOne-review">
+                        <div class="customerReviewsSlider-templateOne-review default-content">
                             {$entry['review']}
                         </div>
                         {/if}

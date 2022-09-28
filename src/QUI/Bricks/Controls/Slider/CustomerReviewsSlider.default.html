@@ -5,7 +5,7 @@
 {/if}
 
 {if $this->getAttribute('content') != ""}
-<div class="control-content">
+<div class="control-content default-content">
     {$this->getAttribute('content')}
 </div>
 {/if}
@@ -31,7 +31,7 @@
                 <li class="glide__slide customerReviewsSlider-default-slide">
 
                     {if $entry['review']}
-                    <div class="customerReviewsSlider-default-review">
+                    <div class="customerReviewsSlider-default-review default-content">
                         {$entry['review']}
                     </div>
                     {/if}
