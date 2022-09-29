@@ -833,7 +833,7 @@
             </description>
 
             <settings>
-                <setting name="entries" data-qui="package/quiqqer/bricks/bin/Controls/BoxContent">
+                <setting name="entries" type="hidden" data-qui="package/quiqqer/bricks/bin/Controls/BoxContentSettings">
                     <locale group="quiqqer/bricks" var="BoxContent.entries"/>
                 </setting>
             </settings>

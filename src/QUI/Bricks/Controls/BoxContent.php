@@ -43,14 +43,23 @@ class BoxContent extends QUI\Control
      */
     public function getBody()
     {
-        $Engine  = QUI::getTemplateManager()->getEngine();
-        $entries = $this->getAttribute('entries');
+        $Engine         = QUI::getTemplateManager()->getEngine();
+        $entries        = $this->getAttribute('entries');
+        $enabledEntries = [];
 
         if (is_string($entries)) {
             $entries = json_decode($entries, true);
         }
 
-        $count      = count($entries);
+        foreach ($entries as $entry) {
+            if (isset($entry['isDisabled']) && $entry['isDisabled'] === 1) {
+                continue;
+            }
+
+            array_push($enabledEntries, $entry);
+        }
+
+        $count      = count($enabledEntries);
         $extraClass = '';
 
         switch ($count) {
@@ -88,7 +97,7 @@ class BoxContent extends QUI\Control
 
         $Engine->assign(array(
             'this'       => $this,
-            'entries'    => $entries,
+            'entries'    => $enabledEntries,
             'extraClass' => $extraClass
         ));
 

@@ -1626,9 +1626,39 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Inhalte werden in Boxen nebeneinander gestellt und zentriert]]></de>
             <en><![CDATA[Show the text in boxes, which are in a single line.]]></en>
         </locale>
+
         <locale name="BoxContent.entries">
             <de><![CDATA[Einträge]]></de>
             <en><![CDATA[Entries]]></en>
+        </locale>
+        <locale name="control.boxContent.entries.disable">
+            <de><![CDATA[Eintrag deaktivieren]]></de>
+            <en><![CDATA[Disable entry]]></en>
+        </locale>
+        <locale name="control.boxContent.entries.title">
+            <de><![CDATA[Titel]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="control.boxContent.entries.text">
+            <de><![CDATA[Text]]></de>
+            <en><![CDATA[Text]]></en>
+        </locale>
+
+        <locale name="control.boxContent.entries.delete.title">
+            <de><![CDATA[Slide wirklich löschen?]]></de>
+            <en><![CDATA[Do you really want to remove this slide?]]></en>
+        </locale>
+        <locale name="control.boxContent.entries.delete.information">
+            <de><![CDATA[Der Slide kann nicht wieder hergestellt werden]]></de>
+            <en><![CDATA[The slide can not be restored]]></en>
+        </locale>
+        <locale name="control.boxContent.entries.edit.title">
+            <de><![CDATA[Eintrag bearbeiten]]></de>
+            <en><![CDATA[Edit entry]]></en>
+        </locale>
+        <locale name="control.boxContent.entries.add.title">
+            <de><![CDATA[Eintrag hinzufügen]]></de>
+            <en><![CDATA[Add entry]]></en>
         </locale>
 
         <!-- Box Content Advanced -->

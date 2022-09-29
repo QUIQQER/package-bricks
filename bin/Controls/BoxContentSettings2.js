@@ -5,11 +5,11 @@
  * @require qui/controls/elements/FormList
  * @require css!package/quiqqer/bricks/bin/Controls/BoxContent.css
  */
-define('package/quiqqer/bricks/bin/Controls/BoxContent', [
+define('package/quiqqer/bricks/bin/Controls/BoxContentSettings2', [
 
     'qui/controls/elements/FormList',
 
-    'css!package/quiqqer/bricks/bin/Controls/BoxContent.css'
+    'css!package/quiqqer/bricks/bin/Controls/BoxContentSettings2.css'
 
 ], function (QUIFormList) {
     "use strict";
