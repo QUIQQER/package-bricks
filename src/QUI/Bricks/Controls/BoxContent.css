@@ -8,6 +8,10 @@
     padding-bottom: 0;
 }
 
+.box-content-entry-center {
+    text-align: center;
+}
+
 .box-content-entry h4 {
     width: 100%;
     white-space: nowrap;

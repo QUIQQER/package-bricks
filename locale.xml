@@ -1627,6 +1627,11 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Show the text in boxes, which are in a single line.]]></en>
         </locale>
 
+        <locale name="bricks.BoxContent.centerText">
+            <de><![CDATA[Text zentrieren]]></de>
+            <en><![CDATA[Center text]]></en>
+        </locale>
+
         <locale name="BoxContent.entries">
             <de><![CDATA[Einträge]]></de>
             <en><![CDATA[Entries]]></en>

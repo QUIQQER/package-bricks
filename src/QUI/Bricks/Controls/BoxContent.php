@@ -26,7 +26,8 @@ class BoxContent extends QUI\Control
         $this->setAttributes(array(
             'title'       => 'Box Content',
             'contentList' => false,
-            'entries'     => array()
+            'entries'     => array(),
+            'centerText'  => false,
         ));
 
         parent::__construct($attributes);
@@ -44,6 +45,7 @@ class BoxContent extends QUI\Control
     public function getBody()
     {
         $Engine         = QUI::getTemplateManager()->getEngine();
+        $centerText     = $this->getAttribute('centerText');
         $entries        = $this->getAttribute('entries');
         $enabledEntries = [];
 
@@ -98,7 +100,8 @@ class BoxContent extends QUI\Control
         $Engine->assign(array(
             'this'       => $this,
             'entries'    => $enabledEntries,
-            'extraClass' => $extraClass
+            'extraClass' => $extraClass,
+            'centerText' => $centerText
         ));
 
         return $Engine->fetch(dirname(__FILE__) . '/BoxContent.html');

@@ -833,6 +833,11 @@
             </description>
 
             <settings>
+                <setting name="centerText" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="bricks.BoxContent.centerText"/>
+                </setting>
+
                 <setting name="entries" type="hidden" data-qui="package/quiqqer/bricks/bin/Controls/BoxContentSettings">
                     <locale group="quiqqer/bricks" var="BoxContent.entries"/>
                 </setting>

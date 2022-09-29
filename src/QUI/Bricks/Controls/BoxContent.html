@@ -12,11 +12,11 @@
     {/if}
 
     {foreach from=$entries item=entry}
-    <div class="box-content-entry{$extraClass}">
+    <div class="box-content-entry{$extraClass} {if $centerText}box-content-entry-center{/if}">
         <h4 title="{$entry.title|escape:"html"}">
         {$entry.title}
         </h4>
-        <p>{$entry.text}</p>
+        <p class="default-content">{$entry.text}</p>
     </div>
     {/foreach}
 </div>
