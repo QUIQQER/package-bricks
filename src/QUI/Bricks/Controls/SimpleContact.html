@@ -31,6 +31,12 @@
         </style>
     </noscript>
 
+    {if $formContent}
+    <div class="qui-contact-formContent default-content">
+        {$formContent}
+    </div>
+    {/if}
+
     {if $this->getAttribute('labels')}
     <label for="qui-contact-name">
         {locale group="quiqqer/bricks" value="control.simpleContact.name"}

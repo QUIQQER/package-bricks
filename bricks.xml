@@ -30,6 +30,9 @@
                 <setting name="useCaptcha" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.simpleContact.useCaptcha"/>
                 </setting>
+                <setting name="formContent" data-qui="controls/editors/Input" type="text">
+                    <locale group="quiqqer/bricks" var="brick.control.simpleContact.formContent"/>
+                </setting>
             </settings>
         </brick>
 

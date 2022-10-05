@@ -187,6 +187,11 @@
             <en>
                 <![CDATA[Protect form submit from spam with a CAPTCHA (requires <b>quiqqer/captcha</b> to be installed!)]]></en>
         </locale>
+        <locale name="brick.control.simpleContact.formContent">
+            <de><![CDATA[Inhalt des Formulars]]></de>
+            <en><![CDATA[Form content]]></en>
+            <pl><![CDATA[Zawartość formularza]]></pl>
+        </locale>
         <locale name="brick.control.simpleContact.mail.privacyPolicy_accepted">
             <de><![CDATA[Der Benutzer hat die Datenschutzbestimmungen akzeptiert.]]></de>
             <en><![CDATA[The user has accepted the Privacy Policy.]]></en>
