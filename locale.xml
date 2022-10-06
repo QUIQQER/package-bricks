@@ -187,6 +187,14 @@
             <en>
                 <![CDATA[Protect form submit from spam with a CAPTCHA (requires <b>quiqqer/captcha</b> to be installed!)]]></en>
         </locale>
+        <locale name="brick.control.simpleContact.formContent">
+            <de><![CDATA[Inhalt über dem Formulars]]></de>
+            <en><![CDATA[Content above the form]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.formContent.desc">
+            <de><![CDATA[Dieser Inhalt verschwindet, wenn das Formular abgeschickt wird.]]></de>
+            <en><![CDATA[This content disappears when the form is submitted.]]></en>
+        </locale>
         <locale name="brick.control.simpleContact.mail.privacyPolicy_accepted">
             <de><![CDATA[Der Benutzer hat die Datenschutzbestimmungen akzeptiert.]]></de>
             <en><![CDATA[The user has accepted the Privacy Policy.]]></en>

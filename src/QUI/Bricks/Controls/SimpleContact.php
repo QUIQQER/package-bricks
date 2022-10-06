@@ -32,7 +32,8 @@ class SimpleContact extends QUI\Control
             'data-brickid'              => false,
             'mailTo'                    => '', // receiver email
             'showPrivacyPolicyCheckbox' => false,
-            'useCaptcha'                => false
+            'useCaptcha'                => false,
+            'formContent'               => ''
         ]);
 
         parent::__construct($attributes);
@@ -51,7 +52,7 @@ class SimpleContact extends QUI\Control
         }
 
         $this->addCSSFile(
-            dirname(__FILE__).'/SimpleContact.css'
+            dirname(__FILE__) . '/SimpleContact.css'
         );
     }
 
@@ -69,6 +70,7 @@ class SimpleContact extends QUI\Control
         $message               = '';
         $privacyPolicyCheckbox = $this->getAttribute('showPrivacyPolicyCheckbox');
         $useCaptcha            = $this->getAttribute('useCaptcha');
+        $formContent           = $this->getAttribute('formContent');
         $error                 = false;
 
         // Is javascript disabled?
@@ -127,7 +129,7 @@ class SimpleContact extends QUI\Control
 
                 $label = preg_replace(
                     '#\[([^\]]*)\]#i',
-                    '<a href="'.$url.'" target="_blank">$1</a>',
+                    '<a href="' . $url . '" target="_blank">$1</a>',
                     $label
                 );
 
@@ -160,13 +162,14 @@ class SimpleContact extends QUI\Control
         }
 
         $Engine->assign([
-            'this'    => $this,
-            'name'    => $name,
-            'email'   => $email,
-            'message' => $message
+            'this'        => $this,
+            'name'        => $name,
+            'email'       => $email,
+            'message'     => $message,
+            'formContent' => $formContent
         ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/SimpleContact.html');
+        return $Engine->fetch(dirname(__FILE__) . '/SimpleContact.html');
     }
 
     /**
@@ -193,7 +196,7 @@ class SimpleContact extends QUI\Control
         }
 
         $receiver = $this->getAttribute('mailTo');
-        $url      = $this->getProject()->getHost().$Site->getUrlRewritten();
+        $url      = $this->getProject()->getHost() . $Site->getUrlRewritten();
 
         // fallback: admin email
         if (!QUI\Utils\Security\Orthos::checkMailSyntax($receiver)) {
@@ -204,7 +207,7 @@ class SimpleContact extends QUI\Control
 
         $Mailer->addRecipient($receiver);
         $Mailer->addReplyTo($_POST['email']);
-        $Mailer->setSubject($Site->getAttribute('title').' | '.$url);
+        $Mailer->setSubject($Site->getAttribute('title') . ' | ' . $url);
 
         $body = "
             <span style=\"font-weight: bold;\">From:</span> {$_POST['name']}<br />
