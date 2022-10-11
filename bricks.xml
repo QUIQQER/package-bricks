@@ -33,6 +33,14 @@
                         <locale group="quiqqer/bricks"
                                 var="brick.control.simpleContact.template.twoColumn"/>
                     </option>
+                    <option value="horizontal" selected="selected">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.simpleContact.template.horizontal"/>
+                    </option>
+                    <option value="horizontal.textRight" selected="selected">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.simpleContact.template.horizontalTextRight"/>
+                    </option>
                 </setting>
 
                 <setting name="mailTo">

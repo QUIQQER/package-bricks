@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+.qui-contact-input-wrapper__horizontal {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 2rem;
+}
+
+.qui-contact-privacypolicy__horizontal {
+    margin: 1rem 0;
+}
+
+
+.quiqqer-simple-contact-textRight__horizontal .qui-contact-input-wrapper__horizontal label {
+    text-align: right;
+}
+
+.qui-contact-sendForm-wrapper__horizontal {
+    text-align: right;
+}

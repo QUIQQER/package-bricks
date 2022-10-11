@@ -34,7 +34,8 @@ class SimpleContact extends QUI\Control
             'showPrivacyPolicyCheckbox' => false,
             'useCaptcha'                => false,
             'formContent'               => '',
-            'template'                  => 'default'
+            'template'                  => 'default',
+            'textPosition'              => ''
         ]);
 
         parent::__construct($attributes);
@@ -70,12 +71,21 @@ class SimpleContact extends QUI\Control
         $formContent           = $this->getAttribute('formContent');
         $error                 = false;
         $template              = $this->getAttribute('template');
+        $textPosition          = $this->getAttribute('textPosition');
 
-        if ($template === 'default') {
-            $template = '';
-        } else {
-            $template = "." . $template;
+        switch ($template) {
+            case 'default':
+                $template = '';
+                break;
+            case 'horizontal.textRight':
+                $textPosition = 'quiqqer-simple-contact-textRight__horizontal';
+                $template     = ".horizontal";
+                echo '1';
+                break;
+            default:
+                $template = "." . $template;
         }
+
 
         $this->addCSSFiles([
             dirname(__FILE__) . '/SimpleContact.css',
@@ -170,12 +180,15 @@ class SimpleContact extends QUI\Control
             $message = !empty($_POST['message']) ? $_POST['message'] : '';
         }
 
+//        echo $textPosition;
+
         $Engine->assign([
-            'this'        => $this,
-            'name'        => $name,
-            'email'       => $email,
-            'message'     => $message,
-            'formContent' => $formContent
+            'this'         => $this,
+            'name'         => $name,
+            'email'        => $email,
+            'message'      => $message,
+            'formContent'  => $formContent,
+            'textPosition' => $textPosition
         ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/SimpleContact' . $template . '.html');

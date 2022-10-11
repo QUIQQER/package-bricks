@@ -151,6 +151,14 @@
             <de><![CDATA[Zwei Spalten]]></de>
             <en><![CDATA[Two columns]]></en>
         </locale>
+        <locale name="brick.control.simpleContact.template.horizontal">
+            <de><![CDATA[Horizontal - Text links]]></de>
+            <en><![CDATA[Horizontal - text left]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.template.horizontalTextRight">
+            <de><![CDATA[Horizontal - Text rechts]]></de>
+            <en><![CDATA[Horizontal - Text right]]></en>
+        </locale>
         <locale name="brick.control.simpleContact.mailTo">
             <de><![CDATA[E-Mail Adresse, an die die Nachricht gesendet wird]]></de>
             <en><![CDATA[Email where the message will send to]]></en>
