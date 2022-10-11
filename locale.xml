@@ -153,7 +153,7 @@
         </locale>
         <locale name="brick.control.simpleContact.template.horizontal">
             <de><![CDATA[Horizontal - Text links]]></de>
-            <en><![CDATA[Horizontal - text left]]></en>
+            <en><![CDATA[Horizontal - Text left]]></en>
         </locale>
         <locale name="brick.control.simpleContact.template.horizontalTextRight">
             <de><![CDATA[Horizontal - Text rechts]]></de>
