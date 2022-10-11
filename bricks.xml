@@ -21,6 +21,20 @@
             </description>
 
             <settings>
+
+                <setting name="template" type="select">
+                    <locale group="quiqqer/bricks" var="brick.control.simpleContact.template"/>
+
+                    <option value="default" selected="selected">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.simpleContact.template.default"/>
+                    </option>
+                    <option value="twoColumns" selected="selected">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.simpleContact.template.twoColumn"/>
+                    </option>
+                </setting>
+
                 <setting name="mailTo">
                     <locale group="quiqqer/bricks" var="brick.control.simpleContact.mailTo"/>
                 </setting>

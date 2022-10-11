@@ -1,0 +1,148 @@
+{if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+<header class="control-header">
+    <h1>{$this->getAttribute('frontendTitle')}</h1>
+</header>
+{/if}
+
+{if $this->getAttribute('content') != ""}
+<div class="control-content">
+    {$this->getAttribute('content')}
+</div>
+{/if}
+
+{if isset( $successMessage )}
+<div class="quiqqer-simple-contact-message quiqqer-simple-contact-message-success">
+    {$successMessage}
+</div>
+{/if}
+
+{if isset( $errorMessage )}
+<div class="quiqqer-simple-contact-message quiqqer-simple-contact-message-error">
+    {$errorMessage}
+</div>
+{/if}
+
+<form class="quiqqer-simple-contact__twoColumns" method="POST" action="">
+    <noscript>
+        <style>
+            .quiqqer-simple-contact-button__hideOnNoScript {
+                display: none !important;
+            }
+        </style>
+    </noscript>
+
+    {if $formContent}
+    <div class="qui-contact-formContent__twoColumns default-content">
+        {$formContent}
+    </div>
+    {/if}
+
+    <div class="qui-contact-inputsWrapper__twoColumns">
+
+        <div class="qui-contact-inputsWrapper-left__twoColumns">
+            {if $this->getAttribute('labels')}
+            <label for="qui-contact-name__twoColumns">
+                {locale group="quiqqer/bricks" value="control.simpleContact.name"}
+            </label>
+            {/if}
+            <input type="text"
+                   name="name"
+                   id="qui-contact-name__twoColumns"
+                   required="required"
+                   value="{$name}"
+                   placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.name.placeholder"}"
+            />
+
+            {if $this->getAttribute('labels')}
+            <label for="qui-contact-email__twoColumns">
+                {locale group="quiqqer/bricks" value="control.simpleContact.email"}
+            </label>
+            {/if}
+            <input type=""
+                   name="email"
+                   id="qui-contact-email__twoColumns"
+                   required="required"
+                   value="{$email}"
+                   placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.email.placeholder"}"
+            />
+        </div>
+
+        <div class="qui-contact-inputsWrapper-right__twoColumns">
+            {if $this->getAttribute('labels')}
+            <label for="qui-contact-message__twoColumns">
+                {locale group="quiqqer/bricks" value="control.simpleContact.message"}
+            </label>
+            {/if}
+            <textarea name="message"
+                      id="qui-contact-message__twoColumns"
+                      required="required"
+                      placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.message.placeholder"}"
+            >{$message}</textarea>
+        </div>
+
+    </div>
+
+    {if $this->getAttribute('showPrivacyPolicyCheckbox')}
+    <label for="qui-contact-privacypolicy" class="qui-contact-privacypolicy__twoColumns">
+        <input type="checkbox"
+               name="privacyPolicy"
+               id="qui-contact-privacypolicy"
+               required="required"/>
+        <span>{$privacyPolicyLabel}</span>
+    </label>
+
+        {if $createPrivacyPolicyLink}
+        <script>
+            {literal}(function() {{/literal}
+                var projectName = "{$projectName}";
+                var projectLang = "{$projectLang}";
+                var siteId      = "{$siteId}";
+
+                {literal}
+                require([
+                    'package/quiqqer/controls/bin/site/Window',
+                    'Locale'
+                ], function (QUISiteWindow, QUILocale) {
+                    var Links = document.getElement('label[for="qui-contact-privacypolicy"]').getParent().getElements('a');
+
+                    if (!Links.length) {
+                        return;
+                    }
+
+                    Links.addEvent('click', function (event) {
+                        event.stop();
+
+                        new QUISiteWindow({
+                            closeButtonText: QUILocale.get('quiqqer/system', 'btn.close'),
+                            showTitle      : true,
+                            project        : projectName,
+                            lang           : projectLang,
+                            id             : siteId
+                        }).open();
+                    });
+                });
+            })();
+            {/literal}
+        </script>
+        {/if}
+    {/if}
+
+    {if isset($CaptchaDisplay)}
+        {if $this->getAttribute('labels') && !$CaptchaDisplay->isInvisible()}
+        <label class="qui-contact-captcha">
+            {locale group="quiqqer/bricks" value="control.simpleContact.captcha"}
+        </label>
+        {/if}
+        {$CaptchaDisplay->create()}
+    {/if}
+
+    <button class="quiqqer-simple-contact-button quiqqer-simple-contact-button__hideOnNoScript" type="submit" disabled="disabled">
+        {locale group='quiqqer/bricks' value='control.simpleContact.sendButton'}
+    </button>
+
+    <noscript>
+        <input class="quiqqer-simple-contact-button" type="submit"
+               value="{locale group='quiqqer/bricks' value='control.simpleContact.sendButton'}" />
+    </noscript>
+
+</form>

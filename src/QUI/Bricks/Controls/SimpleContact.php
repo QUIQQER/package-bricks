@@ -33,7 +33,8 @@ class SimpleContact extends QUI\Control
             'mailTo'                    => '', // receiver email
             'showPrivacyPolicyCheckbox' => false,
             'useCaptcha'                => false,
-            'formContent'               => ''
+            'formContent'               => '',
+            'template'                  => 'default'
         ]);
 
         parent::__construct($attributes);
@@ -50,10 +51,6 @@ class SimpleContact extends QUI\Control
                 );
             }
         }
-
-        $this->addCSSFile(
-            dirname(__FILE__) . '/SimpleContact.css'
-        );
     }
 
     /**
@@ -72,6 +69,18 @@ class SimpleContact extends QUI\Control
         $useCaptcha            = $this->getAttribute('useCaptcha');
         $formContent           = $this->getAttribute('formContent');
         $error                 = false;
+        $template              = $this->getAttribute('template');
+
+        if ($template === 'default') {
+            $template = '';
+        } else {
+            $template = "." . $template;
+        }
+
+        $this->addCSSFiles([
+            dirname(__FILE__) . '/SimpleContact.css',
+            dirname(__FILE__) . '/SimpleContact' . $template . '.css'
+        ]);
 
         // Is javascript disabled?
         if (isset($_POST['name'])
@@ -169,7 +178,7 @@ class SimpleContact extends QUI\Control
             'formContent' => $formContent
         ]);
 
-        return $Engine->fetch(dirname(__FILE__) . '/SimpleContact.html');
+        return $Engine->fetch(dirname(__FILE__) . '/SimpleContact' . $template . '.html');
     }
 
     /**

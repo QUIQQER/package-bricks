@@ -139,6 +139,18 @@
             <de><![CDATA[Die [Datenschutzbestimmungen] habe ich zur Kenntnis genommen.]]></de>
             <en><![CDATA[I am aware of the [Privacy Policy].]]></en>
         </locale>
+        <locale name="brick.control.simpleContact.template">
+            <de><![CDATA[Vorlage]]></de>
+            <en><![CDATA[Templates]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.template.default">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Default]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.template.twoColumn">
+            <de><![CDATA[Zwei Spalten]]></de>
+            <en><![CDATA[Two columns]]></en>
+        </locale>
         <locale name="brick.control.simpleContact.mailTo">
             <de><![CDATA[E-Mail Adresse, an die die Nachricht gesendet wird]]></de>
             <en><![CDATA[Email where the message will send to]]></en>
