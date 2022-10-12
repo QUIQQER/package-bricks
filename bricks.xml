@@ -918,6 +918,10 @@
                         <locale group="quiqqer/bricks"
                                 var="brick.control.simplegooglemaps.settings.template.nextToEachOther"/>
                     </option>
+                    <option value="nextToEachOther.right">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.simplegooglemaps.settings.template.nextToEachOther.right"/>
+                    </option>
                 </setting>
 
                 <setting name="place">
