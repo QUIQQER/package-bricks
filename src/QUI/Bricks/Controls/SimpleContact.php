@@ -80,7 +80,6 @@ class SimpleContact extends QUI\Control
             case 'horizontal.textRight':
                 $textPosition = 'quiqqer-simple-contact-textRight__horizontal';
                 $template     = ".horizontal";
-                echo '1';
                 break;
             default:
                 $template = "." . $template;
