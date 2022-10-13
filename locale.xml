@@ -1557,6 +1557,81 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Enable Google Maps]]></en>
         </locale>
 
+        <!-- SimpleContactWithContactPerson -->
+        <locale name="brick.control.simpleContactWithContactPerson.title">
+            <de><![CDATA[Bausteine: Einfacher Kontakt mit Kontaktperson]]></de>
+            <en><![CDATA[Bricks: Simple Contact With Contact Person]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.description">
+            <de><![CDATA[Bausteine: Einfaches Kontaktformular]]></de>
+            <en><![CDATA[Bricks: Simple contact form]]]></en>
+        </locale>
+
+        <locale name="brick.control.simpleContactWithContactPerson.template">
+            <de><![CDATA[Vorlage]]></de>
+            <en><![CDATA[Template]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.template.standard.formLeft">
+            <de><![CDATA[Formular auf der linken Seite]]></de>
+            <en><![CDATA[Form on the left]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.template.standard.formRight">
+            <de><![CDATA[Formular auf der rechten Seite]]></de>
+            <en><![CDATA[Form on the right]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.mailTo">
+            <de><![CDATA[E-Mail Adresse, an die die Nachricht gesendet wird]]></de>
+            <en><![CDATA[Email where the message will send to]]></en>
+        </locale>
+
+        <locale name="brick.control.simpleContactWithContactPerson.successful">
+            <de><![CDATA[Vielen Dank für Ihre E-Mail. Wir werden uns schnellstmöglich bei Ihnen melden.]]></de>
+            <en><![CDATA[Thank you for your email. We will contact you as soon as possible.]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.error.serverError">
+            <de><![CDATA[Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später noch einmal oder kontaktieren Sie den Support per E-Mail.]]></de>
+            <en><![CDATA[Your message could not be sent. Please try again later or contact our support by e-mail.]]></en>
+            </locale>
+
+        <locale name="brick.control.simpleContactWithContactPerson.error.serverError">
+            <de><![CDATA[Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später noch einmal oder kontaktieren Sie den Support per E-Mail.]]></de>
+            <en><![CDATA[Your message could not be sent. Please try again later or contact our support by e-mail.]]></en>
+            </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.error.wrongEmail">
+            <de><![CDATA[Die eingegebene E-mail Adresse ist nicht korrekt. Bitte geben Sie eine korrekte E-Mail an.]]></de>
+            <en><![CDATA[The entered e-mail address is not correct. Please enter a correct one.]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.error.privacyPolicyRequired">
+            <de><![CDATA[Bitte akzeptieren Sie die Datenschutzbestimmungen, um fortzufahren.]]></de>
+            <en><![CDATA[Please accept the Privacy Policy to continue.]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.showPrivacyPolicyCheckbox">
+            <de><![CDATA[Datenschutzbestimmungen-Checkbox im Formular anzeigen (Pflichtfeld)]]></de>
+            <en><![CDATA[Show Privacy Policy checkbox (required field)]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.useCaptcha">
+            <de>
+                <![CDATA[Absenden des Formulars mittels CAPTCHA vor Spam schützen (setzt voraus, dass <b>quiqqer/captcha</b> installiert ist!)]]></de>
+            <en>
+                <![CDATA[Protect form submit from spam with a CAPTCHA (requires <b>quiqqer/captcha</b> to be installed!)]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.formContent">
+            <de><![CDATA[Inhalt über dem Formulars]]></de>
+            <en><![CDATA[Content above the form]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.formContent.desc">
+            <de><![CDATA[Dieser Inhalt verschwindet, wenn das Formular abgeschickt wird.]]></de>
+            <en><![CDATA[This content disappears when the form is submitted.]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.mail.privacyPolicy_accepted">
+            <de><![CDATA[Der Benutzer hat die Datenschutzbestimmungen akzeptiert.]]></de>
+            <en><![CDATA[The user has accepted the Privacy Policy.]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.error.captcha_failed">
+            <de><![CDATA[Bitte absolvieren Sie die Sicherheitsprüfung (CAPTCHA).]]></de>
+            <en><![CDATA[Please complete the sequrity check (CAPTCHA).]]></en>
+        </locale>
+
         <!-- Box Content -->
         <locale name="bricks.BoxContent.title">
             <de><![CDATA[Bausteine: Inhalt in Boxen]]></de>

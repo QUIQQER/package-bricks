@@ -946,6 +946,51 @@
             </settings>
         </brick>
 
+        <!-- SimpleContactWithContactPerson -->
+
+        <brick control="\QUI\Bricks\Controls\SimpleContactWithContactPerson">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.control.simpleContactWithContactPerson.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.control.simpleContactWithContactPerson.description"/>
+            </description>
+
+            <settings>
+
+                <setting name="template" type="select">
+                    <locale group="quiqqer/bricks"
+                            var="brick.control.simpleContactWithContactPerson.template"/>
+
+                    <option value="standard.formRight">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.simpleContactWithContactPerson.template.standard.formLeft"/>
+                    </option>
+                    <option value="standard.formLeft">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.simpleContactWithContactPerson.template.standard.formRight"/>
+                    </option>
+                </setting>
+
+                <setting name="mailTo">
+                    <locale group="quiqqer/bricks" var="brick.control.simpleContactWithContactPerson.mailTo"/>
+                </setting>
+                <setting name="showPrivacyPolicyCheckbox" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.simpleContactWithContactPerson.showPrivacyPolicyCheckbox"/>
+                </setting>
+                <setting name="useCaptcha" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.simpleContactWithContactPerson.useCaptcha"/>
+                </setting>
+                <setting name="formContent" data-qui="controls/editors/Input" type="text">
+                    <locale group="quiqqer/bricks" var="brick.control.simpleContactWithContactPerson.formContent"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.simpleContactWithContactPerson.formContent.desc"/>
+                    </description>
+                </setting>
+
+            </settings>
+        </brick>
+
         <brick control="\QUI\Bricks\Controls\SideBox1" deprecated="1">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox1.title"/>
