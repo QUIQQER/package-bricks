@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+.qui-simpleContactPerson-contentWrapper__standard {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 2rem;
+}
+
+.qui-simpleContactPerson-contentWrapper-right__standard {
+    display: flex;
+    flex-direction: column;
+}
