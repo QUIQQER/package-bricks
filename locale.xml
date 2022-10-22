@@ -1567,6 +1567,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Bricks: Simple contact form]]]></en>
         </locale>
 
+        <locale name="brick.control.simpleContactWithContactPerson.contactPerson">
+            <de><![CDATA[Kontaktperson]]></de>
+            <en><![CDATA[Contact person]]></en>
+        </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.formContent">
+            <de><![CDATA[Kontaktperson - Inhalt]]></de>
+            <en><![CDATA[Contact person - Content]]></en>
+        </locale>
         <locale name="brick.control.simpleContactWithContactPerson.template">
             <de><![CDATA[Vorlage]]></de>
             <en><![CDATA[Template]]></en>

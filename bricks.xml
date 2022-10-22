@@ -958,6 +958,15 @@
 
             <settings>
 
+                <setting name="contactPerson" data-qui="controls/users/Input" data-qui-options-max="1">
+                    <locale group="quiqqer/bricks"
+                            var="brick.control.simpleContactWithContactPerson.contactPerson"/>
+                </setting>
+                <setting name="formContent" data-qui="controls/editors/Input" type="text">
+                    <locale group="quiqqer/bricks"
+                            var="brick.control.simpleContactWithContactPerson.formContent"/>
+                </setting>
+
                 <setting name="template" type="select">
                     <locale group="quiqqer/bricks"
                             var="brick.control.simpleContactWithContactPerson.template"/>

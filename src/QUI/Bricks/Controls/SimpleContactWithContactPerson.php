@@ -34,7 +34,7 @@ class SimpleContactWithContactPerson extends QUI\Control
             'useCaptcha'                => false,
             'formContent'               => '',
             'template'                  => 'default',
-            'textPosition'              => ''
+            'textPosition'              => '',
         ]);
 
         parent::__construct($attributes);
@@ -84,11 +84,10 @@ class SimpleContactWithContactPerson extends QUI\Control
                 $template = "." . $template;
         }
 
-
-//        $this->addCSSFiles([
-//            dirname(__FILE__) . '/SimpleContactWithContactPerson.css',
-//            dirname(__FILE__) . '/SimpleContactWithContactPerson' . $template . '.css'
-//        ]);
+        $this->addCSSFiles([
+            dirname(__FILE__) . '/SimpleContactWithContactPerson.css',
+            dirname(__FILE__) . '/SimpleContactWithContactPerson.' . $template . '.css'
+        ]);
 
         // Is javascript disabled?
         if (isset($_POST['name'])
@@ -109,7 +108,6 @@ class SimpleContactWithContactPerson extends QUI\Control
                 }
             }
 
-            //KOM wyswietlenie beldu przy wyslaniu meila, bez klikniecie polityki prywtanosci
             if ($privacyPolicyCheckbox && empty($_POST['privacyPolicy'])) {
                 $Engine->assign([
                     'errorMessage' => QUI::getLocale()->get(
@@ -121,7 +119,6 @@ class SimpleContactWithContactPerson extends QUI\Control
                 $error = true;
             }
 
-            //KOM jesli nie ma bledow, to sprobuj wyslac meila
             if (!$error) {
                 try {
                     $this->sendMail($Engine);
@@ -135,7 +132,6 @@ class SimpleContactWithContactPerson extends QUI\Control
             }
         }
 
-        //KOM stworzenie checkboxa polityki pryw.
         // Privacy Policy checkbox
         if ($privacyPolicyCheckbox) {
             $PrivacyPolicySite = $this->getPrivacyPolicySite();
@@ -170,7 +166,6 @@ class SimpleContactWithContactPerson extends QUI\Control
             ]);
         }
 
-        //KOM jesli jest zainstalowana paczka "captcha" i wlaczaona opcja, to ja wyswietle
         // CAPTCHA
         if ($useCaptcha && QUI::getPackageManager()->isInstalled('quiqqer/captcha')) {
             $Engine->assign('CaptchaDisplay', new QUI\Captcha\Controls\CaptchaDisplay());
@@ -182,14 +177,62 @@ class SimpleContactWithContactPerson extends QUI\Control
             $message = !empty($_POST['message']) ? $_POST['message'] : '';
         }
 
+        $contactPersonId   = $this->getAttribute('contactPerson');
+        $contactPersonData = false;
+
+
+        $User   = QUI::getUsers()->get((int)$contactPersonId);
+        $avatar = false;
+        $phone  = false;
+        $mail   = false;
+
+        if ($User->getAvatar()) {
+            $avatar = $User->getAvatar()->getUrl();
+        }
+
+        try {
+            $StandardAddress = $User->getStandardAddress();
+            $userPhones      = $StandardAddress->getPhoneList();
+
+            foreach ($userPhones as $phones) {
+                if ($phones['type'] === 'tel') {
+                    $phone = $phones['no'];
+                }
+            }
+        } catch (QUI\Exception $Exception) {
+            // user has no address
+            $test = 1;
+        }
+
+        try {
+            $StandardAddress = $User->getStandardAddress();
+            $allMails        = $StandardAddress->getMailList();
+
+            if (!empty($allMails)) {
+                $mail = $allMails[0];
+            }
+        } catch (QUI\Exception $Exception) {
+            // user hat no email address
+        }
+
+        $contactPersonData = [
+            'id'        => $User->getId(),
+            'firstName' => $User->getAttribute('firstname'),
+            'lastName'  => $User->getAttribute('lastname'),
+            'phone'     => $phone,
+            'mail'      => $mail,
+            'position'  => $User->getAttribute('quiqqer.teamPage.positionMultiLang'),
+            'avatar'    => $avatar
+        ];
 
         $Engine->assign([
-            'this'         => $this,
-            'name'         => $name,
-            'email'        => $email,
-            'message'      => $message,
-            'formContent'  => $formContent,
-            'textPosition' => $textPosition
+            'this'              => $this,
+            'name'              => $name,
+            'email'             => $email,
+            'message'           => $message,
+            'formContent'       => $formContent,
+            'textPosition'      => $textPosition,
+            'contactPersonData' => $contactPersonData
         ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/SimpleContactWithContactPerson.' . $template . '.html');
