@@ -1575,6 +1575,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Kontaktperson - Inhalt]]></de>
             <en><![CDATA[Contact person - Content]]></en>
         </locale>
+        <locale name="brick.control.simpleContactWithContactPerson.maxWidth">
+            <de><![CDATA[Maximale Breite]]></de>
+            <en><![CDATA[Max width]]></en>
+        </locale>
         <locale name="brick.control.simpleContactWithContactPerson.template">
             <de><![CDATA[Vorlage]]></de>
             <en><![CDATA[Template]]></en>

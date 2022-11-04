@@ -966,6 +966,10 @@
                     <locale group="quiqqer/bricks"
                             var="brick.control.simpleContactWithContactPerson.formContent"/>
                 </setting>
+                <setting name="maxWidth" type="number" min="0" max="1920">
+                    <locale group="quiqqer/bricks"
+                            var="brick.control.simpleContactWithContactPerson.maxWidth"/>
+                </setting>
 
                 <setting name="template" type="select">
                     <locale group="quiqqer/bricks"

@@ -35,6 +35,7 @@ class SimpleContactWithContactPerson extends QUI\Control
             'formContent'               => '',
             'template'                  => 'default',
             'textPosition'              => '',
+            'maxWidth'                  => ''
         ]);
 
         parent::__construct($attributes);
@@ -71,6 +72,7 @@ class SimpleContactWithContactPerson extends QUI\Control
         $error                 = false;
         $template              = $this->getAttribute('template');
         $textPosition          = $this->getAttribute('textPosition');
+        $maxWidth              = $this->getAttribute('maxWidth');
 
         switch ($template) {
             case 'standard.formRight':
@@ -225,6 +227,14 @@ class SimpleContactWithContactPerson extends QUI\Control
             'avatar'    => $avatar
         ];
 
+        if ($maxWidth > 1920) {
+            $maxWidth = 1920;
+        }
+
+        if ($maxWidth < 0) {
+            $maxWidth = 0;
+        }
+
         $Engine->assign([
             'this'              => $this,
             'name'              => $name,
@@ -232,7 +242,8 @@ class SimpleContactWithContactPerson extends QUI\Control
             'message'           => $message,
             'formContent'       => $formContent,
             'textPosition'      => $textPosition,
-            'contactPersonData' => $contactPersonData
+            'contactPersonData' => $contactPersonData,
+            'maxWidth'          => $maxWidth
         ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/SimpleContactWithContactPerson.' . $template . '.html');
