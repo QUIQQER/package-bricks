@@ -22,7 +22,7 @@
 </div>
 {/if}
 
-<form class="quiqqer-simpleContactPerson__standard" method="POST" action="">
+<form class="quiqqer-simpleContactPerson__standard" method="POST" action="" style="max-width:{$maxWidth}px">
     <noscript>
         <style>
             .quiqqer-simple-contact-button__hideOnNoScript {
@@ -40,9 +40,11 @@
                 {$formContent}
             {/if}
 
-            {if $contactPersonData['avatar']}
-            {image src=$contactPersonData['avatar'] width=500 class="namestorm-contacForm-contactPerson-avatar"}
-            {/if}
+            <div class="quiqqer-simpleContactPerson-avatar">
+                {if $contactPersonData['avatar']}
+                {image src=$contactPersonData['avatar'] width=500 class="namestorm-contacForm-contactPerson-avatar"}
+                {/if}
+            </div>
 
             <p class="quiqqer-simpleContactPerson-personalData">
                 {if {$contactPersonData['firstName']}}
@@ -122,6 +124,8 @@
         </div>
 
     </div>
+    <div class="qui-simpleContactPerson-footer">
+
 
     {if $this->getAttribute('showPrivacyPolicyCheckbox')}
     <label for="qui-simpleContactPerson-privacypolicy__standard" class="qui-simpleContactPerson-privacypolicy__standard">
@@ -177,10 +181,11 @@
         {$CaptchaDisplay->create()}
     {/if}
 
+
     <button class="quiqqer-simpleContactPerson-button quiqqer-simpleContactPerson-button__hideOnNoScript" type="submit" disabled="disabled">
         {locale group='quiqqer/bricks' value='control.simpleContact.sendButton'}
     </button>
-
+    </div>
     <noscript>
         <input class="quiqqer-simpleContactPerson-button" type="submit"
                value="{locale group='quiqqer/bricks' value='control.simpleContact.sendButton'}" />

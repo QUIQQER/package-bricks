@@ -10,3 +10,29 @@
     display: flex;
     flex-direction: column;
 }
+
+.quiqqer-simpleContactPerson-personalData {
+    font-weight: bold;
+}
+
+.quiqqer-simpleContactPerson-avatar {
+    width: 8em;
+    height: 8em;
+}
+
+.quiqqer-simpleContactPerson-avatar img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+
+.qui-simpleContactPerson-footer {
+    text-align: right;
+}
+
+.qui-simpleContactPerson-privacypolicy__standard {
+    display: block;
+    margin-bottom: 0.5rem;
+}
