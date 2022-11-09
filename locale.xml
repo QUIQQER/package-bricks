@@ -1567,6 +1567,30 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Bricks: Simple contact form]]]></en>
         </locale>
 
+        <locale name="brick.basicSlider.personFormProportion">
+            <de><![CDATA[Kontaktperson - Formular Anteil]]></de>
+            <en><![CDATA[Contact Person - Form Proportion]]></en>
+        </locale>
+        <locale name="brick.basicSlider.personFormProportion.30">
+            <de><![CDATA[30% - 70%]]></de>
+            <en><![CDATA[30% - 70%]]></en>
+        </locale>
+        <locale name="brick.basicSlider.personFormProportion.40">
+            <de><![CDATA[40% - 60%]]></de>
+            <en><![CDATA[40% - 60%]]></en>
+        </locale>
+        <locale name="brick.basicSlider.personFormProportion.50">
+            <de><![CDATA[50% - 50%]]></de>
+            <en><![CDATA[50% - 50%]]></en>
+        </locale>
+        <locale name="brick.basicSlider.personFormProportion.60">
+            <de><![CDATA[60% - 40%]]></de>
+            <en><![CDATA[60% - 40%]]></en>
+        </locale>
+        <locale name="brick.basicSlider.personFormProportion.70">
+            <de><![CDATA[70% - 30%]]></de>
+            <en><![CDATA[70% - 30%]]></en>
+        </locale>
         <locale name="brick.control.simpleContactWithContactPerson.contactPerson">
             <de><![CDATA[Kontaktperson]]></de>
             <en><![CDATA[Contact person]]></en>

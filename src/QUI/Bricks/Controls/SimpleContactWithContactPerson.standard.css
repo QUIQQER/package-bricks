@@ -1,14 +1,12 @@
 @CHARSET "UTF-8";
 
-.qui-simpleContactPerson-contentWrapper__standard {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-gap: 2rem;
+.quiqqer-simpleContactPerson__standard {
+    margin: 0 auto;
 }
 
-.qui-simpleContactPerson-contentWrapper-right__standard {
+.qui-simpleContactPerson-contentWrapper__standard {
     display: flex;
-    flex-direction: column;
+    gap: 2rem
 }
 
 .quiqqer-simpleContactPerson-personalData {
@@ -16,8 +14,8 @@
 }
 
 .quiqqer-simpleContactPerson-avatar {
-    width: 8em;
-    height: 8em;
+    max-width: 8em;
+    max-height: 8em;
 }
 
 .quiqqer-simpleContactPerson-avatar img {
@@ -35,4 +33,14 @@
 .qui-simpleContactPerson-privacypolicy__standard {
     display: block;
     margin-bottom: 0.5rem;
+}
+
+.qui-simpleContactPerson-contentWrapper-person__standard {
+    width: var(--qui-simpleContactPerson-personWidth);
+}
+
+.qui-simpleContactPerson-contentWrapper-form__standard {
+    display: flex;
+    flex-direction: column;
+    width: var(--qui-simpleContactPerson-formWidth);
 }

@@ -958,6 +958,32 @@
 
             <settings>
 
+                <setting name="personFormProportion" type="select">
+                    <locale group="quiqqer/bricks"
+                            var="brick.basicSlider.personFormProportion"/>
+
+                    <option value="30">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.personFormProportion.30"/>
+                    </option>
+                    <option value="40">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.personFormProportion.40"/>
+                    </option>
+                    <option value="50">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.personFormProportion.50"/>
+                    </option>
+                    <option value="60">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.personFormProportion.60"/>
+                    </option>
+                    <option value="70">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.personFormProportion.70"/>
+                    </option>
+                </setting>
+
                 <setting name="contactPerson" data-qui="controls/users/Input" data-qui-options-max="1">
                     <locale group="quiqqer/bricks"
                             var="brick.control.simpleContactWithContactPerson.contactPerson"/>

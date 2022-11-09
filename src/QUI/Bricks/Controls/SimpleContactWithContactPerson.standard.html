@@ -22,22 +22,33 @@
 </div>
 {/if}
 
-<form class="quiqqer-simpleContactPerson__standard" method="POST" action="" style="max-width:{$maxWidth}px">
+<form class="quiqqer-simpleContactPerson__standard" method="POST" action="" style="
+    max-width:{$maxWidth}px;
+    {if $formWrapperWidth}
+    --qui-simpleContactPerson-formWidth: {$formWrapperWidth};
+    {/if}
+    {if $contactPersonWrapperWidth}
+    --qui-simpleContactPerson-personWidth: {$contactPersonWrapperWidth};
+    {/if}
+    ">
     <noscript>
         <style>
             .quiqqer-simple-contact-button__hideOnNoScript {
                 display: none !important;
             }
+
         </style>
     </noscript>
 
     <div class="qui-simpleContactPerson-contentWrapper__standard">
 
         {if $contactPersonData}
-        <div class="qui-simpleContactPerson-contentWrapper-left__standard">
+        <div class="qui-simpleContactPerson-contentWrapper-person__standard">
 
             {if $formContent}
-                {$formContent}
+                <div class="qui-simpleContactPerson-content">
+                    {$formContent}
+                </div>
             {/if}
 
             <div class="quiqqer-simpleContactPerson-avatar">
@@ -84,7 +95,7 @@
         </div>
         {/if}
 
-        <div class="qui-simpleContactPerson-contentWrapper-right__standard">
+        <div class="qui-simpleContactPerson-contentWrapper-form__standard">
             {if $this->getAttribute('labels')}
             <label for="qui-simpleContactPerson-name__standard">
                 {locale group="quiqqer/bricks" value="control.simpleContact.name"}

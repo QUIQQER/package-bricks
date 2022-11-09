@@ -35,7 +35,8 @@ class SimpleContactWithContactPerson extends QUI\Control
             'formContent'               => '',
             'template'                  => 'default',
             'textPosition'              => '',
-            'maxWidth'                  => ''
+            'maxWidth'                  => '',
+            'personFormProportion'      => "30"
         ]);
 
         parent::__construct($attributes);
@@ -62,17 +63,19 @@ class SimpleContactWithContactPerson extends QUI\Control
      */
     public function getBody()
     {
-        $Engine                = QUI::getTemplateManager()->getEngine();
-        $name                  = '';
-        $email                 = '';
-        $message               = '';
-        $privacyPolicyCheckbox = $this->getAttribute('showPrivacyPolicyCheckbox');
-        $useCaptcha            = $this->getAttribute('useCaptcha');
-        $formContent           = $this->getAttribute('formContent');
-        $error                 = false;
-        $template              = $this->getAttribute('template');
-        $textPosition          = $this->getAttribute('textPosition');
-        $maxWidth              = $this->getAttribute('maxWidth');
+        $Engine                    = QUI::getTemplateManager()->getEngine();
+        $name                      = '';
+        $email                     = '';
+        $message                   = '';
+        $privacyPolicyCheckbox     = $this->getAttribute('showPrivacyPolicyCheckbox');
+        $useCaptcha                = $this->getAttribute('useCaptcha');
+        $formContent               = $this->getAttribute('formContent');
+        $error                     = false;
+        $template                  = $this->getAttribute('template');
+        $textPosition              = $this->getAttribute('textPosition');
+        $maxWidth                  = $this->getAttribute('maxWidth');
+        $formWrapperWidth          = '100%';
+        $contactPersonWrapperWidth = '0%';
 
         switch ($template) {
             case 'standard.formRight':
@@ -182,50 +185,54 @@ class SimpleContactWithContactPerson extends QUI\Control
         $contactPersonId   = $this->getAttribute('contactPerson');
         $contactPersonData = false;
 
-
         $User   = QUI::getUsers()->get((int)$contactPersonId);
         $avatar = false;
         $phone  = false;
         $mail   = false;
 
-        if ($User->getAvatar()) {
-            $avatar = $User->getAvatar()->getUrl();
-        }
+        if ($User->getName() != "Nobody") {
 
-        try {
-            $StandardAddress = $User->getStandardAddress();
-            $userPhones      = $StandardAddress->getPhoneList();
+            if ($User->getAvatar()) {
+                $avatar = $User->getAvatar()->getUrl();
+            }
 
-            foreach ($userPhones as $phones) {
-                if ($phones['type'] === 'tel') {
-                    $phone = $phones['no'];
+            try {
+                $StandardAddress = $User->getStandardAddress();
+                $userPhones      = $StandardAddress->getPhoneList();
+
+                foreach ($userPhones as $phones) {
+                    if ($phones['type'] === 'tel') {
+                        $phone = $phones['no'];
+                    }
                 }
+            } catch (QUI\Exception $Exception) {
+                // user has no address
             }
-        } catch (QUI\Exception $Exception) {
-            // user has no address
-            $test = 1;
-        }
 
-        try {
-            $StandardAddress = $User->getStandardAddress();
-            $allMails        = $StandardAddress->getMailList();
+            try {
+                $StandardAddress = $User->getStandardAddress();
+                $allMails        = $StandardAddress->getMailList();
 
-            if (!empty($allMails)) {
-                $mail = $allMails[0];
+                if (!empty($allMails)) {
+                    $mail = $allMails[0];
+                }
+            } catch (QUI\Exception $Exception) {
+                // user hat no email address
             }
-        } catch (QUI\Exception $Exception) {
-            // user hat no email address
-        }
 
-        $contactPersonData = [
-            'id'        => $User->getId(),
-            'firstName' => $User->getAttribute('firstname'),
-            'lastName'  => $User->getAttribute('lastname'),
-            'phone'     => $phone,
-            'mail'      => $mail,
-            'position'  => $User->getAttribute('quiqqer.teamPage.positionMultiLang'),
-            'avatar'    => $avatar
-        ];
+            $contactPersonData = [
+                'id'        => $User->getId(),
+                'firstName' => $User->getAttribute('firstname'),
+                'lastName'  => $User->getAttribute('lastname'),
+                'phone'     => $phone,
+                'mail'      => $mail,
+                'position'  => $User->getAttribute('quiqqer.teamPage.positionMultiLang'),
+                'avatar'    => $avatar
+            ];
+
+            $contactPersonWrapperWidth = $this->getAttribute('personFormProportion') . '%';
+            $formWrapperWidth          = (100 - $this->getAttribute('personFormProportion')) . "%";
+        }
 
         if ($maxWidth > 1920) {
             $maxWidth = 1920;
@@ -236,14 +243,16 @@ class SimpleContactWithContactPerson extends QUI\Control
         }
 
         $Engine->assign([
-            'this'              => $this,
-            'name'              => $name,
-            'email'             => $email,
-            'message'           => $message,
-            'formContent'       => $formContent,
-            'textPosition'      => $textPosition,
-            'contactPersonData' => $contactPersonData,
-            'maxWidth'          => $maxWidth
+            'this'                      => $this,
+            'name'                      => $name,
+            'email'                     => $email,
+            'message'                   => $message,
+            'formContent'               => $formContent,
+            'textPosition'              => $textPosition,
+            'contactPersonData'         => $contactPersonData,
+            'maxWidth'                  => $maxWidth,
+            'contactPersonWrapperWidth' => $contactPersonWrapperWidth,
+            'formWrapperWidth'          => $formWrapperWidth
         ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/SimpleContactWithContactPerson.' . $template . '.html');
