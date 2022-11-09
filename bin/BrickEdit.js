@@ -492,6 +492,53 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     }
                 }
 
+                // show brick data as json
+                const ShowDataBtn = self.getElm().getElement('.quiqqer-bricks-brickedit-showBrickDataBtn');
+
+                if (ShowDataBtn) {
+                    ShowDataBtn.addEventListener('click', (event) => {
+                        event.preventDefault();
+
+                        require(['qui/controls/windows/Popup'], function (QUIPopup) {
+                            new QUIPopup({
+                                title    : QUILocale.get(lg, 'brick.edit.showBrickData.window.title'),
+                                icon     : 'fa fa-code',
+                                buttons  : false,
+                                autoclose: true,
+                                events   : {
+                                    onOpen: function (Win) {
+                                        const data        = self.getAttribute('data'),
+                                              InfoText    = QUILocale.get(lg, 'brick.edit.showBrickData.window.text'),
+                                              CopyBtnText = QUILocale.get(lg,
+                                                  'brick.edit.showBrickData.window.copyBtn');
+
+                                        data.customfields = self.$customfields;
+
+                                        const CopyBtn = document.createElement('button');
+                                        CopyBtn.classList.add('qui-button');
+                                        CopyBtn.innerHTML = `<span class="fa fa-copy"></span> ${CopyBtnText}`;
+                                        CopyBtn.disabled  = 'disabled';
+
+                                        var Body = Win.getContent();
+
+                                        Body.set('html',
+                                            `
+                                            <div class="showBrickData-window-body">
+                                            <p class="showBrickData-window-body-text">${InfoText}</p>
+                                            <textarea autocorrect="off" autocapitalize="off" spellcheck="false">${btoa(
+                                                JSON.stringify(data))}</textarea>
+                                            </div>
+                                            `
+                                        );
+
+                                        Body.querySelector('.showBrickData-window-body-text').appendChild(CopyBtn);
+                                    }
+                                }
+                            }).open();
+                        });
+                    })
+                }
+
                 return self.$showCategory();
             }).then(function () {
                 self.Loader.hide();
