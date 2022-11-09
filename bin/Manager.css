@@ -18,3 +18,47 @@
     cursor: pointer;
     margin-bottom: 10px;
 }
+
+.quiqqer-bricks-create-labelWrapper {
+    align-items: flex-end;
+    display: flex;
+    float: left;
+    gap: 1rem;
+    width: 100%;
+}
+
+.quiqqer-bricks-create-labelWrapper label {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.quiqqer-bricks-create-btnCreateFromData {
+    line-height: 32px;
+    opacity: 0.5;
+}
+
+.quiqqer-bricks-create-btnCreateFromData:hover,
+.quiqqer-bricks-create-btnCreateFromData:active {
+    background-color: #f8f8f8;
+    color: inherit;
+    opacity: 1;
+}
+
+/* create from data window */
+.quiqqer-bricks-createFromData {
+    display: flex;
+    flex-direction: column;
+}
+
+.quiqqer-bricks-createFromData p {
+    margin-bottom: 20px;
+}
+
+.quiqqer-bricks-createFromData textarea {
+    background: #f5f2f0;
+    border: none;
+    font-family: 'monospace';
+    height: 100%;
+    min-height: 200px;
+    padding: 1rem;
+}

@@ -923,6 +923,20 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Bausteintyp]]></de>
             <en><![CDATA[Brick type]]></en>
         </locale>
+        <locale name="manager.window.create.btnCreateFromData">
+            <de><![CDATA[Baustein aus den exportierten Daten erstellen]]></de>
+            <en><![CDATA[Create a new Brick from exported data]]></en>
+        </locale>
+
+        <locale name="manager.window.createFromData.title">
+            <de><![CDATA[Brick aus Base64 Daten erstellen]]></de>
+            <en><![CDATA[Create a new Brick from Base64]]></en>
+        </locale>
+        <locale name="manager.window.createFromData.text">
+            <de><![CDATA[Bitte in das Eingabefeld die Baustein-Daten in Base64 Format einfügen.]]></de>
+            <en><![CDATA[Please insert the brick data in Base64 format into the input field.]]></en>
+        </locale>
+
         <locale name="manager.window.delete.title">
             <de><![CDATA[Bausteine löschen]]></de>
             <en><![CDATA[Delete Bricks]]></en>
@@ -1382,6 +1396,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             Bricks with the same title make it difficult to keep track of them.
             Please choose a different title for this Brick.
             ]]></en>
+        </locale>
+        <locale name="exception.brick.createFromData.brick.type.not.found">
+            <de><![CDATA[Baustein-Typ oder Name in den importierten Daten nicht gefunden.]]></de>
+            <en><![CDATA[Brick type or name not found in the imported data.]]></en>
+        </locale>
+        <locale name="exception.brick.createFromData.brick.type.not.found.in.quiqqer">
+            <de><![CDATA[Der Baustein kann aus den Daten nicht importiert werden. In dieser QUIQQER Installation existiert der Baustein vom Typ [brickType] nicht.]]></de>
+            <en><![CDATA[The brick cannot be imported from the data. In this QUIQQER installation the brick of type [brickType] does not exist.]]></en>
         </locale>
 
         <locale name="brick.control.googlemaps.title">
