@@ -191,7 +191,6 @@ class SimpleContactWithContactPerson extends QUI\Control
         $mail   = false;
 
         if ($User->getName() != "Nobody") {
-
             if ($User->getAvatar()) {
                 $avatar = $User->getAvatar()->getUrl();
             }
