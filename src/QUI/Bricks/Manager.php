@@ -895,6 +895,8 @@ class Manager
     {
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.edit');
 
+        QUI::getEvents()->fireEvent('quiqqerBricksSaveBefore', [$brickId]);
+
         $Brick      = $this->getBrickById($brickId);
         $areas      = [];
         $areaString = '';

@@ -179,8 +179,6 @@ class SimpleContact extends QUI\Control
             $message = !empty($_POST['message']) ? $_POST['message'] : '';
         }
 
-//        echo $textPosition;
-
         $Engine->assign([
             'this'         => $this,
             'name'         => $name,
