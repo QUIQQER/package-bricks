@@ -563,7 +563,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                         let convertedData = '';
 
                         try {
-                            convertedData = JSON.parse(atob(Textarea.value));
+                            convertedData = JSON.parse(Textarea.value);
                         } catch (e) {
                             QUI.getMessageHandler(function (MH) {
                                 MH.addError(
