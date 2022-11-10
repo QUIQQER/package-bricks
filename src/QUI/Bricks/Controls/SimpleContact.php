@@ -92,8 +92,8 @@ class SimpleContact extends QUI\Control
 
             case 'default':
             default:
-            $template    = dirname(__FILE__).'/SimpleContact.html';
-            $templateCss = dirname(__FILE__).'/SimpleContact.css';
+                $template    = dirname(__FILE__).'/SimpleContact.html';
+                $templateCss = dirname(__FILE__).'/SimpleContact.css';
         }
 
         $this->addCSSFiles([dirname(__FILE__).'/SimpleContact.css', $templateCss]);
