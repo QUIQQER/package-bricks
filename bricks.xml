@@ -960,27 +960,27 @@
 
                 <setting name="personFormProportion" type="select">
                     <locale group="quiqqer/bricks"
-                            var="brick.basicSlider.personFormProportion"/>
+                            var="brick.control.simpleContactWithContactPerson.personFormProportion"/>
 
                     <option value="30">
                         <locale group="quiqqer/bricks"
-                                var="brick.basicSlider.personFormProportion.30"/>
+                                var="brick.control.simpleContactWithContactPerson.personFormProportion.30"/>
                     </option>
                     <option value="40">
                         <locale group="quiqqer/bricks"
-                                var="brick.basicSlider.personFormProportion.40"/>
+                                var="brick.control.simpleContactWithContactPerson.personFormProportion.40"/>
                     </option>
                     <option value="50">
                         <locale group="quiqqer/bricks"
-                                var="brick.basicSlider.personFormProportion.50"/>
+                                var="brick.control.simpleContactWithContactPerson.personFormProportion.50"/>
                     </option>
                     <option value="60">
                         <locale group="quiqqer/bricks"
-                                var="brick.basicSlider.personFormProportion.60"/>
+                                var="brick.control.simpleContactWithContactPerson.personFormProportion.60"/>
                     </option>
                     <option value="70">
                         <locale group="quiqqer/bricks"
-                                var="brick.basicSlider.personFormProportion.70"/>
+                                var="brick.control.simpleContactWithContactPerson.personFormProportion.70"/>
                     </option>
                 </setting>
 
@@ -1003,11 +1003,11 @@
 
                     <option value="standard.formRight">
                         <locale group="quiqqer/bricks"
-                                var="brick.control.simpleContactWithContactPerson.template.standard.formLeft"/>
+                                var="brick.control.simpleContactWithContactPerson.template.standard.formRight"/>
                     </option>
                     <option value="standard.formLeft">
                         <locale group="quiqqer/bricks"
-                                var="brick.control.simpleContactWithContactPerson.template.standard.formRight"/>
+                                var="brick.control.simpleContactWithContactPerson.template.standard.formLeft"/>
                     </option>
                 </setting>
 
