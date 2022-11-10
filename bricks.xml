@@ -21,6 +21,28 @@
             </description>
 
             <settings>
+
+                <setting name="template" type="select">
+                    <locale group="quiqqer/bricks" var="brick.control.simpleContact.template"/>
+
+                    <option value="default" selected="selected">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.simpleContact.template.default"/>
+                    </option>
+                    <option value="twoColumns" selected="selected">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.simpleContact.template.twoColumn"/>
+                    </option>
+<!--                    <option value="horizontal" selected="selected">-->
+<!--                        <locale group="quiqqer/bricks"-->
+<!--                                var="brick.control.simpleContact.template.horizontal"/>-->
+<!--                    </option>-->
+<!--                    <option value="horizontal.textRight" selected="selected">-->
+<!--                        <locale group="quiqqer/bricks"-->
+<!--                                var="brick.control.simpleContact.template.horizontalTextRight"/>-->
+<!--                    </option>-->
+                </setting>
+
                 <setting name="mailTo">
                     <locale group="quiqqer/bricks" var="brick.control.simpleContact.mailTo"/>
                 </setting>
@@ -29,6 +51,12 @@
                 </setting>
                 <setting name="useCaptcha" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.simpleContact.useCaptcha"/>
+                </setting>
+                <setting name="formContent" data-qui="controls/editors/Input" type="text">
+                    <locale group="quiqqer/bricks" var="brick.control.simpleContact.formContent"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.simpleContact.formContent.desc"/>
+                    </description>
                 </setting>
             </settings>
         </brick>
@@ -890,6 +918,10 @@
                         <locale group="quiqqer/bricks"
                                 var="brick.control.simplegooglemaps.settings.template.nextToEachOther"/>
                     </option>
+                    <option value="nextToEachOther.right">
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.simplegooglemaps.settings.template.nextToEachOther.right"/>
+                    </option>
                 </setting>
 
                 <setting name="place">
@@ -1309,6 +1341,9 @@
                     </option>
                     <option value="gallery">
                         <locale group="quiqqer/bricks" var="brick.listTemplate.gallery"/>
+                    </option>
+                    <option value="bigBanner">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.bigBanner"/>
                     </option>
                 </setting>
 

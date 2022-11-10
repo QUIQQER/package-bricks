@@ -26,7 +26,8 @@ class SimpleGoogleMaps extends QUI\Control
         $this->setAttributes([
             'title'          => '',
             'preventLoadMap' => false,
-            'template'       => 'standard'
+            'template'       => 'standard',
+            'mapPosition'    => ''
         ]);
 
         parent::__construct($attributes);
@@ -46,6 +47,7 @@ class SimpleGoogleMaps extends QUI\Control
         $brickCity      = $this->getAttribute('city');
         $zoom           = $this->getAttribute('zoom');
         $preventLoadMap = $this->getAttribute('preventLoadMap');
+        $mapPosition    = $this->getAttribute('mapPosition');
 
         if (!$zoom) {
             $zoom = 15;
@@ -74,6 +76,11 @@ class SimpleGoogleMaps extends QUI\Control
                 $template = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.html';
                 $css      = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.css';
                 break;
+            case 'nextToEachOther.right':
+                $mapPosition = 'simpleGoogleMap-nextToEachOther-reverseContent';
+                $template    = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.html';
+                $css         = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.css';
+                break;
             case 'default':
             default:
                 $template = dirname(__FILE__) . '/SimpleGoogleMaps.Standard.html';
@@ -83,7 +90,8 @@ class SimpleGoogleMaps extends QUI\Control
         $Engine->assign([
             'this'           => $this,
             'url'            => $url,
-            'preventLoadMap' => $preventLoadMap
+            'preventLoadMap' => $preventLoadMap,
+            'mapPosition'    => $mapPosition
         ]);
 
         $this->addCSSFile($css);

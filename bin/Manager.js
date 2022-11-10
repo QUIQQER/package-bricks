@@ -394,7 +394,7 @@ define('package/quiqqer/bricks/bin/Manager', [
         $openCreateDialog: function () {
             var self = this;
 
-            new QUIConfirm({
+            const CreateDialog = new QUIConfirm({
                 title    : QUILocale.get(lg, 'manager.window.create.title'),
                 icon     : 'fa fa-th',
                 maxHeight: 300,
@@ -416,13 +416,23 @@ define('package/quiqqer/bricks/bin/Manager', [
                             '   </span>' +
                             '   <input type="text" name="title" required="required" />' +
                             '</label>' +
-                            '<label>' +
+                            '<div class="quiqqer-bricks-create-labelWrapper"><label>' +
                             '   <span class="quiqqer-bricks-create-label-text">' +
                             QUILocale.get(lg, 'manager.window.create.label.type') +
                             '   </span>' +
                             '   <select name="type"></select>' +
-                            '</label>'
+                            '</label>' +
+                            '<button class="qui-button quiqqer-bricks-create-btnCreateFromData" ' +
+                            'title="' + QUILocale.get(lg, 'manager.window.create.btnCreateFromData') + '">' +
+                            '<span class="fa fa-code"></span></button></div>'
                         );
+
+                        Body.querySelector('.quiqqer-bricks-create-btnCreateFromData').addEventListener('click',
+                            (e) => {
+                                e.preventDefault();
+                                CreateDialog.close();
+                                self.$openCreateDialogFromData();
+                            });
 
                         Bricks.getAvailableBricks().then(function (bricklist) {
                             if (!Body) {
@@ -438,10 +448,10 @@ define('package/quiqqer/bricks/bin/Manager', [
 
                                 if ('group' in title) {
                                     group = title.group;
-                                    val = title.var;
+                                    val   = title.var;
                                 } else {
                                     group = title[0];
-                                    val = title[1];
+                                    val   = title[1];
                                 }
 
                                 text = QUILocale.get(group, val);
@@ -493,6 +503,178 @@ define('package/quiqqer/bricks/bin/Manager', [
                         Bricks.createBrick(project, lang, data).then(function (brickId) {
                             Win.close();
                             self.editBrick(brickId);
+                        });
+                    }
+                }
+            });
+
+            CreateDialog.open();
+        },
+
+        /**
+         * Opens the brick creation from data dialog.
+         */
+        $openCreateDialogFromData: function () {
+            var self = this;
+
+            new QUIConfirm({
+                title    : QUILocale.get(lg, 'manager.window.createFromData.title'),
+                icon     : 'fa fa-code',
+                maxHeight: 400,
+                maxWidth : 500,
+                autoclose: false,
+                events   : {
+                    onOpen: function (Win) {
+                        var Body = Win.getContent();
+
+                        Win.Loader.show();
+                        Body.addClass('quiqqer-bricks-createFromData');
+
+                        const winText = QUILocale.get(lg, 'manager.window.createFromData.text'),
+                              btnText = QUILocale.get(lg, 'manager.window.createFromData.btnText');
+
+                        Body.set(
+                            'html',
+                            `<div><p>
+                            <button class="qui-button quiqqer-bricks-createFromData-copyBtn">
+                            <span class="fa fa-copy"></span> ${btnText}</button>
+                            ${winText} </p></div>
+                            <textarea></textarea>
+                            `
+                        );
+
+                        Body.querySelector('.quiqqer-bricks-createFromData-copyBtn').addEventListener('click',
+                            (event) => {
+                                event.preventDefault();
+                                navigator.clipboard.readText().then((text) => {
+                                    Body.querySelector('textarea').value = text
+                                });
+                            }
+                        )
+
+                        Win.Loader.hide();
+                    },
+
+                    onSubmit: function (Win) {
+                        Win.Loader.show();
+
+                        const Body        = Win.getContent(),
+                              Textarea    = Body.querySelector('textarea');
+                        let convertedData = '';
+
+                        try {
+                            convertedData = JSON.parse(atob(Textarea.value));
+                        } catch (e) {
+                            QUI.getMessageHandler(function (MH) {
+                                MH.addError(
+                                    QUILocale.get(lg, 'exception.brick.createFromData.invalid.data')
+                                );
+                            });
+
+                            Textarea.focus();
+                            Win.Loader.hide();
+
+                            return;
+                        }
+
+                        delete convertedData.attributes.id;
+
+                        let brickTitle = convertedData.attributes.title,
+                            brickType  = convertedData.attributes.type;
+
+                        if (!brickTitle || !brickType) {
+                            QUI.getMessageHandler(function (MH) {
+                                MH.addError(
+                                    QUILocale.get(lg, 'exception.brick.createFromData.brick.type.not.found')
+                                );
+                            });
+
+                            Win.Loader.hide();
+
+                            return;
+                        }
+
+                        let controlTypeExist = false;
+
+                        Bricks.getAvailableBricks().then(function (bricklist) {
+                            if (!Body) {
+                                return;
+                            }
+
+                            var i, len, group, title, val;
+
+                            for (i = 0, len = bricklist.length; i < len; i++) {
+                                title = bricklist[i].title;
+
+                                if ('group' in title) {
+                                    group = title.group;
+                                    val   = title.var;
+                                } else {
+                                    group = title[0];
+                                    val   = title[1];
+                                }
+
+                                if (bricklist[i].control === brickType) {
+                                    controlTypeExist = true;
+                                }
+                            }
+
+                            if (!controlTypeExist) {
+                                QUI.getMessageHandler(function (MH) {
+                                    MH.addError(
+                                        QUILocale.get(lg,
+                                            'exception.brick.createFromData.brick.type.not.found.in.quiqqer', {
+                                                brickType: brickType
+                                            })
+                                    );
+                                });
+
+                                Win.Loader.hide();
+
+                                return;
+                            }
+
+                            var project = self.$ProjectSelect.getValue(),
+                                lang    = self.$ProjectLangs.getValue(),
+                                data    = {
+                                    title: brickTitle,
+                                    type : brickType
+                                };
+
+                            Bricks.createBrick(project, lang, data).then(function (brickId) {
+                                Bricks.getBricksFromProject(project, lang).then(function (result) {
+                                    var i,
+                                        len = result.length;
+
+                                    // check if same name exist
+                                    for (i = 0; i < len; i++) {
+                                        if (result[i].title === brickTitle) {
+                                            convertedData.attributes.title = brickTitle + '-' + brickId
+                                        }
+                                    }
+                                    return Promise.resolve();
+                                }).then(function () {
+                                    Bricks.saveBrick(brickId, convertedData).then(function () {
+                                        QUI.getMessageHandler().then(function (MH) {
+                                            MH.addSuccess(
+                                                QUILocale.get(lg, 'message.brick.save.success')
+                                            );
+                                        });
+
+                                        Win.Loader.hide();
+                                        Win.close();
+                                        self.editBrick(brickId);
+                                    }).catch(function (e) {
+                                        QUI.getMessageHandler().then(function (MH) {
+                                            MH.addError(e.getMessage());
+                                        });
+
+                                        Win.Loader.hide();
+                                    });
+
+                                    Win.Loader.hide();
+                                });
+                            });
                         });
                     }
                 }
