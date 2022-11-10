@@ -492,7 +492,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     }
                 }
 
-                // show brick data as json
+                // show brick data (base64)
                 const ShowDataBtn = self.getElm().getElement('.quiqqer-bricks-brickedit-showBrickDataBtn');
 
                 if (ShowDataBtn) {
@@ -507,7 +507,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                                 autoclose: true,
                                 events   : {
                                     onOpen: function (Win) {
-                                        const data        = self.getAttribute('data'),
+                                        const Body = Win.getContent(),
+                                              data        = self.getAttribute('data'),
                                               InfoText    = QUILocale.get(lg, 'brick.edit.showBrickData.window.text'),
                                               CopyBtnText = QUILocale.get(lg,
                                                   'brick.edit.showBrickData.window.copyBtn');
@@ -517,9 +518,10 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                                         const CopyBtn = document.createElement('button');
                                         CopyBtn.classList.add('qui-button');
                                         CopyBtn.innerHTML = `<span class="fa fa-copy"></span> ${CopyBtnText}`;
-                                        CopyBtn.disabled  = 'disabled';
-
-                                        var Body = Win.getContent();
+                                        CopyBtn.addEventListener('click', (event) => {
+                                            event.preventDefault();
+                                            navigator.clipboard.writeText(Body.querySelector('textarea').value);
+                                        });
 
                                         Body.set('html',
                                             `

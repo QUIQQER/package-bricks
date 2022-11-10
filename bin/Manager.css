@@ -54,11 +54,16 @@
     margin-bottom: 20px;
 }
 
+.quiqqer-bricks-createFromData-copyBtn {
+    float: right;
+    margin-left: 20px;
+}
+
 .quiqqer-bricks-createFromData textarea {
     background: #f5f2f0;
     border: none;
     font-family: 'monospace';
     height: 100%;
-    min-height: 200px;
+    min-height: 60px;
     padding: 1rem;
 }

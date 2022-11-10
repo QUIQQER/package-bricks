@@ -530,15 +530,27 @@ define('package/quiqqer/bricks/bin/Manager', [
                         Win.Loader.show();
                         Body.addClass('quiqqer-bricks-createFromData');
 
-                        const winText = QUILocale.get(lg, 'manager.window.createFromData.text');
+                        const winText = QUILocale.get(lg, 'manager.window.createFromData.text'),
+                              btnText = QUILocale.get(lg, 'manager.window.createFromData.btnText');
 
                         Body.set(
                             'html',
-                            `
-                            <p>${winText}</p>
+                            `<div><p>
+                            <button class="qui-button quiqqer-bricks-createFromData-copyBtn">
+                            <span class="fa fa-copy"></span> ${btnText}</button>
+                            ${winText} </p></div>
                             <textarea></textarea>
                             `
                         );
+
+                        Body.querySelector('.quiqqer-bricks-createFromData-copyBtn').addEventListener('click',
+                            (event) => {
+                                event.preventDefault();
+                                navigator.clipboard.readText().then((text) => {
+                                    Body.querySelector('textarea').value = text
+                                });
+                            }
+                        )
 
                         Win.Loader.hide();
                     },
@@ -546,9 +558,24 @@ define('package/quiqqer/bricks/bin/Manager', [
                     onSubmit: function (Win) {
                         Win.Loader.show();
 
-                        const Body          = Win.getContent(),
-                              Textarea      = Body.querySelector('textarea'),
-                              convertedData = JSON.parse(atob(Textarea.value));
+                        const Body        = Win.getContent(),
+                              Textarea    = Body.querySelector('textarea');
+                        let convertedData = '';
+
+                        try {
+                            convertedData = JSON.parse(atob(Textarea.value));
+                        } catch (e) {
+                            QUI.getMessageHandler(function (MH) {
+                                MH.addError(
+                                    QUILocale.get(lg, 'exception.brick.createFromData.invalid.data')
+                                );
+                            });
+
+                            Textarea.focus();
+                            Win.Loader.hide();
+
+                            return;
+                        }
 
                         delete convertedData.attributes.id;
 
