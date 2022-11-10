@@ -1555,12 +1555,12 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Template (content above the map)]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.template.nextToEachOther">
-            <de><![CDATA[Nebeneinander (Karte auf der linken Seite des Inhalts)]]></de>
-            <en><![CDATA[Next to each other (Map to the left of the content)]]></en>
+            <de><![CDATA[Nebeneinander (Karte links, Inhalt rechts)]]></de>
+            <en><![CDATA[Next to each other (Map on the left, content on the right)]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.template.nextToEachOther.right">
-            <de><![CDATA[Nebeneinander (Karte auf der rechten Seite des Inhalts)]]></de>
-            <en><![CDATA[Next to each other (Map to the right of the content)]]></en>
+            <de><![CDATA[Nebeneinander (Karte rechts, Inhlat links)]]></de>
+            <en><![CDATA[Next to each other (Map on the right, content on the left)]]></en>
         </locale>
 
         <locale name="brick.control.simplegooglemaps.settings.place">
