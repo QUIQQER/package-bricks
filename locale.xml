@@ -302,16 +302,16 @@
             <en><![CDATA[Brick type]]></en>
         </locale>
         <locale name="brick.edit.showBrickDataBtnTitle">
-            <de><![CDATA[Baustein Daten in Base64-Format anzeigen]]></de>
-            <en><![CDATA[Show brick data as Base64]]></en>
+            <de><![CDATA[Baustein Daten in JSON-Format anzeigen]]></de>
+            <en><![CDATA[Show brick data as JSON]]></en>
         </locale>
         <locale name="brick.edit.showBrickData.window.title">
-            <de><![CDATA[Baustein Daten in Base64-Format]]></de>
-            <en><![CDATA[Brick data as Base64]]></en>
+            <de><![CDATA[Baustein Daten in JSON-Format]]></de>
+            <en><![CDATA[Brick data as JSON]]></en>
         </locale>
         <locale name="brick.edit.showBrickData.window.text">
-            <de><![CDATA[Her stehen die Baustein-Daten in Base64-Format.]]></de>
-            <en><![CDATA[Here you can find brick data converted to Base64]]></en>
+            <de><![CDATA[Her stehen die Baustein-Daten in JSON-Format.]]></de>
+            <en><![CDATA[Here you can find brick data converted to JSON.]]></en>
         </locale>
         <locale name="brick.edit.showBrickData.window.copyBtn">
             <de><![CDATA[In Zwischenablage kopieren]]></de>
@@ -929,12 +929,12 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
 
         <locale name="manager.window.createFromData.title">
-            <de><![CDATA[Baustein aus Base64 Daten erstellen]]></de>
-            <en><![CDATA[Create a new Brick from Base64]]></en>
+            <de><![CDATA[Baustein aus JSON Daten erstellen]]></de>
+            <en><![CDATA[Create a new Brick from JSON]]></en>
         </locale>
         <locale name="manager.window.createFromData.text">
-            <de><![CDATA[Bitte in das Eingabefeld die Baustein-Daten in Base64 Format einfügen.]]></de>
-            <en><![CDATA[Please insert the brick data in Base64 format into the input field.]]></en>
+            <de><![CDATA[Bitte in das Eingabefeld die Baustein-Daten in JSON Format einfügen.]]></de>
+            <en><![CDATA[Please insert the brick data in JSON format into the input field.]]></en>
         </locale>
         <locale name="manager.window.createFromData.btnText">
             <de><![CDATA[Daten einfügen]]></de>
@@ -1406,8 +1406,8 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Brick type or name not found in the imported data.]]></en>
         </locale>
         <locale name="exception.brick.createFromData.invalid.data">
-            <de><![CDATA[Der eingefügte String ist fehlerhaft oder falsch kodiert.]]></de>
-            <en><![CDATA[The pasted string is broken or incorrectly decoded.]]></en>
+            <de><![CDATA[Der eingefügte String ist fehlerhaft.]]></de>
+            <en><![CDATA[The pasted string is broken.]]></en>
         </locale>
         <locale name="exception.brick.createFromData.brick.type.not.found.in.quiqqer">
             <de><![CDATA[Der Baustein kann aus den Daten nicht importiert werden. In dieser QUIQQER Installation existiert der Baustein vom Typ [brickType] nicht.]]></de>

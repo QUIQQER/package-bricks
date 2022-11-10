@@ -496,7 +496,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     }
                 }
 
-                // show brick data (base64)
+                // show brick data (JSON)
                 const ShowDataBtn = self.getElm().getElement('.quiqqer-bricks-brickedit-showBrickDataBtn');
 
                 if (ShowDataBtn) {
@@ -531,8 +531,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                                             `
                                             <div class="showBrickData-window-body">
                                             <p class="showBrickData-window-body-text">${InfoText}</p>
-                                            <textarea autocorrect="off" autocapitalize="off" spellcheck="false">${btoa(
-                                                JSON.stringify(data))}</textarea>
+                                            <textarea autocorrect="off" autocapitalize="off" spellcheck="false">${JSON.stringify(data)}</textarea>
                                             </div>
                                             `
                                         );
