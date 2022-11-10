@@ -74,22 +74,29 @@ class SimpleContact extends QUI\Control
         $textPosition          = $this->getAttribute('textPosition');
 
         switch ($template) {
-            case 'default':
-                $template = '';
+            case 'horizontal':
+                $template    = dirname(__FILE__).'/SimpleContact.horizontal.html';
+                $templateCss = dirname(__FILE__).'/SimpleContact.horizontal.css';
                 break;
+
             case 'horizontal.textRight':
                 $textPosition = 'quiqqer-simple-contact-textRight__horizontal';
-                $template     = ".horizontal";
+                $template     = dirname(__FILE__).'/SimpleContact.horizontal.html';
+                $templateCss  = dirname(__FILE__).'/SimpleContact.horizontal.css';
                 break;
+
+            case 'twoColumns':
+                $template    = dirname(__FILE__).'/SimpleContact.twoColumns.html';
+                $templateCss = dirname(__FILE__).'/SimpleContact.twoColumns.css';
+                break;
+
+            case 'default':
             default:
-                $template = "." . $template;
+            $template    = dirname(__FILE__).'/SimpleContact.html';
+            $templateCss = dirname(__FILE__).'/SimpleContact.css';
         }
 
-
-        $this->addCSSFiles([
-            dirname(__FILE__) . '/SimpleContact.css',
-            dirname(__FILE__) . '/SimpleContact' . $template . '.css'
-        ]);
+        $this->addCSSFiles([dirname(__FILE__).'/SimpleContact.css', $templateCss]);
 
         // Is javascript disabled?
         if (isset($_POST['name'])
@@ -147,7 +154,7 @@ class SimpleContact extends QUI\Control
 
                 $label = preg_replace(
                     '#\[([^\]]*)\]#i',
-                    '<a href="' . $url . '" target="_blank">$1</a>',
+                    '<a href="'.$url.'" target="_blank">$1</a>',
                     $label
                 );
 
@@ -188,7 +195,7 @@ class SimpleContact extends QUI\Control
             'textPosition' => $textPosition
         ]);
 
-        return $Engine->fetch(dirname(__FILE__) . '/SimpleContact' . $template . '.html');
+        return $Engine->fetch($template);
     }
 
     /**
@@ -215,7 +222,7 @@ class SimpleContact extends QUI\Control
         }
 
         $receiver = $this->getAttribute('mailTo');
-        $url      = $this->getProject()->getHost() . $Site->getUrlRewritten();
+        $url      = $this->getProject()->getHost().$Site->getUrlRewritten();
 
         // fallback: admin email
         if (!QUI\Utils\Security\Orthos::checkMailSyntax($receiver)) {
@@ -226,7 +233,7 @@ class SimpleContact extends QUI\Control
 
         $Mailer->addRecipient($receiver);
         $Mailer->addReplyTo($_POST['email']);
-        $Mailer->setSubject($Site->getAttribute('title') . ' | ' . $url);
+        $Mailer->setSubject($Site->getAttribute('title').' | '.$url);
 
         $body = "
             <span style=\"font-weight: bold;\">From:</span> {$_POST['name']}<br />

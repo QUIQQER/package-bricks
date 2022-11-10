@@ -5,17 +5,12 @@
 }
 
 .qui-contact-inputsWrapper__twoColumns {
-    display: flex;
-    flex-direction: row;
     gap: 2rem;
-}
-
-.qui-contact-inputsWrapper-left__twoColumns {
-    flex: 1;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
 }
 
 .qui-contact-inputsWrapper-right__twoColumns {
-    flex: 1;
     display: flex;
     flex-direction: column;
 }
@@ -31,7 +26,11 @@
 
 @media screen and (max-width: 768px) {
     .qui-contact-inputsWrapper__twoColumns {
-        flex-direction: column;
         gap: 0;
+        grid-template-columns: 100%;
+    }
+
+    .qui-contact-inputsWrapper-right__twoColumns textarea {
+        min-height: 10rem;
     }
 }
