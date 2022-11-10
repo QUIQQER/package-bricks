@@ -634,46 +634,51 @@ define('package/quiqqer/bricks/bin/Manager', [
                                 return;
                             }
 
-                            var project = self.$ProjectSelect.getValue(),
+                            var allBricks = null,
+                                project = self.$ProjectSelect.getValue(),
                                 lang    = self.$ProjectLangs.getValue(),
                                 data    = {
                                     title: brickTitle,
                                     type : brickType
                                 };
 
-                            Bricks.createBrick(project, lang, data).then(function (brickId) {
-                                Bricks.getBricksFromProject(project, lang).then(function (result) {
-                                    var i,
-                                        len = result.length;
+                            Bricks.getBricksFromProject(project, lang).then(function (result) {
+                                allBricks = result;
 
-                                    // check if same name exist
-                                    for (i = 0; i < len; i++) {
-                                        if (result[i].title === brickTitle) {
-                                            convertedData.attributes.title = brickTitle + '-' + brickId
-                                        }
+                                return Promise.resolve();
+                            }).then(function() {
+                                return Bricks.createBrick(project, lang, data);
+                            }).then(function (brickId) {
+                                    console.log(brickId);
+                                var i,
+                                    len = allBricks.length;
+
+                                // check if same name exist
+                                for (i = 0; i < len; i++) {
+                                    if (allBricks[i].title === brickTitle) {
+                                        convertedData.attributes.title = brickTitle + '-' + brickId
                                     }
-                                    return Promise.resolve();
-                                }).then(function () {
-                                    Bricks.saveBrick(brickId, convertedData).then(function () {
-                                        QUI.getMessageHandler().then(function (MH) {
-                                            MH.addSuccess(
-                                                QUILocale.get(lg, 'message.brick.save.success')
-                                            );
-                                        });
+                                }
 
-                                        Win.Loader.hide();
-                                        Win.close();
-                                        self.editBrick(brickId);
-                                    }).catch(function (e) {
-                                        QUI.getMessageHandler().then(function (MH) {
-                                            MH.addError(e.getMessage());
-                                        });
+                                Bricks.saveBrick(brickId, convertedData).then(function () {
+                                    QUI.getMessageHandler().then(function (MH) {
+                                        MH.addSuccess(
+                                            QUILocale.get(lg, 'message.brick.save.success')
+                                        );
+                                    });
 
-                                        Win.Loader.hide();
+                                    Win.Loader.hide();
+                                    Win.close();
+                                    self.editBrick(brickId);
+                                }).catch(function (e) {
+                                    QUI.getMessageHandler().then(function (MH) {
+                                        MH.addError(e.getMessage());
                                     });
 
                                     Win.Loader.hide();
                                 });
+
+                                Win.Loader.hide();
                             });
                         });
                     }
