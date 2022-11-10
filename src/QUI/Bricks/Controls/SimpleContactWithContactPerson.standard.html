@@ -40,7 +40,7 @@
         </style>
     </noscript>
 
-    <div class="qui-simpleContactPerson-contentWrapper__standard">
+    <div class="qui-simpleContactPerson-contentWrapper__standard {if $textPosition}{$textPosition}{/if}">
 
         {if $contactPersonData}
         <div class="qui-simpleContactPerson-contentWrapper-person__standard">
@@ -51,46 +51,49 @@
                 </div>
             {/if}
 
-            <div class="quiqqer-simpleContactPerson-avatar">
-                {if $contactPersonData['avatar']}
-                {image src=$contactPersonData['avatar'] width=500 class="namestorm-contacForm-contactPerson-avatar"}
-                {/if}
+            <div class="qui-simpleContactPerson-body">
+                <div class="quiqqer-simpleContactPerson-avatar">
+                    {if $contactPersonData['avatar']}
+                    {image src=$contactPersonData['avatar'] width=500 class="namestorm-contacForm-contactPerson-avatar"}
+                    {/if}
+                </div>
+
+                <div class="qui-simpleContactPerson-body-personalData">
+                    <p class="quiqqer-simpleContactPerson-personalData">
+                        {if {$contactPersonData['firstName']}}
+                        {$contactPersonData['firstName']}
+                        {/if}
+
+                        {if {$contactPersonData['lastName']}}
+                        {$contactPersonData['lastName']}
+                        {/if}
+                    </p>
+
+                    {if $contactPersonData['position']}
+                    {assign var=position value=$contactPersonData['position']|json_decode:1}
+
+                    {if isset($position[$Project->getLang()]) &&
+                    $position[$Project->getLang()] !== ''}
+                    <p class="quiqqer-simpleContactPerson-position">
+                        {$position[$Project->getLang()]}
+                    </p>
+                    {/if}
+                    {/if}
+
+
+                    {if {$contactPersonData['phone']}}
+                        <p class="quiqqer-simpleContactPerson-position">
+                            {$contactPersonData['phone']}
+                        </p>
+                    {/if}
+
+                    {if {$contactPersonData['mail']}}
+                        <p class="quiqqer-simpleContactPerson-mail">
+                            {$contactPersonData['mail']}
+                        </p>
+                    {/if}
+                </div>
             </div>
-
-            <p class="quiqqer-simpleContactPerson-personalData">
-                {if {$contactPersonData['firstName']}}
-                {$contactPersonData['firstName']}
-                {/if}
-
-                {if {$contactPersonData['lastName']}}
-                {$contactPersonData['lastName']}
-                {/if}
-            </p>
-
-            {if $contactPersonData['position']}
-            {assign var=position value=$contactPersonData['position']|json_decode:1}
-
-            {if isset($position[$Project->getLang()]) &&
-            $position[$Project->getLang()] !== ''}
-            <p class="quiqqer-simpleContactPerson-position">
-                {$position[$Project->getLang()]}
-            </p>
-            {/if}
-            {/if}
-
-
-            {if {$contactPersonData['phone']}}
-                <p class="quiqqer-simpleContactPerson-position">
-                    {$contactPersonData['phone']}
-                </p>
-            {/if}
-
-            {if {$contactPersonData['mail']}}
-                <p class="quiqqer-simpleContactPerson-mail">
-                    {$contactPersonData['mail']}
-                </p>
-            {/if}
-
 
         </div>
         {/if}

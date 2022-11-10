@@ -9,6 +9,10 @@
     gap: 2rem
 }
 
+.qui-simpleContactPerson-formLeft {
+    flex-direction: row-reverse;
+}
+
 .quiqqer-simpleContactPerson-personalData {
     font-weight: bold;
 }
@@ -16,6 +20,7 @@
 .quiqqer-simpleContactPerson-avatar {
     max-width: 8em;
     max-height: 8em;
+    margin-bottom: var(--qui-spacing, 1rem)
 }
 
 .quiqqer-simpleContactPerson-avatar img {
@@ -43,4 +48,44 @@
     display: flex;
     flex-direction: column;
     width: var(--qui-simpleContactPerson-formWidth);
+}
+
+@media screen and (max-width: 767px) {
+    .qui-simpleContactPerson-contentWrapper__standard {
+        flex-direction: column;
+    }
+
+    .qui-simpleContactPerson-contentWrapper-form__standard {
+        width: 100%;
+    }
+
+    .qui-simpleContactPerson-contentWrapper-person__standard {
+        width: 100%;
+    }
+
+    .qui-simpleContactPerson-body {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .quiqqer-simpleContactPerson-button {
+        width: 100%;
+    }
+
+    .quiqqer-simpleContactPerson-avatar {
+        margin-right: var(--qui-spacing, 1rem);
+    }
+
+    .quiqqer-simpleContactPerson__standard input {
+        margin-bottom: var(--qui-spacing, 1rem)
+    }
+}
+
+@media screen and (max-width: 575px) {
+
+    .qui-simpleContactPerson-body {
+        display: flex;
+        flex-direction: column;
+    }
+
 }

@@ -72,17 +72,17 @@ class SimpleContactWithContactPerson extends QUI\Control
         $formContent               = $this->getAttribute('formContent');
         $error                     = false;
         $template                  = $this->getAttribute('template');
-        $textPosition              = $this->getAttribute('textPosition');
+        $textPosition              = '';
         $maxWidth                  = $this->getAttribute('maxWidth');
-        $formWrapperWidth          = '100%';
-        $contactPersonWrapperWidth = '0%';
+        $formWrapperWidth          = '60%';
+        $contactPersonWrapperWidth = '40%';
 
         switch ($template) {
             case 'standard.formRight':
                 $template = 'standard';
                 break;
             case 'standard.formLeft':
-                $textPosition = 'quiqqer-simple-contact-textRight__horizontal';
+                $textPosition = 'qui-simpleContactPerson-formLeft';
                 $template     = "standard";
                 break;
             default:
