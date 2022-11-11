@@ -22,7 +22,9 @@ use function array_unique;
 use function array_values;
 use function class_exists;
 use function count;
+use function defined;
 use function explode;
+use function file_exists;
 use function implode;
 use function in_array;
 use function is_array;
@@ -35,6 +37,8 @@ use function str_replace;
 use function strpos;
 use function trim;
 use function usort;
+
+use const OPT_DIR;
 
 /**
  * Brick Manager
