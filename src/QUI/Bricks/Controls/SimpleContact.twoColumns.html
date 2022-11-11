@@ -22,7 +22,7 @@
 </div>
 {/if}
 
-<form class="quiqqer-simple-contact" method="POST" action="">
+<form class="quiqqer-simple-contact__twoColumns" method="POST" action="">
     <noscript>
         <style>
             .quiqqer-simple-contact-button__hideOnNoScript {
@@ -32,50 +32,58 @@
     </noscript>
 
     {if $formContent}
-    <div class="qui-contact-formContent default-content">
+    <div class="qui-contact-formContent__twoColumns default-content">
         {$formContent}
     </div>
     {/if}
 
-    {if $this->getAttribute('labels')}
-    <label for="qui-contact-name">
-        {locale group="quiqqer/bricks" value="control.simpleContact.name"}
-    </label>
-    {/if}
-    <input type="text"
-           name="name"
-           id="qui-contact-name"
-           required="required"
-           value="{$name}"
-           placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.name.placeholder"}"
-    />
+    <div class="qui-contact-inputsWrapper__twoColumns">
 
-    {if $this->getAttribute('labels')}
-    <label for="qui-contact-email">
-        {locale group="quiqqer/bricks" value="control.simpleContact.email"}
-    </label>
-    {/if}
-    <input type=""
-           name="email"
-           id="qui-contact-email"
-           required="required"
-           value="{$email}"
-           placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.email.placeholder"}"
-    />
+        <div class="qui-contact-inputsWrapper-left__twoColumns">
+            {if $this->getAttribute('labels')}
+            <label for="qui-contact-name__twoColumns">
+                {locale group="quiqqer/bricks" value="control.simpleContact.name"}
+            </label>
+            {/if}
+            <input type="text"
+                   name="name"
+                   id="qui-contact-name__twoColumns"
+                   required="required"
+                   value="{$name}"
+                   placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.name.placeholder"}"
+            />
 
-    {if $this->getAttribute('labels')}
-    <label for="qui-contact-message">
-        {locale group="quiqqer/bricks" value="control.simpleContact.message"}
-    </label>
-    {/if}
-    <textarea name="message"
-              id="qui-contact-message"
-              required="required"
-              placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.message.placeholder"}"
-    >{$message}</textarea>
+            {if $this->getAttribute('labels')}
+            <label for="qui-contact-email__twoColumns">
+                {locale group="quiqqer/bricks" value="control.simpleContact.email"}
+            </label>
+            {/if}
+            <input type=""
+                   name="email"
+                   id="qui-contact-email__twoColumns"
+                   required="required"
+                   value="{$email}"
+                   placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.email.placeholder"}"
+            />
+        </div>
+
+        <div class="qui-contact-inputsWrapper-right__twoColumns">
+            {if $this->getAttribute('labels')}
+            <label for="qui-contact-message__twoColumns">
+                {locale group="quiqqer/bricks" value="control.simpleContact.message"}
+            </label>
+            {/if}
+            <textarea name="message"
+                      id="qui-contact-message__twoColumns"
+                      required="required"
+                      placeholder="{locale group="quiqqer/bricks" value="control.simpleContact.message.placeholder"}"
+            >{$message}</textarea>
+        </div>
+
+    </div>
 
     {if $this->getAttribute('showPrivacyPolicyCheckbox')}
-    <label for="qui-contact-privacypolicy">
+    <label for="qui-contact-privacypolicy" class="qui-contact-privacypolicy__twoColumns">
         <input type="checkbox"
                name="privacyPolicy"
                id="qui-contact-privacypolicy"

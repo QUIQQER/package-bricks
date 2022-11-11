@@ -492,6 +492,54 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     }
                 }
 
+                // show brick data (JSON)
+                const ShowDataBtn = self.getElm().getElement('.quiqqer-bricks-brickedit-showBrickDataBtn');
+
+                if (ShowDataBtn) {
+                    ShowDataBtn.addEventListener('click', (event) => {
+                        event.preventDefault();
+
+                        require(['qui/controls/windows/Popup'], function (QUIPopup) {
+                            new QUIPopup({
+                                title    : QUILocale.get(lg, 'brick.edit.showBrickData.window.title'),
+                                icon     : 'fa fa-code',
+                                buttons  : false,
+                                autoclose: true,
+                                events   : {
+                                    onOpen: function (Win) {
+                                        const Body = Win.getContent(),
+                                              data        = self.getAttribute('data'),
+                                              InfoText    = QUILocale.get(lg, 'brick.edit.showBrickData.window.text'),
+                                              CopyBtnText = QUILocale.get(lg,
+                                                  'brick.edit.showBrickData.window.copyBtn');
+
+                                        data.customfields = self.$customfields;
+
+                                        const CopyBtn = document.createElement('button');
+                                        CopyBtn.classList.add('qui-button');
+                                        CopyBtn.innerHTML = `<span class="fa fa-copy"></span> ${CopyBtnText}`;
+                                        CopyBtn.addEventListener('click', (event) => {
+                                            event.preventDefault();
+                                            navigator.clipboard.writeText(Body.querySelector('textarea').value);
+                                        });
+
+                                        Body.set('html',
+                                            `
+                                            <div class="showBrickData-window-body">
+                                            <p class="showBrickData-window-body-text">${InfoText}</p>
+                                            <textarea autocorrect="off" autocapitalize="off" spellcheck="false">${JSON.stringify(data)}</textarea>
+                                            </div>
+                                            `
+                                        );
+
+                                        Body.querySelector('.showBrickData-window-body-text').appendChild(CopyBtn);
+                                    }
+                                }
+                            }).open();
+                        });
+                    })
+                }
+
                 return self.$showCategory();
             }).then(function () {
                 self.Loader.hide();

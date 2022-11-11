@@ -58,3 +58,59 @@
     margin-bottom: 0;
     width: 100% !important;
 }
+
+/* copy brick data */
+.quiqqer-bricks-brickedit-showBrickData {
+    position: relative;
+}
+
+.quiqqer-bricks-brickedit-showBrickDataBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    height: calc(100% - 20px);
+    width: 2rem;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0.5;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    float: none;
+    border-radius: 0;
+    line-height: inherit;
+    margin: 0;
+    background: none;
+}
+
+.quiqqer-bricks-brickedit-showBrickDataBtn:hover {
+    background-color: #f8f8f8;
+    opacity: 1;
+    color: inherit;
+}
+
+/* brick data window */
+.showBrickData-window-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.showBrickData-window-body p {
+    margin-bottom: 1rem;
+}
+
+.showBrickData-window-body textarea {
+    height: 100%;
+    background: #f5f2f0;
+    padding: 1rem;
+    min-height: 200px;
+    font-family: 'monospace';
+    border: none;
+}
+
+.showBrickData-window-body-text .qui-button {
+    float: right;
+    margin: 0 0 1rem 1rem;
+}

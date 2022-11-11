@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+.quiqqer-simple-contact__twoColumns textarea {
+    /*margin: 0;*/
+}
+
+.qui-contact-inputsWrapper__twoColumns {
+    gap: 2rem;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+}
+
+.qui-contact-inputsWrapper-right__twoColumns {
+    display: flex;
+    flex-direction: column;
+}
+
+.qui-contact-inputsWrapper-right__twoColumns textarea {
+    min-height: initial;
+    flex-grow: 1;
+}
+
+.qui-contact-privacypolicy__twoColumns {
+    margin: 1rem 0;
+}
+
+@media screen and (max-width: 768px) {
+    .qui-contact-inputsWrapper__twoColumns {
+        gap: 0;
+        grid-template-columns: 100%;
+    }
+
+    .qui-contact-inputsWrapper-right__twoColumns textarea {
+        min-height: 10rem;
+    }
+}
