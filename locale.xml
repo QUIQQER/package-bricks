@@ -310,8 +310,8 @@
             <en><![CDATA[Brick data as JSON]]></en>
         </locale>
         <locale name="brick.edit.showBrickData.window.text">
-            <de><![CDATA[Her stehen die Baustein-Daten in JSON-Format.]]></de>
-            <en><![CDATA[Here you can find brick data converted to JSON.]]></en>
+            <de><![CDATA[Diese Bausteindaten erlauben es dir, Bausteine über verschiedene Systeme zu kopieren und einzufügen.]]></de>
+            <en><![CDATA[This brick data allows you to copy and paste blocks across different systems.]]></en>
         </locale>
         <locale name="brick.edit.showBrickData.window.copyBtn">
             <de><![CDATA[In Zwischenablage kopieren]]></de>
