@@ -34,7 +34,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
             this.parent(options);
 
             this.Loader = new QUILoader();
-            this.areas  = [];
+            this.areas = [];
 
             this.$Areas = null;
 
@@ -52,7 +52,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
             this.$Elm = new Element('div', {
                 'class': 'quiqqer-bricks-site-category',
                 'html' : '<div class="quiqqer-bricks-site-category-areas"></div>' +
-                '<div class="quiqqer-bricks-site-category-image"></div>'
+                         '<div class="quiqqer-bricks-site-category-image"></div>'
             });
 
             this.Loader.inject(this.$Elm);
@@ -182,15 +182,15 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          * @return {Promise}
          */
         getBrickAreas: function (callback) {
-            var Site    = this.getAttribute('Site'),
-                Project = Site.getProject();
+            const Site    = this.getAttribute('Site'),
+                  Project = Site.getProject();
 
             return new Promise(function (resolve, reject) {
                 Project.getConfig(function (layout) {
                     if (Site.getAttribute('layout')) {
                         layout = Site.getAttribute('layout');
                     }
-
+                    
                     QUIAjax.get('package_quiqqer_bricks_ajax_project_getAreas', function (result) {
                         if (typeof callback === 'function') {
                             callback(result);
@@ -201,6 +201,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
                         'package': 'quiqqer/bricks',
                         project  : Project.encode(),
                         layout   : layout,
+                        siteType : Site.getAttribute('type'),
                         onError  : reject
                     });
 

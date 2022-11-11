@@ -66,11 +66,15 @@ class Utils
      *
      * @param string $file - path to xm file
      * @param string|bool $layoutType - optional, return only the bricks for the specific layout type
+     * @param string|bool $siteType - optional, return only the bricks for the specific site type
      *
      * @return array
      */
-    public static function getTemplateAreasFromXML(string $file, $layoutType = false): array
-    {
+    public static function getTemplateAreasFromXML(
+        string $file,
+        $layoutType = false,
+        $siteType = false
+    ): array {
         if (!file_exists($file)) {
             return [];
         }
@@ -88,6 +92,12 @@ class Utils
             $typeAreas = $Path->query("//quiqqer/bricks/templateAreas/layouts/layout/area");
         }
 
+        if ($siteType) {
+            $siteTypeAreas = $Path->query(
+                "//quiqqer/bricks/siteTypes/type[@type='{$siteType}']/area"
+            );
+        }
+
 
         $list = [];
 
@@ -99,6 +109,12 @@ class Utils
 
         if ($typeAreas->length) {
             foreach ($typeAreas as $Area) {
+                $list[] = self::parseAreaToArray($Area, $Path);
+            }
+        }
+
+        if ($siteType && $siteTypeAreas->length) {
+            foreach ($siteTypeAreas as $Area) {
                 $list[] = self::parseAreaToArray($Area, $Path);
             }
         }

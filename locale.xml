@@ -139,6 +139,26 @@
             <de><![CDATA[Die [Datenschutzbestimmungen] habe ich zur Kenntnis genommen.]]></de>
             <en><![CDATA[I am aware of the [Privacy Policy].]]></en>
         </locale>
+        <locale name="brick.control.simpleContact.template">
+            <de><![CDATA[Vorlage]]></de>
+            <en><![CDATA[Templates]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.template.default">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Default]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.template.twoColumn">
+            <de><![CDATA[Zwei Spalten]]></de>
+            <en><![CDATA[Two columns]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.template.horizontal">
+            <de><![CDATA[Horizontal - Text linksbündig]]></de>
+            <en><![CDATA[Horizontal - Text aligned to the left]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.template.horizontalTextRight">
+            <de><![CDATA[Horizontal - Text rechtsbündig]]></de>
+            <en><![CDATA[Horizontal - Text aligned to the right]]></en>
+        </locale>
         <locale name="brick.control.simpleContact.mailTo">
             <de><![CDATA[E-Mail Adresse, an die die Nachricht gesendet wird]]></de>
             <en><![CDATA[Email where the message will send to]]></en>
@@ -186,6 +206,14 @@
                 <![CDATA[Absenden des Formulars mittels CAPTCHA vor Spam schützen (setzt voraus, dass <b>quiqqer/captcha</b> installiert ist!)]]></de>
             <en>
                 <![CDATA[Protect form submit from spam with a CAPTCHA (requires <b>quiqqer/captcha</b> to be installed!)]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.formContent">
+            <de><![CDATA[Inhalt über dem Formulars]]></de>
+            <en><![CDATA[Content above the form]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.formContent.desc">
+            <de><![CDATA[Dieser Inhalt verschwindet, wenn das Formular abgeschickt wird.]]></de>
+            <en><![CDATA[This content disappears when the form is submitted.]]></en>
         </locale>
         <locale name="brick.control.simpleContact.mail.privacyPolicy_accepted">
             <de><![CDATA[Der Benutzer hat die Datenschutzbestimmungen akzeptiert.]]></de>
@@ -272,6 +300,22 @@
         <locale name="brick.edit.type">
             <de><![CDATA[Bausteintyp]]></de>
             <en><![CDATA[Brick type]]></en>
+        </locale>
+        <locale name="brick.edit.showBrickDataBtnTitle">
+            <de><![CDATA[Baustein Daten in JSON-Format anzeigen]]></de>
+            <en><![CDATA[Show brick data as JSON]]></en>
+        </locale>
+        <locale name="brick.edit.showBrickData.window.title">
+            <de><![CDATA[Baustein Daten in JSON-Format]]></de>
+            <en><![CDATA[Brick data as JSON]]></en>
+        </locale>
+        <locale name="brick.edit.showBrickData.window.text">
+            <de><![CDATA[Her stehen die Baustein-Daten in JSON-Format.]]></de>
+            <en><![CDATA[Here you can find brick data converted to JSON.]]></en>
+        </locale>
+        <locale name="brick.edit.showBrickData.window.copyBtn">
+            <de><![CDATA[In Zwischenablage kopieren]]></de>
+            <en><![CDATA[Copy to clipboard]]></en>
         </locale>
         <locale name="brick.edit.type.title">
             <de><![CDATA[Titel des Bausteintyps]]></de>
@@ -879,6 +923,24 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Bausteintyp]]></de>
             <en><![CDATA[Brick type]]></en>
         </locale>
+        <locale name="manager.window.create.btnCreateFromData">
+            <de><![CDATA[Baustein aus den exportierten Daten erstellen]]></de>
+            <en><![CDATA[Create a new Brick from exported data]]></en>
+        </locale>
+
+        <locale name="manager.window.createFromData.title">
+            <de><![CDATA[Baustein aus JSON Daten erstellen]]></de>
+            <en><![CDATA[Create a new Brick from JSON]]></en>
+        </locale>
+        <locale name="manager.window.createFromData.text">
+            <de><![CDATA[Bitte in das Eingabefeld die Baustein-Daten in JSON Format einfügen.]]></de>
+            <en><![CDATA[Please insert the brick data in JSON format into the input field.]]></en>
+        </locale>
+        <locale name="manager.window.createFromData.btnText">
+            <de><![CDATA[Daten einfügen]]></de>
+            <en><![CDATA[Paste data]]></en>
+        </locale>
+
         <locale name="manager.window.delete.title">
             <de><![CDATA[Bausteine löschen]]></de>
             <en><![CDATA[Delete Bricks]]></en>
@@ -1339,6 +1401,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             Please choose a different title for this Brick.
             ]]></en>
         </locale>
+        <locale name="exception.brick.createFromData.brick.type.not.found">
+            <de><![CDATA[Baustein-Typ oder Name in den importierten Daten nicht gefunden.]]></de>
+            <en><![CDATA[Brick type or name not found in the imported data.]]></en>
+        </locale>
+        <locale name="exception.brick.createFromData.invalid.data">
+            <de><![CDATA[Der eingefügte String ist fehlerhaft.]]></de>
+            <en><![CDATA[The pasted string is broken.]]></en>
+        </locale>
+        <locale name="exception.brick.createFromData.brick.type.not.found.in.quiqqer">
+            <de><![CDATA[Der Baustein kann aus den Daten nicht importiert werden. In dieser QUIQQER Installation existiert der Baustein vom Typ [brickType] nicht.]]></de>
+            <en><![CDATA[The brick cannot be imported from the data. In this QUIQQER installation the brick of type [brickType] does not exist.]]></en>
+        </locale>
 
         <locale name="brick.control.googlemaps.title">
             <de><![CDATA[Bausteine: Maps-Karte]]></de>
@@ -1481,8 +1555,12 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Template (content above the map)]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.template.nextToEachOther">
-            <de><![CDATA[Nebeneinander (Text neben der Karte)]]></de>
-            <en><![CDATA[Next to each other (content next to the map)]]></en>
+            <de><![CDATA[Nebeneinander (Karte links, Inhalt rechts)]]></de>
+            <en><![CDATA[Next to each other (Map on the left, content on the right)]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.template.nextToEachOther.right">
+            <de><![CDATA[Nebeneinander (Karte rechts, Inhlat links)]]></de>
+            <en><![CDATA[Next to each other (Map on the right, content on the left)]]></en>
         </locale>
 
         <locale name="brick.control.simplegooglemaps.settings.place">
@@ -1704,9 +1782,13 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Galerie]]></de>
             <en><![CDATA[Gallery]]></en>
         </locale>
+        <locale name="brick.listTemplate.bigBanner">
+            <de><![CDATA[Großes Banner]]></de>
+            <en><![CDATA[Big banner]]></en>
+        </locale>
 
 
-        <!-- max siten -->
+        <!-- max sites -->
         <locale name="brick.max">
             <de><![CDATA[Anzahl der Seiten]]></de>
             <en><![CDATA[Number of sites]]></en>

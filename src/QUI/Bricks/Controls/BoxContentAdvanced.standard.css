@@ -1,5 +1,6 @@
 .quiqqer-boxContentAdvanced-entries__standard .quiqqer-boxContentAdvanced-entry-img {
     margin-bottom: var(--qui-spacing, 1rem);
+    text-align: center;
 }
 
 .quiqqer-boxContentAdvanced-entries__standard .quiqqer-boxContentAdvanced-entry-img picture {
