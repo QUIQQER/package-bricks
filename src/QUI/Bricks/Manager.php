@@ -324,10 +324,16 @@ class Manager
      * @param string|boolean $layoutType - optional, returns only the areas
      *                                     for the specific layout type
      *                                     (default = false)
+     * @param string|boolean $siteType - optional, returns only the areas
+     *                                     for the specific site type
+     *                                     (default = false)
      * @return array
      */
-    public function getAreasByProject(Project $Project, $layoutType = false): array
-    {
+    public function getAreasByProject(
+        Project $Project,
+        $layoutType = false,
+        $siteType = false
+    ): array {
         $templates = [];
         $bricks    = [];
 
@@ -375,7 +381,7 @@ class Manager
 
             $bricks = array_merge(
                 $bricks,
-                Utils::getTemplateAreasFromXML($brickXML, $layoutType)
+                Utils::getTemplateAreasFromXML($brickXML, $layoutType, $siteType)
             );
         }
 
