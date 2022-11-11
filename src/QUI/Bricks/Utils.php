@@ -17,6 +17,9 @@ use function md5;
 use function realpath;
 use function trim;
 
+use const OPT_DIR;
+use const USR_DIR;
+
 /**
  * Class Utils
  * Bricks helper class
@@ -94,7 +97,7 @@ class Utils
 
         if ($siteType) {
             $siteTypeAreas = $Path->query(
-                "//quiqqer/bricks/siteTypes/type[@type='{$siteType}']/area"
+                "//quiqqer/bricks/templateAreas/siteTypes/type[@type='{$siteType}']/area"
             );
         }
 
