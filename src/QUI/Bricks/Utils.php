@@ -99,6 +99,10 @@ class Utils
             $siteTypeAreas = $Path->query(
                 "//quiqqer/bricks/templateAreas/siteTypes/type[@type='{$siteType}']/area"
             );
+        } else {
+            $siteTypeAreas = $Path->query(
+                "//quiqqer/bricks/templateAreas/siteTypes/type/area"
+            );
         }
 
 
@@ -116,7 +120,7 @@ class Utils
             }
         }
 
-        if ($siteType && $siteTypeAreas->length) {
+        if ($siteTypeAreas->length) {
             foreach ($siteTypeAreas as $Area) {
                 $list[] = self::parseAreaToArray($Area, $Path);
             }
