@@ -280,6 +280,8 @@ class Manager
         // check if brick exist
         $Brick = $this->getBrickById($brickId);
 
+        QUI::getEvents()->fireEvent('quiqqerBricksBrickDeleteBefore', [$Brick]);
+
         QUI::getDataBase()->delete($this->getTable(), [
             'id' => $brickId
         ]);
@@ -287,7 +289,6 @@ class Manager
         if (isset($this->bricks[$brickId])) {
             unset($this->bricks[$brickId]);
         }
-
 
         $uniqueBrickIds = QUI::getDataBase()->fetch([
             'select' => 'siteId, project, lang',
@@ -319,6 +320,8 @@ class Manager
             'project' => $Brick->getAttribute('project'),
             'lang'    => $Brick->getAttribute('lang')
         ]);
+
+        QUI::getEvents()->fireEvent('quiqqerBricksBrickDeleteAfter', [$brickId]);
     }
 
     /**
