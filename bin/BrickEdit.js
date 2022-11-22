@@ -218,30 +218,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         $onInject: function () {
             this.Loader.show();
 
-            QUIAjax.get([
-                'package_quiqqer_bricks_ajax_getBrick',
-                'package_quiqqer_bricks_ajax_getAvailableBricks',
-                'package_quiqqer_bricks_ajax_getPanelCategories'
-            ], function (brick, bricks, categories) {
-                /**
-                 * @param {{availableSettings:object}} data
-                 * @param {{attributes:object}} data
-                 * @param {{settings:object}} data
-                 */
-                this.$availableBricks = bricks;
-                this.$availableSettings = brick.availableSettings;
-                this.$customfields = brick.customfields;
-
-                this.setAttribute('data', brick);
-
-                this.setAttributes({
-                    icon : 'fa fa-th',
-                    title: QUILocale.get('quiqqer/bricks', 'panel.title', {
-                        brickId   : this.getAttribute('id'),
-                        brickTitle: brick.attributes.title
-                    })
-                });
-
+            this.refreshData().then(() => {
                 this.getContent().setStyles({
                     position: 'relative'
                 });
@@ -250,28 +227,60 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     'class': 'quiqqer-bricks-container'
                 }).inject(this.getContent());
 
-                // brick xml settings
-                var type = brick.attributes.type;
-                var data = bricks.filter(function (entry) {
-                    return entry.control === type;
-                });
-
-                if (data.length && data[0].hasContent === 0) {
-                    this.getCategory('content').hide();
-                }
-
-                for (var i = 0, len = categories.length; i < len; i++) {
-                    this.addCategory(categories[i]);
-                }
-
-                this.refresh();
-
                 this.fireEvent('loaded', [this]);
                 this.getCategory('information').click();
                 this.$loaded = true;
-            }.bind(this), {
-                'package': 'quiqqer/brick',
-                brickId  : this.getAttribute('id')
+            });
+        },
+
+        refreshData: function () {
+            return new Promise((resolve, reject) => {
+                QUIAjax.get([
+                    'package_quiqqer_bricks_ajax_getBrick',
+                    'package_quiqqer_bricks_ajax_getAvailableBricks',
+                    'package_quiqqer_bricks_ajax_getPanelCategories'
+                ], (brick, bricks, categories) => {
+                    /**
+                     * @param {{availableSettings:object}} data
+                     * @param {{attributes:object}} data
+                     * @param {{settings:object}} data
+                     */
+                    this.$availableBricks = bricks;
+                    this.$availableSettings = brick.availableSettings;
+                    this.$customfields = brick.customfields;
+
+                    this.setAttribute('data', brick);
+
+                    this.setAttributes({
+                        icon : 'fa fa-th',
+                        title: QUILocale.get('quiqqer/bricks', 'panel.title', {
+                            brickId   : this.getAttribute('id'),
+                            brickTitle: brick.attributes.title
+                        })
+                    });
+
+                    // brick xml settings
+                    var type = brick.attributes.type;
+                    var data = bricks.filter(function (entry) {
+                        return entry.control === type;
+                    });
+
+                    if (data.length && data[0].hasContent === 0) {
+                        this.getCategory('content').hide();
+                    }
+
+                    for (var i = 0, len = categories.length; i < len; i++) {
+                        this.addCategory(categories[i]);
+                    }
+
+                    this.refresh();
+
+                    resolve();
+                }, {
+                    'package': 'quiqqer/brick',
+                    brickId  : this.getAttribute('id'),
+                    onError  : reject
+                });
             });
         },
 
