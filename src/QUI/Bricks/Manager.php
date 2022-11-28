@@ -163,7 +163,15 @@ class Manager
             ]
         );
 
-        return QUI::getPDO()->lastInsertId();
+        $brickId = QUI::getPDO()->lastInsertId();
+
+        try {
+            QUI::getEvents()->fireEvent('quiqqerBricksCreate', [$brickId]);
+        } catch (\Exception $Exception) {
+            QUI\System\Log::writeException($Exception);
+        }
+
+        return $brickId;
     }
 
     /**
@@ -380,7 +388,7 @@ class Manager
 
         // get bricks
         foreach ($templates as $template) {
-            $brickXML = realpath(OPT_DIR . $template . '/bricks.xml');
+            $brickXML = realpath(OPT_DIR.$template.'/bricks.xml');
 
             if (!$brickXML) {
                 continue;
@@ -599,7 +607,7 @@ class Manager
      */
     public function getAvailableBrickSettingsByBrickType($brickType): array
     {
-        $cache = 'quiqqer/bricks/brickType/' . md5($brickType);
+        $cache = 'quiqqer/bricks/brickType/'.md5($brickType);
 
         try {
             return QUI\Cache\Manager::get($cache);
@@ -951,7 +959,7 @@ class Manager
         }
 
         if (!empty($areas)) {
-            $areaString = ',' . implode(',', $areas) . ',';
+            $areaString = ','.implode(',', $areas).',';
         }
 
         $Brick->setAttributes($brickData);
@@ -1105,7 +1113,7 @@ class Manager
         QUI\Cache\Manager::clear($cache);
 
         QUI\Cache\Manager::clear(
-            self::getBrickCacheNamespace() . md5($Brick->getType())
+            self::getBrickCacheNamespace().md5($Brick->getType())
         );
 
         QUI::getEvents()->fireEvent('quiqqerBricksSave', [$brickId]);
@@ -1308,7 +1316,7 @@ class Manager
             // package bricks
             foreach ($packages as $package) {
                 $packageName = $package['name'];
-                $bricksXML   = OPT_DIR . $packageName . '/bricks.xml';
+                $bricksXML   = OPT_DIR.$packageName.'/bricks.xml';
 
                 if (!file_exists($bricksXML)) {
                     continue;
