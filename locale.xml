@@ -1130,14 +1130,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
         <locale name="dialog.copy.message">
             <de><![CDATA[
-            Bitte geben Sie an in welche Sprache der Baustein kopieren werden soll.
-            Zusätzlich können Sie Titel und Beschreibung für den neuen Baustein angeben.
-            Alle anderen Einstellungen werden in den neuen Baustein kopiert.
+            Bitte geben Sie an, in welcher Sprache der Baustein kopiert werden soll.
+            Zusätzlich können Sie Titel und Beschreibung für den neuen Baustein angeben,
+            alle anderen Einstellungen werden automatisch in den neuen Baustein kopiert.
             ]]></de>
             <en><![CDATA[
             Please specify in which language the block should be copied.
             You can also specify the title and description for the new module.
-            All other settings are copied to the new block.
+            All other settings are copied to the new block.
             ]]></en>
         </locale>
 
