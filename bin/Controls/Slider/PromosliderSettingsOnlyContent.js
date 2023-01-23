@@ -664,6 +664,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                                     fieldIsDisabled : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled'),
                                     fieldImage      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.image'),
                                     fieldUrl        : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url'),
+                                    fieldUrlWarning : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url.warning'),
                                     fieldNewTab     : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.newTab'),
                                     fieldTitle      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.title'),
                                     fieldDescription: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.text'),
