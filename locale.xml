@@ -1021,6 +1021,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[URL]]></de>
             <en><![CDATA[URL]]></en>
         </locale>
+        <locale name="quiqqer.bricks.promoslider.create.url.warning" html="true">
+            <de><![CDATA[Ist hier eine URL festgelegt, darf im Inhaltsbereich kein anderer Link bzw. kein anderes <a>-Element vorkommen.]]></de>
+            <en><![CDATA[If a URL is specified here, no other link or <a> element may appear in the content area.]]></en>
+        </locale>
         <locale name="quiqqer.bricks.promoslider.create.newTab">
             <de><![CDATA[Link in neuem Tab öffnen]]></de>
             <en><![CDATA[Open link in new tab]]></en>
