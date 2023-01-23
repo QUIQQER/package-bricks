@@ -260,7 +260,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                         header   : QUILocale.get(lg, 'brick.type'),
                         dataIndex: 'type',
                         dataType : 'string',
-                        width    : 200
+                        width    : 300
                     }
                 ],
                 multipleSelection: true,
