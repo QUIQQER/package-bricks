@@ -816,6 +816,9 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </setting>
+                <setting name="gap" type="number" min="0" max="200">
+                    <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.gap"/>
+                </setting>
                 <setting name="autoplay" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="bricks.customerReviewsSlider.autoplay"/>

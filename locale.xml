@@ -1568,6 +1568,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[This setting says how many customer reviews are visible. Default value is 2. That means 2 reviews are always displayed at the same time.
                 <strong>Please note!</strong> Not all templates support this setting.]]></en>
         </locale>
+        <locale name="bricks.customerReviewsSlider.gap">
+            <de><![CDATA[Lücke zwischen den Folien]]></de>
+            <en><![CDATA[Gap between slides]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.autoplay">
+            <de><![CDATA[Automatisches Abspielen]]></de>
+            <en><![CDATA[Autoplay]]></en>
+        </locale>
         <locale name="bricks.customerReviewsSlider.delay">
             <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>
             <en><![CDATA[Time to start next slide (Delay)]]></en>

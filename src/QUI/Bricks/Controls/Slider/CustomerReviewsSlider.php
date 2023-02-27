@@ -23,7 +23,8 @@ class CustomerReviewsSlider extends AbstractPromoslider
             'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider',
             'template' => 'default',
             'delay'    => 5000,
-            'perView'  => 2
+            'perView'  => 2,
+            'gap'      => 40
         ]);
 
         parent::__construct($attributes);
@@ -33,14 +34,30 @@ class CustomerReviewsSlider extends AbstractPromoslider
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
-        $entries  = json_decode($this->getAttribute('entries'), true);
-        $template = $this->getAttribute('template');
-        $path     = \dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.html';
+        $entries        = json_decode($this->getAttribute('entries'), true);
+        $template       = $this->getAttribute('template');
+        $path           = \dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.html';
         $enabledEntries = [];
+        $gap            = $this->getAttribute("gap");
+        
+        switch ($gap) {
+            case null:
+                $gap = 40;
+                break;
+            case $gap < 0:
+                $gap = 0;
+                break;
+            case $gap > 200:
+                $gap = 200;
+                break;
+            default:
+                break;
+        }
 
         $this->setJavaScriptControlOption('delay', $this->getAttribute('delay'));
         $this->setJavaScriptControlOption('autoplay', $this->getAttribute('autoplay'));
         $this->setJavaScriptControlOption('height', $this->getAttribute('sliderHeight'));
+        $this->setJavaScriptControlOption('gap', $gap);
 
         switch ($template) {
             case 'default':

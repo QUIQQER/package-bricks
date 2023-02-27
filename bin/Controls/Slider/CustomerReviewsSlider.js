@@ -52,6 +52,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
             var sliderHeight = this.getAttribute('height');
             var perView      = this.getAttribute('perview');
             var self         = this;
+            var gap          = this.getAttribute('gap');
 
             this.glideTrack = this.getElm().querySelector('.customerReviewsSlider-track');
 
@@ -63,7 +64,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
             });
 
             var options = {
-                gap        : 40,
+                gap        : gap,
                 type       : 'carousel',
                 perView    : perView,
                 breakpoints: {
