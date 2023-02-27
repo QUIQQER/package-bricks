@@ -1533,6 +1533,136 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Reviews]]></en>
         </locale>
 
+        <!-- Customer Reviews Slider -->
+        <locale name="bricks.customerReviewsSlider.title">
+            <de><![CDATA[Bausteine: Kundenrezensionen als Slider]]></de>
+            <en><![CDATA[Bricks: Customer reviews slider]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.description">
+            <de><![CDATA[Erstelle Kundenrezensionen in Slider-Form.]]></de>
+            <en><![CDATA[Create customer reviews as slider]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.template">
+            <de><![CDATA[Template]]></de>
+            <en><![CDATA[Template]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.template.default">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Default]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.template.templateOne">
+            <de><![CDATA[Template 1]]></de>
+            <en><![CDATA[Template 1]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.template.templateOne">
+            <de><![CDATA[Template 1]]></de>
+            <en><![CDATA[Template 1]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.perView">
+            <de><![CDATA[Anzahl der sichtbaren Einträge]]></de>
+            <en><![CDATA[Number of visible entries]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.perView.desc">
+            <de><![CDATA[Diese Einstellung besagt, wie viele Kundenrezensionen sichtbar sind. Standardwert ist 2, d.h. es werden immer gleichzeitig 2 Rezensionen angezeigt.
+                <strong>Achtung!</strong> Nichte alle Templates unterstützen diese Einstellung.]]></de>
+            <en><![CDATA[This setting says how many customer reviews are visible. Default value is 2. That means 2 reviews are always displayed at the same time.
+                <strong>Please note!</strong> Not all templates support this setting.]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.gap">
+            <de><![CDATA[Abstand zwischen den Slides]]></de>
+            <en><![CDATA[Space between slides]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.autoplay">
+            <de><![CDATA[Automatisches Abspielen]]></de>
+            <en><![CDATA[Autoplay]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.delay">
+            <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>
+            <en><![CDATA[Time to start next slide (Delay)]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.delay.desc">
+            <de><![CDATA[Die Einstellung funktioniert nur, wenn die Option "Automatisches Abspielen" aktiviert ist.]]></de>
+            <en><![CDATA[The setting works only if the "Autoplay" option is enabled.]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.arrows">
+            <de><![CDATA[Navigation-Pfeile zeigen]]></de>
+            <en><![CDATA[Show navigation arrows]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.height">
+            <de><![CDATA[Slider Höhe]]></de>
+            <en><![CDATA[Slider height]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.height.fixed">
+            <de><![CDATA[Fest]]></de>
+            <en><![CDATA[Fixed]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.height.variable">
+            <de><![CDATA[Variable]]></de>
+            <en><![CDATA[Variable]]></en>
+        </locale>
+
+        <locale name="bricks.customerReviewsSlider.settings.entries">
+            <de><![CDATA[Rezensionen]]></de>
+            <en><![CDATA[Reviews]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.disable">
+            <de><![CDATA[Eintrag deaktivieren]]></de>
+            <en><![CDATA[Disable entry]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.avatar">
+            <de><![CDATA[Benutzerbild]]></de>
+            <en><![CDATA[Avatar]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.customerName">
+            <de><![CDATA[Kundenname]]></de>
+            <en><![CDATA[Customer name]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.addition">
+            <de><![CDATA[Zusatz (z. B. Berufsbezeichnung)]]></de>
+            <en><![CDATA[Addition (e.g. job title)]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.url">
+            <de><![CDATA[Internetadresse]]></de>
+            <en><![CDATA[Internet address]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.urlTitle">
+            <de><![CDATA[Abweichender Titel für Internetadresse (optional)]]></de>
+            <en><![CDATA[Different title for internet address (optional)]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.review">
+            <de><![CDATA[Rezension]]></de>
+            <en><![CDATA[Review]]></en>
+        </locale>
+
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.isDisabled.short">
+            <de><![CDATA[Deaktiviert]]></de>
+            <en><![CDATA[Disabled]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.avatar.short">
+            <de><![CDATA[Benutzerbild]]></de>
+            <en><![CDATA[Avatar]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.customerName.short">
+            <de><![CDATA[Kundenname]]></de>
+            <en><![CDATA[Customer name]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.addition.short">
+            <de><![CDATA[Zusatz]]></de>
+            <en><![CDATA[Addition]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.url.short">
+            <de><![CDATA[Internetadresse]]></de>
+            <en><![CDATA[Internet address]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.urlTitle.short">
+            <de><![CDATA[Internetadresse - Titel]]></de>
+            <en><![CDATA[Internet address - title]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.customerReviewsSlider.create.review.short">
+            <de><![CDATA[Rezension]]></de>
+            <en><![CDATA[Review]]></en>
+        </locale>
+
         <!-- Simple Google Maps -->
         <locale name="brick.control.simplegooglemaps.title">
             <de><![CDATA[Bausteine: Einfache Google Maps Karte]]></de>
@@ -1616,9 +1746,44 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Inhalte werden in Boxen nebeneinander gestellt und zentriert]]></de>
             <en><![CDATA[Show the text in boxes, which are in a single line.]]></en>
         </locale>
+
+        <locale name="bricks.BoxContent.centerText">
+            <de><![CDATA[Text zentrieren]]></de>
+            <en><![CDATA[Center text]]></en>
+        </locale>
+
         <locale name="BoxContent.entries">
             <de><![CDATA[Einträge]]></de>
             <en><![CDATA[Entries]]></en>
+        </locale>
+        <locale name="control.boxContent.entries.disable">
+            <de><![CDATA[Eintrag deaktivieren]]></de>
+            <en><![CDATA[Disable entry]]></en>
+        </locale>
+        <locale name="control.boxContent.entries.title">
+            <de><![CDATA[Titel]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="control.boxContent.entries.text">
+            <de><![CDATA[Text]]></de>
+            <en><![CDATA[Text]]></en>
+        </locale>
+
+        <locale name="control.boxContent.entries.delete.title">
+            <de><![CDATA[Slide wirklich löschen?]]></de>
+            <en><![CDATA[Do you really want to remove this slide?]]></en>
+        </locale>
+        <locale name="control.boxContent.entries.delete.information">
+            <de><![CDATA[Der Slide kann nicht wieder hergestellt werden]]></de>
+            <en><![CDATA[The slide can not be restored]]></en>
+        </locale>
+        <locale name="control.boxContent.entries.edit.title">
+            <de><![CDATA[Eintrag bearbeiten]]></de>
+            <en><![CDATA[Edit entry]]></en>
+        </locale>
+        <locale name="control.boxContent.entries.add.title">
+            <de><![CDATA[Eintrag hinzufügen]]></de>
+            <en><![CDATA[Add entry]]></en>
         </locale>
 
         <!-- Box Content Advanced -->

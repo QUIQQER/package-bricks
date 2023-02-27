@@ -1,0 +1,117 @@
+.customerReviewsSlider-default-arrows {
+    display: flex;
+    align-items: center;
+}
+
+.customerReviewsSlider-default-arrow-left {
+    margin-right: 2rem;
+}
+
+.customerReviewsSlider-default-arrow-right {
+    margin-left: 2rem;
+}
+
+.customerReviewsSlider-default-arrows .customerReviewsSlider-default-arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #aaa;
+    color: #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s ease-in-out;
+}
+
+.customerReviewsSlider-default-arrows .customerReviewsSlider-default-arrow:hover {
+    border-color: #333;
+    color: #333;
+}
+
+.customerReviewsSlider-default-review {
+    font-size: 1.125rem;
+}
+
+.customerReviewsSlider-default-client {
+    display: flex;
+    flex-direction: row;
+}
+
+.customerReviewsSlider-default-client-img {
+    width: 100px;
+    height: 100px;
+    margin-right: 2rem;
+}
+
+.customerReviewsSlider-default-client-img img {
+    aspect-ratio: 1 / 1;
+    height: auto;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.customerReviewsSlider-default-client-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.customerReviewsSlider-default-client-name,
+.customerReviewsSlider-default-client-addition {
+    font-size: 0.975rem;
+}
+
+.customerReviewsSlider-default-client-name {
+    font-weight: 700;
+}
+
+.customerReviewsSlider-default-dots {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    display: flex;
+}
+
+.customerReviewsSlider-default-dot {
+    width: 10px;
+    height: 10px;
+    border: 2px solid rgba(0,0,0,0);
+    border-radius: 50%;
+    margin: 0 5px;
+    display: block;
+    background-color: #aaa;
+    transition: all .2s ease-in-out;
+}
+
+.customerReviewsSlider-default-dot.glide__bullet--active {
+    border-color: #aaa;
+    background-color: transparent;
+}
+
+.customerReviewsSlider-default-dot:hover {
+    border-radius: 50%;
+}
+
+.customerReviewsSlider-default-slider-wrapper {
+    display: flex;
+}
+
+@media screen and (max-width: 768px) {
+
+    .customerReviewsSlider-default-track {
+        margin: 0;
+    }
+
+    .customerReviewsSlider-default-arrows {
+        display: none;
+    }
+
+    .customerReviewsSlider-default-dots {
+        margin: 1rem auto;
+    }
+
+    .customerReviewsSlider-default-slider-wrapper {
+        flex-direction: column;
+    }
+}

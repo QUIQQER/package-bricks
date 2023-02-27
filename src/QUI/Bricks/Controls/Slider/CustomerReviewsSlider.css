@@ -1,0 +1,25 @@
+.customerReviewsSlider-slider-wrapper {
+    position: relative;
+}
+
+.customerReviewsSlider-slider {
+    display: flex;
+}
+
+.customerReviewsSlider-track {
+    opacity: 0;
+    transition: height .2s ease-in-out, opacity .2s ease-in-out;
+    padding-bottom: 2.5rem;
+    visibility: hidden;
+}
+
+.customerReviewsSlider-dot,
+.customerReviewsSlider-arrow {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .customerReviewsSlider-templateOne-arrows {
+        display: none;
+    }
+}
