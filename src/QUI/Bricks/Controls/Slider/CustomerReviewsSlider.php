@@ -36,21 +36,17 @@ class CustomerReviewsSlider extends AbstractPromoslider
 
         $entries        = json_decode($this->getAttribute('entries'), true);
         $template       = $this->getAttribute('template');
-        $path           = \dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.html';
+        $path           = \dirname(__FILE__).'/CustomerReviewsSlider.'.$template.'.html';
         $enabledEntries = [];
-        $gap            = $this->getAttribute("gap");
+        $gap            = $this->getAttribute('gap') ? intval($this->getAttribute('gap')) : 40;
 
         switch ($gap) {
-            case null:
-                $gap = 40;
-                break;
             case $gap < 0:
                 $gap = 0;
                 break;
+
             case $gap > 200:
                 $gap = 200;
-                break;
-            default:
                 break;
         }
 
@@ -83,8 +79,8 @@ class CustomerReviewsSlider extends AbstractPromoslider
 
         $this->addCSSFiles(
             [
-                \dirname(__FILE__) . '/CustomerReviewsSlider.css',
-                \dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.css'
+                \dirname(__FILE__).'/CustomerReviewsSlider.css',
+                \dirname(__FILE__).'/CustomerReviewsSlider.'.$template.'.css'
             ]
         );
 

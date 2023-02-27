@@ -1569,8 +1569,8 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
                 <strong>Please note!</strong> Not all templates support this setting.]]></en>
         </locale>
         <locale name="bricks.customerReviewsSlider.gap">
-            <de><![CDATA[Lücke zwischen den Folien]]></de>
-            <en><![CDATA[Gap between slides]]></en>
+            <de><![CDATA[Abstand zwischen den Slides]]></de>
+            <en><![CDATA[Space between slides]]></en>
         </locale>
         <locale name="bricks.customerReviewsSlider.autoplay">
             <de><![CDATA[Automatisches Abspielen]]></de>
