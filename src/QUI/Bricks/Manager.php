@@ -8,7 +8,6 @@ namespace QUI\Bricks;
 
 use DOMElement;
 use DOMXPath;
-use Exception;
 use QUI;
 use QUI\Projects\Project;
 use QUI\Projects\Site;
@@ -23,7 +22,9 @@ use function array_unique;
 use function array_values;
 use function class_exists;
 use function count;
+use function defined;
 use function explode;
+use function file_exists;
 use function implode;
 use function in_array;
 use function is_array;
@@ -36,6 +37,8 @@ use function str_replace;
 use function strpos;
 use function trim;
 use function usort;
+
+use const OPT_DIR;
 
 /**
  * Brick Manager
@@ -108,7 +111,7 @@ class Manager
     }
 
     /**
-     * Returns the brick's table name
+     * Returns the bricks table name
      *
      * @return String
      */
@@ -160,7 +163,15 @@ class Manager
             ]
         );
 
-        return QUI::getPDO()->lastInsertId();
+        $brickId = QUI::getPDO()->lastInsertId();
+
+        try {
+            QUI::getEvents()->fireEvent('quiqqerBricksCreate', [$brickId]);
+        } catch (\Exception $Exception) {
+            QUI\System\Log::writeException($Exception);
+        }
+
+        return $brickId;
     }
 
     /**
@@ -328,10 +339,16 @@ class Manager
      * @param string|boolean $layoutType - optional, returns only the areas
      *                                     for the specific layout type
      *                                     (default = false)
+     * @param string|boolean $siteType - optional, returns only the areas
+     *                                     for the specific site type
+     *                                     (default = false)
      * @return array
      */
-    public function getAreasByProject(Project $Project, $layoutType = false): array
-    {
+    public function getAreasByProject(
+        Project $Project,
+        $layoutType = false,
+        $siteType = false
+    ): array {
         $templates = [];
         $bricks    = [];
 
@@ -379,7 +396,7 @@ class Manager
 
             $bricks = array_merge(
                 $bricks,
-                Utils::getTemplateAreasFromXML($brickXML, $layoutType)
+                Utils::getTemplateAreasFromXML($brickXML, $layoutType, $siteType)
             );
         }
 
@@ -473,7 +490,7 @@ class Manager
 
         try {
             QUI\Cache\Manager::set($cache, $list);
-        } catch (Exception $Exception) {
+        } catch (\Exception $Exception) {
             QUI\System\Log::writeException($Exception);
         }
 
@@ -518,12 +535,12 @@ class Manager
      * Get a Brick by its unique ID
      *
      * @param string $uid - unique id
-     * @param QUI\Interfaces\Projects\Site|null $Site - unique id
+     * @param Site|null $Site - unique id
      *
      * @return Brick
      * @throws QUI\Exception
      */
-    public function getBrickByUID(string $uid, ?QUI\Interfaces\Projects\Site $Site = null): Brick
+    public function getBrickByUID(string $uid, $Site = null): Brick
     {
         if (isset($this->brickUIDs[$uid])) {
             return $this->brickUIDs[$uid];
@@ -670,7 +687,7 @@ class Manager
 
         try {
             QUI\Cache\Manager::set($cache, $settings);
-        } catch (Exception $Exception) {
+        } catch (\Exception $Exception) {
             QUI\System\Log::writeException($Exception);
         }
 
@@ -680,12 +697,12 @@ class Manager
     /**
      * Parse a xml setting element to a brick array
      *
-     * @param DOMElement $Setting
+     * @param \DOMElement $Setting
      * @return array
      */
     protected function parseSettingToBrickArray(DOMElement $Setting): array
     {
-        /* @var $Option DOMElement */
+        /* @var $Option \DOMElement */
         $options = false;
 
         if ($Setting->getAttribute('type') == 'select') {
@@ -770,14 +787,10 @@ class Manager
 
         $result = [];
 
-        try {
-            QUI::getEvents()->fireEvent(
-                'onQuiqqerBricksGetBricksByAreaBegin',
-                [$brickArea, $Site, &$result]
-            );
-        } catch (QUI\Exception $e) {
-            QUI\System\Log::addError($e->getMessage());
-        }
+        QUI::getEvents()->fireEvent(
+            'onQuiqqerBricksGetBricksByAreaBegin',
+            [$brickArea, $Site, &$result]
+        );
 
         foreach ($bricks as $brickData) {
             $brickId = (int)$brickData['brickId'];
@@ -788,7 +801,10 @@ class Manager
                     $result[] = $Brick->check();
                     continue;
                 }
+            } catch (QUI\Exception $Exception) {
+            }
 
+            try {
                 if (!$brickId) {
                     continue;
                 }
@@ -812,14 +828,10 @@ class Manager
             }
         }
 
-        try {
-            QUI::getEvents()->fireEvent(
-                'onQuiqqerBricksGetBricksByAreaEnd',
-                [$brickArea, $Site, &$result]
-            );
-        } catch (QUI\Exception $e) {
-            QUI\System\Log::addError($e->getMessage());
-        }
+        QUI::getEvents()->fireEvent(
+            'onQuiqqerBricksGetBricksByAreaEnd',
+            [$brickArea, $Site, &$result]
+        );
 
         return $result;
     }
@@ -904,6 +916,8 @@ class Manager
     {
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.edit');
 
+        QUI::getEvents()->fireEvent('quiqqerBricksSaveBefore', [$brickId]);
+
         $Brick      = $this->getBrickById($brickId);
         $areas      = [];
         $areaString = '';
@@ -933,6 +947,11 @@ class Manager
             $parts = explode(',', $brickData['areas']);
 
             foreach ($parts as $area) {
+                if (defined('QUIQQER_BRICKS_IGNORE_AREA_CHECK')) {
+                    $areas[] = $area;
+                    continue;
+                }
+
                 if (in_array($area, $availableAreas)) {
                     $areas[] = $area;
                 }
@@ -1222,7 +1241,7 @@ class Manager
                 continue;
             }
 
-            if (empty($bricks) || !is_array($bricks)) {
+            if (empty($bricks)) {
                 continue;
             }
 

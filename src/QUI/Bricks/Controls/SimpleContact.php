@@ -32,7 +32,10 @@ class SimpleContact extends QUI\Control
             'data-brickid'              => false,
             'mailTo'                    => '', // receiver email
             'showPrivacyPolicyCheckbox' => false,
-            'useCaptcha'                => false
+            'useCaptcha'                => false,
+            'formContent'               => '',
+            'template'                  => 'default',
+            'textPosition'              => ''
         ]);
 
         parent::__construct($attributes);
@@ -49,10 +52,6 @@ class SimpleContact extends QUI\Control
                 );
             }
         }
-
-        $this->addCSSFile(
-            dirname(__FILE__).'/SimpleContact.css'
-        );
     }
 
     /**
@@ -69,7 +68,35 @@ class SimpleContact extends QUI\Control
         $message               = '';
         $privacyPolicyCheckbox = $this->getAttribute('showPrivacyPolicyCheckbox');
         $useCaptcha            = $this->getAttribute('useCaptcha');
+        $formContent           = $this->getAttribute('formContent');
         $error                 = false;
+        $template              = $this->getAttribute('template');
+        $textPosition          = $this->getAttribute('textPosition');
+
+        switch ($template) {
+            case 'horizontal':
+                $template    = dirname(__FILE__).'/SimpleContact.horizontal.html';
+                $templateCss = dirname(__FILE__).'/SimpleContact.horizontal.css';
+                break;
+
+            case 'horizontal.textRight':
+                $textPosition = 'quiqqer-simple-contact-textRight__horizontal';
+                $template     = dirname(__FILE__).'/SimpleContact.horizontal.html';
+                $templateCss  = dirname(__FILE__).'/SimpleContact.horizontal.css';
+                break;
+
+            case 'twoColumns':
+                $template    = dirname(__FILE__).'/SimpleContact.twoColumns.html';
+                $templateCss = dirname(__FILE__).'/SimpleContact.twoColumns.css';
+                break;
+
+            case 'default':
+            default:
+                $template    = dirname(__FILE__).'/SimpleContact.html';
+                $templateCss = dirname(__FILE__).'/SimpleContact.css';
+        }
+
+        $this->addCSSFiles([dirname(__FILE__).'/SimpleContact.css', $templateCss]);
 
         // Is javascript disabled?
         if (isset($_POST['name'])
@@ -160,13 +187,15 @@ class SimpleContact extends QUI\Control
         }
 
         $Engine->assign([
-            'this'    => $this,
-            'name'    => $name,
-            'email'   => $email,
-            'message' => $message
+            'this'         => $this,
+            'name'         => $name,
+            'email'        => $email,
+            'message'      => $message,
+            'formContent'  => $formContent,
+            'textPosition' => $textPosition
         ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/SimpleContact.html');
+        return $Engine->fetch($template);
     }
 
     /**

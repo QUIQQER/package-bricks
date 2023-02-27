@@ -17,6 +17,9 @@ use function md5;
 use function realpath;
 use function trim;
 
+use const OPT_DIR;
+use const USR_DIR;
+
 /**
  * Class Utils
  * Bricks helper class
@@ -66,11 +69,15 @@ class Utils
      *
      * @param string $file - path to xm file
      * @param string|bool $layoutType - optional, return only the bricks for the specific layout type
+     * @param string|bool $siteType - optional, return only the bricks for the specific site type
      *
      * @return array
      */
-    public static function getTemplateAreasFromXML(string $file, $layoutType = false): array
-    {
+    public static function getTemplateAreasFromXML(
+        string $file,
+        $layoutType = false,
+        $siteType = false
+    ): array {
         if (!file_exists($file)) {
             return [];
         }
@@ -88,6 +95,16 @@ class Utils
             $typeAreas = $Path->query("//quiqqer/bricks/templateAreas/layouts/layout/area");
         }
 
+        if ($siteType) {
+            $siteTypeAreas = $Path->query(
+                "//quiqqer/bricks/templateAreas/siteTypes/type[@type='{$siteType}']/area"
+            );
+        } else {
+            $siteTypeAreas = $Path->query(
+                "//quiqqer/bricks/templateAreas/siteTypes/type/area"
+            );
+        }
+
 
         $list = [];
 
@@ -99,6 +116,12 @@ class Utils
 
         if ($typeAreas->length) {
             foreach ($typeAreas as $Area) {
+                $list[] = self::parseAreaToArray($Area, $Path);
+            }
+        }
+
+        if ($siteTypeAreas->length) {
+            foreach ($siteTypeAreas as $Area) {
                 $list[] = self::parseAreaToArray($Area, $Path);
             }
         }
@@ -133,6 +156,12 @@ class Utils
 
         $hasContent = 1;
         $cacheable  = 1;
+        $deprecated = 0;
+
+        if ($Brick->hasAttribute('deprecated')
+            && (int)$Brick->getAttribute('deprecated') === 1) {
+            $deprecated = 1;
+        }
 
         if ($Brick->hasAttribute('hasContent')
             && (int)$Brick->getAttribute('hasContent') === 0) {
@@ -172,7 +201,8 @@ class Utils
             'title'       => $title,
             'description' => $description,
             'inheritance' => $Brick->getAttribute('inheritance'),
-            'priority'    => $Brick->getAttribute('priority')
+            'priority'    => $Brick->getAttribute('priority'),
+            'deprecated'  => $deprecated
         ];
     }
 

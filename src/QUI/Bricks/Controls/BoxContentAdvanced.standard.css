@@ -1,5 +1,5 @@
 .quiqqer-boxContentAdvanced-entries__standard .quiqqer-boxContentAdvanced-entry-img {
-    margin-bottom: 2rem;
+    margin-bottom: var(--qui-spacing, 1rem);
     text-align: center;
 }
 
@@ -8,19 +8,18 @@
 }
 
 .quiqqer-boxContentAdvanced-entries__standard .quiqqer-boxContentAdvanced-entry-title {
-    font-size: 1.25rem;
+    font-size: var(--qui-fs-lg, 1.25rem);
 }
 
 .quiqqer-boxContentAdvanced-entries__standard  .quiqqer-boxContentAdvanced-entry-subTitle {
-    font-size: 0.9rem;
+    font-size: var(--qui-fs-sm, 0.9rem);
 }
 
 .quiqqer-boxContentAdvanced-entries__standard  .quiqqer-boxContentAdvanced-entry-content *:last-child {
     margin-bottom: 0;
 }
 
-.quiqqer-boxContentAdvanced-entries__standard  .centerText header,
-.quiqqer-boxContentAdvanced-entries__standard  .centerText .quiqqer-boxContentAdvanced-entry-content {
+.quiqqer-boxContentAdvanced-entries__standard  .centerText {
     text-align: center;
 }
 

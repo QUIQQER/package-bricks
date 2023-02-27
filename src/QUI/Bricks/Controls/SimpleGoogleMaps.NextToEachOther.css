@@ -55,6 +55,10 @@
     color: #333;
 }
 
+.simpleGoogleMap-nextToEachOther-reverseContent {
+    flex-direction: row-reverse;
+}
+
 @media screen and (max-width: 767px) {
     .simpleGoogleMap-nextToEachOther {
         display: block;

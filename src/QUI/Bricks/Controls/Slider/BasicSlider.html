@@ -5,14 +5,14 @@
 {/if}
 
 {if $this->getAttribute('content') != ""}
-    <div class="control-content">
+    <div class="control-content default-content">
         {$this->getAttribute('content')}
     </div>
 {/if}
 
 <div class="basic-slider-wrapper {if $imgLeft} basic-slider__imageLeft {/if}">
     <div class="basic-slider-content" style="align-items: {$textPosition};">
-        <div class="basic-slider-content-container">
+        <div class="basic-slider-content-container default-content">
             {$sliderContent}
         </div>
     </div>
