@@ -39,7 +39,7 @@ class CustomerReviewsSlider extends AbstractPromoslider
         $path           = \dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.html';
         $enabledEntries = [];
         $gap            = $this->getAttribute("gap");
-        
+
         switch ($gap) {
             case null:
                 $gap = 40;
