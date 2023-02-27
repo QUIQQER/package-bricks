@@ -804,21 +804,37 @@
                         <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.template.templateOne"/>
                     </option>
                 </setting>
-                <setting name="delay" type="number">
-                    <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.delay"/>
-                </setting>
-                <setting name="showArrows" type="checkbox">
-                    <locale group="quiqqer/bricks"
-                            var="bricks.customerReviewsSlider.arrows"/>
+                <setting name="perView" type="select">
+                    <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.perView"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.perView.desc"/>
+                    </description>
+
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                 </setting>
                 <setting name="autoplay" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="bricks.customerReviewsSlider.autoplay"/>
                 </setting>
+                <setting name="delay" type="number">
+                    <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.delay"/>
+                    <description>
+                        <locale group="quiqqer/bricks"
+                                var="bricks.customerReviewsSlider.delay.desc"/>
+                    </description>
+                </setting>
+                <setting name="showArrows" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="bricks.customerReviewsSlider.arrows"/>
+                </setting>
                 <setting name="sliderHeight" type="select">
                     <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.height"/>
-                    <option value="const">
-                        <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.height.const"/>
+                    <option value="fixed">
+                        <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.height.fixed"/>
                     </option>
                     <option value="variable">
                         <locale group="quiqqer/bricks" var="bricks.customerReviewsSlider.height.variable"/>
@@ -863,7 +879,12 @@
             </description>
 
             <settings>
-                <setting name="entries" data-qui="package/quiqqer/bricks/bin/Controls/BoxContent">
+                <setting name="centerText" type="checkbox">
+                    <locale group="quiqqer/bricks"
+                            var="bricks.BoxContent.centerText"/>
+                </setting>
+
+                <setting name="entries" type="hidden" data-qui="package/quiqqer/bricks/bin/Controls/BoxContentSettings">
                     <locale group="quiqqer/bricks" var="BoxContent.entries"/>
                 </setting>
             </settings>

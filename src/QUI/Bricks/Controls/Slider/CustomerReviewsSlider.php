@@ -23,12 +23,11 @@ class CustomerReviewsSlider extends AbstractPromoslider
             'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider',
             'template' => 'default',
             'delay'    => 5000,
-            'perview'  => 1
+            'perView'  => 2
         ]);
 
         parent::__construct($attributes);
     }
-
 
     public function getBody()
     {
@@ -44,8 +43,9 @@ class CustomerReviewsSlider extends AbstractPromoslider
         $this->setJavaScriptControlOption('height', $this->getAttribute('sliderHeight'));
 
         switch ($template) {
+            case 'default':
             case 'templateOne':
-                $this->setJavaScriptControlOption('perview', 2);
+                $this->setJavaScriptControlOption('perview', intval($this->getAttribute('perView')));
                 break;
         }
 
@@ -60,7 +60,8 @@ class CustomerReviewsSlider extends AbstractPromoslider
         $options = [
             'this'    => $this,
             'entries' => $enabledEntries,
-            'arrows'  => $this->getAttribute('showArrows')
+            'arrows'  => $this->getAttribute('showArrows'),
+            'perView' => $this->getAttribute('perView')
         ];
 
         $this->addCSSFiles(

@@ -26,28 +26,14 @@
         <div data-glide-el="track" class="glide__track customerReviewsSlider-templateOne-track customerReviewsSlider-track">
             <ul class="glide__slides customerReviewsSlider-templateOne-slider customerReviewsSlider-slider">
 
-                {foreach from=$entries item=entry}
-
-                <li class="glide__slide customerReviewsSlider-templateOne-slide">
+                {foreach from=$entries item=entry key=key}
+                {* 1. Avoid big jump effect on page load *}
+                <li class="glide__slide customerReviewsSlider-templateOne-slide" {if $key > $perView - 1}style="display: none;"{/if}{* (1) *}
+                    {if $key <= $perView - 1}style="width: calc(100% / {$perView});"{/if}{* (1) *}>
 
                     <div class="customerReviewsSlider-content-wrapper">
                         <div class="customerReviewsSlider-quote">
-                            <svg width="192" height="192" version="1.1" viewBox="0 0 50.8 50.8" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-                                <metadata>
-                                    <rdf:RDF>
-                                        <cc:Work rdf:about="">
-                                            <dc:format>image/svg+xml</dc:format>
-                                            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-                                            <dc:title/>
-                                        </cc:Work>
-                                    </rdf:RDF>
-                                </metadata>
-                                <g transform="translate(0 -246.2)">
-                                    <g transform="scale(.97499 1.0257)" aria-label='"'>
-                                        <path d="m9.2646 271.8q3.2283-4.0891 4.3761-7.1022l-4.1609-6.2413q0-1.65 0.86087-3.2283 0.93261-1.65 2.5826-2.6543 1.65-1.0044 3.7304-1.0044 3.0848 0 5.237 2.2239 2.1522 2.1522 2.1522 5.5239 0 3.9456-3.1565 8.9674t-9.9 9.7565zm18.796 0q3.2283-4.0891 4.3761-7.1022l-4.1609-6.2413q0-1.65 0.86087-3.2283 0.93261-1.65 2.5826-2.6543 1.65-1.0044 3.7304-1.0044 3.0848 0 5.237 2.2239 2.1522 2.1522 2.1522 5.5239 0 3.9456-3.1565 8.9674t-9.9 9.7565z" stroke-width="1.7935" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal"/>
-                                    </g>
-                                </g>
-                            </svg>
+                            <svg width="192" height="192" viewBox="0 0 50.8 50.8" xmlns="http://www.w3.org/2000/svg"><path d="M9.265 271.8q3.228-4.09 4.376-7.102l-4.161-6.241q0-1.65.86-3.229.933-1.65 2.583-2.654 1.65-1.005 3.73-1.005 3.085 0 5.238 2.224 2.152 2.153 2.152 5.524 0 3.946-3.157 8.968t-9.9 9.756zm18.796 0q3.228-4.09 4.376-7.102l-4.161-6.241q0-1.65.86-3.229.933-1.65 2.583-2.654 1.65-1.005 3.73-1.005 3.085 0 5.238 2.224 2.152 2.153 2.152 5.524 0 3.946-3.157 8.968t-9.9 9.756z" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal" transform="matrix(.97499 0 0 1.0257 0 -246.2)" aria-label="&quot;"/></svg>
                         </div>
 
                         {if $entry['review']}
@@ -60,7 +46,7 @@
 
                             <div class="customerReviewsSlider-templateOne-client-img">
                                 {if $entry['image']}
-                                {image src=$entry['image'] loading="lazy" data-src="{$entry['image']}"}
+                                {image src=$entry['image'] loading="lazy" width="200" height="200"}
                                 {/if}
                             </div>
 
