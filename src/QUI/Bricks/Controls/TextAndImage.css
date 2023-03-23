@@ -61,10 +61,10 @@
 
 .quiqqer-textImage-image__fullImageHeight picture {
     height: 100%;
+    display: flex;
 }
 
 .quiqqer-textImage-image__fullImageHeight picture img {
-    height: 100%;
     object-fit: cover;
 }
 
