@@ -1728,6 +1728,13 @@
                 <setting name="entries" data-qui="package/quiqqer/bricks/bin/Controls/backend/AccordionSettings">
                     <locale group="quiqqer/bricks" var="brick.accordion.entries"/>
                 </setting>
+
+                <setting name="useFaqStructuredData" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.accordion.useFaqStructuredData"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.accordion.useFaqStructuredData.desc"/>
+                    </description>
+                </setting>
             </settings>
         </brick>
 
