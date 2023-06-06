@@ -27,7 +27,7 @@
     </div>
 
     {if $showDropdown}
-    <div class="quiqqer-control-languageswitch-dropdown-dd {$dropdownPosition}">
+    <div class="quiqqer-control-languageswitch-dropdown-dd {$dropdownPosition}" style="display: none;">
         {foreach from=$langs item=lang}
             {strip}
             {if $Site->existLang($lang)}
