@@ -1,64 +1,64 @@
-
+/**********/
+/* button */
+/**********/
 .quiqqer-control-languageswitch-dropdown {
     cursor: pointer;
-    float: left;
     position: relative;
-    z-index: 1;
+    display: flex;
+    padding-inline: 0.5em;
 }
 
-.quiqqer-control-languageswitch-dropdown-lang {
-    float: left;
-    padding: 5px 10px;
+.quiqqer-control-languageswitch-dropdown-button.inactive {
+    cursor: default;
 }
 
-.quiqqer-control-languageswitch-dropdown-lang-icon {
-    margin-right: 5px;
+.quiqqer-control-languageswitch-dropdown-lang__abbreviation,
+.quiqqer-control-languageswitch-dropdown-dd-lang__abbreviation {
+    text-transform: uppercase;
 }
 
-.quiqqer-control-languageswitch-dropdown__withArrow {
-    padding: 0 30px 0 10px;
+.quiqqer-control-languageswitch-dropdown-icon {
+    margin-right: 0.25em;
 }
 
 .quiqqer-control-languageswitch-dropdown-arrow {
-    position: absolute;
-    right: 10px;
-    top: 20px;
+    line-height: inherit;
+    margin-left: 0.25em;
 }
 
-/** lang dropdown
- ===================================================== */
-
+/************/
+/* dropdown */
+/************/
 .quiqqer-control-languageswitch-dropdown-dd {
     background: #fff;
     border: 1px solid #DDDDDD;
     display: none;
     top: 100%;
-    left: 0;
     position: absolute;
-    width: 100%;
+    padding: 1rem;
+    min-width: 10rem;
+    max-width: min(15rem, 240px);
 }
 
-.quiqqer-control-languageswitch-dropdown-dd:after {
-    background-color: transparent;
-    background-image: -moz-linear-gradient(center top, rgba(0, 0, 0, 0.2), transparent);
-    background-image: -webkit-gradient(linear, center top, left bottom, from(rgba(0, 0, 0, 0.2)), to(transparent));
-    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.2), transparent);
-    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.2), transparent);
-    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.2), transparent);
-    background-image: linear-gradient(top, rgba(0, 0, 0, 0.2), transparent);
-    bottom: -8px;
-    content: "";
-    height: 8px;
+.quiqqer-control-languageswitch-dropdown-dd.left {
     left: 0;
-    position: absolute;
-    width: 100%;
+}
+
+.quiqqer-control-languageswitch-dropdown-dd.right {
+    right: 0;
 }
 
 .quiqqer-control-languageswitch-dropdown-dd-entry {
-    clear: both;
-    float: left;
-    line-height: 24px;
-    padding: 10px;
-    text-align: left;
-    width: 100%;
+    display: block;
+    color: inherit;
+    padding-block: 0.25em;
+}
+
+.quiqqer-control-languageswitch-dropdown-dd-entry.inactive {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.quiqqer-control-languageswitch-dropdown-dd-icon {
+    margin-right: 1em;
 }
