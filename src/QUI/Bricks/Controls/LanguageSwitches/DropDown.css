@@ -35,7 +35,6 @@
     display: none;
     top: 100%;
     position: absolute;
-    padding: 1rem;
     min-width: 10rem;
     max-width: min(15rem, 240px);
 }
@@ -51,12 +50,17 @@
 .quiqqer-control-languageswitch-dropdown-dd-entry {
     display: block;
     color: inherit;
-    padding-block: 0.25em;
+    padding: 0.75em;
 }
 
 .quiqqer-control-languageswitch-dropdown-dd-entry.inactive {
     opacity: 0.5;
     pointer-events: none;
+    cursor: default;
+}
+
+.quiqqer-control-languageswitch-dropdown-dd-entry:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .quiqqer-control-languageswitch-dropdown-dd-icon {
