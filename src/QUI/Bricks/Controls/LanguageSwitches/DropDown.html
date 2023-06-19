@@ -4,40 +4,53 @@
 
 {if count($langs) > 1}
 <div class="quiqqer-control-languageswitch-dropdown quiqqer-control-languageswitch-dropdown__withArrow">
-    <div class="quiqqer-control-languageswitch-dropdown-text">
-        {if $this->getAttribute('showFlags')}
-            <span class="quiqqer-control-languageswitch-dropdownicon">
-                <img src="{$smarty.const.URL_BIN_DIR}16x16/flags/{$siteLang}.png"/>
+    <div class="quiqqer-control-languageswitch-dropdown-button {if !$showDropdown}inactive{/if}">
+        {if $buttonShowFlag}
+            <span class="quiqqer-control-languageswitch-dropdown-icon">
+                <img src="{$smarty.const.URL_BIN_DIR}16x16/flags/{$siteLang}.png" />
             </span>
         {/if}
 
-        {if $this->getAttribute('showText')}
-            <span class="quiqqer-control-languageswitch-dropdown-text">
+        {if $buttonText && $buttonText === 'abbreviation'}
+            <span class="quiqqer-control-languageswitch-dropdown-lang quiqqer-control-languageswitch-dropdown-lang__abbreviation">
                 {$siteLang}
             </span>
+        {elseif $buttonText && $buttonText === 'text'}
+            <span class="quiqqer-control-languageswitch-dropdown-lang quiqqer-control-languageswitch-dropdown-lang__text">
+                {locale group='quiqqer/quiqqer' var='language.'|cat:{$siteLang}}
+            </span>
+        {/if}
+
+        {if $showDropdown && $showArrow}
+            <div class="quiqqer-control-languageswitch-dropdown-arrow fa fa-angle-down"></div>
         {/if}
     </div>
 
-    <div class="quiqqer-control-languageswitch-dropdown-arrow fa fa-angle-down"></div>
-
-    <div class="quiqqer-control-languageswitch-dropdown-dd">
+    {if $showDropdown}
+    <div class="quiqqer-control-languageswitch-dropdown-dd {$dropdownPosition}" style="display: none;">
         {foreach from=$langs item=lang}
-        {if $siteLang != $lang && $Site->existLang($lang)}
-        <a class="quiqqer-control-languageswitch-dropdown-dd-entry" href="{url id=$Site->getId( $lang ) lang=$lang}">
-            {if $this->getAttribute('showFlags')}
-                <span class="quiqqer-control-languageswitch-dropdown-dd-icon">
-                    <img src="{$path}{$lang}.png"/>
-                </span>
-            {/if}
+            {strip}
+            {if $Site->existLang($lang)}
+            <a class="quiqqer-control-languageswitch-dropdown-dd-entry {if $siteLang == $lang}inactive{/if}"
+               href="{url id=$Site->getId( $lang ) lang=$lang}">
+                {if $dropdownShowFlag}
+                    <img class="quiqqer-control-languageswitch-dropdown-dd-icon" src="{$path}{$lang}.png"/>
+                {/if}
 
-            {if $this->getAttribute('showText')}
-                <span class="quiqqer-control-languageswitch-dropdown-dd-text">
-                    {$lang}
-                </span>
+                {if $dropdownText && $dropdownText === 'abbreviation'}
+                    <span class="quiqqer-control-languageswitch-dropdown-dd-lang quiqqer-control-languageswitch-dropdown-dd-lang__abbreviation">
+                        {$lang}
+                    </span>
+                {elseif $dropdownText && $dropdownText === 'text'}
+                    <span class="quiqqer-control-languageswitch-dropdown-dd-lang quiqqer-control-languageswitch-dropdown-dd-lang__text">
+                        {locale group='quiqqer/quiqqer' var='language.'|cat:{$lang}}
+                    </span>
+                {/if}
+            </a>
             {/if}
-        </a>
-        {/if}
+            {/strip}
         {/foreach}
     </div>
+    {/if}
 </div>
 {/if}
