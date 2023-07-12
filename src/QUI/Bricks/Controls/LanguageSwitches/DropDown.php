@@ -35,7 +35,6 @@ class DropDown extends QUI\Control
             'dropdownText'     => 'text', // false: disable text, `abbreviation`: i.e. DE, EN, `text`: i.e. German, English
             'dropdownPosition' => 'right', // 'right', 'left'. stick to right or left bottom control corner
             'showArrow'        => true, // enable arrow down
-            'data-qui'         => 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown',
             'flagFolderPath'   => URL_BIN_DIR.'16x16/flags/'
         ]);
 
@@ -75,7 +74,7 @@ class DropDown extends QUI\Control
 
         $langs        = $Project->getLanguages();
         $counter      = 0;
-        $showDropdown = true;
+        $showDropdown = false;
 
         foreach ($langs as $lang) {
             $a = $Site->existLang($lang);
@@ -84,8 +83,9 @@ class DropDown extends QUI\Control
             }
         }
 
-        if ($counter <= 1) {
-            $showDropdown = false;
+        if ($counter > 1) {
+            $showDropdown = true;
+            $this->setJavaScriptControl('package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown');
         }
 
         $Engine->assign([
