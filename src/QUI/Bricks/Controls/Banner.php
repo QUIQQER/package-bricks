@@ -20,20 +20,20 @@ class Banner extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         // default options
-        $this->setAttributes(array(
-            'title'    => '',
-            'text'     => '',
-            'class'    => 'quiqqer-bricks-banner',
+        $this->setAttributes([
+            'title' => '',
+            'text' => '',
+            'class' => 'quiqqer-bricks-banner',
             'nodeName' => 'section'
-        ));
+        ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/Banner.css'
+            dirname(__FILE__) . '/Banner.css'
         );
     }
 
@@ -46,10 +46,10 @@ class Banner extends QUI\Control
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
-        $Engine->assign(array(
+        $Engine->assign([
             'this' => $this
-        ));
+        ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/Banner.html');
+        return $Engine->fetch(dirname(__FILE__) . '/Banner.html');
     }
 }

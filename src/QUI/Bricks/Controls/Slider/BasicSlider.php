@@ -7,7 +7,6 @@
 namespace QUI\Bricks\Controls\Slider;
 
 use QUI;
-use QUI\Projects\Media\Utils;
 
 /**
  * Class BrickSlider
@@ -21,17 +20,17 @@ class BasicSlider extends AbstractPromoslider
     {
         // default options
         $this->setAttributes([
-            'title'         => '',
-            'text'          => '',
-            'mediaFolder'   => false,
-            'delay'         => 7000,
-            'imgLeft'       => false,
+            'title' => '',
+            'text' => '',
+            'mediaFolder' => false,
+            'delay' => 7000,
+            'imgLeft' => false,
             'maxImageWidth' => false,
             'sliderContent' => '',
-            'class'         => 'quiqqer-bricks-basic-slider',
-            'nodeName'      => 'section',
-            'data-qui'      => 'package/quiqqer/bricks/bin/Controls/Slider/BasicSlider',
-            'dotsNav'       => false,
+            'class' => 'quiqqer-bricks-basic-slider',
+            'nodeName' => 'section',
+            'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/BasicSlider',
+            'dotsNav' => false,
         ]);
 
         parent::__construct($attributes);
@@ -46,12 +45,12 @@ class BasicSlider extends AbstractPromoslider
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
-        $mediaFolder   = $this->getAttribute('mediaFolder');
-        $Folder        = false;
-        $images        = [];
+        $mediaFolder = $this->getAttribute('mediaFolder');
+        $Folder = false;
+        $images = [];
         $sliderContent = $this->getAttribute('sliderContent');
-        $imgLeft       = false;
-        $dotsNav       = false;
+        $imgLeft = false;
+        $dotsNav = false;
 
         if (!$mediaFolder) {
             return '';
@@ -94,7 +93,7 @@ class BasicSlider extends AbstractPromoslider
             $maxImageWidth = intval($this->getAttribute('maxImageWidth'));
         }
 
-        $dotsNav      = $this->getAttribute('navigationDotsShow');
+        $dotsNav = $this->getAttribute('navigationDotsShow');
 
         // text position
         switch ($this->getAttribute('textPosition')) {
@@ -112,13 +111,13 @@ class BasicSlider extends AbstractPromoslider
         }
 
         $options = [
-            'this'          => $this,
-            'images'        => $images,
+            'this' => $this,
+            'images' => $images,
             'sliderContent' => $sliderContent,
-            'imgLeft'       => $imgLeft,
+            'imgLeft' => $imgLeft,
             'maxImageWidth' => $maxImageWidth,
-            'textPosition'  => $textPosition,
-            'dotsNav'       => $dotsNav,
+            'textPosition' => $textPosition,
+            'dotsNav' => $dotsNav,
         ];
 
         $Engine->assign($options);

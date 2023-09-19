@@ -20,18 +20,18 @@ class SideBox1 extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         // default options
         $this->setAttributes([
-            'showImage'       => true,
-            'showTitle'       => true,
+            'showImage' => true,
+            'showTitle' => true,
             'showDescription' => true,
-            'showContent'     => true,
-            'class'           => 'quiqqer-bricks-sidebox1',
-            'nodeName'        => 'article',
-            'site'            => false,
-            'order'           => 'release_from DESC'
+            'showContent' => true,
+            'class' => 'quiqqer-bricks-sidebox1',
+            'nodeName' => 'article',
+            'site' => false,
+            'order' => 'release_from DESC'
         ]);
 
         parent::__construct($attributes);
@@ -48,10 +48,10 @@ class SideBox1 extends QUI\Control
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
-        $Engine->assign(array(
+        $Engine->assign([
             'this' => $this,
             'Site' => $this->getSite()
-        ));
+        ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/SideBox1.html');
     }
@@ -64,7 +64,7 @@ class SideBox1 extends QUI\Control
     public function getSite()
     {
         $Project = $this->getProject();
-        $site    = $this->getAttribute('site');
+        $site = $this->getAttribute('site');
 
         if (is_numeric($site)) {
             try {
@@ -99,10 +99,10 @@ class SideBox1 extends QUI\Control
         $children = QUI\Projects\Site\Utils::getSitesByInputList(
             $this->getProject(),
             $this->getAttribute('site'),
-            array(
+            [
                 'limit' => 1,
                 'order' => $order
-            )
+            ]
         );
 
         if (isset($children[0])) {

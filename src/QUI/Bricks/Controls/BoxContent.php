@@ -20,14 +20,14 @@ class BoxContent extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         // default options
-        $this->setAttributes(array(
-            'title'       => 'Box Content',
+        $this->setAttributes([
+            'title' => 'Box Content',
             'contentList' => false,
-            'entries'     => array()
-        ));
+            'entries' => []
+        ]);
 
         parent::__construct($attributes);
 
@@ -43,14 +43,14 @@ class BoxContent extends QUI\Control
      */
     public function getBody()
     {
-        $Engine  = QUI::getTemplateManager()->getEngine();
+        $Engine = QUI::getTemplateManager()->getEngine();
         $entries = $this->getAttribute('entries');
 
         if (is_string($entries)) {
             $entries = json_decode($entries, true);
         }
 
-        $count      = count($entries);
+        $count = count($entries);
         $extraClass = '';
 
         switch ($count) {
@@ -86,11 +86,11 @@ class BoxContent extends QUI\Control
                 break;
         }
 
-        $Engine->assign(array(
-            'this'       => $this,
-            'entries'    => $entries,
+        $Engine->assign([
+            'this' => $this,
+            'entries' => $entries,
             'extraClass' => $extraClass
-        ));
+        ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/BoxContent.html');
     }

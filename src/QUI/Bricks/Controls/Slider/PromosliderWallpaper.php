@@ -25,25 +25,25 @@ class PromosliderWallpaper extends AbstractPromoslider
     {
         // default options
         $this->setAttributes([
-            'title'                 => '',
-            'text'                  => '',
-            'class'                 => 'quiqqer-bricks-promoslider-wallpaper',
-            'nodeName'              => 'section',
-            'data-qui'              => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
-            'role'                  => 'listbox',
-            'shownavigation'        => true,
-            'showarrows'            => 'showHoverScale',
-            'autostart'             => false,
-            'delay'                 => 5000,
-            'template'              => \dirname(__FILE__).'/PromosliderWallpaper.html',
+            'title' => '',
+            'text' => '',
+            'class' => 'quiqqer-bricks-promoslider-wallpaper',
+            'nodeName' => 'section',
+            'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
+            'role' => 'listbox',
+            'shownavigation' => true,
+            'showarrows' => 'showHoverScale',
+            'autostart' => false,
+            'delay' => 5000,
+            'template' => \dirname(__FILE__) . '/PromosliderWallpaper.html',
             'isMobileSlidesEnabled' => false,
-            'preloadFirstImage'     => false // load first slide as background in low quality to improve UX
+            'preloadFirstImage' => false // load first slide as background in low quality to improve UX
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            \dirname(__FILE__).'/PromosliderWallpaper.css'
+            \dirname(__FILE__) . '/PromosliderWallpaper.css'
         );
 
         $this->addCSSClass('grid-100');
@@ -62,7 +62,8 @@ class PromosliderWallpaper extends AbstractPromoslider
             $this->setAttribute('pagefitcutmobile', false);
         }
 
-        if ($this->getAttribute('pagefitcut')
+        if (
+            $this->getAttribute('pagefitcut')
             && (int)$this->getAttribute('pagefitcut')
         ) {
             $pagefit = (int)$this->getAttribute('pagefitcut');
@@ -70,12 +71,13 @@ class PromosliderWallpaper extends AbstractPromoslider
             $result .= '
                 <style>
                     .quiqqer-bricks-promoslider-wallpaper {
-                        height: calc(100vh - '.$pagefit.'px);
+                        height: calc(100vh - ' . $pagefit . 'px);
                     }
                 </style>';
         }
 
-        if ($this->getAttribute('pagefitcutmobile')
+        if (
+            $this->getAttribute('pagefitcutmobile')
             && (int)$this->getAttribute('pagefitcutmobile')
         ) {
             $pagefit = (int)$this->getAttribute('pagefitcutmobile');
@@ -84,7 +86,7 @@ class PromosliderWallpaper extends AbstractPromoslider
                 <style>
                     @media screen and (max-width: 768px) {
                         .quiqqer-bricks-promoslider-wallpaper {
-                            height: calc(100vh - '.$pagefit.'px);
+                            height: calc(100vh - ' . $pagefit . 'px);
                         }
                     }
                 </style>';
@@ -188,7 +190,7 @@ class PromosliderWallpaper extends AbstractPromoslider
                 case "bottom":
                 case "bottom-right":
                     $this->addCSSClass(
-                        'quiqqer-bricks-promoslider-wallpaper__'.$this->getAttribute('position')
+                        'quiqqer-bricks-promoslider-wallpaper__' . $this->getAttribute('position')
                     );
                     break;
 
@@ -223,9 +225,9 @@ class PromosliderWallpaper extends AbstractPromoslider
         $this->parseSlides($this->getAttribute('desktopslides'), 'desktop');
 
         $options = [
-            'this'          => $this,
+            'this' => $this,
             'desktopSlides' => $this->desktopSlides,
-            'Utils'         => new Utils()
+            'Utils' => new Utils()
         ];
 
         if ($this->getAttribute('isMobileSlidesEnabled') == true) {
@@ -241,8 +243,8 @@ class PromosliderWallpaper extends AbstractPromoslider
         $Engine->assign($options);
 
         $Engine->assign([
-            'isMobile'          => QUI\MobileDetection::isMobile(),
-            'isDesktop'         => QUI\MobileDetection::isDesktop(),
+            'isMobile' => QUI\MobileDetection::isMobile(),
+            'isDesktop' => QUI\MobileDetection::isDesktop(),
             'preloadFirstImage' => $this->getAttribute('preloadFirstImage')
         ]);
 
