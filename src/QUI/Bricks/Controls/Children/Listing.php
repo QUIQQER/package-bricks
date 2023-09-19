@@ -24,22 +24,22 @@ class Listing extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'class'          => 'qui-control-brick',
-            'limit'          => 2,
-            'showSheets'     => false,
-            'showImages'     => true,
-            'showShort'      => true,
-            'showHeader'     => true,
-            'showContent'    => true,
-            'showTime'       => false,
-            'showCreator'    => false,
-            'Site'           => true,
-            'where'          => false,
-            'itemtype'       => 'http://schema.org/ItemList',
+            'class' => 'qui-control-brick',
+            'limit' => 2,
+            'showSheets' => false,
+            'showImages' => true,
+            'showShort' => true,
+            'showHeader' => true,
+            'showContent' => true,
+            'showTime' => false,
+            'showCreator' => false,
+            'Site' => true,
+            'where' => false,
+            'itemtype' => 'http://schema.org/ItemList',
             'child-itemtype' => 'https://schema.org/ListItem',
             'child-itemprop' => 'itemListElement',
-            'display'        => 'childrenlist',
-            'order'          => 'c_date DESC'
+            'display' => 'childrenlist',
+            'order' => 'c_date DESC'
         ]);
 
         parent::__construct($attributes);

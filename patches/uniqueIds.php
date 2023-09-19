@@ -2,7 +2,7 @@
 
 define('QUIQQER_SYSTEM', true);
 define('SYSTEM_INTERN', true);
-require dirname(dirname(dirname(dirname(__FILE__)))).'/header.php';
+require dirname(dirname(dirname(dirname(__FILE__)))) . '/header.php';
 
 if (!class_exists('QUI\Bricks\Manager')) {
     exit;
@@ -27,11 +27,11 @@ if (isset($columns['id'])) {
 // if no bricks exists, we not need it
 $result = QUI::getDataBase()->fetch([
     'count' => 'count',
-    'from'  => $Bricks->getTable(),
+    'from' => $Bricks->getTable(),
 ]);
 
 if (!isset($result[0]) || !isset($result[0]['count']) || !$result[0]['count']) {
-    echo 'Patch is not needed. No Bricks available'.PHP_EOL;
+    echo 'Patch is not needed. No Bricks available' . PHP_EOL;
 
     exit;
 }
@@ -39,12 +39,12 @@ if (!isset($result[0]) || !isset($result[0]['count']) || !$result[0]['count']) {
 
 $result = QUI::getDataBase()->fetch([
     'count' => 'count',
-    'from'  => $Bricks->getUIDTable(),
+    'from' => $Bricks->getUIDTable(),
 ]);
 
 // if unique ids already exist, the pages no longer have to be passed through
 if (isset($result[0]) && isset($result[0]['count']) && $result[0]['count']) {
-    echo 'Already executed'.PHP_EOL;
+    echo 'Already executed' . PHP_EOL;
 
     exit;
 }
@@ -76,7 +76,7 @@ foreach ($projects as $Project) {
         $id = $id['id'];
 
         try {
-            $Site  = new QUI\Projects\Site\Edit($Project, $id);
+            $Site = new QUI\Projects\Site\Edit($Project, $id);
             $areas = $Site->getAttribute('quiqqer.bricks.areas');
 
             if ($areas === false) {
@@ -89,13 +89,13 @@ foreach ($projects as $Project) {
                 continue;
             }
 
-            echo $Project->getName().'-'.$Project->getLang().'-'.$id.PHP_EOL;
+            echo $Project->getName() . '-' . $Project->getLang() . '-' . $id . PHP_EOL;
 
             $Site->unlockWithRights();
             $Site->load();
             $Site->save(QUI::getUsers()->getSystemUser());
         } catch (QUI\Exception $Exception) {
-            echo $Exception->getMessage().PHP_EOL;
+            echo $Exception->getMessage() . PHP_EOL;
             continue;
         }
     }
@@ -117,7 +117,7 @@ foreach ($bricks as $brick) {
         $Bricks->saveBrick($brick['id'], $Brick->getAttributes());
     } catch (QUI\Exception $Exception) {
         QUI\System\Log::writeException($Exception);
-        echo $Exception->getMessage().PHP_EOL;
+        echo $Exception->getMessage() . PHP_EOL;
     }
 }
 

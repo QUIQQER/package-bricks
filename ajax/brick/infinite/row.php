@@ -28,7 +28,7 @@ QUI::$Ajax->registerFunction(
             $Brick->getSettings()
         );
 
-        $Engine   = QUI::getTemplateManager()->getEngine();
+        $Engine = QUI::getTemplateManager()->getEngine();
         $Infinite = new Infinite($settings);
 
         // bad fix for getting the right attributes - like gridClass
@@ -38,7 +38,8 @@ QUI::$Ajax->registerFunction(
         // generate rows
         $loadingRows = 1;
 
-        if (isset($settings['loadingrows'])
+        if (
+            isset($settings['loadingrows'])
             && !empty($settings['loadingrows'])
             && (int)$settings['loadingrows']
         ) {
@@ -49,9 +50,9 @@ QUI::$Ajax->registerFunction(
 
         for ($i = 0; $i < $loadingRows; $i++) {
             $Engine->assign([
-                'children'  => $Infinite->getRow((int)$row),
-                'row'       => (int)$row,
-                'this'      => $Infinite,
+                'children' => $Infinite->getRow((int)$row),
+                'row' => (int)$row,
+                'this' => $Infinite,
                 'gridClass' => $Infinite->getAttribute('gridClass')
             ]);
 

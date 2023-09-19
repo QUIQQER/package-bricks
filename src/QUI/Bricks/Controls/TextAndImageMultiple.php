@@ -25,20 +25,20 @@ class TextAndImageMultiple extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'textPosition'  => 'top',
+            'textPosition' => 'top',
             'imagePosition' => 'imageLeft',
-            'textRatio'     => false,
+            'textRatio' => false,
             'maxImageWidth' => false,
-            'title'         => false,
-            'text'          => false,
-            'image'         => false,
-            'imageZoom'     => false
+            'title' => false,
+            'text' => false,
+            'image' => false,
+            'imageZoom' => false
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/TextAndImageMultiple.css'
+            dirname(__FILE__) . '/TextAndImageMultiple.css'
         );
     }
 
@@ -49,21 +49,25 @@ class TextAndImageMultiple extends QUI\Control
      */
     public function getBody()
     {
-        $Engine        = QUI::getTemplateManager()->getEngine();
-        $entries       = json_decode($this->getAttribute('entries'), true);
-        $textRatio     = $this->getAttribute('textRatio');
+        $Engine = QUI::getTemplateManager()->getEngine();
+        $entries = json_decode($this->getAttribute('entries'), true);
+        $textRatio = $this->getAttribute('textRatio');
         $imagePosition = $this->getAttribute('imagePosition');
-        $imageOnLeft   = true;
+        $imageOnLeft = true;
 
         $html = '';
 
-        if ($imagePosition === "imageLeft" ||
-            $imagePosition === "imageLeftAlternately") {
+        if (
+            $imagePosition === "imageLeft" ||
+            $imagePosition === "imageLeftAlternately"
+        ) {
             $imageOnLeft = true;
         }
 
-        if ($imagePosition === "imageRight" ||
-            $imagePosition === "imageRightAlternately") {
+        if (
+            $imagePosition === "imageRight" ||
+            $imagePosition === "imageRightAlternately"
+        ) {
             $imageOnLeft = false;
         }
 
@@ -79,24 +83,26 @@ class TextAndImageMultiple extends QUI\Control
             }
 
             $TextAndImage = new QUI\Bricks\Controls\TextAndImage([
-                'image'           => $entry['image'],
-                'maxImageWidth'   => $this->getAttribute('maxImageWidth'),
-                'imageOnLeft'     => $imageOnLeft,
+                'image' => $entry['image'],
+                'maxImageWidth' => $this->getAttribute('maxImageWidth'),
+                'imageOnLeft' => $imageOnLeft,
                 'fullImageHeight' => $fullImageHeight,
-                'textPosition'    => $this->getAttribute('textPosition'),
-                'textImageRatio'  => $textRatio,
-                'content'         => $entry['text'],
-                'imageZoom'       => $this->getAttribute('imageZoom')
+                'textPosition' => $this->getAttribute('textPosition'),
+                'textImageRatio' => $textRatio,
+                'content' => $entry['text'],
+                'imageZoom' => $this->getAttribute('imageZoom')
             ]);
 
             $TextAndImage->addCSSClass('grid-container');
 
-            $html .= '<div class="quiqqer-textImageMultiple">'.$TextAndImage->create().'</div>';
+            $html .= '<div class="quiqqer-textImageMultiple">' . $TextAndImage->create() . '</div>';
 
             $this->addCSSFiles($TextAndImage->getCSSFiles());
 
-            if ($imagePosition === "imageLeftAlternately" ||
-                $imagePosition === "imageRightAlternately") {
+            if (
+                $imagePosition === "imageLeftAlternately" ||
+                $imagePosition === "imageRightAlternately"
+            ) {
                 $imageOnLeft = !$imageOnLeft;
             }
         }
@@ -106,6 +112,6 @@ class TextAndImageMultiple extends QUI\Control
             'html' => $html
         ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/TextAndImageMultiple.html');
+        return $Engine->fetch(dirname(__FILE__) . '/TextAndImageMultiple.html');
     }
 }

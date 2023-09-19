@@ -24,20 +24,20 @@ class TextAndImage extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'image'           => false,
-            'maxImageWidth'   => false,
-            'imageRight'      => false,
-            'imageShadow'     => false,
+            'image' => false,
+            'maxImageWidth' => false,
+            'imageRight' => false,
+            'imageShadow' => false,
             'fullImageHeight' => false,
-            'textPosition'    => 'top', // top, center, bottom
-            'textImageRatio'  => 50, // 30,35,40,45,50,55,60,65,70
-            'imageZoom'       => false
+            'textPosition' => 'top', // top, center, bottom
+            'textImageRatio' => 50, // 30,35,40,45,50,55,60,65,70
+            'imageZoom' => false
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/TextAndImage.css'
+            dirname(__FILE__) . '/TextAndImage.css'
         );
     }
 
@@ -67,16 +67,16 @@ class TextAndImage extends QUI\Control
 
         /* text width */
         $textWidthClass = 'grid-50';
-        $imgWidthClass  = 'grid-50';
+        $imgWidthClass = 'grid-50';
 
         if ($this->getAttribute('textImageRatio')) {
             $textWidth = intval($this->getAttribute('textImageRatio'));
 
 
             if ($textWidth > 0 && $textWidth < 100) {
-                $imgWidth       = 100 - $textWidth;
-                $textWidthClass = 'grid-'.$textWidth;
-                $imgWidthClass  = 'grid-'.$imgWidth;
+                $imgWidth = 100 - $textWidth;
+                $textWidthClass = 'grid-' . $textWidth;
+                $imgWidthClass = 'grid-' . $imgWidth;
             }
         }
 
@@ -97,25 +97,27 @@ class TextAndImage extends QUI\Control
 
         // zoom
         $imageZoom = 0;
-        if ($this->getAttribute('imageZoom') &&
-            QUI::getPackageManager()->isInstalled('quiqqer/gallery')) {
+        if (
+            $this->getAttribute('imageZoom') &&
+            QUI::getPackageManager()->isInstalled('quiqqer/gallery')
+        ) {
             $imageZoom = 1;
         }
 
         $Engine->assign([
-            'this'              => $this,
-            'img'               => $this->getAttribute('image'),
-            'maxImageWidth'     => $maxImageWidth,
-            'imageOnLeft'       => $this->getAttribute('imageOnLeft'),
-            'imageShadow'       => $shadow,
-            'fullImageHeight'   => $fullImageHeight,
+            'this' => $this,
+            'img' => $this->getAttribute('image'),
+            'maxImageWidth' => $maxImageWidth,
+            'imageOnLeft' => $this->getAttribute('imageOnLeft'),
+            'imageShadow' => $shadow,
+            'fullImageHeight' => $fullImageHeight,
             'imageAsBackground' => $this->getAttribute('imageAsBackground'),
-            'textPosition'      => $textPosition,
-            'textWidthClass'    => $textWidthClass,
-            'imgWidthClass'     => $imgWidthClass,
-            'imageZoom'         => $imageZoom
+            'textPosition' => $textPosition,
+            'textWidthClass' => $textWidthClass,
+            'imgWidthClass' => $imgWidthClass,
+            'imageZoom' => $imageZoom
         ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/TextAndImage.html');
+        return $Engine->fetch(dirname(__FILE__) . '/TextAndImage.html');
     }
 }

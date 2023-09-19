@@ -7,6 +7,7 @@
  * @param $category
  * @return String
  */
+
 QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_getPanelCategory',
     function ($brickId, $category) {

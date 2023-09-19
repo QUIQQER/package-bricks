@@ -24,11 +24,11 @@ class BoxContentAdvanced extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'title'          => 'Box Content Advanced',
+            'title' => 'Box Content Advanced',
             'entriesPerLine' => 3,
-            'template'       => 'standard',
-            'centerText'     => false,
-            'entries'        => []
+            'template' => 'standard',
+            'centerText' => false,
+            'entries' => []
         ]);
 
         parent::__construct($attributes);
@@ -45,7 +45,7 @@ class BoxContentAdvanced extends QUI\Control
      */
     public function getBody()
     {
-        $Engine  = QUI::getTemplateManager()->getEngine();
+        $Engine = QUI::getTemplateManager()->getEngine();
         $entries = $this->getAttribute('entries');
 
         if (is_string($entries)) {
@@ -53,20 +53,20 @@ class BoxContentAdvanced extends QUI\Control
         }
 
         $Engine->assign([
-            'entries'        => $entries,
-            'centerText'     => $this->getAttribute('centerText'),
+            'entries' => $entries,
+            'centerText' => $this->getAttribute('centerText'),
             'entriesPerLine' => '-' . $this->getAttribute('entriesPerLine')
         ]);
 
         switch ($this->getAttribute('template')) {
             case 'boxWithShadow':
                 $boxTemplate = '/BoxContentAdvanced.boxWithShadow.html';
-                $boxCss      = '/BoxContentAdvanced.boxWithShadow.css';
+                $boxCss = '/BoxContentAdvanced.boxWithShadow.css';
                 break;
             case 'default':
             default:
                 $boxTemplate = '/BoxContentAdvanced.standard.html';
-                $boxCss      = '/BoxContentAdvanced.standard.css';
+                $boxCss = '/BoxContentAdvanced.standard.css';
                 break;
         }
 
@@ -74,7 +74,7 @@ class BoxContentAdvanced extends QUI\Control
         $this->addCSSFile(dirname(__FILE__) . $boxCss);
 
         $Engine->assign([
-            'this'            => $this,
+            'this' => $this,
             'entriesTemplate' => $entriesTemplate
         ]);
 

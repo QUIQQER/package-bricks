@@ -42,11 +42,11 @@ class Utils
             return [];
         }
 
-        $Dom  = XML::getDomFromXml($file);
+        $Dom = XML::getDomFromXml($file);
         $Path = new DOMXPath($Dom);
 
         $bricks = $Path->query("//quiqqer/bricks/brick");
-        $list   = [];
+        $list = [];
 
         if (!$bricks->length) {
             return $list;
@@ -82,7 +82,7 @@ class Utils
             return [];
         }
 
-        $Dom  = XML::getDomFromXml($file);
+        $Dom = XML::getDomFromXml($file);
         $Path = new DOMXPath($Dom);
 
         $globalAreas = $Path->query("//quiqqer/bricks/templateAreas/areas/area");
@@ -152,57 +152,63 @@ class Utils
     public static function parseAreaToArray(DOMElement $Brick, DOMXPath $Path): array
     {
         $control = $Brick->getAttribute('control');
-        $name    = $Brick->getAttribute('name');
+        $name = $Brick->getAttribute('name');
 
         $hasContent = 1;
-        $cacheable  = 1;
+        $cacheable = 1;
         $deprecated = 0;
 
-        if ($Brick->hasAttribute('deprecated')
-            && (int)$Brick->getAttribute('deprecated') === 1) {
+        if (
+            $Brick->hasAttribute('deprecated')
+            && (int)$Brick->getAttribute('deprecated') === 1
+        ) {
             $deprecated = 1;
         }
 
-        if ($Brick->hasAttribute('hasContent')
-            && (int)$Brick->getAttribute('hasContent') === 0) {
+        if (
+            $Brick->hasAttribute('hasContent')
+            && (int)$Brick->getAttribute('hasContent') === 0
+        ) {
             $hasContent = 0;
         }
 
-        if ($Brick->hasAttribute('cacheable')
-            && (int)$Brick->getAttribute('cacheable') === 0) {
+        if (
+            $Brick->hasAttribute('cacheable')
+            && (int)$Brick->getAttribute('cacheable') === 0
+        ) {
             $cacheable = 0;
         }
 
-        $title       = [];
+        $title = [];
         $description = [];
 
         $titleLocale = $Path->query('./title/locale', $Brick);
-        $descLocale  = $Path->query('./description/locale', $Brick);
+        $descLocale = $Path->query('./description/locale', $Brick);
 
         if ($titleLocale->length) {
             $title = [
                 'group' => $titleLocale->item(0)->getAttribute('group'),
-                'var'   => $titleLocale->item(0)->getAttribute('var')
+                'var' => $titleLocale->item(0)->getAttribute('var')
             ];
         }
 
         if ($descLocale->length) {
             $description = [
                 'group' => $descLocale->item(0)->getAttribute('group'),
-                'var'   => $descLocale->item(0)->getAttribute('var')
+                'var' => $descLocale->item(0)->getAttribute('var')
             ];
         }
 
         return [
-            'control'     => $control,
-            'hasContent'  => $hasContent,
-            'cacheable'   => $cacheable,
-            'name'        => $name,
-            'title'       => $title,
+            'control' => $control,
+            'hasContent' => $hasContent,
+            'cacheable' => $cacheable,
+            'name' => $name,
+            'title' => $title,
             'description' => $description,
             'inheritance' => $Brick->getAttribute('inheritance'),
-            'priority'    => $Brick->getAttribute('priority'),
-            'deprecated'  => $deprecated
+            'priority' => $Brick->getAttribute('priority'),
+            'deprecated' => $deprecated
         ];
     }
 
@@ -221,7 +227,7 @@ class Utils
 
         // getAreasByProject
         $brickXML = realpath(OPT_DIR . $template . '/bricks.xml');
-        $bricks   = self::getTemplateAreasFromXML($brickXML);
+        $bricks = self::getTemplateAreasFromXML($brickXML);
 
         foreach ($bricks as $brickData) {
             if ($brickData['name'] != $areaName) {
@@ -252,10 +258,10 @@ class Utils
         } catch (QUI\Exception $Exception) {
         }
 
-        $PKM      = QUI::getPackageManager();
+        $PKM = QUI::getPackageManager();
         $Projects = QUI::getProjectManager();
         $packages = $PKM->getInstalled();
-        $result   = [];
+        $result = [];
 
         // package bricks
         foreach ($packages as $package) {
@@ -298,13 +304,13 @@ class Utils
     public static function getAttributesForBrick(Brick $Brick): array
     {
         $attributes = [];
-        $files      = Panel::getInstance()->getXMLFilesForBricks($Brick);
+        $files = Panel::getInstance()->getXMLFilesForBricks($Brick);
 
         // main path
         $type = $Brick->getAttribute('type');
         $type = '\\' . trim($type, '\\');
 
-        $path  = '//quiqqer/bricks/brick[@control="' . $type . '"]';
+        $path = '//quiqqer/bricks/brick[@control="' . $type . '"]';
         $cache = 'quiqqer/bricks/' . md5($type) . '/attributes';
 
         try {
@@ -313,11 +319,11 @@ class Utils
         }
 
 
-        $settingsPath   = $path . '/settings/setting';
+        $settingsPath = $path . '/settings/setting';
         $categoriesPath = $path . '/window/categories/category/settings';
 
         foreach ($files as $file) {
-            $Dom  = QUI\Utils\Text\XML::getDomFromXml($file);
+            $Dom = QUI\Utils\Text\XML::getDomFromXml($file);
             $Path = new DOMXPath($Dom);
 
             // settings

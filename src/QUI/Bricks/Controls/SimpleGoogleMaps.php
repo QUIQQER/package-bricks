@@ -24,10 +24,10 @@ class SimpleGoogleMaps extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'title'          => '',
+            'title' => '',
             'preventLoadMap' => false,
-            'template'       => 'standard',
-            'mapPosition'    => ''
+            'template' => 'standard',
+            'mapPosition' => ''
         ]);
 
         parent::__construct($attributes);
@@ -40,14 +40,14 @@ class SimpleGoogleMaps extends QUI\Control
      */
     public function getBody()
     {
-        $Engine         = QUI::getTemplateManager()->getEngine();
-        $brickPlace     = $this->getAttribute('place');
-        $brickZip       = $this->getAttribute('zip');
-        $brickStreet    = $this->getAttribute('street');
-        $brickCity      = $this->getAttribute('city');
-        $zoom           = $this->getAttribute('zoom');
+        $Engine = QUI::getTemplateManager()->getEngine();
+        $brickPlace = $this->getAttribute('place');
+        $brickZip = $this->getAttribute('zip');
+        $brickStreet = $this->getAttribute('street');
+        $brickCity = $this->getAttribute('city');
+        $zoom = $this->getAttribute('zoom');
         $preventLoadMap = $this->getAttribute('preventLoadMap');
-        $mapPosition    = $this->getAttribute('mapPosition');
+        $mapPosition = $this->getAttribute('mapPosition');
 
         if (!$zoom) {
             $zoom = 15;
@@ -55,7 +55,7 @@ class SimpleGoogleMaps extends QUI\Control
 
         $query = http_build_query([
             'key' => trim($this->getAttribute('api')),
-            'q'   => "{$brickPlace},{$brickZip},{$brickStreet},{$brickCity}"
+            'q' => "{$brickPlace},{$brickZip},{$brickStreet},{$brickCity}"
         ]);
 
         // prevent load map
@@ -64,8 +64,8 @@ class SimpleGoogleMaps extends QUI\Control
             $imgUrl = URL_OPT_DIR . 'quiqqer/bricks/bin/images/SimpleGoogleMapsBackground1.png';
 
             $this->setAttributes([
-                'qui-class'       => "package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps",
-                'data-qui-url'    => $url,
+                'qui-class' => "package/quiqqer/bricks/bin/Controls/SimpleGoogleMaps",
+                'data-qui-url' => $url,
                 'data-qui-imgUrl' => $imgUrl
             ]);
         }
@@ -74,24 +74,24 @@ class SimpleGoogleMaps extends QUI\Control
         switch ($this->getAttribute('template')) {
             case 'nextToEachOther':
                 $template = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.html';
-                $css      = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.css';
+                $css = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.css';
                 break;
             case 'nextToEachOther.right':
                 $mapPosition = 'simpleGoogleMap-nextToEachOther-reverseContent';
-                $template    = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.html';
-                $css         = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.css';
+                $template = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.html';
+                $css = dirname(__FILE__) . '/SimpleGoogleMaps.NextToEachOther.css';
                 break;
             case 'default':
             default:
                 $template = dirname(__FILE__) . '/SimpleGoogleMaps.Standard.html';
-                $css      = dirname(__FILE__) . '/SimpleGoogleMaps.Standard.css';
+                $css = dirname(__FILE__) . '/SimpleGoogleMaps.Standard.css';
         }
 
         $Engine->assign([
-            'this'           => $this,
-            'url'            => $url,
+            'this' => $this,
+            'url' => $url,
             'preventLoadMap' => $preventLoadMap,
-            'mapPosition'    => $mapPosition
+            'mapPosition' => $mapPosition
         ]);
 
         $this->addCSSFile($css);

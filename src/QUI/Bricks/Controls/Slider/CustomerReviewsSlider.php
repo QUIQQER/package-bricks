@@ -9,6 +9,8 @@ namespace QUI\Bricks\Controls\Slider;
 
 use QUI;
 
+use function dirname;
+
 /**
  * Class CustomerReviews
  *
@@ -22,9 +24,9 @@ class CustomerReviewsSlider extends AbstractPromoslider
         $this->setAttributes([
             'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider',
             'template' => 'default',
-            'delay'    => 5000,
-            'perView'  => 2,
-            'gap'      => 40
+            'delay' => 5000,
+            'perView' => 2,
+            'gap' => 40
         ]);
 
         parent::__construct($attributes);
@@ -34,11 +36,11 @@ class CustomerReviewsSlider extends AbstractPromoslider
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
-        $entries        = json_decode($this->getAttribute('entries'), true);
-        $template       = $this->getAttribute('template');
-        $path           = \dirname(__FILE__).'/CustomerReviewsSlider.'.$template.'.html';
+        $entries = json_decode($this->getAttribute('entries'), true);
+        $template = $this->getAttribute('template');
+        $path = dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.html';
         $enabledEntries = [];
-        $gap            = $this->getAttribute('gap') ? intval($this->getAttribute('gap')) : 40;
+        $gap = $this->getAttribute('gap') ? intval($this->getAttribute('gap')) : 40;
 
         switch ($gap) {
             case $gap < 0:
@@ -71,16 +73,16 @@ class CustomerReviewsSlider extends AbstractPromoslider
         }
 
         $options = [
-            'this'    => $this,
+            'this' => $this,
             'entries' => $enabledEntries,
-            'arrows'  => $this->getAttribute('showArrows'),
+            'arrows' => $this->getAttribute('showArrows'),
             'perView' => $this->getAttribute('perView')
         ];
 
         $this->addCSSFiles(
             [
-                \dirname(__FILE__).'/CustomerReviewsSlider.css',
-                \dirname(__FILE__).'/CustomerReviewsSlider.'.$template.'.css'
+                dirname(__FILE__) . '/CustomerReviewsSlider.css',
+                dirname(__FILE__) . '/CustomerReviewsSlider.' . $template . '.css'
             ]
         );
 
