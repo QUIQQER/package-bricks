@@ -76,11 +76,11 @@ class AbstractPromoslider extends QUI\Control
         }
 
         $this->desktopSlides[] = [
-            'image'  => $image,
-            'title'  => $title,
-            'text'   => $text,
-            'pos'    => $pos,
-            'url'    => $url,
+            'image' => $image,
+            'title' => $title,
+            'text' => $text,
+            'pos' => $pos,
+            'url' => $url,
             'newTab' => $newTab
         ];
     }
@@ -126,10 +126,10 @@ class AbstractPromoslider extends QUI\Control
         }
 
         $this->mobileSlides[] = [
-            'image'  => $image,
-            'title'  => $title,
-            'text'   => $text,
-            'url'    => $url,
+            'image' => $image,
+            'title' => $title,
+            'text' => $text,
+            'url' => $url,
             'newTab' => $newTab
         ];
     }

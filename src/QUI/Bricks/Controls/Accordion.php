@@ -31,20 +31,20 @@ class Accordion extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'nodeName'             => 'section',
-            'class'                => 'quiqqer-accordion',
-            'qui-class'            => 'package/quiqqer/bricks/bin/Controls/Accordion',
-            'stayOpen'             => false, // if true make accordion items stay open when another item is opened
-            'openFirst'            => false, // the first entry is initially opened
-            'listMaxWidth'         => 0, // positive numbers only, 0 disabled this option.
-            'entries'              => [],
+            'nodeName' => 'section',
+            'class' => 'quiqqer-accordion',
+            'qui-class' => 'package/quiqqer/bricks/bin/Controls/Accordion',
+            'stayOpen' => false, // if true make accordion items stay open when another item is opened
+            'openFirst' => false, // the first entry is initially opened
+            'listMaxWidth' => 0, // positive numbers only, 0 disabled this option.
+            'entries' => [],
             'useFaqStructuredData' => false
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/Accordion.css'
+            dirname(__FILE__) . '/Accordion.css'
         );
     }
 
@@ -55,7 +55,7 @@ class Accordion extends QUI\Control
      */
     public function getBody()
     {
-        $Engine  = QUI::getTemplateManager()->getEngine();
+        $Engine = QUI::getTemplateManager()->getEngine();
         $entries = $this->getAttribute('entries');
 
         if ($this->getAttribute('stayOpen') !== false) {
@@ -86,14 +86,14 @@ class Accordion extends QUI\Control
         $this->entries = $entries;
 
         $Engine->assign([
-            'this'                 => $this,
-            'openFirst'            => $this->getAttribute('openFirst'),
-            'listMaxWidth'         => $maxWidth,
-            'entries'              => $this->entries,
+            'this' => $this,
+            'openFirst' => $this->getAttribute('openFirst'),
+            'listMaxWidth' => $maxWidth,
+            'entries' => $this->entries,
             'useFaqStructuredData' => $this->getAttribute('useFaqStructuredData')
         ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/Accordion.html');
+        return $Engine->fetch(dirname(__FILE__) . '/Accordion.html');
     }
 
     /**
@@ -107,10 +107,10 @@ class Accordion extends QUI\Control
         $Engine = QUI::getTemplateManager()->getEngine();
 
         $Engine->assign([
-            'this'    => $this,
+            'this' => $this,
             'entries' => $this->entries
         ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/Accordion.JSON-LD-Schema.html');
+        return $Engine->fetch(dirname(__FILE__) . '/Accordion.JSON-LD-Schema.html');
     }
 }

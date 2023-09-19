@@ -24,16 +24,16 @@ class SideBox2 extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'showImage'          => true,
-            'showTitle'          => true,
-            'showDescription'    => true,
-            'showContent'        => false,
-            'class'              => 'quiqqer-bricks-sidebox2',
-            'nodeName'           => 'section',
-            'site'               => false,
-            'limit'              => 2,
-            'order'              => 'release_from DESC',
-            'grid-class-row'     => 'row',
+            'showImage' => true,
+            'showTitle' => true,
+            'showDescription' => true,
+            'showContent' => false,
+            'class' => 'quiqqer-bricks-sidebox2',
+            'nodeName' => 'section',
+            'site' => false,
+            'limit' => 2,
+            'order' => 'release_from DESC',
+            'grid-class-row' => 'row',
             'grid-class-article' => '6u'
         ]);
 
@@ -50,7 +50,7 @@ class SideBox2 extends QUI\Control
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
-        $limit  = $this->getAttribute('limit');
+        $limit = $this->getAttribute('limit');
 
         if (!$limit) {
             $limit = 2;
@@ -86,10 +86,10 @@ class SideBox2 extends QUI\Control
         );
 
         $Engine->assign([
-            'this'     => $this,
+            'this' => $this,
             'children' => $children
         ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/SideBox2.html');
+        return $Engine->fetch(dirname(__FILE__) . '/SideBox2.html');
     }
 }

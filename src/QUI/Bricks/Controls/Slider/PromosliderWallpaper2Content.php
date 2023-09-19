@@ -24,19 +24,19 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
     public function __construct($attributes = [])
     {
         $defaultAttributes = [
-            'title'                 => '',
-            'text'                  => '',
-            'class'                 => 'quiqqer-bricks-promoslider-wallpaper2Content',
-            'nodeName'              => 'section',
-            'data-qui'              => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
-            'role'                  => 'listbox',
-            'shownavigation'        => true,
-            'showarrows'            => 'showHoverScale',
-            'autostart'             => false,
-            'delay'                 => 5000,
-            'template'              => \dirname(__FILE__).'/PromosliderWallpaper2Content.html',
+            'title' => '',
+            'text' => '',
+            'class' => 'quiqqer-bricks-promoslider-wallpaper2Content',
+            'nodeName' => 'section',
+            'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderWallpaper',
+            'role' => 'listbox',
+            'shownavigation' => true,
+            'showarrows' => 'showHoverScale',
+            'autostart' => false,
+            'delay' => 5000,
+            'template' => \dirname(__FILE__) . '/PromosliderWallpaper2Content.html',
             'isMobileSlidesEnabled' => false,
-            'preloadFirstImage'     => false // load first slide as background in low quality to improve UX
+            'preloadFirstImage' => false // load first slide as background in low quality to improve UX
         ];
 
         parent::__construct();
@@ -44,7 +44,7 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
         // merge default attributes with custom attributes (custom overwrites default values)
         $this->setAttributes(\array_merge($defaultAttributes, $attributes));
 
-        $this->addCSSFile(\dirname(__FILE__).'/PromosliderWallpaper2Content.css');
+        $this->addCSSFile(\dirname(__FILE__) . '/PromosliderWallpaper2Content.css');
 
         $this->addCSSClass('grid-100');
         $this->addCSSClass('mobile-grid-100');
@@ -110,10 +110,10 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
         }
 
         return [
-            'image'  => $image,
-            'left'   => $left,
-            'right'  => $right,
-            'url'    => $url,
+            'image' => $image,
+            'left' => $left,
+            'right' => $right,
+            'url' => $url,
             'newTab' => $newTab
         ];
     }

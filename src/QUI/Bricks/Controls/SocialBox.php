@@ -24,14 +24,14 @@ class SocialBox extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'title'      => 'Social',
+            'title' => 'Social',
             'socialList' => false
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/SocialBox.css'
+            dirname(__FILE__) . '/SocialBox.css'
         );
     }
 
@@ -42,7 +42,7 @@ class SocialBox extends QUI\Control
      */
     public function getBody()
     {
-        $Engine     = QUI::getTemplateManager()->getEngine();
+        $Engine = QUI::getTemplateManager()->getEngine();
         $socialList = $this->getAttribute('socialList');
 
         if ($socialList) {
@@ -50,10 +50,10 @@ class SocialBox extends QUI\Control
         }
 
         $Engine->assign([
-            'this'       => $this,
+            'this' => $this,
             'socialList' => $socialList
         ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/SocialBox.html');
+        return $Engine->fetch(dirname(__FILE__) . '/SocialBox.html');
     }
 }

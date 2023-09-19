@@ -23,14 +23,14 @@ class Slider extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'class'                      => 'quiqqer-bricks-children-slider',
-            'nodeName'                   => 'section',
-            'site'                       => '',
-            'order'                      => false,
-            'limit'                      => false,
-            'moreLink'                   => false,
-            'data-qui'                   => 'package/quiqqer/bricks/bin/Controls/Children/Slider',
-            'template'                   => false, // default -> onlyImage
+            'class' => 'quiqqer-bricks-children-slider',
+            'nodeName' => 'section',
+            'site' => '',
+            'order' => false,
+            'limit' => false,
+            'moreLink' => false,
+            'data-qui' => 'package/quiqqer/bricks/bin/Controls/Children/Slider',
+            'template' => false, // default -> onlyImage
             'data-qui-options-usemobile' => false
         ]);
 
@@ -39,8 +39,8 @@ class Slider extends QUI\Control
         $this->setAttribute('cacheable', 0);
 
         $this->addCSSFiles([
-            dirname(__FILE__).'/Slider.OnlyImage.css',
-            dirname(__FILE__).'/Slider.ImageAndText.css'
+            dirname(__FILE__) . '/Slider.OnlyImage.css',
+            dirname(__FILE__) . '/Slider.ImageAndText.css'
         ]);
     }
 
@@ -51,7 +51,7 @@ class Slider extends QUI\Control
      */
     public function getBody()
     {
-        $Engine   = QUI::getTemplateManager()->getEngine();
+        $Engine = QUI::getTemplateManager()->getEngine();
         $MoreLink = null;
 
         if (!$this->getAttribute('slideHeight')) {
@@ -66,16 +66,16 @@ class Slider extends QUI\Control
         }
 
         $template = $this->getTemplate();
-        $css      = $this->getTemplate();
+        $css = $this->getTemplate();
 
         switch ($this->getAttribute('template')) {
             case 'onlyImage':
-                $template = dirname(__FILE__).'/Slider.OnlyImage.html';
-                $css      = dirname(__FILE__).'/Slider.OnlyImage.css';
+                $template = dirname(__FILE__) . '/Slider.OnlyImage.html';
+                $css = dirname(__FILE__) . '/Slider.OnlyImage.css';
                 break;
             case 'imageAndText':
-                $template = dirname(__FILE__).'/Slider.ImageAndText.html';
-                $css      = dirname(__FILE__).'/Slider.ImageAndText.css';
+                $template = dirname(__FILE__) . '/Slider.ImageAndText.html';
+                $css = dirname(__FILE__) . '/Slider.ImageAndText.css';
 
                 if (!$this->getAttribute('slideHeight')) {
                     $this->setAttribute('slideHeight', 600);
@@ -88,7 +88,7 @@ class Slider extends QUI\Control
         }
 
         $Engine->assign([
-            'this'     => $this,
+            'this' => $this,
             'children' => $this->getChildren(),
             'MoreLink' => $MoreLink
         ]);
@@ -105,7 +105,7 @@ class Slider extends QUI\Control
      */
     protected function getTemplate()
     {
-        return dirname(__FILE__).'/Slider.OnlyImage.html';
+        return dirname(__FILE__) . '/Slider.OnlyImage.html';
     }
 
     /**
@@ -115,7 +115,7 @@ class Slider extends QUI\Control
      */
     protected function getCSS()
     {
-        return dirname(__FILE__).'/Slider.OnlyImage.css';
+        return dirname(__FILE__) . '/Slider.OnlyImage.css';
     }
 
     /**
