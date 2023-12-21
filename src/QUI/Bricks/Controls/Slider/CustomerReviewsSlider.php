@@ -16,7 +16,7 @@ use function dirname;
  *
  * @package quiqqer/bricks/Controls
  */
-class CustomerReviewsSlider extends AbstractPromoslider
+class CustomerReviewsSlider extends QUI\Control
 {
     public function __construct($attributes = [])
     {

@@ -14,7 +14,7 @@ use QUI;
  * @author  Dominik Chrzanowski
  * @package QUI\Bricks\Controls
  */
-class BasicSlider extends AbstractPromoslider
+class BasicSlider extends QUI\Control
 {
     public function __construct($attributes = [])
     {
