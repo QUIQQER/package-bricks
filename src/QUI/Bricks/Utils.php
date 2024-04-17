@@ -68,15 +68,15 @@ class Utils
      * Return the template bricks from a xml file
      *
      * @param string $file - path to xm file
-     * @param string|bool $layoutType - optional, return only the bricks for the specific layout type
-     * @param string|bool $siteType - optional, return only the bricks for the specific site type
+     * @param bool|string $layoutType - optional, return only the bricks for the specific layout type
+     * @param bool|string $siteType - optional, return only the bricks for the specific site type
      *
      * @return array
      */
     public static function getTemplateAreasFromXML(
         string $file,
-        $layoutType = false,
-        $siteType = false
+        bool|string $layoutType = false,
+        bool|string $siteType = false
     ): array {
         if (!file_exists($file)) {
             return [];
@@ -89,7 +89,7 @@ class Utils
 
         if ($layoutType) {
             $typeAreas = $Path->query(
-                "//quiqqer/bricks/templateAreas/layouts/layout[@layout='{$layoutType}']/area"
+                "//quiqqer/bricks/templateAreas/layouts/layout[@layout='$layoutType']/area"
             );
         } else {
             $typeAreas = $Path->query("//quiqqer/bricks/templateAreas/layouts/layout/area");
@@ -97,7 +97,7 @@ class Utils
 
         if ($siteType) {
             $siteTypeAreas = $Path->query(
-                "//quiqqer/bricks/templateAreas/siteTypes/type[@type='{$siteType}']/area"
+                "//quiqqer/bricks/templateAreas/siteTypes/type[@type='$siteType']/area"
             );
         } else {
             $siteTypeAreas = $Path->query(
@@ -255,7 +255,7 @@ class Utils
 
         try {
             return QUI\Cache\Manager::get($cache);
-        } catch (QUI\Exception $Exception) {
+        } catch (QUI\Exception) {
         }
 
         $PKM = QUI::getPackageManager();
@@ -273,13 +273,7 @@ class Utils
         }
 
         // project bricks
-        try {
-            $projects = $Projects->getProjects();
-        } catch (QUI\Exception $Exception) {
-            QUI\System\Log::addError($Exception->getMessage());
-
-            return [];
-        }
+        $projects = $Projects->getProjects();
 
         foreach ($projects as $project) {
             $bricksXML = USR_DIR . $project . '/bricks.xml';

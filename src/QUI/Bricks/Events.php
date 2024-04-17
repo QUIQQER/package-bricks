@@ -7,8 +7,6 @@
 namespace QUI\Bricks;
 
 use QUI;
-use QUI\Projects\Site;
-use QUI\Projects\Site\Edit;
 
 use function array_flip;
 use function array_map;
@@ -33,10 +31,10 @@ class Events
      * Event : on site save
      * Create site brick cache, for inheritance
      *
-     * @param Site|Edit $Site
+     * @param QUI\Interfaces\Projects\Site $Site
      * @throws QUI\Exception
      */
-    public static function onSiteSave($Site)
+    public static function onSiteSave(QUI\Interfaces\Projects\Site $Site): void
     {
         if (isset(self::$saved[$Site->getId()])) {
             return;

@@ -8,6 +8,10 @@ namespace QUI\Bricks\Controls\Slider;
 
 use QUI;
 
+use QUI\Projects\Media\Folder;
+
+use function dirname;
+
 /**
  * Class BrickSlider
  *
@@ -36,12 +40,12 @@ class BasicSlider extends QUI\Control
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            \dirname(__FILE__) . '/BasicSlider.css'
+            dirname(__FILE__) . '/BasicSlider.css'
         );
     }
 
 
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
@@ -60,13 +64,13 @@ class BasicSlider extends QUI\Control
             return '';
         }
 
-        /* @var $Folder \QUI\Projects\Media\Folder */
-        if (\strpos($mediaFolder, 'image.php') !== false) {
+        /* @var $Folder Folder */
+        if (str_contains($mediaFolder, 'image.php')) {
             try {
                 $Folder = QUI\Projects\Media\Utils::getMediaItemByUrl(
                     $mediaFolder
                 );
-            } catch (QUI\Exception $Exception) {
+            } catch (QUI\Exception) {
                 $Folder = false;
             }
         }
@@ -96,19 +100,11 @@ class BasicSlider extends QUI\Control
         $dotsNav = $this->getAttribute('navigationDotsShow');
 
         // text position
-        switch ($this->getAttribute('textPosition')) {
-            case 'center':
-                $textPosition = 'center';
-                break;
-
-            case 'bottom':
-                $textPosition = 'flex-end';
-                break;
-
-            case 'top':
-            default:
-                $textPosition = 'flex-start';
-        }
+        $textPosition = match ($this->getAttribute('textPosition')) {
+            'center' => 'center',
+            'bottom' => 'flex-end',
+            default => 'flex-start',
+        };
 
         $options = [
             'this' => $this,
@@ -122,6 +118,6 @@ class BasicSlider extends QUI\Control
 
         $Engine->assign($options);
 
-        return $Engine->fetch(\dirname(__FILE__) . '/BasicSlider.html');
+        return $Engine->fetch(dirname(__FILE__) . '/BasicSlider.html');
     }
 }

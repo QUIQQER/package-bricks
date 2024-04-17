@@ -40,7 +40,7 @@ class SocialBox extends QUI\Control
      *
      * @see \QUI\Control::create()
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
         $socialList = $this->getAttribute('socialList');

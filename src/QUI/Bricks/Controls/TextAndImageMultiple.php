@@ -47,7 +47,7 @@ class TextAndImageMultiple extends QUI\Control
      *
      * @see \QUI\Control::create()
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
         $entries = json_decode($this->getAttribute('entries'), true);

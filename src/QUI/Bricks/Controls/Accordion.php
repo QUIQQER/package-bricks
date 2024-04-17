@@ -2,8 +2,12 @@
 
 namespace QUI\Bricks\Controls;
 
+use Exception;
 use QUI;
 use Seld\JsonLint\JsonParser;
+
+use function is_array;
+use function str_replace;
 
 /**
  * Class Accordion
@@ -27,7 +31,7 @@ class Accordion extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([
@@ -49,11 +53,9 @@ class Accordion extends QUI\Control
     }
 
     /**
-     * (non-PHPdoc)
-     *
      * @see \QUI\Control::create()
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
         $entries = $this->getAttribute('entries');
@@ -69,17 +71,17 @@ class Accordion extends QUI\Control
         }
 
         if (is_string($entries)) {
-            $entries = \str_replace("\n", "", $entries);
+            $entries = str_replace("\n", "", $entries);
 
             try {
                 $entries = (new JsonParser())->parse($entries, JsonParser::PARSE_TO_ASSOC);
-            } catch (\Exception $Exception) {
+            } catch (Exception $Exception) {
                 QUI\System\Log::writeException($Exception);
                 $entries = [];
             }
         }
 
-        if (!\is_array($entries)) {
+        if (!is_array($entries)) {
             $entries = [];
         }
 
@@ -100,9 +102,8 @@ class Accordion extends QUI\Control
      * Generate JSON-LD FAQ Schema Code
      *
      * @return string
-     * @throws QUI\Exception
      */
-    public function createJSONLDFAQSchemaCode()
+    public function createJSONLDFAQSchemaCode(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 

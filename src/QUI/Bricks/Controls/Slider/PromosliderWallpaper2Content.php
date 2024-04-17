@@ -9,6 +9,12 @@ namespace QUI\Bricks\Controls\Slider;
 use QUI;
 use QUI\Projects\Media\Utils;
 
+use function array_merge;
+use function dirname;
+use function is_array;
+use function is_string;
+use function json_decode;
+
 /**
  * Class PromosliderWallpaper2Content
  *
@@ -21,7 +27,7 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         $defaultAttributes = [
             'title' => '',
@@ -34,7 +40,7 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
             'showarrows' => 'showHoverScale',
             'autostart' => false,
             'delay' => 5000,
-            'template' => \dirname(__FILE__) . '/PromosliderWallpaper2Content.html',
+            'template' => dirname(__FILE__) . '/PromosliderWallpaper2Content.html',
             'isMobileSlidesEnabled' => false,
             'preloadFirstImage' => false // load first slide as background in low quality to improve UX
         ];
@@ -42,9 +48,9 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
         parent::__construct();
 
         // merge default attributes with custom attributes (custom overwrites default values)
-        $this->setAttributes(\array_merge($defaultAttributes, $attributes));
+        $this->setAttributes(array_merge($defaultAttributes, $attributes));
 
-        $this->addCSSFile(\dirname(__FILE__) . '/PromosliderWallpaper2Content.css');
+        $this->addCSSFile(dirname(__FILE__) . '/PromosliderWallpaper2Content.css');
 
         $this->addCSSClass('grid-100');
         $this->addCSSClass('mobile-grid-100');
@@ -61,7 +67,7 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param string $url - index.php? or extern url
      * @param boolean $newTab - should the url be opened in a new tab?
      */
-    public function addSlide($image, $left = '', $right = '', $type = false, $url = '', $newTab = false)
+    public function addSlide($image, $left = '', $right = '', $type = false, $url = '', $newTab = false): void
     {
         $this->desktopSlides[] = $this->checkSlideParams($image, $left, $right, $url, $newTab);
     }
@@ -75,7 +81,7 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param string $url - index.php? or extern url
      * @param boolean $newTab - should the url be opened in a new tab?
      */
-    public function addMobileSlide($image, $left = '', $right = '', $url = '', $newTab = false)
+    public function addMobileSlide($image, $left = '', $right = '', $url = '', $newTab = false): void
     {
         $this->mobileSlides[] = $this->checkSlideParams($image, $left, $right, $url, $newTab);
     }
@@ -90,7 +96,7 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param boolean $newTab - should the url be opened in a new tab?
      * @return array
      */
-    protected function checkSlideParams($image, $left = '', $right = '', $url = '', $newTab = false)
+    protected function checkSlideParams($image, $left = '', $right = '', $url = '', $newTab = false): array
     {
         if (Utils::isMediaUrl($image)) {
             try {
@@ -124,18 +130,18 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param mixed $slides
      * @param string $type
      */
-    protected function parseSlides($slides, $type = 'desktop')
+    protected function parseSlides($slides, $type = 'desktop'): void
     {
         if (empty($slides)) {
             return;
         }
 
         // desktop slides
-        if (\is_string($slides)) {
-            $slides = \json_decode($slides, true);
+        if (is_string($slides)) {
+            $slides = json_decode($slides, true);
         }
 
-        if (!\is_array($slides)) {
+        if (!is_array($slides)) {
             return;
         }
 

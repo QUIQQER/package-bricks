@@ -32,7 +32,7 @@ class CustomerReviewsSlider extends QUI\Control
         parent::__construct($attributes);
     }
 
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
@@ -69,7 +69,7 @@ class CustomerReviewsSlider extends QUI\Control
                 continue;
             }
 
-            array_push($enabledEntries, $entry);
+            $enabledEntries[] = $entry;
         }
 
         $options = [
