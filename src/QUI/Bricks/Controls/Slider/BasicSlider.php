@@ -7,7 +7,6 @@
 namespace QUI\Bricks\Controls\Slider;
 
 use QUI;
-
 use QUI\Projects\Media\Folder;
 
 use function dirname;
