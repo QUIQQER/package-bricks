@@ -15,14 +15,14 @@
     "email": "support@pcsg.de"
   },
   "require": {
-    "quiqqer\/quiqqer": "^1.6|dev-master|dev-dev",
-    "quiqqer\/qui": "^1|dev-master|dev-dev",
-    "quiqqer\/utils": "^1.19.2|dev-master|dev-dev",
-    "quiqqer\/mobile-detection": "^1|dev-master|dev-dev",
-    "quiqqer-asset\/hammerjs": "2.*",
+    "quiqqer\/quiqqer": "^2",
+    "quiqqer\/qui": "^1",
+    "quiqqer\/utils": "^1.27",
+    "quiqqer\/mobile-detection": "^1",
+    "quiqqer-asset\/hammerjs": "^2",
     "quiqqer-asset\/mustache": "*",
     "ramsey\/uuid": "^3|^4",
-    "quiqqer-asset\/glidejs-glide": "3.*"
+    "quiqqer-asset\/glidejs-glide": "^3"
   },
   "suggest": {
     "quiqqer\/gallery": "Present your photos, products and pictures in elaborate and beautiful galleries."
