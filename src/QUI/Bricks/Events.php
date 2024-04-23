@@ -8,7 +8,6 @@ namespace QUI\Bricks;
 
 use Exception;
 use QUI;
-
 use QUI\ExceptionStack;
 use Smarty;
 use SmartyException;
@@ -23,7 +22,6 @@ use function json_encode;
 use function method_exists;
 use function preg_replace_callback;
 use function str_replace;
-use function strpos;
 use function trim;
 
 /**
