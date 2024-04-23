@@ -63,12 +63,18 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param string $image - image.php URL to an image
      * @param string $title - optional, left text
      * @param string $text - optional, right text
-     * @param string|false $type - optional, not exists, but we are from PromosliderWallpaper and AbstractPromoslider
+     * @param string|bool $type - optional, not exists, but we are from PromosliderWallpaper and AbstractPromoslider
      * @param string $url - index.php? or extern url
      * @param boolean $newTab - should the url be opened in a new tab?
      */
-    public function addSlide(string $image, string $title, string $text, string $type = false, string $url = '', bool $newTab = false): void
-    {
+    public function addSlide(
+        string $image,
+        string $title,
+        string $text,
+        string|bool $type = false,
+        string $url = '',
+        bool $newTab = false
+    ): void {
         $this->desktopSlides[] = $this->checkSlideParams($image, $title, $text, $url, $newTab);
     }
 
@@ -81,8 +87,13 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param string $url - index.php? or extern url
      * @param boolean $newTab - should the url be opened in a new tab?
      */
-    public function addMobileSlide(string $image, string $title, string $text, string $url = '', bool $newTab = false): void
-    {
+    public function addMobileSlide(
+        string $image,
+        string $title,
+        string $text,
+        string $url = '',
+        bool $newTab = false
+    ): void {
         $this->mobileSlides[] = $this->checkSlideParams($image, $title, $text, $url, $newTab);
     }
 
