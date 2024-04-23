@@ -20,7 +20,7 @@ class SimpleGoogleMaps extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([
@@ -55,7 +55,7 @@ class SimpleGoogleMaps extends QUI\Control
 
         $query = http_build_query([
             'key' => trim($this->getAttribute('api')),
-            'q' => "{$brickPlace},{$brickZip},{$brickStreet},{$brickCity}"
+            'q' => "$brickPlace,$brickZip,$brickStreet,$brickCity"
         ]);
 
         // prevent load map

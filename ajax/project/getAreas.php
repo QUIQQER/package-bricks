@@ -15,7 +15,7 @@
 QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_project_getAreas',
     function ($project, $layout, $siteType) {
-        $Project      = QUI::getProjectManager()->decode($project);
+        $Project = QUI::getProjectManager()->decode($project);
         $BrickManager = QUI\Bricks\Manager::init();
 
         return $BrickManager->getAreasByProject($Project, $layout, $siteType);

@@ -9,6 +9,10 @@ namespace QUI\Bricks\Controls\Slider;
 use QUI;
 use QUI\Projects\Media\Utils;
 
+use function is_array;
+use function is_string;
+use function json_decode;
+
 /**
  * Class AbstractPromoslider
  * Abstact parent class for all sliders
@@ -21,12 +25,12 @@ class AbstractPromoslider extends QUI\Control
     /**
      * @var array
      */
-    protected $mobileSlides = [];
+    protected array $mobileSlides = [];
 
     /**
      * @var array
      */
-    protected $desktopSlides = [];
+    protected array $desktopSlides = [];
 
     /**
      * Add a slide for the desktop view
@@ -38,8 +42,14 @@ class AbstractPromoslider extends QUI\Control
      * @param string $url - index.php? or extern url
      * @param boolean $newTab - should the url be opened in a new tab?
      */
-    public function addSlide($image, $title, $text, $type = 'right', $url = '', $newTab = false)
-    {
+    public function addSlide(
+        string $image,
+        string $title,
+        string $text,
+        string $type = 'right',
+        string $url = '',
+        bool $newTab = false
+    ): void {
         if (Utils::isMediaUrl($image)) {
             try {
                 $Image = Utils::getMediaItemByUrl($image);
@@ -62,7 +72,7 @@ class AbstractPromoslider extends QUI\Control
                 if (Utils::isImage($Title)) {
                     $title = $Title;
                 }
-            } catch (QUI\Exception $Exception) {
+            } catch (QUI\Exception) {
                 $title = '';
             }
         } else {
@@ -94,8 +104,13 @@ class AbstractPromoslider extends QUI\Control
      * @param string $url - index.php? or extern url
      * @param boolean $newTab - should the url be opened in a new tab?
      */
-    public function addMobileSlide($image, $title, $text, $url = '', $newTab = false)
-    {
+    public function addMobileSlide(
+        string $image,
+        string $title,
+        string $text,
+        string $url = '',
+        bool $newTab = false
+    ): void {
         if (Utils::isMediaUrl($image)) {
             try {
                 $Image = Utils::getMediaItemByUrl($image);
@@ -120,7 +135,7 @@ class AbstractPromoslider extends QUI\Control
                 if (Utils::isImage($Title)) {
                     $title = $Title;
                 }
-            } catch (QUI\Exception $Exception) {
+            } catch (QUI\Exception) {
                 $title = false;
             }
         }
@@ -140,18 +155,18 @@ class AbstractPromoslider extends QUI\Control
      * @param mixed $slides
      * @param string $type
      */
-    protected function parseSlides($slides, $type = 'desktop')
+    protected function parseSlides(mixed $slides, string $type = 'desktop'): void
     {
         if (empty($slides)) {
             return;
         }
 
         // desktop slides
-        if (\is_string($slides)) {
-            $slides = \json_decode($slides, true);
+        if (is_string($slides)) {
+            $slides = json_decode($slides, true);
         }
 
-        if (!\is_array($slides)) {
+        if (!is_array($slides)) {
             return;
         }
 

@@ -20,7 +20,7 @@ class TextAndImage extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([
@@ -42,28 +42,18 @@ class TextAndImage extends QUI\Control
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see \QUI\Control::create()
+     * @return string
      */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
         // text position
-        switch ($this->getAttribute('textPosition')) {
-            case 'center':
-                $textPosition = 'center';
-                break;
-
-            case 'bottom':
-                $textPosition = 'flex-end';
-                break;
-
-            case 'top':
-            default:
-                $textPosition = 'flex-start';
-        }
+        $textPosition = match ($this->getAttribute('textPosition')) {
+            'center' => 'center',
+            'bottom' => 'flex-end',
+            default => 'flex-start',
+        };
 
         /* text width */
         $textWidthClass = 'grid-50';

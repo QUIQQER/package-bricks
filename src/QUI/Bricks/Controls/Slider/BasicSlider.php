@@ -53,7 +53,6 @@ class BasicSlider extends QUI\Control
         $images = [];
         $sliderContent = $this->getAttribute('sliderContent');
         $imgLeft = false;
-        $dotsNav = false;
 
         if (!$mediaFolder) {
             return '';
@@ -70,7 +69,6 @@ class BasicSlider extends QUI\Control
                     $mediaFolder
                 );
             } catch (QUI\Exception) {
-                $Folder = false;
             }
         }
 

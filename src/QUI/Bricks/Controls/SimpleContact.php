@@ -6,6 +6,7 @@
 
 namespace QUI\Bricks\Controls;
 
+use Exception;
 use QUI;
 use QUI\Captcha\Handler as CaptchaHandler;
 
@@ -22,8 +23,9 @@ class SimpleContact extends QUI\Control
      * constructor
      *
      * @param array $attributes
+     * @throws QUI\Exception
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         $this->setAttributes([
             'class' => 'quiqqer-simple-contact',
@@ -134,7 +136,7 @@ class SimpleContact extends QUI\Control
             if (!$error) {
                 try {
                     $this->sendMail($Engine);
-                } catch (\Exception $Exception) {
+                } catch (Exception $Exception) {
                     $Engine->assign([
                         'errorMessage' => $Exception->getMessage()
                     ]);
@@ -207,7 +209,7 @@ class SimpleContact extends QUI\Control
      * @param QUI\Interfaces\Template\EngineInterface $Engine
      * @throws QUI\Exception
      */
-    public function sendMail($Engine)
+    public function sendMail(QUI\Interfaces\Template\EngineInterface $Engine): void
     {
         $Site = $this->getSite();
         $privacyPolicyCheckbox = boolval(
@@ -268,7 +270,7 @@ class SimpleContact extends QUI\Control
                     'brick.control.simpleContact.successful'
                 )
             ]);
-        } catch (\Exception $Exception) {
+        } catch (Exception $Exception) {
             QUI\System\Log::writeException($Exception);
 
             throw new QUI\Exception(
@@ -285,7 +287,7 @@ class SimpleContact extends QUI\Control
      *
      * @return QUI\Projects\Site|false
      */
-    protected function getPrivacyPolicySite()
+    protected function getPrivacyPolicySite(): bool|QUI\Projects\Site
     {
         try {
             $Project = QUI::getRewrite()->getProject();
@@ -296,7 +298,7 @@ class SimpleContact extends QUI\Control
                 ],
                 'limit' => 1
             ]);
-        } catch (\Exception $Exception) {
+        } catch (Exception $Exception) {
             QUI\System\Log::writeException($Exception);
 
             return false;
@@ -314,7 +316,7 @@ class SimpleContact extends QUI\Control
      *
      * @throws QUI\Exception
      */
-    public function getSite()
+    public function getSite(): mixed
     {
         if ($this->getAttribute('Site')) {
             return $this->getAttribute('Site');

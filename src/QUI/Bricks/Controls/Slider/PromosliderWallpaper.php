@@ -6,6 +6,7 @@
 
 namespace QUI\Bricks\Controls\Slider;
 
+use Exception;
 use QUI;
 use QUI\Projects\Media\Utils;
 
@@ -54,6 +55,7 @@ class PromosliderWallpaper extends AbstractPromoslider
 
     /**
      * @return string
+     * @throws Exception
      */
     public function create(): string
     {

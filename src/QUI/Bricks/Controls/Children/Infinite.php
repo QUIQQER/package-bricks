@@ -7,6 +7,7 @@
 namespace QUI\Bricks\Controls\Children;
 
 use QUI;
+use QUI\Database\Exception;
 
 /**
  * Class Infinite
@@ -19,7 +20,7 @@ class Infinite extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         $childrenPerRow = $this->getAttribute('childrenPerRow');
         $rows = $this->getAttribute('rows');
@@ -126,7 +127,7 @@ class Infinite extends QUI\Control
      *
      * @return string
      */
-    public function getTemplate()
+    public function getTemplate(): string
     {
         return dirname(__FILE__) . '/Infinite.html';
     }
@@ -136,7 +137,7 @@ class Infinite extends QUI\Control
      *
      * @return string
      */
-    public function getRowTemplate()
+    public function getRowTemplate(): string
     {
         return dirname(__FILE__) . '/InfiniteRow.html';
     }
@@ -146,12 +147,13 @@ class Infinite extends QUI\Control
      *
      * @param int $start
      * @return array
+     * @throws Exception
      */
-    protected function getChildren($start = 0)
+    protected function getChildren(int $start = 0): array
     {
         $max = $this->getAttribute('childrenPerRow');
 
-        $children = QUI\Projects\Site\Utils::getSitesByInputList(
+        return QUI\Projects\Site\Utils::getSitesByInputList(
             $this->getProject(),
             $this->getAttribute('site'),
             [
@@ -159,16 +161,16 @@ class Infinite extends QUI\Control
                 'order' => $this->getAttribute('order')
             ]
         );
-
-        return $children;
     }
 
     /**
      * Return the number of children
      *
      * @return int
+     * @throws Exception
+     * @throws \Exception
      */
-    protected function countChildren()
+    protected function countChildren(): int
     {
         $result = QUI\Projects\Site\Utils::getSitesByInputList(
             $this->getProject(),
@@ -184,11 +186,12 @@ class Infinite extends QUI\Control
      *
      * @param integer $row
      * @return array
+     * @throws Exception
      */
-    public function getRow($row)
+    public function getRow(int $row): array
     {
         $perRow = $this->getAttribute('childrenPerRow');
-        $start = (int)$row * $perRow;
+        $start = $row * $perRow;
 
         return $this->getChildren($start);
     }
