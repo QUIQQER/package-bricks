@@ -9,6 +9,7 @@
  *
  * @return array
  */
+
 QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_getAvailableBricks',
     function () {

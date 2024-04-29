@@ -20,13 +20,13 @@ class Image extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         // default options
-        $this->setAttributes(array(
-            'title'       => 'Image Brick',
+        $this->setAttributes([
+            'title' => 'Image Brick',
             'contentList' => false
-        ));
+        ]);
 
         parent::__construct($attributes);
 
@@ -42,15 +42,15 @@ class Image extends QUI\Control
      */
     public function getBody()
     {
-        $Engine     = QUI::getTemplateManager()->getEngine();
+        $Engine = QUI::getTemplateManager()->getEngine();
         $brickImage = $this->getAttribute('picture');
-        $brickLink  = $this->getAttribute('link');
+        $brickLink = $this->getAttribute('link');
 
-        $Engine->assign(array(
-            'this'       => $this,
+        $Engine->assign([
+            'this' => $this,
             'brickImage' => $brickImage,
-            'brickLink'  => $brickLink
-        ));
+            'brickLink' => $brickLink
+        ]);
 
 
         return $Engine->fetch(dirname(__FILE__) . '/Image.html');

@@ -10,6 +10,7 @@
  * @param {String|Integer} $brickId - Brick-ID
  * @return array
  */
+
 QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_getPanelCategories',
     function ($brickId) {

@@ -25,26 +25,26 @@ class Promoslider extends AbstractPromoslider
     {
         // default options
         $this->setAttributes([
-            'title'                      => '',
-            'text'                       => '',
-            'class'                      => 'quiqqer-bricks-promoslider',
-            'nodeName'                   => 'section',
-            'data-qui'                   => 'package/quiqqer/bricks/bin/Controls/Slider/Promoslider',
-            'role'                       => 'listbox',
-            'shownavigation'             => false,
-            'showarrows'                 => false,
-            'image-as-wallpaper'         => false,
+            'title' => '',
+            'text' => '',
+            'class' => 'quiqqer-bricks-promoslider',
+            'nodeName' => 'section',
+            'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/Promoslider',
+            'role' => 'listbox',
+            'shownavigation' => false,
+            'showarrows' => false,
+            'image-as-wallpaper' => false,
             'image-wallpaper-attachment' => false,
-            'autostart'                  => false,
-            'delay'                      => 5000,
-            'isMobileSlidesEnabled'      => false,
-            'imageSize'                  => false // false = use original size, do not create srcset
+            'autostart' => false,
+            'delay' => 5000,
+            'isMobileSlidesEnabled' => false,
+            'imageSize' => false // false = use original size, do not create srcset
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            \dirname(__FILE__).'/Promoslider.css'
+            \dirname(__FILE__) . '/Promoslider.css'
         );
 
         $this->addCSSClass('grid-100');
@@ -91,7 +91,7 @@ class Promoslider extends AbstractPromoslider
 
             $this->setAttribute(
                 'height',
-                'calc(100vh - '.(int)$this->getAttribute('pagefitcut').'px)'
+                'calc(100vh - ' . (int)$this->getAttribute('pagefitcut') . 'px)'
             );
         }
 
@@ -145,7 +145,7 @@ class Promoslider extends AbstractPromoslider
                 case "bottom":
                 case "bottom-right":
                     $this->addCSSClass(
-                        'quiqqer-bricks-promoslider-wallpaper__'.$this->getAttribute('image-wallpaper-position')
+                        'quiqqer-bricks-promoslider-wallpaper__' . $this->getAttribute('image-wallpaper-position')
                     );
                     break;
 
@@ -175,10 +175,10 @@ class Promoslider extends AbstractPromoslider
         $this->parseSlides($this->getAttribute('desktopslides'), 'desktop');
 
         $options = [
-            'this'          => $this,
+            'this' => $this,
             'desktopSlides' => $this->desktopSlides,
-            'Utils'         => new Utils(),
-            'imageSize'     => $this->getAttribute('imageSize')
+            'Utils' => new Utils(),
+            'imageSize' => $this->getAttribute('imageSize')
         ];
 
         if ($this->getAttribute('isMobileSlidesEnabled') === "true") {
@@ -193,6 +193,6 @@ class Promoslider extends AbstractPromoslider
 
         $Engine->assign($options);
 
-        return $Engine->fetch(\dirname(__FILE__).'/Promoslider.html');
+        return $Engine->fetch(\dirname(__FILE__) . '/Promoslider.html');
     }
 }

@@ -26,13 +26,16 @@ class SimpleContact extends QUI\Control
     public function __construct($attributes = [])
     {
         $this->setAttributes([
-            'class'                     => 'quiqqer-simple-contact',
-            'qui-class'                 => 'package/quiqqer/bricks/bin/Controls/SimpleContact',
-            'labels'                    => true,
-            'data-brickid'              => false,
-            'mailTo'                    => '', // receiver email
+            'class' => 'quiqqer-simple-contact',
+            'qui-class' => 'package/quiqqer/bricks/bin/Controls/SimpleContact',
+            'labels' => true,
+            'data-brickid' => false,
+            'mailTo' => '', // receiver email
             'showPrivacyPolicyCheckbox' => false,
-            'useCaptcha'                => false
+            'useCaptcha' => false,
+            'formContent' => '',
+            'template' => 'default',
+            'textPosition' => ''
         ]);
 
         parent::__construct($attributes);
@@ -49,10 +52,6 @@ class SimpleContact extends QUI\Control
                 );
             }
         }
-
-        $this->addCSSFile(
-            dirname(__FILE__).'/SimpleContact.css'
-        );
     }
 
     /**
@@ -63,22 +62,53 @@ class SimpleContact extends QUI\Control
      */
     public function getBody()
     {
-        $Engine                = QUI::getTemplateManager()->getEngine();
-        $name                  = '';
-        $email                 = '';
-        $message               = '';
+        $Engine = QUI::getTemplateManager()->getEngine();
+        $name = '';
+        $email = '';
+        $message = '';
         $privacyPolicyCheckbox = $this->getAttribute('showPrivacyPolicyCheckbox');
-        $useCaptcha            = $this->getAttribute('useCaptcha');
-        $error                 = false;
+        $useCaptcha = $this->getAttribute('useCaptcha');
+        $formContent = $this->getAttribute('formContent');
+        $error = false;
+        $template = $this->getAttribute('template');
+        $textPosition = $this->getAttribute('textPosition');
+
+        switch ($template) {
+            case 'horizontal':
+                $template = dirname(__FILE__) . '/SimpleContact.horizontal.html';
+                $templateCss = dirname(__FILE__) . '/SimpleContact.horizontal.css';
+                break;
+
+            case 'horizontal.textRight':
+                $textPosition = 'quiqqer-simple-contact-textRight__horizontal';
+                $template = dirname(__FILE__) . '/SimpleContact.horizontal.html';
+                $templateCss = dirname(__FILE__) . '/SimpleContact.horizontal.css';
+                break;
+
+            case 'twoColumns':
+                $template = dirname(__FILE__) . '/SimpleContact.twoColumns.html';
+                $templateCss = dirname(__FILE__) . '/SimpleContact.twoColumns.css';
+                break;
+
+            case 'default':
+            default:
+                $template = dirname(__FILE__) . '/SimpleContact.html';
+                $templateCss = dirname(__FILE__) . '/SimpleContact.css';
+        }
+
+        $this->addCSSFiles([dirname(__FILE__) . '/SimpleContact.css', $templateCss]);
 
         // Is javascript disabled?
-        if (isset($_POST['name'])
+        if (
+            isset($_POST['name'])
             && isset($_POST['email'])
             && isset($_POST['message'])
         ) {
             if ($useCaptcha && QUI::getPackageManager()->isInstalled('quiqqer/captcha')) {
-                if (empty($_POST['quiqqer-captcha-response'])
-                    || !CaptchaHandler::isResponseValid($_POST['quiqqer-captcha-response'])) {
+                if (
+                    empty($_POST['quiqqer-captcha-response'])
+                    || !CaptchaHandler::isResponseValid($_POST['quiqqer-captcha-response'])
+                ) {
                     $Engine->assign([
                         'errorMessage' => QUI::getLocale()->get(
                             'quiqqer/bricks',
@@ -117,7 +147,7 @@ class SimpleContact extends QUI\Control
         // Privacy Policy checkbox
         if ($privacyPolicyCheckbox) {
             $PrivacyPolicySite = $this->getPrivacyPolicySite();
-            $label             = QUI::getLocale()->get(
+            $label = QUI::getLocale()->get(
                 'quiqqer/bricks',
                 'control.simpleContact.privacyPolicy.label'
             );
@@ -127,7 +157,7 @@ class SimpleContact extends QUI\Control
 
                 $label = preg_replace(
                     '#\[([^\]]*)\]#i',
-                    '<a href="'.$url.'" target="_blank">$1</a>',
+                    '<a href="' . $url . '" target="_blank">$1</a>',
                     $label
                 );
 
@@ -136,14 +166,14 @@ class SimpleContact extends QUI\Control
                 $Engine->assign([
                     'projectName' => $Project->getName(),
                     'projectLang' => $Project->getLang(),
-                    'siteId'      => $PrivacyPolicySite->getId()
+                    'siteId' => $PrivacyPolicySite->getId()
                 ]);
             }
 
             $label = str_replace(['[', ']'], '', $label);
 
             $Engine->assign([
-                'privacyPolicyLabel'      => $label,
+                'privacyPolicyLabel' => $label,
                 'createPrivacyPolicyLink' => $PrivacyPolicySite !== false
             ]);
         }
@@ -154,19 +184,21 @@ class SimpleContact extends QUI\Control
         }
 
         if ($error) {
-            $name    = !empty($_POST['name']) ? $_POST['name'] : '';
-            $email   = !empty($_POST['email']) ? $_POST['email'] : '';
+            $name = !empty($_POST['name']) ? $_POST['name'] : '';
+            $email = !empty($_POST['email']) ? $_POST['email'] : '';
             $message = !empty($_POST['message']) ? $_POST['message'] : '';
         }
 
         $Engine->assign([
-            'this'    => $this,
-            'name'    => $name,
-            'email'   => $email,
-            'message' => $message
+            'this' => $this,
+            'name' => $name,
+            'email' => $email,
+            'message' => $message,
+            'formContent' => $formContent,
+            'textPosition' => $textPosition
         ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/SimpleContact.html');
+        return $Engine->fetch($template);
     }
 
     /**
@@ -177,10 +209,12 @@ class SimpleContact extends QUI\Control
      */
     public function sendMail($Engine)
     {
-        $Site                  = $this->getSite();
-        $privacyPolicyCheckbox = boolval($Site->getAttribute(
-            'quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'
-        ));
+        $Site = $this->getSite();
+        $privacyPolicyCheckbox = boolval(
+            $Site->getAttribute(
+                'quiqqer.settings.sitetypes.contact.showPrivacyPolicyCheckbox'
+            )
+        );
 
         // email correct?
         if (!QUI\Utils\Security\Orthos::checkMailSyntax($_POST['email'])) {
@@ -193,7 +227,7 @@ class SimpleContact extends QUI\Control
         }
 
         $receiver = $this->getAttribute('mailTo');
-        $url      = $this->getProject()->getHost().$Site->getUrlRewritten();
+        $url = $this->getProject()->getHost() . $Site->getUrlRewritten();
 
         // fallback: admin email
         if (!QUI\Utils\Security\Orthos::checkMailSyntax($receiver)) {
@@ -204,7 +238,7 @@ class SimpleContact extends QUI\Control
 
         $Mailer->addRecipient($receiver);
         $Mailer->addReplyTo($_POST['email']);
-        $Mailer->setSubject($Site->getAttribute('title').' | '.$url);
+        $Mailer->setSubject($Site->getAttribute('title') . ' | ' . $url);
 
         $body = "
             <span style=\"font-weight: bold;\">From:</span> {$_POST['name']}<br />

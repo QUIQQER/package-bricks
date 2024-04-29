@@ -8,13 +8,13 @@ namespace QUI\Bricks;
 
 use Exception;
 use QUI;
-
 use QUI\Control;
 
 use function array_filter;
 use function array_flip;
 use function array_merge;
 use function array_unique;
+use function array_values;
 use function class_exists;
 use function dirname;
 use function explode;
@@ -96,19 +96,20 @@ class Brick extends QUI\QDOM
     {
         // default
         $default = [
-            'type'          => 'content',
-            'content'       => '',
-            'title'         => '',
-            'description'   => '',
-            'project'       => '',
-            'lang'          => '',
-            'areas'         => '',
-            'height'        => '',
-            'width'         => '',
-            'classes'       => '',
+            'type' => 'content',
+            'content' => '',
+            'title' => '',
+            'description' => '',
+            'project' => '',
+            'lang' => '',
+            'areas' => '',
+            'height' => '',
+            'width' => '',
+            'classes' => '',
             'frontendTitle' => '',
-            'hasContent'    => 1,
-            'cacheable'     => 1    // if the brick is cacheable or not
+            'hasContent' => 1,
+            'cacheable' => 1, // if the brick is cacheable or not
+            'deprecated' => 0
         ];
 
         $this->setAttributes($default);
@@ -202,6 +203,26 @@ class Brick extends QUI\QDOM
 
             if (is_array($customfields)) {
                 $this->customfields = $customfields;
+            }
+        }
+
+        // deprecated
+        $BricksManager = QUI\Bricks\Manager::init();
+        $type = $this->getAttribute('type');
+
+        $brick = array_filter($BricksManager->getAvailableBricks(), function ($brick) use ($type) {
+            if (!isset($brick['control'])) {
+                return false;
+            }
+
+            return $brick['control'] === $type;
+        });
+
+        if ($brick) {
+            $brick = array_values($brick)[0];
+
+            if (!empty($brick['deprecated'])) {
+                $this->setAttribute('deprecated', 1);
             }
         }
 
@@ -305,8 +326,8 @@ class Brick extends QUI\QDOM
 
         if ($this->getAttribute('cacheable')) {
             try {
-                $data       = QUI\Cache\Manager::get($cacheName);
-                $cssFiles   = $data['cssFiles'];
+                $data = QUI\Cache\Manager::get($cacheName);
+                $cssFiles = $data['cssFiles'];
                 $cssClasses = $data['cssClasses'];
 
                 if (is_array($cssClasses)) {
@@ -347,7 +368,7 @@ class Brick extends QUI\QDOM
             }
 
 
-            $oldCssClasses     = $this->getAttribute('classes');
+            $oldCssClasses = $this->getAttribute('classes');
             $oldCssClassesJson = null;
 
             if (is_string($oldCssClasses)) {
@@ -368,23 +389,23 @@ class Brick extends QUI\QDOM
                 $_classes[] = trim($class);
             }
 
-            $_classes   = array_unique($_classes);
+            $_classes = array_unique($_classes);
             $classesStr = implode(' ', $_classes);
             $classesStr = 'class="' . $classesStr . '"';
 
             $Engine = QUI::getTemplateManager()->getEngine();
 
             $Engine->assign([
-                'this'       => $this,
+                'this' => $this,
                 'classesStr' => $classesStr
             ]);
 
             $result = $Engine->fetch(dirname(__FILE__) . '/Brick.html');
 
             QUI\Cache\Manager::set($cacheName, [
-                'html'       => $result,
+                'html' => $result,
                 'cssClasses' => $this->cssClasses,
-                'cssFiles'   => []
+                'cssFiles' => []
             ]);
 
             return $result;
@@ -423,13 +444,13 @@ class Brick extends QUI\QDOM
             $Control->addCSSClass($cssClass);
         }
 
-        $result   = $Control->create();
+        $result = $Control->create();
         $cssFiles = $Control->getCSSFiles();
 
         QUI\Cache\Manager::set($cacheName, [
-            'html'       => $result,
+            'html' => $result,
             'cssClasses' => $this->cssClasses,
-            'cssFiles'   => $cssFiles
+            'cssFiles' => $cssFiles
         ]);
 
         return $result;
@@ -584,7 +605,7 @@ class Brick extends QUI\QDOM
      */
     public function getAttributes(): array
     {
-        $attributes            = parent::getAttributes();
+        $attributes = parent::getAttributes();
         $attributes['classes'] = $this->getCSSClasses();
 
         return $attributes;
@@ -629,7 +650,7 @@ class Brick extends QUI\QDOM
         foreach ($classes as $cssClass) {
             if (!isset($keys[$cssClass])) {
                 $this->cssClasses[] = $cssClass;
-                $keys[$cssClass]    = true;
+                $keys[$cssClass] = true;
             }
         }
     }

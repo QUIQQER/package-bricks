@@ -26,18 +26,18 @@ class Flags extends QUI\Control
     {
         // defaults values
         $this->setAttributes([
-            'Site'           => false,
-            'showFlags'      => true,
-            'showText'       => true,
-            'all'            => true,
-            'data-qui'       => 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags',
-            'flagFolderPath' => URL_BIN_DIR.'16x16/flags/'
+            'Site' => false,
+            'showFlags' => true,
+            'showText' => true,
+            'all' => true,
+            'data-qui' => 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags',
+            'flagFolderPath' => URL_BIN_DIR . '16x16/flags/'
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/Flags.css'
+            dirname(__FILE__) . '/Flags.css'
         );
 
         $this->setAttribute('class', 'quiqqer-bricks-languageswitch-flag');
@@ -51,7 +51,7 @@ class Flags extends QUI\Control
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
-        $Site   = $this->getSite();
+        $Site = $this->getSite();
 
         if (!$Site) {
             return '';
@@ -61,7 +61,7 @@ class Flags extends QUI\Control
 
         if (count($Project->getLanguages()) < 2) {
             QUI\System\Log::addNotice(
-                'The Project "'.$Project->getName().'" has only one Language.'.
+                'The Project "' . $Project->getName() . '" has only one Language.' .
                 'The Control (\QUI\Bricks\Controls\LanguageSwitches\Flags) makes here no sense.'
             );
 
@@ -69,13 +69,13 @@ class Flags extends QUI\Control
         }
 
         $Engine->assign([
-            'Site'    => $Site,
+            'Site' => $Site,
             'Project' => $Project,
-            'langs'   => $Project->getLanguages(),
-            'this'    => $this
+            'langs' => $Project->getLanguages(),
+            'this' => $this
         ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/Flags.html');
+        return $Engine->fetch(dirname(__FILE__) . '/Flags.html');
     }
 
     /**

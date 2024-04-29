@@ -146,7 +146,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
                         header   : QUILocale.get(lg, 'quiqqer.bricks.customerReviewsSlider.create.isDisabled.short'),
                         dataIndex: 'isDisabledDisplay',
                         dataType : 'QUI',
-                        width    : 70
+                        width    : 80
                     }, {
                         dataIndex: 'isDisabled',
                         hidden   : true
@@ -154,37 +154,37 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
                         header   : QUILocale.get(lg, 'quiqqer.bricks.customerReviewsSlider.create.avatar.short'),
                         dataIndex: 'imagePreview',
                         dataType : 'node',
-                        width    : 60
+                        width    : 80
                     },
                     {
                         header   : QUILocale.get(lg, 'quiqqer.bricks.customerReviewsSlider.create.customerName.short'),
                         dataIndex: 'customerName',
                         dataType : 'code',
-                        width    : 80
+                        width    : 160
                     },
                     {
                         header   : QUILocale.get(lg, 'quiqqer.bricks.customerReviewsSlider.create.addition.short'),
                         dataIndex: 'addition',
                         dataType : 'code',
-                        width    : 80
+                        width    : 160
                     },
                     {
                         header   : QUILocale.get(lg, 'quiqqer.bricks.customerReviewsSlider.create.url.short'),
                         dataIndex: 'url',
                         dataType : 'code',
-                        width    : 80
+                        width    : 120
                     },
                     {
                         header   : QUILocale.get(lg, 'quiqqer.bricks.customerReviewsSlider.create.urlTitle.short'),
                         dataIndex: 'urlTitle',
                         dataType : 'code',
-                        width    : 80
+                        width    : 120
                     },
                     {
                         header   : QUILocale.get(lg, 'quiqqer.bricks.customerReviewsSlider.create.review.short'),
                         dataIndex: 'review',
                         dataType : 'code',
-                        width    : 80
+                        width    : 300
                     },
                     {
                         dataIndex: 'newTab',

@@ -22,16 +22,21 @@ class DropDown extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         // defaults values
-        $this->setAttributes(array(
+        $this->setAttributes([
             'Site' => false,
-            'showFlags' => true,
-            'showText' => true,
-            'data-qui' => 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown',
+            // button: the visible part of the language switch.
+            'buttonShowFlag' => true,
+            'buttonText' => '', // false: disable text, `abbreviation`: i.e. DE, EN, `text`: i.e. German, English
+            // dropdown: the part that appears when the user clicks on the button
+            'dropdownShowFlag' => true,
+            'dropdownText' => 'text', // false: disable text, `abbreviation`: i.e. DE, EN, `text`: i.e. German, English
+            'dropdownPosition' => 'right', // 'right', 'left'. stick to right or left bottom control corner
+            'showArrow' => true, // enable arrow down
             'flagFolderPath' => URL_BIN_DIR . '16x16/flags/'
-        ));
+        ]);
 
         parent::__construct($attributes);
 
@@ -50,7 +55,7 @@ class DropDown extends QUI\Control
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
-        $Site   = $this->getSite();
+        $Site = $this->getSite();
 
         if (!$Site) {
             return '';
@@ -67,12 +72,35 @@ class DropDown extends QUI\Control
             return '';
         }
 
-        $Engine->assign(array(
+        $langs = $Project->getLanguages();
+        $counter = 0;
+        $showDropdown = false;
+
+        foreach ($langs as $lang) {
+            $a = $Site->existLang($lang);
+            if ($a) {
+                $counter++;
+            }
+        }
+
+        if ($counter > 1) {
+            $showDropdown = true;
+            $this->setJavaScriptControl('package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown');
+        }
+
+        $Engine->assign([
             'Site' => $Site,
             'Project' => $Project,
-            'langs' => $Project->getLanguages(),
+            'langs' => $langs,
+            'buttonShowFlag' => $this->getAttribute('buttonShowFlag'),
+            'buttonText' => $this->getAttribute('buttonText'),
+            'dropdownShowFlag' => $this->getAttribute('dropdownShowFlag'),
+            'dropdownText' => $this->getAttribute('dropdownText'),
+            'dropdownPosition' => $this->getAttribute('dropdownPosition'),
+            'showArrow' => $this->getAttribute('showArrow'),
+            'showDropdown' => $showDropdown,
             'this' => $this
-        ));
+        ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/DropDown.html');
     }

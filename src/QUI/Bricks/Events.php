@@ -6,18 +6,13 @@
 
 namespace QUI\Bricks;
 
-use Exception;
 use QUI;
 use QUI\Projects\Site;
 use QUI\Projects\Site\Edit;
-use Smarty;
-use SmartyException;
 
 use function array_flip;
 use function array_map;
 use function explode;
-use function is_array;
-use function is_string;
 use function json_decode;
 use function json_encode;
 use function preg_replace_callback;
@@ -32,7 +27,7 @@ use function trim;
  */
 class Events
 {
-    protected static array $saved = [];
+    protected static $saved = [];
 
     /**
      * Event : on site save
@@ -50,20 +45,21 @@ class Events
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.assign');
 
         $areas = $Site->getAttribute('quiqqer.bricks.areas');
+        $oldAreaString = $areas;
         $areas = json_decode($areas, true);
 
-        if (!$areas || empty($areas)) {
+        if (empty($areas)) {
             return;
         }
 
         $Manager = Manager::init();
 
         // get inheritance areas
-        $Project      = $Site->getProject();
+        $Project = $Site->getProject();
         $projectAreas = $Manager->getAreasByProject($Project);
         $projectTable = QUI::getDBProjectTableName(Manager::TABLE_CACHE, $Project);
 
-        $uidTable           = QUI\Bricks\Manager::getUIDTable();
+        $uidTable = QUI\Bricks\Manager::getUIDTable();
         $availableUniqueIds = [];
 
         foreach ($projectAreas as $area) {
@@ -83,15 +79,15 @@ class Events
 
             // clear area and new data set
             QUI::getDataBase()->delete($projectTable, [
-                'id'   => $Site->getId(),
+                'id' => $Site->getId(),
                 'area' => $area['name']
             ]);
 
             // check if deactivated
             if (isset($bricks[0]) && isset($bricks[0]['deactivate'])) {
                 QUI::getDataBase()->insert($projectTable, [
-                    'id'    => $Site->getId(),
-                    'area'  => $area['name'],
+                    'id' => $Site->getId(),
+                    'area' => $area['name'],
                     'brick' => -1
                 ]);
 
@@ -121,11 +117,11 @@ class Events
                 $customFields = [];
 
                 // Custom data cache
-                if (isset($brick['customfields']) && is_string($brick['customfields'])) {
+                if (isset($brick['customfields']) && \is_string($brick['customfields'])) {
                     $customFields = json_decode($brick['customfields'], true);
                 }
 
-                if (isset($brick['customfields']) && is_array($brick['customfields'])) {
+                if (isset($brick['customfields']) && \is_array($brick['customfields'])) {
                     $customFields = $brick['customfields'];
                 }
 
@@ -134,8 +130,8 @@ class Events
                 }
 
                 QUI::getDataBase()->insert($projectTable, [
-                    'id'    => $Site->getId(),
-                    'area'  => $area['name'],
+                    'id' => $Site->getId(),
+                    'area' => $area['name'],
                     'brick' => (int)$brick['brickId']
                 ]);
             }
@@ -144,11 +140,11 @@ class Events
         // cleanup unique ids
         $uniquerIdsInDataBase = QUI::getDataBase()->fetch([
             'select' => 'uid',
-            'from'   => $uidTable,
-            'where'  => [
+            'from' => $uidTable,
+            'where' => [
                 'project' => $Project->getName(),
-                'lang'    => $Project->getLang(),
-                'siteId'  => $Site->getId()
+                'lang' => $Project->getLang(),
+                'siteId' => $Site->getId()
             ]
         ]);
 
@@ -171,8 +167,10 @@ class Events
         self::$saved[$Site->getId()] = true;
 
         // save bricks with unique ids
-        $Site->setAttribute('quiqqer.bricks.areas', json_encode($areas));
-        $Site->save();
+        if ($oldAreaString !== json_encode($areas)) {
+            $Site->setAttribute('quiqqer.bricks.areas', json_encode($areas));
+            $Site->save();
+        }
     }
 
     /**
@@ -204,7 +202,7 @@ class Events
 
         // delete bricks project tables
         // Mainproject_de_bricksCache
-        $Table  = QUI::getDataBase()->table();
+        $Table = QUI::getDataBase()->table();
         $tables = $Table->getTables();
 
         foreach ($tables as $table) {
@@ -224,13 +222,14 @@ class Events
      * Event : on smarty init
      * add new brickarea function
      *
-     * @param Smarty $Smarty
-     * @throws SmartyException
+     * @param \Smarty $Smarty
+     * @throws \SmartyException
      */
-    public static function onSmartyInit(Smarty $Smarty)
+    public static function onSmartyInit($Smarty)
     {
         // {brickarea}
-        if (!isset($Smarty->registered_plugins['function'])
+        if (
+            !isset($Smarty->registered_plugins['function'])
             || !isset($Smarty->registered_plugins['function']['brickarea'])
         ) {
             $Smarty->registerPlugin("function", "brickarea", "\\QUI\\Bricks\\Events::brickarea");
@@ -241,7 +240,7 @@ class Events
      * Smarty brickarea function {brickarea}
      *
      * @param array $params - function parameter
-     * @param Smarty $smarty
+     * @param \Smarty $smarty
      * @return string|array
      */
     public static function brickarea($params, $smarty)
@@ -293,8 +292,10 @@ class Events
 
             try {
                 // Only drop composite primary key if it exists
-                if (QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'id')
-                    && QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'area')) {
+                if (
+                    QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'id')
+                    && QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'area')
+                ) {
                     // Primary key no longer exists and should be removed
                     QUI::getDataBase()->execSQL("ALTER TABLE `{$projectCacheTable}` DROP PRIMARY KEY;");
                 }
@@ -348,10 +349,10 @@ class Events
 
         try {
             $brickId = (int)$attributes['id'];
-            $Brick   = Manager::init()->getBrickById($brickId);
+            $Brick = Manager::init()->getBrickById($brickId);
 
             return QUI\Output::getInstance()->parse($Brick->create());
-        } catch (Exception $Exception) {
+        } catch (\Exception $Exception) {
         }
 
         return $match[0];

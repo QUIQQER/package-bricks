@@ -24,20 +24,20 @@ class SideBox4 extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'showImage'       => true,
-            'showTitle'       => true,
+            'showImage' => true,
+            'showTitle' => true,
             'showDescription' => true,
-            'showContent'     => false,
-            'site'            => false,
-            'limit'           => 4,
-            'order'           => 'release_from DESC',
-            'cacheable'       => 0
+            'showContent' => false,
+            'site' => false,
+            'limit' => 4,
+            'order' => 'release_from DESC',
+            'cacheable' => 0
         ]);
 
         parent::__construct($attributes);
 
         $this->setAttribute('cacheable', 0);
-        $this->addCSSFile(dirname(__FILE__).'/SideBox4.css');
+        $this->addCSSFile(dirname(__FILE__) . '/SideBox4.css');
     }
 
     /**
@@ -48,7 +48,7 @@ class SideBox4 extends QUI\Control
     public function getBody()
     {
         $Engine = QUI::getTemplateManager()->getEngine();
-        $limit  = $this->getAttribute('limit');
+        $limit = $this->getAttribute('limit');
 
         if (!$limit) {
             $limit = 3;
@@ -84,10 +84,10 @@ class SideBox4 extends QUI\Control
         );
 
         $Engine->assign([
-            'this'     => $this,
+            'this' => $this,
             'children' => $children
         ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/SideBox4.html');
+        return $Engine->fetch(dirname(__FILE__) . '/SideBox4.html');
     }
 }

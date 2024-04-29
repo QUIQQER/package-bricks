@@ -36,12 +36,35 @@
             <td>
                 <label for="type" class="field-container">
                     <span class="field-container-item">
+                        {locale group="quiqqer/bricks" var="brick.edit.type.title"}
+                    </span>
+                    <input type="text"
+                           name="typeTitle"
+                           id="typeTitle"
+                           disabled="disabled"
+                           class="field-container-field"
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td class="quiqqer-bricks-brickedit-showBrickData">
+                <label for="type" class="field-container">
+                    <span class="field-container-item">
                         {locale group="quiqqer/bricks" var="brick.edit.type"}
                     </span>
                     <input type="text" name="type" id="type" disabled="disabled" class="field-container-field"/>
                 </label>
+                <button class="qui-button quiqqer-bricks-brickedit-showBrickDataBtn" title="{locale group="quiqqer/bricks" var="brick.edit.showBrickDataBtnTitle"}"><span class="fa fa-code"></span></button>
             </td>
         </tr>
         </tbody>
     </table>
+
+    <div class="deprecated-messages quiqqer-message quiqqer-message-error"
+         style="display: none; width: 100%; max-width: 100%">
+        <div class="quiqqer-message-text">
+            {locale group="quiqqer/bricks" var="brick.deprecated"}
+        </div>
+    </div>
 </form>

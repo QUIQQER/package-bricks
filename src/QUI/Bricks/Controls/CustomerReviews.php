@@ -24,10 +24,10 @@ class CustomerReviews extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'template'   => 'wideBoxes',
+            'template' => 'wideBoxes',
             'showAvatar' => true,
-            'entries'    => [],
-            'random'     => 'off'
+            'entries' => [],
+            'random' => 'off'
         ]);
 
         parent::__construct($attributes);
@@ -40,7 +40,7 @@ class CustomerReviews extends QUI\Control
      */
     public function getBody()
     {
-        $Engine  = QUI::getTemplateManager()->getEngine();
+        $Engine = QUI::getTemplateManager()->getEngine();
         $entries = $this->getAttribute('entries');
 
         if (is_string($entries)) {
@@ -81,8 +81,8 @@ class CustomerReviews extends QUI\Control
         }
 
         $Engine->assign([
-            'this'       => $this,
-            'entries'    => $entries,
+            'this' => $this,
+            'entries' => $entries,
             'showAvatar' => $this->getAttribute('showAvatar')
         ]);
 

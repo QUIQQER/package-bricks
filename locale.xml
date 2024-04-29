@@ -139,6 +139,26 @@
             <de><![CDATA[Die [Datenschutzbestimmungen] habe ich zur Kenntnis genommen.]]></de>
             <en><![CDATA[I am aware of the [Privacy Policy].]]></en>
         </locale>
+        <locale name="brick.control.simpleContact.template">
+            <de><![CDATA[Vorlage]]></de>
+            <en><![CDATA[Templates]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.template.default">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Default]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.template.twoColumn">
+            <de><![CDATA[Zwei Spalten]]></de>
+            <en><![CDATA[Two columns]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.template.horizontal">
+            <de><![CDATA[Horizontal - Text linksbündig]]></de>
+            <en><![CDATA[Horizontal - Text aligned to the left]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.template.horizontalTextRight">
+            <de><![CDATA[Horizontal - Text rechtsbündig]]></de>
+            <en><![CDATA[Horizontal - Text aligned to the right]]></en>
+        </locale>
         <locale name="brick.control.simpleContact.mailTo">
             <de><![CDATA[E-Mail Adresse, an die die Nachricht gesendet wird]]></de>
             <en><![CDATA[Email where the message will send to]]></en>
@@ -186,6 +206,14 @@
                 <![CDATA[Absenden des Formulars mittels CAPTCHA vor Spam schützen (setzt voraus, dass <b>quiqqer/captcha</b> installiert ist!)]]></de>
             <en>
                 <![CDATA[Protect form submit from spam with a CAPTCHA (requires <b>quiqqer/captcha</b> to be installed!)]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.formContent">
+            <de><![CDATA[Inhalt über dem Formulars]]></de>
+            <en><![CDATA[Content above the form]]></en>
+        </locale>
+        <locale name="brick.control.simpleContact.formContent.desc">
+            <de><![CDATA[Dieser Inhalt verschwindet, wenn das Formular abgeschickt wird.]]></de>
+            <en><![CDATA[This content disappears when the form is submitted.]]></en>
         </locale>
         <locale name="brick.control.simpleContact.mail.privacyPolicy_accepted">
             <de><![CDATA[Der Benutzer hat die Datenschutzbestimmungen akzeptiert.]]></de>
@@ -272,6 +300,26 @@
         <locale name="brick.edit.type">
             <de><![CDATA[Bausteintyp]]></de>
             <en><![CDATA[Brick type]]></en>
+        </locale>
+        <locale name="brick.edit.showBrickDataBtnTitle">
+            <de><![CDATA[Baustein Daten in JSON-Format anzeigen]]></de>
+            <en><![CDATA[Show brick data as JSON]]></en>
+        </locale>
+        <locale name="brick.edit.showBrickData.window.title">
+            <de><![CDATA[Baustein Daten in JSON-Format]]></de>
+            <en><![CDATA[Brick data as JSON]]></en>
+        </locale>
+        <locale name="brick.edit.showBrickData.window.text">
+            <de><![CDATA[Diese Bausteindaten erlauben es dir, Bausteine über verschiedene Systeme zu kopieren und einzufügen.]]></de>
+            <en><![CDATA[This brick data allows you to copy and paste blocks across different systems.]]></en>
+        </locale>
+        <locale name="brick.edit.showBrickData.window.copyBtn">
+            <de><![CDATA[In Zwischenablage kopieren]]></de>
+            <en><![CDATA[Copy to clipboard]]></en>
+        </locale>
+        <locale name="brick.edit.type.title">
+            <de><![CDATA[Titel des Bausteintyps]]></de>
+            <en><![CDATA[Title of the brick type]]></en>
         </locale>
         <locale name="brick.edit.allowed.areas">
             <de><![CDATA[Erlaubte Bausteinzonen]]></de>
@@ -413,8 +461,10 @@
             <en><![CDATA[Bricks: Basic slider]]></en>
         </locale>
         <locale name="brick.control.basicSlider.description">
-            <de><![CDATA[Ein einfaches Bilder-Slider. Der Slider wird neben dem Text angezeigt (wahlweise links oder rechts).]]></de>
-            <en><![CDATA[A simple image slider. The slider is displayed next to the text (optionally on the left or right).]]></en>
+            <de>
+                <![CDATA[Ein einfaches Bilder-Slider. Der Slider wird neben dem Text angezeigt (wahlweise links oder rechts).]]></de>
+            <en>
+                <![CDATA[A simple image slider. The slider is displayed next to the text (optionally on the left or right).]]></en>
         </locale>
         <locale name="brick.control.basicSlider.mediaFolder">
             <de><![CDATA[Media-Ordner auswählen]]></de>
@@ -718,6 +768,16 @@
             Error in brick type. The block type is not permitted and is therefore not saved.
             ]]></en>
         </locale>
+        <locale name="brick.deprecated">
+            <de><![CDATA[
+            Dieser Brick ist deprecated und sollte nicht mehr genutzt werden.
+            Beachte das in neueren Version dieser Brick nicht mehr einwandfrei funktionieren kann.
+            ]]></de>
+            <en><![CDATA[
+            This brick is deprecated and should not be used anymore.
+            Note that in newer versions this brick may not work properly.
+            ]]></en>
+        </locale>
     </groups>
     <groups name="quiqqer/bricks" datatype="js">
         <locale name="brick.type">
@@ -863,6 +923,24 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Bausteintyp]]></de>
             <en><![CDATA[Brick type]]></en>
         </locale>
+        <locale name="manager.window.create.btnCreateFromData">
+            <de><![CDATA[Baustein aus den exportierten Daten erstellen]]></de>
+            <en><![CDATA[Create a new Brick from exported data]]></en>
+        </locale>
+
+        <locale name="manager.window.createFromData.title">
+            <de><![CDATA[Baustein aus JSON Daten erstellen]]></de>
+            <en><![CDATA[Create a new Brick from JSON]]></en>
+        </locale>
+        <locale name="manager.window.createFromData.text">
+            <de><![CDATA[Bitte in das Eingabefeld die Baustein-Daten in JSON Format einfügen.]]></de>
+            <en><![CDATA[Please insert the brick data in JSON format into the input field.]]></en>
+        </locale>
+        <locale name="manager.window.createFromData.btnText">
+            <de><![CDATA[Daten einfügen]]></de>
+            <en><![CDATA[Paste data]]></en>
+        </locale>
+
         <locale name="manager.window.delete.title">
             <de><![CDATA[Bausteine löschen]]></de>
             <en><![CDATA[Delete Bricks]]></en>
@@ -942,6 +1020,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="quiqqer.bricks.promoslider.create.url">
             <de><![CDATA[URL]]></de>
             <en><![CDATA[URL]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.promoslider.create.url.warning" html="true">
+            <de><![CDATA[Ist hier eine URL festgelegt, darf im Inhaltsbereich kein anderer Link bzw. kein anderes <a>-Element vorkommen.]]></de>
+            <en><![CDATA[If a URL is specified here, no other link or <a> element may appear in the content area.]]></en>
         </locale>
         <locale name="quiqqer.bricks.promoslider.create.newTab">
             <de><![CDATA[Link in neuem Tab öffnen]]></de>
@@ -1052,14 +1134,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
         <locale name="dialog.copy.message">
             <de><![CDATA[
-            Bitte geben Sie an in welche Sprache der Baustein kopieren werden soll.
-            Zusätzlich können Sie Titel und Beschreibung für den neuen Baustein angeben.
-            Alle anderen Einstellungen werden in den neuen Baustein kopiert.
+            Bitte geben Sie an, in welcher Sprache der Baustein kopiert werden soll.
+            Zusätzlich können Sie Titel und Beschreibung für den neuen Baustein angeben,
+            alle anderen Einstellungen werden automatisch in den neuen Baustein kopiert.
             ]]></de>
             <en><![CDATA[
             Please specify in which language the block should be copied.
             You can also specify the title and description for the new module.
-            All other settings are copied to the new block.
+            All other settings are copied to the new block.
             ]]></en>
         </locale>
 
@@ -1323,6 +1405,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             Please choose a different title for this Brick.
             ]]></en>
         </locale>
+        <locale name="exception.brick.createFromData.brick.type.not.found">
+            <de><![CDATA[Baustein-Typ oder Name in den importierten Daten nicht gefunden.]]></de>
+            <en><![CDATA[Brick type or name not found in the imported data.]]></en>
+        </locale>
+        <locale name="exception.brick.createFromData.invalid.data">
+            <de><![CDATA[Der eingefügte String ist fehlerhaft.]]></de>
+            <en><![CDATA[The pasted string is broken.]]></en>
+        </locale>
+        <locale name="exception.brick.createFromData.brick.type.not.found.in.quiqqer">
+            <de><![CDATA[Der Baustein kann aus den Daten nicht importiert werden. In dieser QUIQQER Installation existiert der Baustein vom Typ [brickType] nicht.]]></de>
+            <en><![CDATA[The brick cannot be imported from the data. In this QUIQQER installation the brick of type [brickType] does not exist.]]></en>
+        </locale>
 
         <locale name="brick.control.googlemaps.title">
             <de><![CDATA[Bausteine: Maps-Karte]]></de>
@@ -1441,44 +1535,66 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
 
         <!-- Customer Reviews Slider -->
         <locale name="bricks.customerReviewsSlider.title">
-            <de><![CDATA[Bausteine: Schieberegler für Kundenrezensionen]]></de>
+            <de><![CDATA[Bausteine: Kundenrezensionen als Slider]]></de>
             <en><![CDATA[Bricks: Customer reviews slider]]></en>
         </locale>
         <locale name="bricks.customerReviewsSlider.description">
-            <de><![CDATA[Allows you to add slider with customer opinions and show them on the site.]]></de>
-            <en><![CDATA[Ermöglicht das Hinzufügen von Schiebereglern mit Kundenmeinungen und deren Anzeige auf der Website.]]></en>
+            <de><![CDATA[Erstelle Kundenrezensionen in Slider-Form.]]></de>
+            <en><![CDATA[Create customer reviews as slider]]></en>
         </locale>
         <locale name="bricks.customerReviewsSlider.template">
-            <de><![CDATA[Schablone]]></de>
+            <de><![CDATA[Template]]></de>
             <en><![CDATA[Template]]></en>
         </locale>
         <locale name="bricks.customerReviewsSlider.template.default">
-            <de><![CDATA[Ursprünglich]]></de>
+            <de><![CDATA[Standard]]></de>
             <en><![CDATA[Default]]></en>
         </locale>
         <locale name="bricks.customerReviewsSlider.template.templateOne">
-            <de><![CDATA[Schablone 1]]></de>
+            <de><![CDATA[Template 1]]></de>
             <en><![CDATA[Template 1]]></en>
         </locale>
-        <locale name="bricks.customerReviewsSlider.delay">
-            <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>
-            <en><![CDATA[Time to start next slide (Delay)]]></en>
+        <locale name="bricks.customerReviewsSlider.template.templateOne">
+            <de><![CDATA[Template 1]]></de>
+            <en><![CDATA[Template 1]]></en>
         </locale>
-        <locale name="bricks.customerReviewsSlider.arrows">
-            <de><![CDATA[Pfeile zeigen]]></de>
-            <en><![CDATA[Show arrows]]></en>
+        <locale name="bricks.customerReviewsSlider.perView">
+            <de><![CDATA[Anzahl der sichtbaren Einträge]]></de>
+            <en><![CDATA[Number of visible entries]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.perView.desc">
+            <de><![CDATA[Diese Einstellung besagt, wie viele Kundenrezensionen sichtbar sind. Standardwert ist 2, d.h. es werden immer gleichzeitig 2 Rezensionen angezeigt.
+                <strong>Achtung!</strong> Nichte alle Templates unterstützen diese Einstellung.]]></de>
+            <en><![CDATA[This setting says how many customer reviews are visible. Default value is 2. That means 2 reviews are always displayed at the same time.
+                <strong>Please note!</strong> Not all templates support this setting.]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.gap">
+            <de><![CDATA[Abstand zwischen den Slides]]></de>
+            <en><![CDATA[Space between slides]]></en>
         </locale>
         <locale name="bricks.customerReviewsSlider.autoplay">
             <de><![CDATA[Automatisches Abspielen]]></de>
             <en><![CDATA[Autoplay]]></en>
         </locale>
+        <locale name="bricks.customerReviewsSlider.delay">
+            <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>
+            <en><![CDATA[Time to start next slide (Delay)]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.delay.desc">
+            <de><![CDATA[Die Einstellung funktioniert nur, wenn die Option "Automatisches Abspielen" aktiviert ist.]]></de>
+            <en><![CDATA[The setting works only if the "Autoplay" option is enabled.]]></en>
+        </locale>
+        <locale name="bricks.customerReviewsSlider.arrows">
+            <de><![CDATA[Navigation-Pfeile zeigen]]></de>
+            <en><![CDATA[Show navigation arrows]]></en>
+        </locale>
         <locale name="bricks.customerReviewsSlider.height">
-            <de><![CDATA[Schieberhöhe]]></de>
+            <de><![CDATA[Slider Höhe]]></de>
             <en><![CDATA[Slider height]]></en>
         </locale>
-        <locale name="bricks.customerReviewsSlider.height.const">
-            <de><![CDATA[Konst]]></de>
-            <en><![CDATA[Const]]></en>
+        <locale name="bricks.customerReviewsSlider.height.fixed">
+            <de><![CDATA[Fest]]></de>
+            <en><![CDATA[Fixed]]></en>
         </locale>
         <locale name="bricks.customerReviewsSlider.height.variable">
             <de><![CDATA[Variable]]></de>
@@ -1486,7 +1602,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
 
         <locale name="bricks.customerReviewsSlider.settings.entries">
-            <de><![CDATA[Meinungen / Rezensionen]]></de>
+            <de><![CDATA[Rezensionen]]></de>
             <en><![CDATA[Reviews]]></en>
         </locale>
         <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.disable">
@@ -1498,8 +1614,8 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Avatar]]></en>
         </locale>
         <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.customerName">
-            <de><![CDATA[Kunden oder Firmenname]]></de>
-            <en><![CDATA[Customer or company name]]></en>
+            <de><![CDATA[Kundenname]]></de>
+            <en><![CDATA[Customer name]]></en>
         </locale>
         <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.addition">
             <de><![CDATA[Zusatz (z. B. Berufsbezeichnung)]]></de>
@@ -1514,21 +1630,21 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Different title for internet address (optional)]]></en>
         </locale>
         <locale name="quiqqer.bricks.customerReviewsSlider.settings.createPopup.review">
-            <de><![CDATA[Kurze Review]]></de>
-            <en><![CDATA[Short review]]></en>
+            <de><![CDATA[Rezension]]></de>
+            <en><![CDATA[Review]]></en>
         </locale>
 
         <locale name="quiqqer.bricks.customerReviewsSlider.create.isDisabled.short">
-            <de><![CDATA[Eintrag deaktivieren]]></de>
-            <en><![CDATA[Disable entry]]></en>
+            <de><![CDATA[Deaktiviert]]></de>
+            <en><![CDATA[Disabled]]></en>
         </locale>
         <locale name="quiqqer.bricks.customerReviewsSlider.create.avatar.short">
             <de><![CDATA[Benutzerbild]]></de>
             <en><![CDATA[Avatar]]></en>
         </locale>
         <locale name="quiqqer.bricks.customerReviewsSlider.create.customerName.short">
-            <de><![CDATA[Kunden / Firmenname]]></de>
-            <en><![CDATA[Customer / company name]]></en>
+            <de><![CDATA[Kundenname]]></de>
+            <en><![CDATA[Customer name]]></en>
         </locale>
         <locale name="quiqqer.bricks.customerReviewsSlider.create.addition.short">
             <de><![CDATA[Zusatz]]></de>
@@ -1539,12 +1655,12 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Internet address]]></en>
         </locale>
         <locale name="quiqqer.bricks.customerReviewsSlider.create.urlTitle.short">
-            <de><![CDATA[Internetadresse (Titel)]]></de>
-            <en><![CDATA[Internet address (title)]]></en>
+            <de><![CDATA[Internetadresse - Titel]]></de>
+            <en><![CDATA[Internet address - title]]></en>
         </locale>
         <locale name="quiqqer.bricks.customerReviewsSlider.create.review.short">
-            <de><![CDATA[Kurze Review]]></de>
-            <en><![CDATA[Short review]]></en>
+            <de><![CDATA[Rezension]]></de>
+            <en><![CDATA[Review]]></en>
         </locale>
 
         <!-- Simple Google Maps -->
@@ -1573,8 +1689,12 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Template (content above the map)]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.template.nextToEachOther">
-            <de><![CDATA[Nebeneinander (Text neben der Karte)]]></de>
-            <en><![CDATA[Next to each other (content next to the map)]]></en>
+            <de><![CDATA[Nebeneinander (Karte links, Inhalt rechts)]]></de>
+            <en><![CDATA[Next to each other (Map on the left, content on the right)]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.template.nextToEachOther.right">
+            <de><![CDATA[Nebeneinander (Karte rechts, Inhlat links)]]></de>
+            <en><![CDATA[Next to each other (Map on the right, content on the left)]]></en>
         </locale>
 
         <locale name="brick.control.simplegooglemaps.settings.place">
@@ -1831,9 +1951,13 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Galerie]]></de>
             <en><![CDATA[Gallery]]></en>
         </locale>
+        <locale name="brick.listTemplate.bigBanner">
+            <de><![CDATA[Großes Banner]]></de>
+            <en><![CDATA[Big banner]]></en>
+        </locale>
 
 
-        <!-- max siten -->
+        <!-- max sites -->
         <locale name="brick.max">
             <de><![CDATA[Anzahl der Seiten]]></de>
             <en><![CDATA[Number of sites]]></en>
@@ -1923,8 +2047,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Clickable images]]></en>
         </locale>
         <locale name="brick.textAndImage.imageZoom.desc" html="true">
-            <de><![CDATA[Wenn aktiviert, kann man die Bilder klicken um sie zu vergrößern. Bitte beachte: das funktioniert nur, wenn das QUIQQER Paket <code>quiqqer/gallery</code> installiert ist.]]></de>
-            <en><![CDATA[If activated, you can click on the images to enlarge them. Please note: this only works if the QUIQQER package <code>quiqqer/gallery</code> is installed.]]></en>
+            <de>
+                <![CDATA[Wenn aktiviert, kann man die Bilder klicken um sie zu vergrößern. Bitte beachte: das funktioniert nur, wenn das QUIQQER Paket <code>quiqqer/gallery</code> installiert ist.]]></de>
+            <en>
+                <![CDATA[If activated, you can click on the images to enlarge them. Please note: this only works if the QUIQQER package <code>quiqqer/gallery</code> is installed.]]></en>
         </locale>
         <locale name="brick.textAndImage.maxImageWidth">
             <de><![CDATA[Maximale Briete des Bildes]]></de>
@@ -2129,7 +2255,8 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Bricks: Accordion menu]]></en>
         </locale>
         <locale name="brick.accordion.description">
-            <de><![CDATA[Baustein mit ausklappbaren Elementen. Es kann zum Bauen der Hilfe oder FAQ Einträge benutzt werden.]]></de>
+            <de>
+                <![CDATA[Baustein mit ausklappbaren Elementen. Es kann zum Bauen der Hilfe oder FAQ Einträge benutzt werden.]]></de>
             <en><![CDATA[Brick with fold-out elements. It can be used to build help or FAQ entries.]]></en>
         </locale>
         <locale name="brick.accordion.stayOpen">
@@ -2167,6 +2294,16 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.accordion.settings.content">
             <de><![CDATA[Inhalt]]></de>
             <en><![CDATA[Content]]></en>
+        </locale>
+        <locale name="brick.accordion.useFaqStructuredData">
+            <de><![CDATA[FAQ Schema Markup aktivieren]]></de>
+            <en><![CDATA[Use FAQ schema markup]]></en>
+        </locale>
+        <locale name="brick.accordion.useFaqStructuredData.desc" html="true">
+            <de><![CDATA[Wenn die Option aktiviert ist, wird ein JSON-LD Code Snippet generiert. Dadurch kann Google die FAQ Einträgen direkt in den Suchergebnissen einblenden. Mehr zu diesem Thema auf
+            <a href="https://developers.google.com/search/docs/advanced/structured-data/faqpage" target="_blank">Häufig gestellte Fragen mit strukturierten Daten auszeichnen</a>.]]></de>
+            <en><![CDATA[If enabled a JSON-LD code snippet will be generated. This allows Google to display the FAQ entries directly in the search results. More on this topic at
+            <a href="https://developers.google.com/search/docs/advanced/structured-data/faqpage" target="_blank">Mark up your FAQs with structured data</a>.]]></en>
         </locale>
 
     </groups>

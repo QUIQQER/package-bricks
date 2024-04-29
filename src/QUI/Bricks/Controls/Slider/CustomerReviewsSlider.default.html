@@ -26,9 +26,11 @@
         <div data-glide-el="track" class="glide__track customerReviewsSlider-default-track customerReviewsSlider-track">
             <ul class="glide__slides customerReviewsSlider-default-slider customerReviewsSlider-slider">
 
-                {foreach from=$entries item=entry}
+                {foreach from=$entries item=entry key=key}
 
-                <li class="glide__slide customerReviewsSlider-default-slide">
+                {* 1. Avoid big jump effect on page load *}
+                <li class="glide__slide customerReviewsSlider-default-slide"{if $key > $perView - 1}style="display: none;"{/if}{* (1) *}
+                    {if $key <= $perView - 1}style="width: calc(100% / {$perView});"{/if}{* (1) *}>
 
                     {if $entry['review']}
                     <div class="customerReviewsSlider-default-review default-content">
@@ -53,7 +55,7 @@
                             {/if}
 
                             {if $entry['url']}
-                            <a href="{$entry['url']}" class="customerReviewsSlider-default-url">
+                            <a href="{$entry['url']}" class="customerReviewsSlider-default-url" target="_blank">
                                 {if $entry['urlTitle']}
                                 {$entry['urlTitle']}
                                 {else}

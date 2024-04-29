@@ -24,15 +24,15 @@ class ContentSwitcher extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'title'       => 'Content Switcher',
+            'title' => 'Content Switcher',
             'contentList' => false,
-            'entries'     => []
+            'entries' => []
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/ContentSwitcher.css'
+            dirname(__FILE__) . '/ContentSwitcher.css'
         );
     }
 
@@ -43,7 +43,7 @@ class ContentSwitcher extends QUI\Control
      */
     public function getBody()
     {
-        $Engine  = QUI::getTemplateManager()->getEngine();
+        $Engine = QUI::getTemplateManager()->getEngine();
         $entries = $this->getAttribute('entries');
 
         if (\is_string($entries)) {
@@ -51,10 +51,10 @@ class ContentSwitcher extends QUI\Control
         }
 
         $Engine->assign([
-            'this'    => $this,
+            'this' => $this,
             'entries' => $entries
         ]);
 
-        return $Engine->fetch(\dirname(__FILE__).'/ContentSwitcher.html');
+        return $Engine->fetch(\dirname(__FILE__) . '/ContentSwitcher.html');
     }
 }

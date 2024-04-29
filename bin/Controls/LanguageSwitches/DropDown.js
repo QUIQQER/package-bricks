@@ -47,8 +47,6 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown', [
                 }
             });
 
-            this.$Elm.addClass('button');
-
             this.$Elm.addEvents({
                 click: function (event) {
                     event.target.focus();

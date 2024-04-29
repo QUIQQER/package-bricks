@@ -3,6 +3,7 @@
 /**
  * This file contains QUI\Bricks\Controls\Children\Infinite
  */
+
 namespace QUI\Bricks\Controls\Children;
 
 use QUI;
@@ -18,25 +19,25 @@ class Infinite extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         $childrenPerRow = $this->getAttribute('childrenPerRow');
-        $rows           = $this->getAttribute('rows');
+        $rows = $this->getAttribute('rows');
 
         if (!$childrenPerRow) {
             $childrenPerRow = 3;
         }
 
         // default options
-        $this->setAttributes(array(
-            'class'          => 'quiqqer-bricks-children-infinite',
-            'nodeName'       => 'section',
+        $this->setAttributes([
+            'class' => 'quiqqer-bricks-children-infinite',
+            'nodeName' => 'section',
             'childrenPerRow' => $childrenPerRow,
-            'rows'           => $rows,
-            'site'           => '',
-            'order'          => false,
-            'data-qui'       => 'package/quiqqer/bricks/bin/Controls/Children/Infinite'
-        ));
+            'rows' => $rows,
+            'site' => '',
+            'order' => false,
+            'data-qui' => 'package/quiqqer/bricks/bin/Controls/Children/Infinite'
+        ]);
 
         parent::__construct($attributes);
 
@@ -54,9 +55,9 @@ class Infinite extends QUI\Control
      */
     public function getBody()
     {
-        $Engine   = QUI::getTemplateManager()->getEngine();
+        $Engine = QUI::getTemplateManager()->getEngine();
         $children = '';
-        $rows     = $this->getAttribute('rows');
+        $rows = $this->getAttribute('rows');
 
         switch ($this->getAttribute('childrenPerRow')) {
             case 2:
@@ -91,19 +92,19 @@ class Infinite extends QUI\Control
         }
 
         for ($i = 0, $len = $rows; $i < $len; $i++) {
-            $Engine->assign(array(
-                'children'  => $this->getRow($i),
-                'row'       => $i,
-                'this'      => $this,
+            $Engine->assign([
+                'children' => $this->getRow($i),
+                'row' => $i,
+                'this' => $this,
                 'gridClass' => $this->getAttribute('gridClass')
-            ));
+            ]);
 
             $children .= $Engine->fetch($this->getRowTemplate());
         }
 
         // more button
         $listCount = $this->getAttribute('childrenPerRow') * $rows;
-        $count     = $this->countChildren();
+        $count = $this->countChildren();
 
         $showMoreButton = true;
 
@@ -111,11 +112,11 @@ class Infinite extends QUI\Control
             $showMoreButton = false;
         }
 
-        $Engine->assign(array(
-            'this'           => $this,
-            'children'       => $children,
+        $Engine->assign([
+            'this' => $this,
+            'children' => $children,
             'showMoreButton' => $showMoreButton
-        ));
+        ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/Infinite.html');
     }
@@ -153,10 +154,10 @@ class Infinite extends QUI\Control
         $children = QUI\Projects\Site\Utils::getSitesByInputList(
             $this->getProject(),
             $this->getAttribute('site'),
-            array(
+            [
                 'limit' => $start . ',' . $max,
                 'order' => $this->getAttribute('order')
-            )
+            ]
         );
 
         return $children;
@@ -172,7 +173,7 @@ class Infinite extends QUI\Control
         $result = QUI\Projects\Site\Utils::getSitesByInputList(
             $this->getProject(),
             $this->getAttribute('site'),
-            array('count' => true)
+            ['count' => true]
         );
 
         return (int)$result[0]['count'];
@@ -187,7 +188,7 @@ class Infinite extends QUI\Control
     public function getRow($row)
     {
         $perRow = $this->getAttribute('childrenPerRow');
-        $start  = (int)$row * $perRow;
+        $start = (int)$row * $perRow;
 
         return $this->getChildren($start);
     }
