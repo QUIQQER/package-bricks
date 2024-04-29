@@ -1,22 +1,24 @@
-<div class="quiqqer-box-content">
-    {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+{if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
     <header class="control-header">
         <h1>{$this->getAttribute('frontendTitle')}</h1>
     </header>
-    {/if}
+{/if}
 
-    {if $this->getAttribute('content') != ""}
+{if $this->getAttribute('content') != ""}
     <div class="control-content">
         {$this->getAttribute('content')}
     </div>
-    {/if}
+{/if}
 
+<div class="quiqqer-boxContent__entries">
     {foreach from=$entries item=entry}
-    <div class="box-content-entry{$extraClass} {if $centerText}box-content-entry-center{/if}">
-        <h4 title="{$entry.title|escape:"html"}">
-        {$entry.title}
-        </h4>
-        <p class="default-content">{$entry.text}</p>
-    </div>
+        <div class="quiqqer-boxContent__entry {if $centerText}quiqqer-boxContent__entry--center{/if}">
+            <h4 title="{$entry.title|escape:"html"}">
+                {$entry.title}
+            </h4>
+            <div class="default-content">
+                {$entry.text}
+            </div>
+        </div>
     {/foreach}
 </div>
