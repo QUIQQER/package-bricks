@@ -42,6 +42,7 @@ class CustomerReviews extends QUI\Control
     {
         $Engine = QUI::getTemplateManager()->getEngine();
         $entries = $this->getAttribute('entries');
+        $randomEntries = [];
 
         if (is_string($entries)) {
             $entries = json_decode($entries, true);
