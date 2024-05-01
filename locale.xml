@@ -831,6 +831,10 @@
             <de><![CDATA[Baustein hinzufügen]]></de>
             <en><![CDATA[Add a Brick]]></en>
         </locale>
+        <locale name="site.area.window.input.placeholder">
+            <de><![CDATA[Nach Titel oder Beschreibung filtern]]></de>
+            <en><![CDATA[Filter by title or description]]></en>
+        </locale>
         <locale name="site.area.window.delete.title">
             <de><![CDATA[Baustein löschen?]]></de>
             <en><![CDATA[Delete the Brick?]]></en>
