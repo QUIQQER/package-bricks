@@ -96,3 +96,35 @@
     position: relative;
     width: 0
 }
+
+.siteAreaWindow-filterContainer {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.siteAreaWindow-filterContainer > .fa {
+    position: absolute;
+    left: 0;
+    width: 3rem;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+}
+
+.siteAreaWindow-filterContainer-input {
+    width: 100%;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.siteAreaWindow-filterContainer-counter {
+    position: absolute;
+    right: 0;
+    width: 3rem;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+}
+
