@@ -940,6 +940,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Bitte in das Eingabefeld die Baustein-Daten in JSON Format einfügen.]]></de>
             <en><![CDATA[Please insert the brick data in JSON format into the input field.]]></en>
         </locale>
+        <locale name="manager.window.createFromData.info.project">
+            <de><![CDATA[<strong>Projektnamen anpassen</strong><br>Wenn der Projektnamen im JSON-String nicht mit dem ausgewählten Projekt übereinstimmt, wird er automatisch angepasst. Falls dies nicht gewünscht ist, sollte die Checkbox abgewählt werden.]]></de>
+            <en><![CDATA[<strong>Adjust Project Name</strong><br>If the project name in the JSON string does not match the selected project, it will be automatically adjusted. If this is not desired, the checkbox should be unchecked.]]></en>
+        </locale>
+        <locale name="manager.window.createFromData.info.lang">
+            <de><![CDATA[<strong>Sprache anpassen</strong><br>Wenn die Sprache im JSON-String nicht mit der ausgewählten Sprache übereinstimmt, wird sie automatisch angepasst. Falls dies nicht gewünscht ist, sollte die Checkbox abgewählt werden.]]></de>
+            <en><![CDATA[<strong>Adjust Language</strong><br>If the language in the JSON string does not match the selected language, it will be automatically adjusted. If this is not desired, the checkbox should be unchecked.]]></en>
+        </locale>
+        <locale name="manager.window.createFromData.info.general">
+            <de><![CDATA[<strong>Bitte beachte!</strong> Die Verlinkungen zu internen Seiten und Bildern sowie die im Baustein Einstellungen benutzten Bilder müssen weiterhin nach der Erstellung per Hand angepasst werden. Diese Aktion lässt sich nicht automatisieren.]]></de>
+            <en><![CDATA[<strong>Please Note!</strong> Links to internal pages and images, as well as the images used in the brick settings, must still be manually adjusted after creation. This action cannot be automated.]]></en>
+        </locale>
         <locale name="manager.window.createFromData.btnText">
             <de><![CDATA[Daten einfügen]]></de>
             <en><![CDATA[Paste data]]></en>
