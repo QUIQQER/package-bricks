@@ -704,42 +704,148 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             });
         },
 
-        /**
-         * dialogs
-         */
+        // region dialogs
 
         /**
          * Opens the brick add dialog
          */
-        openBrickDialog: function () {
+        openBrickDialog: function() {
             if (!this.$availableBricks.length) {
                 new QUIAlert({
-                    title          : QUILocale.get(lg, 'site.area.window.noBricksInArea.title'),
-                    content        : QUILocale.get(lg, 'site.area.window.noBricksInArea.content'),
-                    maxHeight      : 300,
-                    maxWidth       : 450,
+                    title: QUILocale.get(lg, 'site.area.window.noBricksInArea.title'),
+                    content: QUILocale.get(lg, 'site.area.window.noBricksInArea.content'),
+                    maxHeight: 300,
+                    maxWidth: 450,
                     closeButtonText: QUILocale.get('quiqqer/system', 'ok')
                 }).open();
 
                 return;
             }
 
-            var self = this;
+            const self = this;
+            let inputEsc = false;
+            let specialKeyPressed = false;
+            let searchTerm = '';
+            let Timer = null;
+            let itemNodes = [];
+            let Input = null;
+            let CounterNode = null;
+            let availableBricksNumber = 0;
+
+            // restore original title and description of list items
+            const restoreOriginalHtml = function(Item) {
+                Item.querySelector('header').innerHTML = Item.getAttribute('data-qui-title');
+                Item.querySelector('.qui-elements-list-item-description').innerHTML = Item.getAttribute(
+                    'data-qui-desc');
+            }
+
+            // hide all entries (bricks)
+            const hideAll = function() {
+                itemNodes.each(function(Item) {
+                    Item.style.display = 'none';
+                    restoreOriginalHtml(Item);
+                });
+            };
+
+            // show all entries (bricks)
+            const showAll = function() {
+                itemNodes.each(function(Item) {
+                    Item.style.display = null;
+                    restoreOriginalHtml(Item);
+                });
+            };
+
+            // change number of founded bricks
+            const updateCounter = function(number) {
+                CounterNode.innerHTML = '(' + number + ')';
+            };
+
+            // mark founded term in the string
+            const markFoundedTerm = function(Item, term) {
+                let titleHtml     = '',
+                    descHtml     = '';
+
+                // search result in title?
+                if (Item.getAttribute('data-qui-title').indexOf(term) >= 0) {
+                    let  TitleNode = Item.querySelector('header'),
+                    titleText = TitleNode.innerText;
+
+                    titleHtml = titleText.substr(0, titleText.toLowerCase().indexOf(term));
+                    titleHtml += "<mark>" + titleText.substr(titleText.toLowerCase().indexOf(term),
+                        term.length) + "</mark>";
+                    titleHtml += titleText.substr(titleText.toLowerCase().indexOf(term) + term.length);
+
+                    TitleNode.innerHTML = titleHtml;
+                }
+
+                // search result in description?
+                if (Item.getAttribute('data-qui-desc').indexOf(term) >= 0) {
+                    let  DescNode = Item.querySelector('.qui-elements-list-item-description'),
+                        descText = DescNode.innerText;
+
+                    descHtml = descText.substr(0, descText.toLowerCase().indexOf(term));
+                    descHtml += "<mark>" + descText.substr(descText.toLowerCase().indexOf(term),
+                        term.length) + "</mark>";
+                    descHtml += descText.substr(descText.toLowerCase().indexOf(term) + term.length);
+
+                    DescNode.innerHTML = descHtml;
+                }
+            }
+
+            // execute search / filter
+            const search = function() {
+                let term = Input.value.trim();
+
+                if (term === '') {
+                    Input.value = '';
+                }
+
+                // prevents the search from being executed
+                // after action-less keys (alt, shift, ctrl, etc.)
+                if (term === searchTerm) {
+                    return;
+                }
+
+                if (Timer) {
+                    clearInterval(Timer);
+                }
+
+                Timer = (function() {
+                    searchTerm = term;
+
+                    hideAll();
+
+                    let counter = 0;
+
+                    itemNodes.each(function(Item) {
+                        term = term.toLowerCase();
+                        if (Item.getAttribute('data-qui-title').indexOf(term) >= 0 ||
+                            Item.getAttribute('data-qui-desc').indexOf(term) >= 0) {
+
+                            markFoundedTerm(Item, term);
+
+                            Item.show();
+                            counter++;
+                        }
+                    });
+
+                    updateCounter(counter);
+                }).delay(400);
+            };
 
             new QUIPopup({
-                title    : QUILocale.get(lg, 'site.area.window.add'),
-                icon     : 'fa fa-th',
-                maxWidth : 500,
+                title: QUILocale.get(lg, 'site.area.window.add'),
+                icon: 'fa fa-th',
+                maxWidth: 500,
                 maxHeight: 600,
                 autoclose: false,
-                events   : {
-                    onOpen: function (Win) {
-                        var items   = [],
+                events: {
+                    onOpen: function(Win) {
+                        const items = [],
                             Content = Win.getContent(),
-
-                            List    = new QUIList({
+                            List = new QUIList({
                                 events: {
-                                    onClick: function (List, data) {
+                                    onClick: function(List, data) {
                                         self.addBrickById(data.brickId);
                                         Win.close();
                                     }
@@ -751,13 +857,93 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                         for (var i = 0, len = self.$availableBricks.length; i < len; i++) {
                             items.push({
                                 brickId: self.$availableBricks[i].id,
-                                icon   : 'fa fa-th',
-                                title  : self.$availableBricks[i].title,
-                                text   : self.$availableBricks[i].description
+                                icon: 'fa fa-th',
+                                title: self.$availableBricks[i].title,
+                                text: self.$availableBricks[i].description
                             });
+                            availableBricksNumber++;
                         }
 
                         List.addItems(items);
+
+                        // no filter needed if there are only few bricks
+                        if (availableBricksNumber < 6) {
+                            return;
+                        }
+
+                        itemNodes = List.getElm().getElements('.qui-elements-list-item');
+
+                        itemNodes.forEach((Item) => {
+                            Item.setAttribute(
+                                'data-qui-title',
+                                Item.getElement('header').innerText.toLowerCase()
+                            );
+
+                            Item.setAttribute(
+                                'data-qui-desc',
+                                Item.getElement('.qui-elements-list-item-description').innerText.toLowerCase()
+                            );
+                        });
+
+                        // filter
+                        const FilterContainer = new Element('div', {
+                            'class': 'siteAreaWindow-filterContainer',
+                            html: '<span class="fa fa-search"></span>'
+                        });
+
+                        CounterNode = new Element('span', {
+                            'class': 'siteAreaWindow-filterContainer-counter',
+                            text: '(' + availableBricksNumber + ')'
+                        });
+
+                        Input = new Element('input', {
+                            'class': 'siteAreaWindow-filterContainer-input',
+                            type: 'text',
+                            placeholder: QUILocale.get(lg, 'site.area.window.input.placeholder'),
+                            events: {
+                                keydown: function(event) {
+                                    if (event.key === 'esc') {
+                                        event.stop();
+                                        inputEsc = true;
+                                        updateCounter(availableBricksNumber);
+
+                                        return;
+                                    }
+
+                                    if (event.key === 'down' ||
+                                        event.key === 'up' ||
+                                        event.key === 'enter') {
+                                        specialKeyPressed = true;
+                                    }
+
+                                    inputEsc = false;
+                                },
+
+                                keyup: function(event) {
+                                    event.stop();
+
+                                    // Esc clears the input field
+                                    if (inputEsc) {
+                                        Input.value = '';
+                                        showAll();
+
+                                        return;
+                                    }
+
+                                    if (!specialKeyPressed) {
+                                        search();
+                                    }
+
+                                    specialKeyPressed = false;
+                                }
+                            }
+                        }).inject(FilterContainer, 'top');
+
+                        CounterNode.inject(FilterContainer);
+
+                        FilterContainer.inject(Content, 'top');
+
+                        Input.focus();
                     }
                 }
             }).open();
@@ -926,5 +1112,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 }
             }).open();
         }
+
+        // end region
     });
 });

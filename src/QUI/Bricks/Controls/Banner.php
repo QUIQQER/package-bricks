@@ -20,7 +20,7 @@ class Banner extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([
@@ -38,11 +38,9 @@ class Banner extends QUI\Control
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see \QUI\Control::create()
+    * @see \QUI\Control::create()
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 

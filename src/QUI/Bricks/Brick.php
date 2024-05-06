@@ -44,7 +44,7 @@ class Brick extends QUI\QDOM
      *
      * @var int|bool
      */
-    protected $id = false;
+    protected int|bool $id = false;
 
     /**
      * internal unique ID
@@ -52,47 +52,48 @@ class Brick extends QUI\QDOM
      *
      * @var string
      */
-    protected $uniqueId = false;
+    protected mixed $uniqueId = false;
 
     /**
      * Brick settings
      *
      * @var array
      */
-    protected $settings = [];
+    protected array $settings = [];
 
     /**
      * Fields can be overwritten by another user
      *
      * @var array
      */
-    protected $customfields = [];
+    protected array $customfields = [];
 
     /**
      * Internal control
      *
      * @var null|Control
      */
-    protected $Control = null;
+    protected ?Control $Control = null;
 
     /**
      * List of extra css classes
      *
      * @var array
      */
-    protected $cssClasses = [];
+    protected array $cssClasses = [];
 
     /**
      * @var string
      */
-    protected $hash;
+    protected string $hash;
 
     /**
      * Constructor
      *
      * @param array $params - brick params
+     * @throws QUI\Exception
      */
-    public function __construct($params = [])
+    public function __construct(array $params = [])
     {
         // default
         $default = [
@@ -233,6 +234,7 @@ class Brick extends QUI\QDOM
      * Return the class type
      *
      * @return String
+     * @throws QUI\Exception
      */
     public function getType(): string
     {
@@ -250,8 +252,9 @@ class Brick extends QUI\QDOM
      *
      * @param string $className
      * @return bool
+     * @throws QUI\Exception
      */
-    public function isInstanceOf($className): bool
+    public function isInstanceOf(string $className): bool
     {
         $Control = $this->getControl();
 
@@ -299,9 +302,8 @@ class Brick extends QUI\QDOM
         });
 
         $hash = serialize($hashParams);
-        $hash = md5($hash);
 
-        return $hash;
+        return md5($hash);
     }
 
     /**
@@ -345,7 +347,7 @@ class Brick extends QUI\QDOM
                 if (!empty($data['html'])) {
                     return $data['html'];
                 }
-            } catch (Exception $Exception) {
+            } catch (Exception) {
             }
         }
 
@@ -353,15 +355,6 @@ class Brick extends QUI\QDOM
             $_classes = [
                 'brick-' . $this->id
             ];
-
-            //check if is json
-            if (is_string($this->cssClasses)) {
-                $jsonArray = json_decode($this->cssClasses);
-
-                if (is_array($jsonArray)) {
-                    $this->cssClasses = $jsonArray;
-                }
-            }
 
             foreach ($this->cssClasses as $cssClass) {
                 $_classes[] = $cssClass;
@@ -459,9 +452,10 @@ class Brick extends QUI\QDOM
     /**
      * Return the internal control
      *
-     * @return Control|Bool
+     * @return Control|bool|null
+     * @throws QUI\Exception
      */
-    protected function getControl()
+    protected function getControl(): Control|bool|null
     {
         if ($this->Control) {
             return $this->Control;
@@ -536,7 +530,7 @@ class Brick extends QUI\QDOM
      *
      * @return void
      */
-    public function setSettings(array $settings)
+    public function setSettings(array $settings): void
     {
         foreach ($settings as $key => $value) {
             if ($key === 'classes') {
@@ -555,7 +549,7 @@ class Brick extends QUI\QDOM
      *
      * @return boolean|string|array
      */
-    public function getSetting(string $name)
+    public function getSetting(string $name): bool|array|string
     {
         if ($name === 'classes') {
             return $this->getCSSClasses();
@@ -576,13 +570,13 @@ class Brick extends QUI\QDOM
      *
      * @return void
      */
-    public function setSetting(string $name, $value)
+    public function setSetting(string $name, mixed $value): void
     {
         if (isset($this->settings[$name])) {
             $this->settings[$name] = $value;
         }
 
-        if ($this->Control && $this->Control instanceof Control) {
+        if ($this->Control instanceof Control) {
             $this->Control->setAttribute($name, $value);
         }
     }
@@ -591,7 +585,7 @@ class Brick extends QUI\QDOM
      * @param string $name
      * @return mixed
      */
-    public function getAttribute($name)
+    public function getAttribute(string $name): mixed
     {
         if ($name === 'classes') {
             return $this->getCSSClasses();
@@ -624,11 +618,11 @@ class Brick extends QUI\QDOM
     /**
      * Add an extra CSS Class to the control
      *
-     * @param string|array $cssClass - Name of the CSS Class
+     * @param array|string $cssClass - Name of the CSS Class
      *
      * @return void
      */
-    public function addCSSClass($cssClass)
+    public function addCSSClass(array|string $cssClass): void
     {
         if (is_array($cssClass)) {
             $cssClass = implode(' ', $cssClass);
@@ -658,7 +652,7 @@ class Brick extends QUI\QDOM
     /**
      * Remove all css classes
      */
-    public function clearCSSClasses()
+    public function clearCSSClasses(): void
     {
         $this->cssClasses = [];
     }
@@ -674,7 +668,7 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * Match pattern agains the css classes
+     * Match pattern against the css classes
      *
      * @param string $pattern - The shell wildcard pattern.
      *

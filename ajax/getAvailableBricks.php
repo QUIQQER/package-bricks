@@ -14,7 +14,6 @@ QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_getAvailableBricks',
     function () {
         $BricksManager = QUI\Bricks\Manager::init();
-
         return $BricksManager->getAvailableBricks();
     },
     false,

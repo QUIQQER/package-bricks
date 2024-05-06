@@ -1,5 +1,5 @@
 {
-  "name": "quiqqer\/bricks",
+  "name": "quiqqer/bricks",
   "type": "quiqqer-module",
   "description": "The brick system allows you to design your website according to your wishes. You can quickly move, create, or remove bricks to different places in the template.",
   "license": "GPL-3.0+",
@@ -7,7 +7,7 @@
     {
       "name": "Henning Leutz",
       "email": "leutz@pcsg.de",
-      "homepage": "http:\/\/www.pcsg.de",
+      "homepage": "http://www.pcsg.de",
       "role": "Developer"
     }
   ],
@@ -15,21 +15,22 @@
     "email": "support@pcsg.de"
   },
   "require": {
-    "quiqqer\/quiqqer": "^1.6|dev-master|dev-dev",
-    "quiqqer\/qui": "^1|dev-master|dev-dev",
-    "quiqqer\/utils": "^1.19.2|dev-master|dev-dev",
-    "quiqqer\/mobile-detection": "^1|dev-master|dev-dev",
-    "quiqqer-asset\/hammerjs": "2.*",
-    "quiqqer-asset\/mustache": "*",
-    "ramsey\/uuid": "^3|^4",
-    "quiqqer-asset\/glidejs-glide": "3.*"
+    "php": "^8.1",
+    "quiqqer/core": "^2",
+    "quiqqer/qui": "^1",
+    "quiqqer/utils": "^1.27",
+    "quiqqer/mobile-detection": "^1",
+    "quiqqer-asset/hammerjs": "^2",
+    "quiqqer-asset/mustache": "*",
+    "ramsey/uuid": "^3|^4",
+    "quiqqer-asset/glidejs-glide": "^3"
   },
   "suggest": {
-    "quiqqer\/gallery": "Present your photos, products and pictures in elaborate and beautiful galleries."
+    "quiqqer/gallery": "Present your photos, products and pictures in elaborate and beautiful galleries."
   },
   "autoload": {
     "psr-4": {
-      "QUI\\Bricks\\": "src\/QUI\/Bricks"
+      "QUI\\Bricks\\": "src/QUI/Bricks"
     }
   }
 }
