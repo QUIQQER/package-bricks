@@ -520,8 +520,8 @@ define('package/quiqqer/bricks/bin/Manager', [
             new QUIConfirm({
                 title    : QUILocale.get(lg, 'manager.window.createFromData.title'),
                 icon     : 'fa fa-code',
-                maxHeight: 400,
-                maxWidth : 500,
+                maxHeight: 600,
+                maxWidth : 700,
                 autoclose: false,
                 events   : {
                     onOpen: function (Win) {
@@ -530,27 +530,24 @@ define('package/quiqqer/bricks/bin/Manager', [
                         Win.Loader.show();
                         Body.addClass('quiqqer-bricks-createFromData');
 
-                        const winText = QUILocale.get(lg, 'manager.window.createFromData.text'),
-                              btnText = QUILocale.get(lg, 'manager.window.createFromData.btnText');
+                        require(['text!package/quiqqer/bricks/bin/Manager.CreateBrickFromJSON.html'], (tpl) => {
+                            Body.set('html', Mustache.render(tpl, {
+                                infoText: QUILocale.get(lg, 'manager.window.createFromData.text'),
+                                btnText: QUILocale.get(lg, 'manager.window.createFromData.btnText'),
+                                infoProject: QUILocale.get(lg, 'manager.window.createFromData.info.project'),
+                                infoLang: QUILocale.get(lg, 'manager.window.createFromData.info.lang'),
+                                infoGeneral: QUILocale.get(lg, 'manager.window.createFromData.info.general'),
+                            }));
 
-                        Body.set(
-                            'html',
-                            `<div><p>
-                            <button class="qui-button quiqqer-bricks-createFromData-copyBtn">
-                            <span class="fa fa-copy"></span> ${btnText}</button>
-                            ${winText} </p></div>
-                            <textarea></textarea>
-                            `
-                        );
-
-                        Body.querySelector('.quiqqer-bricks-createFromData-copyBtn').addEventListener('click',
-                            (event) => {
-                                event.preventDefault();
-                                navigator.clipboard.readText().then((text) => {
-                                    Body.querySelector('textarea').value = text
-                                });
-                            }
-                        )
+                            Body.querySelector('.quiqqer-bricks-createFromData-copyBtn').addEventListener('click',
+                                (event) => {
+                                    event.preventDefault();
+                                    navigator.clipboard.readText().then((text) => {
+                                        Body.querySelector('textarea').value = text
+                                    });
+                                }
+                            )
+                        })
 
                         Win.Loader.hide();
                     },
@@ -561,6 +558,11 @@ define('package/quiqqer/bricks/bin/Manager', [
                         const Body        = Win.getContent(),
                               Textarea    = Body.querySelector('textarea');
                         let convertedData = '';
+                        const adjustProjectName = Body.querySelector('[name="adjustProject"]').checked;
+                        const adjustProjectLang = Body.querySelector('[name="adjustLang"]').checked;
+
+                        Textarea.classList.remove('error');
+
 
                         try {
                             convertedData = JSON.parse(Textarea.value);
@@ -649,15 +651,23 @@ define('package/quiqqer/bricks/bin/Manager', [
                             }).then(function() {
                                 return Bricks.createBrick(project, lang, data);
                             }).then(function (brickId) {
-                                    console.log(brickId);
-                                var i,
+                                let i,
                                     len = allBricks.length;
 
                                 // check if same name exist
                                 for (i = 0; i < len; i++) {
                                     if (allBricks[i].title === brickTitle) {
-                                        convertedData.attributes.title = brickTitle + '-' + brickId
+                                        convertedData.attributes.title = brickTitle + ' (' + brickId + ')'
                                     }
+                                }
+
+                                if (adjustProjectName && convertedData.attributes.project !== project) {
+                                    convertedData.attributes.project = project;
+                                }
+
+
+                                if (adjustProjectLang && convertedData.attributes.lang !== lang) {
+                                    convertedData.attributes.lang = lang;
                                 }
 
                                 Bricks.saveBrick(brickId, convertedData).then(function () {
@@ -675,10 +685,10 @@ define('package/quiqqer/bricks/bin/Manager', [
                                         MH.addError(e.getMessage());
                                     });
 
+                                    Textarea.classList.add('error');
+
                                     Win.Loader.hide();
                                 });
-
-                                Win.Loader.hide();
                             });
                         });
                     }

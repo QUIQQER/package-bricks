@@ -9,6 +9,8 @@ namespace QUI\Bricks\Controls\Slider;
 use QUI;
 use QUI\Projects\Media\Utils;
 
+use function dirname;
+
 /**
  * Class Promoslider
  *
@@ -21,7 +23,7 @@ class Promoslider extends AbstractPromoslider
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([
@@ -44,7 +46,7 @@ class Promoslider extends AbstractPromoslider
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            \dirname(__FILE__) . '/Promoslider.css'
+            dirname(__FILE__) . '/Promoslider.css'
         );
 
         $this->addCSSClass('grid-100');
@@ -56,7 +58,7 @@ class Promoslider extends AbstractPromoslider
      *
      * @see \QUI\Control::create()
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
@@ -172,7 +174,7 @@ class Promoslider extends AbstractPromoslider
             );
         }
 
-        $this->parseSlides($this->getAttribute('desktopslides'), 'desktop');
+        $this->parseSlides($this->getAttribute('desktopslides'));
 
         $options = [
             'this' => $this,
@@ -193,6 +195,6 @@ class Promoslider extends AbstractPromoslider
 
         $Engine->assign($options);
 
-        return $Engine->fetch(\dirname(__FILE__) . '/Promoslider.html');
+        return $Engine->fetch(dirname(__FILE__) . '/Promoslider.html');
     }
 }

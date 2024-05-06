@@ -7,6 +7,9 @@
 namespace QUI\Bricks\Controls\Slider;
 
 use QUI;
+use QUI\Projects\Media\Folder;
+
+use function dirname;
 
 /**
  * Class BrickSlider
@@ -14,7 +17,7 @@ use QUI;
  * @author  Dominik Chrzanowski
  * @package QUI\Bricks\Controls
  */
-class BasicSlider extends AbstractPromoslider
+class BasicSlider extends QUI\Control
 {
     public function __construct($attributes = [])
     {
@@ -36,12 +39,12 @@ class BasicSlider extends AbstractPromoslider
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            \dirname(__FILE__) . '/BasicSlider.css'
+            dirname(__FILE__) . '/BasicSlider.css'
         );
     }
 
 
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
@@ -50,7 +53,6 @@ class BasicSlider extends AbstractPromoslider
         $images = [];
         $sliderContent = $this->getAttribute('sliderContent');
         $imgLeft = false;
-        $dotsNav = false;
 
         if (!$mediaFolder) {
             return '';
@@ -60,14 +62,13 @@ class BasicSlider extends AbstractPromoslider
             return '';
         }
 
-        /* @var $Folder \QUI\Projects\Media\Folder */
-        if (\strpos($mediaFolder, 'image.php') !== false) {
+        /* @var $Folder Folder */
+        if (str_contains($mediaFolder, 'image.php')) {
             try {
                 $Folder = QUI\Projects\Media\Utils::getMediaItemByUrl(
                     $mediaFolder
                 );
-            } catch (QUI\Exception $Exception) {
-                $Folder = false;
+            } catch (QUI\Exception) {
             }
         }
 
@@ -96,19 +97,11 @@ class BasicSlider extends AbstractPromoslider
         $dotsNav = $this->getAttribute('navigationDotsShow');
 
         // text position
-        switch ($this->getAttribute('textPosition')) {
-            case 'center':
-                $textPosition = 'center';
-                break;
-
-            case 'bottom':
-                $textPosition = 'flex-end';
-                break;
-
-            case 'top':
-            default:
-                $textPosition = 'flex-start';
-        }
+        $textPosition = match ($this->getAttribute('textPosition')) {
+            'center' => 'center',
+            'bottom' => 'flex-end',
+            default => 'flex-start',
+        };
 
         $options = [
             'this' => $this,
@@ -122,6 +115,6 @@ class BasicSlider extends AbstractPromoslider
 
         $Engine->assign($options);
 
-        return $Engine->fetch(\dirname(__FILE__) . '/BasicSlider.html');
+        return $Engine->fetch(dirname(__FILE__) . '/BasicSlider.html');
     }
 }

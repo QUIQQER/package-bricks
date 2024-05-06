@@ -8,6 +8,8 @@
  * @return String
  */
 
+use QUI\Projects\Site;
+
 QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_getSitesFromBrick',
     function ($brickId, $options) {
@@ -17,7 +19,7 @@ QUI::$Ajax->registerFunction(
 
         $sites = $Bricks->getSitesByBrick($Brick);
         $result = array_map(function ($Site) {
-            /* @var $Site \QUI\Projects\Site */
+            /* @var $Site Site */
             return [
                 'project' => $Site->getProject()->getName(),
                 'lang' => $Site->getProject()->getLang(),

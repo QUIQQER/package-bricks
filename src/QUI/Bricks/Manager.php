@@ -8,7 +8,9 @@ namespace QUI\Bricks;
 
 use DOMElement;
 use DOMXPath;
+use Exception;
 use QUI;
+use QUI\ExceptionStack;
 use QUI\Projects\Project;
 use QUI\Projects\Site;
 use QUI\Utils\Text\XML;
@@ -34,7 +36,6 @@ use function json_encode;
 use function md5;
 use function realpath;
 use function str_replace;
-use function strpos;
 use function trim;
 use function usort;
 
@@ -86,7 +87,7 @@ class Manager
     /**
      * Return the global QUI\Bricks\Manager
      *
-     * @return Manager
+     * @return Manager|null
      */
     public static function init(): ?Manager
     {
@@ -167,7 +168,7 @@ class Manager
 
         try {
             QUI::getEvents()->fireEvent('quiqqerBricksCreate', [$brickId]);
-        } catch (\Exception $Exception) {
+        } catch (Exception $Exception) {
             QUI\System\Log::writeException($Exception);
         }
 
@@ -177,13 +178,13 @@ class Manager
     /**
      * Create and update a unique site brick
      *
-     * @param Site $Site
+     * @param QUI\Interfaces\Projects\Site $Site
      * @param array $brickData
      * @return string - Unique ID
      *
      * @throws QUI\Exception
      */
-    public function createUniqueSiteBrick(Site $Site, array $brickData = []): string
+    public function createUniqueSiteBrick(QUI\Interfaces\Projects\Site $Site, array $brickData = []): string
     {
         if (!empty($brickData['uid'])) {
             $uid = $brickData['uid'];
@@ -224,7 +225,7 @@ class Manager
      *
      * @throws QUI\Exception
      */
-    protected function createUniqueBrickId(int $brickId, Site $Site): string
+    protected function createUniqueBrickId(int $brickId, QUI\Interfaces\Projects\Site $Site): string
     {
         $Project = $Site->getProject();
         $uuid = QUI\Utils\Uuid::get();
@@ -268,9 +269,9 @@ class Manager
     }
 
     /**
-     * CLears the bricks cache
+     * Clears the bricks cache
      */
-    public function clearCache()
+    public function clearCache(): void
     {
         QUI\Cache\Manager::clear('quiqqer/bricks');
     }
@@ -281,7 +282,7 @@ class Manager
      * @param integer $brickId - Brick-ID
      * @throws QUI\Exception
      */
-    public function deleteBrick(int $brickId)
+    public function deleteBrick(int $brickId): void
     {
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.delete');
 
@@ -336,18 +337,18 @@ class Manager
      * Return the areas which are available in the project
      *
      * @param Project $Project
-     * @param string|boolean $layoutType - optional, returns only the areas
+     * @param boolean|string $layoutType - optional, returns only the areas
      *                                     for the specific layout type
      *                                     (default = false)
-     * @param string|boolean $siteType - optional, returns only the areas
+     * @param boolean|string $siteType - optional, returns only the areas
      *                                     for the specific site type
      *                                     (default = false)
      * @return array
      */
     public function getAreasByProject(
         Project $Project,
-        $layoutType = false,
-        $siteType = false
+        bool|string $layoutType = false,
+        bool|string $siteType = false
     ): array {
         $templates = [];
         $bricks = [];
@@ -366,7 +367,7 @@ class Manager
             if ($Parent) {
                 $templates[] = $Parent->getName();
             }
-        } catch (QUI\Exception $Exception) {
+        } catch (QUI\Exception) {
         }
 
         // get all vhosts, and the used templates of the project
@@ -458,7 +459,7 @@ class Manager
 
         try {
             return QUI\Cache\Manager::get($cache);
-        } catch (QUI\Exception $Exception) {
+        } catch (QUI\Exception) {
         }
 
         $xmlFiles = $this->getBricksXMLFiles();
@@ -490,7 +491,7 @@ class Manager
 
         try {
             QUI\Cache\Manager::set($cache, $list);
-        } catch (\Exception $Exception) {
+        } catch (Exception $Exception) {
             QUI\System\Log::writeException($Exception);
         }
 
@@ -535,12 +536,12 @@ class Manager
      * Get a Brick by its unique ID
      *
      * @param string $uid - unique id
-     * @param Site|null $Site - unique id
+     * @param QUI\Interfaces\Projects\Site|null $Site - unique id
      *
      * @return Brick
      * @throws QUI\Exception
      */
-    public function getBrickByUID(string $uid, $Site = null): Brick
+    public function getBrickByUID(string $uid, QUI\Interfaces\Projects\Site $Site = null): Brick
     {
         if (isset($this->brickUIDs[$uid])) {
             return $this->brickUIDs[$uid];
@@ -611,7 +612,7 @@ class Manager
 
         try {
             return QUI\Cache\Manager::get($cache);
-        } catch (QUI\Exception $Exception) {
+        } catch (QUI\Exception) {
         }
 
 
@@ -687,7 +688,7 @@ class Manager
 
         try {
             QUI\Cache\Manager::set($cache, $settings);
-        } catch (\Exception $Exception) {
+        } catch (Exception $Exception) {
             QUI\System\Log::writeException($Exception);
         }
 
@@ -697,12 +698,12 @@ class Manager
     /**
      * Parse a xml setting element to a brick array
      *
-     * @param \DOMElement $Setting
+     * @param DOMElement $Setting
      * @return array
      */
     protected function parseSettingToBrickArray(DOMElement $Setting): array
     {
-        /* @var $Option \DOMElement */
+        /* @var $Option DOMElement */
         $options = false;
 
         if ($Setting->getAttribute('type') == 'select') {
@@ -724,7 +725,7 @@ class Manager
                 continue;
             }
 
-            if (strpos($attribute->nodeName, 'data-') !== false) {
+            if (str_contains($attribute->nodeName, 'data-')) {
                 $dataAttributes[$attribute->nodeName] = trim($attribute->nodeValue);
             }
         }
@@ -754,6 +755,7 @@ class Manager
      * @param QUI\Interfaces\Projects\Site $Site
      *
      * @return array
+     * @throws ExceptionStack
      */
     public function getBricksByArea(
         string $brickArea,
@@ -801,7 +803,7 @@ class Manager
                     $result[] = $Brick->check();
                     continue;
                 }
-            } catch (QUI\Exception $Exception) {
+            } catch (QUI\Exception) {
             }
 
             try {
@@ -813,7 +815,7 @@ class Manager
                 $Brick = $this->getBrickById($brickId);
                 $Clone = clone $Brick;
 
-                if (isset($brickData['customfields']) && !empty($brickData['customfields'])) {
+                if (!empty($brickData['customfields'])) {
                     $custom = json_decode($brickData['customfields'], true);
 
                     if ($custom) {
@@ -908,11 +910,11 @@ class Manager
     }
 
     /**
-     * @param string|integer $brickId - Brick-ID
+     * @param integer|string $brickId - Brick-ID
      * @param array $brickData - Brick data
      * @throws QUI\Exception
      */
-    public function saveBrick($brickId, array $brickData)
+    public function saveBrick(int|string $brickId, array $brickData): void
     {
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.edit');
 
@@ -939,7 +941,7 @@ class Manager
             return '';
         }, $this->getAreasByProject($Project));
 
-        if (isset($brickData['attributes']) && isset($brickData['attributes']['areas'])) {
+        if (isset($brickData['attributes']['areas'])) {
             $brickData['areas'] = $brickData['attributes']['areas'];
         }
 
@@ -1128,7 +1130,7 @@ class Manager
      *
      * @throws QUI\Exception
      */
-    public function copyBrick($brickId, array $params = []): int
+    public function copyBrick(int|string $brickId, array $params = []): int
     {
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.create');
 
@@ -1247,7 +1249,7 @@ class Manager
 
             try {
                 $Parent = $Project->get($parentId);
-            } catch (QUI\Exception $Exception) {
+            } catch (QUI\Exception) {
                 continue;
             }
 
@@ -1305,13 +1307,13 @@ class Manager
      * @param bool|string $template - optional, name of the current template
      * @return string
      */
-    public function getAlternateClass($control, $template = false): string
+    public function getAlternateClass($control, bool|string $template = false): string
     {
         $control = trim($control, '\\ ');
 
         try {
             $alternates = QUI\Cache\Manager::get('quiqqer/bricks/alternates');
-        } catch (QUI\Exception $Exception) {
+        } catch (QUI\Exception) {
             $alternates = [];
 
             $PKM = QUI::getPackageManager();

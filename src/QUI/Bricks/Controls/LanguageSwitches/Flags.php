@@ -7,6 +7,7 @@
 namespace QUI\Bricks\Controls\LanguageSwitches;
 
 use QUI;
+use QUI\Exception;
 
 /**
  * Class LangSwitch
@@ -22,7 +23,7 @@ class Flags extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         // defaults values
         $this->setAttributes([
@@ -46,17 +47,13 @@ class Flags extends QUI\Control
     /**
      * (non-PHPdoc)
      *
+     * @throws Exception
      * @see \QUI\Control::create()
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
         $Site = $this->getSite();
-
-        if (!$Site) {
-            return '';
-        }
-
         $Project = $Site->getProject();
 
         if (count($Project->getLanguages()) < 2) {
@@ -81,9 +78,10 @@ class Flags extends QUI\Control
     /**
      * Return the Project
      *
-     * @return QUI\Projects\Site
+     * @return QUI\Interfaces\Projects\Site
+     * @throws Exception
      */
-    public function getSite()
+    public function getSite(): QUI\Interfaces\Projects\Site
     {
         if ($this->getAttribute('Site')) {
             return $this->getAttribute('Site');

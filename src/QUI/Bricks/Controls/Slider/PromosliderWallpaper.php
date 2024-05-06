@@ -6,8 +6,11 @@
 
 namespace QUI\Bricks\Controls\Slider;
 
+use Exception;
 use QUI;
 use QUI\Projects\Media\Utils;
+
+use function dirname;
 
 /**
  * Class Promoslider
@@ -21,7 +24,7 @@ class PromosliderWallpaper extends AbstractPromoslider
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([
@@ -35,7 +38,7 @@ class PromosliderWallpaper extends AbstractPromoslider
             'showarrows' => 'showHoverScale',
             'autostart' => false,
             'delay' => 5000,
-            'template' => \dirname(__FILE__) . '/PromosliderWallpaper.html',
+            'template' => dirname(__FILE__) . '/PromosliderWallpaper.html',
             'isMobileSlidesEnabled' => false,
             'preloadFirstImage' => false // load first slide as background in low quality to improve UX
         ]);
@@ -43,7 +46,7 @@ class PromosliderWallpaper extends AbstractPromoslider
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            \dirname(__FILE__) . '/PromosliderWallpaper.css'
+            dirname(__FILE__) . '/PromosliderWallpaper.css'
         );
 
         $this->addCSSClass('grid-100');
@@ -52,8 +55,9 @@ class PromosliderWallpaper extends AbstractPromoslider
 
     /**
      * @return string
+     * @throws Exception
      */
-    public function create()
+    public function create(): string
     {
         $result = '';
 
@@ -102,7 +106,7 @@ class PromosliderWallpaper extends AbstractPromoslider
      *
      * @see \QUI\Control::create()
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
@@ -201,12 +205,10 @@ class PromosliderWallpaper extends AbstractPromoslider
 
         // wallpaper background site
         if ($this->getAttribute('size')) {
-            switch ($this->getAttribute('size')) {
-                case 'contain':
-                    $this->addCSSClass(
-                        'quiqqer-bricks-promoslider-wallpaper__contain'
-                    );
-                    break;
+            if ($this->getAttribute('size') == 'contain') {
+                $this->addCSSClass(
+                    'quiqqer-bricks-promoslider-wallpaper__contain'
+                );
             }
         }
 
@@ -230,7 +232,7 @@ class PromosliderWallpaper extends AbstractPromoslider
             'Utils' => new Utils()
         ];
 
-        if ($this->getAttribute('isMobileSlidesEnabled') == true) {
+        if ($this->getAttribute('isMobileSlidesEnabled')) {
             $this->parseSlides($this->getAttribute('mobileslides'), 'mobile');
 
             $options['mobileSlides'] = $this->mobileSlides;

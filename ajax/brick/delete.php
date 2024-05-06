@@ -13,7 +13,7 @@ QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_brick_delete',
     function ($brickIds) {
         $BrickManager = QUI\Bricks\Manager::init();
-        $brickIds     = json_decode($brickIds, true);
+        $brickIds = json_decode($brickIds, true);
 
         foreach ($brickIds as $brickId) {
             try {

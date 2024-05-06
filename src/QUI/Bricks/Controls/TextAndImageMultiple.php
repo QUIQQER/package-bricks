@@ -6,6 +6,7 @@
 
 namespace QUI\Bricks\Controls;
 
+use Exception;
 use QUI;
 
 /**
@@ -21,7 +22,7 @@ class TextAndImageMultiple extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([
@@ -43,11 +44,10 @@ class TextAndImageMultiple extends QUI\Control
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see \QUI\Control::create()
+     * @return string
+     * @throws Exception
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
         $entries = json_decode($this->getAttribute('entries'), true);

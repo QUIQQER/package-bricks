@@ -78,7 +78,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
                 options['autoplay'] = delay;
             }
 
-            var glide = new Glide('.glide', options);
+            var glide = new Glide(this.getElm('.glide'), options);
 
             glide.on('build.after', function () {
                 self.showSlider();

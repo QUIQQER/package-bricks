@@ -16,15 +16,15 @@ QUI::$Ajax->registerFunction(
     'package_quiqqer_bricks_ajax_brick_save',
     function ($brickId, $data) {
         $BrickManager = QUI\Bricks\Manager::init();
-        $data         = json_decode($data, true);
+        $data = json_decode($data, true);
 
         $BrickManager->saveBrick($brickId, $data);
         $Brick = $BrickManager->getBrickById($brickId);
 
         return [
-            'attributes'        => $Brick->getAttributes(),
-            'settings'          => $Brick->getSettings(),
-            'customfields'      => $Brick->getCustomFields(),
+            'attributes' => $Brick->getAttributes(),
+            'settings' => $Brick->getSettings(),
+            'customfields' => $Brick->getCustomFields(),
             'availableSettings' => $BrickManager->getAvailableBrickSettingsByBrickType(
                 $Brick->getAttribute('type')
             )

@@ -16,7 +16,7 @@ use function dirname;
  *
  * @package quiqqer/bricks/Controls
  */
-class CustomerReviewsSlider extends AbstractPromoslider
+class CustomerReviewsSlider extends QUI\Control
 {
     public function __construct($attributes = [])
     {
@@ -32,7 +32,7 @@ class CustomerReviewsSlider extends AbstractPromoslider
         parent::__construct($attributes);
     }
 
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
@@ -69,7 +69,7 @@ class CustomerReviewsSlider extends AbstractPromoslider
                 continue;
             }
 
-            array_push($enabledEntries, $entry);
+            $enabledEntries[] = $entry;
         }
 
         $options = [
