@@ -17,7 +17,7 @@ QUI::$Ajax->registerFunction(
     function ($brickId, $brickUID, $row) {
         $BrickManager = QUI\Bricks\Manager::init();
 
-        if (isset($brickUID) && !empty($brickUID)) {
+        if (!empty($brickUID)) {
             $Brick = $BrickManager->getBrickById($brickUID);
         } else {
             $Brick = $BrickManager->getBrickById($brickId);
@@ -38,11 +38,7 @@ QUI::$Ajax->registerFunction(
         // generate rows
         $loadingRows = 1;
 
-        if (
-            isset($settings['loadingrows'])
-            && !empty($settings['loadingrows'])
-            && (int)$settings['loadingrows']
-        ) {
+        if (!empty($settings['loadingrows']) && (int)$settings['loadingrows']) {
             $loadingRows = (int)$settings['loadingrows'];
         }
 
@@ -62,6 +58,5 @@ QUI::$Ajax->registerFunction(
 
         return $result;
     },
-    ['brickId', 'brickUID', 'row'],
-    false
+    ['brickId', 'brickUID', 'row']
 );

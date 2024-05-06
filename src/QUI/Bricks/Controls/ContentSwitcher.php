@@ -8,6 +8,10 @@ namespace QUI\Bricks\Controls;
 
 use QUI;
 
+use function dirname;
+use function is_string;
+use function json_decode;
+
 /**
  * Class ContentSwitcher
  *
@@ -20,7 +24,7 @@ class ContentSwitcher extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([
@@ -41,13 +45,13 @@ class ContentSwitcher extends QUI\Control
      *
      * @see \QUI\Control::create()
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
         $entries = $this->getAttribute('entries');
 
-        if (\is_string($entries)) {
-            $entries = \json_decode($entries, true);
+        if (is_string($entries)) {
+            $entries = json_decode($entries, true);
         }
 
         $Engine->assign([
@@ -55,6 +59,6 @@ class ContentSwitcher extends QUI\Control
             'entries' => $entries
         ]);
 
-        return $Engine->fetch(\dirname(__FILE__) . '/ContentSwitcher.html');
+        return $Engine->fetch(dirname(__FILE__) . '/ContentSwitcher.html');
     }
 }

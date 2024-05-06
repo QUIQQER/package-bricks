@@ -6,6 +6,7 @@
 
 namespace QUI\Bricks\Controls\Children;
 
+use Exception;
 use QUI;
 
 /**
@@ -20,7 +21,7 @@ class Listing extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([
@@ -35,7 +36,7 @@ class Listing extends QUI\Control
             'showCreator' => false,
             'Site' => true,
             'where' => false,
-            'itemtype' => 'http://schema.org/ItemList',
+            'itemtype' => 'https://schema.org/ItemList',
             'child-itemtype' => 'https://schema.org/ListItem',
             'child-itemprop' => 'itemListElement',
             'display' => 'childrenlist',
@@ -52,8 +53,9 @@ class Listing extends QUI\Control
      * Can be overwritten
      *
      * @return String
+     * @throws Exception
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Control = new QUI\Controls\ChildrenList();
 

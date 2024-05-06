@@ -7,6 +7,7 @@
 namespace QUI\Bricks\Controls\Children;
 
 use QUI;
+use QUI\Database\Exception;
 
 /**
  * Class Slider
@@ -19,7 +20,7 @@ class Slider extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([
@@ -49,7 +50,7 @@ class Slider extends QUI\Control
      *
      * @see \QUI\Control::create()
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
         $MoreLink = null;
@@ -61,7 +62,7 @@ class Slider extends QUI\Control
         if ($this->getAttribute('moreLink')) {
             try {
                 $MoreLink = QUI\Projects\Site\Utils::getSiteByLink($this->getAttribute('moreLink'));
-            } catch (QUI\Exception $Exception) {
+            } catch (QUI\Exception) {
             }
         }
 
@@ -103,7 +104,7 @@ class Slider extends QUI\Control
      *
      * @return string
      */
-    protected function getTemplate()
+    protected function getTemplate(): string
     {
         return dirname(__FILE__) . '/Slider.OnlyImage.html';
     }
@@ -113,7 +114,7 @@ class Slider extends QUI\Control
      *
      * @return string
      */
-    protected function getCSS()
+    protected function getCSS(): string
     {
         return dirname(__FILE__) . '/Slider.OnlyImage.css';
     }
@@ -123,10 +124,12 @@ class Slider extends QUI\Control
      *
      * @param int $start
      * @return array
+     * @throws Exception
+     * @throws \Exception
      */
-    protected function getChildren($start = 0)
+    protected function getChildren(int $start = 0): array
     {
-        $children = QUI\Projects\Site\Utils::getSitesByInputList(
+        return QUI\Projects\Site\Utils::getSitesByInputList(
             $this->getProject(),
             $this->getAttribute('site'),
             [
@@ -134,7 +137,5 @@ class Slider extends QUI\Control
                 'limit' => $this->getAttribute('limit')
             ]
         );
-
-        return $children;
     }
 }

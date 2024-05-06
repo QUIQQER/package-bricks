@@ -7,6 +7,8 @@
 namespace QUI\Bricks\Controls;
 
 use QUI;
+use QUI\Database\Exception;
+use QUI\Interfaces\Projects\Site;
 
 /**
  * Class SocialBox
@@ -20,7 +22,7 @@ class SideBox1 extends QUI\Control
      *
      * @param array $attributes
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([
@@ -40,11 +42,11 @@ class SideBox1 extends QUI\Control
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see \QUI\Control::create()
+     * @return string
+     * @throws Exception
+     * @throws QUI\Exception
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
@@ -59,9 +61,12 @@ class SideBox1 extends QUI\Control
     /**
      * Return the site object
      *
-     * @return QUI\Projects\Site
+     * @return Site
+     * @throws Exception
+     * @throws QUI\Exception
+     * @throws \Exception
      */
-    public function getSite()
+    public function getSite(): QUI\Interfaces\Projects\Site
     {
         $Project = $this->getProject();
         $site = $this->getAttribute('site');
