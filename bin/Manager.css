@@ -50,20 +50,50 @@
     flex-direction: column;
 }
 
-.quiqqer-bricks-createFromData p {
+.quiqqer-bricks-createFromData-header {
+    display: flex;
     margin-bottom: 20px;
+    gap: 1rem;
+    align-items: flex-start;
 }
 
 .quiqqer-bricks-createFromData-copyBtn {
-    float: right;
-    margin-left: 20px;
+    white-space: nowrap;
+    margin-left: auto;
 }
 
-.quiqqer-bricks-createFromData textarea {
+.quiqqer-bricks-createFromData > textarea {
     background: #f5f2f0;
     border: none;
     font-family: 'monospace';
     height: 100%;
     min-height: 60px;
     padding: 1rem;
+}
+
+.quiqqer-bricks-createFromData > textarea.error {
+    outline: 2px solid red;
+}
+
+.quiqqer-bricks-createFromData-footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.quiqqer-bricks-createFromData-footer > label {
+    display: flex;
+    align-items: flex-start;
+    gap: 1em;
+}
+
+.quiqqer-bricks-createFromData-footer > label:not(:last-child) {
+    margin-bottom: 1em;
+}
+
+.quiqqer-bricks-createFromData-footer > label > input[type="checkbox"] {
+    flex-shrink: 0;
+}
+
+.quiqqer-bricks-createFromData-footer > label > .label-text {
+    flex-grow: 1;
 }

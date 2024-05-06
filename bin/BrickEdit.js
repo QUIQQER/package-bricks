@@ -536,11 +536,12 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                                             `
                                             <div class="showBrickData-window-body">
                                             <p class="showBrickData-window-body-text">${InfoText}</p>
-                                            <textarea autocorrect="off" autocapitalize="off" spellcheck="false">${JSON.stringify(data)}</textarea>
+                                            <textarea autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
                                             </div>
                                             `
                                         );
 
+                                        Body.querySelector('textarea').value = JSON.stringify(data);
                                         Body.querySelector('.showBrickData-window-body-text').appendChild(CopyBtn);
                                     }
                                 }
