@@ -7,7 +7,7 @@
     {
       "name": "Henning Leutz",
       "email": "leutz@pcsg.de",
-      "homepage": "http://www.pcsg.de",
+      "homepage": "https://www.pcsg.de",
       "role": "Developer"
     }
   ],
@@ -18,7 +18,7 @@
     "php": "^8.1",
     "quiqqer/core": "^2",
     "quiqqer/qui": "^1",
-    "quiqqer/utils": "^1.27",
+    "quiqqer/utils": "^2",
     "quiqqer/mobile-detection": "^1",
     "quiqqer-asset/hammerjs": "^2",
     "quiqqer-asset/mustache": "*",
