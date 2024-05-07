@@ -93,19 +93,19 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
             this.$Grid = new Grid(this.$Container, {
                 columnModel      : [
                     {
-                        header   : QUILocale.get('quiqqer/quiqqer', 'id'),
+                        header   : QUILocale.get('quiqqer/core', 'id'),
                         dataIndex: 'id',
                         dataType : 'integer',
                         width    : 40
                     },
                     {
-                        header   : QUILocale.get('quiqqer/quiqqer', 'title'),
+                        header   : QUILocale.get('quiqqer/core', 'title'),
                         dataIndex: 'title',
                         dataType : 'string',
                         width    : 140
                     },
                     {
-                        header   : QUILocale.get('quiqqer/quiqqer', 'description'),
+                        header   : QUILocale.get('quiqqer/core', 'description'),
                         dataIndex: 'description',
                         dataType : 'string',
                         width    : 300

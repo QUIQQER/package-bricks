@@ -12,7 +12,7 @@ use QUI\Exception;
 /**
  * Class Language Switch - DropDown
  *
- * @package quiqqer/quiqqer
+ * @package quiqqer/core
  * @author  www.pcsg.de (Henning Leutz)
  * @licence For copyright and license information, please view the /README.md
  */

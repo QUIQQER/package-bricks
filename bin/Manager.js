@@ -239,19 +239,19 @@ define('package/quiqqer/bricks/bin/Manager', [
             this.$Grid = new Grid(Container, {
                 columnModel      : [
                     {
-                        header   : QUILocale.get('quiqqer/quiqqer', 'id'),
+                        header   : QUILocale.get('quiqqer/core', 'id'),
                         dataIndex: 'id',
                         dataType : 'integer',
                         width    : 40
                     },
                     {
-                        header   : QUILocale.get('quiqqer/quiqqer', 'title'),
+                        header   : QUILocale.get('quiqqer/core', 'title'),
                         dataIndex: 'title',
                         dataType : 'string',
                         width    : 140
                     },
                     {
-                        header   : QUILocale.get('quiqqer/quiqqer', 'description'),
+                        header   : QUILocale.get('quiqqer/core', 'description'),
                         dataIndex: 'description',
                         dataType : 'string',
                         width    : 300
@@ -777,7 +777,7 @@ define('package/quiqqer/bricks/bin/Manager', [
 
                             for (var i = 0, len = langs.length; i < len; i++) {
                                 Select.appendChild(
-                                    QUILocale.get('quiqqer/quiqqer', 'language.' + langs[i]),
+                                    QUILocale.get('quiqqer/core', 'language.' + langs[i]),
                                     langs[i],
                                     URL_BIN_DIR + '16x16/flags/' + langs[i] + '.png'
                                 );
