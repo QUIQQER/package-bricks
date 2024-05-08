@@ -117,7 +117,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     }, {
                         name     : 'add',
                         textimage: 'fa fa-plus',
-                        text     : QUILocale.get('quiqqer/quiqqer', 'add'),
+                        text     : QUILocale.get('quiqqer/core', 'add'),
                         events   : {
                             onClick: this.$openAddDialog
                         }
@@ -126,7 +126,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     }, {
                         name     : 'edit',
                         textimage: 'fa fa-edit',
-                        text     : QUILocale.get('quiqqer/quiqqer', 'edit'),
+                        text     : QUILocale.get('quiqqer/core', 'edit'),
                         disabled : true,
                         events   : {
                             onClick: this.$openEditDialog
@@ -134,7 +134,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     }, {
                         name     : 'delete',
                         textimage: 'fa fa-trash',
-                        text     : QUILocale.get('quiqqer/quiqqer', 'delete'),
+                        text     : QUILocale.get('quiqqer/core', 'delete'),
                         disabled : true,
                         events   : {
                             onClick: this.$openDeleteDialog
@@ -151,13 +151,13 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                         dataIndex: 'isDisabled',
                         hidden   : true
                     }, {
-                        header   : QUILocale.get('quiqqer/quiqqer', 'image'),
+                        header   : QUILocale.get('quiqqer/core', 'image'),
                         dataIndex: 'imagePreview',
                         dataType : 'node',
                         width    : 60
                     },
                     {
-                        header   : QUILocale.get('quiqqer/quiqqer', 'content'),
+                        header   : QUILocale.get('quiqqer/core', 'content'),
                         dataIndex: 'text',
                         dataType : 'code',
                         width    : 300
@@ -467,7 +467,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                 maxWidth   : 600,
                 maxHeight  : 400,
                 ok_button  : {
-                    text     : QUILocale.get('quiqqer/quiqqer', 'delete'),
+                    text     : QUILocale.get('quiqqer/core', 'delete'),
                     textimage: 'fa fa-trash'
                 },
                 events     : {

@@ -17,7 +17,7 @@
             </span>
         {elseif $buttonText && $buttonText === 'text'}
             <span class="quiqqer-control-languageswitch-dropdown-lang quiqqer-control-languageswitch-dropdown-lang__text">
-                {locale group='quiqqer/quiqqer' var='language.'|cat:{$siteLang}}
+                {locale group='quiqqer/core' var='language.'|cat:{$siteLang}}
             </span>
         {/if}
 
@@ -43,7 +43,7 @@
                     </span>
                 {elseif $dropdownText && $dropdownText === 'text'}
                     <span class="quiqqer-control-languageswitch-dropdown-dd-lang quiqqer-control-languageswitch-dropdown-dd-lang__text">
-                        {locale group='quiqqer/quiqqer' var='language.'|cat:{$lang}}
+                        {locale group='quiqqer/core' var='language.'|cat:{$lang}}
                     </span>
                 {/if}
             </a>
