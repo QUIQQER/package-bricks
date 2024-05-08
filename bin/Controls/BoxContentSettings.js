@@ -118,7 +118,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
                     }, {
                         name: 'add',
                         textimage: 'fa fa-plus',
-                        text: QUILocale.get('quiqqer/quiqqer', 'add'),
+                        text: QUILocale.get('quiqqer/core', 'add'),
                         events: {
                             onClick: this.$openAddDialog
                         }
@@ -127,7 +127,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
                     }, {
                         name: 'edit',
                         textimage: 'fa fa-edit',
-                        text: QUILocale.get('quiqqer/quiqqer', 'edit'),
+                        text: QUILocale.get('quiqqer/core', 'edit'),
                         disabled: true,
                         events: {
                             onClick: this.$openEditDialog
@@ -135,7 +135,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
                     }, {
                         name: 'delete',
                         textimage: 'fa fa-trash',
-                        text: QUILocale.get('quiqqer/quiqqer', 'delete'),
+                        text: QUILocale.get('quiqqer/core', 'delete'),
                         disabled: true,
                         events: {
                             onClick: this.$openDeleteDialog
@@ -464,7 +464,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
                 maxWidth: 600,
                 maxHeight: 400,
                 ok_button: {
-                    text: QUILocale.get('quiqqer/quiqqer', 'delete'),
+                    text: QUILocale.get('quiqqer/core', 'delete'),
                     textimage: 'fa fa-trash'
                 },
                 events: {

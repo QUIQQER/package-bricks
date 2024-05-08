@@ -112,7 +112,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                             '<tr>' +
                             '   <td>{{localeLang}}</td>' +
                             '   <td><img src="' + window.URL_OPT_DIR +
-                            'quiqqer/quiqqer/bin/16x16/flags/{{lang}}.png" alt="" /> {{lang}}</td>' +
+                            'quiqqer/core/bin/16x16/flags/{{lang}}.png" alt="" /> {{lang}}</td>' +
                             '</tr>' +
                             '<tr>' +
                             '   <td>{{localeID}}</td>' +
@@ -121,8 +121,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                             '</table>';
 
                 const result = Mustache.render(tpl, {
-                    localeProject: QUILocale.get('quiqqer/quiqqer', 'project'),
-                    localeLang   : QUILocale.get('quiqqer/quiqqer', 'language'),
+                    localeProject: QUILocale.get('quiqqer/core', 'project'),
+                    localeLang   : QUILocale.get('quiqqer/core', 'language'),
                     localeID     : QUILocale.get('quiqqer/bricks', 'brickId'),
 
                     project: project,
