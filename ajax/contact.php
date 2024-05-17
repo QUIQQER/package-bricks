@@ -58,7 +58,11 @@ QUI::$Ajax->registerFunction(
             );
         }
 
-        if ($useCaptcha && QUI::getPackageManager()->isInstalled('quiqqer/captcha')) {
+        if (
+            $useCaptcha
+            && QUI::getPackageManager()->isInstalled('quiqqer/captcha')
+            && class_exists('QUI\Captcha\Handler')
+        ) {
             if (!CaptchaHandler::isResponseValid($captchaResponse)) {
                 throw new QUI\Exception(
                     QUI::getLocale()->get(

@@ -10,6 +10,8 @@ use Exception;
 use QUI;
 use QUI\Captcha\Handler as CaptchaHandler;
 
+use function class_exists;
+
 /**
  * Mini contact control
  * {control control="\QUI\Bricks\Controls\SimpleContact" labels=false}
@@ -106,7 +108,11 @@ class SimpleContact extends QUI\Control
             && isset($_POST['email'])
             && isset($_POST['message'])
         ) {
-            if ($useCaptcha && QUI::getPackageManager()->isInstalled('quiqqer/captcha')) {
+            if (
+                $useCaptcha
+                && QUI::getPackageManager()->isInstalled('quiqqer/captcha')
+                && class_exists('QUI\Captcha\Handler')
+            ) {
                 if (
                     empty($_POST['quiqqer-captcha-response'])
                     || !CaptchaHandler::isResponseValid($_POST['quiqqer-captcha-response'])
@@ -181,7 +187,11 @@ class SimpleContact extends QUI\Control
         }
 
         // CAPTCHA
-        if ($useCaptcha && QUI::getPackageManager()->isInstalled('quiqqer/captcha')) {
+        if (
+            $useCaptcha
+            && QUI::getPackageManager()->isInstalled('quiqqer/captcha')
+            && class_exists('QUI\Captcha\Controls\CaptchaDisplay')
+        ) {
             $Engine->assign('CaptchaDisplay', new QUI\Captcha\Controls\CaptchaDisplay());
         }
 
