@@ -19,8 +19,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
 
         Binds: [
             '$onImport',
-            'prev',
-            'next',
+            '$next',
             'resize'
         ],
 
@@ -44,11 +43,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          * event : on import
          */
         $onImport: function () {
-            var Elm  = this.getElm();
+            const Elm  = this.getElm();
 
             this.List = Elm.getElement(".basic-slider-images");
             this.Slide = this.List.getFirst('li');
             this.Dots = null;
+
+            // first image is already loaded so we set the attribute
+            this.Slide.querySelector('img').setAttribute('data-qui-loaded', 1);
 
             if (Elm.getElement(".basic-slider-dots") !== null) {
                 this.Dots = Elm.getElement(".basic-slider-dots");
@@ -67,31 +69,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
             this.NextSlide = this.$getNextSlide();
             this.NextDot = this.$getNextDot();
 
-            var Image = this.$prepareImg(this.NextSlide);
-
-            this.$next.delay(this.delay, this, Image);
+            setTimeout(() => {
+                this.$loadImage(this.NextSlide).then(() => {
+                    this.$next();
+                });
+            }, this.delay);
         },
 
         /**
          *  Get next slide
-         *
-         * @param Image
          */
-        $next: function (Image) {
-            var self = this;
-
-            Image.then(function (resolve) {
-                if(resolve === true) {
-                    self.$toggle().then(function () {
-                        self.$start();
-                    });
-                    return;
-                }
-
-                resolve.inject(self.NextSlide);
-                self.$toggle().then(function () {
-                    self.$start();
-                });
+        $next: function () {
+            this.$toggle().then(() => {
+                this.$start();
             });
         },
 
@@ -101,7 +91,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          * @returns {*}
          */
         $toggle: function () {
-            var self = this;
+            const self = this;
 
             return new Promise(function (resolve){
                 self.$hide().then(function () {
@@ -119,7 +109,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          * @returns {Promise}
          */
         $hide: function () {
-            var self = this;
+            const self = this;
 
             return new Promise(function (resolve){
                 moofx(self.Slide).animate({
@@ -145,10 +135,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          * @returns {Promise}
          */
         $show: function () {
-            var self = this;
+            const self = this;
 
             return new Promise(function (resolve) {
-
                 self.NextSlide.setStyle('display', "block");
 
                 moofx(self.NextSlide).animate({
@@ -162,27 +151,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
                 if (self.Dots) {
                     self.NextDot.classList.add('active');
                 }
-            });
-        },
-
-        /**
-         * Create img elemnt
-         *
-         * @param {HTML Node} Slide
-         * @returns {*}
-         */
-        $createImage: function (Slide) {
-            var url = Slide.get('data-image');
-
-            return new Promise(function (resolve) {
-
-                var Img = new Element('img', {
-                    'src': url
-                });
-
-                Img.addEventListener('load', () => {
-                    resolve(Img);
-                });
             });
         },
 
@@ -205,7 +173,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          * @returns {*}
          */
         $getNextDot: function () {
-
             if (this.Dots === null) {
                 return null;
             }
@@ -218,22 +185,25 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
         },
 
         /**
-         *  Prepare image element
-         *  Check if the image has been previously loaded
+         * Delete the loading attribute to force the image to load
+         * If the image is already loaded, the promise will be resolved immediately
          *
-         * @param {HTML Node} Slide
-         * @returns {Promise}
+         * We do this to avoid jumping effect while the image is loaded and it is not present
+         *
+         * @param Slide HTML Node
          */
-        $prepareImg: function (Slide) {
-            var self = this;
+        $loadImage: function (Slide) {
+            const Image = Slide.querySelector('img');
 
-            return new Promise(function (resolve) {
-                if(!Slide.getElement('img')) {
-                    resolve(self.$createImage(Slide));
-                    return;
-                }
+            if (Image.getAttribute('data-qui-loaded')) {
+                return Promise.resolve();
+            }
 
-                resolve(true);
+            return new Promise((resolve) => {
+                Image.addEventListener('load', resolve);
+
+                Image.setAttribute('data-qui-loaded', 1);
+                Image.removeAttribute('loading');
             });
         }
     });
