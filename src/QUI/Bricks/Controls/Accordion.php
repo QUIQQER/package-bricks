@@ -53,7 +53,7 @@ class Accordion extends QUI\Control
      *
      * @see \QUI\Control::create()
      */
-    public function getBody()
+    public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
         $entries = $this->getAttribute('entries');
@@ -102,9 +102,17 @@ class Accordion extends QUI\Control
      * @return string
      * @throws QUI\Exception
      */
-    public function createJSONLDFAQSchemaCode()
+    public function createJSONLDFAQSchemaCode(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
+
+        if (empty($this->entries)) {
+            $this->entries = $this->getAttribute('entries');
+        }
+
+        if (empty($this->entries)) {
+            return '';
+        }
 
         $Engine->assign([
             'this' => $this,
