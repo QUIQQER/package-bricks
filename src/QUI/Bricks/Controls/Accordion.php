@@ -107,15 +107,17 @@ class Accordion extends QUI\Control
     {
         $Engine = QUI::getTemplateManager()->getEngine();
 
-        $entries = $this->entries;
+        if (empty($this->entries)) {
+            $this->entries = $this->getAttribute('entries');
+        }
 
-        if (!$entries) {
-            $entries = $this->getAttribute('entries');
+        if (empty($this->entries)) {
+            return '';
         }
 
         $Engine->assign([
             'this' => $this,
-            'entries' => $entries
+            'entries' => $this->entries
         ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/Accordion.JSON-LD-Schema.html');
