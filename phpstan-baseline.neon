@@ -1,0 +1,51 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Property QUI\\\\Bricks\\\\Brick\\:\\:\\$uniqueId \\(string\\) does not accept default value of type false\\.$#"
+			count: 1
+			path: src/QUI/Bricks/Brick.php
+
+		-
+			message: "#^Call to an undefined method QUI\\\\Interfaces\\\\Projects\\\\Media\\\\File\\:\\:getImages\\(\\)\\.$#"
+			count: 1
+			path: src/QUI/Bricks/Controls/Slider/BasicSlider.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
+			count: 2
+			path: src/QUI/Bricks/Manager.php
+
+		-
+			message: "#^Method QUI\\\\Bricks\\\\Manager\\:\\:copyBrick\\(\\) should return int but returns string\\|false\\.$#"
+			count: 1
+			path: src/QUI/Bricks/Manager.php
+
+		-
+			message: "#^Method QUI\\\\Bricks\\\\Manager\\:\\:createBrickForProject\\(\\) should return int but returns string\\|false\\.$#"
+			count: 1
+			path: src/QUI/Bricks/Manager.php
+
+		-
+			message: "#^Parameter \\#1 \\$Setting of method QUI\\\\Bricks\\\\Manager\\:\\:parseSettingToBrickArray\\(\\) expects DOMElement, DOMNode given\\.$#"
+			count: 2
+			path: src/QUI/Bricks/Manager.php
+
+		-
+			message: "#^Parameter \\#2 \\$Site of method QUI\\\\Bricks\\\\Manager\\:\\:createUniqueBrickId\\(\\) expects QUI\\\\Projects\\\\Site, QUI\\\\Interfaces\\\\Projects\\\\Site given\\.$#"
+			count: 2
+			path: src/QUI/Bricks/Manager.php
+
+		-
+			message: "#^Parameter \\#2 \\$code of class QUI\\\\Exception constructor expects int, string given\\.$#"
+			count: 1
+			path: src/QUI/Bricks/Manager.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
+			count: 7
+			path: src/QUI/Bricks/Utils.php
+
+		-
+			message: "#^Parameter \\#1 \\$Brick of static method QUI\\\\Bricks\\\\Utils\\:\\:parseAreaToArray\\(\\) expects DOMElement, DOMNode given\\.$#"
+			count: 4
+			path: src/QUI/Bricks/Utils.php
