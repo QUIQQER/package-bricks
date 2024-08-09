@@ -16,11 +16,6 @@ parameters:
 			path: src/QUI/Bricks/Manager.php
 
 		-
-			message: "#^Class QUI\\\\Database\\\\Exception referenced with incorrect case\\: QUI\\\\DataBase\\\\Exception\\.$#"
-			count: 2
-			path: src/QUI/Bricks/Manager.php
-
-		-
 			message: "#^Method QUI\\\\Bricks\\\\Manager\\:\\:copyBrick\\(\\) should return int but returns string\\|false\\.$#"
 			count: 1
 			path: src/QUI/Bricks/Manager.php

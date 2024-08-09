@@ -259,7 +259,7 @@ class Manager
                 ],
                 'limit' => 1
             ]);
-        } catch (QUI\DataBase\Exception $Exception) {
+        } catch (QUI\Database\Exception $Exception) {
             QUI\System\Log::addError($Exception->getMessage());
 
             return false;
@@ -1238,7 +1238,7 @@ class Manager
                         'area' => $brickArea
                     ]
                 ]);
-            } catch (QUI\DataBase\Exception $Exception) {
+            } catch (QUI\Database\Exception $Exception) {
                 QUI\System\Log::addError($Exception->getMessage());
                 continue;
             }
