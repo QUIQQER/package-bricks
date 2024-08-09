@@ -6,26 +6,6 @@ parameters:
 			path: src/QUI/Bricks/Brick.php
 
 		-
-			message: "#^Call to method create\\(\\) on an unknown class QUI\\\\Controls\\\\ChildrenList\\.$#"
-			count: 1
-			path: src/QUI/Bricks/Controls/Children/Listing.php
-
-		-
-			message: "#^Call to method getCSSFiles\\(\\) on an unknown class QUI\\\\Controls\\\\ChildrenList\\.$#"
-			count: 1
-			path: src/QUI/Bricks/Controls/Children/Listing.php
-
-		-
-			message: "#^Call to method setAttribute\\(\\) on an unknown class QUI\\\\Controls\\\\ChildrenList\\.$#"
-			count: 15
-			path: src/QUI/Bricks/Controls/Children/Listing.php
-
-		-
-			message: "#^Instantiated class QUI\\\\Controls\\\\ChildrenList not found\\.$#"
-			count: 1
-			path: src/QUI/Bricks/Controls/Children/Listing.php
-
-		-
 			message: "#^Call to an undefined method QUI\\\\Interfaces\\\\Projects\\\\Media\\\\File\\:\\:getImages\\(\\)\\.$#"
 			count: 1
 			path: src/QUI/Bricks/Controls/Slider/BasicSlider.php
