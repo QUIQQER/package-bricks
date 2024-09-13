@@ -1119,6 +1119,14 @@ class Manager
         );
 
         QUI::getEvents()->fireEvent('quiqqerBricksSave', [$brickId]);
+
+        if (isset($this->bricks[$brickId])) {
+            unset($this->bricks[$brickId]);
+        }
+
+        if (isset($this->brickUIDs[$brickId])) {
+            unset($this->brickUIDs[$brickId]);
+        }
     }
 
     /**
