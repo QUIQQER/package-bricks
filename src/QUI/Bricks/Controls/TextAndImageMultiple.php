@@ -55,6 +55,15 @@ class TextAndImageMultiple extends QUI\Control
         $imagePosition = $this->getAttribute('imagePosition');
         $imageOnLeft = true;
 
+        if (!$entries) {
+            QUI\System\Log::addNotice(
+                'QUI\Bricks\Controls\Slider\CustomerReviewsSlider - No entries founded. 
+packages/quiqqer/bricks/src/QUI/Bricks/Controls/TextAndImageMultiple.php'
+            );
+
+            return '';
+        }
+
         $html = '';
 
         if (

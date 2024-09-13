@@ -42,6 +42,15 @@ class CustomerReviewsSlider extends QUI\Control
         $enabledEntries = [];
         $gap = $this->getAttribute('gap') ? intval($this->getAttribute('gap')) : 40;
 
+        if (!$entries) {
+            QUI\System\Log::addNotice(
+                'QUI\Bricks\Controls\Slider\CustomerReviewsSlider - No customer reviews founded. 
+packages/quiqqer/bricks/src/QUI/Bricks/Controls/Slider/CustomerReviewsSlider.php:45'
+            );
+
+            return '';
+        }
+
         switch ($gap) {
             case $gap < 0:
                 $gap = 0;
