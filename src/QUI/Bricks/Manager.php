@@ -1027,10 +1027,15 @@ class Manager
                 return true;
             }
 
-            throw new QUI\Exception(
+            QUI\System\Log::addError(
+                QUI::getLocale()->get('quiqqer/bricks', 'exception.type.is.not.allowed'),
+                ['type' => $type]
+            );
+
+            throw new QUI\Exception([
                 'quiqqer/bricks',
                 'exception.type.is.not.allowed'
-            );
+            ]);
         };
 
         $checkType($type);

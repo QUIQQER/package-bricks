@@ -242,13 +242,13 @@ define('package/quiqqer/bricks/bin/Manager', [
                         header   : QUILocale.get('quiqqer/core', 'id'),
                         dataIndex: 'id',
                         dataType : 'integer',
-                        width    : 40
+                        width    : 60
                     },
                     {
                         header   : QUILocale.get('quiqqer/core', 'title'),
                         dataIndex: 'title',
                         dataType : 'string',
-                        width    : 140
+                        width    : 300
                     },
                     {
                         header   : QUILocale.get('quiqqer/core', 'description'),
