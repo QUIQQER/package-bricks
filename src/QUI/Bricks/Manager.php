@@ -704,7 +704,7 @@ class Manager
     protected function parseSettingToBrickArray(DOMElement $Setting): array
     {
         /* @var $Option DOMElement */
-        $options = false;
+        $options = null;
 
         if ($Setting->getAttribute('type') == 'select') {
             $optionElements = $Setting->getElementsByTagName('option');
