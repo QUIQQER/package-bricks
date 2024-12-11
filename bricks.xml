@@ -1372,7 +1372,6 @@
                     </option>
                 </setting>
 
-
                 <setting name="template" type="select">
                     <locale group="quiqqer/bricks" var="brick.listTemplate"/>
                     <option value="imageTop">
@@ -1413,6 +1412,9 @@
                     </option>
                     <option value="gallery">
                         <locale group="quiqqer/bricks" var="brick.listTemplate.gallery"/>
+                    </option>
+                    <option value="galleryOverlay">
+                        <locale group="quiqqer/bricks" var="brick.listTemplate.galleryOverlay"/>
                     </option>
                     <option value="bigBanner">
                         <locale group="quiqqer/bricks" var="brick.listTemplate.bigBanner"/>
