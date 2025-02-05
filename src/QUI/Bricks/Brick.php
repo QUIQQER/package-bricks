@@ -49,8 +49,6 @@ class Brick extends QUI\QDOM
     /**
      * internal unique ID
      * This ID is unique for the complete system
-     *
-     * @var string
      */
     protected mixed $uniqueId = false;
 

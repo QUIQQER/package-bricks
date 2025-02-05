@@ -7,6 +7,7 @@
 namespace QUI\Bricks;
 
 use DOMElement;
+use DOMNode;
 use DOMXPath;
 use Exception;
 use QUI;
@@ -172,7 +173,7 @@ class Manager
             QUI\System\Log::writeException($Exception);
         }
 
-        return $brickId;
+        return (int)$brickId;
     }
 
     /**
@@ -220,7 +221,7 @@ class Manager
      * Create a new unique Brick ID
      *
      * @param integer $brickId - Brick ID
-     * @param Site $Site - Current Site
+     * @param QUI\Interfaces\Projects\Site $Site - Current Site
      * @return string
      *
      * @throws QUI\Exception
@@ -347,8 +348,8 @@ class Manager
      */
     public function getAreasByProject(
         Project $Project,
-        bool|string $layoutType = false,
-        bool|string $siteType = false
+        bool | string $layoutType = false,
+        bool | string $siteType = false
     ): array {
         $templates = [];
         $bricks = [];
@@ -541,7 +542,7 @@ class Manager
      * @return Brick
      * @throws QUI\Exception
      */
-    public function getBrickByUID(string $uid, QUI\Interfaces\Projects\Site $Site = null): Brick
+    public function getBrickByUID(string $uid, null | QUI\Interfaces\Projects\Site $Site = null): Brick
     {
         if (isset($this->brickUIDs[$uid])) {
             return $this->brickUIDs[$uid];
@@ -698,15 +699,18 @@ class Manager
     /**
      * Parse a xml setting element to a brick array
      *
-     * @param DOMElement $Setting
+     * @param DOMNode|DOMElement $Setting
      * @return array
      */
-    protected function parseSettingToBrickArray(DOMElement $Setting): array
+    protected function parseSettingToBrickArray(DOMNode | DOMElement $Setting): array
     {
-        /* @var $Option DOMElement */
         $options = null;
 
-        if ($Setting->getAttribute('type') == 'select') {
+        if (
+            method_exists($Setting, 'getAttribute')
+            && method_exists($Setting, 'getElementsByTagName')
+            && $Setting->getAttribute('type') == 'select'
+        ) {
             $optionElements = $Setting->getElementsByTagName('option');
 
             foreach ($optionElements as $Option) {
@@ -730,19 +734,21 @@ class Manager
             }
         }
 
-        $Description = $Setting->getElementsByTagName('description');
+        if (method_exists($Setting, 'getElementsByTagName')) {
+            $Description = $Setting->getElementsByTagName('description');
 
-        if ($Description->length) {
-            $description = QUI\Utils\DOM::getTextFromNode($Description->item(0), false);
+            if ($Description->length) {
+                $description = QUI\Utils\DOM::getTextFromNode($Description->item(0), false);
+            }
         }
 
         return [
-            'name' => $Setting->getAttribute('name'),
+            'name' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('name') : '',
             'text' => QUI\Utils\DOM::getTextFromNode($Setting, false),
             'description' => $description,
-            'type' => $Setting->getAttribute('type'),
-            'class' => $Setting->getAttribute('class'),
-            'data-qui' => $Setting->getAttribute('data-qui'),
+            'type' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('type') : '',
+            'class' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('class') : '',
+            'data-qui' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('data-qui') : '',
             'options' => $options,
             'data-attributes' => $dataAttributes
         ];
@@ -914,7 +920,7 @@ class Manager
      * @param array $brickData - Brick data
      * @throws QUI\Exception
      */
-    public function saveBrick(int|string $brickId, array $brickData): void
+    public function saveBrick(int | string $brickId, array $brickData): void
     {
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.edit');
 
@@ -1143,7 +1149,7 @@ class Manager
      *
      * @throws QUI\Exception
      */
-    public function copyBrick(int|string $brickId, array $params = []): int
+    public function copyBrick(int | string $brickId, array $params = []): int
     {
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.create');
 
@@ -1178,7 +1184,7 @@ class Manager
 
         QUI::getDataBase()->insert($this->getTable(), $data);
 
-        return QUI::getPDO()->lastInsertId();
+        return (int)QUI::getPDO()->lastInsertId();
     }
 
     /**
@@ -1320,7 +1326,7 @@ class Manager
      * @param bool|string $template - optional, name of the current template
      * @return string
      */
-    public function getAlternateClass($control, bool|string $template = false): string
+    public function getAlternateClass($control, bool | string $template = false): string
     {
         $control = trim($control, '\\ ');
 
@@ -1347,6 +1353,10 @@ class Manager
                 $list = $Path->query('//quiqqer/bricks/overwrite/brick');
 
                 foreach ($list as $Overwrite) {
+                    if (!method_exists($Overwrite, 'getAttribute')) {
+                        continue;
+                    }
+
                     $src = $Overwrite->getAttribute('parent');
                     $alt = $Overwrite->getAttribute('alternate');
 
