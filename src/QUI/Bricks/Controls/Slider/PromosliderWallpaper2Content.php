@@ -69,8 +69,8 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      */
     public function addSlide(
         string $image,
-        string $title,
-        string $text,
+        string $title = '',
+        string $text = '',
         string|bool $type = false,
         string $url = '',
         bool $newTab = false
@@ -89,8 +89,8 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      */
     public function addMobileSlide(
         string $image,
-        string $title,
-        string $text,
+        string $title = '',
+        string $text = '',
         string $url = '',
         bool $newTab = false
     ): void {
@@ -107,8 +107,13 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param boolean $newTab - should the url be opened in a new tab?
      * @return array
      */
-    protected function checkSlideParams($image, $left = '', $right = '', $url = '', $newTab = false): array
-    {
+    protected function checkSlideParams(
+        string $image,
+        string $left = '',
+        string $right = '',
+        string $url = '',
+        bool $newTab = false
+    ): array {
         if (Utils::isMediaUrl($image)) {
             try {
                 $Image = Utils::getMediaItemByUrl($image);

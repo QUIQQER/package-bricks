@@ -319,6 +319,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 });
 
                 self.fireEvent('save', [self]);
+
+                if (self.getActiveCategory().getAttribute('name')) {
+
+                }
+
                 self.Loader.hide();
             }).catch(function (e) {
                 QUI.getMessageHandler().then(function (MH) {
@@ -446,7 +451,6 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                 data.settings = Object.merge(data.settings, extra);
             }
-
             if (unload === 'content' && this.$Editor) {
                 data.attributes.content = this.$Editor.getContent();
             }

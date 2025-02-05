@@ -18,14 +18,11 @@
     </div>
 
     <div class="basic-slider-image-wrapper">
-        <ul class="basic-slider-images">
+        <ul class="basic-slider-images" {if $maxImageWidth}style="--_qui-bricks-basicSlider-image-maxWidth: {$maxImageWidth}px;"{/if}>
             {assign var=showFirstImage value=true}
             {foreach from=$images item=Image}
-                <li data-image="{image image=$Image onlysrc=1 width="$maxImageWidth"}">
-                    {if $showFirstImage}
-                        {image image=$Image width="$maxImageWidth"}
-                        {assign var=showFirstImage value=false}
-                    {/if}
+                <li>
+                    {image image=$Image width="$maxImageWidth" loading="lazy"}
                 </li>
             {/foreach}
         </ul>

@@ -31,8 +31,9 @@
     transform: translateX(0);
 }
 
-.basic-slider-image-wrapper li img {
+.basic-slider-image-wrapper img {
     max-width: 100%;
+    width: var(--_qui-bricks-basicSlider-image-maxWidth, initial);
 }
 
 .basic-slider-content {
@@ -47,6 +48,7 @@
 .basic-slider-dots {
     display: flex;
     justify-content: center;
+    margin-top: 1rem;
     margin-bottom: 0;
     padding: 0;
 }

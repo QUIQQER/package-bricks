@@ -734,16 +734,15 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             // restore original title and description of list items
             const restoreOriginalHtml = function(Item) {
-                Item.querySelector('header').innerHTML = Item.getAttribute('data-qui-title');
+                Item.querySelector('header').innerHTML = Item.getAttribute('data-qui-title-original');
                 Item.querySelector('.qui-elements-list-item-description').innerHTML = Item.getAttribute(
-                    'data-qui-desc');
-            }
+                    'data-qui-desc-original');
+            };
 
             // hide all entries (bricks)
             const hideAll = function() {
                 itemNodes.each(function(Item) {
                     Item.style.display = 'none';
-                    restoreOriginalHtml(Item);
                 });
             };
 
@@ -769,7 +768,6 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 if (Item.getAttribute('data-qui-title').indexOf(term) >= 0) {
                     let  TitleNode = Item.querySelector('header'),
                     titleText = TitleNode.innerText;
-
                     titleHtml = titleText.substr(0, titleText.toLowerCase().indexOf(term));
                     titleHtml += "<mark>" + titleText.substr(titleText.toLowerCase().indexOf(term),
                         term.length) + "</mark>";
@@ -790,11 +788,12 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                     DescNode.innerHTML = descHtml;
                 }
-            }
+            };
 
             // execute search / filter
             const search = function() {
                 let term = Input.value.trim();
+                term = term.toLowerCase();
 
                 if (term === '') {
                     Input.value = '';
@@ -818,7 +817,6 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                     let counter = 0;
 
                     itemNodes.each(function(Item) {
-                        term = term.toLowerCase();
                         if (Item.getAttribute('data-qui-title').indexOf(term) >= 0 ||
                             Item.getAttribute('data-qui-desc').indexOf(term) >= 0) {
 
@@ -880,7 +878,17 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                             );
 
                             Item.setAttribute(
+                                'data-qui-title-original',
+                                Item.getElement('header').innerText
+                            );
+
+                            Item.setAttribute(
                                 'data-qui-desc',
+                                Item.getElement('.qui-elements-list-item-description').innerText.toLowerCase()
+                            );
+
+                            Item.setAttribute(
+                                'data-qui-desc-original',
                                 Item.getElement('.qui-elements-list-item-description').innerText.toLowerCase()
                             );
                         });
@@ -940,7 +948,6 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                         }).inject(FilterContainer, 'top');
 
                         CounterNode.inject(FilterContainer);
-
                         FilterContainer.inject(Content, 'top');
 
                         Input.focus();
