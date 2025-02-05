@@ -72,7 +72,7 @@ class BasicSlider extends QUI\Control
             }
         }
 
-        if ($Folder) {
+        if ($Folder && method_exists($Folder, 'getImages')) {
             $images = $Folder->getImages();
         } elseif (!empty($this->ownImages)) {
             $images = $this->ownImages;

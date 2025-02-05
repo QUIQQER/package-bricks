@@ -7,6 +7,7 @@
 namespace QUI\Bricks;
 
 use DOMElement;
+use DOMNode;
 use DOMXPath;
 use QUI;
 use QUI\Projects\Project;
@@ -54,6 +55,10 @@ class Utils
 
         /* @var $Brick DOMElement */
         foreach ($bricks as $Brick) {
+            if (!method_exists($Brick, 'getAttribute')) {
+                continue;
+            }
+
             if ($Brick->getAttribute('control') == '*') {
                 continue;
             }
@@ -75,8 +80,8 @@ class Utils
      */
     public static function getTemplateAreasFromXML(
         string $file,
-        bool|string $layoutType = false,
-        bool|string $siteType = false
+        bool | string $layoutType = false,
+        bool | string $siteType = false
     ): array {
         if (!file_exists($file)) {
             return [];
@@ -144,36 +149,47 @@ class Utils
     /**
      * parse a <area> xml node to an array
      *
-     * @param DOMElement $Brick
+     * @param DOMNode|DOMElement $Brick
      * @param DOMXPath $Path
      *
      * @return array
      */
-    public static function parseAreaToArray(DOMElement $Brick, DOMXPath $Path): array
+    public static function parseAreaToArray(DOMNode | DOMElement $Brick, DOMXPath $Path): array
     {
-        $control = $Brick->getAttribute('control');
-        $name = $Brick->getAttribute('name');
+        $control = '';
+        $name = '';
+
+        if (method_exists($Brick, 'getAttribute')) {
+            $control = $Brick->getAttribute('control');
+            $name = $Brick->getAttribute('name');
+        }
 
         $hasContent = 1;
         $cacheable = 1;
         $deprecated = 0;
 
         if (
-            $Brick->hasAttribute('deprecated')
+            method_exists($Brick, 'getAttribute')
+            && method_exists($Brick, 'hasAttribute')
+            && $Brick->hasAttribute('deprecated')
             && (int)$Brick->getAttribute('deprecated') === 1
         ) {
             $deprecated = 1;
         }
 
         if (
-            $Brick->hasAttribute('hasContent')
+            method_exists($Brick, 'getAttribute')
+            && method_exists($Brick, 'hasAttribute')
+            && $Brick->hasAttribute('hasContent')
             && (int)$Brick->getAttribute('hasContent') === 0
         ) {
             $hasContent = 0;
         }
 
         if (
-            $Brick->hasAttribute('cacheable')
+            method_exists($Brick, 'getAttribute')
+            && method_exists($Brick, 'hasAttribute')
+            && $Brick->hasAttribute('cacheable')
             && (int)$Brick->getAttribute('cacheable') === 0
         ) {
             $cacheable = 0;
@@ -185,14 +201,22 @@ class Utils
         $titleLocale = $Path->query('./title/locale', $Brick);
         $descLocale = $Path->query('./description/locale', $Brick);
 
-        if ($titleLocale->length) {
+        if (
+            $titleLocale->length
+            && $titleLocale->item(0)
+            && method_exists($titleLocale->item(0), 'getAttribute')
+        ) {
             $title = [
                 'group' => $titleLocale->item(0)->getAttribute('group'),
                 'var' => $titleLocale->item(0)->getAttribute('var')
             ];
         }
 
-        if ($descLocale->length) {
+        if (
+            $descLocale->length
+            && $descLocale->item(0)
+            && method_exists($descLocale->item(0), 'getAttribute')
+        ) {
             $description = [
                 'group' => $descLocale->item(0)->getAttribute('group'),
                 'var' => $descLocale->item(0)->getAttribute('var')
@@ -206,8 +230,8 @@ class Utils
             'name' => $name,
             'title' => $title,
             'description' => $description,
-            'inheritance' => $Brick->getAttribute('inheritance'),
-            'priority' => $Brick->getAttribute('priority'),
+            'inheritance' => method_exists($Brick, 'getAttribute') ? $Brick->getAttribute('inheritance') : '',
+            'priority' => method_exists($Brick, 'getAttribute') ? $Brick->getAttribute('priority') : '',
             'deprecated' => $deprecated
         ];
     }
@@ -323,9 +347,10 @@ class Utils
             // settings
             $settings = $Path->query($settingsPath);
 
-            /* @var $Setting DOMElement */
             foreach ($settings as $Setting) {
-                $attributes[] = $Setting->getAttribute('name');
+                if (method_exists($Setting, 'getAttribute')) {
+                    $attributes[] = $Setting->getAttribute('name');
+                }
             }
 
             // categories
@@ -337,6 +362,10 @@ class Utils
 
                 /* @var $Child DOMElement */
                 foreach ($children as $Child) {
+                    if (!method_exists($Child, 'getAttribute')) {
+                        continue;
+                    }
+
                     switch ($Child->nodeName) {
                         case 'input':
                         case 'textarea':
