@@ -8,7 +8,7 @@
 
             {
                 "@type": "Question",
-                "name": "{$entry['entryTitle']}",
+                "name": "{$entry['entryTitle']|escape:"htmlall"}",
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "{$entry['entryContent']|escape:"htmlall"}"
