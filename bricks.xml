@@ -976,6 +976,9 @@
             <settings>
                 <setting name="preventLoadMap" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.preventLoadMap"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.preventLoadMap.desc"/>
+                    </description>
                 </setting>
 
                 <setting name="template" type="select">
@@ -1010,6 +1013,9 @@
                 </setting>
                 <setting name="zoom" type="number">
                     <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.zoom"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.simplegooglemaps.settings.zoom.desc"/>
+                    </description>
                 </setting>
 
                 <setting name="api">
