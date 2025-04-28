@@ -1683,18 +1683,19 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.control.simplegooglemaps.title">
             <de><![CDATA[Bausteine: Einfache Google Maps Karte]]></de>
             <en><![CDATA[Bricks: Simple Google Maps]]></en>
-            <pl><![CDATA[Bricks: Simple Google Maps]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.description">
             <de><![CDATA[Einstellungen für Karten]]></de>
             <en><![CDATA[Maps settings]]></en>
-            <pl><![CDATA[Ustawienia mapy]]></pl>
         </locale>
 
         <locale name="brick.control.simplegooglemaps.settings.preventLoadMap">
-            <de>
-                <![CDATA[Das automatische Laden von Google Maps verhindern. Der Benutzer muss sie manuell aktivieren.]]></de>
-            <en><![CDATA[Prevent auto-load Google Maps. User must activate it manually.]]></en>
+            <de><![CDATA[Automatisches Laden verhindern]]></de>
+            <en><![CDATA[Disable auto loading]]></en>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.preventLoadMap.desc">
+            <de><![CDATA[Der Benutzer muss per Button Klick erlauben, die Google Karte zu laden. Wenn der Benutzer zuvor die erforderlichen Cookies zugelassen hat und das Modul "QUIQQER - DSGVO (GDPR)" (<code>quiqqer/gdpr</code>) installiert ist, wird die Google-Karte automatisch geladen. Eine wiederholte Zustimmung durch den Benutzer ist in diesem Fall nicht erforderlich.]]></de>
+            <en><![CDATA[The user must explicitly allow the Google map to be loaded by clicking a button. If the user has previously allowed the required cookies and the "QUIQQER - GDPR" module (<code>quiqqer/gdpr</code>) is installed, the Google map will be loaded automatically. In this case, repeated user consent is not required.]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.template">
             <de><![CDATA[Template]]></de>
@@ -1716,37 +1717,34 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.control.simplegooglemaps.settings.place">
             <de><![CDATA[Google Place]]></de>
             <en><![CDATA[Google Place]]></en>
-            <pl><![CDATA[Google Place]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.title">
             <de><![CDATA[Title]]></de>
             <en><![CDATA[Title]]></en>
-            <pl><![CDATA[Tytuł]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.street">
             <de><![CDATA[Straße]]></de>
             <en><![CDATA[Street]]></en>
-            <pl><![CDATA[Ulica]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.zip">
             <de><![CDATA[PLZ]]></de>
             <en><![CDATA[ZIP code]]></en>
-            <pl><![CDATA[Kod pocztowy]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.city">
             <de><![CDATA[Stadt]]></de>
             <en><![CDATA[City]]></en>
-            <pl><![CDATA[Miejscowość]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.zoom">
             <de><![CDATA[Zoom]]></de>
             <en><![CDATA[Zoom]]></en>
-            <pl><![CDATA[Zoom]]></pl>
+        </locale>
+        <locale name="brick.control.simplegooglemaps.settings.zoom.desc">
+            <de><![CDATA[Standardwert ist 15. Je größer die Zahl, desto näher wird gezoomt. Werte von 0 (die ganze Welt) bis 21 (einzelne Gebäude) sind erlaubt. Die Obergrenze kann je nach den am ausgewählten Standort verfügbaren Kartendaten variieren.]]></de>
+            <en><![CDATA[The default value is 15. The larger the number, the more zoomed in the map will be. Values ranging from 0 (the whole world) to 21 (individual buildings) are allowed. The upper limit can vary depending on the map data available at the selected location.]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.api">
             <de><![CDATA[API Key]]></de>
             <en><![CDATA[API Key]]></en>
-            <pl><![CDATA[Klucz API]]></pl>
         </locale>
         <locale name="brick.control.simplegooglemaps.frontend.buttonShow">
             <de><![CDATA[Google Maps aktivieren]]></de>
