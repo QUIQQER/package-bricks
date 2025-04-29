@@ -21,7 +21,10 @@
 
         {if $this->getAttribute('showFlags')}
         <span class="quiqqer-bricks-languageswitch-flag-entry-icon">
-            <img src="{$path}{$lang}.png"/>
+            <img src="{$path}{$lang}.png"
+                 alt="{locale group='quiqqer/core' var='language.'|cat:$lang}"
+                 title="{locale group='quiqqer/core' var='language.'|cat:$lang}"
+            />
         </span>
         {/if}
 
