@@ -53,7 +53,8 @@ class BoxContentAdvanced extends QUI\Control
         $Engine->assign([
             'entries' => $entries,
             'centerText' => $this->getAttribute('centerText'),
-            'entriesPerLine' => '-' . $this->getAttribute('entriesPerLine')
+            'entriesPerLine' => '-' . $this->getAttribute('entriesPerLine'),
+            'SiteUtils' => '\\QUI\\Projects\\Site\\Utils'
         ]);
 
         switch ($this->getAttribute('template')) {

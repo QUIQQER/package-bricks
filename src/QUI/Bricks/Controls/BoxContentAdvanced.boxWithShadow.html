@@ -5,8 +5,8 @@
     {/if}
     {foreach from=$entries item=entry}
 
-    {if $entry.entryUrl && QUI\Projects\Site\Utils::getSiteByLink($entry.entryUrl)}
-        {assign var=TargetSite value=QUI\Projects\Site\Utils::getSiteByLink($entry.entryUrl)}
+    {if $entry.entryUrl && $SiteUtils::getSiteByLink($entry.entryUrl)}
+        {assign var=TargetSite value=$SiteUtils::getSiteByLink($entry.entryUrl)}
     {/if}
 
     <div class="quiqqer-boxContentAdvanced-entry-container quiqqer-boxContentAdvanced{$entriesPerLine} {$centerText}"
