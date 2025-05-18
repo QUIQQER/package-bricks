@@ -5,8 +5,8 @@
     {/if}
     {foreach from=$entries item=entry}
 
-    {if $entry.entryUrl && QUI\Projects\Site\Utils::getSiteByLink($entry.entryUrl)}
-        {assign var=TargetSite value=QUI\Projects\Site\Utils::getSiteByLink($entry.entryUrl)}
+    {if $entry.entryUrl && $SiteUtils::getSiteByLink($entry.entryUrl)}
+        {assign var=TargetSite value=$SiteUtils::getSiteByLink($entry.entryUrl)}
     {/if}
 
     <div class="quiqqer-boxContentAdvanced-entry-container quiqqer-boxContentAdvanced{$entriesPerLine} {$centerText}"
@@ -17,7 +17,7 @@
                 <a href="{url site=$TargetSite rewrited=1}" title="{$TargetSite->getAttribute('title')}">
                 {/if}
 
-                <div class="quiqqer-boxContentAdvanced-entry-img control-color">
+                <div class="quiqqer-boxContentAdvanced-entry-img">
                     {image src=$entry.entryImage width="500"}
                 </div>
 
@@ -29,9 +29,9 @@
             {if $entry.entryTitle || $entry.entrySubTitle}
             <header>
                 {if $entry.entryTitle}
-                <h4 class="quiqqer-boxContentAdvanced-entry-title" title="{$entry.entryTitle|escape:'html'}">
+                <div role="heading" class="quiqqer-boxContentAdvanced-entry-title">
                     {if $entry.entryUrl}
-                    <a href="{url site=$TargetSite rewrited=1}" title="{$TargetSite->getAttribute('title')}">
+                    <a href="{url site=$TargetSite rewrited=1}">
                     {/if}
 
                     {$entry.entryTitle|escape:'html'}
@@ -39,7 +39,7 @@
                     {if $entry.entryUrl}
                     </a>
                     {/if}
-                </h4>
+                </div>
                 {/if}
                 
                 {if $entry.entrySubTitle}
