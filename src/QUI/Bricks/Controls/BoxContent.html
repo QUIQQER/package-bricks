@@ -13,9 +13,11 @@
 <div class="quiqqer-boxContent__entries">
     {foreach from=$entries item=entry}
         <div class="quiqqer-boxContent__entry {if $centerText}quiqqer-boxContent__entry--center{/if}">
-            <h4 title="{$entry.title|escape:"html"}">
-                {$entry.title}
-            </h4>
+            <header>
+                <div role="heading">
+                    {$entry.title}
+                </div>
+            </header>
             <div class="default-content">
                 {$entry.text}
             </div>
