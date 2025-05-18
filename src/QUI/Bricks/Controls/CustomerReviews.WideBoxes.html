@@ -26,19 +26,11 @@
 
     <div class="customer-review customer-review-{$modKey} control-template" {if $title}title="{$title}"{/if}>
         {if $showAvatar}
-        <div class="customer-review-image">
-
-            {if $entry.avatar}
-                {assign var=avatarImage value={image src=$entry.avatar width=200 onlysrc=true}}
-            {else}
-                {assign var=avatarImage value=URL_OPT_DIR|cat:"/quiqqer/bricks/bin/images/avatar-placeholder.svg"}
-            {/if}
-
-            <div class="customer-review-image-img"
-                 style="background-image: url({$avatarImage})">
+            <div class="customer-review-image">
+                {image src=$entry.avatar width=200}
             </div>
-        </div>
         {/if}
+
         <div class="customer-review-content">
             <div class="customer-review-content-text">
                 {* Fix content issue *}

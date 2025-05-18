@@ -47,9 +47,14 @@
     width: 50px;
 }
 
-/* div with img as background */
-.customer-review-footer-image-img {
-    background-size: cover;
+.customer-review-footer-image > picture {
+    display: grid;
+    place-items: center;
+}
+
+.customer-review-footer-image img {
+    object-position: center;
+    object-fit: fill;
     height: 100%;
     width: 100%;
 }

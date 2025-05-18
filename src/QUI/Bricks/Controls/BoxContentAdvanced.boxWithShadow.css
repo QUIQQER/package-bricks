@@ -22,6 +22,10 @@
     padding-right: 1rem;
 }
 
+.quiqqer-boxContentAdvanced-entries__boxWithShadow .quiqqer-boxContentAdvanced-entry-title {
+    font-size: var(--qui-fs-lg, 1.25rem);
+}
+
 .quiqqer-boxContentAdvanced-entries__boxWithShadow .quiqqer-boxContentAdvanced-entry-content {
     padding-left: 1rem;
     padding-right: 1rem;
