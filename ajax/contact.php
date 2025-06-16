@@ -9,7 +9,7 @@ use QUI\Captcha\Handler as CaptchaHandler;
 /**
  * Returns the Brick data
  *
- * @param String|Integer $brickId - Brick-ID
+ * @param String|Integer $brickId - Brick-ID (will be cast to int)
  * @param string $project
  * @param int $siteId
  * @param string $message
@@ -37,7 +37,7 @@ QUI::$Ajax->registerFunction(
 
         if (!empty($brickId)) {
             $BrickManager               = QUI\Bricks\Manager::init();
-            $Brick                      = $BrickManager->getBrickByID($brickId);
+            $Brick                      = $BrickManager->getBrickByID((int)$brickId);
             $privacyPolicyCheckboxBrick = $Brick->getSetting('showPrivacyPolicyCheckbox');
         }
 
