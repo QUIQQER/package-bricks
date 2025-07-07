@@ -474,17 +474,94 @@
             <de><![CDATA[Zeit zum nächsten Slide (Verzögerung)]]></de>
             <en><![CDATA[Time to start next slide (Delay)]]></en>
         </locale>
+        <locale name="brick.control.basicSlider.settings.delay.desc">
+            <de><![CDATA[Zeit bis zum nächsten Slide in Millisekunden. 1000 entspricht 1 Sekunde.]]></de>
+            <en><![CDATA[Time until the next slide in milliseconds. 1000 equals 1 second.]]></en>
+        </locale>
+        <locale name="brick.basicSlider.animationType">
+            <de><![CDATA[Art der Animation]]></de>
+            <en><![CDATA[Animation type]]></en>
+        </locale>
+        <locale name="brick.basicSlider.animationType.hideSlideToLeftShowSlideFromLeft">
+            <de><![CDATA[Nach links ausblenden, von links einblenden]]></de>
+            <en><![CDATA[Hide slide to left, show slide from left]]></en>
+        </locale>
+        <locale name="brick.basicSlider.animationType.hideSlideToLeftShowSlideFromRight">
+            <de><![CDATA[Nach links ausblenden, von rechts einblenden]]></de>
+            <en><![CDATA[Hide slide to left, show slide from right]]></en>
+        </locale>
+        <locale name="brick.basicSlider.animationType.hideSlideToRightShowSlideFromRight">
+            <de><![CDATA[Nach rechts ausblenden, von rechts einblenden]]></de>
+            <en><![CDATA[Hide slide to right, show slide from right]]></en>
+        </locale>
+        <locale name="brick.basicSlider.animationType.hideSlideToRightShowSlideFromLeft">
+            <de><![CDATA[Nach rechts ausblenden, von links einblenden]]></de>
+            <en><![CDATA[Hide slide to right, show slide from left]]></en>
+        </locale>
+        <locale name="brick.basicSlider.animationType.hideSlideToBottomShowSlideFromBottom">
+            <de><![CDATA[Nach unten ausblenden, von unten einblenden]]></de>
+            <en><![CDATA[Hide slide to bottom, show slide from bottom]]></en>
+        </locale>
+        <locale name="brick.basicSlider.animationType.hideSlideToBottomShowSlideFromTop">
+            <de><![CDATA[Nach unten ausblenden, von oben einblenden]]></de>
+            <en><![CDATA[Hide slide to bottom, show slide from top]]></en>
+        </locale>
+        <locale name="brick.basicSlider.animationType.fadeOutFadeIn">
+            <de><![CDATA[Aus- und einblenden]]></de>
+            <en><![CDATA[Fade out and in]]></en>
+        </locale>
+        <locale name="brick.basicSlider.animationType.hideScaleOutShowFromScaleOut">
+            <de><![CDATA[Verkleinern beim Ausblenden und von klein vergrößern beim Einblenden]]></de>
+            <en><![CDATA[Scale out on hide, scale in from small on show]]></en>
+        </locale>
+        <locale name="brick.basicSlider.animationType.hideScaleInShowFromScaleIn">
+            <de><![CDATA[Vergrößern beim Ausblenden und von groß verkleinern beim Einblenden]]></de>
+            <en><![CDATA[Scale in on hide, scale out from large on show]]></en>
+        </locale>
+        <locale name="brick.basicSlider.animationType.hideScaleOutShowFromScaleIn">
+            <de><![CDATA[Verkleinern beim Ausblenden und von groß verkleinern beim Einblenden]]></de>
+            <en><![CDATA[Scale out on hide, scale out from large on show]]></en>
+        </locale>
+        <locale name="brick.basicSlider.animationType.hideScaleInShowFromScaleOut">
+            <de><![CDATA[Vergrößern beim Ausblenden und von klein vergrößern beim Einblenden]]></de>
+            <en><![CDATA[Scale in on hide, scale in from small on show]]></en>
+        </locale>
+
         <locale name="brick.control.basicSlider.imgLeft">
             <de><![CDATA[Bilder auf der linken Seite]]></de>
             <en><![CDATA[Show images on left]]></en>
         </locale>
-        <locale name="brick.control.basicSlider.navigationDotsShow">
+        <locale name="brick.control.basicSlider.imgLeft.desc">
+            <de><![CDATA[Zeigt die Bilder im Slider links an und den Text rechts daneben. Ohne diese Einstellung wird der Text unter den Bildern angezeigt.]]></de>
+            <en><![CDATA[Displays the images on the left side of the slider and the text on the right. Without this setting, the text is shown below the images.]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.imgTopMobile">
+            <de><![CDATA[Bilder über dem Text (mobil)]]></de>
+            <en><![CDATA[Images above text (mobile)]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.imgTopMobile.desc">
+            <de><![CDATA[Wenn aktiviert, werden auf mobilen Geräten die Bilder über dem Text angezeigt. Ist die Option nicht aktiviert, erscheint zuerst der Text und dann die Bilder.]]></de>
+            <en><![CDATA[When enabled, images are shown above the text on mobile devices. If this option is not enabled, the text appears before the images.]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.showDotNav">
             <de><![CDATA[Punktnavigation anzeigen]]></de>
-            <en><![CDATA[Show dots navigation]]></en>
+            <en><![CDATA[Show dot navigation]]></en>
         </locale>
         <locale name="brick.control.basicSlider.maxImageWidth">
-            <de><![CDATA[Maximale Briete des Bildes]]></de>
-            <en><![CDATA[Maximum image width]]></en>
+            <de><![CDATA[Maximale Breite des Bildes (in Pixel)]]></de>
+            <en><![CDATA[Maximum image width (in pixels)]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.sliderHeight">
+            <de><![CDATA[Slider Höhe (in Pixel)]]></de>
+            <en><![CDATA[Slider height (in pixels)]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.sliderHeight.desc">
+            <de><![CDATA[Legt die maximale Höhe des Slider-Containers fest. Besonders hilfreich, wenn die enthaltenen Bilder unterschiedliche Größen haben. Mit einer festen Höhe wird verhindert, dass der Slider beim Wechsel zwischen unterschiedlich großen Bildern „springt“ und die Bilder bleiben immer zentriert. Bei Bildern mit gleichem Format und gleicher Größe ist die Einstellung nicht notwendig, kann aber optional gesetzt werden.]]></de>
+            <en><![CDATA[Defines the maximum height of the slider container. Especially useful when the included images have different sizes. Setting a fixed height prevents the slider from “jumping” when switching between images of different sizes and keeps all images centered. If all images have the same format and size, this setting is not required but can still be used.]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.sliderHeightMobile">
+            <de><![CDATA[Slider Höhe (mobile) (in Pixel)]]></de>
+            <en><![CDATA[Slider height (mobile) (in pixels)]]></en>
         </locale>
         <locale name="brick.basicSlider.textPosition">
             <de><![CDATA[Text Position]]></de>
@@ -503,8 +580,14 @@
             <en><![CDATA[Bottom]]></en>
         </locale>
         <locale name="brick.control.basicSlider.sliderContent">
-            <de><![CDATA[Inhalt]]></de>
-            <en><![CDATA[Text]]></en>
+            <de><![CDATA[Inhalt neben den Bildern]]></de>
+            <en><![CDATA[Content next to images]]></en>
+        </locale>
+        <locale name="brick.control.basicSlider.sliderContent.desc">
+            <de><![CDATA[Dieser Inhalt wird abhängig von der gewählten Einstellung neben den Bildern angezeigt – entweder links oder rechts der Bilder.
+Dieser Inhalt ersetzt den Baustein-Inhalt nicht. Du kannst weiterhin über dem Slider den Bausteintext platzieren.]]></de>
+            <en><![CDATA[This content is displayed next to the images, depending on the selected setting – either to the left or right of the images.
+This content does not replace the block content. You can still place the brick text above the slider.]]></en>
         </locale>
 
         <locale name="brick.control.slider.title">
