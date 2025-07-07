@@ -23,17 +23,21 @@ class BasicSlider extends QUI\Control
     {
         // default options
         $this->setAttributes([
-            'title' => '',
-            'text' => '',
-            'mediaFolder' => false,
-            'delay' => 7000,
-            'imgLeft' => false,
-            'maxImageWidth' => false,
-            'sliderContent' => '',
-            'class' => 'quiqqer-bricks-basic-slider',
             'nodeName' => 'section',
+            'class' => 'quiqqer-bricks-slider-basicSlider',
             'data-qui' => 'package/quiqqer/bricks/bin/Controls/Slider/BasicSlider',
-            'dotsNav' => false,
+
+            'mediaFolder' => false,
+            'showDotNav' => false,
+            'delay' => 7000,
+            'animationType' => 'hideSlideToLeftShowSlideFromLeft', // see js control options for possible values
+            'imgLeft' => false,
+            'imgTopMobile' => false,
+            'maxImageWidth' => 300,
+            'sliderHeight' => false,
+            'sliderHeightMobile' => false,
+            'sliderContent' => '',
+            'textPosition' => 'center',
         ]);
 
         parent::__construct($attributes);
@@ -52,13 +56,8 @@ class BasicSlider extends QUI\Control
         $Folder = false;
         $images = [];
         $sliderContent = $this->getAttribute('sliderContent');
-        $imgLeft = false;
 
         if (!$mediaFolder) {
-            return '';
-        }
-
-        if (!$sliderContent) {
             return '';
         }
 
@@ -78,15 +77,20 @@ class BasicSlider extends QUI\Control
             $images = $this->ownImages;
         }
 
-        $delay = 5000;
-        if (intval($this->getAttribute('delay')) > 0) {
+        $delay = 7000;
+        if (intval($this->getAttribute('delay')) >= 1000) {
             $delay = $this->getAttribute('delay');
         }
 
-        $this->setJavaScriptControlOption('delay', $delay);
+        $containerChildDirection = 'row';
+        $containerChildDirectionMobile = 'column';
 
         if ($this->getAttribute('imgLeft')) {
-            $imgLeft = $this->getAttribute('imgLeft');
+            $containerChildDirection = 'row-reverse';
+        }
+
+        if ($this->getAttribute('imgTopMobile')) {
+            $containerChildDirectionMobile = 'column-reverse';
         }
 
         $maxImageWidth = false;
@@ -94,27 +98,65 @@ class BasicSlider extends QUI\Control
             $maxImageWidth = intval($this->getAttribute('maxImageWidth'));
         }
 
-        $dotsNav = $this->getAttribute('navigationDotsShow');
+        $sliderHeight = false;
+        $sliderHeightMobile = false;
+        if (intval($this->getAttribute('sliderHeight')) > 0) {
+            $sliderHeight = intval($this->getAttribute('sliderHeight'));
+        }
+        if (intval($this->getAttribute('sliderHeightMobile')) > 0) {
+            $sliderHeightMobile = intval($this->getAttribute('sliderHeightMobile'));
+        }
 
-        // text position
         $textPosition = match ($this->getAttribute('textPosition')) {
             'center' => 'center',
             'bottom' => 'flex-end',
             default => 'flex-start',
         };
 
+        $this->setCustomVariable('textPosition', $textPosition);
+        $this->setCustomVariable('direction', $containerChildDirection);
+        $this->setCustomVariable('direction--mobile', $containerChildDirectionMobile);
+        $this->setCustomVariable('image-maxWidth', $maxImageWidth . 'px');
+        $this->setCustomVariable('slider-height', $sliderHeight . 'px');
+        $this->setCustomVariable('slider-height--mobile', $sliderHeightMobile . 'px');
+
+        $this->setJavaScriptControlOption('delay', $delay);
+        $this->setJavaScriptControlOption('animationtype', $this->getAttribute('animationType'));
+
         $options = [
             'this' => $this,
             'images' => $images,
             'sliderContent' => $sliderContent,
-            'imgLeft' => $imgLeft,
             'maxImageWidth' => $maxImageWidth,
             'textPosition' => $textPosition,
-            'dotsNav' => $dotsNav,
+            'showDotNav' => $this->getAttribute('showDotNav'),
         ];
 
         $Engine->assign($options);
 
         return $Engine->fetch(dirname(__FILE__) . '/BasicSlider.html');
+    }
+
+    /**
+     * Set custom css variable to the control as inline style
+     *   --_qui-bricks-slider-basicSlider-settings-$name: $value;
+     *
+     * Example:
+     *   --_qui-bricks-slider-basicSlider-settings-sliderHEight: 300px;
+     *
+     * @param string $name
+     * @param string $value
+     *
+     * @return void
+     */
+    private function setCustomVariable(string $name, string $value): void
+    {
+        if (!$name || !$value) {
+            return;
+        }
+
+        $this->setStyle(
+            '--_qui-bricks-slider-basicSlider-settings-' . $name, $value
+        );
     }
 }

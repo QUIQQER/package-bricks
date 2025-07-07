@@ -1,38 +1,56 @@
 /**
+ * Basic Slider
+ *
+ * Animation types: see isAnimationTypeValid() function for valid types
+ *
  * @module package/quiqqer/bricks/bin/Controls/Slider/BasicSlider
  * @author Dominik Chrzanowski
+ * @author Michael Danielczok
  *
- * Basic Slider
+ * @require qui/QUI
+ * @require qui/controls/Control
+ *
+ * @event onAnimationToggleStart [this]
+ * @event onAnimationHideEnd [this]
+ * @event onAnimationToggleEnd [this]
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
 
     'qui/QUI',
-    'qui/controls/Control',
+    'qui/controls/Control'
 
-], function (QUI, QUIControl) {
-    "use strict";
+], function(QUI, QUIControl) {
+    'use strict';
 
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Controls/Slider/BasicSlider',
+        Type: 'package/quiqqer/bricks/bin/Controls/Slider/BasicSlider',
 
         Binds: [
             '$onImport',
             '$next',
-            'resize'
+            'resize',
+            '$getAnimatedPropertiesForHide',
+            '$getAnimatedPropertiesForShow'
         ],
 
         options: {
-            delay: 5000
+            delay: 5000,
+            animationdurationhide: 250, // in miliseconds
+            animationdurationshow: 500, // in miliseconds
+            animationtype: 'hideSlideToLeftShowSlideFromLeft'
         },
 
-        initialize: function (options) {
+        initialize: function(options) {
             this.parent(options);
 
-            this.List = null;
+            this.SliderList = null;
             this.Slide = null;
             this.NextSlide = null;
+            this.animationDurationHide = this.options.animationdurationhide;
+            this.animationDurationShow = this.options.animationdurationshow;
+            this.animationType = this.options.animationtype;
 
             this.addEvents({
                 onImport: this.$onImport
@@ -42,19 +60,32 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
         /**
          * event : on import
          */
-        $onImport: function () {
-            const Elm  = this.getElm();
+        $onImport: function() {
+            const Elm = this.getElm();
 
-            this.List = Elm.getElement(".basic-slider-images");
-            this.Slide = this.List.getFirst('li');
-            this.Dots = null;
+            if (this.getAttribute('animationtype') && this.isAnimationTypeValid(this.getAttribute('animationtype'))) {
+                this.animationType = this.getAttribute('animationtype');
+            }
+
+            const animDurationHide = parseInt(this.getAttribute('animationDurationHide'), 10);
+            const animDurationShow = parseInt(this.getAttribute('animationDurationShow'), 10);
+            if (animDurationHide > 50) {
+                this.animationDurationHide = animDurationHide;
+            }
+            if (animDurationShow > 50) {
+                this.animationDurationShow = animDurationShow;
+            }
+
+
+            this.SliderList = Elm.querySelector('[data-name="sliderList"]');
+            this.Slide = this.SliderList.querySelector(':scope > li');
+            this.DotNav = Elm.querySelector('[data-name="dotNavList"]');
 
             // first image is already loaded so we set the attribute
             this.Slide.querySelector('img').setAttribute('data-qui-loaded', 1);
 
-            if (Elm.getElement(".basic-slider-dots") !== null) {
-                this.Dots = Elm.getElement(".basic-slider-dots");
-                this.Dot = this.Dots.getFirst('li');
+            if (this.DotNav) {
+                this.DotCurrent = this.DotNav.getFirst('li');
             }
 
             this.delay = this.getAttribute('delay');
@@ -65,7 +96,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
         /**
          * Start countdown to change slide
          */
-        $start: function () {
+        $start: function() {
             this.NextSlide = this.$getNextSlide();
             this.NextDot = this.$getNextDot();
 
@@ -79,7 +110,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
         /**
          *  Get next slide
          */
-        $next: function () {
+        $next: function() {
             this.$toggle().then(() => {
                 this.$start();
             });
@@ -90,14 +121,24 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @returns {*}
          */
-        $toggle: function () {
+        $toggle: function() {
+            this.fireEvent('animationToggleStart', [this]);
+
             const self = this;
 
-            return new Promise(function (resolve){
-                self.$hide().then(function () {
-                    self.$show();
+            return new Promise(function(resolve) {
+                self.$hide().then(function() {
+                    if (self.DotNav) {
+                        self.DotCurrent.classList.remove('active');
+                        self.DotCurrent = self.NextDot;
+                        self.NextDot.classList.add('active');
+                    }
+
+                    return self.$show();
+                }).then(function() {
                     self.Slide = self.NextSlide;
-                    self.Dot = self.NextDot;
+
+                    self.fireEvent('animationToggleEnd', [this]);
                     resolve();
                 });
             });
@@ -108,24 +149,18 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @returns {Promise}
          */
-        $hide: function () {
+        $hide: function() {
             const self = this;
 
-            return new Promise(function (resolve){
-                moofx(self.Slide).animate({
-                    'transform': 'translateX(-40px)',
-                    'opacity' : '0'
-                }, {
-                    duration: 250,
-                    callback: function () {
-                        self.Slide.setStyle('display', "none");
+            return new Promise(function(resolve) {
+                moofx(self.Slide).animate(self.$getAnimatedPropertiesForHide(), {
+                    duration: self.animationDurationHide,
+                    callback: function() {
+                        self.Slide.setStyle('display', 'none');
+                        self.fireEvent('animationHideEnd', [this]);
                         resolve();
                     }
                 });
-
-                if (self.Dots) {
-                    self.Dot.classList.remove('active');
-                }
             });
         },
 
@@ -134,23 +169,16 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @returns {Promise}
          */
-        $show: function () {
+        $show: function() {
             const self = this;
 
-            return new Promise(function (resolve) {
-                self.NextSlide.setStyle('display', "block");
+            return new Promise(function(resolve) {
+                self.NextSlide.setStyle('display', 'block');
 
-                moofx(self.NextSlide).animate({
-                    'transform': 'translateX(0px)',
-                    'opacity' : '1'
-                }, {
-                    duration: 500,
+                moofx(self.NextSlide).animate(self.$getAnimatedPropertiesForShow(), {
+                    duration: self.animationDurationShow,
                     callback: resolve
                 });
-
-                if (self.Dots) {
-                    self.NextDot.classList.add('active');
-                }
             });
         },
 
@@ -159,9 +187,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @returns {*}
          */
-        $getNextSlide: function () {
-            if(!this.Slide.getNext()) {
-                return this.List.getFirst('li');
+        $getNextSlide: function() {
+            if (!this.Slide.getNext()) {
+                return this.SliderList.getFirst('li');
             }
 
             return this.Slide.getNext();
@@ -172,16 +200,16 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @returns {*}
          */
-        $getNextDot: function () {
-            if (this.Dots === null) {
+        $getNextDot: function() {
+            if (this.DotNav === null) {
                 return null;
             }
 
-            if(!this.Dot.getNext()) {
-                return this.Dots.getFirst('li');
+            if (!this.DotCurrent.getNext()) {
+                return this.DotNav.querySelector(':scope > li');
             }
 
-            return this.Dot.getNext();
+            return this.DotCurrent.getNext();
         },
 
         /**
@@ -192,7 +220,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @param Slide HTML Node
          */
-        $loadImage: function (Slide) {
+        $loadImage: function(Slide) {
             const Image = Slide.querySelector('img');
 
             if (Image.getAttribute('data-qui-loaded')) {
@@ -205,6 +233,209 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
                 Image.setAttribute('data-qui-loaded', 1);
                 Image.removeAttribute('loading');
             });
+        },
+
+        /**
+         * Checks if the given animationName is a valid animation type
+         *
+         * @param {string} animationName
+         * @returns {boolean}
+         */
+        isAnimationTypeValid: function(animationName) {
+            const validTypes = [
+                'hideSlideToLeftShowSlideFromLeft',
+                'hideSlideToLeftShowSlideFromRight',
+                'hideSlideToRightShowSlideFromRight',
+                'hideSlideToRightShowSlideFromLeft',
+                'hideSlideToBottomShowSlideFromBottom',
+                'hideSlideToBottomShowSlideFromTop',
+                'fadeOutFadeIn',
+                'hideScaleOutShowFromScaleOut',
+                'hideScaleInShowFromScaleIn',
+                'hideScaleOutShowFromScaleIn',
+                'hideScaleInShowFromScaleOut'
+            ];
+
+            return validTypes.indexOf(animationName) !== -1;
+        },
+
+        /**
+         * Get animation CSS properties for hide animation
+         *
+         * @returns {Object.<string, string>}
+         */
+        $getAnimatedPropertiesForHide: function() {
+            switch (this.animationType) {
+                case 'hideSlideToLeftShowSlideFromLeft':
+                    return {
+                        'transform': 'translateX(-20px)',
+                        'opacity': '0'
+                    };
+
+                case 'hideSlideToLeftShowSlideFromRight':
+                    return {
+                        'transform': 'translateX(-20px)',
+                        'opacity': '0'
+                    };
+
+                case 'hideSlideToRightShowSlideFromRight':
+                    return {
+                        'transform': 'translateX(20px)',
+                        'opacity': '0'
+                    };
+
+                case 'hideSlideToRightShowSlideFromLeft':
+                    return {
+                        'transform': 'translateX(20px)',
+                        'opacity': '0'
+                    };
+
+                case 'hideSlideToBottomShowSlideFromBottom':
+                    return {
+                        'transform': 'translateY(20px)',
+                        'opacity': '0'
+                    };
+
+                case 'hideSlideToBottomShowSlideFromTop':
+                    return {
+                        'transform': 'translateY(20px)',
+                        'opacity': '0'
+                    };
+
+                case 'fadeOutFadeIn':
+                    return {
+                        'opacity': '0'
+                    };
+
+                case 'hideScaleOutShowFromScaleOut':
+                    return {
+                        'transform': 'scale(0.95)',
+                        'opacity': '0'
+                    };
+
+                case 'hideScaleInShowFromScaleIn':
+                    return {
+                        'transform': 'scale(1.05)',
+                        'opacity': '0'
+                    };
+
+                case 'hideScaleOutShowFromScaleIn':
+                    return {
+                        'transform': 'scale(0.95)',
+                        'opacity': '0'
+                    };
+
+                case 'hideScaleInShowFromScaleOut':
+                    return {
+                        'transform': 'scale(1.05)',
+                        'opacity': '0'
+                    };
+            }
+        },
+
+        /**
+         * Get animation CSS properties for show animation and set the pre animation state
+         *
+         * @returns {Object.<string, string>}
+         */
+        $getAnimatedPropertiesForShow: function() {
+            switch (this.animationType) {
+                case 'hideSlideToLeftShowSlideFromLeft':
+                    this.NextSlide.style.transform = 'translateX(-20px)';
+                    this.NextSlide.style.opacity = 0;
+
+                    return {
+                        'transform': 'translateX(0px)',
+                        'opacity': '1'
+                    };
+
+                case 'hideSlideToLeftShowSlideFromRight':
+                    this.NextSlide.style.transform = 'translateX(20px)';
+                    this.NextSlide.style.opacity = 0;
+
+                    return {
+                        'transform': 'translateX(0px)',
+                        'opacity': '1'
+                    };
+
+                case 'hideSlideToRightShowSlideFromRight':
+                    this.NextSlide.style.transform = 'translateX(20px)';
+                    this.NextSlide.style.opacity = 0;
+
+                    return {
+                        'transform': 'translateX(0px)',
+                        'opacity': '1'
+                    };
+
+                case 'hideSlideToRightShowSlideFromLeft':
+                    this.NextSlide.style.transform = 'translateX(-20px)';
+                    this.NextSlide.style.opacity = 0;
+
+                    return {
+                        'transform': 'translateX(0px)',
+                        'opacity': '1'
+                    };
+
+                case 'hideSlideToBottomShowSlideFromBottom':
+                    this.NextSlide.style.transform = 'translateY(20px)';
+                    this.NextSlide.style.opacity = 0;
+
+                    return {
+                        'transform': 'translateY(0px)',
+                        'opacity': '1'
+                    };
+
+                case 'hideSlideToBottomShowSlideFromTop':
+                    this.NextSlide.style.transform = 'translateY(-20px)';
+                    this.NextSlide.style.opacity = 0;
+
+                    return {
+                        'transform': 'translateY(0px)',
+                        'opacity': '1'
+                    };
+
+                case 'fadeOutFadeIn':
+                    this.NextSlide.style.opacity = 0;
+                    return {
+                        'opacity': '1'
+                    };
+
+                case 'hideScaleOutShowFromScaleOut':
+                    this.NextSlide.style.transform = 'scale(0.95)';
+                    this.NextSlide.style.opacity = 0;
+
+                    return {
+                        'transform': 'scale(1)',
+                        'opacity': '1'
+                    };
+
+                case 'hideScaleInShowFromScaleIn':
+                    this.NextSlide.style.transform = 'scale(1.05)';
+                    this.NextSlide.style.opacity = 0;
+
+                    return {
+                        'transform': 'scale(1)',
+                        'opacity': '1'
+                    };
+
+                case 'hideScaleOutShowFromScaleIn':
+                    this.NextSlide.style.transform = 'scale(1.05)';
+                    this.NextSlide.style.opacity = 0;
+
+                    return {
+                        'transform': 'scale(1)',
+                        'opacity': '1'
+                    };
+
+                case 'hideScaleInShowFromScaleOut':
+                    this.NextSlide.style.transform = 'scale(0.95)';
+                    this.NextSlide.style.opacity = 0;
+
+                    return {
+                        'transform': 'scale(1)',
+                        'opacity': '1'
+                    };
+            }
         }
     });
 });

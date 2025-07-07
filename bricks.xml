@@ -198,21 +198,104 @@
                     <locale group="quiqqer/bricks" var="brick.control.basicSlider.mediaFolder"/>
                 </setting>
 
-                <setting name="delay" type="number">
+                <setting name="showDotNav" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.basicSlider.showDotNav"/>
+                </setting>
+
+                <setting name="delay" type="number" min="1000">
                     <locale group="quiqqer/bricks" var="brick.control.basicSlider.settings.delay"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.basicSlider.settings.delay.desc"/>
+                    </description>
+                </setting>
+
+                <setting name="animationType" type="select">
+                    <locale group="quiqqer/bricks"
+                            var="brick.basicSlider.animationType"/>
+
+                    <option value="hideSlideToLeftShowSlideFromLeft">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.animationType.hideSlideToLeftShowSlideFromLeft"/>
+                    </option>
+                    <option value="hideSlideToLeftShowSlideFromRight">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.animationType.hideSlideToLeftShowSlideFromRight"/>
+                    </option>
+                    <option value="hideSlideToRightShowSlideFromRight">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.animationType.hideSlideToRightShowSlideFromRight"/>
+                    </option>
+                    <option value="hideSlideToRightShowSlideFromLeft">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.animationType.hideSlideToRightShowSlideFromLeft"/>
+                    </option>
+                    <option value="hideSlideToBottomShowSlideFromBottom">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.animationType.hideSlideToBottomShowSlideFromBottom"/>
+                    </option>
+                    <option value="hideSlideToBottomShowSlideFromTop">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.animationType.hideSlideToBottomShowSlideFromTop"/>
+                    </option>
+                    <option value="fadeOutFadeIn">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.animationType.fadeOutFadeIn"/>
+                    </option>
+                    <option value="hideScaleOutShowFromScaleOut">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.animationType.hideScaleOutShowFromScaleOut"/>
+                    </option>
+                    <option value="hideScaleInShowFromScaleIn">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.animationType.hideScaleInShowFromScaleIn"/>
+                    </option>
+                    <option value="hideScaleOutShowFromScaleIn">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.animationType.hideScaleOutShowFromScaleIn"/>
+                    </option>
+                    <option value="hideScaleInShowFromScaleOut">
+                        <locale group="quiqqer/bricks"
+                                var="brick.basicSlider.animationType.hideScaleInShowFromScaleOut"/>
+                    </option>
+
                 </setting>
 
                 <setting name="imgLeft" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.control.basicSlider.imgLeft"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.basicSlider.imgLeft.desc"/>
+                    </description>
                 </setting>
-
-                <setting name="navigationDotsShow" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.control.basicSlider.navigationDotsShow"/>
+                <setting name="imgTopMobile" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.basicSlider.imgTopMobile"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.basicSlider.imgTopMobile.desc"/>
+                    </description>
                 </setting>
 
                 <setting name="maxImageWidth" type="number">
                     <locale group="quiqqer/bricks"
                             var="brick.control.basicSlider.maxImageWidth"/>
+                </setting>
+                <setting name="sliderHeight" type="number">
+                    <locale group="quiqqer/bricks"
+                            var="brick.control.basicSlider.sliderHeight"/>
+                    <description>
+                        <locale group="quiqqer/bricks"
+                                var="brick.control.basicSlider.sliderHeight.desc"/>
+                    </description>
+                </setting>
+
+                <setting name="sliderHeightMobile" type="number">
+                    <locale group="quiqqer/bricks"
+                            var="brick.control.basicSlider.sliderHeightMobile"/>
+                </setting>
+
+                <setting name="sliderContent" data-qui="controls/editors/Input" type="text">
+                    <locale group="quiqqer/bricks" var="brick.control.basicSlider.sliderContent"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.basicSlider.sliderContent.desc"/>
+                    </description>
                 </setting>
 
                 <setting name="textPosition" type="select">
@@ -231,10 +314,6 @@
                         <locale group="quiqqer/bricks"
                                 var="brick.basicSlider.textPosition.bottom"/>
                     </option>
-                </setting>
-
-                <setting name="sliderContent" data-qui="controls/editors/Input" type="text">
-                    <locale group="quiqqer/bricks" var="brick.control.basicSlider.sliderContent"/>
                 </setting>
             </settings>
 
