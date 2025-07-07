@@ -1,6 +1,6 @@
 {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
     <header class="control-header">
-        <h1>{$this->getAttribute('frontendTitle')}</h1>
+        <h2>{$this->getAttribute('frontendTitle')}</h2>
     </header>
 {/if}
 
@@ -10,15 +10,17 @@
     </div>
 {/if}
 
-<div class="basic-slider-wrapper {if $imgLeft} basic-slider__imageLeft {/if}">
-    <div class="basic-slider-content" style="align-items: {$textPosition};">
-        <div class="basic-slider-content-container default-content">
+<div class="quiqqer-bricks-slider-basicSlider-control control-template">
+    {if $sliderContent}
+    <div class="quiqqer-bricks-slider-basicSlider-control__content" data-name="slider-content">
+        <div class="default-content">
             {$sliderContent}
         </div>
     </div>
+    {/if}
 
-    <div class="basic-slider-image-wrapper">
-        <ul class="basic-slider-images" {if $maxImageWidth}style="--_qui-bricks-basicSlider-image-maxWidth: {$maxImageWidth}px;"{/if}>
+    <div class="quiqqer-bricks-slider-basicSlider-control__sliderWrapper">
+        <ul class="quiqqer-bricks-slider-basicSlider-control__slider" data-name="sliderList">
             {assign var=showFirstImage value=true}
             {foreach from=$images item=Image}
                 <li>
@@ -27,12 +29,10 @@
             {/foreach}
         </ul>
 
-        {if $dotsNav}
-        <ul class="basic-slider-dots">
+        {if $showDotNav}
+        <ul class="quiqqer-bricks-slider-basicSlider-control__dotNav" data-name="dotNavList">
             {foreach from=$images item=Image key=key}
-
-                <li class="basic-slider-dot {if $key===0}active{/if}"></li>
-
+                <li class="{if $key===0}active{/if}"></li>
             {/foreach}
         </ul>
         {/if}
