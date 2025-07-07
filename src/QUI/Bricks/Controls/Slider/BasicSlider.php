@@ -156,7 +156,8 @@ class BasicSlider extends QUI\Control
         }
 
         $this->setStyle(
-            '--_qui-bricks-slider-basicSlider-settings-' . $name, $value
+            '--_qui-bricks-slider-basicSlider-settings-' . $name,
+            $value
         );
     }
 }
