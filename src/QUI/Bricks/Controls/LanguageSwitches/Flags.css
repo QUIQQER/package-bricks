@@ -1,21 +1,14 @@
-
-.quiqqer-bricks-languageswitch-flag {
-    float: left;
+:where(.quiqqer-bricks-languageswitch-flag) {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
-.quiqqer-bricks-languageswitch-flag-entry {
-    background: rgba(255, 255, 255, 0.15);
+:where(.quiqqer-bricks-languageswitch-flag-entry) {
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    float: left;
-    min-width: 50px;
-    line-height: 50px;
-}
-
-.quiqqer-bricks-languageswitch-flag-entry-text {
-    margin-left: 5px;
+    min-width: max(44px, 2.75rem);
+    line-height: max(44px, 2.75rem);
+    gap: 0.5rem;
 }

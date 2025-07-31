@@ -13,12 +13,12 @@
         {assign var=activeLang value='active'}
     {/if}
 
+    {assign var=siteId value=1}
     {if $Site->getId($lang)}
-    <a class="quiqqer-bricks-languageswitch-flag-entry {$activeLang}" href="{url id=$Site->getId($lang) lang=$lang}">
-    {else}
-    <a class="quiqqer-bricks-languageswitch-flag-entry {$activeLang}" href="{url id=1 lang=$lang}">
+        {assign var=siteId value=$Site->getId($lang)}
     {/if}
 
+    <a class="quiqqer-bricks-languageswitch-flag-entry {$activeLang}" href="{url id=$siteId lang=$lang}">
         {if $this->getAttribute('showFlags')}
         <span class="quiqqer-bricks-languageswitch-flag-entry-icon">
             <img src="{$path}{$lang}.png"
