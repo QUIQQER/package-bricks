@@ -4,7 +4,6 @@
 }
 
 :where(.quiqqer-bricks-languageswitch-flag-entry) {
-    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
