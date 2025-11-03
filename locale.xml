@@ -97,17 +97,17 @@
         </locale>
         <locale name="control.simpleContact.name">
             <de><![CDATA[Vor- und Nachname]]></de>
-            <en><![CDATA[Firt- and Last name]]></en>
+            <en><![CDATA[Full name]]></en>
             <pl><![CDATA[Imię i nazwisko]]></pl>
         </locale>
         <locale name="control.simpleContact.name.placeholder">
             <de><![CDATA[Ihr Vor- und Nachname]]></de>
-            <en><![CDATA[Please enter Your First and Last Name here]]></en>
+            <en><![CDATA[Enter your full name]]></en>
             <pl><![CDATA[Imię i nazwisko]]></pl>
         </locale>
         <locale name="control.simpleContact.email">
             <de><![CDATA[E-Mail]]></de>
-            <en><![CDATA[Email]]></en>
+            <en><![CDATA[Email address]]></en>
             <pl><![CDATA[Adres e-mail]]></pl>
         </locale>
         <locale name="control.simpleContact.captcha">
@@ -117,17 +117,17 @@
         </locale>
         <locale name="control.simpleContact.email.placeholder">
             <de><![CDATA[Ihre E-Mail-Adresse]]></de>
-            <en><![CDATA[Please enter your email address here]]></en>
+            <en><![CDATA[Enter your email address]]></en>
             <pl><![CDATA[twój@adres.pl]]></pl>
         </locale>
         <locale name="control.simpleContact.message">
             <de><![CDATA[Nachricht]]></de>
-            <en><![CDATA[Message]]></en>
+            <en><![CDATA[Your message]]></en>
             <pl><![CDATA[Treść]]></pl>
         </locale>
         <locale name="control.simpleContact.message.placeholder">
             <de><![CDATA[Ihre Nachricht an uns...]]></de>
-            <en><![CDATA[Your message to us]]></en>
+            <en><![CDATA[How can we help you?]]></en>
             <pl><![CDATA[Wiadomość do nas]]></pl>
         </locale>
         <locale name="control.simpleContact.sendButton">

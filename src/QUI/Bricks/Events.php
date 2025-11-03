@@ -251,7 +251,7 @@ class Events
      * @return string|array
      * @throws ExceptionStack
      */
-    public static function brickarea(array $params, Smarty $smarty): array|string
+    public static function brickarea(array $params, Smarty $smarty): array | string
     {
         if (!isset($params['Site']) || !isset($params['area'])) {
             if (!isset($params['assign'])) {
@@ -297,6 +297,11 @@ class Events
                 Manager::TABLE_CACHE,
                 $Project
             );
+
+            if (QUI::getDataBase()->table()->exist($projectCacheTable) === false) {
+                // at installation, ignore missing table
+                continue;
+            }
 
             try {
                 // Only drop composite primary key if it exists

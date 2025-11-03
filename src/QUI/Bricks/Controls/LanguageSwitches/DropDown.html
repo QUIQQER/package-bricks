@@ -25,8 +25,8 @@
             </span>
         {/if}
 
-        {if $showDropdown && $showArrow}
-            <div class="quiqqer-control-languageswitch-dropdown-arrow fa fa-angle-down" aria-hidden="true"></div>
+        {if $showDropdown && $showArrow && $arrowIconCssClass}
+            <div class="quiqqer-control-languageswitch-dropdown-arrow {$arrowIconCssClass}" aria-hidden="true"></div>
         {/if}
     </div>
 
