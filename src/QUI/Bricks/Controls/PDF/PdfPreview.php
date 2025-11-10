@@ -11,7 +11,7 @@ class PdfPreview extends QUI\Control
         $this->addCSSClass('quiqqer-bricks-pdfPreview');
         $this->addCSSFile(dirname(__FILE__) . '/PdfPreview.css');
 
-        $this->setJavaScriptControl('package/namefruits/namereport-service/bin/controls/PdfPreviewBrick');
+        $this->setJavaScriptControl('package/quiqqer/bricks/bin/Controls/PDF/PdfPreviewBrick');
 
         parent::__construct($attributes);
     }
