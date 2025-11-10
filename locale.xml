@@ -310,7 +310,8 @@
             <en><![CDATA[Brick data as JSON]]></en>
         </locale>
         <locale name="brick.edit.showBrickData.window.text">
-            <de><![CDATA[Diese Bausteindaten erlauben es dir, Bausteine über verschiedene Systeme zu kopieren und einzufügen.]]></de>
+            <de>
+                <![CDATA[Diese Bausteindaten erlauben es dir, Bausteine über verschiedene Systeme zu kopieren und einzufügen.]]></de>
             <en><![CDATA[This brick data allows you to copy and paste blocks across different systems.]]></en>
         </locale>
         <locale name="brick.edit.showBrickData.window.copyBtn">
@@ -532,16 +533,20 @@
             <en><![CDATA[Show images on left]]></en>
         </locale>
         <locale name="brick.control.basicSlider.imgLeft.desc">
-            <de><![CDATA[Zeigt die Bilder im Slider links an und den Text rechts daneben. Ohne diese Einstellung wird der Text unter den Bildern angezeigt.]]></de>
-            <en><![CDATA[Displays the images on the left side of the slider and the text on the right. Without this setting, the text is shown below the images.]]></en>
+            <de>
+                <![CDATA[Zeigt die Bilder im Slider links an und den Text rechts daneben. Ohne diese Einstellung wird der Text unter den Bildern angezeigt.]]></de>
+            <en>
+                <![CDATA[Displays the images on the left side of the slider and the text on the right. Without this setting, the text is shown below the images.]]></en>
         </locale>
         <locale name="brick.control.basicSlider.imgTopMobile">
             <de><![CDATA[Bilder über dem Text (mobil)]]></de>
             <en><![CDATA[Images above text (mobile)]]></en>
         </locale>
         <locale name="brick.control.basicSlider.imgTopMobile.desc">
-            <de><![CDATA[Wenn aktiviert, werden auf mobilen Geräten die Bilder über dem Text angezeigt. Ist die Option nicht aktiviert, erscheint zuerst der Text und dann die Bilder.]]></de>
-            <en><![CDATA[When enabled, images are shown above the text on mobile devices. If this option is not enabled, the text appears before the images.]]></en>
+            <de>
+                <![CDATA[Wenn aktiviert, werden auf mobilen Geräten die Bilder über dem Text angezeigt. Ist die Option nicht aktiviert, erscheint zuerst der Text und dann die Bilder.]]></de>
+            <en>
+                <![CDATA[When enabled, images are shown above the text on mobile devices. If this option is not enabled, the text appears before the images.]]></en>
         </locale>
         <locale name="brick.control.basicSlider.showDotNav">
             <de><![CDATA[Punktnavigation anzeigen]]></de>
@@ -556,8 +561,10 @@
             <en><![CDATA[Slider height (in pixels)]]></en>
         </locale>
         <locale name="brick.control.basicSlider.sliderHeight.desc">
-            <de><![CDATA[Legt die maximale Höhe des Slider-Containers fest. Besonders hilfreich, wenn die enthaltenen Bilder unterschiedliche Größen haben. Mit einer festen Höhe wird verhindert, dass der Slider beim Wechsel zwischen unterschiedlich großen Bildern „springt“ und die Bilder bleiben immer zentriert. Bei Bildern mit gleichem Format und gleicher Größe ist die Einstellung nicht notwendig, kann aber optional gesetzt werden.]]></de>
-            <en><![CDATA[Defines the maximum height of the slider container. Especially useful when the included images have different sizes. Setting a fixed height prevents the slider from “jumping” when switching between images of different sizes and keeps all images centered. If all images have the same format and size, this setting is not required but can still be used.]]></en>
+            <de>
+                <![CDATA[Legt die maximale Höhe des Slider-Containers fest. Besonders hilfreich, wenn die enthaltenen Bilder unterschiedliche Größen haben. Mit einer festen Höhe wird verhindert, dass der Slider beim Wechsel zwischen unterschiedlich großen Bildern „springt“ und die Bilder bleiben immer zentriert. Bei Bildern mit gleichem Format und gleicher Größe ist die Einstellung nicht notwendig, kann aber optional gesetzt werden.]]></de>
+            <en>
+                <![CDATA[Defines the maximum height of the slider container. Especially useful when the included images have different sizes. Setting a fixed height prevents the slider from “jumping” when switching between images of different sizes and keeps all images centered. If all images have the same format and size, this setting is not required but can still be used.]]></en>
         </locale>
         <locale name="brick.control.basicSlider.sliderHeightMobile">
             <de><![CDATA[Slider Höhe (mobile) (in Pixel)]]></de>
@@ -784,6 +791,23 @@ This content does not replace the block content. You can still place the brick t
         <locale name="brick.panel.usage.grid.url">
             <de><![CDATA[Seiten URL]]></de>
             <en><![CDATA[Site URL]]></en>
+        </locale>
+
+        <locale name="pdfPreview.brick.title">
+            <de><![CDATA[PDF Vorschau]]></de>
+            <en><![CDATA[PDF Preview]]></en>
+        </locale>
+        <locale name="pdfPreview.brick.description">
+            <de><![CDATA[PDF Vorschau - PDF in einem Baustein mit Blattansicht anzeigen]]></de>
+            <en><![CDATA[PDF Preview - Display a PDF in a block with sheet view]]></en>
+        </locale>
+        <locale name="brick.control.pdfView.file">
+            <de><![CDATA[PDF Datei]]></de>
+            <en><![CDATA[PDF File]]></en>
+        </locale>
+        <locale name="brick.control.pdfView.file.description">
+            <de><![CDATA[Bitte wähle nur eine PDF aus.]]></de>
+            <en><![CDATA[Please select only a PDF.]]></en>
         </locale>
     </groups>
 
@@ -1024,16 +1048,22 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Please insert the brick data in JSON format into the input field.]]></en>
         </locale>
         <locale name="manager.window.createFromData.info.project">
-            <de><![CDATA[<strong>Projektnamen anpassen</strong><br>Wenn der Projektnamen im JSON-String nicht mit dem ausgewählten Projekt übereinstimmt, wird er automatisch angepasst. Falls dies nicht gewünscht ist, sollte die Checkbox abgewählt werden.]]></de>
-            <en><![CDATA[<strong>Adjust Project Name</strong><br>If the project name in the JSON string does not match the selected project, it will be automatically adjusted. If this is not desired, the checkbox should be unchecked.]]></en>
+            <de>
+                <![CDATA[<strong>Projektnamen anpassen</strong><br>Wenn der Projektnamen im JSON-String nicht mit dem ausgewählten Projekt übereinstimmt, wird er automatisch angepasst. Falls dies nicht gewünscht ist, sollte die Checkbox abgewählt werden.]]></de>
+            <en>
+                <![CDATA[<strong>Adjust Project Name</strong><br>If the project name in the JSON string does not match the selected project, it will be automatically adjusted. If this is not desired, the checkbox should be unchecked.]]></en>
         </locale>
         <locale name="manager.window.createFromData.info.lang">
-            <de><![CDATA[<strong>Sprache anpassen</strong><br>Wenn die Sprache im JSON-String nicht mit der ausgewählten Sprache übereinstimmt, wird sie automatisch angepasst. Falls dies nicht gewünscht ist, sollte die Checkbox abgewählt werden.]]></de>
-            <en><![CDATA[<strong>Adjust Language</strong><br>If the language in the JSON string does not match the selected language, it will be automatically adjusted. If this is not desired, the checkbox should be unchecked.]]></en>
+            <de>
+                <![CDATA[<strong>Sprache anpassen</strong><br>Wenn die Sprache im JSON-String nicht mit der ausgewählten Sprache übereinstimmt, wird sie automatisch angepasst. Falls dies nicht gewünscht ist, sollte die Checkbox abgewählt werden.]]></de>
+            <en>
+                <![CDATA[<strong>Adjust Language</strong><br>If the language in the JSON string does not match the selected language, it will be automatically adjusted. If this is not desired, the checkbox should be unchecked.]]></en>
         </locale>
         <locale name="manager.window.createFromData.info.general">
-            <de><![CDATA[<strong>Bitte beachte!</strong> Die Verlinkungen zu internen Seiten und Bildern sowie die im Baustein Einstellungen benutzten Bilder müssen weiterhin nach der Erstellung per Hand angepasst werden. Diese Aktion lässt sich nicht automatisieren.]]></de>
-            <en><![CDATA[<strong>Please Note!</strong> Links to internal pages and images, as well as the images used in the brick settings, must still be manually adjusted after creation. This action cannot be automated.]]></en>
+            <de>
+                <![CDATA[<strong>Bitte beachte!</strong> Die Verlinkungen zu internen Seiten und Bildern sowie die im Baustein Einstellungen benutzten Bilder müssen weiterhin nach der Erstellung per Hand angepasst werden. Diese Aktion lässt sich nicht automatisieren.]]></de>
+            <en>
+                <![CDATA[<strong>Please Note!</strong> Links to internal pages and images, as well as the images used in the brick settings, must still be manually adjusted after creation. This action cannot be automated.]]></en>
         </locale>
         <locale name="manager.window.createFromData.btnText">
             <de><![CDATA[Daten einfügen]]></de>
@@ -1121,8 +1151,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[URL]]></en>
         </locale>
         <locale name="quiqqer.bricks.promoslider.create.url.warning" html="true">
-            <de><![CDATA[Ist hier eine URL festgelegt, darf im Inhaltsbereich kein anderer Link bzw. kein anderes <a>-Element vorkommen.]]></de>
-            <en><![CDATA[If a URL is specified here, no other link or <a> element may appear in the content area.]]></en>
+            <de>
+                <![CDATA[Ist hier eine URL festgelegt, darf im Inhaltsbereich kein anderer Link bzw. kein anderes <a>-Element vorkommen.]]></de>
+            <en>
+                <![CDATA[If a URL is specified here, no other link or <a> element may appear in the content area.]]></en>
         </locale>
         <locale name="quiqqer.bricks.promoslider.create.newTab">
             <de><![CDATA[Link in neuem Tab öffnen]]></de>
@@ -1513,8 +1545,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[The pasted string is broken.]]></en>
         </locale>
         <locale name="exception.brick.createFromData.brick.type.not.found.in.quiqqer">
-            <de><![CDATA[Der Baustein kann aus den Daten nicht importiert werden. In dieser QUIQQER Installation existiert der Baustein vom Typ [brickType] nicht.]]></de>
-            <en><![CDATA[The brick cannot be imported from the data. In this QUIQQER installation the brick of type [brickType] does not exist.]]></en>
+            <de>
+                <![CDATA[Der Baustein kann aus den Daten nicht importiert werden. In dieser QUIQQER Installation existiert der Baustein vom Typ [brickType] nicht.]]></de>
+            <en>
+                <![CDATA[The brick cannot be imported from the data. In this QUIQQER installation the brick of type [brickType] does not exist.]]></en>
         </locale>
 
         <locale name="brick.control.googlemaps.title">
@@ -1680,7 +1714,8 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Time to start next slide (Delay)]]></en>
         </locale>
         <locale name="bricks.customerReviewsSlider.delay.desc">
-            <de><![CDATA[Die Einstellung funktioniert nur, wenn die Option "Automatisches Abspielen" aktiviert ist.]]></de>
+            <de>
+                <![CDATA[Die Einstellung funktioniert nur, wenn die Option "Automatisches Abspielen" aktiviert ist.]]></de>
             <en><![CDATA[The setting works only if the "Autoplay" option is enabled.]]></en>
         </locale>
         <locale name="bricks.customerReviewsSlider.arrows">
@@ -1777,8 +1812,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Disable auto loading]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.preventLoadMap.desc">
-            <de><![CDATA[Der Benutzer muss per Button Klick erlauben, die Google Karte zu laden. Wenn der Benutzer zuvor die erforderlichen Cookies zugelassen hat und das Modul "QUIQQER - DSGVO (GDPR)" (<code>quiqqer/gdpr</code>) installiert ist, wird die Google-Karte automatisch geladen. Eine wiederholte Zustimmung durch den Benutzer ist in diesem Fall nicht erforderlich.]]></de>
-            <en><![CDATA[The user must explicitly allow the Google map to be loaded by clicking a button. If the user has previously allowed the required cookies and the "QUIQQER - GDPR" module (<code>quiqqer/gdpr</code>) is installed, the Google map will be loaded automatically. In this case, repeated user consent is not required.]]></en>
+            <de>
+                <![CDATA[Der Benutzer muss per Button Klick erlauben, die Google Karte zu laden. Wenn der Benutzer zuvor die erforderlichen Cookies zugelassen hat und das Modul "QUIQQER - DSGVO (GDPR)" (<code>quiqqer/gdpr</code>) installiert ist, wird die Google-Karte automatisch geladen. Eine wiederholte Zustimmung durch den Benutzer ist in diesem Fall nicht erforderlich.]]></de>
+            <en>
+                <![CDATA[The user must explicitly allow the Google map to be loaded by clicking a button. If the user has previously allowed the required cookies and the "QUIQQER - GDPR" module (<code>quiqqer/gdpr</code>) is installed, the Google map will be loaded automatically. In this case, repeated user consent is not required.]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.template">
             <de><![CDATA[Template]]></de>
@@ -1822,8 +1859,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Zoom]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.zoom.desc">
-            <de><![CDATA[Standardwert ist 15. Je größer die Zahl, desto näher wird gezoomt. Werte von 0 (die ganze Welt) bis 21 (einzelne Gebäude) sind erlaubt. Die Obergrenze kann je nach den am ausgewählten Standort verfügbaren Kartendaten variieren.]]></de>
-            <en><![CDATA[The default value is 15. The larger the number, the more zoomed in the map will be. Values ranging from 0 (the whole world) to 21 (individual buildings) are allowed. The upper limit can vary depending on the map data available at the selected location.]]></en>
+            <de>
+                <![CDATA[Standardwert ist 15. Je größer die Zahl, desto näher wird gezoomt. Werte von 0 (die ganze Welt) bis 21 (einzelne Gebäude) sind erlaubt. Die Obergrenze kann je nach den am ausgewählten Standort verfügbaren Kartendaten variieren.]]></de>
+            <en>
+                <![CDATA[The default value is 15. The larger the number, the more zoomed in the map will be. Values ranging from 0 (the whole world) to 21 (individual buildings) are allowed. The upper limit can vary depending on the map data available at the selected location.]]></en>
         </locale>
         <locale name="brick.control.simplegooglemaps.settings.api">
             <de><![CDATA[API Key]]></de>

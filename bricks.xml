@@ -1825,5 +1825,22 @@
             </settings>
         </brick>
 
+        <brick control="\QUI\Bricks\Controls\PDF\PdfPreview">
+            <title>
+                <locale group="quiqqer/bricks" var="pdfPreview.brick.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="pdfPreview.brick.description"/>
+            </description>
+
+            <settings>
+                <setting name="pdfFile" data-qui="controls/projects/project/media/Input">
+                    <locale group="quiqqer/bricks" var="brick.control.pdfView.file"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.pdfView.file.description"/>
+                    </description>
+                </setting>
+            </settings>
+        </brick>
     </bricks>
 </quiqqer>

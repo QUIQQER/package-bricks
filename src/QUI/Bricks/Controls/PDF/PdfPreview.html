@@ -1,0 +1,11 @@
+{if $this->getAttribute('frontendTitle')}
+<h1>{$this->getAttribute('frontendTitle')}</h1>
+{/if}
+
+{if $this->getAttribute('content')}
+<div data-name="preview-description">
+    {$this->getAttribute('content')}
+</div>
+{/if}
+
+<div data-name="pdf-preview" data-qui-options-pdffile="{$pdfFile}"></div>

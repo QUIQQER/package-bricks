@@ -1,0 +1,44 @@
+[data-name="quiqqer-bricks-pdf-preview"] {
+    display: flex;
+    min-height: 500px;
+}
+
+[data-name="quiqqer-bricks-pdf-preview"] [data-name="preview"],
+[data-name="quiqqer-bricks-pdf-preview"] [data-name="sheets"] {
+    padding: 1rem;
+    width: 50%;
+}
+
+[data-name="quiqqer-bricks-pdf-preview"] [data-name="sheets"] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+    /* Optional: Zeilen statt Spalten, falls horizontal gewünscht */
+    /* flex-direction: row; */
+}
+
+[data-name="quiqqer-bricks-pdf-preview"] [data-name="sheets"] canvas {
+    background: #fff;
+    border: 1px solid #c3c3c3;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07), 0 0.5px 1.5px rgba(0,0,0,0.05);
+    width: calc(25% - 1rem);
+    height: auto;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+    margin: 0; /* margin wird durch gap ersetzt */
+}
+
+[data-name="quiqqer-bricks-pdf-preview"] [data-name="sheets"] canvas:hover {
+    box-shadow: 0 4px 16px rgba(136, 136, 136, 0.15), 0 1px 3px rgba(0,0,0,0.10);
+    border-color: #3a3a3a;
+}
+
+[data-name="quiqqer-bricks-pdf-preview"] [data-name="preview"] canvas {
+    width: 100%;
+    height: auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
