@@ -1,8 +1,4 @@
-.quiqqer-bricks-pdfPreview h1 {
-    text-align: center;
-}
 
-.quiqqer-bricks-pdfPreview [data-name="preview-description"] {
-    text-align: center;
-    margin-bottom: 2rem;
+.quiqqer-bricks-pdfPreview__container {
+
 }

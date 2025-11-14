@@ -26,8 +26,6 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreviewBrick', [
 
         $onImport: function () {
             const pdfContainer = this.getElm().querySelector('[data-name="pdf-preview-container"]');
-            pdfContainer.style.display = 'block';
-            pdfContainer.style.width = '100%';
 
             new PdfPreview({
                 pdf: pdfContainer.getAttribute('data-qui-options-pdfFile')

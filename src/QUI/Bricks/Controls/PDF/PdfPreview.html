@@ -1,11 +1,11 @@
 {if $this->getAttribute('frontendTitle')}
-<h1>{$this->getAttribute('frontendTitle')}</h1>
+    <h2 class="control-header">{$this->getAttribute('frontendTitle')}</h2>
 {/if}
 
 {if $this->getAttribute('content')}
-<div data-name="preview-description">
-    {$this->getAttribute('content')}
-</div>
+    <div class="control-content">
+        {$this->getAttribute('content')}
+    </div>
 {/if}
 
-<div data-name="pdf-preview-container" data-qui-options-pdffile="{$pdfFile}"></div>
+<div class="quiqqer-bricks-pdfPreview__container" data-name="pdf-preview-container" data-qui-options-pdffile="{$pdfFile}"></div>

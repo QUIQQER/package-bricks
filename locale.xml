@@ -794,8 +794,8 @@ This content does not replace the block content. You can still place the brick t
         </locale>
 
         <locale name="pdfPreview.brick.title">
-            <de><![CDATA[PDF Vorschau]]></de>
-            <en><![CDATA[PDF Preview]]></en>
+            <de><![CDATA[Bausteine: PDF Vorschau]]></de>
+            <en><![CDATA[Bricks: PDF Preview]]></en>
         </locale>
         <locale name="pdfPreview.brick.description">
             <de><![CDATA[PDF Vorschau - PDF in einem Baustein mit Blattansicht anzeigen]]></de>

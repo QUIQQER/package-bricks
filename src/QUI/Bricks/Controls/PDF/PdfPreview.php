@@ -8,10 +8,14 @@ class PdfPreview extends QUI\Control
 {
     public function __construct(array $attributes = [])
     {
-        $this->addCSSClass('quiqqer-bricks-pdfPreview');
-        $this->addCSSFile(dirname(__FILE__) . '/PdfPreview.css');
+        $this->setAttributes([
+            'class' => 'quiqqer-bricks-pdfPreview',
+            'qui-class' => 'package/quiqqer/bricks/bin/Controls/PDF/PdfPreviewBrick',
+            'pdfFile' => '',
+            'aspectRatio' => '210/297'
+        ]);
 
-        $this->setJavaScriptControl('package/quiqqer/bricks/bin/Controls/PDF/PdfPreviewBrick');
+        $this->addCSSFile(dirname(__FILE__) . '/PdfPreview.css');
 
         parent::__construct($attributes);
     }

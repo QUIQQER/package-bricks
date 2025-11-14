@@ -1,6 +1,7 @@
 [data-name="quiqqer-bricks-pdf-preview"] {
     display: flex;
     min-height: 500px;
+    align-items: flex-start;
 }
 
 [data-name="quiqqer-bricks-pdf-preview"] [data-name="preview"],
@@ -28,6 +29,7 @@
     transition: box-shadow 0.2s;
     cursor: pointer;
     margin: 0; /* margin wird durch gap ersetzt */
+    aspect-ratio: 210/297;
 }
 
 [data-name="quiqqer-bricks-pdf-preview"] [data-name="sheets"] canvas:hover {
