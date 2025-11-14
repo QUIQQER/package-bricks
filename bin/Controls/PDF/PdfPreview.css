@@ -2,12 +2,32 @@
     display: flex;
     min-height: 500px;
     align-items: flex-start;
+    position: relative;
 }
 
 [data-name="quiqqer-bricks-pdf-preview"] [data-name="preview"],
 [data-name="quiqqer-bricks-pdf-preview"] [data-name="sheets"] {
     padding: 1rem;
     width: 50%;
+}
+
+[data-name="quiqqer-bricks-pdf-preview"] [data-name="loader"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.5);
+    color: #aeaeae;
+}
+
+[data-name="quiqqer-bricks-pdf-preview"] [data-name="loader"] .fa {
+    font-size: 3rem;
 }
 
 [data-name="quiqqer-bricks-pdf-preview"] [data-name="sheets"] {

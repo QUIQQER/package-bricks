@@ -1,4 +1,8 @@
 
 .quiqqer-bricks-pdfPreview__container {
+    min-height: 500px;
+}
 
+[data-name="quiqqer-bricks-pdf-preview"] {
+    min-height: 500px;
 }

@@ -37,12 +37,39 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
             container.setAttribute('data-name', 'quiqqer-bricks-pdf-preview');
 
             container.innerHTML = `
+                <div data-name="loader">
+                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                    <span>Loading file ...</span>
+                </div>
                 <div data-name="preview"></div>
                 <div data-name="sheets"></div>
             `;
 
-            this.loadPdf(file).then(() => {
+            let loaded = false;
+
+            const init = () => {
+                if (!loaded) {
+                    loaded = true;
+                    this.loadPdf(file).then(() => {
+                        const loader = container.querySelector('[data-name="loader"]');
+                        loader.parentNode.removeChild(loader);
+                    });
+                }
+            };
+
+            // load pdf only in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // im view
+                        init();
+                    }
+                });
+            }, {
+                threshold: 0.1 // 10% sichtbar
             });
+
+            observer.observe(container);
         },
 
         loadPdf: function (pdfFile) {
