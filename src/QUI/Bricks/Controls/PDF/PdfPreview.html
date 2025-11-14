@@ -8,4 +8,23 @@
     </div>
 {/if}
 
-<div class="quiqqer-bricks-pdfPreview__container" data-name="pdf-preview-container" data-qui-options-pdffile="{$pdfFile}"></div>
+<div class="control-template">
+    <div class="quiqqer-bricks-pdfPreview__control" data-name="pdf-preview-container" data-qui-options-pdffile="{$pdfFile}">
+        <div class="container">
+            <div class="preview">
+                <button class="btn btn-icon btn-rounded btn--prev">
+                    <i class="fa-solid fa-angle-left" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-icon btn-rounded btn--next">
+                    <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="sheets">
+                {section name=idx start=0 loop=$sheetsNumber}
+                <div class="sheet"></div>
+                {/section}
+            </div>
+        </div>
+    </div>
+</div>
+

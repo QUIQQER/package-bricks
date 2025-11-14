@@ -12,7 +12,8 @@ class PdfPreview extends QUI\Control
             'class' => 'quiqqer-bricks-pdfPreview',
             'qui-class' => 'package/quiqqer/bricks/bin/Controls/PDF/PdfPreviewBrick',
             'pdfFile' => '',
-            'aspectRatio' => '210/297'
+            'aspectRatio' => '210/297',
+            'sheetsNumber' => 16
         ]);
 
         $this->addCSSFile(dirname(__FILE__) . '/PdfPreview.css');
@@ -35,7 +36,8 @@ class PdfPreview extends QUI\Control
 
         $Engine->assign([
             'this' => $this,
-            'pdfFile' => $pdfFile
+            'pdfFile' => $pdfFile,
+            'sheetsNumber' => $this->getAttribute('sheetsNumber')
         ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/PdfPreview.html');

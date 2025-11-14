@@ -1,8 +1,81 @@
-
-.quiqqer-bricks-pdfPreview__container {
-    min-height: 500px;
+.quiqqer-bricks-pdfPreview :where(.container) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
 }
 
-[data-name="quiqqer-bricks-pdf-preview"] {
-    min-height: 500px;
+.quiqqer-bricks-pdfPreview :where(.preview) {
+    aspect-ratio: 210/297;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    position: relative;
+}
+
+.quiqqer-bricks-pdfPreview :where(.preview .btn) {
+    --pos: -1.5rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    width: 3rem;
+}
+
+.quiqqer-bricks-pdfPreview :where(.preview .btn--prev) {
+    left: var(--pos);
+}
+
+.quiqqer-bricks-pdfPreview :where(.preview .btn--next) {
+    right: var(--pos);
+}
+
+@media screen and (hover: hover) {
+    .quiqqer-bricks-pdfPreview :where(.container:not(:hover) .btn) {
+        --pos: -1rem;
+        opacity: 0;
+    }
+}
+
+.quiqqer-bricks-pdfPreview :where(.sheets) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: clamp(0.5rem, 4vw, 1rem);
+}
+
+.quiqqer-bricks-pdfPreview :where(.sheet) {
+    aspect-ratio: 210/297;
+    border: 1px solid #c3c3c3;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.quiqqer-bricks-pdfPreview :where(.sheet):hover {
+    box-shadow: 0 4px 16px rgba(136, 136, 136, 0.15), 0 1px 3px rgba(0,0,0,0.10);
+    border-color: #3a3a3a;
+}
+
+@media screen and (max-width: 767px) {
+    .quiqqer-bricks-pdfPreview :where(.container) {
+        grid-template-columns: 1fr;
+    }
+
+    .quiqqer-bricks-pdfPreview :where(.preview .btn) {
+        --pos: 0.5rem;
+        width: 2rem;
+    }
+
+    .quiqqer-bricks-pdfPreview :where(.sheets) {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: auto;
+        padding-bottom: 1rem;
+    }
+
+    .quiqqer-bricks-pdfPreview :where(.sheet) {
+        width: 50px;
+        flex-shrink: 0;
+    }
 }
