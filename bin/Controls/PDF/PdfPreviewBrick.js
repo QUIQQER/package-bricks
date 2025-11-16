@@ -28,7 +28,8 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreviewBrick', [
             const pdfContainer = this.getElm().querySelector('[data-name="pdf-preview-container"]');
 
             new PdfPreview({
-                pdf: pdfContainer.getAttribute('data-qui-options-pdfFile')
+                pdf: pdfContainer.getAttribute('data-qui-options-pdfFile'),
+                pageNum : pdfContainer.getAttribute('data-qui-options-pagenum')
             }).inject(pdfContainer);
         }
     });

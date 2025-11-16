@@ -809,6 +809,10 @@ This content does not replace the block content. You can still place the brick t
             <de><![CDATA[Bitte wähle nur eine PDF aus.]]></de>
             <en><![CDATA[Please select only a PDF.]]></en>
         </locale>
+        <locale name="pdfPreview.brick.frontend.loading.title">
+            <de><![CDATA[Datei wird geladen...]]></de>
+            <en><![CDATA[File is loading...]]></en>
+        </locale>
     </groups>
 
     <groups name="quiqqer/bricks" datatype="php">

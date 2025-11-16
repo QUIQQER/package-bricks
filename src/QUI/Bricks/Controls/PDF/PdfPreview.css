@@ -1,10 +1,26 @@
 .quiqqer-bricks-pdfPreview :where(.container) {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 2fr;
     gap: 2rem;
     align-items: start;
 }
 
+.quiqqer-bricks-pdfPreview canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    position: relative;
+    z-index: 1;
+}
+
+.quiqqer-bricks-pdfPreview .skeleton-loader {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* preview */
 .quiqqer-bricks-pdfPreview :where(.preview) {
     aspect-ratio: 210/297;
     background: #fff;
@@ -20,6 +36,7 @@
     transform: translateY(-50%);
     padding: 0;
     width: 3rem;
+    z-index: 20; /* qui loader has z-index of 10 */
 }
 
 .quiqqer-bricks-pdfPreview :where(.preview .btn--prev) {
@@ -37,6 +54,7 @@
     }
 }
 
+/* sheets */
 .quiqqer-bricks-pdfPreview :where(.sheets) {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -45,16 +63,20 @@
 
 .quiqqer-bricks-pdfPreview :where(.sheet) {
     aspect-ratio: 210/297;
-    border: 1px solid #c3c3c3;
+    border: 1px solid var(--qui-colors-gray-200, #f2f2f2);
     border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
-    transition: box-shadow 0.2s;
+    transition: outline 0.3s ease;
     cursor: pointer;
+    position: relative;
+    outline: 2px solid transparent;
 }
 
-.quiqqer-bricks-pdfPreview :where(.sheet):hover {
-    box-shadow: 0 4px 16px rgba(136, 136, 136, 0.15), 0 1px 3px rgba(0,0,0,0.10);
-    border-color: #3a3a3a;
+.quiqqer-bricks-pdfPreview :where(.sheet):hover{
+    border-color: var(--qui-colors-gray-500, #3a3a3a);
+}
+
+.quiqqer-bricks-pdfPreview :where(.sheet.active) {
+    outline: 2px solid var(--qui-colors-primary, #111);
 }
 
 @media screen and (max-width: 767px) {
@@ -71,7 +93,8 @@
         display: flex;
         flex-wrap: nowrap;
         overflow: auto;
-        padding-bottom: 1rem;
+        padding-block: 1rem;
+        padding-inline: 2px; /* according to 2px outline for active sheet */
     }
 
     .quiqqer-bricks-pdfPreview :where(.sheet) {
