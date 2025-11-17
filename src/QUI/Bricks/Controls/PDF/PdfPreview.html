@@ -14,6 +14,7 @@
          data-qui-options-pdffile="{$pdfFile}"
          data-qui-options-pagenum="{$sheetsNumber}"
          data-qui="package/quiqqer/bricks/bin/Controls/PDF/PdfPreview"
+         {if $aspectRatio}style="--_aspectRatio: var(--aspectRatio, {$aspectRatio});"{/if}
     >
         <div class="container">
         <div class="preview" data-name="preview">

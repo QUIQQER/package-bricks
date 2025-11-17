@@ -809,6 +809,22 @@ This content does not replace the block content. You can still place the brick t
             <de><![CDATA[Bitte wähle nur eine PDF aus.]]></de>
             <en><![CDATA[Please select only a PDF.]]></en>
         </locale>
+        <locale name="brick.control.pdfView.sheetsNumber">
+            <de><![CDATA[Anzahl der Seiten]]></de>
+            <en><![CDATA[Number of sheets]]></en>
+        </locale>
+        <locale name="brick.control.pdfView.sheetsNumber.description">
+            <de><![CDATA[Gibt die Anzahl der Seiten (Sheets) des ausgewählten PDFs an. Im Frontend werden entsprechend viele Boxen angezeigt, die jeweils eine Seite repräsentieren. <br>Diese Einstellung sorgt dafür, dass die HTML-Struktur mit der korrekten Anzahl an Boxen bereits vor dem Laden der PDF-Datei vorhanden ist. Das verbessert die Ladezeit (Pagespeed) und verhindert Layout-Verschiebungen (CLS), da die Darstellung von Anfang an stabil bleibt.]]></de>
+            <en><![CDATA[Specifies the number of pages (sheets) in the selected PDF. The front end displays the corresponding number of boxes, each representing one page. <br>This setting ensures that the HTML structure with the correct number of boxes is already in place before the PDF file is loaded. This improves loading time (page speed) and prevents layout shifts (CLS), as the display remains stable from the outset.]]></en>
+        </locale>
+        <locale name="brick.control.pdfView.aspectRatio">
+            <de><![CDATA[Seitenverhältnis]]></de>
+            <en><![CDATA[Aspect ratio]]></en>
+        </locale>
+        <locale name="brick.control.pdfView.aspectRatio.description">
+            <de><![CDATA[Reserviert den Platz im Frontend bereits vor dem Laden der PDF-Datei anhand des angegebenen Seitenverhältnisses. <br>Bitte einen gültigen CSS-Wert für die Eigenschaft <code>aspect-ratio</code> im Format ZAHL/ZAHL eingeben. <strong>Der Standardwert entspricht dem Seitenverhältnis einer A4-Seite (210/297).</strong>]]></de>
+            <en><![CDATA[Reserves space in the front end before loading the PDF file based on the specified aspect ratio. <br>Please provide a valid CSS value for the <code>aspect-ratio</code> property in the format NUMBER/NUMBER. <strong>The default value corresponds to the aspect ratio of an A4 page (210/297).</strong>]]></en>
+        </locale>
         <locale name="pdfPreview.brick.frontend.loading.title">
             <de><![CDATA[Datei wird geladen...]]></de>
             <en><![CDATA[File is loading...]]></en>

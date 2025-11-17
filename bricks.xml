@@ -1846,7 +1846,7 @@
                         <locale group="quiqqer/bricks" var="brick.control.pdfView.sheetsNumber.description"/>
                     </description>
                 </setting>
-                <setting name="aspectRatio" type="text">
+                <setting name="aspectRatio" type="text" placeholder="210/297">
                     <locale group="quiqqer/bricks" var="brick.control.pdfView.aspectRatio"/>
                     <description>
                         <locale group="quiqqer/bricks" var="brick.control.pdfView.aspectRatio.description"/>

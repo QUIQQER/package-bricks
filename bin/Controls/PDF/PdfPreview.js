@@ -190,6 +190,16 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
                         const scale = 0.2; // Kleinere Skalierung für Thumbnails
                         this.maxPage = pdf.numPages;
 
+                        // remove sheets that are not needed.
+                        // It is likely that the entered number of pages is higher than the actual number of pages in the PDF file.
+                        if (this.sheets.length > this.maxPage) {
+                            this.sheets.forEach((sheet, idx) => {
+                                if (idx >= pdf.numPages) {
+                                    sheet.remove();
+                                }
+                            });
+                        }
+
                         for (pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                             page = await pdf.getPage(pageNum);
 
