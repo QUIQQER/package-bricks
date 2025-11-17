@@ -1,66 +1,104 @@
-/*[data-name="quiqqer-bricks-pdf-preview"] {*/
-/*    display: flex;*/
-/*    min-height: 500px;*/
-/*    align-items: flex-start;*/
-/*    position: relative;*/
-/*}*/
+.quiqqer-bricks-pdfPreview :where(.container) {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 2rem;
+    align-items: start;
+}
 
-/*[data-name="quiqqer-bricks-pdf-preview"] [data-name="preview"],*/
-/*[data-name="quiqqer-bricks-pdf-preview"] [data-name="sheets"] {*/
-/*    padding: 1rem;*/
-/*    width: 50%;*/
-/*}*/
+.quiqqer-bricks-pdfPreview canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    position: relative;
+    z-index: 1;
+}
 
-/*[data-name="quiqqer-bricks-pdf-preview"] [data-name="loader"] {*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    display: flex;*/
-/*    gap: 0.5rem;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    background: rgba(255, 255, 255, 0.5);*/
-/*    color: #aeaeae;*/
-/*}*/
+.quiqqer-bricks-pdfPreview .skeleton-loader {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
 
-/*[data-name="quiqqer-bricks-pdf-preview"] [data-name="loader"] .fa {*/
-/*    font-size: 3rem;*/
-/*}*/
+/* preview */
+.quiqqer-bricks-pdfPreview :where(.preview) {
+    aspect-ratio: 210/297;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    position: relative;
+}
 
-/*[data-name="quiqqer-bricks-pdf-preview"] [data-name="sheets"] {*/
-/*    display: flex;*/
-/*    flex-wrap: wrap;*/
-/*    gap: 1rem;*/
-/*    align-items: flex-start;*/
-/*    !* Optional: Zeilen statt Spalten, falls horizontal gewünscht *!*/
-/*    !* flex-direction: row; *!*/
-/*}*/
+.quiqqer-bricks-pdfPreview :where(.preview .btn) {
+    --pos: -1.5rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    width: 3rem;
+    z-index: 20; /* qui loader has z-index of 10 */
+}
 
-/*[data-name="quiqqer-bricks-pdf-preview"] [data-name="sheets"] canvas {*/
-/*    background: #fff;*/
-/*    border: 1px solid #c3c3c3;*/
-/*    border-radius: 6px;*/
-/*    box-shadow: 0 2px 8px rgba(0,0,0,0.07), 0 0.5px 1.5px rgba(0,0,0,0.05);*/
-/*    width: calc(25% - 1rem);*/
-/*    height: auto;*/
-/*    transition: box-shadow 0.2s;*/
-/*    cursor: pointer;*/
-/*    margin: 0; !* margin wird durch gap ersetzt *!*/
-/*    aspect-ratio: 210/297;*/
-/*}*/
+.quiqqer-bricks-pdfPreview :where(.preview .btn--prev) {
+    left: var(--pos);
+}
 
-/*[data-name="quiqqer-bricks-pdf-preview"] [data-name="sheets"] canvas:hover {*/
-/*    box-shadow: 0 4px 16px rgba(136, 136, 136, 0.15), 0 1px 3px rgba(0,0,0,0.10);*/
-/*    border-color: #3a3a3a;*/
-/*}*/
+.quiqqer-bricks-pdfPreview :where(.preview .btn--next) {
+    right: var(--pos);
+}
 
-/*[data-name="quiqqer-bricks-pdf-preview"] [data-name="preview"] canvas {*/
-/*    width: 100%;*/
-/*    height: auto;*/
-/*    background: #fff;*/
-/*    border-radius: 8px;*/
-/*    box-shadow: 0 4px 24px rgba(0,0,0,0.08);*/
-/*}*/
+@media screen and (hover: hover) {
+    .quiqqer-bricks-pdfPreview :where(.container:not(:hover) .btn) {
+        --pos: -1rem;
+        opacity: 0;
+    }
+}
+
+/* sheets */
+.quiqqer-bricks-pdfPreview :where(.sheets) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: clamp(0.5rem, 4vw, 1rem);
+}
+
+.quiqqer-bricks-pdfPreview :where(.sheet) {
+    aspect-ratio: 210/297;
+    border: 1px solid var(--qui-colors-gray-200, #f2f2f2);
+    border-radius: 6px;
+    transition: outline 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    outline: 2px solid transparent;
+}
+
+.quiqqer-bricks-pdfPreview :where(.sheet):hover{
+    border-color: var(--qui-colors-gray-500, #3a3a3a);
+}
+
+.quiqqer-bricks-pdfPreview :where(.sheet.active) {
+    outline: 2px solid var(--qui-colors-primary, #111);
+}
+
+@media screen and (max-width: 767px) {
+    .quiqqer-bricks-pdfPreview :where(.container) {
+        grid-template-columns: 1fr;
+    }
+
+    .quiqqer-bricks-pdfPreview :where(.preview .btn) {
+        --pos: 0.5rem;
+        width: 2rem;
+    }
+
+    .quiqqer-bricks-pdfPreview :where(.sheets) {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: auto;
+        padding-block: 1rem;
+        padding-inline: 2px; /* according to 2px outline for active sheet */
+    }
+
+    .quiqqer-bricks-pdfPreview :where(.sheet) {
+        width: 50px;
+        flex-shrink: 0;
+    }
+}

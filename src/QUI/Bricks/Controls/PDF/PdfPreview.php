@@ -16,7 +16,7 @@ class PdfPreview extends QUI\Control
             'sheetsNumber' => 17
         ]);
 
-        $this->addCSSFile(dirname(__FILE__) . '/PdfPreview.css');
+        $this->addCSSFile(OPT_DIR . 'quiqqer/bricks/bin/Controls/PDF/PdfPreview.css');
 
         parent::__construct($attributes);
     }
