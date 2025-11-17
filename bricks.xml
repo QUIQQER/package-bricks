@@ -1825,5 +1825,34 @@
             </settings>
         </brick>
 
+        <brick control="\QUI\Bricks\Controls\PDF\PdfPreview">
+            <title>
+                <locale group="quiqqer/bricks" var="pdfPreview.brick.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="pdfPreview.brick.description"/>
+            </description>
+
+            <settings>
+                <setting name="pdfFile" data-qui="controls/projects/project/media/Input">
+                    <locale group="quiqqer/bricks" var="brick.control.pdfView.file"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.pdfView.file.description"/>
+                    </description>
+                </setting>
+                <setting name="sheetsNumber" type="number">
+                    <locale group="quiqqer/bricks" var="brick.control.pdfView.sheetsNumber"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.pdfView.sheetsNumber.description"/>
+                    </description>
+                </setting>
+                <setting name="aspectRatio" type="text" placeholder="210/297">
+                    <locale group="quiqqer/bricks" var="brick.control.pdfView.aspectRatio"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.pdfView.aspectRatio.description"/>
+                    </description>
+                </setting>
+            </settings>
+        </brick>
     </bricks>
 </quiqqer>
