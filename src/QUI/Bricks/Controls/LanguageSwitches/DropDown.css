@@ -8,6 +8,11 @@
     padding-inline: 0.5em;
 }
 
+.quiqqer-control-languageswitch-dropdown-button {
+    display: flex;
+    align-items: center;
+}
+
 .quiqqer-control-languageswitch-dropdown-button.inactive {
     cursor: default;
 }
@@ -19,6 +24,10 @@
 
 .quiqqer-control-languageswitch-dropdown-icon {
     margin-right: 0.25em;
+}
+
+.quiqqer-control-languageswitch-dropdown-icon > img {
+    display: inline;
 }
 
 .quiqqer-control-languageswitch-dropdown-arrow {

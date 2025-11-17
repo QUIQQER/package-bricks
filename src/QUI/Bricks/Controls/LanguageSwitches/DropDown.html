@@ -4,10 +4,14 @@
 
 {if count($langs) > 1}
 <div class="quiqqer-control-languageswitch-dropdown quiqqer-control-languageswitch-dropdown__withArrow">
-    <div class="quiqqer-control-languageswitch-dropdown-button {if !$showDropdown}inactive{/if}">
+    <div class="quiqqer-control-languageswitch-dropdown-button {if !$showDropdown}inactive{/if}" role="button">
         {if $buttonShowFlag}
             <span class="quiqqer-control-languageswitch-dropdown-icon">
-                <img src="{$smarty.const.URL_BIN_DIR}16x16/flags/{$siteLang}.png" />
+                <img src="{$smarty.const.URL_BIN_DIR}16x16/flags/{$siteLang}.png"
+                     alt="{locale group='quiqqer/core' var='language.'|cat:$siteLang}"
+                     title="{locale group='quiqqer/core' var='language.'|cat:$siteLang}"
+                     style="display: inline;"
+                />
             </span>
         {/if}
 
@@ -21,8 +25,8 @@
             </span>
         {/if}
 
-        {if $showDropdown && $showArrow}
-            <div class="quiqqer-control-languageswitch-dropdown-arrow fa fa-angle-down"></div>
+        {if $showDropdown && $showArrow && $arrowIconCssClass}
+            <div class="quiqqer-control-languageswitch-dropdown-arrow {$arrowIconCssClass}" aria-hidden="true"></div>
         {/if}
     </div>
 
@@ -34,7 +38,11 @@
             <a class="quiqqer-control-languageswitch-dropdown-dd-entry {if $siteLang == $lang}inactive{/if}"
                href="{url id=$Site->getId( $lang ) lang=$lang}">
                 {if $dropdownShowFlag}
-                    <img class="quiqqer-control-languageswitch-dropdown-dd-icon" src="{$path}{$lang}.png"/>
+                    <img class="quiqqer-control-languageswitch-dropdown-dd-icon"
+                         alt="{locale group='quiqqer/core' var='language.'|cat:$siteLang}"
+                         title="{locale group='quiqqer/core' var='language.'|cat:$siteLang}"
+                         src="{$path}{$lang}.png" style="display: inline;"
+                    />
                 {/if}
 
                 {if $dropdownText && $dropdownText === 'abbreviation'}

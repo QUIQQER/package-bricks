@@ -41,7 +41,7 @@ class Flags extends QUI\Control
             dirname(__FILE__) . '/Flags.css'
         );
 
-        $this->setAttribute('class', 'quiqqer-bricks-languageswitch-flag');
+        $this->setAttribute('class', 'quiqqer-bricks-languageswitch-flag-control');
     }
 
     /**

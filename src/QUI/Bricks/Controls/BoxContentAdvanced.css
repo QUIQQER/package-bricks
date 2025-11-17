@@ -58,11 +58,6 @@
     }
 }
 
-.quiqqer-boxContentAdvanced-entry-img picture,
-.quiqqer-boxContentAdvanced-entry-img img {
-    width: auto;
-}
-
 .quiqqer-boxContentAdvanced-entry-img .fa {
     font-size: 60px;
     margin-bottom: 2rem;

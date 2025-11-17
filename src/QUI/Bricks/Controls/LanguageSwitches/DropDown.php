@@ -36,6 +36,7 @@ class DropDown extends QUI\Control
             'dropdownText' => 'text', // false: disable text, `abbreviation`: i.e. DE, EN, `text`: i.e. German, English
             'dropdownPosition' => 'right', // 'right', 'left'. stick to right or left bottom control corner
             'showArrow' => true, // enable arrow down
+            'arrowIcon' => 'fa-solid fa-angle-down', // any valid FontAwesome icon css class
             'flagFolderPath' => URL_BIN_DIR . '16x16/flags/'
         ]);
 
@@ -95,6 +96,7 @@ class DropDown extends QUI\Control
             'dropdownText' => $this->getAttribute('dropdownText'),
             'dropdownPosition' => $this->getAttribute('dropdownPosition'),
             'showArrow' => $this->getAttribute('showArrow'),
+            'arrowIconCssClass' => $this->getAttribute('arrowIconCssClass'),
             'showDropdown' => $showDropdown,
             'this' => $this
         ]);
