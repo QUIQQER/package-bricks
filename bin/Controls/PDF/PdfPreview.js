@@ -36,6 +36,7 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
             this.PrevBtn = null;
             this.pdfFile = '';
             this.sheets = [];
+            this.isLoading = false;
 
             this.addEvents({
                 onInject: this.$onInject,
@@ -71,7 +72,7 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
             this.PrevBtn.innerHTML = '<i class="fa-solid fa-angle-left" aria-hidden="true"></i>';
 
             this.PrevBtn.addEventListener('click', () => {
-                this.openPrevPage();
+                this.handleOpenPageClick('prev');
             });
 
             this.NextBtn = document.createElement('button');
@@ -79,7 +80,7 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
             this.NextBtn.setAttribute('class', 'btn btn-icon btn-rounded btn--next');
             this.NextBtn.innerHTML = '<i class="fa-solid fa-angle-right" aria-hidden="true"></i>';
             this.NextBtn.addEventListener('click', () => {
-                this.openNextPage();
+                this.handleOpenPageClick('next');
             });
 
             this.PrevBtn.inject(container.querySelector('[data-name="preview"]'));
@@ -134,10 +135,7 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
             const init = () => {
                 if (!loaded) {
                     loaded = true;
-                    this.loadPdf().then(() => {
-                        const loader = container.querySelector('[data-name="loader"]');
-                        loader.parentNode.removeChild(loader);
-                    });
+                    this.loadPdf();
                 }
             };
 
@@ -163,8 +161,7 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
          */
         loadPdf: function () {
             if (!this.pdfFile) {
-                console.error('No pdf file provided.');
-                return;
+                return Promise.reject(new Error('No pdf file provided.'));
             }
 
             const container = this.getElm();
@@ -182,7 +179,8 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
                         const pdf = await module.getDocument(this.pdfFile).promise;
 
                         const canvasClick = (e) => {
-                            this.showPageNumber(parseInt(e.target.getAttribute('data-sheet')));
+                            this.disableButtons();
+                            this.showPageNumber(parseInt(e.target.getAttribute('data-sheet'))).then(() => this.enableButtons());
                         };
 
                         let page, pageNum;
@@ -249,6 +247,7 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
                             }).promise;
                         }
 
+                        this.isLoading  = false;
                         resolve();
                     } catch (error) {
                         console.error('Fehler beim Laden des Moduls:', error);
@@ -259,9 +258,14 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
         },
 
         showPageNumber: function (pageNumber) {
+            if (this.isLoading) {
+                return Promise.resolve();
+            }
+
+            this.isLoading = true;
+
             if (!this.pdfFile) {
-                console.error('No pdf file provided.');
-                return Promise.reject();
+                return Promise.reject(new Error('No pdf file provided.'));
             }
 
             const container = this.getElm();
@@ -301,6 +305,7 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
                             if (PageToHide) {
                                 this.showPage(canvas).then(() => {
                                     this.Loader.hide();
+                                    this.isLoading = false;
                                     resolve();
                                 });
                             } else {
@@ -310,17 +315,20 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
                                     callback: () => {
                                         if (SkeletonLoader) {
                                             SkeletonLoader.remove();
+                                            this.isLoading = false;
                                             resolve();
                                             return;
                                         }
 
                                         this.Loader.hide();
+                                        this.isLoading = false;
                                         resolve();
                                     }
                                 });
                             }
                         } catch (error) {
                             console.error('Fehler beim Laden des Moduls:', error);
+                            this.isLoading = false;
                             reject();
                         }
                     })();
@@ -341,20 +349,13 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
         },
 
         handleOpenPageClick: function(direction) {
-            this.NextBtn.disabled = true;
-            this.PrevBtn.disabled = true;
+            this.disableButtons();
 
             if (direction === 'next') {
-                return this.openNextPage().then(() => {
-                    this.NextBtn.disabled = false;
-                    this.PrevBtn.disabled = false;
-                });
+                return this.openNextPage().then(() => this.enableButtons())
             }
 
-            return this.openPrevPage().then(() => {
-                this.NextBtn.disabled = false;
-                this.PrevBtn.disabled = false;
-            });
+            return this.openPrevPage().then(() => this.enableButtons());
         },
 
         openNextPage: function() {
@@ -411,6 +412,26 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
                     sheet.classList.remove('active');
                 }
             });
+        },
+
+        disableButtons: function() {
+            if (this.NextBtn) {
+                this.NextBtn.disabled = true;
+            }
+
+            if (this.PrevBtn) {
+                this.PrevBtn.disabled = true;
+            }
+        },
+
+        enableButtons: function() {
+            if (this.NextBtn) {
+                this.NextBtn.disabled = false;
+            }
+
+            if (this.PrevBtn) {
+                this.PrevBtn.disabled = false;
+            }
         }
     });
 });
