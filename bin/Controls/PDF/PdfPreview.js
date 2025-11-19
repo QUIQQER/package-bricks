@@ -51,6 +51,7 @@ define('package/quiqqer/bricks/bin/Controls/PDF/PdfPreview', [
 
             container.setAttribute('data-qui', 'package/quiqqer/bricks/bin/Controls/PDF/PdfPreview');
             container.setAttribute('data-name', 'quiqqer-bricks-pdf-preview');
+            container.classList.add('quiqqer-bricks-pdfPreview');
 
             container.innerHTML = `
                <div class="container">
