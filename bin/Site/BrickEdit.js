@@ -25,13 +25,15 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
         Type   : 'package/quiqqer/bricks/bin/Site/BrickEdit',
 
         Binds: [
-            '$onInject'
+            '$onInject',
+            '$brickSettingsPromise'
         ],
 
         options: {
             brickId     : false,
             Site        : false,
-            customfields: false
+            customfields: false,
+            hasCustomFields: false,
         },
 
         initialize: function (options) {
@@ -39,6 +41,23 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
 
             this.Loader = new QUILoader();
             this.$Form  = null;
+
+            /**
+             * To check, if the brick has custom fields (this.hasCustomFields())
+             * we need to get the brick data. The brick data comes from ajax request.
+             * Therefore, we save the promise as a property to avoid multiple ajax requests.
+             * E.g. we need in package/quiqqer/bricks/bin/Site/Area
+             * this.openBrickSettingDialog()
+             * to know if a brick has custom fields to make the dialog larger.
+             *
+             * @type {Promise<unknown>}
+             */
+            this.$brickSettingsPromise = this.getBrickSettings().then((result) => {
+                if (result.customfields && result.customfields.length > 0) {
+                    this.setAttribute('hasCustomFields', true);
+                }
+                return result;
+            });
 
             this.$globalBrickSettings = {};
 
@@ -81,7 +100,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
 
             this.Loader.show();
 
-            this.getBrickSettings().then(function (result) {
+            this.$brickSettingsPromise.then(function (result) {
                 self.$globalBrickSettings = result.settings;
 
                 return Template.get('bin/Site/BrickEdit', false, {
@@ -126,7 +145,6 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                 }
 
                 self.Loader.hide();
-                self.Loader.hide();
             }).catch(function (err) {
                 self.Loader.hide();
                 console.error(err);
@@ -140,10 +158,9 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
          */
         getBrickSettings: function () {
             return new Promise(function (resolve, reject) {
-
                 QUIAjax.get('package_quiqqer_bricks_ajax_getBrick', function (result) {
                     resolve(result);
-                }, {
+                }.bind(this), {
                     'package': 'quiqqer/bricks',
                     onError  : reject,
                     brickId  : this.getAttribute('brickId')
@@ -180,6 +197,17 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                     PanelUtils.openPanelInTasks(Panel);
                     resolve(Panel);
                 });
+            });
+        },
+
+        /**
+         * Check if the brick has custom fields
+         *
+         * @returns {Promise}
+         */
+        hasCustomFields: function() {
+            return this.$brickSettingsPromise.then(() => {
+                return this.getAttribute('hasCustomFields');
             });
         }
     });
