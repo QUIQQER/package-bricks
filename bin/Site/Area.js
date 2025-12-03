@@ -427,7 +427,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             var Elm = new Element('li', {
                 'class': 'quiqqer-bricks-site-category-area-brick',
-                html   : '<select></select>',
+                html   : '<select></select><div class="btn-wrapper" data-name="btn-container"></div>',
                 id     : String.uniqueID()
             });
 
@@ -437,14 +437,14 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             Select.set('disabled', true);
 
             new QUIButton({
-                title : QUILocale.get(lg, 'site.area.button.delete'),
-                icon  : 'fa fa-remove',
+                title : QUILocale.get(lg, 'brick.sheet.edit.title'),
+                icon  : 'fa fa-edit',
                 events: {
                     onClick: function () {
-                        self.openBrickDeleteDialog(Elm);
+                        self.openBrick(Select);
                     }
                 }
-            }).inject(Elm);
+            }).inject(Elm.querySelector('[data-name="btn-container"]'));
 
             new QUIButton({
                 title : QUILocale.get(lg, 'site.area.button.settings'),
@@ -458,8 +458,18 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                         self.openBrickSettingDialog(Select);
                     }
                 }
-            }).inject(Elm);
+            }).inject(Elm.querySelector('[data-name="btn-container"]'));
 
+            new QUIButton({
+                'class' : 'btn-red',
+                title : QUILocale.get(lg, 'site.area.button.delete'),
+                icon  : 'fa fa-trash',
+                events: {
+                    onClick: function () {
+                        self.openBrickDeleteDialog(Elm);
+                    }
+                }
+            }).inject(Elm.querySelector('[data-name="btn-container"]'));
 
             for (i = 0, len = this.$availableBricks.length; i < len; i++) {
                 new Element('option', {
@@ -1040,6 +1050,14 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                                 }
                             }).inject(Win.getContent());
 
+                            Edit.hasCustomFields().then((hasCustomFields) => {
+                                if (hasCustomFields) {
+                                    Win.setAttribute('maxWidth', 800);
+                                    Win.setAttribute('maxHeight', 800);
+                                    Win.resize();
+                                }
+                            });
+
                             EditButton.addEvent('click', function () {
                                 Edit.openBrick();
                                 Win.close();
@@ -1070,6 +1088,24 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                     }
                 }
             }).open();
+        },
+
+        /**
+         * Opens the brick in a new tab
+         *
+         * @param Select
+         */
+        openBrick: function(Select) {
+            require([
+                'package/quiqqer/bricks/bin/Site/BrickEdit'
+            ], (BrickEdit) => {
+                const Edit = new BrickEdit({
+                    brickId     : Select.value,
+                    Site        : this.getAttribute('Site'),
+                });
+
+                Edit.openBrick();
+            });
         },
 
         /**
