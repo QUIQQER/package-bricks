@@ -1,6 +1,6 @@
 {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
 <header class="control-header">
-    <h1>{$this->getAttribute('frontendTitle')}</h1>
+    <h2>{$this->getAttribute('frontendTitle')}</h2>
 </header>
 {/if}
 
@@ -18,7 +18,7 @@
         <div class="customerReviewsSlider-templateOne-arrows" data-glide-el="controls">
                 <span class="customerReviewsSlider-arrow customerReviewsSlider-templateOne-arrow customerReviewsSlider-templateOne-arrow-left"
                       data-glide-dir="<">
-                    <span class="arrow"> &lt; </span>
+                    <span class="arrow" aria-hidden="true"> &lt; </span>
                 </span>
         </div>
         {/if}
@@ -33,7 +33,9 @@
 
                     <div class="customerReviewsSlider-content-wrapper">
                         <div class="customerReviewsSlider-quote">
-                            <svg width="192" height="192" viewBox="0 0 50.8 50.8" xmlns="http://www.w3.org/2000/svg"><path d="M9.265 271.8q3.228-4.09 4.376-7.102l-4.161-6.241q0-1.65.86-3.229.933-1.65 2.583-2.654 1.65-1.005 3.73-1.005 3.085 0 5.238 2.224 2.152 2.153 2.152 5.524 0 3.946-3.157 8.968t-9.9 9.756zm18.796 0q3.228-4.09 4.376-7.102l-4.161-6.241q0-1.65.86-3.229.933-1.65 2.583-2.654 1.65-1.005 3.73-1.005 3.085 0 5.238 2.224 2.152 2.153 2.152 5.524 0 3.946-3.157 8.968t-9.9 9.756z" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal" transform="matrix(.97499 0 0 1.0257 0 -246.2)" aria-label="&quot;"/></svg>
+                            <svg width="192" height="192" viewBox="0 0 50.8 50.8" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                <path d="M9.265 271.8q3.228-4.09 4.376-7.102l-4.161-6.241q0-1.65.86-3.229.933-1.65 2.583-2.654 1.65-1.005 3.73-1.005 3.085 0 5.238 2.224 2.152 2.153 2.152 5.524 0 3.946-3.157 8.968t-9.9 9.756zm18.796 0q3.228-4.09 4.376-7.102l-4.161-6.241q0-1.65.86-3.229.933-1.65 2.583-2.654 1.65-1.005 3.73-1.005 3.085 0 5.238 2.224 2.152 2.153 2.152 5.524 0 3.946-3.157 8.968t-9.9 9.756z" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal" transform="matrix(.97499 0 0 1.0257 0 -246.2)"/>
+                            </svg>
                         </div>
 
                         {if $entry['review']}
@@ -83,7 +85,7 @@
         <div class="customerReviewsSlider-templateOne-arrows" data-glide-el="controls">
                 <span class="customerReviewsSlider-arrow customerReviewsSlider-templateOne-arrow customerReviewsSlider-templateOne-arrow-right"
                       data-glide-dir=">">
-                    <span class="arrow"> &gt; </span>
+                    <span class="arrow" aria-hidden="true"> &gt; </span>
                 </span>
         </div>
         {/if}
