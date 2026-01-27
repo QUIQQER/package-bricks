@@ -16,6 +16,7 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
     "use strict";
 
     return new Class({
+
         Extends: QDOM,
         Type: 'package/quiqqer/bricks/bin/classes/Bricks',
 
@@ -128,7 +129,6 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
                 });
             });
         },
-
 
         /**
          * Create a new brick
