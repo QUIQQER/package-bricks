@@ -1,9 +1,6 @@
 /**
  * Area manager for the site object
  *
- * @module package/quiqqer/bricks/bin/Site/Category
- * @author www.pcsg.de (Henning Leutz)
- *
  * @event onLoaded
  */
 define('package/quiqqer/bricks/bin/Site/Category', [
@@ -23,7 +20,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Site/Category',
+        Type: 'package/quiqqer/bricks/bin/Site/Category',
 
         Binds: [
             '$onInject',
@@ -39,7 +36,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
             this.$Areas = null;
 
             this.addEvents({
-                onInject : this.$onInject,
+                onInject: this.$onInject,
                 onDestroy: this.$onDestroy
             });
         },
@@ -51,8 +48,8 @@ define('package/quiqqer/bricks/bin/Site/Category', [
         create: function () {
             this.$Elm = new Element('div', {
                 'class': 'quiqqer-bricks-site-category',
-                'html' : '<div class="quiqqer-bricks-site-category-areas"></div>' +
-                         '<div class="quiqqer-bricks-site-category-image"></div>'
+                'html': '<div class="quiqqer-bricks-site-category-areas"></div>' +
+                    '<div class="quiqqer-bricks-site-category-image"></div>'
             });
 
             this.Loader.inject(this.$Elm);
@@ -69,10 +66,10 @@ define('package/quiqqer/bricks/bin/Site/Category', [
         $onInject: function () {
             this.Loader.show();
 
-            var self    = this,
-                Site    = this.getAttribute('Site'),
+            var self = this,
+                Site = this.getAttribute('Site'),
                 Project = Site.getProject(),
-                layout  = Site.getAttribute('layout');
+                layout = Site.getAttribute('layout');
 
             Project.getLayouts().then(function (layouts) {
                 layout = layouts.find(function (entry) {
@@ -102,7 +99,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
 
                 var i, len, data, AC;
 
-                var Site  = self.getAttribute('Site'),
+                var Site = self.getAttribute('Site'),
                     areas = Site.getAttribute('quiqqer.bricks.areas');
 
                 if (areas) {
@@ -163,7 +160,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
         updateSite: function () {
             var i, len, AC;
 
-            var Site  = this.getAttribute('Site'),
+            var Site = this.getAttribute('Site'),
                 areas = {};
 
             for (i = 0, len = this.areas.length; i < len; i++) {
@@ -182,15 +179,15 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          * @return {Promise}
          */
         getBrickAreas: function (callback) {
-            const Site    = this.getAttribute('Site'),
-                  Project = Site.getProject();
+            const Site = this.getAttribute('Site'),
+                Project = Site.getProject();
 
             return new Promise(function (resolve, reject) {
                 Project.getConfig(function (layout) {
                     if (Site.getAttribute('layout')) {
                         layout = Site.getAttribute('layout');
                     }
-                    
+
                     QUIAjax.get('package_quiqqer_bricks_ajax_project_getAreas', function (result) {
                         if (typeof callback === 'function') {
                             callback(result);
@@ -199,10 +196,10 @@ define('package/quiqqer/bricks/bin/Site/Category', [
                         resolve(result);
                     }, {
                         'package': 'quiqqer/bricks',
-                        project  : Project.encode(),
-                        layout   : layout,
-                        siteType : Site.getAttribute('type'),
-                        onError  : reject
+                        project: Project.encode(),
+                        layout: layout,
+                        siteType: Site.getAttribute('type'),
+                        onError: reject
                     });
 
                 }, 'layout');
@@ -216,7 +213,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          * @return Area
          */
         $insertBrickAreaEdit: function (area) {
-            var Site    = this.getAttribute('Site'),
+            var Site = this.getAttribute('Site'),
                 Project = Site.getProject(),
                 Control = new Area();
 

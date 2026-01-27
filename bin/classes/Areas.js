@@ -1,7 +1,5 @@
 /**
  * Main area handler
- *
- * @author www.pcsg.de (Henning Leutz)
  */
 define('package/quiqqer/bricks/bin/classes/Areas', [
 
@@ -15,7 +13,7 @@ define('package/quiqqer/bricks/bin/classes/Areas', [
     return new Class({
 
         Extends: QDOM,
-        Type   : 'package/quiqqer/bricks/bin/classes/Areas',
+        Type: 'package/quiqqer/bricks/bin/classes/Areas',
 
         initialize: function (options) {
             this.parent(options);
@@ -43,7 +41,7 @@ define('package/quiqqer/bricks/bin/classes/Areas', [
                     resolve(self.$areas);
                 }, {
                     'package': 'quiqqer/brick',
-                    project  : JSON.encode({
+                    project: JSON.encode({
                         name: project,
                         lang: lang
                     })

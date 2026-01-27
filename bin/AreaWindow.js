@@ -2,9 +2,6 @@
  * AreaWindow Control
  * List of the areas which are available
  *
- * @module package/quiqqer/bricks/bin/AreaWindow
- * @author www.pcsg.de (Henning Leutz)
- *
  * @event onSubmit [ this, areas ]
  */
 define('package/quiqqer/bricks/bin/AreaWindow', [
@@ -21,27 +18,27 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
     return new Class({
 
         Extends: QUIConfirm,
-        Type   : 'package/quiqqer/bricks/bin/AreaWindow',
+        Type: 'package/quiqqer/bricks/bin/AreaWindow',
 
         Binds: [
             '$onOpen'
         ],
 
         options: {
-            icon       : 'fa fa-th',
-            title      : QUILocale.get('quiqqer/bricks', 'area.window.title'),
+            icon: 'fa fa-th',
+            title: QUILocale.get('quiqqer/bricks', 'area.window.title'),
             projectName: false,
             projectLang: false,
-            maxHeight  : 600,
-            maxWidth   : 400,
-            texticon   : false,
+            maxHeight: 600,
+            maxWidth: 400,
+            texticon: false,
 
             cancel_button: {
-                text     : QUILocale.get('quiqqer/system', 'cancel'),
+                text: QUILocale.get('quiqqer/system', 'cancel'),
                 textimage: 'fa fa-remove'
             },
-            ok_button    : {
-                text     : QUILocale.get('quiqqer/system', 'accept'),
+            ok_button: {
+                text: QUILocale.get('quiqqer/system', 'accept'),
                 textimage: 'fa fa-check'
             }
         },
@@ -68,12 +65,12 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
 
                 for (i = 0, len = result.length; i < len; i++) {
                     title = result[i].title;
-                    desc  = result[i].description;
+                    desc = result[i].description;
 
                     new Area({
-                        title      : QUILocale.get(title.group, title['var']),
+                        title: QUILocale.get(title.group, title['var']),
                         description: QUILocale.get(desc.group, desc['var']),
-                        area       : result[i].name
+                        area: result[i].name
                     }).inject(Content);
                 }
 
@@ -91,7 +88,7 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
 
             Ajax.get('package_quiqqer_bricks_ajax_project_getAreas', callback, {
                 'package': 'quiqqer/brick',
-                project  : JSON.encode({
+                project: JSON.encode({
                     name: this.getAttribute('projectName'),
                     lang: this.getAttribute('projectLang')
                 })

@@ -1,10 +1,3 @@
-/**
- * @module package/quiqqer/bricks/bin/Controls/LanguagesSwitches/DropDown
- * @author www.pcsg.de (Henning Leutz)
- *
- * @require qui/QUI
- * @require qui/controls/Control
- */
 define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown', [
 
     'qui/QUI',
@@ -16,7 +9,7 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown',
+        Type: 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown',
 
         Binds: [
             'open',
@@ -27,7 +20,7 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown', [
         initialize: function (options) {
             this.parent(options);
 
-            this.$Display  = null;
+            this.$Display = null;
             this.$DropDown = null;
 
             this.addEvents({
@@ -41,8 +34,8 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown', [
         $onImport: function () {
             this.$Elm.set({
                 tabindex: -1,
-                styles  : {
-                    outline       : 'none',
+                styles: {
+                    outline: 'none',
                     '-moz-outline': 'none'
                 }
             });
@@ -52,7 +45,7 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown', [
                     event.target.focus();
                 },
                 focus: this.open,
-                blur : this.close
+                blur: this.close
             });
 
 
@@ -84,7 +77,7 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown', [
                 event.stop();
 
                 var search = window.location.search;
-                var hash   = window.location.hash;
+                var hash = window.location.hash;
 
                 window.location = href + search + hash;
             });

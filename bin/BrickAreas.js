@@ -2,9 +2,6 @@
  * BrickAreas Control
  * Edit and change the areas for the brick
  *
- * @module package/quiqqer/bricks/bin/BrickAreas
- * @author www.pcsg.de (Henning Leutz)
- *
  * @event onLoaded [ this ]
  */
 define('package/quiqqer/bricks/bin/BrickAreas', [
@@ -25,18 +22,18 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/BrickAreas',
+        Type: 'package/quiqqer/bricks/bin/BrickAreas',
 
         Binds: [
             '$onDestroy'
         ],
 
         options: {
-            brickId    : false, // brickId
-            styles     : false,
+            brickId: false, // brickId
+            styles: false,
             projectName: false,
             projectLang: false,
-            areas      : false
+            areas: false
         },
 
         initialize: function (options) {
@@ -55,8 +52,8 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
 
             this.$Elm = new Element('div', {
                 'class': 'quiqqer-bricks-brickareas',
-                html   : '<div class="quiqqer-bricks-brickareas-container"></div>' +
-                '<div class="quiqqer-bricks-brickareas-buttons"></div>'
+                html: '<div class="quiqqer-bricks-brickareas-container"></div>' +
+                    '<div class="quiqqer-bricks-brickareas-buttons"></div>'
             });
 
             if (this.getAttribute('styles')) {
@@ -64,10 +61,10 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
             }
 
             this.$Container = this.$Elm.getElement('.quiqqer-bricks-brickareas-container');
-            this.$Buttons   = this.$Elm.getElement('.quiqqer-bricks-brickareas-buttons');
+            this.$Buttons = this.$Elm.getElement('.quiqqer-bricks-brickareas-buttons');
 
             new QUIButton({
-                text  : QUILocale.get('quiqqer/bricks', 'brick.edit.area.add'),
+                text: QUILocale.get('quiqqer/bricks', 'brick.edit.area.add'),
                 styles: {
                     width: '100%'
                 },
@@ -76,7 +73,7 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
                         new AreaWindow({
                             projectName: self.getAttribute('projectName'),
                             projectLang: self.getAttribute('projectLang'),
-                            events     : {
+                            events: {
                                 onSubmit: function (Win, areas) {
                                     for (var i = 0, len = areas.length; i < len; i++) {
                                         self.addArea(areas[i]);
@@ -116,8 +113,8 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
             this.$areas[area] = true;
 
             var BrickNode = new Element('div', {
-                'class'    : 'quiqqer-bricks-brickareas-area',
-                html       : '<span class="fa fa-spinner fa-spin"></span>',
+                'class': 'quiqqer-bricks-brickareas-area',
+                html: '<span class="fa fa-spinner fa-spin"></span>',
                 'data-area': area
             }).inject(this.$Container);
 
@@ -153,11 +150,11 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
 
             new Element('span', {
                 'class': 'fa fa-times',
-                styles : {
-                    cursor    : 'pointer',
+                styles: {
+                    cursor: 'pointer',
                     marginLeft: 10
                 },
-                events : {
+                events: {
                     click: function () {
                         var area = BrickNode.get('data-area');
 
