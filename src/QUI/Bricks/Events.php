@@ -10,6 +10,7 @@ use Exception;
 use QUI;
 use QUI\ExceptionStack;
 use Smarty;
+use Smarty_Internal_Template;
 use SmartyException;
 
 use function array_flip;
@@ -247,11 +248,11 @@ class Events
      * Smarty brickarea function {brickarea}
      *
      * @param array $params - function parameter
-     * @param Smarty $smarty
+     * @param Smarty_Internal_Template $smarty
      * @return string|array
      * @throws ExceptionStack
      */
-    public static function brickarea(array $params, Smarty $smarty): array | string
+    public static function brickarea(array $params, Smarty_Internal_Template $smarty): array | string
     {
         if (!isset($params['Site']) || !isset($params['area'])) {
             if (!isset($params['assign'])) {

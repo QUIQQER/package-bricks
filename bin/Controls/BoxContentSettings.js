@@ -1,9 +1,3 @@
-/**
- * @module package/quiqqer/bricks/bin/Controls/BoxContentSettings
- * @author Dominik Chrzanowski
- *
- */
-
 define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
 
     'qui/QUI',
@@ -606,7 +600,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
                             var prefix = 'control.boxContent.entries.',
                                 Container = new Element('div', {
                                     html: Mustache.render(templateEntry, {
-                                        fieldIsDisabled : QUILocale.get(lg, prefix + 'disable'),
+                                        fieldIsDisabled: QUILocale.get(lg, prefix + 'disable'),
                                         fieldTitle: QUILocale.get(lg, prefix + 'title'),
                                         fieldText: QUILocale.get(lg, prefix + 'text')
                                     }),

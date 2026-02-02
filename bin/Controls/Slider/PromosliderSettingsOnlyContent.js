@@ -1,7 +1,4 @@
 /**
- * @module package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContent
- * @author www.pcsg.de (Henning Leutz)
- *
  * Wallpaper Slider mit zwei Inhaltsbereichen
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyContent', [
@@ -28,7 +25,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings',
+        Type: 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings',
 
         Binds: [
             '$onImport',
@@ -43,7 +40,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
             this.parent(options);
 
             this.$Input = null;
-            this.$Grid  = null;
+            this.$Grid = null;
 
             this.$data = [];
 
@@ -60,23 +57,23 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
 
             this.$Elm = new Element('div', {
                 'class': 'quiqqer-bricks-promoslider-settings',
-                styles : {
-                    clear   : 'both',
-                    'float' : 'left',
-                    height  : 400,
+                styles: {
+                    clear: 'both',
+                    'float': 'left',
+                    height: 400,
                     overflow: 'hidden',
                     position: 'relative',
-                    margin  : '10px 0 0 0',
-                    width   : '100%'
+                    margin: '10px 0 0 0',
+                    width: '100%'
                 }
             }).wraps(this.$Input);
 
             // exist label?
-            var id    = this.$Input.get('id'),
+            var id = this.$Input.get('id'),
                 Label = document.getElement('label[for="extraField_' + id + '"]');
 
             if (Label) {
-                var Cell    = Label.getParent('td'),
+                var Cell = Label.getParent('td'),
                     OldCell = this.$Elm.getParent('td');
 
                 Cell.set('colspan', 2);
@@ -95,23 +92,23 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
             }).inject(this.$Elm);
 
             this.$Grid = new Grid(Desktop, {
-                height     : 400,
-                width      : size.x,
-                buttons    : [{
-                    name    : 'up',
-                    icon    : 'fa fa-angle-up',
+                height: 400,
+                width: size.x,
+                buttons: [{
+                    name: 'up',
+                    icon: 'fa fa-angle-up',
                     disabled: true,
-                    events  : {
+                    events: {
                         onClick: function () {
                             this.$Grid.moveup();
                             this.$refreshSorting();
                         }.bind(this)
                     }
                 }, {
-                    name    : 'down',
-                    icon    : 'fa fa-angle-down',
+                    name: 'down',
+                    icon: 'fa fa-angle-down',
                     disabled: true,
-                    events  : {
+                    events: {
                         onClick: function () {
                             this.$Grid.movedown();
                             this.$refreshSorting();
@@ -120,76 +117,76 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                 }, {
                     type: 'separator'
                 }, {
-                    name     : 'add',
+                    name: 'add',
                     textimage: 'fa fa-plus',
-                    text     : QUILocale.get('quiqqer/system', 'add'),
-                    events   : {
+                    text: QUILocale.get('quiqqer/system', 'add'),
+                    events: {
                         onClick: this.$openAddDialog
                     }
                 }, {
                     type: 'separator'
                 }, {
-                    name     : 'edit',
+                    name: 'edit',
                     textimage: 'fa fa-edit',
-                    text     : QUILocale.get('quiqqer/system', 'edit'),
-                    disabled : true,
-                    events   : {
+                    text: QUILocale.get('quiqqer/system', 'edit'),
+                    disabled: true,
+                    events: {
                         onClick: this.$openEditDialog
                     }
                 }, {
-                    name     : 'delete',
+                    name: 'delete',
                     textimage: 'fa fa-trash',
-                    text     : QUILocale.get('quiqqer/system', 'delete'),
-                    disabled : true,
-                    events   : {
+                    text: QUILocale.get('quiqqer/system', 'delete'),
+                    disabled: true,
+                    events: {
                         onClick: this.$openDeleteDialog
                     }
                 }],
                 columnModel: [{
-                    header   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled.short'),
+                    header: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled.short'),
                     dataIndex: 'isDisabledDisplay',
-                    dataType : 'QUI',
-                    width    : 60
+                    dataType: 'QUI',
+                    width: 60
                 }, {
                     dataIndex: 'isDisabled',
-                    hidden   : true
+                    hidden: true
                 }, {
-                    header   : QUILocale.get('quiqqer/system', 'title'),
+                    header: QUILocale.get('quiqqer/system', 'title'),
                     dataIndex: 'title',
-                    dataType : 'string',
-                    width    : 100
+                    dataType: 'string',
+                    width: 100
                 }, {
-                    header   : QUILocale.get('quiqqer/system', 'image'),
+                    header: QUILocale.get('quiqqer/system', 'image'),
                     dataIndex: 'imagePreview',
-                    dataType : 'node',
-                    width    : 60
+                    dataType: 'node',
+                    width: 60
                 }, {
-                    header   : QUILocale.get(lg, 'quiqqer.products.control.promoslider.left'),
+                    header: QUILocale.get(lg, 'quiqqer.products.control.promoslider.left'),
                     dataIndex: 'left',
-                    dataType : 'code',
-                    width    : 300
+                    dataType: 'code',
+                    width: 300
                 }, {
-                    header   : QUILocale.get(lg, 'quiqqer.products.control.promoslider.right'),
+                    header: QUILocale.get(lg, 'quiqqer.products.control.promoslider.right'),
                     dataIndex: 'right',
-                    dataType : 'code',
-                    width    : 300
+                    dataType: 'code',
+                    width: 300
                 }, {
-                    header   : QUILocale.get(lg, 'quiqqer.products.control.promoslider.url'),
+                    header: QUILocale.get(lg, 'quiqqer.products.control.promoslider.url'),
                     dataIndex: 'url',
-                    dataType : 'string',
-                    width    : 300
+                    dataType: 'string',
+                    width: 300
                 }, {
-                    header   : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.newTab.short'),
+                    header: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.newTab.short'),
                     dataIndex: 'newTabDisplay',
-                    dataType : 'node',
-                    width    : 60
+                    dataType: 'node',
+                    width: 60
                 }, {
                     dataIndex: 'newTab',
-                    hidden   : true
+                    hidden: true
                 }, {
                     dataIndex: 'image',
-                    dataType : 'string',
-                    hidden   : true
+                    dataType: 'string',
+                    hidden: true
                 }]
             });
 
@@ -197,19 +194,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                 onClick: function () {
                     var buttons = this.$Grid.getButtons(),
 
-                        Edit    = buttons.filter(function (Btn) {
+                        Edit = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'edit';
                         })[0],
 
-                        Up      = buttons.filter(function (Btn) {
+                        Up = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'up';
                         })[0],
 
-                        Down    = buttons.filter(function (Btn) {
+                        Down = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'down';
                         })[0],
 
-                        Delete  = buttons.filter(function (Btn) {
+                        Delete = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'delete';
                         })[0];
 
@@ -278,9 +275,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
             var data = [];
 
             for (i = 0, len = this.$data.length; i < len; i++) {
-                entry  = this.$data[i];
+                entry = this.$data[i];
                 insert = {
-                    image       : '',
+                    image: '',
                     imagePreview: new Element('span', {html: '&nbsp;'})
                 };
 
@@ -321,7 +318,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     entry.newTab = parseInt(entry.newTab);
 
                     insert.newTabDisplay = new Element('span', {
-                        'class'       : entry.newTab === 1 ? 'fa fa-check' : 'fa fa-times',
+                        'class': entry.newTab === 1 ? 'fa fa-check' : 'fa fa-times',
                         'data-enabled': entry.newTab
                     });
                 }
@@ -335,19 +332,19 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
 
             var buttons = this.$Grid.getButtons(),
 
-                Edit    = buttons.filter(function (Btn) {
+                Edit = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'edit';
                 })[0],
 
-                Up      = buttons.filter(function (Btn) {
+                Up = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'up';
                 })[0],
 
-                Down    = buttons.filter(function (Btn) {
+                Down = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'down';
                 })[0],
 
-                Delete  = buttons.filter(function (Btn) {
+                Delete = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'delete';
                 })[0];
 
@@ -363,16 +360,16 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
          */
         $refreshSorting: function () {
             var gridData = this.$Grid.getData(),
-                data     = [];
+                data = [];
 
             for (var i = 0, len = gridData.length; i < len; i++) {
                 data.push({
-                    title     : gridData[i].title,
-                    image     : gridData[i].image,
-                    left      : gridData[i].left,
-                    right     : gridData[i].right,
-                    url       : gridData[i].url || '',
-                    newTab    : parseInt(gridData[i].newTab),
+                    title: gridData[i].title,
+                    image: gridData[i].image,
+                    left: gridData[i].left,
+                    right: gridData[i].right,
+                    url: gridData[i].url || '',
+                    newTab: parseInt(gridData[i].newTab),
                     isDisabled: parseInt(gridData[i].isDisabled)
                 });
             }
@@ -401,12 +398,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
          */
         add: function (title, left, right, image, url, newTab, isDisabled) {
             this.$data.push({
-                title     : title || '',
-                left      : left || '',
-                right     : right || '',
-                image     : image || '',
-                url       : url || '',
-                newTab    : parseInt(newTab),
+                title: title || '',
+                left: left || '',
+                right: right || '',
+                image: image || '',
+                url: url || '',
+                newTab: parseInt(newTab),
                 isDisabled: parseInt(isDisabled)
             });
 
@@ -432,12 +429,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
             }
 
             this.$data[index] = {
-                title     : title || '',
-                left      : left || '',
-                right     : right || '',
-                image     : image || '',
-                url       : url || '',
-                newTab    : parseInt(newTab),
+                title: title || '',
+                left: left || '',
+                right: right || '',
+                image: image || '',
+                url: url || '',
+                newTab: parseInt(newTab),
                 isDisabled: parseInt(isDisabled)
             };
 
@@ -498,18 +495,18 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
          */
         $openDeleteDialog: function () {
             new QUIConfirm({
-                icon       : 'fa fa-icon',
-                title      : QUILocale.get(lg, 'quiqqer.products.control.delete.title'),
-                text       : QUILocale.get(lg, 'quiqqer.products.control.delete.text'),
+                icon: 'fa fa-icon',
+                title: QUILocale.get(lg, 'quiqqer.products.control.delete.title'),
+                text: QUILocale.get(lg, 'quiqqer.products.control.delete.text'),
                 information: QUILocale.get(lg, 'quiqqer.products.control.delete.information'),
-                texticon   : false,
-                maxWidth   : 600,
-                maxHeight  : 400,
-                ok_button  : {
-                    text     : QUILocale.get('quiqqer/system', 'delete'),
+                texticon: false,
+                maxWidth: 600,
+                maxHeight: 400,
+                ok_button: {
+                    text: QUILocale.get('quiqqer/system', 'delete'),
                     textimage: 'fa fa-trash'
                 },
-                events     : {
+                events: {
                     onSubmit: function () {
                         var selected = this.$Grid.getSelectedIndices();
 
@@ -527,27 +524,27 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
          * @retrun {Promise}
          */
         $openEditDialog: function () {
-            var self  = this,
-                data  = this.$Grid.getSelectedData(),
+            var self = this,
+                data = this.$Grid.getSelectedData(),
                 index = this.$Grid.getSelectedIndices();
 
             if (!data.length) {
                 return Promise.resolve();
             }
 
-            data  = data[0];
+            data = data[0];
             index = index[0];
 
             return this.$createDialog().then(function (Dialog) {
                 Dialog.addEvent('onOpenAfterCreate', function () {
                     var Content = Dialog.getContent();
-                    var Form    = Content.getElement('form');
+                    var Form = Content.getElement('form');
 
                     var Title = Form.elements.title;
-                    var Left  = Form.elements.left;
+                    var Left = Form.elements.left;
                     var Right = Form.elements.right;
                     var Image = Form.elements.image;
-                    var Url   = Form.elements.url;
+                    var Url = Form.elements.url;
 
                     if (data.isDisabled) {
                         Dialog.IsDisabledSwitch.on();
@@ -556,10 +553,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     }
 
                     Title.value = data.title || '';
-                    Left.value  = data.left || '';
+                    Left.value = data.left || '';
                     Right.value = data.right || '';
                     Image.value = data.image || '';
-                    Url.value   = data.url || '';
+                    Url.value = data.url || '';
 
                     if (data.newTab && parseInt(data.newTab.getAttribute('data-enabled')) === 1) {
                         Dialog.NewTabSwitch.on();
@@ -574,13 +571,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     Dialog.Loader.show();
 
                     var Content = Dialog.getContent();
-                    var Form    = Content.getElement('form');
+                    var Form = Content.getElement('form');
 
                     var Title = Form.elements.title;
-                    var Left  = Form.elements.left;
+                    var Left = Form.elements.left;
                     var Right = Form.elements.right;
                     var Image = Form.elements.image;
-                    var Url   = Form.elements.url;
+                    var Url = Form.elements.url;
 
                     self.edit(
                         index,
@@ -613,13 +610,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                     Dialog.Loader.show();
 
                     var Content = Dialog.getContent();
-                    var Form    = Content.getElement('form');
+                    var Form = Content.getElement('form');
 
                     var Title = Form.elements.title;
-                    var Left  = Form.elements.left;
+                    var Left = Form.elements.left;
                     var Right = Form.elements.right;
                     var Image = Form.elements.image;
-                    var Url   = Form.elements.url;
+                    var Url = Form.elements.url;
 
                     self.add(
                         Title.value,
@@ -648,29 +645,29 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
 
             return new Promise(function (resolve) {
                 var Dialog = new QUIConfirm({
-                    title       : QUILocale.get(lg, 'quiqqer.bricks.promoslider.adddialog.title'),
-                    icon        : 'fa fa-edit',
-                    maxWidth    : 800,
-                    maxHeight   : 600,
-                    autoclose   : false,
+                    title: QUILocale.get(lg, 'quiqqer.bricks.promoslider.adddialog.title'),
+                    icon: 'fa fa-edit',
+                    maxWidth: 800,
+                    maxHeight: 600,
+                    autoclose: false,
                     NewTabSwitch: false,
-                    events      : {
+                    events: {
                         onOpen: function (Win) {
                             Win.Loader.show();
                             Win.getContent().set('html', '');
 
                             var Container = new Element('div', {
-                                html   : Mustache.render(templateEntry, {
-                                    fieldIsDisabled : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled'),
-                                    fieldImage      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.image'),
-                                    fieldUrl        : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url'),
-                                    fieldUrlWarning : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url.warning'),
-                                    fieldNewTab     : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.newTab'),
-                                    fieldTitle      : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.title'),
+                                html: Mustache.render(templateEntry, {
+                                    fieldIsDisabled: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.isDisabled'),
+                                    fieldImage: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.image'),
+                                    fieldUrl: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url'),
+                                    fieldUrlWarning: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.url.warning'),
+                                    fieldNewTab: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.newTab'),
+                                    fieldTitle: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.title'),
                                     fieldDescription: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.text'),
-                                    fieldType       : QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.align'),
-                                    fieldLeft       : QUILocale.get(lg, 'quiqqer.products.control.promoslider.left'),
-                                    fieldRight      : QUILocale.get(lg, 'quiqqer.products.control.promoslider.right')
+                                    fieldType: QUILocale.get(lg, 'quiqqer.bricks.promoslider.create.align'),
+                                    fieldLeft: QUILocale.get(lg, 'quiqqer.products.control.promoslider.left'),
+                                    fieldRight: QUILocale.get(lg, 'quiqqer.products.control.promoslider.right')
                                 }),
                                 'class': 'quiqqer-bricks-promoslider-settings-entry'
                             }).inject(Win.getContent());
@@ -682,7 +679,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                             });
 
                             Win.IsDisabledSwitch = new QUISwitch({
-                                name  : 'isDisabled',
+                                name: 'isDisabled',
                                 status: false
                             }).inject(Container.getElement('#isDisabledWrapper'));
 
@@ -694,7 +691,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
                                 return ControlsUtils.parse(Container);
                             }).then(function () {
                                 var controls = QUI.Controls.getControlsInElement(Container),
-                                    project  = self.getAttribute('project');
+                                    project = self.getAttribute('project');
 
                                 controls.each(function (Control) {
                                     if (Control === self) {
@@ -710,7 +707,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettingsOnlyConten
 
                                 moofx(Container).animate({
                                     opacity: 1,
-                                    top    : 0
+                                    top: 0
                                 }, {
                                     duration: 250,
                                     callback: function () {

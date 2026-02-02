@@ -2,9 +2,6 @@
  * BrickAreas Control
  * Edit and change the areas for the brick
  *
- * @module package/quiqqer/bricks/bin/BrickAreas
- * @author www.pcsg.de (Henning Leutz)
- *
  * @event onLoaded [ this ]
  */
 define('package/quiqqer/bricks/bin/Area', [
@@ -24,23 +21,23 @@ define('package/quiqqer/bricks/bin/Area', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Area',
+        Type: 'package/quiqqer/bricks/bin/Area',
 
         Binds: [
             'toggle'
         ],
 
         options: {
-            area       : false,
-            title      : false,
+            area: false,
+            title: false,
             description: false
         },
 
         initialize: function (options) {
             this.parent(options);
 
-            this.$Title    = false;
-            this.$Desc     = false;
+            this.$Title = false;
+            this.$Desc = false;
             this.$selected = false;
         },
 
@@ -52,20 +49,20 @@ define('package/quiqqer/bricks/bin/Area', [
         create: function () {
             this.$Elm = new Element('div', {
                 'class': 'quiqqer-bricks-area smooth',
-                html   : '<div class="quiqqer-bricks-area-icon">' +
-                '<span class="fa fa-list-alt"></span>' +
-                '</div>' +
-                '<div class="quiqqer-bricks-area-content">' +
-                '<div class="quiqqer-bricks-area-content-title"></div>' +
-                '<div class="quiqqer-bricks-area-content-description"></div>' +
-                '</div>',
-                events : {
+                html: '<div class="quiqqer-bricks-area-icon">' +
+                    '<span class="fa fa-list-alt"></span>' +
+                    '</div>' +
+                    '<div class="quiqqer-bricks-area-content">' +
+                    '<div class="quiqqer-bricks-area-content-title"></div>' +
+                    '<div class="quiqqer-bricks-area-content-description"></div>' +
+                    '</div>',
+                events: {
                     click: this.toggle
                 }
             });
 
             this.$Title = this.$Elm.getElement('.quiqqer-bricks-area-content-title');
-            this.$Desc  = this.$Elm.getElement('.quiqqer-bricks-area-content-description');
+            this.$Desc = this.$Elm.getElement('.quiqqer-bricks-area-content-description');
 
             if (this.getAttribute('area')) {
                 this.$Elm.set('data-area', this.getAttribute('area'));

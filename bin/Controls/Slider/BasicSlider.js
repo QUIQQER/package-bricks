@@ -3,13 +3,6 @@
  *
  * Animation types: see isAnimationTypeValid() function for valid types
  *
- * @module package/quiqqer/bricks/bin/Controls/Slider/BasicSlider
- * @author Dominik Chrzanowski
- * @author Michael Danielczok
- *
- * @require qui/QUI
- * @require qui/controls/Control
- *
  * @event onAnimationToggleStart [this]
  * @event onAnimationHideEnd [this]
  * @event onAnimationToggleEnd [this]
@@ -19,7 +12,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
     'qui/QUI',
     'qui/controls/Control'
 
-], function(QUI, QUIControl) {
+], function (QUI, QUIControl) {
     'use strict';
 
     return new Class({
@@ -42,7 +35,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
             animationtype: 'hideSlideToLeftShowSlideFromLeft'
         },
 
-        initialize: function(options) {
+        initialize: function (options) {
             this.parent(options);
 
             this.SliderList = null;
@@ -60,7 +53,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
         /**
          * event : on import
          */
-        $onImport: function() {
+        $onImport: function () {
             const Elm = this.getElm();
 
             if (this.getAttribute('animationtype') && this.isAnimationTypeValid(this.getAttribute('animationtype'))) {
@@ -96,7 +89,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
         /**
          * Start countdown to change slide
          */
-        $start: function() {
+        $start: function () {
             this.NextSlide = this.$getNextSlide();
             this.NextDot = this.$getNextDot();
 
@@ -110,7 +103,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
         /**
          *  Get next slide
          */
-        $next: function() {
+        $next: function () {
             this.$toggle().then(() => {
                 this.$start();
             });
@@ -121,13 +114,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @returns {*}
          */
-        $toggle: function() {
+        $toggle: function () {
             this.fireEvent('animationToggleStart', [this]);
 
             const self = this;
 
-            return new Promise(function(resolve) {
-                self.$hide().then(function() {
+            return new Promise(function (resolve) {
+                self.$hide().then(function () {
                     if (self.DotNav) {
                         self.DotCurrent.classList.remove('active');
                         self.DotCurrent = self.NextDot;
@@ -135,7 +128,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
                     }
 
                     return self.$show();
-                }).then(function() {
+                }).then(function () {
                     self.Slide = self.NextSlide;
 
                     self.fireEvent('animationToggleEnd', [this]);
@@ -149,13 +142,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @returns {Promise}
          */
-        $hide: function() {
+        $hide: function () {
             const self = this;
 
-            return new Promise(function(resolve) {
+            return new Promise(function (resolve) {
                 moofx(self.Slide).animate(self.$getAnimatedPropertiesForHide(), {
                     duration: self.animationDurationHide,
-                    callback: function() {
+                    callback: function () {
                         self.Slide.setStyle('display', 'none');
                         self.fireEvent('animationHideEnd', [this]);
                         resolve();
@@ -169,10 +162,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @returns {Promise}
          */
-        $show: function() {
+        $show: function () {
             const self = this;
 
-            return new Promise(function(resolve) {
+            return new Promise(function (resolve) {
                 self.NextSlide.setStyle('display', 'block');
 
                 moofx(self.NextSlide).animate(self.$getAnimatedPropertiesForShow(), {
@@ -187,7 +180,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @returns {*}
          */
-        $getNextSlide: function() {
+        $getNextSlide: function () {
             if (!this.Slide.getNext()) {
                 return this.SliderList.getFirst('li');
             }
@@ -200,7 +193,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @returns {*}
          */
-        $getNextDot: function() {
+        $getNextDot: function () {
             if (this.DotNav === null) {
                 return null;
             }
@@ -220,7 +213,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @param Slide HTML Node
          */
-        $loadImage: function(Slide) {
+        $loadImage: function (Slide) {
             const Image = Slide.querySelector('img');
 
             if (Image.getAttribute('data-qui-loaded')) {
@@ -241,7 +234,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          * @param {string} animationName
          * @returns {boolean}
          */
-        isAnimationTypeValid: function(animationName) {
+        isAnimationTypeValid: function (animationName) {
             const validTypes = [
                 'hideSlideToLeftShowSlideFromLeft',
                 'hideSlideToLeftShowSlideFromRight',
@@ -264,7 +257,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @returns {Object.<string, string>}
          */
-        $getAnimatedPropertiesForHide: function() {
+        $getAnimatedPropertiesForHide: function () {
             switch (this.animationType) {
                 case 'hideSlideToLeftShowSlideFromLeft':
                     return {
@@ -338,7 +331,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/BasicSlider', [
          *
          * @returns {Object.<string, string>}
          */
-        $getAnimatedPropertiesForShow: function() {
+        $getAnimatedPropertiesForShow: function () {
             switch (this.animationType) {
                 case 'hideSlideToLeftShowSlideFromLeft':
                     this.NextSlide.style.transform = 'translateX(-20px)';

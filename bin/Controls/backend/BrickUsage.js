@@ -1,7 +1,3 @@
-/**
- * @module package/quiqqer/bricks/bin/Controls/backend/BrickUsage
- * @author www.pcsg.de (Henning Leutz)
- */
 define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
 
     'qui/QUI',
@@ -17,7 +13,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Controls/backend/BrickUsage',
+        Type: 'package/quiqqer/bricks/bin/Controls/backend/BrickUsage',
 
         Binds: [
             '$onInject',
@@ -26,10 +22,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
 
         options: {
             brickId: false,
-            styles : {
+            styles: {
                 'float': 'left',
-                height : '100%',
-                width  : '100%'
+                height: '100%',
+                width: '100%'
             }
         },
 
@@ -56,38 +52,38 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
             var Container = new Element('div', {
                 styles: {
                     height: '100%',
-                    width : '100%'
+                    width: '100%'
                 }
             }).inject(this.$Elm);
 
             this.$Grid = new Grid(Container, {
                 columnModel: [{
-                    header   : QUILocale.get('quiqqer/system', 'project'),
+                    header: QUILocale.get('quiqqer/system', 'project'),
                     dataIndex: 'project',
-                    dataType : 'string',
-                    width    : 100
+                    dataType: 'string',
+                    width: 100
                 }, {
-                    header   : QUILocale.get('quiqqer/system', 'language'),
+                    header: QUILocale.get('quiqqer/system', 'language'),
                     dataIndex: 'lang',
-                    dataType : 'string',
-                    width    : 100
+                    dataType: 'string',
+                    width: 100
                 }, {
-                    header   : QUILocale.get('quiqqer/system', 'id'),
+                    header: QUILocale.get('quiqqer/system', 'id'),
                     dataIndex: 'id',
-                    dataType : 'string',
-                    width    : 100
+                    dataType: 'string',
+                    width: 100
                 }, {
-                    header   : QUILocale.get('quiqqer/system', 'title'),
+                    header: QUILocale.get('quiqqer/system', 'title'),
                     dataIndex: 'title',
-                    dataType : 'string',
-                    width    : 200
+                    dataType: 'string',
+                    width: 200
                 }, {
-                    header   : QUILocale.get('quiqqer/bricks', 'brick.panel.usage.grid.url'),
+                    header: QUILocale.get('quiqqer/bricks', 'brick.panel.usage.grid.url'),
                     dataIndex: 'url',
-                    dataType : 'string',
-                    width    : 300
+                    dataType: 'string',
+                    width: 300
                 }],
-                onrefresh  : this.refresh
+                onrefresh: this.refresh
             });
 
             this.$Grid.addEvents({
@@ -113,8 +109,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
                     resolve();
                 }, {
                     'package': 'quiqqer/bricks',
-                    brickId  : self.getAttribute('brickId'),
-                    options  : JSON.encode({})
+                    brickId: self.getAttribute('brickId'),
+                    options: JSON.encode({})
                 });
             });
         },

@@ -1,7 +1,4 @@
 /**
- * @module package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings
- * @author www.pcsg.de (Henning Leutz)
- *
  * Inhaltseinstellung für Promoslider
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
@@ -16,7 +13,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting',
+        Type: 'package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting',
 
         $Switch: QUISwitch,
 
@@ -49,7 +46,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
                 status: parseInt(this.getElm().value),
                 events: {
                     onChange: this.$switchToggled,
-                    onLoad  : function () {
+                    onLoad: function () {
                         if (!this.$Switch.getStatus()) {
                             this.hideMobileSlidesSetting();
                         }
@@ -94,7 +91,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
 
             this.$SlideSettingsElement.setStyles({
                 visibility: 'hidden',
-                display   : 'none'
+                display: 'none'
             });
         },
 
@@ -109,7 +106,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
 
             this.$SlideSettingsElement.setStyles({
                 visibility: 'visible',
-                display   : null
+                display: null
             });
         },
 
