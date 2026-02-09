@@ -1,7 +1,3 @@
-/**
- * @module package/quiqqer/bricks/bin/Controls/backend/BrickList
- * @author www.pcsg.de (Henning Leutz)
- */
 define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
 
     'qui/QUI',
@@ -23,7 +19,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Controls/backend/BrickList',
+        Type: 'package/quiqqer/bricks/bin/Controls/backend/BrickList',
 
         Binds: [
             '$onCreate',
@@ -33,9 +29,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
         ],
 
         options: {
-            project : false,
-            lang    : false,
-            styles  : false,
+            project: false,
+            lang: false,
+            styles: false,
             multiple: true
         },
 
@@ -55,7 +51,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
 
             Elm.set({
                 'data-quiid': this.getId(),
-                'data-qui'  : 'package/quiqqer/bricks/bin/Controls/backend/BrickList'
+                'data-qui': 'package/quiqqer/bricks/bin/Controls/backend/BrickList'
             });
 
             Elm.addClass('quiqqer-bricks-brickList');
@@ -67,7 +63,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
             this.$ProjectSelect = new ProjectSelect({
                 styles: {
                     marginBottom: 10,
-                    width       : '100%'
+                    width: '100%'
                 },
                 events: {
                     onChange: this.refresh
@@ -91,38 +87,38 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
             }
 
             this.$Grid = new Grid(this.$Container, {
-                columnModel      : [
+                columnModel: [
                     {
-                        header   : QUILocale.get('quiqqer/core', 'id'),
+                        header: QUILocale.get('quiqqer/core', 'id'),
                         dataIndex: 'id',
-                        dataType : 'integer',
-                        width    : 40
+                        dataType: 'integer',
+                        width: 40
                     },
                     {
-                        header   : QUILocale.get('quiqqer/core', 'title'),
+                        header: QUILocale.get('quiqqer/core', 'title'),
                         dataIndex: 'title',
-                        dataType : 'string',
-                        width    : 140
+                        dataType: 'string',
+                        width: 140
                     },
                     {
-                        header   : QUILocale.get('quiqqer/core', 'description'),
+                        header: QUILocale.get('quiqqer/core', 'description'),
                         dataIndex: 'description',
-                        dataType : 'string',
-                        width    : 300
+                        dataType: 'string',
+                        width: 300
                     },
                     {
-                        header   : QUILocale.get(lg, 'brick.type'),
+                        header: QUILocale.get(lg, 'brick.type'),
                         dataIndex: 'type',
-                        dataType : 'string',
-                        width    : 200
+                        dataType: 'string',
+                        width: 200
                     }
                 ],
                 multipleSelection: this.getAttribute('multiple'),
-                pagination       : true
+                pagination: true
             });
 
             this.$Grid.addEvents({
-                onRefresh : this.refresh,
+                onRefresh: this.refresh,
                 onDblClick: this.$onDblClick
             });
 
@@ -162,13 +158,13 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickList', [
 
             return Bricks.getBricksFromProject(value[0], value[1]).then(function (result) {
                 let options = self.$Grid.options,
-                    page    = parseInt(options.page),
+                    page = parseInt(options.page),
                     perPage = parseInt(options.perPage),
-                    start   = (page - 1) * perPage;
+                    start = (page - 1) * perPage;
 
                 self.$Grid.setData({
-                    data : result.slice(start, start + perPage),
-                    page : page,
+                    data: result.slice(start, start + perPage),
+                    page: page,
                     total: result.length
                 });
 

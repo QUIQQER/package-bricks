@@ -1,10 +1,3 @@
-/**
- * @module package/quiqqer/bricks/bin/Controls/LanguagesSwitches/Flags
- * @author www.pcsg.de (Henning Leutz)
- *
- * @require qui/QUI
- * @require qui/controls/Control
- */
 define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags', [
 
     'qui/QUI',
@@ -16,7 +9,7 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags',
+        Type: 'package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags',
 
         Binds: [
             '$onImport'
@@ -25,7 +18,7 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags', [
         initialize: function (options) {
             this.parent(options);
 
-            this.$Display  = null;
+            this.$Display = null;
             this.$DropDown = null;
 
             this.addEvents({
@@ -57,7 +50,7 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags', [
                 event.stop();
 
                 var search = window.location.search;
-                var hash   = window.location.hash;
+                var hash = window.location.hash;
 
                 window.location = href + search + hash;
             });

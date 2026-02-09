@@ -1,8 +1,6 @@
 /**
  * Main Brick Handler
  *
- * @author www.pcsg.de (Henning Leutz)
- *
  * @event onBrickSave [brickId, data, result]
  * @event onBrickCopy [brickId, params, result]
  * @event onBrickCreate [brick, project, lang, data]
@@ -18,8 +16,9 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
     "use strict";
 
     return new Class({
+
         Extends: QDOM,
-        Type   : 'package/quiqqer/bricks/bin/classes/Bricks',
+        Type: 'package/quiqqer/bricks/bin/classes/Bricks',
 
         initialize: function (options) {
             this.parent(options);
@@ -35,8 +34,8 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
             return new Promise(function (resolve, reject) {
                 QUIAjax.get('package_quiqqer_bricks_ajax_getBrick', resolve, {
                     'package': 'quiqqer/bricks',
-                    brickId  : brickId,
-                    onError  : reject
+                    brickId: brickId,
+                    onError: reject
                 });
             });
         },
@@ -61,9 +60,9 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
                     resolve(result);
                 }, {
                     'package': 'quiqqer/bricks',
-                    brickId  : brickId,
-                    data     : JSON.encode(data),
-                    onError  : reject
+                    brickId: brickId,
+                    data: JSON.encode(data),
+                    onError: reject
                 });
             });
         },
@@ -90,9 +89,9 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
                     resolve(result);
                 }, {
                     'package': 'quiqqer/bricks',
-                    brickId  : brickId,
-                    params   : JSON.encode(params),
-                    onError  : reject
+                    brickId: brickId,
+                    params: JSON.encode(params),
+                    onError: reject
                 });
             });
         },
@@ -108,11 +107,11 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
             return new Promise(function (resolve, reject) {
                 QUIAjax.get('package_quiqqer_bricks_ajax_project_getBricks', resolve, {
                     'package': 'quiqqer/bricks',
-                    project  : JSON.encode({
+                    project: JSON.encode({
                         name: project,
                         lang: lang
                     }),
-                    onError  : reject
+                    onError: reject
                 });
             });
         },
@@ -126,11 +125,10 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
             return new Promise(function (resolve, reject) {
                 QUIAjax.get('package_quiqqer_bricks_ajax_getAvailableBricks', resolve, {
                     'package': 'quiqqer/bricks',
-                    onError  : reject
+                    onError: reject
                 });
             });
         },
-
 
         /**
          * Create a new brick
@@ -155,12 +153,12 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
                     resolve(brick);
                 }, {
                     'package': 'quiqqer/bricks',
-                    project  : JSON.encode({
+                    project: JSON.encode({
                         name: project,
                         lang: lang
                     }),
-                    data     : JSON.encode(data),
-                    onError  : reject
+                    data: JSON.encode(data),
+                    onError: reject
                 });
             });
         },
@@ -197,8 +195,8 @@ define('package/quiqqer/bricks/bin/classes/Bricks', [
                     resolve();
                 }, {
                     'package': 'quiqqer/bricks',
-                    brickIds : JSON.encode(brickIds),
-                    onError  : reject
+                    brickIds: JSON.encode(brickIds),
+                    onError: reject
                 });
             });
         }

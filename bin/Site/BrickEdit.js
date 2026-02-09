@@ -1,8 +1,5 @@
 /**
  * Area edit control for the site object
- *
- * @module package/quiqqer/bricks/bin/Site/Area
- * @author www.pcsg.de (Henning Leutz)
  */
 define('package/quiqqer/bricks/bin/Site/BrickEdit', [
 
@@ -22,7 +19,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Site/BrickEdit',
+        Type: 'package/quiqqer/bricks/bin/Site/BrickEdit',
 
         Binds: [
             '$onInject',
@@ -30,8 +27,8 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
         ],
 
         options: {
-            brickId     : false,
-            Site        : false,
+            brickId: false,
+            Site: false,
             customfields: false,
             hasCustomFields: false,
         },
@@ -40,7 +37,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
             this.parent(options);
 
             this.Loader = new QUILoader();
-            this.$Form  = null;
+            this.$Form = null;
 
             /**
              * To check, if the brick has custom fields (this.hasCustomFields())
@@ -105,8 +102,8 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
 
                 return Template.get('bin/Site/BrickEdit', false, {
                     'package': 'quiqqer/bricks',
-                    params   : JSON.encode({
-                        customfields     : result.customfields,
+                    params: JSON.encode({
+                        customfields: result.customfields,
                         availableSettings: result.availableSettings
                     })
                 });
@@ -133,7 +130,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
 
                 var i, len, Control;
 
-                var Project  = self.getAttribute('Site').getProject(),
+                var Project = self.getAttribute('Site').getProject(),
                     controls = self.getElm().getElements('[data-quiid]');
 
                 for (i = 0, len = controls.length; i < len; i++) {
@@ -162,8 +159,8 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                     resolve(result);
                 }.bind(this), {
                     'package': 'quiqqer/bricks',
-                    onError  : reject,
-                    brickId  : this.getAttribute('brickId')
+                    onError: reject,
+                    brickId: this.getAttribute('brickId')
                 });
 
             }.bind(this));
@@ -173,7 +170,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
          * Opens the brick panel
          */
         openBrick: function () {
-            var brickId     = this.getAttribute('brickId'),
+            var brickId = this.getAttribute('brickId'),
                 projectName = '',
                 projectLang = '';
 
@@ -188,8 +185,8 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                     'utils/Panels'
                 ], function (BrickEdit, PanelUtils) {
                     var Panel = new BrickEdit({
-                        '#id'      : 'brick-edit-' + brickId,
-                        id         : brickId,
+                        '#id': 'brick-edit-' + brickId,
+                        id: brickId,
                         projectName: projectName,
                         projectLang: projectLang
                     });
@@ -205,7 +202,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
          *
          * @returns {Promise}
          */
-        hasCustomFields: function() {
+        hasCustomFields: function () {
             return this.$brickSettingsPromise.then(() => {
                 return this.getAttribute('hasCustomFields');
             });

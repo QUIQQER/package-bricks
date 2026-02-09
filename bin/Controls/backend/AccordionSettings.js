@@ -1,10 +1,3 @@
-/**
- *
- * @module package/quiqqer/bricks/bin/Controls/backend/AccordionSettings
- *
- * @require qui/controls/elements/FormList
- * @require css!package/quiqqer/bricks/bin/Controls/backend/AccordionSettings.css
- */
 define('package/quiqqer/bricks/bin/Controls/backend/AccordionSettings', [
 
     'qui/controls/elements/FormList',
@@ -23,7 +16,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/AccordionSettings', [
     return new Class({
 
         Extends: QUIFormList,
-        Type   : 'package/quiqqer/bricks/bin/Controls/backend/AccordionSettings',
+        Type: 'package/quiqqer/bricks/bin/Controls/backend/AccordionSettings',
 
         Binds: [
             '$onParsed'
@@ -42,8 +35,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/AccordionSettings', [
 
             this.setAttributes({
                 buttonText: QUILocale.get(lg, 'bricks.accordion.settings.addButton'),
-                entry     : Mustache.render(template, {
-                    'title'  : QUILocale.get(lg, 'brick.accordion.settings.title'),
+                entry: Mustache.render(template, {
+                    'title': QUILocale.get(lg, 'brick.accordion.settings.title'),
                     'content': QUILocale.get(lg, 'brick.accordion.settings.content')
                 })
             });

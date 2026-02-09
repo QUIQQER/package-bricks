@@ -1,7 +1,3 @@
-/**
- * @module package/quiqqer/bricks/bin/Controls/backend/BrickSelectWindow
- * @author www.pcsg.de (Henning Leutz)
- */
 define('package/quiqqer/bricks/bin/Controls/backend/BrickSelectWindow', [
 
     'qui/QUI',
@@ -16,7 +12,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickSelectWindow', [
     return new Class({
 
         Extends: QUIConfirm,
-        Type   : 'package/quiqqer/bricks/bin/Controls/backend/BrickSelectWindow',
+        Type: 'package/quiqqer/bricks/bin/Controls/backend/BrickSelectWindow',
 
         Binds: [
             '$onOpen'
@@ -24,16 +20,16 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickSelectWindow', [
 
         options: {
             project: false,
-            lang   : false
+            lang: false
         },
 
         initialize: function (options) {
             // defaults
             this.setAttributes({
                 maxHeight: 800,
-                maxWidth : 800,
-                icon     : 'fa fa-cubes',
-                title    : QUILocale.get(lg, 'window.brick.select.title')
+                maxWidth: 800,
+                icon: 'fa fa-cubes',
+                title: QUILocale.get(lg, 'window.brick.select.title')
             });
 
             this.parent(options);
@@ -59,13 +55,13 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickSelectWindow', [
                 'package/quiqqer/bricks/bin/Controls/backend/BrickList'
             ], function (BrickList) {
                 self.$BricksSelect = new BrickList({
-                    project : self.getAttribute('project'),
-                    lang    : self.getAttribute('lang'),
+                    project: self.getAttribute('project'),
+                    lang: self.getAttribute('lang'),
                     multiple: self.getAttribute('multiple'),
-                    styles  : {
+                    styles: {
                         height: '100%'
                     },
-                    events  : {
+                    events: {
                         onDblClick: function () {
                             self.submit();
                         }

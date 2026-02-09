@@ -1,7 +1,4 @@
 /**
- * @module package/quiqqer/bricks/bin/Controls/Slider/Promoslider
- * @author www.pcsg.de (Henning Leutz)
- *
  * Promo Slider - Slider für eye catching Sachen
  */
 define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
@@ -22,7 +19,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Controls/Slider/Promoslider',
+        Type: 'package/quiqqer/bricks/bin/Controls/Slider/Promoslider',
 
         Binds: [
             '$onImport',
@@ -32,34 +29,34 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
         ],
 
         options: {
-            delay         : 5000,
+            delay: 5000,
             effectduration: 400,
-            autostart     : true,
-            touch         : true,
+            autostart: true,
+            touch: true,
             shownavigation: true,
 
-            pagefit         : false,
-            pagefitcut      : 0,
+            pagefit: false,
+            pagefitcut: 0,
             pagefitcutmobile: 0,
 
-            'image-as-wallpaper'  : false,
-            'wallpaper-position'  : 'center',
+            'image-as-wallpaper': false,
+            'wallpaper-position': 'center',
             'wallpaper-attachment': false,
-            'navigation-position' : 'outer'
+            'navigation-position': 'outer'
         },
 
         initialize: function (options) {
             this.parent(options);
 
-            this.$mobile  = (QUI.getWindowSize().x <= 768);
+            this.$mobile = (QUI.getWindowSize().x <= 768);
             this.$running = false;
-            this.$Touch   = null;
-            this.$FX      = null;
+            this.$Touch = null;
+            this.$FX = null;
 
             this.$desktopdots = [];
-            this.$mobiledots  = [];
+            this.$mobiledots = [];
             this.$DotsDesktop = null;
-            this.$DotsMobile  = null;
+            this.$DotsMobile = null;
 
             this.addEvents({
                 onImport: this.$onImport
@@ -73,27 +70,27 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
          */
         $onImport: function () {
             var self = this,
-                Elm  = this.getElm();
+                Elm = this.getElm();
 
             var desktopSlides = Elm.getElements('.quiqqer-bricks-promoslider-slide'),
-                mobileSlides  = Elm.getElements('.quiqqer-bricks-promoslider-slide-mobile-slide');
+                mobileSlides = Elm.getElements('.quiqqer-bricks-promoslider-slide-mobile-slide');
 
             this.$FX = moofx(Elm);
 
             // DOTS
             this.$DotsDesktop = Elm.getElement('.quiqqer-bricks-promoslider-slide-desktop-dots');
-            this.$DotsMobile  = Elm.getElement('.quiqqer-bricks-promoslider-slide-mobile-dots');
+            this.$DotsMobile = Elm.getElement('.quiqqer-bricks-promoslider-slide-mobile-dots');
 
             // Nav
-            this.$Next      = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-next');
-            this.$Previous  = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-prev');
+            this.$Next = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-next');
+            this.$Previous = Elm.getElement('.quiqqer-bricks-promoslider-wallpaper-prev');
 
             // navigation
             if (this.$Next) {
                 this.$Next.addEvent('click', function (event) {
                     event.stop();
                     this.$scrollOnMouseMove = false;
-                    this.$scrolling         = true;
+                    this.$scrolling = true;
                     this.stop();
                     this.next();
                 }.bind(this));
@@ -103,7 +100,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 this.$Previous.addEvent('click', function (event) {
                     event.stop();
                     this.$scrollOnMouseMove = false;
-                    this.$scrolling         = true;
+                    this.$scrolling = true;
                     this.stop();
                     this.prev();
                 }.bind(this));
@@ -121,9 +118,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
             for (i = 0, len = desktopSlides.length; i < len; i++) {
                 Dot = new Element('div', {
-                    'class'  : 'quiqqer-bricks-promoslider-dot',
+                    'class': 'quiqqer-bricks-promoslider-dot',
                     'data-no': i,
-                    events   : {
+                    events: {
                         click: click
                     }
                 });
@@ -145,9 +142,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
             for (i = 0, len = mobileSlides.length; i < len; i++) {
                 Dot = new Element('div', {
-                    'class'  : 'quiqqer-bricks-promoslider-dot',
+                    'class': 'quiqqer-bricks-promoslider-dot',
                     'data-no': i,
-                    events   : {
+                    events: {
                         click: click
                     }
                 });
@@ -221,7 +218,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                     return resolve();
                 }
 
-                var Prom    = Promise.resolve(1);
+                var Prom = Promise.resolve(1);
                 var winSize = QUI.getWindowSize();
                 var pagefit = this.getAttribute('pagefitcut');
 
@@ -231,7 +228,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                     // view change
                     this.stop();
                     this.$running = false;
-                    this.$mobile  = (winSize.x <= 768);
+                    this.$mobile = (winSize.x <= 768);
 
                     Prom = this.show(0);
                 }
@@ -295,7 +292,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 return Promise.resolve();
             }
 
-            var Elm     = this.getElm(),
+            var Elm = this.getElm(),
                 Current = null;
 
             if (this.$mobile) {
@@ -332,8 +329,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 return Promise.resolve();
             }
 
-            var Elm     = this.getElm(),
-                slides  = [],
+            var Elm = this.getElm(),
+                slides = [],
                 Current = null;
 
             if (this.$mobile) {
@@ -484,13 +481,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             var Image, Header, Text;
 
             if (this.$mobile) {
-                Image  = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-image');
+                Image = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-image');
                 Header = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-title');
-                Text   = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-text');
+                Text = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-text');
             } else {
-                Image  = Sheet.getElement('.quiqqer-bricks-promoslider-slide-image');
+                Image = Sheet.getElement('.quiqqer-bricks-promoslider-slide-image');
                 Header = Sheet.getElement('.quiqqer-bricks-promoslider-slide-title');
-                Text   = Sheet.getElement('.quiqqer-bricks-promoslider-slide-text');
+                Text = Sheet.getElement('.quiqqer-bricks-promoslider-slide-text');
             }
 
             return Promise.all([
@@ -512,13 +509,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             var Image, Header, Text;
 
             if (this.$mobile) {
-                Image  = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-image');
+                Image = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-image');
                 Header = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-title');
-                Text   = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-text');
+                Text = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-text');
             } else {
-                Image  = Sheet.getElement('.quiqqer-bricks-promoslider-slide-image');
+                Image = Sheet.getElement('.quiqqer-bricks-promoslider-slide-image');
                 Header = Sheet.getElement('.quiqqer-bricks-promoslider-slide-title');
-                Text   = Sheet.getElement('.quiqqer-bricks-promoslider-slide-text');
+                Text = Sheet.getElement('.quiqqer-bricks-promoslider-slide-text');
             }
 
             if (Image) {
@@ -564,7 +561,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                         var oldPos = Node.getStyle('left').toInt();
 
                         moofx(Node).animate({
-                            left   : oldPos - 50,
+                            left: oldPos - 50,
                             opacity: 0
                         }, {
                             duration: effectduration,
@@ -579,7 +576,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
                     moofx(Node).animate({
                         marginLeft: -50,
-                        opacity   : 0
+                        opacity: 0
                     }, {
                         duration: effectduration,
                         callback: function () {
@@ -616,7 +613,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                         Node.setStyle('left', origLeft + 50);
 
                         moofx(Node).animate({
-                            left   : origLeft,
+                            left: origLeft,
                             opacity: 1
                         }, {
                             duration: effectduration,
@@ -630,7 +627,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
                     moofx(Node).animate({
                         marginLeft: 0,
-                        opacity   : 1
+                        opacity: 1
                     }, {
                         duration: effectduration,
                         callback: resolve
