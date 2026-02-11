@@ -8,9 +8,3 @@ parameters:
         - ajax
     bootstrapFiles:
         - tests/phpstan-bootstrap.php
-    customRulesetUsed: true
-services:
-    -
-        class: \PHPStan\Rules\Properties\TypesAssignedToPropertiesRule
-        tags:
-            - phpstan.rules.rule
