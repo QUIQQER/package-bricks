@@ -44,7 +44,7 @@ class Brick extends QUI\QDOM
      *
      * @var int|bool
      */
-    protected int|bool $id = false;
+    protected int | bool $id = false;
 
     /**
      * internal unique ID
@@ -453,7 +453,7 @@ class Brick extends QUI\QDOM
      * @return Control|bool|null
      * @throws QUI\Exception
      */
-    protected function getControl(): Control|bool|null
+    protected function getControl(): Control | bool | null
     {
         if ($this->Control) {
             return $this->Control;
@@ -547,7 +547,7 @@ class Brick extends QUI\QDOM
      *
      * @return boolean|string|array
      */
-    public function getSetting(string $name): bool|array|string
+    public function getSetting(string $name): bool | array | string
     {
         if ($name === 'classes') {
             return $this->getCSSClasses();
@@ -620,14 +620,10 @@ class Brick extends QUI\QDOM
      *
      * @return void
      */
-    public function addCSSClass(array|string $cssClass): void
+    public function addCSSClass(array | string $cssClass): void
     {
         if (is_array($cssClass)) {
             $cssClass = implode(' ', $cssClass);
-        }
-
-        if (!is_string($cssClass)) {
-            return;
         }
 
         if (empty($cssClass)) {

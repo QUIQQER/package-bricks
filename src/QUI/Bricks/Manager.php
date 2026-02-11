@@ -1170,10 +1170,6 @@ class Manager
 
         unset($data['id']);
 
-        if (!is_array($params)) {
-            $params = [];
-        }
-
         foreach ($params as $param => $value) {
             if (!isset($allowed[$param])) {
                 continue;

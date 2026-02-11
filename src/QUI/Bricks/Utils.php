@@ -232,7 +232,10 @@ class Utils
             && $mockups->item(0)
         ) {
             foreach ($mockups as $mockup) {
-                if (empty($mockup->getAttribute('src'))) {
+                if (
+                    !method_exists($mockup, 'getAttribute')
+                    || empty($mockup->getAttribute('src'))
+                ) {
                     continue;
                 }
 
