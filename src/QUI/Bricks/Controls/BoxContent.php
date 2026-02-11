@@ -10,15 +10,13 @@ use QUI;
 
 /**
  * Class BoxContent
- *
- * @package quiqqer/bricks
  */
 class BoxContent extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -37,11 +35,6 @@ class BoxContent extends QUI\Control
         );
     }
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
@@ -58,7 +51,7 @@ class BoxContent extends QUI\Control
                 continue;
             }
 
-            array_push($enabledEntries, $entry);
+            $enabledEntries[] = $entry;
         }
 
         $Engine->assign([

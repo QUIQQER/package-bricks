@@ -23,7 +23,7 @@ QUI::$Ajax->registerFunction(
             'settings' => $Brick->getSettings(),
             'customfields' => $Brick->getCustomFields(),
             'availableSettings' => $BrickManager->getAvailableBrickSettingsByBrickType(
-                $Brick->getAttribute('type')
+                (string)$Brick->getAttribute('type')
             )
         ];
     },

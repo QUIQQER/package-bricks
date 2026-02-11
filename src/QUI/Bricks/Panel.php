@@ -68,9 +68,9 @@ class Panel extends QUI\Utils\Singleton
 
     /**
      * @param integer|string $brickId
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
-    public function getCategoriesFromBrick(int|string $brickId): array
+    public function getCategoriesFromBrick(int | string $brickId): array
     {
         try {
             $BrickManager = QUI\Bricks\Manager::init();
@@ -122,7 +122,7 @@ class Panel extends QUI\Utils\Singleton
 
     /**
      * @param Brick $Brick
-     * @return array
+     * @return array<string>
      */
     public function getXMLFilesForBricks(Brick $Brick): array
     {

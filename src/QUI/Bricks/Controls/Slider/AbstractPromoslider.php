@@ -23,12 +23,12 @@ use function json_decode;
 class AbstractPromoslider extends QUI\Control
 {
     /**
-     * @var array
+     * @var array<int, array<string, mixed>>
      */
     protected array $mobileSlides = [];
 
     /**
-     * @var array
+     * @var array<int, array<string, mixed>>
      */
     protected array $desktopSlides = [];
 

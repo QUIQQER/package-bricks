@@ -15,16 +15,13 @@ use function class_exists;
 /**
  * Mini contact control
  * {control control="\QUI\Bricks\Controls\SimpleContact" labels=false}
- *
- * @author  www.pcsg.de (Henning Leutz, Michael Danielczok)
- * @licence For copyright and license information, please view the /README.md
  */
 class SimpleContact extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      * @throws QUI\Exception
      */
     public function __construct(array $attributes = [])
@@ -58,12 +55,6 @@ class SimpleContact extends QUI\Control
         }
     }
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @throws QUI\Exception
-     * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();

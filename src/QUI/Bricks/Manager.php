@@ -67,14 +67,14 @@ class Manager
     /**
      * Brick temp collector
      *
-     * @var array
+     * @var array<Brick>
      */
     protected array $bricks = [];
 
     /**
      * Brick UID temp collector
      *
-     * @var array
+     * @var array<Brick>
      */
     protected array $brickUIDs = [];
 
@@ -180,7 +180,7 @@ class Manager
      * Create and update a unique site brick
      *
      * @param QUI\Interfaces\Projects\Site $Site
-     * @param array $brickData
+     * @param array{brickId?: int, uid?: string, customfields?: mixed} $brickData
      * @return string - Unique ID
      *
      * @throws QUI\Exception
@@ -344,7 +344,7 @@ class Manager
      * @param boolean|string $siteType - optional, returns only the areas
      *                                     for the specific site type
      *                                     (default = false)
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
     public function getAreasByProject(
         Project $Project,
@@ -452,7 +452,7 @@ class Manager
     /**
      * Returns the available bricks
      *
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
     public function getAvailableBricks(): array
     {
@@ -603,11 +603,10 @@ class Manager
     /**
      * Return the available brick settings by the brick type
      *
-     * @param $brickType
-     *
-     * @return array
+     * @param string $brickType
+     * @return array<int, array<string, mixed>>
      */
-    public function getAvailableBrickSettingsByBrickType($brickType): array
+    public function getAvailableBrickSettingsByBrickType(string $brickType): array
     {
         $cache = 'quiqqer/bricks/brickType/' . md5($brickType);
 
@@ -697,10 +696,10 @@ class Manager
     }
 
     /**
-     * Parse a xml setting element to a brick array
+     * Parse an XML setting element to a brick array
      *
      * @param DOMNode|DOMElement $Setting
-     * @return array
+     * @return array<string, mixed>
      */
     protected function parseSettingToBrickArray(DOMNode | DOMElement $Setting): array
     {
@@ -760,7 +759,7 @@ class Manager
      * @param string $brickArea - Name of the area
      * @param QUI\Interfaces\Projects\Site $Site
      *
-     * @return array
+     * @return array<int, Brick>
      * @throws ExceptionStack
      */
     public function getBricksByArea(
@@ -848,7 +847,7 @@ class Manager
      * Return a list with \QUI\Bricks\Brick which are assigned to a project
      *
      * @param Project $Project
-     * @return array
+     * @return array<int, Brick>
      *
      * @throws QUI\Exception
      */
@@ -876,7 +875,7 @@ class Manager
      * Return a list with \QUI\Bricks\Brick which are assigned to a project
      *
      * @param Brick $Brick
-     * @return array
+     * @return Site\Edit[]|Site[]
      */
     public function getSitesByBrick(Brick $Brick): array
     {
@@ -917,7 +916,7 @@ class Manager
 
     /**
      * @param integer|string $brickId - Brick-ID
-     * @param array $brickData - Brick data
+     * @param array<array<string, mixed>> $brickData - Brick data
      * @throws QUI\Exception
      */
     public function saveBrick(int | string $brickId, array $brickData): void
@@ -1144,7 +1143,7 @@ class Manager
      * Copy a brick
      *
      * @param integer|string $brickId
-     * @param array $params - project, lang, title, description
+     * @param array<array<string, mixed>> $params - project, lang, title, description
      * @return integer
      *
      * @throws QUI\Exception
@@ -1186,7 +1185,7 @@ class Manager
     /**
      * List of available bricks.xml files
      *
-     * @return array
+     * @return array<string>
      */
     protected function getBricksXMLFiles(): array
     {
@@ -1199,7 +1198,7 @@ class Manager
      * @param string $brickArea - Name of the area
      * @param QUI\Interfaces\Projects\Site $Site - Site object
      *
-     * @return array
+     * @return array<int, Brick>
      */
     protected function getInheritedBricks(
         string $brickArea,
@@ -1318,11 +1317,11 @@ class Manager
     }
 
     /**
-     * @param $control
+     * @param string $control
      * @param bool|string $template - optional, name of the current template
      * @return string
      */
-    public function getAlternateClass($control, bool | string $template = false): string
+    public function getAlternateClass(string $control, bool | string $template = false): string
     {
         $control = trim($control, '\\ ');
 

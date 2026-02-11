@@ -32,10 +32,7 @@ use function trim;
 
 /**
  * Class Brick
- * A Brick from the Brickmanager
- *
- * @author  www.pcsg.de (Henning Leutz)
- * @package quiqqer/bricks
+ * A Brick from the Brick-Manager
  */
 class Brick extends QUI\QDOM
 {
@@ -55,14 +52,14 @@ class Brick extends QUI\QDOM
     /**
      * Brick settings
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected array $settings = [];
 
     /**
      * Fields can be overwritten by another user
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected array $customfields = [];
 
@@ -74,9 +71,9 @@ class Brick extends QUI\QDOM
     protected ?Control $Control = null;
 
     /**
-     * List of extra css classes
+     * List of extra CSS classes
      *
-     * @var array
+     * @var array<string>
      */
     protected array $cssClasses = [];
 
@@ -88,7 +85,7 @@ class Brick extends QUI\QDOM
     /**
      * Constructor
      *
-     * @param array $params - brick params
+     * @param array<string, mixed> $params - brick params
      * @throws QUI\Exception
      */
     public function __construct(array $params = [])
@@ -150,7 +147,7 @@ class Brick extends QUI\QDOM
         $Manager = Manager::init();
 
         $availableSettings = $Manager->getAvailableBrickSettingsByBrickType(
-            $this->getAttribute('type')
+            (string)$this->getAttribute('type')
         );
 
         foreach ($availableSettings as $entry) {
@@ -264,7 +261,7 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * Check, if control can be created
+     * Check if control can be created
      *
      * @return QUI\Bricks\Brick
      * @throws QUI\Exception
@@ -512,7 +509,7 @@ class Brick extends QUI\QDOM
     /**
      * Return the brick settings
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getSettings(): array
     {
@@ -524,7 +521,7 @@ class Brick extends QUI\QDOM
     /**
      * Set brick settings
      *
-     * @param array $settings - list of settings
+     * @param array<string, mixed> $settings - list of settings
      *
      * @return void
      */
@@ -543,9 +540,9 @@ class Brick extends QUI\QDOM
     /**
      * Return the setting of the brick
      *
-     * @param String $name - Name of the setting
+     * @param string $name - Name of the setting
      *
-     * @return boolean|string|array
+     * @return bool|string|array<string, mixed>
      */
     public function getSetting(string $name): bool | array | string
     {
@@ -593,7 +590,7 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function getAttributes(): array
     {
@@ -604,9 +601,7 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * This fields can be overwritten by another user
-     *
-     * @return array
+     * @return array<string>
      */
     public function getCustomFields(): array
     {
@@ -616,7 +611,7 @@ class Brick extends QUI\QDOM
     /**
      * Add an extra CSS Class to the control
      *
-     * @param array|string $cssClass - Name of the CSS Class
+     * @param array<string> $cssClass - Name of the CSS Class
      *
      * @return void
      */
@@ -644,7 +639,7 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * Remove all css classes
+     * Remove all CSS classes
      */
     public function clearCSSClasses(): void
     {
@@ -652,9 +647,9 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * Return all css classes
+     * Return all CSS classes
      *
-     * @return array
+     * @return array<string>
      */
     public function getCSSClasses(): array
     {
@@ -662,7 +657,7 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * Match pattern against the css classes
+     * Match pattern against the CSS classes
      *
      * @param string $pattern - The shell wildcard pattern.
      *

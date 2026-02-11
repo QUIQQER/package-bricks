@@ -11,15 +11,13 @@ use QUI;
 
 /**
  * Class Listing
- *
- * @package QUI\Bricks\Controls\Children
  */
 class Listing extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<array<string, mixed>> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -52,7 +50,7 @@ class Listing extends QUI\Control
      * Return the inner body of the element
      * Can be overwritten
      *
-     * @return String
+     * @return string
      * @throws Exception
      */
     public function getBody(): string

@@ -10,15 +10,13 @@ use QUI;
 
 /**
  * Class CustomerReviews
- *
- * @package quiqqer/bricks
  */
 class CustomerReviews extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -33,11 +31,6 @@ class CustomerReviews extends QUI\Control
         parent::__construct($attributes);
     }
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();

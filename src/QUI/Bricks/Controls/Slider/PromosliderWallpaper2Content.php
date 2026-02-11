@@ -25,7 +25,7 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<array<string, mixed>> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -105,7 +105,7 @@ class PromosliderWallpaper2Content extends PromosliderWallpaper
      * @param string $right - Right text
      * @param string $url - index.php? or extern url
      * @param boolean $newTab - should the url be opened in a new tab?
-     * @return array
+     * @return array<string, mixed>
      */
     protected function checkSlideParams(
         string $image,

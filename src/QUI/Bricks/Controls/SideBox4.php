@@ -10,15 +10,13 @@ use QUI;
 
 /**
  * Class SocialBox
- *
- * @package quiqqer/bricks
  */
 class SideBox4 extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -40,11 +38,6 @@ class SideBox4 extends QUI\Control
         $this->addCSSFile(dirname(__FILE__) . '/SideBox4.css');
     }
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();

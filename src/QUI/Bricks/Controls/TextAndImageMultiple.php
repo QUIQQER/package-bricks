@@ -11,16 +11,13 @@ use QUI;
 
 /**
  * Class TextAndImageMultiple
- *
- * @author  Dominik Chrzanowski
- * @package quiqqer/bricks
  */
 class TextAndImageMultiple extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {

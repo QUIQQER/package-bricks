@@ -10,15 +10,13 @@ use QUI;
 
 /**
  * Class Image
- *
- * @package quiqqer/bricks
  */
 class Image extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -35,11 +33,6 @@ class Image extends QUI\Control
         );
     }
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();

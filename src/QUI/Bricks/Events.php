@@ -32,10 +32,13 @@ use function trim;
  */
 class Events
 {
+    /**
+     * @var array<int, bool>
+     */
     protected static array $saved = [];
 
     /**
-     * Event : on site save
+     * Event: on site save
      * Create site brick cache, for inheritance
      *
      * @param QUI\Interfaces\Projects\Site $Site
@@ -247,9 +250,9 @@ class Events
     /**
      * Smarty brickarea function {brickarea}
      *
-     * @param array $params - function parameter
+     * @param array<string, mixed> $params - function parameter
      * @param Smarty_Internal_Template $smarty
-     * @return string|array
+     * @return string|array<int, \QUI\Bricks\Brick>
      * @throws ExceptionStack
      */
     public static function brickarea(array $params, Smarty_Internal_Template $smarty): array | string
@@ -283,6 +286,7 @@ class Events
 
     /**
      * @param QUI\Package\Package $Package
+     * @throws \Doctrine\DBAL\Exception
      */
     public static function onPackageSetup(QUI\Package\Package $Package): void
     {
@@ -305,7 +309,7 @@ class Events
             }
 
             try {
-                // Only drop composite primary key if it exists
+                // Only drop a composite primary key if it exists
                 if (
                     QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'id')
                     && QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'area')
@@ -322,15 +326,15 @@ class Events
     //region output filter
 
     /**
-     * @param $content
+     * @param string|null $content
      */
-    public static function onOutputParseEnd(&$content): void
+    public static function onOutputParseEnd(string | null &$content): void
     {
         if (!str_contains($content, '{{brick id=')) {
             return;
         }
 
-        // search css files
+        // search CSS files
         $content = preg_replace_callback(
             '#{{brick ([^}}]*)}}#',
             ['QUI\Bricks\Events', "outputParsing"],
@@ -339,10 +343,10 @@ class Events
     }
 
     /**
-     * @param $match
+     * @param array<int, string> $match
      * @return string
      */
-    public static function outputParsing($match): string
+    public static function outputParsing(array $match): string
     {
         $params = $match[0];
         $params = str_replace('{{brick', '', $params);

@@ -24,18 +24,14 @@ use const USR_DIR;
 /**
  * Class Utils
  * Bricks helper class
- *
- * @package QUI\Bricks
- * @author  www.pcsg.de (Henning Leutz) <support@pcsg.de>
  */
 class Utils
 {
     /**
-     * Return the bricks from a xml file
+     * Return the bricks from an XML file
      *
-     * @param String $file - path to file
-     *
-     * @return array
+     * @param string $file - path to file
+     * @return array<int, array<string, mixed>>
      */
     public static function getBricksFromXML(string $file): array
     {
@@ -69,13 +65,13 @@ class Utils
     }
 
     /**
-     * Return the template bricks from a xml file
+     * Return the template bricks from an XML file
      *
      * @param string $file - path to xm file
      * @param bool|string $layoutType - optional, return only the bricks for the specific layout type
      * @param bool|string $siteType - optional, return only the bricks for the specific site type
      *
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
     public static function getTemplateAreasFromXML(
         string $file,
@@ -133,25 +129,25 @@ class Utils
         return $list;
     }
 
-    public static function getGlobalTemplateAreasFromXML()
+    public static function getGlobalTemplateAreasFromXML(): void
     {
     }
 
     /**
-     * @param $file
-     * @param $siteType
+     * @param string $file
+     * @param string $siteType
      */
-    public static function getTypeTemplateAreasFromXML($file, $siteType)
+    public static function getTypeTemplateAreasFromXML(string $file, string $siteType): void
     {
     }
 
     /**
-     * parse a <area> xml node to an array
+     * parse a <area> XML node to an array
      *
      * @param DOMNode|DOMElement $Brick
      * @param DOMXPath $Path
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public static function parseAreaToArray(DOMNode | DOMElement $Brick, DOMXPath $Path): array
     {
@@ -332,7 +328,7 @@ class Utils
     /**
      * List of available bricks.xml files
      *
-     * @return array
+     * @return array<int, string>
      */
     public static function getBricksXMLFiles(): array
     {
@@ -378,7 +374,7 @@ class Utils
      * Return all available attributes for a brick
      *
      * @param Brick $Brick
-     * @return array
+     * @return array<int, string>
      */
     public static function getAttributesForBrick(Brick $Brick): array
     {

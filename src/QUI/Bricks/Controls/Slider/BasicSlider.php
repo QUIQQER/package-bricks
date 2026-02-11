@@ -19,7 +19,10 @@ use function dirname;
  */
 class BasicSlider extends QUI\Control
 {
-    public function __construct($attributes = [])
+    /**
+     * @param array<array<string, mixed>> $attributes
+     */
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([

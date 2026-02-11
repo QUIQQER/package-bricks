@@ -22,7 +22,7 @@ class PromosliderWallpaper extends AbstractPromoslider
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<array<string, mixed>> $attributes
      */
     public function __construct(array $attributes = [])
     {
