@@ -109,6 +109,10 @@ class DropDown extends QUI\Control
             return $this->getAttribute('Site');
         }
 
-        return QUI::getRewrite()->getSite();
+        if (QUI::getRewrite()->getSite() instanceof QUI\Interfaces\Projects\Site) {
+            return QUI::getRewrite()->getSite();
+        }
+
+        throw new Exception('Site not found');
     }
 }

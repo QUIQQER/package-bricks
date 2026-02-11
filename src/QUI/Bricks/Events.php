@@ -62,6 +62,10 @@ class Events
 
         $Manager = Manager::init();
 
+        if ($Manager === null) {
+            return;
+        }
+
         // get inheritance areas
         $Project = $Site->getProject();
         $projectAreas = $Manager->getAreasByProject($Project);
@@ -120,8 +124,6 @@ class Events
                 $areas[$area['name']][$bricksKey]['uid'] = $uid;
 
                 $availableUniqueIds[] = $uid;
-
-
                 $customFields = [];
 
                 // Custom data cache
@@ -214,6 +216,11 @@ class Events
         // delete bricks project tables
         // Mainproject_de_bricksCache
         $Table = QUI::getDataBase()->table();
+
+        if ($Table === null) {
+            return;
+        }
+
         $tables = $Table->getTables();
 
         foreach ($tables as $table) {
@@ -230,8 +237,8 @@ class Events
     }
 
     /**
-     * Event : on smarty init
-     * add new brickarea function
+     * Event: on smarty init
+     * add a new {brickarea} function
      *
      * @param Smarty $Smarty
      * @throws SmartyException
@@ -252,7 +259,7 @@ class Events
      *
      * @param array<string, mixed> $params - function parameter
      * @param Smarty_Internal_Template $smarty
-     * @return string|array<int, \QUI\Bricks\Brick>
+     * @return string|array<int, Brick>
      * @throws ExceptionStack
      */
     public static function brickarea(array $params, Smarty_Internal_Template $smarty): array | string
@@ -269,6 +276,15 @@ class Events
 
 
         $BricksManager = QUI\Bricks\Manager::init();
+
+        if ($BricksManager === null) {
+            if (!isset($params['assign'])) {
+                return [];
+            }
+
+            $smarty->assign($params['assign'], []);
+            return '';
+        }
 
         $Site = $params['Site'];
         $area = $params['area'];
@@ -303,7 +319,13 @@ class Events
                 $Project
             );
 
-            if (QUI::getDataBase()->table()->exist($projectCacheTable) === false) {
+            $tableManager = QUI::getDataBase()->table();
+
+            if ($tableManager === null) {
+                continue;
+            }
+
+            if ($tableManager->exist($projectCacheTable) === false) {
                 // at installation, ignore missing table
                 continue;
             }
@@ -311,10 +333,10 @@ class Events
             try {
                 // Only drop a composite primary key if it exists
                 if (
-                    QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'id')
-                    && QUI::getDataBase()->table()->issetPrimaryKey($projectCacheTable, 'area')
+                    $tableManager->issetPrimaryKey($projectCacheTable, 'id')
+                    && $tableManager->issetPrimaryKey($projectCacheTable, 'area')
                 ) {
-                    // Primary key no longer exists and should be removed
+                    // The primary key no longer exists and should be removed
                     QUI::getDataBase()->execSQL("ALTER TABLE `$projectCacheTable` DROP PRIMARY KEY;");
                 }
             } catch (QUI\Exception $Exception) {
@@ -330,7 +352,7 @@ class Events
      */
     public static function onOutputParseEnd(string | null &$content): void
     {
-        if (!str_contains($content, '{{brick id=')) {
+        if (!str_contains((string)$content, '{{brick id=')) {
             return;
         }
 
@@ -338,7 +360,7 @@ class Events
         $content = preg_replace_callback(
             '#{{brick ([^}}]*)}}#',
             ['QUI\Bricks\Events', "outputParsing"],
-            $content
+            (string)$content
         );
     }
 
@@ -368,9 +390,9 @@ class Events
 
         try {
             $brickId = (int)$attributes['id'];
-            $Brick = Manager::init()->getBrickById($brickId);
+            $Brick = Manager::init()?->getBrickById($brickId);
 
-            return QUI\Output::getInstance()->parse($Brick->create());
+            return QUI\Output::getInstance()->parse($Brick?->create());
         } catch (Exception) {
         }
 

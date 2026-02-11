@@ -12,15 +12,19 @@ use QUI\Bricks\Controls\Children\Infinite;
  * @param string|integer $brickId - Brick-ID
  * @param string|integer $row - Row number
  */
-QUI::$Ajax->registerFunction(
+QUI::getAjax()->registerFunction(
     'package_quiqqer_bricks_ajax_brick_infinite_row',
     function ($brickId, $brickUID, $row) {
         $BrickManager = QUI\Bricks\Manager::init();
 
         if (!empty($brickUID)) {
-            $Brick = $BrickManager->getBrickById($brickUID);
+            $Brick = $BrickManager?->getBrickById($brickUID);
         } else {
-            $Brick = $BrickManager->getBrickById($brickId);
+            $Brick = $BrickManager?->getBrickById($brickId);
+        }
+
+        if (!$Brick) {
+            return '';
         }
 
         $settings = array_merge(

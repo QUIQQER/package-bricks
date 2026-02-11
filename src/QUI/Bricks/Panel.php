@@ -32,6 +32,9 @@ class Panel extends QUI\Utils\Singleton
     {
         try {
             $BrickManager = QUI\Bricks\Manager::init();
+            if ($BrickManager === null) {
+                return '';
+            }
             $Brick = $BrickManager->getBrickById($brickId);
             $type = $Brick->getAttribute('type');
         } catch (QUI\Exception $Exception) {
@@ -74,7 +77,10 @@ class Panel extends QUI\Utils\Singleton
     {
         try {
             $BrickManager = QUI\Bricks\Manager::init();
-            $Brick = $BrickManager->getBrickById($brickId);
+            if ($BrickManager === null) {
+                return [];
+            }
+            $Brick = $BrickManager->getBrickById((int)$brickId);
         } catch (QUI\Exception $Exception) {
             QUI\System\Log::addError($Exception->getMessage());
 
@@ -137,7 +143,7 @@ class Panel extends QUI\Utils\Singleton
                 $Path = new DOMXPath($Dom);
                 $bricks = $Path->query($path);
 
-                if ($bricks->length) {
+                if ($bricks && $bricks->length) {
                     $result[] = $xmlFile;
                 }
             } catch (QUI\Exception $Exception) {

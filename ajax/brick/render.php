@@ -7,14 +7,14 @@
 /**
  * renders a brick
  */
-QUI::$Ajax->registerFunction(
+QUI::getAjax()->registerFunction(
     'package_quiqqer_bricks_ajax_brick_render',
     function ($brickId) {
         $bm = QUI\Bricks\Manager::init();
-        $brick = $bm->getBrickById($brickId);
+        $brick = $bm?->getBrickById($brickId);
 
         $html = QUI\Control\Manager::getCSS();
-        $html .= $brick->create();
+        $html .= $brick?->create() ?? '';
 
         return $html;
     },

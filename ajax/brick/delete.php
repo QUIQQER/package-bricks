@@ -9,7 +9,7 @@
  *
  * @param {String} $brickId - Brick-IDs; JSON Array
  */
-QUI::$Ajax->registerFunction(
+QUI::getAjax()->registerFunction(
     'package_quiqqer_bricks_ajax_brick_delete',
     function ($brickIds) {
         $BrickManager = QUI\Bricks\Manager::init();
@@ -17,7 +17,7 @@ QUI::$Ajax->registerFunction(
 
         foreach ($brickIds as $brickId) {
             try {
-                $BrickManager->deleteBrick($brickId);
+                $BrickManager?->deleteBrick($brickId);
             } catch (QUI\Exception $Exception) {
                 QUI::getMessagesHandler()->addAttention(
                     $Exception->getMessage()

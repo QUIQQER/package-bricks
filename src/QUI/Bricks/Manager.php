@@ -7,6 +7,7 @@
 namespace QUI\Bricks;
 
 use DOMElement;
+use DOMNameSpaceNode;
 use DOMNode;
 use DOMXPath;
 use Exception;
@@ -187,6 +188,10 @@ class Manager
      */
     public function createUniqueSiteBrick(QUI\Interfaces\Projects\Site $Site, array $brickData = []): string
     {
+        if (empty($brickData['brickId'])) {
+            throw new QUI\Exception('brickId is required to create a unique brick id');
+        }
+
         if (!empty($brickData['uid'])) {
             $uid = $brickData['uid'];
 
@@ -320,8 +325,10 @@ class Manager
             $Site = $Project->get($uniqueBrickId['siteId']);
             $Edit = $Site->getEdit();
 
-            $Edit->load();
-            $Edit->save(QUI::getUsers()->getSystemUser());
+            if ($Edit) {
+                $Edit->load();
+                $Edit->save(QUI::getUsers()->getSystemUser());
+            }
         }
 
         // delete unique ids
@@ -356,13 +363,18 @@ class Manager
 
         $projectName = $Project->getName();
 
-        if ($Project->getAttribute('template')) {
-            $templates[] = $Project->getAttribute('template');
+        $projectTemplate = $Project->getAttribute('template');
+        if (is_string($projectTemplate) && $projectTemplate !== '') {
+            $templates[] = $projectTemplate;
         }
 
         // inheritance
         try {
-            $Package = QUI::getPackage($Project->getAttribute('template'));
+            if (!is_string($projectTemplate) || $projectTemplate === '') {
+                throw new QUI\Exception('Invalid project template');
+            }
+
+            $Package = QUI::getPackage($projectTemplate);
             $Parent = $Package->getTemplateParent();
 
             if ($Parent) {
@@ -659,12 +671,16 @@ class Manager
                 "//quiqqer/bricks/brick[@control='*']/settings/setting"
             );
 
-            foreach ($Globals as $Setting) {
-                $settings[] = $this->parseSettingToBrickArray($Setting);
+            if ($Globals) {
+                foreach ($Globals as $Setting) {
+                    $settings[] = $this->parseSettingToBrickArray($Setting);
+                }
             }
 
-            foreach ($Settings as $Setting) {
-                $settings[] = $this->parseSettingToBrickArray($Setting);
+            if ($Settings) {
+                foreach ($Settings as $Setting) {
+                    $settings[] = $this->parseSettingToBrickArray($Setting);
+                }
             }
         }
 
@@ -701,7 +717,7 @@ class Manager
      * @param DOMNode|DOMElement $Setting
      * @return array<string, mixed>
      */
-    protected function parseSettingToBrickArray(DOMNode | DOMElement $Setting): array
+    protected function parseSettingToBrickArray(DOMNode | DOMElement | DOMNameSpaceNode $Setting): array
     {
         $options = null;
 
@@ -723,13 +739,15 @@ class Manager
         $dataAttributes = [];
         $description = '';
 
-        foreach ($Setting->attributes as $attribute) {
-            if ($attribute->nodeName === 'data-qui') {
-                continue;
-            }
+        if ($Setting instanceof DOMElement) {
+            foreach ($Setting->attributes as $attribute) {
+                if ($attribute->nodeName === 'data-qui') {
+                    continue;
+                }
 
-            if (str_contains($attribute->nodeName, 'data-')) {
-                $dataAttributes[$attribute->nodeName] = trim($attribute->nodeValue);
+                if (str_contains($attribute->nodeName, 'data-')) {
+                    $dataAttributes[$attribute->nodeName] = trim($attribute->nodeValue ?? '');
+                }
             }
         }
 
@@ -743,7 +761,9 @@ class Manager
 
         return [
             'name' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('name') : '',
-            'text' => QUI\Utils\DOM::getTextFromNode($Setting, false),
+            'text' => $Setting instanceof DOMNode
+                ? QUI\Utils\DOM::getTextFromNode($Setting, false)
+                : '',
             'description' => $description,
             'type' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('type') : '',
             'class' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('class') : '',
@@ -925,7 +945,7 @@ class Manager
 
         QUI::getEvents()->fireEvent('quiqqerBricksSaveBefore', [$brickId]);
 
-        $Brick = $this->getBrickById($brickId);
+        $Brick = $this->getBrickById((int)$brickId);
         $areas = [];
         $areaString = '';
 
@@ -1346,6 +1366,10 @@ class Manager
                 $Path = new DOMXPath($Dom);
 
                 $list = $Path->query('//quiqqer/bricks/overwrite/brick');
+
+                if (!$list) {
+                    $list = [];
+                }
 
                 foreach ($list as $Overwrite) {
                     if (!method_exists($Overwrite, 'getAttribute')) {

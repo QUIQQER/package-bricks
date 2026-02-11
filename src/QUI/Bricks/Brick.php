@@ -146,9 +146,9 @@ class Brick extends QUI\QDOM
         $Control = $this->getControl();
         $Manager = Manager::init();
 
-        $availableSettings = $Manager->getAvailableBrickSettingsByBrickType(
+        $availableSettings = $Manager?->getAvailableBrickSettingsByBrickType(
             (string)$this->getAttribute('type')
-        );
+        ) ?? [];
 
         foreach ($availableSettings as $entry) {
             $this->settings[$entry['name']] = false;
@@ -206,7 +206,8 @@ class Brick extends QUI\QDOM
         $BricksManager = QUI\Bricks\Manager::init();
         $type = $this->getAttribute('type');
 
-        $brick = array_filter($BricksManager->getAvailableBricks(), function ($brick) use ($type) {
+        $brickList = $BricksManager?->getAvailableBricks() ?? [];
+        $brick = array_filter($brickList, function ($brick) use ($type) {
             if (!isset($brick['control'])) {
                 return false;
             }
@@ -447,10 +448,10 @@ class Brick extends QUI\QDOM
     /**
      * Return the internal control
      *
-     * @return Control|bool|null
+     * @return Control|false|null
      * @throws QUI\Exception
      */
-    protected function getControl(): Control | bool | null
+    protected function getControl(): Control | false | null
     {
         if ($this->Control) {
             return $this->Control;
@@ -459,7 +460,7 @@ class Brick extends QUI\QDOM
         $Ctrl = $this->getAttribute('type');
 
         if ($Ctrl === 'content') {
-            return true;
+            return false;
         }
 
         if (!is_callable($Ctrl) && !class_exists($Ctrl)) {
@@ -468,19 +469,34 @@ class Brick extends QUI\QDOM
 
         $Site = $this->getAttribute('Site');
 
-        if ($Site instanceof QUI\Projects\Site) {
+        if ($Site instanceof QUI\Projects\Site && is_string($Ctrl)) {
             $Project = $Site->getProject();
+            $BricksManager = QUI\Bricks\Manager::init();
 
-            $Ctrl = QUI\Bricks\Manager::init()->getAlternateClass(
+            if ($BricksManager === null) {
+                return false;
+            }
+
+            $template = $Project->getAttribute('template');
+
+            $Ctrl = $BricksManager->getAlternateClass(
                 $Ctrl,
-                $Project->getAttribute('template')
+                is_string($template) ? $template : false
             );
+        }
+
+        if (!is_string($Ctrl)) {
+            return false;
         }
 
         /* @var $Control Control */
         $Control = new $Ctrl(
             array_merge($this->getSettings(), $this->getAttributes())
         );
+
+        if (!($Control instanceof Control)) {
+            return false;
+        }
 
         $Control->setAttribute('height', $this->getAttribute('height'));
         $Control->setAttribute('width', $this->getAttribute('width'));
@@ -490,11 +506,6 @@ class Brick extends QUI\QDOM
             $Control->setAttribute('Site', $this->getAttribute('Site'));
         } else {
             $Control->setAttribute('Site', QUI::getRewrite()->getSite());
-        }
-
-
-        if (!($Control instanceof Control)) {
-            return false;
         }
 
         $this->Control = $Control;

@@ -7,6 +7,7 @@
 namespace QUI\Bricks;
 
 use DOMElement;
+use DOMNameSpaceNode;
 use DOMNode;
 use DOMXPath;
 use QUI;
@@ -45,7 +46,7 @@ class Utils
         $bricks = $Path->query("//quiqqer/bricks/brick");
         $list = [];
 
-        if (!$bricks->length) {
+        if (!$bricks || !$bricks->length) {
             return $list;
         }
 
@@ -108,19 +109,19 @@ class Utils
 
         $list = [];
 
-        if ($globalAreas->length) {
+        if ($globalAreas && $globalAreas->length) {
             foreach ($globalAreas as $Area) {
                 $list[] = self::parseAreaToArray($Area, $Path);
             }
         }
 
-        if ($typeAreas->length) {
+        if ($typeAreas && $typeAreas->length) {
             foreach ($typeAreas as $Area) {
                 $list[] = self::parseAreaToArray($Area, $Path);
             }
         }
 
-        if ($siteTypeAreas->length) {
+        if ($siteTypeAreas && $siteTypeAreas->length) {
             foreach ($siteTypeAreas as $Area) {
                 $list[] = self::parseAreaToArray($Area, $Path);
             }
@@ -144,12 +145,12 @@ class Utils
     /**
      * parse a <area> XML node to an array
      *
-     * @param DOMNode|DOMElement $Brick
+     * @param DOMNode|DOMElement|DOMNameSpaceNode $Brick
      * @param DOMXPath $Path
      *
      * @return array<string, mixed>
      */
-    public static function parseAreaToArray(DOMNode | DOMElement $Brick, DOMXPath $Path): array
+    public static function parseAreaToArray(DOMNode | DOMElement | DOMNameSpaceNode $Brick, DOMXPath $Path): array
     {
         $control = '';
         $name = '';
@@ -193,11 +194,13 @@ class Utils
         $title = [];
         $description = [];
 
-        $titleLocale = $Path->query('./title/locale', $Brick);
-        $descLocale = $Path->query('./description/locale', $Brick);
+        $contextNode = $Brick instanceof DOMNameSpaceNode ? $Brick->ownerDocument : $Brick;
+        $titleLocale = $Path->query('./title/locale', $contextNode);
+        $descLocale = $Path->query('./description/locale', $contextNode);
 
         if (
-            $titleLocale->length
+            $titleLocale
+            && $titleLocale->length
             && $titleLocale->item(0)
             && method_exists($titleLocale->item(0), 'getAttribute')
         ) {
@@ -208,7 +211,8 @@ class Utils
         }
 
         if (
-            $descLocale->length
+            $descLocale
+            && $descLocale->length
             && $descLocale->item(0)
             && method_exists($descLocale->item(0), 'getAttribute')
         ) {
@@ -221,10 +225,11 @@ class Utils
         // mockups
         $mockupList = [];
         $mainMockup = null;
-        $mockups = $Path->query('./mockups/mockup', $Brick);
+        $mockups = $Path->query('./mockups/mockup', $contextNode);
 
         if (
-            $mockups->length
+            $mockups
+            && $mockups->length
             && $mockups->item(0)
         ) {
             foreach ($mockups as $mockup) {
@@ -296,7 +301,7 @@ class Utils
     /**
      *
      * @param Project $Project
-     * @param String $areaName
+     * @param string $areaName
      *
      * @return bool
      */
@@ -306,9 +311,13 @@ class Utils
     ): bool {
         $template = $Project->getAttribute('template');
 
+        if (!is_string($template) || $template === '') {
+            return false;
+        }
+
         // getAreasByProject
         $brickXML = realpath(OPT_DIR . $template . '/bricks.xml');
-        $bricks = self::getTemplateAreasFromXML($brickXML);
+        $bricks = $brickXML ? self::getTemplateAreasFromXML($brickXML) : [];
 
         foreach ($bricks as $brickData) {
             if ($brickData['name'] != $areaName) {
@@ -404,30 +413,38 @@ class Utils
             // settings
             $settings = $Path->query($settingsPath);
 
-            foreach ($settings as $Setting) {
-                if (method_exists($Setting, 'getAttribute')) {
-                    $attributes[] = $Setting->getAttribute('name');
+            if ($settings) {
+                foreach ($settings as $Setting) {
+                    if (method_exists($Setting, 'getAttribute')) {
+                        $attributes[] = $Setting->getAttribute('name');
+                    }
                 }
             }
 
             // categories
             $categories = $Path->query($categoriesPath);
 
-            /* @var $Settings DOMElement */
-            foreach ($categories as $Settings) {
-                $children = $Settings->childNodes;
-
-                /* @var $Child DOMElement */
-                foreach ($children as $Child) {
-                    if (!method_exists($Child, 'getAttribute')) {
+            if ($categories) {
+                /* @var $Settings DOMElement */
+                foreach ($categories as $Settings) {
+                    if (!($Settings instanceof DOMElement)) {
                         continue;
                     }
 
-                    switch ($Child->nodeName) {
-                        case 'input':
-                        case 'textarea':
-                            $attributes[] = $Child->getAttribute('conf');
-                            break;
+                    $children = $Settings->childNodes;
+
+                    /* @var $Child DOMElement */
+                    foreach ($children as $Child) {
+                        if (!($Child instanceof DOMElement)) {
+                            continue;
+                        }
+
+                        switch ($Child->nodeName) {
+                            case 'input':
+                            case 'textarea':
+                                $attributes[] = $Child->getAttribute('conf');
+                                break;
+                        }
                     }
                 }
             }

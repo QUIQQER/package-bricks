@@ -11,7 +11,7 @@
  * @return array
  */
 
-QUI::$Ajax->registerFunction(
+QUI::getAjax()->registerFunction(
     'package_quiqqer_bricks_ajax_getPanelCategories',
     function ($brickId) {
         $categories = QUI\Bricks\Panel::getInstance()->getCategoriesFromBrick($brickId);

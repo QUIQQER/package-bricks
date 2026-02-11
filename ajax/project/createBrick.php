@@ -12,7 +12,7 @@
  *
  * @return array
  */
-QUI::$Ajax->registerFunction(
+QUI::getAjax()->registerFunction(
     'package_quiqqer_bricks_ajax_project_createBrick',
     function ($project, $data) {
         $Project = QUI::getProjectManager()->decode($project);
@@ -20,7 +20,7 @@ QUI::$Ajax->registerFunction(
 
         $BrickManager = QUI\Bricks\Manager::init();
 
-        return $BrickManager->createBrickForProject($Project, $Brick);
+        return $BrickManager?->createBrickForProject($Project, $Brick) ?? 0;
     },
     ['project', 'data'],
     'Permission::checkAdminUser'
