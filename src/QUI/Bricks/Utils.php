@@ -53,7 +53,6 @@ class Utils
             return $list;
         }
 
-        /* @var $Brick DOMElement */
         foreach ($bricks as $Brick) {
             if (!method_exists($Brick, 'getAttribute')) {
                 continue;
@@ -223,6 +222,63 @@ class Utils
             ];
         }
 
+        // mockups
+        $mockupList = [];
+        $mainMockup = null;
+        $mockups = $Path->query('./mockups/mockup', $Brick);
+
+        if (
+            $mockups->length
+            && $mockups->item(0)
+        ) {
+            foreach ($mockups as $mockup) {
+                if (empty($mockup->getAttribute('src'))) {
+                    continue;
+                }
+
+                $src = $mockup->getAttribute('src');
+                $src = str_replace(
+                    [
+                        '{URL_BIN_DIR}',
+                        '{URL_OPT_DIR}',
+                        '{URL_USR_DIR}',
+                        '{BIN_DIR}',
+                        '{OPT_DIR}',
+                        '{URL_DIR}',
+                        '{SYS_DIR}',
+                        '{CMS_DIR}',
+                        '{USR_DIR}'
+                    ],
+                    [
+                        URL_BIN_DIR,
+                        URL_OPT_DIR,
+                        URL_USR_DIR,
+                        BIN_DIR,
+                        OPT_DIR,
+                        URL_DIR,
+                        SYS_DIR,
+                        CMS_DIR,
+                        USR_DIR
+                    ],
+                    $src
+                );
+
+                $mockupList[] = $src;
+
+                if ($mockup->getAttribute('type') === 'preview') {
+                    $mainMockup = $src;
+                }
+            }
+
+            if (
+                empty($mainMockup)
+                && method_exists($mockups->item(0), 'getAttribute')
+                && !empty($mockups->item(0)->getAttribute('src'))
+            ) {
+                $mainMockup = $mockups->item(0)->getAttribute('src');
+            }
+        }
+
         return [
             'control' => $control,
             'hasContent' => $hasContent,
@@ -232,7 +288,9 @@ class Utils
             'description' => $description,
             'inheritance' => method_exists($Brick, 'getAttribute') ? $Brick->getAttribute('inheritance') : '',
             'priority' => method_exists($Brick, 'getAttribute') ? $Brick->getAttribute('priority') : '',
-            'deprecated' => $deprecated
+            'deprecated' => $deprecated,
+            'mockups' => $mockupList,
+            'mockup' => $mainMockup
         ];
     }
 
