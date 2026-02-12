@@ -1163,7 +1163,7 @@ class Manager
      * Copy a brick
      *
      * @param integer|string $brickId
-     * @param array<array<string, mixed>> $params - project, lang, title, description
+     * @param array<string, mixed> $params - project, lang, title, description
      * @return integer
      *
      * @throws QUI\Exception
