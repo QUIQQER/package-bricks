@@ -1,8 +1,5 @@
 /**
  * QUIQQER Accordion Control
- *
- * @author www.pcsg.de (Michael Danielczok)
- * @module Bricks\Controls\SimpleContact
  */
 define('package/quiqqer/bricks/bin/Controls/Accordion', [
 
@@ -16,11 +13,11 @@ define('package/quiqqer/bricks/bin/Controls/Accordion', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'Controls/Accordion',
+        Type: 'Controls/Accordion',
 
         options: {
-            stayopen   : false,
-            openfirst  : true,
+            stayopen: false,
+            openfirst: true,
             rotateangle: 180
         },
 
@@ -42,25 +39,25 @@ define('package/quiqqer/bricks/bin/Controls/Accordion', [
         },
 
         /**
-         * event : on import
+         * event: on import
          */
         $onImport: function () {
-            var self = this;
+            const self = this;
 
             this.accordionItems = this.getElm().getElements('.quiqqer-accordion-item');
 
             this.accordionItems.forEach(function (Item) {
-                var Header = Item.getElement('.quiqqer-accordion-item-header');
+                const Header = Item.getElement('.quiqqer-accordion-item-header');
 
                 Header.addEvent('click', self.$toggle);
             });
         },
 
         $toggle: function (event) {
-            var Target         = event.target,
-                Item           = Target.getParent('.quiqqer-accordion-item'),
+            const Target = event.target,
+                Item = Target.getParent('.quiqqer-accordion-item'),
                 ContentWrapper = Item.getElement('.quiqqer-accordion-item-content-wrapper'),
-                Content        = ContentWrapper.getElement('.quiqqer-accordion-item-content');
+                Content = ContentWrapper.getElement('.quiqqer-accordion-item-content');
 
             if (Item.getAttribute('data-open') === '0') {
                 this.open(ContentWrapper, Content, Item);
@@ -73,7 +70,7 @@ define('package/quiqqer/bricks/bin/Controls/Accordion', [
         },
 
         open: function (ContentWrapper, Content, Item) {
-            var self = this;
+            const self = this;
 
             if (self.getAttribute('stayopen') === false) {
                 this.accordionItems.forEach(function (Item) {
@@ -81,8 +78,8 @@ define('package/quiqqer/bricks/bin/Controls/Accordion', [
                         return;
                     }
 
-                    var ContentWrapper = Item.getElement('.quiqqer-accordion-item-content-wrapper'),
-                        Content        = ContentWrapper.getElement('.quiqqer-accordion-item-content');
+                    const ContentWrapper = Item.getElement('.quiqqer-accordion-item-content-wrapper'),
+                        Content = ContentWrapper.getElement('.quiqqer-accordion-item-content');
 
                     self.close(ContentWrapper, Content, Item);
                     self.setIconCloseState(Item);
@@ -92,7 +89,7 @@ define('package/quiqqer/bricks/bin/Controls/Accordion', [
             ContentWrapper.setStyle('height', 0);
             Content.setStyle('display', 'block');
 
-            var height = Content.getHeight();
+            const height = Content.getHeight();
 
             moofx(ContentWrapper).animate({
                 height: height
@@ -116,19 +113,19 @@ define('package/quiqqer/bricks/bin/Controls/Accordion', [
         },
 
         setIconOpenState: function (Item) {
-            var Icon = Item.getElement('.quiqqer-accordion-item-header .fa');
+            const Icon = Item.getElement('.quiqqer-accordion-item-header .fa');
 
             if (!Icon) {
                 return;
             }
 
-            var angle = 180;
+            let angle = 180;
 
             if (this.getAttribute('rotateangle').toInt() > 0) {
                 angle = this.getAttribute('rotateangle').toInt();
             }
 
-            var animation = 'rotate(' + angle + 'deg)';
+            const animation = 'rotate(' + angle + 'deg)';
 
             moofx(Icon).animate({
                 transform: animation
@@ -136,7 +133,7 @@ define('package/quiqqer/bricks/bin/Controls/Accordion', [
         },
 
         setIconCloseState: function (Item) {
-            var Icon = Item.getElement('.quiqqer-accordion-item-header .fa');
+            const Icon = Item.getElement('.quiqqer-accordion-item-header .fa');
 
             if (!Icon) {
                 return;

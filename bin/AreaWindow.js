@@ -52,16 +52,16 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
         },
 
         /**
-         * event : on open
+         * event: on open
          */
         $onOpen: function () {
-            var self = this;
+            const self = this;
 
             this.Loader.show();
 
             this.getList(function (result) {
-                var i, len, desc, title;
-                var Content = self.getContent();
+                let i, len, desc, title;
+                const Content = self.getContent();
 
                 for (i = 0, len = result.length; i < len; i++) {
                     title = result[i].title;
@@ -99,9 +99,9 @@ define('package/quiqqer/bricks/bin/AreaWindow', [
          * Submit the window
          */
         submit: function () {
-            var Content = this.getContent();
+            const Content = this.getContent();
 
-            var areas = Content.getElements(
+            const areas = Content.getElements(
                 '.quiqqer-bricks-area-selected'
             ).map(function (Elm) {
                 return Elm.get('data-area');

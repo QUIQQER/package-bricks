@@ -2,7 +2,6 @@
 
 /**
  * This file contains QUI\Bricks\Controls\Slider\CustomerReviewsSlider
- * @author Dominik Chrzanowski
  */
 
 namespace QUI\Bricks\Controls\Slider;

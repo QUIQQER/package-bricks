@@ -71,7 +71,7 @@ define('package/quiqqer/bricks/bin/Sortables', function () {
         addItems: function () {
             Array.flatten(arguments).each(function (element) {
                 this.elements.push(element);
-                var start = element.retrieve('sortables:start', function (event) {
+                const start = element.retrieve('sortables:start', function (event) {
                     this.start.call(this, event, element);
                 }.bind(this));
                 (this.options.handle ? element.getElement(this.options.handle) || element : element).addEvent('mousedown', start);
@@ -90,7 +90,7 @@ define('package/quiqqer/bricks/bin/Sortables', function () {
         removeItems: function () {
             return $$(Array.flatten(arguments).map(function (element) {
                 this.elements.erase(element);
-                var start = element.retrieve('sortables:start');
+                const start = element.retrieve('sortables:start');
                 (this.options.handle ? element.getElement(this.options.handle) || element : element).removeEvent('mousedown', start);
 
                 return element;
@@ -107,9 +107,9 @@ define('package/quiqqer/bricks/bin/Sortables', function () {
         },
 
         getDroppableCoordinates: function (element) {
-            var offsetParent = element.getOffsetParent();
-            var position = element.getPosition(offsetParent);
-            var scroll = {
+            const offsetParent = element.getOffsetParent();
+            const position = element.getPosition(offsetParent);
+            const scroll = {
                 w: window.getScroll(),
                 offsetParent: offsetParent.getScroll()
             };
@@ -126,8 +126,8 @@ define('package/quiqqer/bricks/bin/Sortables', function () {
 
         getClone: function (event, element) {
             if (!this.options.clone) return new Element(element.tagName).inject(document.body);
-            if (typeOf(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
-            var clone = element.clone(true).setStyles({
+            if (typeOf(this.options.clone) === 'function') return this.options.clone.call(this, event, element, this.list);
+            const clone = element.clone(true).setStyles({
                 margin: 0,
                 position: 'absolute',
                 visibility: 'hidden',
@@ -147,13 +147,13 @@ define('package/quiqqer/bricks/bin/Sortables', function () {
         },
 
         getDroppables: function () {
-            var droppables = this.list.getChildren().erase(this.clone).erase(this.element);
+            const droppables = this.list.getChildren().erase(this.clone).erase(this.element);
             if (!this.options.constrain) droppables.append(this.lists).erase(this.list);
             return droppables;
         },
 
         insert: function (dragging, element) {
-            var where = 'inside';
+            let where = 'inside';
             if (this.lists.contains(element)) {
                 this.list = element;
                 this.drag.droppables = this.getDroppables();
@@ -199,13 +199,13 @@ define('package/quiqqer/bricks/bin/Sortables', function () {
         end: function () {
             this.drag.detach();
             this.element.setStyle('opacity', this.opacity);
-            var self = this;
+            const self = this;
             if (this.effect) {
-                var dim = this.element.getStyles('width', 'height'),
+                const dim = this.element.getStyles('width', 'height'),
                     clone = this.clone,
                     pos = clone.computePosition(this.getDroppableCoordinates(clone));
 
-                var destroy = function () {
+                const destroy = function () {
                     this.removeEvent('cancel', destroy);
                     clone.destroy();
                     self.reset();
@@ -232,20 +232,20 @@ define('package/quiqqer/bricks/bin/Sortables', function () {
         },
 
         serialize: function () {
-            var params = Array.link(arguments, {
+            const params = Array.link(arguments, {
                 modifier: Type.isFunction,
                 index: function (obj) {
                     return obj !== null;
                 }
             });
-            var serial = this.lists.map(function (list) {
+            const serial = this.lists.map(function (list) {
                 return list.getChildren().map(params.modifier || function (element) {
                     return element.get('id');
                 }, this);
             }, this);
 
-            var index = params.index;
-            if (this.lists.length == 1) index = 0;
+            let index = params.index;
+            if (this.lists.length === 1) index = 0;
             return (index || index === 0) && index >= 0 && index < this.lists.length ? serial[index] : serial;
         }
 

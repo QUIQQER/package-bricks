@@ -1,7 +1,3 @@
-/**
- * @module package/quiqqer/bricks/bin/Controls/CustomerReviews
- * @author www.pcsg.de (Michael Danielczok)
- */
 define('package/quiqqer/bricks/bin/Controls/CustomerReviews', [
 
     'qui/controls/elements/FormList',
@@ -15,12 +11,12 @@ define('package/quiqqer/bricks/bin/Controls/CustomerReviews', [
 ], function (QUIFormList, QUIControls, QUILocale, Mustache, templateSettings) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
     return new Class({
 
         Extends: QUIFormList,
-        Type   : 'package/quiqqer/bricks/bin/Controls/CustomerReviews',
+        Type: 'package/quiqqer/bricks/bin/Controls/CustomerReviews',
 
         Binds: [
             '$onParsed'
@@ -37,17 +33,17 @@ define('package/quiqqer/bricks/bin/Controls/CustomerReviews', [
 
             this.setAttributes({
                 buttonText: QUILocale.get(lg, 'customerReviews.reviews.addButton'),
-                entry     : Mustache.render(templateSettings, {
-                    'avatar'             : QUILocale.get(lg, 'customerReviews.reviews.entry.avatar'),
-                    'userName'           : QUILocale.get(lg, 'customerReviews.reviews.entry.userName'),
+                entry: Mustache.render(templateSettings, {
+                    'avatar': QUILocale.get(lg, 'customerReviews.reviews.entry.avatar'),
+                    'userName': QUILocale.get(lg, 'customerReviews.reviews.entry.userName'),
                     'userNamePlaceholder': QUILocale.get(lg, 'customerReviews.reviews.entry.userName.placeholder'),
-                    'jobTitle'           : QUILocale.get(lg, 'customerReviews.reviews.entry.jobTitle'),
+                    'jobTitle': QUILocale.get(lg, 'customerReviews.reviews.entry.jobTitle'),
                     'jobTitlePlaceholder': QUILocale.get(lg, 'customerReviews.reviews.entry.jobTitle.placeholder'),
-                    'url'                : QUILocale.get(lg, 'customerReviews.reviews.entry.url'),
-                    'urlPlaceholder'     : QUILocale.get(lg, 'customerReviews.reviews.entry.url.placeholder'),
-                    'urlTitle'           : QUILocale.get(lg, 'customerReviews.reviews.entry.urlTitle'),
+                    'url': QUILocale.get(lg, 'customerReviews.reviews.entry.url'),
+                    'urlPlaceholder': QUILocale.get(lg, 'customerReviews.reviews.entry.url.placeholder'),
+                    'urlTitle': QUILocale.get(lg, 'customerReviews.reviews.entry.urlTitle'),
                     'urlTitlePlaceholder': QUILocale.get(lg, 'customerReviews.reviews.entry.urlTitle.placeholder'),
-                    'review'             : QUILocale.get(lg, 'customerReviews.reviews.entry.content')
+                    'review': QUILocale.get(lg, 'customerReviews.reviews.entry.content')
                 })
             });
         },
@@ -59,7 +55,7 @@ define('package/quiqqer/bricks/bin/Controls/CustomerReviews', [
          */
         $onImport: function () {
             // look if some value exist
-            var value = this.getElm().value;
+            let value = this.getElm().value;
 
             if (value === '') {
                 this.parent();
@@ -73,7 +69,7 @@ define('package/quiqqer/bricks/bin/Controls/CustomerReviews', [
                 return;
             }
 
-            for (var i = 0, len = value.length; i < len; i++) {
+            for (let i = 0, len = value.length; i < len; i++) {
                 if (typeof value[i].content !== 'undefined') {
                     value[i].customerReviewsContent = value[i].content;
                 }
@@ -116,17 +112,17 @@ define('package/quiqqer/bricks/bin/Controls/CustomerReviews', [
          * @returns {Promise}
          */
         $executeParsing: function (Node) {
-            var self = this;
+            const self = this;
 
             return QUIControls.parse(Node).then(function () {
                 // Element is fully parsed so we can finally show it
                 Node.getElements('.quiqqer-bricks-ContentSwitcher-entry').show();
 
-                var inputEditors = Node.getElements('[data-qui="controls/editors/Input"]').map(function (InnerNode) {
+                const inputEditors = Node.getElements('[data-qui="controls/editors/Input"]').map(function (InnerNode) {
                     return QUI.Controls.getById(InnerNode.get('data-quiid'));
                 });
 
-                for (var i = 0, len = inputEditors.length; i < len; i++) {
+                for (let i = 0, len = inputEditors.length; i < len; i++) {
                     inputEditors[i].setProject(self.$Project);
                 }
             });

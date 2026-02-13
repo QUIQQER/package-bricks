@@ -78,7 +78,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 onCreate: this.$onCreate,
                 onDestroy: this.$onDestroy,
                 onResize: function () {
-                    var controls = QUI.Controls.getControlsInElement(this.getContent());
+                    const controls = QUI.Controls.getControlsInElement(this.getContent());
 
                     controls.each(function (Control) {
                         if ("resize" in Control) {
@@ -257,8 +257,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     });
 
                     // brick xml settings
-                    var type = brick.attributes.type;
-                    var data = bricks.filter(function (entry) {
+                    const type = brick.attributes.type;
+                    const data = bricks.filter(function (entry) {
                         return entry.control === type;
                     });
 
@@ -266,7 +266,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         this.getCategory('content').hide();
                     }
 
-                    for (var i = 0, len = categories.length; i < len; i++) {
+                    for (let i = 0, len = categories.length; i < len; i++) {
                         this.addCategory(categories[i]);
                     }
 
@@ -387,7 +387,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 return;
             }
 
-            var Form = this.getContent().getElement('form'),
+            const Form = this.getContent().getElement('form'),
                 unload = this.getActiveCategory().getAttribute('name'),
                 data = this.getAttribute('data');
 
@@ -408,10 +408,10 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             if (unload === 'settings' && this.$Areas) {
                 data.attributes.areas = this.$Areas.getAreas().join(',');
 
-                var flexibleList = [],
+                const flexibleList = [],
                     fieldData = QUIFormUtils.getFormData(Form);
 
-                for (var key in fieldData) {
+                for (const key in fieldData) {
 
                     if (!fieldData.hasOwnProperty(key)) {
                         continue;
@@ -430,10 +430,10 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             }
 
             if (unload === 'extra') {
-                var extra = QUIFormUtils.getFormData(Form);
+                let extra = QUIFormUtils.getFormData(Form);
 
                 // filter numbers
-                var isNumeric = function (n) {
+                const isNumeric = function (n) {
                     return !isNaN(parseFloat(n)) && isFinite(n);
                 };
 
@@ -567,7 +567,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         self.$Container.set('html', result);
 
                         // areas
-                        var Content = self.getContent(),
+                        let Content = self.getContent(),
                             areas = [],
                             attributes = self.getAttribute('data').attributes,
                             customfields = self.$customfields;
@@ -592,8 +592,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
 
                         // flexible settings
-                        var i, len, data, description, Row;
-                        var TBody = Content.getElement('.brick-table-flexible tbody');
+                        let i, len, data, description, Row;
+                        const TBody = Content.getElement('.brick-table-flexible tbody');
 
                         for (i = 0, len = self.$availableSettings.length; i < len; i++) {
                             data = self.$availableSettings[i];
@@ -626,8 +626,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         }
 
                         if (customfields) {
-                            var name;
-                            var Form = Content.getElement('form');
+                            let name;
+                            const Form = Content.getElement('form');
 
                             for (i = 0, len = customfields.length; i < len; i++) {
                                 name = customfields[i];
@@ -758,7 +758,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             const self = this;
 
             return new Promise(function (resolve) {
-                var TableBody = self.$Container.getElement('table.brick-edit-content tbody'),
+                const TableBody = self.$Container.getElement('table.brick-edit-content tbody'),
                     TD = new Element('td'),
                     TR = new Element('tr', {
                         'class': 'odd'
@@ -767,7 +767,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 TD.inject(TR);
                 TR.inject(TableBody);
 
-                var contentSize = self.getContent().getSize();
+                const contentSize = self.getContent().getSize();
 
                 // load ckeditor
                 require(['classes/editor/Manager'], function (EditorManager) {
@@ -775,21 +775,21 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         self.$Editor = Editor;
                         self.$Editor.setAttribute('showLoader', false);
 
-                        var Project = Projects.get(
+                        const Project = Projects.get(
                             self.getAttribute('projectName'),
                             self.getAttribute('projectLang')
                         );
 
                         self.$Editor.setProject(Project);
 
-                        var height = 300;
+                        let height = 300;
 
                         if ((contentSize.y - 100) > height) {
                             height = contentSize.y - 100;
                         }
 
 
-                        var EditorContainer = new Element('div', {
+                        const EditorContainer = new Element('div', {
                             styles: {
                                 clear: 'both',
                                 'float': 'left',
@@ -817,7 +817,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
          */
         $createExtraData: function () {
             return new Promise(function (resolve, reject) {
-                var TableExtra = this.$Elm.getElement('table.brick-edit-extra-header'),
+                const TableExtra = this.$Elm.getElement('table.brick-edit-extra-header'),
                     TableBody = TableExtra.getElement('tbody');
 
                 TableBody.getElement('[name="frontendTitle"]').value =
@@ -899,7 +899,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                         if (Value.type === 'checkbox' ||
                             Value.type === 'radio' ||
                             Value.type === 'hidden') {
-                            var Container = new Element('div', {
+                            const Container = new Element('div', {
                                 'class': 'field-container-field'
                             }).inject(Row.getElement('.field-container'));
 
@@ -960,7 +960,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 }).then(function () {
                     // set project to the controls
                     TableExtra.getElements('[data-quiid]').each(function (Elm) {
-                        var Control = QUI.Controls.getById(
+                        const Control = QUI.Controls.getById(
                             Elm.get('data-quiid')
                         );
 

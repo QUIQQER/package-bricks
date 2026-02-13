@@ -33,7 +33,7 @@ define('package/quiqqer/bricks/bin/classes/Areas', [
                 return Promise.resolve(this.$areas);
             }
 
-            var self = this;
+            const self = this;
 
             return new Promise(function (resolve) {
                 QUIAjax.get('package_quiqqer_bricks_ajax_project_getAreas', function (result) {

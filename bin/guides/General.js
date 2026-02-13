@@ -1,12 +1,5 @@
 /**
- * @module package/quiqqer/bricks/bin/guides/General
- *
  * Erste Tour für die Bricks (Grundlagentour)
- *
- * @require package/quiqqer/tour/bin/classes/Tour
- * @require utils/Panels
- * @require Locale
- * @require Projects
  */
 define('package/quiqqer/bricks/bin/guides/General', [
 
@@ -18,12 +11,12 @@ define('package/quiqqer/bricks/bin/guides/General', [
 ], function (Tour, PanelUtils, QUILocale, Projects) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
-    var Bricks = new Tour();
-    var FooterZone = null;
+    const Bricks = new Tour();
+    let FooterZone = null;
 
-    var DropDownMenu,
+    let DropDownMenu,
         BricksMenuEntry,
         PopupBox,
         PopupBox2,
@@ -33,15 +26,15 @@ define('package/quiqqer/bricks/bin/guides/General', [
         PopupSubmitButtonControl,
         ProjectPanel;
 
-    var step1Text = QUILocale.get(lg, 'tour.general.bricks.Step1_1.Text') +
+    const step1Text = QUILocale.get(lg, 'tour.general.bricks.Step1_1.Text') +
         '<a target="_blank" href = "https://www.quiqqer.com/media/cache/quiqqer/zonen-bild.png">' +
         '<img alt="" src="' + URL_OPT_DIR + 'quiqqer/tour/bin/img/zonen-bild.png"' +
         ' style="max-width: 100%; height: 200px;" /></a>'
         + QUILocale.get(lg, 'tour.general.bricks.Step1_2.Text');
 
-    var catchClicks = function () {
+    const catchClicks = function () {
         //make rest unclickable
-        var clickCatcher = new Element('div', {
+        const clickCatcher = new Element('div', {
             'class': 'clickCatcher',
             styles: {
                 width: '100%',
@@ -56,8 +49,8 @@ define('package/quiqqer/bricks/bin/guides/General', [
         clickCatcher.inject(document.getElement('body'));
     };
 
-    var stopCatching = function () {
-        var clickCatcher = document.getElement('.clickCatcher');
+    const stopCatching = function () {
+        const clickCatcher = document.getElement('.clickCatcher');
 
         //checking because event gets triggered double
         if (clickCatcher) {
@@ -70,7 +63,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
         text: step1Text,
         when: {
             show: function () {
-                var quiId = document.getElement('[data-name = "extras"]').getAttribute('data-quiid');
+                const quiId = document.getElement('[data-name = "extras"]').getAttribute('data-quiid');
                 DropDownMenu = QUI.Controls.getById(quiId);
             }
         },
@@ -103,7 +96,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
         when: {
             show: function () {
                 DropDownMenu.getElm().addEvent('click', Bricks.next);
-                var Entries = DropDownMenu.getChildren();
+                const Entries = DropDownMenu.getChildren();
                 Entries.forEach(function (Entry) {
                     if (Entry.options.name === 'bricks') {
                         BricksMenuEntry = Entry;
@@ -348,7 +341,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
         text: QUILocale.get(lg, 'tour.general.bricks.Step12_4.Text'),
         attachTo: {
             element: function () {
-                var Footer;
+                let Footer;
                 Footer = PopupBox2.getElements('.quiqqer-bricks-area.smooth');
                 Footer.forEach(function (Entry) {
                     if (Entry.getAttribute('data-area') === "footer") {
@@ -365,7 +358,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
         buttons: {
             text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
-                var Footer;
+                let Footer;
                 Footer = PopupBox2.getElements('.quiqqer-bricks-area.smooth');
 
                 Footer.forEach(function (Entry) {
@@ -383,7 +376,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
         },
         when: {
             show: function () {
-                var Footer,
+                let Footer,
                     submitButtonControlId,
                     selector;
 
@@ -403,7 +396,7 @@ define('package/quiqqer/bricks/bin/guides/General', [
                 PopupSubmitButtonControl.disable();
             },
             hide: function () {
-                var Footer;
+                let Footer;
                 Footer = PopupBox2.getElements('.quiqqer-bricks-area.smooth');
                 Footer.forEach(function (Entry) {
                     if (Entry.getAttribute('data-area') === "footer") {
@@ -546,15 +539,15 @@ define('package/quiqqer/bricks/bin/guides/General', [
         buttons: {
             text: QUILocale.get(lg, 'tour.general.bricks.Button.Weiter'),
             action: function () {
-                var ProjektBar = document.getElements('.project-container');
-                var Panel = QUI.Controls.getById(
+                const ProjektBar = document.getElements('.project-container');
+                const Panel = QUI.Controls.getById(
                     ProjektBar.getParent('.qui-panel').get('data-quiid')
                 );
                 ProjectPanel = Panel;
                 Panel.open(function () {
                     Projects.getList(function (result) {
-                        var keys        = Object.keys(result),
-                            project     = result[keys[0]],
+                        const keys = Object.keys(result),
+                            project = result[keys[0]],
                             projectName = keys[0],
                             projectLang = project.default_lang;
 
@@ -587,9 +580,9 @@ define('package/quiqqer/bricks/bin/guides/General', [
         },
         when: {
             show: function () {
-                var Tab = SitePanel.getCategory('quiqqer.bricks').getElm();
-                var Bar = SitePanel.getCategoryBar().getElm();
-                var top = Tab.getPosition(Bar).y;
+                const Tab = SitePanel.getCategory('quiqqer.bricks').getElm();
+                const Bar = SitePanel.getCategoryBar().getElm();
+                const top = Tab.getPosition(Bar).y;
 
                 SitePanel.getCategoryBar().scrollDown(top);
             }
@@ -650,8 +643,8 @@ define('package/quiqqer/bricks/bin/guides/General', [
         text: QUILocale.get(lg, 'tour.general.bricks.Step19.Text'),
         attachTo: {
             element: function () {
-                var rows = SitePanel.getElm().getElements('.quiqqer-bricks-site-category-area');
-                var counter = 1;
+                let rows = SitePanel.getElm().getElements('.quiqqer-bricks-site-category-area');
+                let counter = 1;
 
                 while (rows === null) {
                     counter++;
@@ -706,12 +699,12 @@ define('package/quiqqer/bricks/bin/guides/General', [
         // action: function () {
         //     //console.log(document.getElements('.qui-window-popup.box .qui-window-popup-content.box .qui-elements-list-item.smooth')[0]);
         //     //document.getElements('.qui-window-popup.box .qui-window-popup-content.box .qui-elements-list-item.smooth')[0].fireEvent('click');
-        //     var list = QUI.Controls.getByType('qui/controls/elements/List');
+        //     const list = QUI.Controls.getByType('qui/controls/elements/List');
         //     console.log(list);
         //     list = list[list.length-1];
         //     console.log(list);
-        //     var entries  = list.getElm().getChildren();
-        //     var entry = entries[entries.length - 1];
+        //     const entries  = list.getElm().getChildren();
+        //     const entry = entries[entries.length - 1];
         //     console.log(entry);
         //     entry.click();            //Das funktioniert leider nicht die entries haben keine click funktion
         //     Bricks.next.delay(1000);

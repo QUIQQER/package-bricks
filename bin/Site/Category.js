@@ -66,10 +66,11 @@ define('package/quiqqer/bricks/bin/Site/Category', [
         $onInject: function () {
             this.Loader.show();
 
-            var self = this,
+            const self = this,
                 Site = this.getAttribute('Site'),
-                Project = Site.getProject(),
-                layout = Site.getAttribute('layout');
+                Project = Site.getProject();
+
+            let layout = Site.getAttribute('layout');
 
             Project.getLayouts().then(function (layouts) {
                 layout = layouts.find(function (entry) {
@@ -97,16 +98,16 @@ define('package/quiqqer/bricks/bin/Site/Category', [
                     return;
                 }
 
-                var i, len, data, AC;
+                let i, len, data, AC;
 
-                var Site = self.getAttribute('Site'),
+                let Site = self.getAttribute('Site'),
                     areas = Site.getAttribute('quiqqer.bricks.areas');
 
                 if (areas) {
                     areas = JSON.decode(areas);
                 }
 
-                var loadData = function (brickData) {
+                const loadData = function (brickData) {
                     AC.addBrick(brickData);
                 };
 
@@ -158,9 +159,9 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          * Update the internal site object
          */
         updateSite: function () {
-            var i, len, AC;
+            let i, len, AC;
 
-            var Site = this.getAttribute('Site'),
+            const Site = this.getAttribute('Site'),
                 areas = {};
 
             for (i = 0, len = this.areas.length; i < len; i++) {
@@ -213,7 +214,7 @@ define('package/quiqqer/bricks/bin/Site/Category', [
          * @return Area
          */
         $insertBrickAreaEdit: function (area) {
-            var Site = this.getAttribute('Site'),
+            const Site = this.getAttribute('Site'),
                 Project = Site.getProject(),
                 Control = new Area();
 

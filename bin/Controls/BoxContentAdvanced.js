@@ -18,12 +18,12 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentAdvanced', [
 ], function (QUIFormList, QUIControls, QUILocale, Mustache, template) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
     return new Class({
 
         Extends: QUIFormList,
-        Type   : 'package/quiqqer/bricks/bin/Controls/BoxContentAdvanced',
+        Type: 'package/quiqqer/bricks/bin/Controls/BoxContentAdvanced',
 
         Binds: [
             '$onParsed'
@@ -42,13 +42,13 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentAdvanced', [
 
             this.setAttributes({
                 buttonText: QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.addButton'),
-                entry     : Mustache.render(template, {
-                    'entryTitle'   : QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryTitle'),
+                entry: Mustache.render(template, {
+                    'entryTitle': QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryTitle'),
                     'entrySubTitle': QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entrySubTitle'),
-                    'entryImage'   : QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryImage'),
-                    'entryUrl'     : QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryUrl'),
-                    'entryOrder'   : QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryOrder'),
-                    'entryContent' : QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryContent')
+                    'entryImage': QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryImage'),
+                    'entryUrl': QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryUrl'),
+                    'entryOrder': QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryOrder'),
+                    'entryContent': QUILocale.get(lg, 'bricks.BoxContentAdvanced.entries.settings.entryContent')
                 })
             });
         },
@@ -90,7 +90,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentAdvanced', [
          * @returns {Promise}
          */
         $executeParsing: function (Node) {
-            var self = this;
+            const self = this;
 
             return QUIControls.parse(Node).then(function () {
                 // Element is fully parsed so we can finally show it
@@ -98,11 +98,11 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentAdvanced', [
 
                 self.getElm().addClass('qui-controls-formlist-boxContentAdvanced');
 
-                var inputEditors = Node.getElements('[data-qui="controls/editors/Input"]').map(function (InnerNode) {
+                const inputEditors = Node.getElements('[data-qui="controls/editors/Input"]').map(function (InnerNode) {
                     return QUI.Controls.getById(InnerNode.get('data-quiid'));
                 });
 
-                for (var i = 0, len = inputEditors.length; i < len; i++) {
+                for (let i = 0, len = inputEditors.length; i < len; i++) {
                     inputEditors[i].setProject(self.$Project);
                 }
             });

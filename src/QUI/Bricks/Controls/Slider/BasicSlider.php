@@ -13,9 +13,6 @@ use function dirname;
 
 /**
  * Class BrickSlider
- *
- * @author  Dominik Chrzanowski
- * @package QUI\Bricks\Controls
  */
 class BasicSlider extends QUI\Control
 {

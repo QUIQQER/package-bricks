@@ -26,7 +26,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
 ) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
     return new Class({
 
@@ -75,9 +75,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
             }).wraps(this.$Input);
 
             // grid and sizes
-            var size = this.$Elm.getSize();
+            const size = this.$Elm.getSize();
 
-            var Desktop = new Element('div', {
+            const Desktop = new Element('div', {
                 styles: {
                     width: size.x
                 }
@@ -194,7 +194,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
 
             this.$Grid.addEvents({
                 onClick: function () {
-                    var buttons = this.$Grid.getButtons(),
+                    const buttons = this.$Grid.getButtons(),
 
                         Edit = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'edit';
@@ -249,7 +249,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
             }
 
             // get cell number
-            var row = Caller.getElm().getParent('li').get('data-row');
+            const row = Caller.getElm().getParent('li').get('data-row');
 
             this.$data[row].isDisabled = Caller.getStatus();
             this.update();
@@ -261,7 +261,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
          * @return {Promise}
          */
         resize: function () {
-            var size = this.getElm().getSize();
+            const size = this.getElm().getSize();
 
             return this.$Grid.setWidth(size.x).then(function () {
                 this.$Grid.resize();
@@ -272,8 +272,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
          * refresh the display
          */
         refresh: function () {
-            var i, len, entry, insert;
-            var data = [];
+            let i, len, entry, insert;
+            const data = [];
 
             for (i = 0, len = this.$data.length; i < len; i++) {
                 entry = this.$data[i];
@@ -329,7 +329,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
                 data: data
             });
 
-            var buttons = this.$Grid.getButtons(),
+            const buttons = this.$Grid.getButtons(),
 
                 Edit = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'edit';
@@ -366,7 +366,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
          * @param {Object} params
          */
         add: function (params) {
-            var entry = {
+            const entry = {
                 image: '',
                 customerName: '',
                 addition: '',
@@ -421,7 +421,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
                 return;
             }
 
-            var entry = {
+            const entry = {
                 image: '',
                 customerName: '',
                 addition: '',
@@ -471,13 +471,13 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
          * @param {number|array} index
          */
         del: function (index) {
-            var newList = [];
+            const newList = [];
 
             if (typeOf(index) !== 'array') {
                 index = [index];
             }
 
-            for (var i = 0, len = this.$data.length; i < len; i++) {
+            for (let i = 0, len = this.$data.length; i < len; i++) {
                 if (!index.contains(i)) {
                     newList.push(this.$data[i]);
                 }
@@ -494,7 +494,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
         setProject: function (Project) {
             this.setAttribute('project', Project);
 
-            var controls = QUI.Controls.getControlsInElement(this.getElm());
+            const controls = QUI.Controls.getControlsInElement(this.getElm());
 
             controls.each(function (Control) {
                 if (Control === this) {
@@ -511,10 +511,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
          * Refresh the data sorting in dependence of the grid
          */
         $refreshSorting: function () {
-            var gridData = this.$Grid.getData(),
+            const gridData = this.$Grid.getData(),
                 data = [];
 
-            for (var i = 0, len = gridData.length; i < len; i++) {
+            for (let i = 0, len = gridData.length; i < len; i++) {
                 data.push({
                     isDisabled: parseInt(gridData[i].isDisabled),
                     image: gridData[i].image,
@@ -553,7 +553,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
                 },
                 events: {
                     onSubmit: function () {
-                        var selected = this.$Grid.getSelectedIndices();
+                        const selected = this.$Grid.getSelectedIndices();
 
                         this.$Grid.deleteRows(selected);
                         this.del(selected);
@@ -569,7 +569,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
          * @retrun {Promise}
          */
         $openEditDialog: function () {
-            var self = this,
+            let self = this,
                 data = this.$Grid.getSelectedData(),
                 index = this.$Grid.getSelectedIndices();
 
@@ -585,15 +585,15 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
                 Dialog.addEvent('onSubmit', function () {
                     Dialog.Loader.show();
 
-                    var Content = Dialog.getContent();
-                    var Form = Content.getElement('form');
+                    const Content = Dialog.getContent();
+                    const Form = Content.getElement('form');
 
-                    var Image = Form.elements.image;
-                    var CustomerName = Form.elements.customerName;
-                    var Addition = Form.elements.addition;
-                    var Url = Form.elements.url;
-                    var UrlTitle = Form.elements.urlTitle;
-                    var Review = Form.elements.review;
+                    const Image = Form.elements.image;
+                    const CustomerName = Form.elements.customerName;
+                    const Addition = Form.elements.addition;
+                    const Url = Form.elements.url;
+                    const UrlTitle = Form.elements.urlTitle;
+                    const Review = Form.elements.review;
 
                     self.edit(index, {
                         image: Image.value,
@@ -610,15 +610,15 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
 
 
                 Dialog.addEvent('onOpenAfterCreate', function () {
-                    var Content = Dialog.getContent();
-                    var Form = Content.getElement('form');
+                    const Content = Dialog.getContent();
+                    const Form = Content.getElement('form');
 
-                    var Image = Form.elements.image;
-                    var CustomerName = Form.elements.customerName;
-                    var Addition = Form.elements.addition;
-                    var Url = Form.elements.url;
-                    var UrlTitle = Form.elements.urlTitle;
-                    var Review = Form.elements.review;
+                    const Image = Form.elements.image;
+                    const CustomerName = Form.elements.customerName;
+                    const Addition = Form.elements.addition;
+                    const Url = Form.elements.url;
+                    const UrlTitle = Form.elements.urlTitle;
+                    const Review = Form.elements.review;
 
                     if (data.isDisabled) {
                         Dialog.IsDisabledSwitch.on();
@@ -658,21 +658,21 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
          * @return {Promise}
          */
         $openAddDialog: function () {
-            var self = this;
+            const self = this;
 
             return this.$createDialog().then(function (Dialog) {
                 Dialog.addEvent('onSubmit', function () {
                     Dialog.Loader.show();
 
-                    var Content = Dialog.getContent();
-                    var Form = Content.getElement('form');
+                    const Content = Dialog.getContent();
+                    const Form = Content.getElement('form');
 
-                    var Image = Form.elements.image;
-                    var CustomerName = Form.elements.customerName;
-                    var Addition = Form.elements.addition;
-                    var Url = Form.elements.url;
-                    var UrlTitle = Form.elements.urlTitle;
-                    var Review = Form.elements.review;
+                    const Image = Form.elements.image;
+                    const CustomerName = Form.elements.customerName;
+                    const Addition = Form.elements.addition;
+                    const Url = Form.elements.url;
+                    const UrlTitle = Form.elements.urlTitle;
+                    const Review = Form.elements.review;
 
                     self.add({
                         image: Image.value,
@@ -697,10 +697,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
          * @return {Promise}
          */
         $createDialog: function () {
-            var self = this;
+            const self = this;
 
             return new Promise(function (resolve) {
-                var Dialog = new QUIConfirm({
+                const Dialog = new QUIConfirm({
                     title: QUILocale.get(lg, 'quiqqer.bricks.entires.adddialog.title'),
                     icon: 'fa fa-edit',
                     maxWidth: 800,
@@ -714,7 +714,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
                             Win.getContent().set('html', '');
 
 
-                            var prefix = 'quiqqer.bricks.customerReviewsSlider.settings.createPopup.',
+                            const prefix = 'quiqqer.bricks.customerReviewsSlider.settings.createPopup.',
                                 Container = new Element('div', {
                                     html: Mustache.render(templateEntry, {
                                         fieldIsDisabled: QUILocale.get(lg, prefix + 'disable'),
@@ -728,7 +728,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
                                     'class': 'quiqqer-bricks-customerReviewSlider-settings-entry'
                                 }).inject(Win.getContent());
 
-                            var Text = Container.getElement('.field-description');
+                            const Text = Container.getElement('.field-description');
 
                             Text.getParent().setStyles({
                                 height: 100
@@ -748,7 +748,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSliderSettings
                             QUI.parse(Container).then(function () {
                                 return ControlsUtils.parse(Container);
                             }).then(function () {
-                                var controls = QUI.Controls.getControlsInElement(Container),
+                                const controls = QUI.Controls.getControlsInElement(Container),
                                     project = self.getAttribute('project');
 
                                 controls.each(function (Control) {

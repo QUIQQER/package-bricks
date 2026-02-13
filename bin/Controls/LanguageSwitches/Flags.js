@@ -27,11 +27,11 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags', [
         },
 
         /**
-         * event : on inject
+         * event: on inject
          */
         $onImport: function () {
             // click events
-            var links = this.$Elm.getElements(
+            const links = this.$Elm.getElements(
                 '.quiqqer-bricks-languageswitch-flag-entry'
             );
 
@@ -41,7 +41,7 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags', [
                     return;
                 }
 
-                var href = this.get('href');
+                const href = this.get('href');
 
                 if (href.match(/\?/)) {
                     return;
@@ -49,8 +49,8 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/Flags', [
 
                 event.stop();
 
-                var search = window.location.search;
-                var hash = window.location.hash;
+                const search = window.location.search;
+                const hash = window.location.hash;
 
                 window.location = href + search + hash;
             });

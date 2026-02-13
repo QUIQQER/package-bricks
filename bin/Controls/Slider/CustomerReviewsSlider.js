@@ -41,15 +41,15 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
         },
 
         /**
-         * event : on import
+         * event: on import
          */
         $onImport: function () {
-            var delay = this.getAttribute('delay');
-            var autoplay = this.getAttribute('autoplay');
-            var sliderHeight = this.getAttribute('height');
-            var perView = this.getAttribute('perview');
-            var self = this;
-            var gap = this.getAttribute('gap');
+            const delay = this.getAttribute('delay');
+            const autoplay = this.getAttribute('autoplay');
+            const sliderHeight = this.getAttribute('height');
+            const perView = this.getAttribute('perview');
+            const self = this;
+            const gap = this.getAttribute('gap');
 
             this.glideTrack = this.getElm().querySelector('.customerReviewsSlider-track');
 
@@ -60,7 +60,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
                 Slide.style.width = null;
             });
 
-            var options = {
+            const options = {
                 gap: gap,
                 type: 'carousel',
                 perView: perView,
@@ -75,7 +75,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
                 options['autoplay'] = delay;
             }
 
-            var glide = new Glide(this.getElm('.glide'), options);
+            const glide = new Glide(this.getElm('.glide'), options);
 
             glide.on('build.after', function () {
                 self.showSlider();
@@ -89,8 +89,8 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
         },
 
         sliderHandleHeight: function (glide) {
-            var self = this;
-            var GlideElem = this.getElm().querySelector('.customerReviewsSlider-slider-wrapper');
+            const self = this;
+            const GlideElem = this.getElm().querySelector('.customerReviewsSlider-slider-wrapper');
 
             if (GlideElem) {
                 // Auto height on Carousel build
@@ -106,22 +106,22 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
         },
 
         showSlider: function () {
-            var Track = this.getElm().querySelector('.customerReviewsSlider-track');
+            const Track = this.getElm().querySelector('.customerReviewsSlider-track');
             Track.style.opacity = 1;
             Track.style.visibility = 'visible';
         },
 
         changeSliderHeight: function (direction, steps) {
-            var activeSlide = this.getElm().querySelector('.glide__slide--active');
-            var activeSlideWidth = activeSlide.offsetWidth;
-            var glideTrackWidth = this.glideTrack.offsetWidth;
-            var howMany = Math.round(glideTrackWidth / activeSlideWidth);
+            const activeSlide = this.getElm().querySelector('.glide__slide--active');
+            const activeSlideWidth = activeSlide.offsetWidth;
+            const glideTrackWidth = this.glideTrack.offsetWidth;
+            const howMany = Math.round(glideTrackWidth / activeSlideWidth);
 
-            var slides = this.getSlides(howMany, direction, steps);
+            const slides = this.getSlides(howMany, direction, steps);
 
-            var highestSlide = this.getHeight(slides);
+            const highestSlide = this.getHeight(slides);
 
-            var glideTrackHeight = this.glideTrack.offsetHeight;
+            const glideTrackHeight = this.glideTrack.offsetHeight;
 
             if (highestSlide !== glideTrackHeight) {
                 this.glideTrack.style.height = `${highestSlide + 50}px`;
@@ -129,15 +129,15 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
         },
 
         setSliderHeight: function () {
-            var activeSlide = this.getElm().querySelector('.glide__slide--active');
-            var activeSlideWidth = activeSlide.offsetWidth;
-            var glideTrackWidth = this.glideTrack.offsetWidth;
-            var howMany = Math.round(glideTrackWidth / activeSlideWidth);
+            const activeSlide = this.getElm().querySelector('.glide__slide--active');
+            const activeSlideWidth = activeSlide.offsetWidth;
+            const glideTrackWidth = this.glideTrack.offsetWidth;
+            const howMany = Math.round(glideTrackWidth / activeSlideWidth);
 
-            var slides = this.getSlides(howMany);
-            var highestSlide = this.getHeight(slides);
+            const slides = this.getSlides(howMany);
+            const highestSlide = this.getHeight(slides);
 
-            var glideTrackHeight = this.glideTrack.offsetHeight;
+            const glideTrackHeight = this.glideTrack.offsetHeight;
 
             if (highestSlide !== glideTrackHeight) {
                 this.glideTrack.style.height = `${highestSlide + 50}px`;
@@ -145,14 +145,14 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
         },
 
         getSlides: function (howMany, direction = null, steps = null) {
-            var i = 0;
-            var Slider = this.getElm().querySelector('.customerReviewsSlider-slider');
-            var sliderChildren = Slider.children;
-            var len = sliderChildren.length;
-            var activeSlideIndex = null;
-            var firstNewIndex = null;
-            var lastNewIndex = null;
-            var visibleSlides = [];
+            let i = 0;
+            const Slider = this.getElm().querySelector('.customerReviewsSlider-slider');
+            const sliderChildren = Slider.children;
+            const len = sliderChildren.length;
+            let activeSlideIndex = null;
+            let firstNewIndex = null;
+            let lastNewIndex = null;
+            const visibleSlides = [];
 
             for (i; i < len; i++) {
                 if (sliderChildren[i].className.includes('glide__slide--active')) {
@@ -172,7 +172,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
             }
 
             if (direction === "=") {
-                var j = 0;
+                let j = 0;
 
                 for (i = 0; i < sliderChildren.length; i++) {
                     if (sliderChildren[i].className.includes('glide__slide--clone')) {
@@ -204,12 +204,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/CustomerReviewsSlider', [
         },
 
         getHeight: function (slides) {
-            var newHeight = 0;
-            var i = 0;
-            var len = slides.length;
+            let newHeight = 0;
+            let i = 0;
+            const len = slides.length;
 
             for (i; i < len; i++) {
-                var slideHeight = slides[i].offsetHeight;
+                let slideHeight = slides[i].offsetHeight;
 
                 if (slideHeight > newHeight) {
                     newHeight = slideHeight;
