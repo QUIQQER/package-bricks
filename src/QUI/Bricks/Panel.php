@@ -17,8 +17,6 @@ use function trim;
 /**
  * Class Panel
  * - Helper class for the brick panel in the administration
- *
- * @package QUI\Bricks
  */
 class Panel extends QUI\Utils\Singleton
 {

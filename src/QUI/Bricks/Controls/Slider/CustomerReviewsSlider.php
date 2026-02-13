@@ -12,8 +12,6 @@ use function dirname;
 
 /**
  * Class CustomerReviews
- *
- * @package quiqqer/bricks/Controls
  */
 class CustomerReviewsSlider extends QUI\Control
 {

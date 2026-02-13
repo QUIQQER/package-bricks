@@ -14,8 +14,6 @@ use function dirname;
 
 /**
  * Class Promoslider
- *
- * @package QUI\Bricks\Controls
  */
 class PromosliderWallpaper extends AbstractPromoslider
 {

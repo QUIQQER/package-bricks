@@ -45,8 +45,6 @@ use const OPT_DIR;
 
 /**
  * Brick Manager
- *
- * @package quiqqer/bricks
  */
 class Manager
 {

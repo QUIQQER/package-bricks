@@ -13,8 +13,6 @@ use function dirname;
 
 /**
  * Class Promoslider
- *
- * @package QUI\Bricks\Controls
  */
 class Promoslider extends AbstractPromoslider
 {

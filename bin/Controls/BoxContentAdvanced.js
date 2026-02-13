@@ -1,10 +1,3 @@
-/**
- *
- * @module package/quiqqer/bricks/bin/Controls/BoxContentAdvanced
- *
- * @require qui/controls/elements/FormList
- * @require css!package/quiqqer/bricks/bin/Controls/BoxContentAdvanced.css
- */
 define('package/quiqqer/bricks/bin/Controls/BoxContentAdvanced', [
 
     'qui/controls/elements/FormList',

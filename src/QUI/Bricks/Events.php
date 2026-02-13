@@ -27,8 +27,6 @@ use function trim;
 
 /**
  * Class Events
- *
- * @package quiqqer/bricks
  */
 class Events
 {

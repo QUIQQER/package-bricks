@@ -17,8 +17,6 @@ use function json_decode;
 
 /**
  * Class PromosliderWallpaper2Content
- *
- * @package QUI\Bricks\Controls
  */
 class PromosliderWallpaper2Content extends PromosliderWallpaper
 {

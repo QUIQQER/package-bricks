@@ -1,11 +1,3 @@
-
-/**
- *
- * @module package/quiqqer/bricks/bin/Controls/SocialBox
- *
- * @require qui/controls/elements/FormList
- * @require css!package/quiqqer/bricks/bin/Controls/SocialBox.css
- */
 define('package/quiqqer/bricks/bin/Controls/SocialBox', [
 
     'qui/controls/elements/FormList',
