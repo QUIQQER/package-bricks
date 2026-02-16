@@ -1042,53 +1042,6 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Markierte Bausteine löschen]]></de>
             <en><![CDATA[Delete marked Bricks]]></en>
         </locale>
-        <locale name="manager.window.create.title">
-            <de><![CDATA[Neuen Baustein hinzufügen]]></de>
-            <en><![CDATA[Create a new Brick]]></en>
-        </locale>
-        <locale name="manager.window.create.label.title">
-            <de><![CDATA[Bausteintitel]]></de>
-            <en><![CDATA[Brick title]]></en>
-        </locale>
-        <locale name="manager.window.create.label.type">
-            <de><![CDATA[Bausteintyp]]></de>
-            <en><![CDATA[Brick type]]></en>
-        </locale>
-        <locale name="manager.window.create.btnCreateFromData">
-            <de><![CDATA[Baustein aus den exportierten Daten erstellen]]></de>
-            <en><![CDATA[Create a new Brick from exported data]]></en>
-        </locale>
-
-        <locale name="manager.window.createFromData.title">
-            <de><![CDATA[Baustein aus JSON Daten erstellen]]></de>
-            <en><![CDATA[Create a new Brick from JSON]]></en>
-        </locale>
-        <locale name="manager.window.createFromData.text">
-            <de><![CDATA[Bitte in das Eingabefeld die Baustein-Daten in JSON Format einfügen.]]></de>
-            <en><![CDATA[Please insert the brick data in JSON format into the input field.]]></en>
-        </locale>
-        <locale name="manager.window.createFromData.info.project">
-            <de>
-                <![CDATA[<strong>Projektnamen anpassen</strong><br>Wenn der Projektnamen im JSON-String nicht mit dem ausgewählten Projekt übereinstimmt, wird er automatisch angepasst. Falls dies nicht gewünscht ist, sollte die Checkbox abgewählt werden.]]></de>
-            <en>
-                <![CDATA[<strong>Adjust Project Name</strong><br>If the project name in the JSON string does not match the selected project, it will be automatically adjusted. If this is not desired, the checkbox should be unchecked.]]></en>
-        </locale>
-        <locale name="manager.window.createFromData.info.lang">
-            <de>
-                <![CDATA[<strong>Sprache anpassen</strong><br>Wenn die Sprache im JSON-String nicht mit der ausgewählten Sprache übereinstimmt, wird sie automatisch angepasst. Falls dies nicht gewünscht ist, sollte die Checkbox abgewählt werden.]]></de>
-            <en>
-                <![CDATA[<strong>Adjust Language</strong><br>If the language in the JSON string does not match the selected language, it will be automatically adjusted. If this is not desired, the checkbox should be unchecked.]]></en>
-        </locale>
-        <locale name="manager.window.createFromData.info.general">
-            <de>
-                <![CDATA[<strong>Bitte beachte!</strong> Die Verlinkungen zu internen Seiten und Bildern sowie die im Baustein Einstellungen benutzten Bilder müssen weiterhin nach der Erstellung per Hand angepasst werden. Diese Aktion lässt sich nicht automatisieren.]]></de>
-            <en>
-                <![CDATA[<strong>Please Note!</strong> Links to internal pages and images, as well as the images used in the brick settings, must still be manually adjusted after creation. This action cannot be automated.]]></en>
-        </locale>
-        <locale name="manager.window.createFromData.btnText">
-            <de><![CDATA[Daten einfügen]]></de>
-            <en><![CDATA[Paste data]]></en>
-        </locale>
 
         <locale name="manager.window.delete.title">
             <de><![CDATA[Bausteine löschen]]></de>
@@ -1541,7 +1494,7 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Social Media Entries]]></en>
         </locale>
         <locale name="exception.brick.has.no.title">
-            <de><![CDATA[Fügen Sie einen Titel hinzu!]]></de>
+            <de><![CDATA[Es fehlt der Titel!]]></de>
             <en><![CDATA[Add a title!]]></en>
         </locale>
         <locale name="exception.brick.title.already.exists">
@@ -1569,6 +1522,162 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
                 <![CDATA[Der Baustein kann aus den Daten nicht importiert werden. In dieser QUIQQER Installation existiert der Baustein vom Typ [brickType] nicht.]]></de>
             <en>
                 <![CDATA[The brick cannot be imported from the data. In this QUIQQER installation the brick of type [brickType] does not exist.]]></en>
+        </locale>
+
+        <locale name="addBrickWindow.aside.title">
+            <de><![CDATA[Bausteine durchsuchen]]></de>
+            <en><![CDATA[Search for bricks]]></en>
+        </locale>
+        <locale name="addBrickWindow.aside.desc">
+            <de><![CDATA[Bausteine durchstöbern oder mit einem JSON-Code erstellen.]]></de>
+            <en><![CDATA[Browse bricks or create one from JSON data.]]></en>
+        </locale>
+        <locale name="addBrickWindow.aside.toolbar.btn.import.title">
+            <de><![CDATA[Baustein als JSON importieren]]></de>
+            <en><![CDATA[Import brick from JSON]]></en>
+        </locale>
+        <locale name="addBrickWindow.aside.toolbar.input.placeholder">
+            <de><![CDATA[Baustein suchen...]]></de>
+            <en><![CDATA[Search for brick...]]></en>
+        </locale>
+        <locale name="addBrickWindow.aside.toolbar.select.title">
+            <de><![CDATA[Paket Filter]]></de>
+            <en><![CDATA[Package filter]]></en>
+        </locale>
+        <locale name="addBrickWindow.aside.toolbar.select.option.all">
+            <de><![CDATA[Alle]]></de>
+            <en><![CDATA[All]]></en>
+        </locale>
+        <locale name="addBrickWindow.aside.toolbar.count.single">
+            <de><![CDATA[Baustein]]></de>
+            <en><![CDATA[Brick]]></en>
+        </locale>
+        <locale name="addBrickWindow.aside.toolbar.count.multi">
+            <de><![CDATA[Bausteine]]></de>
+            <en><![CDATA[Bricks]]></en>
+        </locale>
+        <locale name="addBrickWindow.aside.list.empty">
+            <de><![CDATA[Keine passenden Bausteine gefunden]]></de>
+            <en><![CDATA[No matching bricks found]]></en>
+        </locale>
+        <locale name="addBrickWindow.details.btn.add">
+            <de><![CDATA[Hinzufügen]]></de>
+            <en><![CDATA[Select]]></en>
+        </locale>
+        <locale name="addBrickWindow.details.brickTypeContent.title">
+            <de><![CDATA[Einfacher Inhalt]]></de>
+            <en><![CDATA[Simple content]]></en>
+        </locale>
+        <locale name="addBrickWindow.details.brickTypeContent.desc">
+            <de><![CDATA[Der Baustein zeigt nur den Inhalt. Dadurch eignet er sich für eigene komplexere HTML Strukturen oder auch einfache Texte.]]></de>
+            <en><![CDATA[The brick only shows the content. Therefore, it is suitable for own complex HTML structures or also simple texts.]]></en>
+        </locale>
+        <locale name="addBrickWindow.details.section.package">
+            <de><![CDATA[Paket & Control]]></de>
+            <en><![CDATA[Package & control]]></en>
+        </locale>
+        <locale name="addBrickWindow.details.section.desc">
+            <de><![CDATA[Beschreibung]]></de>
+            <en><![CDATA[Description]]></en>
+        </locale>
+        <locale name="addBrickWindow.details.section.gallery">
+            <de><![CDATA[Weitere Bilder]]></de>
+            <en><![CDATA[Additional images]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.btn.cancel">
+            <de><![CDATA[Abbrechen]]></de>
+            <en><![CDATA[Cancel]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.title">
+            <de><![CDATA[Baustein erstellen]]></de>
+            <en><![CDATA[Create brick]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.desc">
+            <de><![CDATA[Bitte gib einen eindeutigen Namen ein. Der Name darf noch nicht vergeben sein und sollte idealerweise beschreiben, was der Baustein macht.]]></de>
+            <en><![CDATA[Please enter a unique name. The name must not be assigned yet and should ideally describe what the brick does.]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.input.placeholder">
+            <de><![CDATA[Titel]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.btn.create">
+            <de><![CDATA[Baustein erstellen]]></de>
+            <en><![CDATA[Create brick]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.error.noProject">
+            <de><![CDATA[Bitte wähle zuerst ein Projekt und eine Sprache aus.]]></de>
+            <en><![CDATA[Please select a project and a language first.]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.error.brickType">
+            <de><![CDATA[Bitte wähle zuerst einen Baustein-Typ aus.]]></de>
+            <en><![CDATA[Please select a brick type first.]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.error.missingTitle">
+            <de><![CDATA[Bitte gib einen Titel ein.]]></de>
+            <en><![CDATA[Please enter a title.]]></en>
+        </locale>
+
+        <locale name="addBrickWindow.overlay.createFromData.title">
+            <de><![CDATA[Baustein aus JSON Daten erstellen]]></de>
+            <en><![CDATA[Create a new Brick from JSON]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.desc">
+            <de><![CDATA[Bitte in das Eingabefeld die Baustein-Daten in JSON Format einfügen.]]></de>
+            <en><![CDATA[Please insert the brick data in JSON format into the input field.]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.btn.import">
+            <de><![CDATA[Importieren]]></de>
+            <en><![CDATA[Import]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.info.project">
+            <de>
+                <![CDATA[<strong>Projektnamen anpassen</strong><br>Wenn der Projektnamen im JSON-String nicht mit dem ausgewählten Projekt übereinstimmt, wird er automatisch angepasst. Falls dies nicht gewünscht ist, sollte die Checkbox abgewählt werden.]]></de>
+            <en>
+                <![CDATA[<strong>Adjust Project Name</strong><br>If the project name in the JSON string does not match the selected project, it will be automatically adjusted. If this is not desired, the checkbox should be unchecked.]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.info.lang">
+            <de>
+                <![CDATA[<strong>Sprache anpassen</strong><br>Wenn die Sprache im JSON-String nicht mit der ausgewählten Sprache übereinstimmt, wird sie automatisch angepasst. Falls dies nicht gewünscht ist, sollte die Checkbox abgewählt werden.]]></de>
+            <en>
+                <![CDATA[<strong>Adjust Language</strong><br>If the language in the JSON string does not match the selected language, it will be automatically adjusted. If this is not desired, the checkbox should be unchecked.]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.info.general">
+            <de>
+                <![CDATA[<strong>Bitte beachte!</strong> Die Verlinkungen zu internen Seiten und Bildern sowie die im Baustein Einstellungen benutzten Bilder müssen weiterhin nach der Erstellung per Hand angepasst werden. Diese Aktion lässt sich nicht automatisieren.]]></de>
+            <en>
+                <![CDATA[<strong>Please Note!</strong> Links to internal pages and images, as well as the images used in the brick settings, must still be manually adjusted after creation. This action cannot be automated.]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.btn.paste">
+            <de><![CDATA[Daten einfügen]]></de>
+            <en><![CDATA[Paste data]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.error.pasteNotAvailable">
+            <de><![CDATA[Clipboard ist in diesem Browser nicht verfügbar.]]></de>
+            <en><![CDATA[Clipboard is not available in this browser.]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.error.pasteError">
+            <de><![CDATA[Konnte nicht aus der Zwischenablage lesen.]]></de>
+            <en><![CDATA[Could not read from clipboard.]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.error.empty">
+            <de><![CDATA[Bitte füge JSON-Daten ein.]]></de>
+            <en><![CDATA[Please insert JSON data.]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.error.invalidJson">
+            <de><![CDATA[Ungültiges JSON. Bitte überprüfe die Syntax.]]></de>
+            <en><![CDATA[Invalid JSON. Please check the syntax.]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.error.invalidObject">
+            <de><![CDATA[Ungültige JSON-Daten. Erwartet wird ein Objekt.]]></de>
+            <en><![CDATA[Invalid JSON data. Expected an object.]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.error.missingAttributes">
+            <de><![CDATA[Ungültige Daten. Erwartet wird ein Objekt mit "attributes".]]></de>
+            <en><![CDATA[Invalid data. Expected an object with "attributes".]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.createFromData.error.failed">
+            <de><![CDATA[Import fehlgeschlagen.]]></de>
+            <en><![CDATA[Import failed.]]></en>
         </locale>
 
         <locale name="brick.control.googlemaps.title">

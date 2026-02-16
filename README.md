@@ -47,6 +47,28 @@ Contribution
 - Source Code: https://dev.quiqqer.com/quiqqer/package-bricks/tree/master
 
 
+For developer
+------
+
+When adding new bricks, please make sure the brick metadata and mockups are
+consistent and high-quality:
+
+- **Title**: Provide a clear title without the package name.
+- **Description**: Describe precisely what the brick does. One sentence is
+  usually not enough.
+- **Settings**: If the brick has multiple settings, summarize them briefly with
+  bullet points.
+- **Images**: Provide at least one image.
+  - **Main image (mockup)**: Ideally with a grey background and shown as a
+    wireframe-style representation of the brick.
+  - **Additional images (mockups)**: Screenshots are fine.
+- **Image format**: All images should use a 3:2 aspect ratio and preferably not
+  exceed 900x600 pixels.
+
+More information about how to provide a brick and mockups:
+https://dev.quiqqer.com/quiqqer/package-bricks/-/wikis/dev/bricks
+
+
 Support
 -------
 
