@@ -172,8 +172,6 @@ define('package/quiqqer/bricks/bin/Manager', [
                 AddBrickWin.options.lang = this.$ProjectLangs.getValue();
             }.bind(this));
 
-            AddBrickWin.open();
-
             this.addButton(this.$ProjectSelect);
             this.addButton(this.$ProjectLangs);
             this.addButton(new QUISeparator());
@@ -281,7 +279,8 @@ define('package/quiqqer/bricks/bin/Manager', [
                     }
                 ],
                 multipleSelection: true,
-                pagination: true
+                pagination: true,
+                storageKey: true
             });
 
             this.$Grid.addEvents({
