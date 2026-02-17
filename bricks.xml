@@ -12,7 +12,7 @@
         </brick>
 
         <!-- simple contact form -->
-        <brick control="\QUI\Bricks\Controls\SimpleContact">
+        <brick control="\QUI\Bricks\Controls\SimpleContact" deprecated="1">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.simpleContact.title"/>
             </title>
@@ -82,7 +82,7 @@
             </settings>
         </brick>
 
-        <brick control="\QUI\Bricks\Controls\SocialBox">
+        <brick control="\QUI\Bricks\Controls\SocialBox" deprecated="1">
             <title>
                 <locale group="quiqqer/bricks" var="bricks.SocialBox.title"/>
             </title>

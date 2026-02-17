@@ -1548,6 +1548,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Alle]]></de>
             <en><![CDATA[All]]></en>
         </locale>
+        <locale name="addBrickWindow.deprecated.badge">
+            <de><![CDATA[Deprecated]]></de>
+            <en><![CDATA[Deprecated]]></en>
+        </locale>
+        <locale name="addBrickWindow.aside.footer.toggle.deprecated.show">
+            <de><![CDATA[Veraltete (deprecated) Bausteine anzeigen]]></de>
+            <en><![CDATA[Show deprecated bricks]]></en>
+        </locale>
+        <locale name="addBrickWindow.aside.footer.toggle.deprecated.hide">
+            <de><![CDATA[Veraltete (deprecated) Bausteine ausblenden]]></de>
+            <en><![CDATA[Hide deprecated bricks]]></en>
+        </locale>
         <locale name="addBrickWindow.aside.toolbar.count.single">
             <de><![CDATA[Baustein]]></de>
             <en><![CDATA[Brick]]></en>

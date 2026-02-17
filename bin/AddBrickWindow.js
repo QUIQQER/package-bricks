@@ -20,6 +20,7 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
             'applyFilters',
             'onPackageChange',
             'onSearchInput',
+            'onDeprecatedToggleChange',
             'onItemClick',
             'createOverlay',
             'openCreateOverlay',
@@ -56,6 +57,7 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
             this.$PackageFilter = null;
             this.$SearchInput = null;
             this.$BrickList = null;
+            this.$DeprecatedToggle = null;
             this.$SelectedPackage = null;
             this.$BrickCount = null;
             this.$DetailTitle = null;
@@ -259,6 +261,8 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                 asideInputPlaceholder: QUILocale.get(lg, 'addBrickWindow.aside.toolbar.input.placeholder'),
                 asideSelectTitle: QUILocale.get(lg, 'addBrickWindow.aside.toolbar.select.title'),
                 asideSelectOptionAll: QUILocale.get(lg, 'addBrickWindow.aside.toolbar.select.option.all'),
+                asideFooterToggleDeprecated: QUILocale.get(lg, 'addBrickWindow.aside.footer.toggle.deprecated.show'),
+                deprecatedText: QUILocale.get(lg, 'addBrickWindow.deprecated.badge'),
                 detailsBtnAdd: QUILocale.get(lg, 'addBrickWindow.details.btn.add'),
                 detailsSectionPackage: QUILocale.get(lg, 'addBrickWindow.details.section.package'),
                 detailsSectionDesc: QUILocale.get(lg, 'addBrickWindow.details.section.desc'),
@@ -281,6 +285,7 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
             this.$PackageFilter = this.$Content.getElement('[data-name="package-filter"]');
             this.$SearchInput = this.$Content.getElement('[data-name="search-input"]');
             this.$BrickList = this.$Content.getElement('[data-name="brickList"]');
+            this.$DeprecatedToggle = this.$Content.getElement('[data-name="toggle-deprecated"]');
             this.$SelectedPackage = this.$Content.getElement('[data-name="selected-package"]');
             this.$BrickCount = this.$Content.getElement('[data-name="brick-count"]');
             this.$DetailTitle = this.$Content.getElement('[data-name="detail-title"]');
@@ -973,8 +978,28 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
             }
 
             if (this.$DetailControl) {
-                const normalized = String(data.control || '').replace(/\\\\/g, '\\');
+                const normalized = String(data.control || '').replace(/\\/g, '\\');
                 this.$DetailControl.set('text', normalized);
+            }
+
+            const existingDeprecatedBadge = this.$Content
+                ? this.$Content.getElement('[data-name="detail-deprecated"]')
+                : null;
+
+            if (existingDeprecatedBadge) {
+                existingDeprecatedBadge.destroy();
+            }
+
+            if (data.deprecated && this.$Content) {
+                const Container = this.$Content.getElement('[data-name="details-section-package"]');
+
+                if (Container) {
+                    new Element('span', {
+                        'class': 'badge badge-warning badge-sm',
+                        'data-name': 'detail-deprecated',
+                        html: QUILocale.get(lg, 'addBrickWindow.deprecated.badge')
+                    }).inject(Container);
+                }
             }
 
             if (this.$DetailDescription) {
@@ -1141,6 +1166,29 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
             this.applyFilters();
         },
 
+        onDeprecatedToggleChange: function () {
+            if (!this.$BrickList || !this.$DeprecatedToggle) {
+                return;
+            }
+
+            const textShow = QUILocale.get(lg, 'addBrickWindow.aside.footer.toggle.deprecated.show');
+            const textHide = QUILocale.get(lg, 'addBrickWindow.aside.footer.toggle.deprecated.hide');
+
+            const Label = this.$DeprecatedToggle.getParent('label');
+
+            if (Label) {
+                const targetText = this.$DeprecatedToggle.checked ? textHide : textShow;
+                const TextElm = Label.getElement('[data-name="toggle-deprecated-text"]');
+
+                if (TextElm) {
+                    TextElm.set('html', targetText);
+                }
+            }
+
+            this.$BrickList.setAttribute('data-show-deprecated', this.$DeprecatedToggle.checked ? '1' : '0');
+            this.applyFilters();
+        },
+
         /**
          * List item click handler.
          * Updates `aria-current` and re-renders the details panel.
@@ -1171,6 +1219,7 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
         $onOpen: function () {
             Bricks.getAvailableBricks().then((brickList) => {
                 this.brickList = brickList;
+                console.log(this.brickList)
 
                 const viewData = brickList.map((brick) => {
                     if (brick.control === 'content') {
@@ -1194,7 +1243,8 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                             displayPackage: displayPackage,
                             mockup: mockup,
                             mockups: mockups,
-                            search: searchText
+                            search: searchText,
+                            deprecated: 0
                         };
                     }
 
@@ -1248,6 +1298,7 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
 
                     const mockup = brick.mockup ? brick.mockup : '/packages/quiqqer/bricks/bin/images/mockup-placeholder.svg';
                     const mockups = Array.isArray(brick.mockups) ? brick.mockups : [];
+                    const deprecated = brick.deprecated ? 1 : 0;
 
                     return {
                         control: brick.control,
@@ -1256,7 +1307,8 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                         displayPackage: pkg,
                         mockup: mockup,
                         mockups: mockups,
-                        search: searchText
+                        search: searchText,
+                        deprecated: deprecated
                     };
                 });
 
@@ -1292,6 +1344,14 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
 
                 if (this.$SearchInput) {
                     this.$SearchInput.addEvent('input', this.onSearchInput);
+                }
+
+                if (this.$DeprecatedToggle) {
+                    this.$DeprecatedToggle.checked = this.$BrickList
+                        ? this.$BrickList.getAttribute('data-show-deprecated') === '1'
+                        : false;
+                    this.$DeprecatedToggle.addEvent('change', this.onDeprecatedToggleChange);
+                    this.onDeprecatedToggleChange();
                 }
 
                 if (this.$BrickList) {
