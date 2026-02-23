@@ -263,8 +263,9 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                 asideSelectOptionAll: QUILocale.get(lg, 'addBrickWindow.aside.toolbar.select.option.all'),
                 asideFooterToggleDeprecated: QUILocale.get(lg, 'addBrickWindow.aside.footer.toggle.deprecated.show'),
                 deprecatedText: QUILocale.get(lg, 'addBrickWindow.deprecated.badge'),
+                recommendedText: QUILocale.get(lg, 'addBrickWindow.recommendedText.badge'),
                 detailsBtnAdd: QUILocale.get(lg, 'addBrickWindow.details.btn.add'),
-                detailsSectionPackage: QUILocale.get(lg, 'addBrickWindow.details.section.package'),
+                detailsSectionInfo: QUILocale.get(lg, 'addBrickWindow.details.section.info'),
                 detailsSectionDesc: QUILocale.get(lg, 'addBrickWindow.details.section.desc'),
                 detailsSectionGallery: QUILocale.get(lg, 'addBrickWindow.details.section.gallery'),
             });
@@ -982,6 +983,7 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                 this.$DetailControl.set('text', normalized);
             }
 
+            // deprecated badge
             const existingDeprecatedBadge = this.$Content
                 ? this.$Content.getElement('[data-name="detail-deprecated"]')
                 : null;
@@ -991,13 +993,34 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
             }
 
             if (data.deprecated && this.$Content) {
-                const Container = this.$Content.getElement('[data-name="details-section-package"]');
+                const Container = this.$Content.getElement('[data-name="details-section-info"]');
+
+                if (Container) {
+                    new Element('span', {
+                        'class': 'badge badge-danger badge-sm',
+                        'data-name': 'detail-deprecated',
+                        html: QUILocale.get(lg, 'addBrickWindow.deprecated.badge')
+                    }).inject(Container);
+                }
+            }
+
+            // recommended badge
+            const existingRecommendedBadge = this.$Content
+                ? this.$Content.getElement('[data-name="detail-recommended"]')
+                : null;
+
+            if (existingRecommendedBadge) {
+                existingRecommendedBadge.destroy();
+            }
+
+            if (data.recommended && this.$Content) {
+                const Container = this.$Content.getElement('[data-name="details-section-info"]');
 
                 if (Container) {
                     new Element('span', {
                         'class': 'badge badge-warning badge-sm',
-                        'data-name': 'detail-deprecated',
-                        html: QUILocale.get(lg, 'addBrickWindow.deprecated.badge')
+                        'data-name': 'detail-recommended',
+                        html: QUILocale.get(lg, 'addBrickWindow.recommendedText.badge')
                     }).inject(Container);
                 }
             }
@@ -1244,7 +1267,8 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                             mockup: mockup,
                             mockups: mockups,
                             search: searchText,
-                            deprecated: 0
+                            deprecated: 0,
+                            recommended: 0
                         };
                     }
 
@@ -1299,6 +1323,7 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                     const mockup = brick.mockup ? brick.mockup : '/packages/quiqqer/bricks/bin/images/mockup-placeholder.svg';
                     const mockups = Array.isArray(brick.mockups) ? brick.mockups : [];
                     const deprecated = brick.deprecated ? 1 : 0;
+                    let recommended = brick.recommended ? 1 : 0;
 
                     return {
                         control: brick.control,
@@ -1308,7 +1333,8 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                         mockup: mockup,
                         mockups: mockups,
                         search: searchText,
-                        deprecated: deprecated
+                        deprecated: deprecated,
+                        recommended: recommended
                     };
                 });
 

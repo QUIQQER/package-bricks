@@ -163,6 +163,7 @@ class Utils
         $hasContent = 1;
         $cacheable = 1;
         $deprecated = 0;
+        $recommended = 0;
 
         if (
             method_exists($Brick, 'getAttribute')
@@ -189,6 +190,15 @@ class Utils
             && (int)$Brick->getAttribute('cacheable') === 0
         ) {
             $cacheable = 0;
+        }
+
+        if (
+            method_exists($Brick, 'getAttribute')
+            && method_exists($Brick, 'hasAttribute')
+            && $Brick->hasAttribute('recommended')
+            && (int)$Brick->getAttribute('recommended') === 1
+        ) {
+            $recommended = 1;
         }
 
         $title = [];
@@ -287,6 +297,7 @@ class Utils
             'control' => $control,
             'hasContent' => $hasContent,
             'cacheable' => $cacheable,
+            'recommended' => $recommended,
             'name' => $name,
             'title' => $title,
             'description' => $description,

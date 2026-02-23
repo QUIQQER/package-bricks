@@ -12,7 +12,7 @@
         </brick>
 
         <!-- simple contact form -->
-        <brick control="\QUI\Bricks\Controls\SimpleContact" deprecated="1">
+        <brick control="\QUI\Bricks\Controls\SimpleContact">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.simpleContact.title"/>
             </title>
@@ -82,7 +82,7 @@
             </settings>
         </brick>
 
-        <brick control="\QUI\Bricks\Controls\SocialBox" deprecated="1">
+        <brick control="\QUI\Bricks\Controls\SocialBox">
             <title>
                 <locale group="quiqqer/bricks" var="bricks.SocialBox.title"/>
             </title>
@@ -771,7 +771,7 @@
 
 
         <!-- Content Switcher -->
-        <brick control="\QUI\Bricks\Controls\ContentSwitcher">
+        <brick control="\QUI\Bricks\Controls\ContentSwitcher" deprecated="1">
             <title>
                 <locale group="quiqqer/bricks" var="bricks.ContentSwitcher.title"/>
             </title>
@@ -1283,7 +1283,7 @@
             </settings>
         </brick>
 
-        <brick control="\QUI\Bricks\Controls\SideBox3TitleTop">
+        <brick control="\QUI\Bricks\Controls\SideBox3TitleTop" deprecated="1">
             <title>
                 <locale group="quiqqer/bricks" var="brick.control.sidebox3TitleTop.title"/>
             </title>
@@ -1547,7 +1547,7 @@
             </settings>
         </brick>
 
-        <brick control="\QUI\Bricks\Controls\TextAndImage">
+        <brick control="\QUI\Bricks\Controls\TextAndImage" recommended="1">
             <title>
                 <locale group="quiqqer/bricks"
                         var="brick.textAndImage.title"/>

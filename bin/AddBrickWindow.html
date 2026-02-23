@@ -31,7 +31,7 @@
 
         <div class="qui-addBrick__list" data-name="brickList" data-show-deprecated="0">
             {{#brickList}}
-            <div class="qui-addBrick__item" data-name="item" data-control="{{control}}" data-package="{{displayPackage}}" data-search="{{search}}" data-deprecated="{{deprecated}}">
+            <div class="qui-addBrick__item" data-name="item" data-control="{{control}}" data-package="{{displayPackage}}" data-search="{{search}}" data-deprecated="{{deprecated}}" data-recommended="{{recommended}}">
                 <div class="thumb">
                     <img src="{{mockup}}" alt="{{displayTitle}}">
                 </div>
@@ -42,8 +42,11 @@
                     <div style="line-height: 1;">
                         <span class="badge badge-success-light badge-sm">{{displayPackage}}</span>
                         {{#deprecated}}
-                        <span class="badge badge-warning badge-sm">{{deprecatedText}}</span>
+                        <span class="badge badge-danger badge-sm">{{deprecatedText}}</span>
                         {{/deprecated}}
+                        {{#recommended}}
+                        <span class="badge badge-warning badge-sm">{{{recommendedText}}}</span>
+                        {{/recommended}}
                     </div>
 
                     <div class="desc">{{displayDescription}}</div>
@@ -73,8 +76,8 @@
             </div>
 
             <div class="section">
-                <div class="section-label">{{detailsSectionPackage}}</div>
-                <div data-name="details-section-package">
+                <div class="section-label">{{detailsSectionInfo}}</div>
+                <div data-name="details-section-info">
                     <span class="badge badge-success-light" data-name="detail-package">quiqqer/bricks</span> <span data-name="detail-control"></span>
                 </div>
             </div>

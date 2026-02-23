@@ -104,6 +104,7 @@ class Brick extends QUI\QDOM
             'classes' => '',
             'frontendTitle' => '',
             'hasContent' => 1,
+            'recommended' => 0,
             'cacheable' => 1, // if the brick is cacheable or not
             'deprecated' => 0
         ];
