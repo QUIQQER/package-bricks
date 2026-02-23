@@ -92,16 +92,16 @@
         {if $createPrivacyPolicyLink}
         <script>
             {literal}(function() {{/literal}
-                var projectName = "{$projectName}";
-                var projectLang = "{$projectLang}";
-                var siteId      = "{$siteId}";
+                const projectName = "{$projectName}";
+                const projectLang = "{$projectLang}";
+                const siteId      = "{$siteId}";
 
                 {literal}
                 require([
                     'package/quiqqer/controls/bin/site/Window',
                     'Locale'
                 ], function (QUISiteWindow, QUILocale) {
-                    var Links = document.getElement('label[for="qui-contact-privacypolicy"]').getParent().getElements('a');
+                    const Links = document.getElement('label[for="qui-contact-privacypolicy"]').getParent().getElements('a');
 
                     if (!Links.length) {
                         return;
@@ -123,22 +123,22 @@
                 {/literal}
 
                     window.addEventListener('load', (event) => {
-                        var emailInput = document.querySelector('#qui-contact-name__horizontal');
+                        const emailInput = document.querySelector('#qui-contact-name__horizontal');
 
-                        var emailLabel = document.querySelector('.qui-contact-email-label__horizontal');
-                        var nameLabel = document.querySelector('.qui-contact-name-label__horizontal');
+                        const emailLabel = document.querySelector('.qui-contact-email-label__horizontal');
+                        const nameLabel = document.querySelector('.qui-contact-name-label__horizontal');
                         var messageLabel = document.querySelector('.qui-contact-message-label__horizontal');
 
-                        var inputPadding = window.getComputedStyle(emailInput, null).getPropertyValue('padding-top');
+                        let inputPadding = window.getComputedStyle(emailInput, null).getPropertyValue('padding-top');
                         inputPadding = inputPadding.replace('px', '');
 
-                        var inputMargin = window.getComputedStyle(emailInput, null).getPropertyValue('margin-top');
+                        let inputMargin = window.getComputedStyle(emailInput, null).getPropertyValue('margin-top');
                         inputMargin = inputMargin.replace('px', '');
 
-                        var inputBorder = window.getComputedStyle(emailInput, null).getPropertyValue('border-width');
+                        let inputBorder = window.getComputedStyle(emailInput, null).getPropertyValue('border-width');
                         inputBorder = inputBorder.replace('px', '');
 
-                        var labelMargin = (inputPadding*1) + (inputMargin*1) + (inputBorder*1) + "px";
+                        const labelMargin = (inputPadding*1) + (inputMargin*1) + (inputBorder*1) + "px";
 
                         emailLabel.style.marginTop = labelMargin;
                         nameLabel.style.marginTop = labelMargin;

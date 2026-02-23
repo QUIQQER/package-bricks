@@ -1,8 +1,3 @@
-/**
- * @module package/quiqqer/bricks/bin/Controls/Slider/TextAndImageMultipleSettings
- * @author Dominik Chrzanowski
- *
- */
 define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
 
     'qui/QUI',
@@ -19,24 +14,24 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
     'css!package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings.css'
 
 ], function (QUI,
-    QUIControl,
-    QUIConfirm,
-    QUIButton,
-    QUISwitch,
-    QUILocale,
-    Mustache,
-    Grid,
-    ControlsUtils,
-    templateEntry
+             QUIControl,
+             QUIConfirm,
+             QUIButton,
+             QUISwitch,
+             QUILocale,
+             Mustache,
+             Grid,
+             ControlsUtils,
+             templateEntry
 ) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings',
+        Type: 'package/quiqqer/bricks/bin/Controls/Slider/PromosliderSettings',
 
         Binds: [
             '$onImport',
@@ -51,7 +46,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
             this.parent(options);
 
             this.$Input = null;
-            this.$Grid  = null;
+            this.$Grid = null;
 
             this.$data = [];
 
@@ -68,45 +63,45 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
 
             this.$Elm = new Element('div', {
                 'class': 'quiqqer-bricks-textAndImageMultiple-settings',
-                styles : {
-                    clear   : 'both',
-                    'float' : 'left',
-                    height  : 400,
+                styles: {
+                    clear: 'both',
+                    'float': 'left',
+                    height: 400,
                     overflow: 'hidden',
                     position: 'relative',
-                    margin  : '10px 0 0 0',
-                    width   : '100%'
+                    margin: '10px 0 0 0',
+                    width: '100%'
                 }
             }).wraps(this.$Input);
 
             // grid and sizes
-            var size = this.$Elm.getSize();
+            const size = this.$Elm.getSize();
 
-            var Desktop = new Element('div', {
+            const Desktop = new Element('div', {
                 styles: {
                     width: size.x
                 }
             }).inject(this.$Elm);
 
             this.$Grid = new Grid(Desktop, {
-                height     : 400,
-                width      : size.x,
-                buttons    : [
+                height: 400,
+                width: size.x,
+                buttons: [
                     {
-                        name    : 'up',
-                        icon    : 'fa fa-angle-up',
+                        name: 'up',
+                        icon: 'fa fa-angle-up',
                         disabled: true,
-                        events  : {
+                        events: {
                             onClick: function () {
                                 this.$Grid.moveup();
                                 this.$refreshSorting();
                             }.bind(this)
                         }
                     }, {
-                        name    : 'down',
-                        icon    : 'fa fa-angle-down',
+                        name: 'down',
+                        icon: 'fa fa-angle-down',
                         disabled: true,
-                        events  : {
+                        events: {
                             onClick: function () {
                                 this.$Grid.movedown();
                                 this.$refreshSorting();
@@ -115,81 +110,81 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                     }, {
                         type: 'separator'
                     }, {
-                        name     : 'add',
+                        name: 'add',
                         textimage: 'fa fa-plus',
-                        text     : QUILocale.get('quiqqer/core', 'add'),
-                        events   : {
+                        text: QUILocale.get('quiqqer/core', 'add'),
+                        events: {
                             onClick: this.$openAddDialog
                         }
                     }, {
                         type: 'separator'
                     }, {
-                        name     : 'edit',
+                        name: 'edit',
                         textimage: 'fa fa-edit',
-                        text     : QUILocale.get('quiqqer/core', 'edit'),
-                        disabled : true,
-                        events   : {
+                        text: QUILocale.get('quiqqer/core', 'edit'),
+                        disabled: true,
+                        events: {
                             onClick: this.$openEditDialog
                         }
                     }, {
-                        name     : 'delete',
+                        name: 'delete',
                         textimage: 'fa fa-trash',
-                        text     : QUILocale.get('quiqqer/core', 'delete'),
-                        disabled : true,
-                        events   : {
+                        text: QUILocale.get('quiqqer/core', 'delete'),
+                        disabled: true,
+                        events: {
                             onClick: this.$openDeleteDialog
                         }
                     }
                 ],
                 columnModel: [
                     {
-                        header   : QUILocale.get(lg, 'quiqqer.bricks.textAndImageMultiple.create.isDisabled.short'),
+                        header: QUILocale.get(lg, 'quiqqer.bricks.textAndImageMultiple.create.isDisabled.short'),
                         dataIndex: 'isDisabledDisplay',
-                        dataType : 'QUI',
-                        width    : 70
+                        dataType: 'QUI',
+                        width: 70
                     }, {
                         dataIndex: 'isDisabled',
-                        hidden   : true
+                        hidden: true
                     }, {
-                        header   : QUILocale.get('quiqqer/core', 'image'),
+                        header: QUILocale.get('quiqqer/core', 'image'),
                         dataIndex: 'imagePreview',
-                        dataType : 'node',
-                        width    : 60
+                        dataType: 'node',
+                        width: 60
                     },
                     {
-                        header   : QUILocale.get('quiqqer/core', 'content'),
+                        header: QUILocale.get('quiqqer/core', 'content'),
                         dataIndex: 'text',
-                        dataType : 'code',
-                        width    : 300
+                        dataType: 'code',
+                        width: 300
                     },
                     {
                         dataIndex: 'newTab',
-                        hidden   : true
+                        hidden: true
                     }, {
                         dataIndex: 'image',
-                        dataType : 'string',
-                        hidden   : true
+                        dataType: 'string',
+                        hidden: true
                     }
                 ]
             });
 
             this.$Grid.addEvents({
                 onClick: function () {
-                    var buttons = this.$Grid.getButtons(),
+                    const buttons = this.$Grid.getButtons(),
 
-                        Edit    = buttons.filter(function (Btn) {
+                        Edit = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'edit';
                         })[0],
 
-                        Up      = buttons.filter(function (Btn) {
+                        Up = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'up';
                         })[0],
 
-                        Down    = buttons.filter(function (Btn) {
+                        Down = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'down';
                         })[0],
 
-                        Delete  = buttons.filter(function (Btn) {
+                        Delete = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'delete';
                         })[0];
 
@@ -230,7 +225,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
             }
 
             // get cell number
-            var row = Caller.getElm().getParent('li').get('data-row');
+            const row = Caller.getElm().getParent('li').get('data-row');
 
             this.$data[row].isDisabled = Caller.getStatus();
             this.update();
@@ -242,7 +237,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
          * @return {Promise}
          */
         resize: function () {
-            var size = this.getElm().getSize();
+            const size = this.getElm().getSize();
 
             return this.$Grid.setWidth(size.x).then(function () {
                 this.$Grid.resize();
@@ -253,13 +248,13 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
          * refresh the display
          */
         refresh: function () {
-            var i, len, entry, insert;
-            var data = [];
+            let i, len, entry, insert;
+            const data = [];
 
             for (i = 0, len = this.$data.length; i < len; i++) {
-                entry  = this.$data[i];
+                entry = this.$data[i];
                 insert = {
-                    image       : '',
+                    image: '',
                     imagePreview: new Element('span', {html: '&nbsp;'})
                 };
 
@@ -267,8 +262,8 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
 
                 insert.isDisabledDisplay = new QUISwitch({
                     status: entry.isDisabled,
-                    name  : i,
-                    uid   : i,
+                    name: i,
+                    uid: i,
                     events: {
                         onChange: this.$toggleSlideStatus
                     }
@@ -293,21 +288,21 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                 data: data
             });
 
-            var buttons = this.$Grid.getButtons(),
+            const buttons = this.$Grid.getButtons(),
 
-                Edit    = buttons.filter(function (Btn) {
+                Edit = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'edit';
                 })[0],
 
-                Up      = buttons.filter(function (Btn) {
+                Up = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'up';
                 })[0],
 
-                Down    = buttons.filter(function (Btn) {
+                Down = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'down';
                 })[0],
 
-                Delete  = buttons.filter(function (Btn) {
+                Delete = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'delete';
                 })[0];
 
@@ -330,9 +325,9 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
          * @param {Object} params
          */
         add: function (params) {
-            var entry = {
-                image     : '',
-                text      : '',
+            const entry = {
+                image: '',
+                text: '',
                 isDisabled: 0,
             };
 
@@ -364,9 +359,9 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                 return;
             }
 
-            var entry = {
-                image     : '',
-                text      : '',
+            const entry = {
+                image: '',
+                text: '',
                 isDisabled: 0
             };
 
@@ -394,13 +389,13 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
          * @param {number|array} index
          */
         del: function (index) {
-            var newList = [];
+            const newList = [];
 
             if (typeOf(index) !== 'array') {
                 index = [index];
             }
 
-            for (var i = 0, len = this.$data.length; i < len; i++) {
+            for (let i = 0, len = this.$data.length; i < len; i++) {
                 if (!index.contains(i)) {
                     newList.push(this.$data[i]);
                 }
@@ -417,7 +412,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
         setProject: function (Project) {
             this.setAttribute('project', Project);
 
-            var controls = QUI.Controls.getControlsInElement(this.getElm());
+            const controls = QUI.Controls.getControlsInElement(this.getElm());
 
             controls.each(function (Control) {
                 if (Control === this) {
@@ -434,14 +429,14 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
          * Refresh the data sorting in dependence of the grid
          */
         $refreshSorting: function () {
-            var gridData = this.$Grid.getData(),
-                data     = [];
+            const gridData = this.$Grid.getData(),
+                data = [];
 
-            for (var i = 0, len = gridData.length; i < len; i++) {
+            for (let i = 0, len = gridData.length; i < len; i++) {
                 data.push({
                     isDisabled: parseInt(gridData[i].isDisabled),
-                    image     : gridData[i].image,
-                    text      : gridData[i].text,
+                    image: gridData[i].image,
+                    text: gridData[i].text,
                 });
             }
 
@@ -460,19 +455,19 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
          */
         $openDeleteDialog: function () {
             new QUIConfirm({
-                icon       : 'fa fa-icon',
-                text       : QUILocale.get(lg, 'quiqqer.bricks.entires.delete.text'),
+                icon: 'fa fa-icon',
+                text: QUILocale.get(lg, 'quiqqer.bricks.entires.delete.text'),
                 information: QUILocale.get(lg, 'quiqqer.bricks.entires.delete.information'),
-                texticon   : false,
-                maxWidth   : 600,
-                maxHeight  : 400,
-                ok_button  : {
-                    text     : QUILocale.get('quiqqer/core', 'delete'),
+                texticon: false,
+                maxWidth: 600,
+                maxHeight: 400,
+                ok_button: {
+                    text: QUILocale.get('quiqqer/core', 'delete'),
                     textimage: 'fa fa-trash'
                 },
-                events     : {
+                events: {
                     onSubmit: function () {
-                        var selected = this.$Grid.getSelectedIndices();
+                        const selected = this.$Grid.getSelectedIndices();
 
                         this.$Grid.deleteRows(selected);
                         this.del(selected);
@@ -488,30 +483,30 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
          * @retrun {Promise}
          */
         $openEditDialog: function () {
-            var self  = this,
-                data  = this.$Grid.getSelectedData(),
+            let self = this,
+                data = this.$Grid.getSelectedData(),
                 index = this.$Grid.getSelectedIndices();
 
             if (!data.length) {
                 return Promise.resolve();
             }
 
-            data  = data[0];
+            data = data[0];
             index = index[0];
 
             return this.$createDialog().then(function (Dialog) {
                 Dialog.addEvent('onSubmit', function () {
                     Dialog.Loader.show();
 
-                    var Content = Dialog.getContent();
-                    var Form    = Content.getElement('form');
+                    const Content = Dialog.getContent();
+                    const Form = Content.getElement('form');
 
-                    var Image       = Form.elements.image;
-                    var Description = Form.elements.description;
+                    const Image = Form.elements.image;
+                    const Description = Form.elements.description;
 
                     self.edit(index, {
-                        image     : Image.value,
-                        text      : Description.value,
+                        image: Image.value,
+                        text: Description.value,
                         isDisabled: Dialog.IsDisabledSwitch.getStatus()
                     });
 
@@ -520,11 +515,11 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
 
 
                 Dialog.addEvent('onOpenAfterCreate', function () {
-                    var Content = Dialog.getContent();
-                    var Form    = Content.getElement('form');
+                    const Content = Dialog.getContent();
+                    const Form = Content.getElement('form');
 
-                    var Image       = Form.elements.image;
-                    var Description = Form.elements.description;
+                    const Image = Form.elements.image;
+                    const Description = Form.elements.description;
 
                     if (data.isDisabled) {
                         Dialog.IsDisabledSwitch.on();
@@ -532,7 +527,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                         Dialog.IsDisabledSwitch.off();
                     }
 
-                    Image.value       = data.image;
+                    Image.value = data.image;
                     Description.value = data.text;
 
                     if (data.newTab && data.newTab.getAttribute('data-enabled') === "1") {
@@ -556,21 +551,21 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
          * @return {Promise}
          */
         $openAddDialog: function () {
-            var self = this;
+            const self = this;
 
             return this.$createDialog().then(function (Dialog) {
                 Dialog.addEvent('onSubmit', function () {
                     Dialog.Loader.show();
 
-                    var Content = Dialog.getContent();
-                    var Form    = Content.getElement('form');
+                    const Content = Dialog.getContent();
+                    const Form = Content.getElement('form');
 
-                    var Image       = Form.elements.image;
-                    var Description = Form.elements.description;
+                    const Image = Form.elements.image;
+                    const Description = Form.elements.description;
 
                     self.add({
-                        image     : Image.value,
-                        text      : Description.value,
+                        image: Image.value,
+                        text: Description.value,
                         isDisabled: Dialog.IsDisabledSwitch.getStatus()
                     });
 
@@ -587,34 +582,34 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
          * @return {Promise}
          */
         $createDialog: function () {
-            var self = this;
+            const self = this;
 
             return new Promise(function (resolve) {
-                var Dialog = new QUIConfirm({
-                    title           : QUILocale.get(lg, 'quiqqer.bricks.entires.adddialog.title'),
-                    icon            : 'fa fa-edit',
-                    maxWidth        : 800,
-                    maxHeight       : 600,
-                    autoclose       : false,
+                const Dialog = new QUIConfirm({
+                    title: QUILocale.get(lg, 'quiqqer.bricks.entires.adddialog.title'),
+                    icon: 'fa fa-edit',
+                    maxWidth: 800,
+                    maxHeight: 600,
+                    autoclose: false,
                     IsDisabledSwitch: false,
-                    NewTabSwitch    : false,
-                    events          : {
+                    NewTabSwitch: false,
+                    events: {
                         onOpen: function (Win) {
                             Win.Loader.show();
                             Win.getContent().set('html', '');
 
 
-                            var prefix    = 'quiqqer.bricks.textAndImageMultiple.settings.createPopup.',
+                            const prefix = 'quiqqer.bricks.textAndImageMultiple.settings.createPopup.',
                                 Container = new Element('div', {
-                                    html   : Mustache.render(templateEntry, {
-                                        fieldIsDisabled : QUILocale.get(lg, prefix + 'disable'),
-                                        fieldImage      : QUILocale.get(lg, prefix + 'image'),
+                                    html: Mustache.render(templateEntry, {
+                                        fieldIsDisabled: QUILocale.get(lg, prefix + 'disable'),
+                                        fieldImage: QUILocale.get(lg, prefix + 'image'),
                                         fieldDescription: QUILocale.get(lg, prefix + 'content'),
                                     }),
                                     'class': 'quiqqer-bricks-promoslider-settings-entry'
                                 }).inject(Win.getContent());
 
-                            var Text = Container.getElement('.field-description');
+                            const Text = Container.getElement('.field-description');
 
                             Text.getParent().setStyles({
                                 height: 100
@@ -622,7 +617,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
 
 
                             Win.IsDisabledSwitch = new QUISwitch({
-                                name  : 'isDisabled',
+                                name: 'isDisabled',
                                 status: false
                             }).inject(Container.getElement('#isDisabledWrapper'))
 
@@ -634,8 +629,8 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
                             QUI.parse(Container).then(function () {
                                 return ControlsUtils.parse(Container);
                             }).then(function () {
-                                var controls = QUI.Controls.getControlsInElement(Container),
-                                    project  = self.getAttribute('project');
+                                const controls = QUI.Controls.getControlsInElement(Container),
+                                    project = self.getAttribute('project');
 
                                 controls.each(function (Control) {
                                     if (Control === self) {
@@ -651,7 +646,7 @@ define('package/quiqqer/bricks/bin/Controls/TextAndImageMultipleSettings', [
 
                                 moofx(Container).animate({
                                     opacity: 1,
-                                    top    : 0
+                                    top: 0
                                 }, {
                                     duration: 250,
                                     callback: function () {

@@ -14,6 +14,7 @@ define('package/quiqqer/bricks/bin/Manager', [
     'Projects',
     'Ajax',
     'package/quiqqer/bricks/bin/Bricks',
+    'package/quiqqer/bricks/bin/AddBrickWindow',
     'Mustache',
 
     'text!package/quiqqer/bricks/bin/Manager.Copy.html',
@@ -21,10 +22,10 @@ define('package/quiqqer/bricks/bin/Manager', [
     'css!package/quiqqer/bricks/bin/Manager.css'
 
 ], function (QUI, QUIPanel, QUISelect, QUIButton, QUISeparator, QUIConfirm, Grid, QUILocale, Projects, Ajax,
-             Bricks, Mustache, templateCopy) {
+             Bricks, AddBrickWindow, Mustache, templateCopy) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
     return new Class({
 
@@ -75,7 +76,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                 return;
             }
 
-            var self = this,
+            const self = this,
                 project = this.$ProjectSelect.getValue(),
                 lang = this.$ProjectLangs.getValue();
 
@@ -86,7 +87,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                     callback();
                 }
 
-                var options = self.$Grid.options,
+                const options = self.$Grid.options,
                     page = parseInt(options.page),
                     perPage = parseInt(options.perPage),
                     start = (page - 1) * perPage;
@@ -106,7 +107,7 @@ define('package/quiqqer/bricks/bin/Manager', [
          * Refresh the buttons status
          */
         refreshButtons: function () {
-            var selected = this.$Grid.getSelectedData(),
+            const selected = this.$Grid.getSelectedData(),
                 AddButton = this.getButtons('brick-add'),
                 EditButton = this.getButtons('brick-edit'),
                 CopyButton = this.getButtons('brick-copy'),
@@ -138,7 +139,7 @@ define('package/quiqqer/bricks/bin/Manager', [
          * event : on create
          */
         $onCreate: function () {
-            var self = this;
+            const self = this;
 
             // Buttons
             this.$ProjectSelect = new QUISelect({
@@ -158,6 +159,19 @@ define('package/quiqqer/bricks/bin/Manager', [
                 }
             });
 
+            const AddBrickWin = new AddBrickWindow({
+                project: this.$ProjectSelect.getValue(),
+                lang: this.$ProjectLangs.getValue()
+            });
+
+            this.$ProjectSelect.addEvent('change', function () {
+                AddBrickWin.options.project = this.$ProjectSelect.getValue();
+            }.bind(this));
+
+            this.$ProjectLangs.addEvent('change', function () {
+                AddBrickWin.options.lang = this.$ProjectLangs.getValue();
+            }.bind(this));
+
             this.addButton(this.$ProjectSelect);
             this.addButton(this.$ProjectLangs);
             this.addButton(new QUISeparator());
@@ -170,7 +184,11 @@ define('package/quiqqer/bricks/bin/Manager', [
                     name: 'brick-add',
                     disabled: true,
                     events: {
-                        onClick: this.$openCreateDialog
+                        onClick: function () {
+                            AddBrickWin.options.project = this.$ProjectSelect.getValue();
+                            AddBrickWin.options.lang = this.$ProjectLangs.getValue();
+                            AddBrickWin.open();
+                        }.bind(this)
                     }
                 })
             );
@@ -203,7 +221,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                     disabled: true,
                     events: {
                         onClick: function () {
-                            var data = self.$Grid.getSelectedData();
+                            const data = self.$Grid.getSelectedData();
 
                             if (data.length === 1) {
                                 self.$openCopyDialog(data[0].id);
@@ -229,7 +247,7 @@ define('package/quiqqer/bricks/bin/Manager', [
             );
 
             // Grid
-            var Container = new Element('div').inject(
+            const Container = new Element('div').inject(
                 this.getContent()
             );
 
@@ -261,7 +279,8 @@ define('package/quiqqer/bricks/bin/Manager', [
                     }
                 ],
                 multipleSelection: true,
-                pagination: true
+                pagination: true,
+                storageKey: true
             });
 
             this.$Grid.addEvents({
@@ -273,7 +292,7 @@ define('package/quiqqer/bricks/bin/Manager', [
             this.Loader.show();
 
             Projects.getList(function (projects) {
-                for (var project in projects) {
+                for (const project in projects) {
                     if (!projects.hasOwnProperty(project)) {
                         continue;
                     }
@@ -321,14 +340,14 @@ define('package/quiqqer/bricks/bin/Manager', [
                 return;
             }
 
-            var Body = this.getContent();
+            const Body = this.getContent();
 
             if (!Body) {
                 return;
             }
 
 
-            var size = Body.getSize();
+            const size = Body.getSize();
 
             this.$Grid.setHeight(size.y - 40);
             this.$Grid.setWidth(size.x - 40);
@@ -354,11 +373,11 @@ define('package/quiqqer/bricks/bin/Manager', [
          * Refresh the project language DropDown
          */
         $refreshProjectLanguages: function () {
-            var self = this,
+            const self = this,
                 activeProject = this.$ProjectSelect.getValue();
 
             Projects.getList(function (projects) {
-                for (var project in projects) {
+                for (const project in projects) {
                     if (!projects.hasOwnProperty(project)) {
                         continue;
                     }
@@ -367,12 +386,12 @@ define('package/quiqqer/bricks/bin/Manager', [
                         continue;
                     }
 
-                    var langs = projects[project].langs;
+                    let langs = projects[project].langs;
                     langs = langs.split(',');
 
                     self.$ProjectLangs.clear();
 
-                    for (var i = 0, len = langs.length; i < len; i++) {
+                    for (let i = 0, len = langs.length; i < len; i++) {
                         self.$ProjectLangs.appendChild(
                             langs[i], langs[i], 'fa fa-home'
                         );
@@ -386,133 +405,10 @@ define('package/quiqqer/bricks/bin/Manager', [
         },
 
         /**
-         * Opens the brick creation dialog
-         */
-        $openCreateDialog: function () {
-            var self = this;
-
-            const CreateDialog = new QUIConfirm({
-                title: QUILocale.get(lg, 'manager.window.create.title'),
-                icon: 'fa fa-th',
-                maxHeight: 300,
-                maxWidth: 400,
-                autoclose: false,
-                events: {
-                    onOpen: function (Win) {
-                        var Body = Win.getContent();
-
-                        Win.Loader.show();
-                        Body.addClass('quiqqer-bricks-create');
-
-                        Body.set(
-                            'html',
-
-                            '<label>' +
-                            '   <span class="quiqqer-bricks-create-label-text">' +
-                            QUILocale.get(lg, 'manager.window.create.label.title') +
-                            '   </span>' +
-                            '   <input type="text" name="title" required="required" />' +
-                            '</label>' +
-                            '<div class="quiqqer-bricks-create-labelWrapper"><label>' +
-                            '   <span class="quiqqer-bricks-create-label-text">' +
-                            QUILocale.get(lg, 'manager.window.create.label.type') +
-                            '   </span>' +
-                            '   <select name="type"></select>' +
-                            '</label>' +
-                            '<button class="qui-button quiqqer-bricks-create-btnCreateFromData" ' +
-                            'title="' + QUILocale.get(lg, 'manager.window.create.btnCreateFromData') + '">' +
-                            '<span class="fa fa-code"></span></button></div>'
-                        );
-
-                        Body.querySelector('.quiqqer-bricks-create-btnCreateFromData').addEventListener('click',
-                            (e) => {
-                                e.preventDefault();
-                                CreateDialog.close();
-                                self.$openCreateDialogFromData();
-                            });
-
-                        Bricks.getAvailableBricks().then(function (bricklist) {
-                            if (!Body) {
-                                return;
-                            }
-
-                            var i, len, group, title, val, text;
-                            var Select = Body.getElement('select'),
-                                Title = Body.getElement('[name="title"]');
-
-                            for (i = 0, len = bricklist.length; i < len; i++) {
-                                title = bricklist[i].title;
-
-                                if ('group' in title) {
-                                    group = title.group;
-                                    val = title.var;
-                                } else {
-                                    group = title[0];
-                                    val = title[1];
-                                }
-
-                                text = QUILocale.get(group, val);
-
-                                if (bricklist[i].deprecated) {
-                                    text = text + ' (deprecated)';
-                                }
-
-                                new Element('option', {
-                                    value: bricklist[i].control,
-                                    html: text
-                                }).inject(Select);
-                            }
-
-                            Title.focus.delay(500, Title);
-
-                            Win.Loader.hide();
-                        });
-                    },
-
-                    onSubmit: function (Win) {
-                        Win.Loader.show();
-
-                        var Body = Win.getContent(),
-                            Title = Body.getElement('[name="title"]'),
-                            Type = Body.getElement('[name="type"]');
-
-                        if (Title.value === '') {
-                            QUI.getMessageHandler(function (MH) {
-                                MH.addError(
-                                    QUILocale.get(lg, 'exception.brick.has.no.title'),
-                                    Title
-                                );
-                            });
-
-                            Title.focus();
-
-                            Win.Loader.hide();
-                            return;
-                        }
-
-                        var project = self.$ProjectSelect.getValue(),
-                            lang = self.$ProjectLangs.getValue(),
-                            data = {
-                                title: Title.value,
-                                type: Type.value
-                            };
-
-                        Bricks.createBrick(project, lang, data).then(function (brickId) {
-                            Win.close();
-                            self.editBrick(brickId);
-                        });
-                    }
-                }
-            });
-
-            CreateDialog.open();
-        },
-
-        /**
          * Opens the brick creation from data dialog.
          */
         $openCreateDialogFromData: function () {
-            var self = this;
+            const self = this;
 
             new QUIConfirm({
                 title: QUILocale.get(lg, 'manager.window.createFromData.title'),
@@ -522,7 +418,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                 autoclose: false,
                 events: {
                     onOpen: function (Win) {
-                        var Body = Win.getContent();
+                        const Body = Win.getContent();
 
                         Win.Loader.show();
                         Body.addClass('quiqqer-bricks-createFromData');
@@ -543,8 +439,8 @@ define('package/quiqqer/bricks/bin/Manager', [
                                         Body.querySelector('textarea').value = text
                                     });
                                 }
-                            )
-                        })
+                            );
+                        });
 
                         Win.Loader.hide();
                     },
@@ -600,7 +496,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                                 return;
                             }
 
-                            var i, len, group, title, val;
+                            let i, len, group, title, val;
 
                             for (i = 0, len = bricklist.length; i < len; i++) {
                                 title = bricklist[i].title;
@@ -633,7 +529,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                                 return;
                             }
 
-                            var allBricks = null,
+                            let allBricks = null,
                                 project = self.$ProjectSelect.getValue(),
                                 lang = self.$ProjectLangs.getValue(),
                                 data = {
@@ -697,7 +593,7 @@ define('package/quiqqer/bricks/bin/Manager', [
          * Opens the delete brick dialog
          */
         $openDeleteDialog: function () {
-            var self = this,
+            const self = this,
                 brickIds = this.$Grid.getSelectedData().map(function (brick) {
                     return brick.id;
                 });
@@ -709,7 +605,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                 title: QUILocale.get(lg, 'manager.window.delete.title'),
                 events: {
                     onOpen: function (Win) {
-                        var Content = Win.getContent(),
+                        let Content = Win.getContent(),
                             lists = '<ul>';
 
                         self.$Grid.getSelectedData().each(function (brick) {
@@ -741,7 +637,7 @@ define('package/quiqqer/bricks/bin/Manager', [
          * opens the copy dialog
          */
         $openCopyDialog: function (brickId) {
-            var self = this;
+            const self = this;
 
             new QUIConfirm({
                 title: QUILocale.get(lg, 'dialog.copy.title', {
@@ -756,7 +652,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                     onOpen: function (Win) {
                         Win.Loader.show();
 
-                        var Content = Win.getContent(),
+                        const Content = Win.getContent(),
                             project = self.$ProjectSelect.getValue(),
                             lang = self.$ProjectLangs.getValue(),
                             Project = Projects.get(project);
@@ -766,13 +662,13 @@ define('package/quiqqer/bricks/bin/Manager', [
                         }));
 
                         Project.getConfig().then(function (config) {
-                            var Select = new QUISelect({
+                            const Select = new QUISelect({
                                 name: 'language-select'
                             });
 
-                            var langs = config.langs.split(',');
+                            const langs = config.langs.split(',');
 
-                            for (var i = 0, len = langs.length; i < len; i++) {
+                            for (let i = 0, len = langs.length; i < len; i++) {
                                 Select.appendChild(
                                     QUILocale.get('quiqqer/core', 'language.' + langs[i]),
                                     langs[i],
@@ -787,7 +683,7 @@ define('package/quiqqer/bricks/bin/Manager', [
                             Select.setValue(lang);
 
                             Bricks.getBrick(brickId).then(function (data) {
-                                var Form = Content.getElement('form');
+                                const Form = Content.getElement('form');
 
                                 Form.elements.title.value = data.attributes.title;
                                 Form.elements.description.value = data.attributes.description;
@@ -800,11 +696,11 @@ define('package/quiqqer/bricks/bin/Manager', [
                     onSubmit: function (Win) {
                         Win.Loader.show();
 
-                        var Content = Win.getContent(),
+                        const Content = Win.getContent(),
                             Form = Content.getElement('form');
 
-                        var Select = Content.getElement('.dialog-bricks-copy-languages [data-quiid]');
-                        var Language = QUI.Controls.getById(Select.get('data-quiid'));
+                        const Select = Content.getElement('.dialog-bricks-copy-languages [data-quiid]');
+                        const Language = QUI.Controls.getById(Select.get('data-quiid'));
 
                         Bricks.copyBrick(brickId, {
                             'lang': Language.getValue(),

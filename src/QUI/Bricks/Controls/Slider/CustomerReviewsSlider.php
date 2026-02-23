@@ -2,7 +2,6 @@
 
 /**
  * This file contains QUI\Bricks\Controls\Slider\CustomerReviewsSlider
- * @author Dominik Chrzanowski
  */
 
 namespace QUI\Bricks\Controls\Slider;
@@ -13,12 +12,13 @@ use function dirname;
 
 /**
  * Class CustomerReviews
- *
- * @package quiqqer/bricks/Controls
  */
 class CustomerReviewsSlider extends QUI\Control
 {
-    public function __construct($attributes = [])
+    /**
+     * @param array<array<string, mixed>> $attributes
+     */
+    public function __construct(array $attributes = [])
     {
         // default options
         $this->setAttributes([

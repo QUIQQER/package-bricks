@@ -49,7 +49,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
                 this.$Elm.setStyles(this.getAttribute('styles'));
             }
 
-            var Container = new Element('div', {
+            const Container = new Element('div', {
                 styles: {
                     height: '100%',
                     width: '100%'
@@ -97,7 +97,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
          * Refresh the data
          */
         refresh: function () {
-            var self = this;
+            const self = this;
 
             this.fireEvent('refreshBegin', [this]);
 
@@ -123,13 +123,13 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
                 return;
             }
 
-            var Body = this.getElm();
+            const Body = this.getElm();
 
             if (!Body) {
                 return;
             }
 
-            var size = Body.getSize();
+            const size = Body.getSize();
 
             this.$Grid.setHeight(size.y);
             this.$Grid.setWidth(size.x);
@@ -148,7 +148,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
          * grid dbl click
          */
         $dblClick: function () {
-            var selected = this.$Grid.getSelectedData();
+            const selected = this.$Grid.getSelectedData();
 
             if (!selected.length) {
                 return;

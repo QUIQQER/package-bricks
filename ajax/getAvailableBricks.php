@@ -10,11 +10,11 @@
  * @return array
  */
 
-QUI::$Ajax->registerFunction(
+QUI::getAjax()->registerFunction(
     'package_quiqqer_bricks_ajax_getAvailableBricks',
     function () {
         $BricksManager = QUI\Bricks\Manager::init();
-        return $BricksManager->getAvailableBricks();
+        return $BricksManager?->getAvailableBricks() ?? [];
     },
     false,
     'Permission::checkAdminUser'

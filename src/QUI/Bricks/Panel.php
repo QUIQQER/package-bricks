@@ -17,8 +17,6 @@ use function trim;
 /**
  * Class Panel
  * - Helper class for the brick panel in the administration
- *
- * @package QUI\Bricks
  */
 class Panel extends QUI\Utils\Singleton
 {
@@ -32,6 +30,9 @@ class Panel extends QUI\Utils\Singleton
     {
         try {
             $BrickManager = QUI\Bricks\Manager::init();
+            if ($BrickManager === null) {
+                return '';
+            }
             $Brick = $BrickManager->getBrickById($brickId);
             $type = $Brick->getAttribute('type');
         } catch (QUI\Exception $Exception) {
@@ -68,13 +69,16 @@ class Panel extends QUI\Utils\Singleton
 
     /**
      * @param integer|string $brickId
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
-    public function getCategoriesFromBrick(int|string $brickId): array
+    public function getCategoriesFromBrick(int | string $brickId): array
     {
         try {
             $BrickManager = QUI\Bricks\Manager::init();
-            $Brick = $BrickManager->getBrickById($brickId);
+            if ($BrickManager === null) {
+                return [];
+            }
+            $Brick = $BrickManager->getBrickById((int)$brickId);
         } catch (QUI\Exception $Exception) {
             QUI\System\Log::addError($Exception->getMessage());
 
@@ -122,7 +126,7 @@ class Panel extends QUI\Utils\Singleton
 
     /**
      * @param Brick $Brick
-     * @return array
+     * @return array<string>
      */
     public function getXMLFilesForBricks(Brick $Brick): array
     {
@@ -137,7 +141,7 @@ class Panel extends QUI\Utils\Singleton
                 $Path = new DOMXPath($Dom);
                 $bricks = $Path->query($path);
 
-                if ($bricks->length) {
+                if ($bricks && $bricks->length) {
                     $result[] = $xmlFile;
                 }
             } catch (QUI\Exception $Exception) {

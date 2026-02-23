@@ -10,15 +10,13 @@ use QUI;
 
 /**
  * Class TextAndImage
- *
- * @package quiqqer/bricks
  */
 class TextAndImage extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {

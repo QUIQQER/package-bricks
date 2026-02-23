@@ -15,16 +15,13 @@ use function class_exists;
 /**
  * Mini contact control
  * {control control="\QUI\Bricks\Controls\SimpleContact" labels=false}
- *
- * @author  www.pcsg.de (Henning Leutz, Michael Danielczok)
- * @licence For copyright and license information, please view the /README.md
  */
 class SimpleContact extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      * @throws QUI\Exception
      */
     public function __construct(array $attributes = [])
@@ -58,12 +55,6 @@ class SimpleContact extends QUI\Control
         }
     }
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @throws QUI\Exception
-     * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
@@ -162,7 +153,6 @@ class SimpleContact extends QUI\Control
 
             if ($PrivacyPolicySite) {
                 $url = $PrivacyPolicySite->getUrlRewrittenWithHost();
-
                 $label = preg_replace(
                     '#\[([^\]]*)\]#i',
                     '<a href="' . $url . '" target="_blank">$1</a>',
@@ -171,13 +161,16 @@ class SimpleContact extends QUI\Control
 
                 $Project = QUI::getRewrite()->getProject();
 
-                $Engine->assign([
-                    'projectName' => $Project->getName(),
-                    'projectLang' => $Project->getLang(),
-                    'siteId' => $PrivacyPolicySite->getId()
-                ]);
+                if ($Project) {
+                    $Engine->assign([
+                        'projectName' => $Project->getName(),
+                        'projectLang' => $Project->getLang(),
+                        'siteId' => $PrivacyPolicySite->getId()
+                    ]);
+                }
             }
 
+            $label = $label ?? '';
             $label = str_replace(['[', ']'], '', $label);
 
             $Engine->assign([
@@ -297,10 +290,13 @@ class SimpleContact extends QUI\Control
      *
      * @return QUI\Projects\Site|false
      */
-    protected function getPrivacyPolicySite(): bool|QUI\Projects\Site
+    protected function getPrivacyPolicySite(): bool | QUI\Projects\Site
     {
         try {
             $Project = QUI::getRewrite()->getProject();
+            if (!$Project) {
+                return false;
+            }
 
             $result = $Project->getSites([
                 'where' => [
@@ -314,7 +310,7 @@ class SimpleContact extends QUI\Control
             return false;
         }
 
-        if (empty($result)) {
+        if (!is_array($result) || empty($result)) {
             return false;
         }
 

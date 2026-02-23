@@ -58,7 +58,7 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown', [
             });
 
             // click events
-            var links = this.$DropDown.getElements(
+            const links = this.$DropDown.getElements(
                 '.quiqqer-control-languageswitch-dropdown-dd-entry'
             );
 
@@ -68,7 +68,7 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown', [
                     return;
                 }
 
-                var href = this.get('href');
+                const href = this.get('href');
 
                 if (href.match(/\?/)) {
                     return;
@@ -76,8 +76,8 @@ define('package/quiqqer/bricks/bin/Controls/LanguageSwitches/DropDown', [
 
                 event.stop();
 
-                var search = window.location.search;
-                var hash = window.location.hash;
+                const search = window.location.search;
+                const hash = window.location.hash;
 
                 window.location = href + search + hash;
             });

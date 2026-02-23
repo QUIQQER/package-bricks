@@ -19,7 +19,7 @@ use QUI\Captcha\Handler as CaptchaHandler;
  *
  * @return array
  */
-QUI::$Ajax->registerFunction(
+QUI::getAjax()->registerFunction(
     'package_quiqqer_bricks_ajax_contact',
     function ($brickId, $project, $siteId, $message, $name, $email, $privacyPolicyAccepted, $captchaResponse = null) {
         // check if email correct
@@ -38,8 +38,10 @@ QUI::$Ajax->registerFunction(
 
         if (!empty($brickId)) {
             $BrickManager = QUI\Bricks\Manager::init();
-            $Brick = $BrickManager->getBrickByID((int)$brickId);
-            $privacyPolicyCheckboxBrick = $Brick->getSetting('showPrivacyPolicyCheckbox');
+            $Brick = $BrickManager?->getBrickByID((int)$brickId);
+            if ($Brick) {
+                $privacyPolicyCheckboxBrick = $Brick->getSetting('showPrivacyPolicyCheckbox');
+            }
         }
 
         $Project = QUI::getProjectManager()->decode($project);

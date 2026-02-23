@@ -1,9 +1,5 @@
 /**
  * QUIQQER Contact Control
- *
- * @author www.pcsg.de (Henning Leutz)
- * @author www.pcsg.de (Michael Danielczok)
- * @module Bricks\Controls\SimpleContact
  */
 define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
 
@@ -17,12 +13,12 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
 ], function (QUI, QUIControl, QUIControlUtils, QUILoader, Ajax, QUILocale) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'Controls/SimpleContact',
+        Type: 'Controls/SimpleContact',
 
         Binds: [
             '$onImport'
@@ -33,9 +29,9 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
 
             this.Loader = new QUILoader();
 
-            this.$Text            = null;
-            this.$Email           = null;
-            this.$Name            = null;
+            this.$Text = null;
+            this.$Email = null;
+            this.$Name = null;
             this.$captchaResponse = false;
             this.$captchaRequired = false;
 
@@ -48,12 +44,12 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
          * event : on import
          */
         $onImport: function () {
-            var self = this;
+            const self = this;
 
             this.Loader.inject(this.$Elm);
             this.Form = this.$Elm.getElement('form');
 
-            var Button = this.Form.getElement('.quiqqer-simple-contact-button');
+            const Button = this.Form.getElement('.quiqqer-simple-contact-button');
 
             if (Button) {
                 Button.addEvent('click', function (event) {
@@ -63,7 +59,7 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                         QUI.getMessageHandler(function (MH) {
                             MH.options.displayTimeMessages = 2000;
 
-                            var CaptchaElm = self.$Elm.getElement('.qui-contact-captcha');
+                            let CaptchaElm = self.$Elm.getElement('.qui-contact-captcha');
 
                             if (!CaptchaElm) {
                                 CaptchaElm = undefined;
@@ -92,12 +88,12 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                 self.send();
             });
 
-            this.$Text  = this.$Elm.getElement('[name="message"]');
+            this.$Text = this.$Elm.getElement('[name="message"]');
             this.$Email = this.$Elm.getElement('[name="email"]');
-            this.$Name  = this.$Elm.getElement('[name="name"]');
+            this.$Name = this.$Elm.getElement('[name="name"]');
 
             // CAPTCHA
-            var CaptchaElm = this.$Elm.getElement(
+            const CaptchaElm = this.$Elm.getElement(
                 'div[data-qui="package/quiqqer/captcha/bin/controls/CaptchaDisplay"]'
             );
 
@@ -141,20 +137,20 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                 return;
             }
 
-            var PrivacyPolicyCheckbox = this.$Elm.getElement('#qui-contact-privacypolicy');
-            var privacyPolicyAccepted = false;
+            let PrivacyPolicyCheckbox = this.$Elm.getElement('#qui-contact-privacypolicy');
+            let privacyPolicyAccepted = false;
 
             if (PrivacyPolicyCheckbox) {
                 privacyPolicyAccepted = PrivacyPolicyCheckbox.checked;
             }
 
-            var self = this;
+            const self = this;
 
             this.Loader.show();
 
             Ajax.post('package_quiqqer_bricks_ajax_contact', function (result) {
                 if (result) {
-                    var html = '<span class="fa fa-check fa-check-simple-contact control-color"></span>';
+                    let html = '<span class="fa fa-check fa-check-simple-contact control-color"></span>';
                     html += QUILocale.get('quiqqer/bricks', 'brick.control.simpleContact.successful');
                     self.Form.set('html', html);
                 }
@@ -162,17 +158,17 @@ define('package/quiqqer/bricks/bin/Controls/SimpleContact', [
                 self.Loader.hide();
 
             }, {
-                'package'            : 'quiqqer/bricks',
-                brickId              : this.$Elm.get('data-brickid'),
-                message              : this.$Text.value,
-                email                : this.$Email.value,
-                name                 : this.$Name.value,
-                showError            : false,
-                project              : JSON.encode(QUIQQER_PROJECT),
-                siteId               : QUIQQER_SITE.id,
+                'package': 'quiqqer/bricks',
+                brickId: this.$Elm.get('data-brickid'),
+                message: this.$Text.value,
+                email: this.$Email.value,
+                name: this.$Name.value,
+                showError: false,
+                project: JSON.encode(QUIQQER_PROJECT),
+                siteId: QUIQQER_SITE.id,
                 privacyPolicyAccepted: privacyPolicyAccepted ? 1 : 0,
-                captchaResponse      : this.$captchaResponse,
-                onError              : function (Exception) {
+                captchaResponse: this.$captchaResponse,
+                onError: function (Exception) {
                     self.Loader.hide();
 
                     QUI.getMessageHandler(function (MH) {

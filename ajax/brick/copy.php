@@ -13,15 +13,19 @@
  *
  * @return array
  */
-QUI::$Ajax->registerFunction(
+QUI::getAjax()->registerFunction(
     'package_quiqqer_bricks_ajax_brick_copy',
     function ($brickId, $params) {
         $BrickManager = QUI\Bricks\Manager::init();
 
-        $newId = $BrickManager->copyBrick(
+        $newId = $BrickManager?->copyBrick(
             $brickId,
             json_decode($params, true)
         );
+
+        if (empty($newId)) {
+            throw new QUI\Exception('Could not copy brick');
+        }
 
         return $BrickManager->getBrickById($newId)->getAttributes();
     },

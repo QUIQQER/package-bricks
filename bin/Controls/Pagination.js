@@ -1,13 +1,6 @@
 /**
  * Ajax pagination
  * Pagination js control for \QUI\Bricks\Controls\Pagination
- *
- * @module package/quiqqer/bricks/bin/Controls/Pagination
- * @author www.pcsg.de (Henning Leutz)
- *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/utils/String
  */
 define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
@@ -22,7 +15,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
     return new Class({
 
         Extends: QUIControl,
-        Type   : 'package/quiqqer/bricks/bin/Controls/Pagination',
+        Type: 'package/quiqqer/bricks/bin/Controls/Pagination',
 
         Binds: [
             '$onImport',
@@ -35,13 +28,13 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             this.parent(options);
 
             this.$Current = null;
-            this.$Select  = null;
+            this.$Select = null;
 
-            this.$Prev    = null;
-            this.$Next    = null;
-            this.$First   = null;
-            this.$Last    = null;
-            this.$sheets  = [];
+            this.$Prev = null;
+            this.$Next = null;
+            this.$First = null;
+            this.$Last = null;
+            this.$sheets = [];
             this.$showMax = 10;
 
             this.$MorePrev = null;
@@ -62,14 +55,14 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
          * event : on import
          */
         $onImport: function () {
-            var i;
+            let i;
 
             this.$Container = this.$Elm.getElement('.quiqqer-sheets-desktop');
-            this.$First     = this.$Elm.getElement('.quiqqer-sheets-first');
-            this.$Prev      = this.$Elm.getElement('.quiqqer-sheets-prev');
-            this.$Last      = this.$Elm.getElement('.quiqqer-sheets-last');
-            this.$Next      = this.$Elm.getElement('.quiqqer-sheets-next');
-            this.$Select    = this.$Elm.getElement('.quiqqer-sheets-mobile select');
+            this.$First = this.$Elm.getElement('.quiqqer-sheets-first');
+            this.$Prev = this.$Elm.getElement('.quiqqer-sheets-prev');
+            this.$Last = this.$Elm.getElement('.quiqqer-sheets-last');
+            this.$Next = this.$Elm.getElement('.quiqqer-sheets-next');
+            this.$Select = this.$Elm.getElement('.quiqqer-sheets-mobile select');
 
             this.$Current = this.$Elm.getElement(
                 '.quiqqer-sheets-desktop-current'
@@ -77,19 +70,19 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
             this.$sheets = this.$Elm.getElements('.quiqqer-sheets-sheet');
 
-            var params = QUIStringUtils.getUrlParams(this.$Last.get('href'));
+            const params = QUIStringUtils.getUrlParams(this.$Last.get('href'));
 
             if (this.$sheets[0]) {
-                var Start    = this.$sheets[0],
+                const Start = this.$sheets[0],
                     dataPage = Start.get('data-page').toInt();
 
                 for (i = 1; i < dataPage; i++) {
                     new Element('a', {
-                        html       : i,
-                        href       : '?sheet=' + i + '&limit=' + params.limit,
-                        'class'    : 'quiqqer-sheets-sheet',
+                        html: i,
+                        href: '?sheet=' + i + '&limit=' + params.limit,
+                        'class': 'quiqqer-sheets-sheet',
                         'data-page': i,
-                        styles     : {
+                        styles: {
                             display: 'none'
                         }
                     }).inject(Start, 'before');
@@ -105,9 +98,9 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
             if (!this.$MorePrev.hasClass('more')) {
                 this.$MorePrev = new Element('span', {
-                    html   : '...',
+                    html: '...',
                     'class': 'more',
-                    styles : {
+                    styles: {
                         display: 'none'
                     }
                 }).inject(this.$Prev, 'after');
@@ -115,32 +108,32 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
 
             if (!this.$MoreNext.hasClass('more')) {
                 this.$MoreNext = new Element('span', {
-                    html   : '...',
+                    html: '...',
                     'class': 'more',
-                    styles : {
+                    styles: {
                         display: 'none'
                     }
                 }).inject(this.$Next, 'before');
             }
 
-            var LastSheet = this.$sheets[this.$sheets.length - 1];
+            const LastSheet = this.$sheets[this.$sheets.length - 1];
 
             if (LastSheet) {
-                var last = LastSheet.get('data-page').toInt();
+                const last = LastSheet.get('data-page').toInt();
 
                 for (i = last + 1; i < this.$lastSheetNumber; i++) {
                     new Element('a', {
-                        html       : i,
-                        href       : '?sheet=' + i + '&limit=' + params.limit,
-                        'class'    : 'quiqqer-sheets-sheet',
+                        html: i,
+                        href: '?sheet=' + i + '&limit=' + params.limit,
+                        'class': 'quiqqer-sheets-sheet',
                         'data-page': i,
-                        styles     : {
+                        styles: {
                             display: 'none'
                         }
                     }).inject(this.$MoreNext, 'before');
                 }
 
-                var lastSize = LastSheet.getSize().x;
+                const lastSize = LastSheet.getSize().x;
 
                 this.$sheets = this.$Elm.getElements('.quiqqer-sheets-sheet');
 
@@ -177,7 +170,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 return;
             }
 
-            var Prev;
+            let Prev;
 
             if (this.$sheets.length) {
                 Prev = this.$sheets[0].getPrevious();
@@ -188,24 +181,24 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             this.$sheets.destroy();
             this.$Select.set('html', '');
 
-            for (var i = 1; i <= pages; i++) {
+            for (let i = 1; i <= pages; i++) {
                 Prev = new Element('a', {
-                    href       : window.location.pathname,
-                    html       : i,
+                    href: window.location.pathname,
+                    html: i,
                     'data-page': i,
-                    'class'    : 'quiqqer-sheets-sheet',
-                    events     : {
+                    'class': 'quiqqer-sheets-sheet',
+                    events: {
                         click: this.$linkclick
                     }
                 }).inject(Prev, 'after');
 
                 new Element('option', {
-                        value      : window.location.pathname,
-                        html       : QUILocale.get(
+                        value: window.location.pathname,
+                        html: QUILocale.get(
                             "quiqqer/bricks",
                             "controls.pagination.mobile.option", {
                                 from: i,
-                                max : pages
+                                max: pages
                             }
                         ),
                         'data-page': i
@@ -221,8 +214,8 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
          * register all js events
          */
         $registerEvents: function () {
-            var self      = this,
-                aElms     = this.$Elm.getElements('a'),
+            const self = this,
+                aElms = this.$Elm.getElements('a'),
                 limitElms = this.$Elm.getElements('.quiqqer-sheets-desktop-limits a');
 
             aElms.addEvent('click', this.$linkclick);
@@ -230,7 +223,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             limitElms.addEvent('click', function (event) {
                 event.stop();
 
-                var Sheet = self.$Current,
+                const Sheet = self.$Current,
                     Query = QUIStringUtils.getUrlParams(Sheet.search);
 
                 Query.limit = event.target.getProperty('data-limit');
@@ -245,7 +238,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
             this.$Select.addEvent('change', function (event) {
                 event.stop();
 
-                var Query = QUIStringUtils.getUrlParams(this.value);
+                const Query = QUIStringUtils.getUrlParams(this.value);
 
                 self.fireEvent('change', [self, this, Query]);
             });
@@ -260,7 +253,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
         $linkclick: function (event) {
             event.stop();
 
-            var Target = event.target;
+            const Target = event.target;
 
             if (Target.hasClass('quiqqer-sheets-first')) {
                 this.first();
@@ -292,8 +285,8 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 return;
             }
 
-            var Sheet = this.$sheets[no];
-            var query = QUIStringUtils.getUrlParams(Sheet.search);
+            const Sheet = this.$sheets[no];
+            const query = QUIStringUtils.getUrlParams(Sheet.search);
 
             if (this.$Current === Sheet) {
                 return;
@@ -316,7 +309,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 return;
             }
 
-            var Sheet = this.$sheets[no];
+            const Sheet = this.$sheets[no];
 
             if (this.$Current === Sheet) {
                 return;
@@ -348,7 +341,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 return;
             }
 
-            var currentPage = this.$Current.get('data-page');
+            const currentPage = this.$Current.get('data-page');
 
             if (currentPage < this.$sheets.length) {
                 this.openPage(currentPage);
@@ -365,7 +358,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 return;
             }
 
-            var currentPage = this.$Current.get('data-page');
+            const currentPage = this.$Current.get('data-page');
 
             if (currentPage - 2) {
                 this.openPage(currentPage - 2);
@@ -396,47 +389,47 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
          * new draw aff the pagination
          */
         $redraw: function () {
-            var elmSize = this.$Container.getSize();
+            const elmSize = this.$Container.getSize();
 
             if (!this.$sheets.length) {
                 return;
             }
 
-            var len     = this.$sheets.length,
+            let len = this.$sheets.length,
                 current = 0;
 
             if (this.$Current) {
-                current = this.$Current.get('data-page').toInt();
+                current = parseInt(this.$Current.get('data-page'));
             }
 
             // we must calc the max sheets
             // calc with last sheets, its the longest
-            var lastSize = this.$Last.getSize().x;
+            let lastSize = this.$Last.getSize().x;
 
             lastSize = lastSize +
-                this.$Last.getStyle('marginRight').toInt() +
-                this.$Last.getStyle('marginLeft').toInt();
+                parseInt(this.$Last.getStyle('marginRight')) +
+                parseInt(this.$Last.getStyle('marginLeft'));
 
             this.$showMax = (elmSize.x / lastSize).floor();
 
-            if (current == 1) {
+            if (current === 1) {
                 this.$showMax = this.$showMax - 5;
             } else {
                 this.$showMax = this.$showMax - 6;
             }
 
-            var leftRight = (this.$showMax / 2).floor(),
-                start     = current - leftRight,
-                end       = current + leftRight;
+            let leftRight = (this.$showMax / 2).floor(),
+                start = current - leftRight,
+                end = current + leftRight;
 
-            if (this.$showMax != end - start) {
+            if (this.$showMax !== end - start) {
                 start = start - (this.$showMax - (end - start));
             }
 
 
             if (start <= 0) {
                 start = -1;
-                end   = this.$showMax;
+                end = this.$showMax;
             }
 
             if (end >= len) {
@@ -447,7 +440,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 start = len - this.$showMax;
             }
 
-            for (var i = 0; i < len; i++) {
+            for (let i = 0; i < len; i++) {
 
                 if (start > i) {
                     this.$sheets[i].setStyle('display', 'none');
@@ -462,7 +455,7 @@ define('package/quiqqer/bricks/bin/Controls/Pagination', [
                 this.$sheets[i].setStyle('display', null);
             }
 
-            if (this.$sheets[0].getStyle('display') == 'none') {
+            if (this.$sheets[0].getStyle('display') === 'none') {
                 this.$MorePrev.setStyle('display', null);
             } else {
                 this.$MorePrev.setStyle('display', 'none');

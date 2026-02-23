@@ -12,13 +12,13 @@
  *
  * @return array
  */
-QUI::$Ajax->registerFunction(
+QUI::getAjax()->registerFunction(
     'package_quiqqer_bricks_ajax_project_getBricks',
     function ($project, $area = false) {
         $Project = QUI::getProjectManager()->decode($project);
         $BrickManager = QUI\Bricks\Manager::init();
 
-        $bricks = $BrickManager->getBricksFromProject($Project);
+        $bricks = $BrickManager?->getBricksFromProject($Project) ?? [];
         $result = [];
 
         foreach ($bricks as $Brick) {

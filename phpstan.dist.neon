@@ -2,15 +2,9 @@ includes:
 	- phpstan-baseline.neon
 
 parameters:
-    level: 5
+    level: 8
     paths:
         - src
         - ajax
     bootstrapFiles:
         - tests/phpstan-bootstrap.php
-    customRulesetUsed: true
-services:
-    -
-        class: \PHPStan\Rules\Properties\TypesAssignedToPropertiesRule
-        tags:
-            - phpstan.rules.rule

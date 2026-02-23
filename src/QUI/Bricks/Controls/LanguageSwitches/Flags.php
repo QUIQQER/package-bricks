@@ -11,17 +11,13 @@ use QUI\Exception;
 
 /**
  * Class LangSwitch
- *
- * @package quiqqer/core
- * @author  www.pcsg.de (Henning Leutz)
- * @licence For copyright and license information, please view the /README.md
  */
 class Flags extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -45,10 +41,7 @@ class Flags extends QUI\Control
     }
 
     /**
-     * (non-PHPdoc)
-     *
      * @throws Exception
-     * @see \QUI\Control::create()
      */
     public function getBody(): string
     {
@@ -87,6 +80,10 @@ class Flags extends QUI\Control
             return $this->getAttribute('Site');
         }
 
-        return QUI::getRewrite()->getSite();
+        if (QUI::getRewrite()->getSite() instanceof QUI\Interfaces\Projects\Site) {
+            return QUI::getRewrite()->getSite();
+        }
+
+        throw new Exception('Site not found');
     }
 }

@@ -11,25 +11,23 @@ use function str_replace;
 
 /**
  * Class Accordion
- *
- * @package quiqqer/bricks
  */
 class Accordion extends QUI\Control
 {
     /**
      * [
-     *   'entryTitle'   => string,
+     *   'entryTitle' => string,
      *   'entryContent' => string
      * ]
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected array $entries = [];
 
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -52,9 +50,6 @@ class Accordion extends QUI\Control
         );
     }
 
-    /**
-     * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();

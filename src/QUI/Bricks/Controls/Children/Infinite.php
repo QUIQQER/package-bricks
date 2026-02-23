@@ -11,14 +11,13 @@ use QUI\Database\Exception;
 
 /**
  * Class Infinite
- * @package QUI\Bricks\Controls\Children
  */
 class Infinite extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<array<string, mixed>> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -49,11 +48,6 @@ class Infinite extends QUI\Control
         );
     }
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
@@ -146,7 +140,7 @@ class Infinite extends QUI\Control
      * Return the children
      *
      * @param int $start
-     * @return array
+     * @return array<int, array<string, mixed>>
      * @throws Exception
      */
     protected function getChildren(int $start = 0): array
@@ -185,7 +179,7 @@ class Infinite extends QUI\Control
      * Return the children of the row
      *
      * @param integer $row
-     * @return array
+     * @return array<int, array<string, mixed>>
      * @throws Exception
      */
     public function getRow(int $row): array

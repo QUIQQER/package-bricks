@@ -69,10 +69,10 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
          * event : on import
          */
         $onImport: function () {
-            var self = this,
+            const self = this,
                 Elm = this.getElm();
 
-            var desktopSlides = Elm.getElements('.quiqqer-bricks-promoslider-slide'),
+            const desktopSlides = Elm.getElements('.quiqqer-bricks-promoslider-slide'),
                 mobileSlides = Elm.getElements('.quiqqer-bricks-promoslider-slide-mobile-slide');
 
             this.$FX = moofx(Elm);
@@ -106,7 +106,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 }.bind(this));
             }
 
-            var click = function (event) {
+            const click = function (event) {
                 if (self.$Timer) {
                     clearInterval(self.$Timer);
                 }
@@ -114,7 +114,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 self.show(event.target.get('data-no'));
             };
 
-            var i, len, Dot;
+            let i, len, Dot;
 
             for (i = 0, len = desktopSlides.length; i < len; i++) {
                 Dot = new Element('div', {
@@ -218,9 +218,9 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                     return resolve();
                 }
 
-                var Prom = Promise.resolve(1);
-                var winSize = QUI.getWindowSize();
-                var pagefit = this.getAttribute('pagefitcut');
+                let Prom = Promise.resolve(1);
+                const winSize = QUI.getWindowSize();
+                let pagefit = this.getAttribute('pagefitcut');
 
                 if (winSize.x <= 768 && this.$mobile === false ||
                     winSize.x > 768 && this.$mobile === true
@@ -292,7 +292,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 return Promise.resolve();
             }
 
-            var Elm = this.getElm(),
+            let Elm = this.getElm(),
                 Current = null;
 
             if (this.$mobile) {
@@ -306,7 +306,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
             }
 
 
-            var slideNo = Current.get('data-no');
+            let slideNo = Current.get('data-no');
 
             slideNo--;
 
@@ -329,7 +329,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 return Promise.resolve();
             }
 
-            var Elm = this.getElm(),
+            let Elm = this.getElm(),
                 slides = [],
                 Current = null;
 
@@ -356,7 +356,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 return;
             }
 
-            var slideNo = Current.get('data-no');
+            let slideNo = Current.get('data-no');
 
             if (slideNo >= slides.length - 1) {
                 slideNo = 0;
@@ -402,7 +402,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
 
 
             return new Promise(function (resolve) {
-                var cls, Current;
+                let cls, Current;
 
                 if (this.$mobile) {
                     cls = '.quiqqer-bricks-promoslider-slide-mobile-sl' + slideNo;
@@ -410,7 +410,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                     cls = '.quiqqer-bricks-promoslider-sl' + slideNo;
                 }
 
-                var Slide = this.getElm().getElement(cls);
+                const Slide = this.getElm().getElement(cls);
 
                 if (this.$mobile) {
                     if (typeof this.$mobiledots[slideNo] !== 'undefined') {
@@ -453,7 +453,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
          */
         $normalizeDots: function () {
             return new Promise(function (resolve) {
-                var i, len;
+                let i, len;
 
                 for (i = 0, len = this.$desktopdots.length; i < len; i++) {
                     this.$desktopdots[i].removeClass(
@@ -478,7 +478,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
          * @return {Promise}
          */
         $hideSheetToLeft: function (Sheet) {
-            var Image, Header, Text;
+            let Image, Header, Text;
 
             if (this.$mobile) {
                 Image = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-image');
@@ -506,7 +506,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
          * @return {Promise}
          */
         $showSheetFromRight: function (Sheet) {
-            var Image, Header, Text;
+            let Image, Header, Text;
 
             if (this.$mobile) {
                 Image = Sheet.getElement('.quiqqer-bricks-promoslider-slide-mobile-image');
@@ -553,12 +553,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 return Promise.resolve();
             }
 
-            var effectduration = this.getAttribute('effectduration');
+            const effectduration = this.getAttribute('effectduration');
 
             return new Promise(function (resolve) {
                 (function () {
                     if (Node.getStyle('position') === 'absolute') {
-                        var oldPos = Node.getStyle('left').toInt();
+                        const oldPos = Node.getStyle('left').toInt();
 
                         moofx(Node).animate({
                             left: oldPos - 50,
@@ -603,12 +603,12 @@ define('package/quiqqer/bricks/bin/Controls/Slider/Promoslider', [
                 return Promise.resolve();
             }
 
-            var effectduration = this.getAttribute('effectduration');
+            const effectduration = this.getAttribute('effectduration');
 
             return new Promise(function (resolve) {
                 (function () {
                     if (Node.getStyle('position') === 'absolute') {
-                        var origLeft = Node.getStyle('left').toInt();
+                        const origLeft = Node.getStyle('left').toInt();
 
                         Node.setStyle('left', origLeft + 50);
 

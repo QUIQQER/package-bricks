@@ -8,7 +8,7 @@
  * @return String
  */
 
-QUI::$Ajax->registerFunction(
+QUI::getAjax()->registerFunction(
     'package_quiqqer_bricks_ajax_getPanelCategory',
     function ($brickId, $category) {
         return QUI\Bricks\Panel::getInstance()->getCategoryFromBrick($brickId, $category);

@@ -1,0 +1,638 @@
+.qui-window-popup-title-close {
+    opacity: 0.5;
+}
+
+.qui-window-popup .qui-window-popup-title-close:hover {
+    opacity: 1;
+    background-color: transparent !important;
+}
+
+.qui-addBrick-container {
+    --aside-inline-padding: 1.5rem;
+    --aside-block-padding: 1rem;
+    --borderRadius: 0.75rem;
+    --line: #e6eaf2;
+    --input-height: 2.5rem;
+    --input-borderColor: #d1d5de;
+    --input-borderRadius: 0.75rem;
+    --input-color: #0f172a;
+    --input-borderColor--hover: #b4b8c0;
+    --muted: #64748b;
+
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 450px 1fr;
+    min-height: 0;
+    height: 100%;
+}
+
+/**
+ * Basic btn styling
+ * Can be removed once QUIQQER provides this as base styling.
+ */
+.qui-addBrick-container .btn {
+    --color: var(--qui-btn-color, inherit);
+    --background-color: var(--qui-btn-bgColor, transparent);
+    --border-color: var(--qui-btn-borderColor, transparent);
+    --color--hover: var(--qui-btn-color--hover, inherit);
+    --background-color--hover: var(--qui-btn-bgColor--hover, transparent);
+    --border-color--hover: var(--qui-btn-borderColor--hover, transparent);
+
+    color: var(--color);
+    background-color: var(--background-color);
+    border-color: var(--border-color);
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    font-weight: normal;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 0.5em;
+    transition: 0.2s ease;
+
+    text-align: center;
+    user-select: none;
+
+    padding: 0.5em 1em;
+    font-size: 1em;
+    line-height: 1.25;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.qui-addBrick-container .btn:hover,
+.qui-addBrick-container .btn:active {
+    color: var(--color--hover);
+    background-color: var(--background-color--hover);
+    border-color: var(--border-color--hover);
+    outline: none;
+    text-decoration: none;
+}
+
+.qui-addBrick-container .btn-success {
+    --color: #fff;
+    --background-color: #28a745;
+    --border-color: #28a745;
+    --color--hover: #fff;
+    --background-color--hover: color-mix(in srgb, #28a745, black 10%);
+    --border-color--hover: color-mix(in srgb, #28a745, black 10%);
+}
+
+.qui-addBrick-container .btn-light {
+    --color: #333;
+    --background-color: #e5e5e5;
+    --border-color: #e5e5e5;
+    --color--hover: #333;
+    --background-color--hover: color-mix(in srgb, #e5e5e5, black 10%);
+    --border-color--hover: color-mix(in srgb, #e5e5e5, black 10%);
+}
+
+.qui-addBrick-container .btn-light-outline {
+    --color: #333;
+    --background-color: transparent;
+    --border-color: #e6eaf2;
+    --color--hover: #333;
+    --background-color--hover: transparent;
+    --border-color--hover: color-mix(in srgb, #e6eaf2, black 10%);
+}
+
+.qui-addBrick-container .btn-primary {
+    --color: #fff;
+    --background-color: #2563eb;
+    --border-color: #2563eb;
+    --color--hover: #fff;
+    --background-color--hover: color-mix(in srgb, #2563eb, black 10%);
+    --border-color--hover: color-mix(in srgb, #2563eb, black 10%);
+}
+
+.qui-addBrick__aside .badge-sm {
+    font-size: clamp(10px, 0.65em, 1rem);
+}
+
+/**
+ * Left top
+ */
+.qui-addBrick__aside {
+    border-right: 1px solid var(--line);
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.qui-addBrick__aside .header {
+    margin-top: 1rem;
+    padding: var(--aside-block-padding) var(--aside-inline-padding);
+    border-bottom: 1px solid var(--line);
+}
+
+.qui-addBrick__aside .header .title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-bottom: 0.25em;
+}
+
+.qui-addBrick__aside .header .desc {
+    font-size: 0.875rem;
+    color: var(--muted)
+}
+
+.qui-addBrick__aside .top {
+    padding: var(--aside-block-padding) var(--aside-inline-padding);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.qui-addBrick__aside .toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.qui-addBrick__aside .toolbar .btn--import {
+    height: var(--input-height);
+    border-radius: var(--input-borderRadius);
+    --border-color: var(--input-borderColor);
+    --border-color--hover: var(--input-borderColor--hover);
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    padding-inline: 0;
+}
+
+.qui-addBrick__aside .toolbar .search {
+    flex: 1;
+    position: relative;
+    flex-basis: 200px;
+    flex-shrink: 0;
+}
+
+.qui-addBrick__aside .toolbar input {
+    width: 100%;
+    height: var(--input-height);
+    padding: 0 12px 0 36px;
+    border-radius: var(--input-borderRadius);
+    border: 1px solid var(--input-borderColor);
+    background: #fff;
+    outline: none;
+    color: var(--input-color);
+}
+
+.qui-addBrick__aside .toolbar input:focus {
+    border-color: rgba(37, 99, 235, .45);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.qui-addBrick__aside .toolbar input::placeholder {
+    color: #94a3b8
+}
+
+.qui-addBrick__aside .toolbar .search .icon-search {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: .7;
+    z-index: 1;
+}
+
+.qui-addBrick__aside .toolbar select {
+    height: var(--input-height);
+    border-radius: var(--input-borderRadius);
+    border: 1px solid var(--input-borderColor);
+    background: #fff;
+    padding: 0 10px;
+    cursor: pointer;
+    color: var(--input-color);
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.qui-addBrick__aside .toolbar select:hover,
+.qui-addBrick__aside .toolbar input:hover {
+    border-color: var(--input-borderColor--hover);
+}
+
+.qui-addBrick__aside .filterHint {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 12px;
+    gap: 10px;
+}
+
+.qui-addBrick__aside .filterHint [data-name="selected-package"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 1.8em;
+}
+
+.qui-addBrick__aside .filterHint [data-name="selected-package"]:empty::before {
+    content: '';
+    display: inline-block;
+    height: 1.8em;
+}
+
+.qui-addBrick-container--overlay-open {
+    overflow: hidden;
+}
+
+.qui-addBrick-container--overlay-open .qui-addBrick__aside,
+.qui-addBrick-container--overlay-open .qui-addBrick__main {
+    pointer-events: none;
+}
+
+.qui-addBrick-container--overlay-open .qui-addBrick-overlay {
+    pointer-events: auto;
+}
+
+.qui-addBrick-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.25);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 9; /* qui loader has z-index: 10 */
+}
+
+.qui-addBrick-dialog {
+    width: min(520px, 100%);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    box-shadow: 0 20px 60px rgba(2, 6, 23, 0.25);
+    padding: 1.25rem;
+}
+
+.qui-addBrick-dialog--import {
+    width: min(780px, 100%);
+}
+
+.qui-addBrick-dialog--import textarea {
+    min-height: 240px;
+}
+
+.qui-addBrick-dialog--import .qui-addBrick-dialog__desc {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.qui-addBrick-import__descText {
+    color: var(--muted);
+    font-size: clamp(13px, 0.875em, 0.875rem);
+    line-height: 1.35;
+}
+
+.qui-addBrick-import__pasteBtn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.qui-addBrick-import__options {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.qui-addBrick-import__option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    line-height: 1.3;
+}
+
+.qui-addBrick-import__option input[type="checkbox"] {
+    margin-top: 2px;
+}
+
+.qui-addBrick-import__attention {
+    margin-top: 1rem;
+}
+
+.qui-addBrick-dialog__title {
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.qui-addBrick-dialog__desc {
+    color: var(--muted);
+    font-size: clamp(13px, 0.875em, 0.875rem);
+    margin-bottom: 2rem;
+}
+
+.qui-addBrick-dialog input[type="text"] {
+    width: 100%;
+    height: var(--input-height);
+    padding: 0 12px;
+    border-radius: var(--input-borderRadius);
+    border: 1px solid var(--input-borderColor);
+    background: #fff;
+    outline: none;
+    color: var(--input-color);
+}
+
+.qui-addBrick-dialog textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--input-borderRadius);
+    border: 1px solid var(--input-borderColor);
+    background: #fff;
+    outline: none;
+    color: var(--input-color);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    resize: vertical;
+}
+
+.qui-addBrick-dialog input[type="text"]:focus {
+    border-color: rgba(37, 99, 235, .45);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.qui-addBrick-dialog textarea:focus {
+    border-color: rgba(37, 99, 235, .45);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.qui-addBrick-dialog__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+/**
+ * List
+ */
+.qui-addBrick__list {
+    padding: var(--aside-block-padding) calc(var(--aside-inline-padding) - 10px);
+    overflow: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: #fff;
+    flex-grow: 1;
+}
+
+.qui-addBrick__item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0.75rem;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background: #fff;
+    cursor: pointer;
+    transition: .15s ease;
+    align-items: start;
+}
+
+.qui-addBrick__item:hover {
+    background: #f7f9ff;
+    border-color: #e8edfb;
+}
+
+.qui-addBrick__item[aria-current="true"] {
+    background: linear-gradient(180deg, rgba(37, 99, 235, .10), rgba(37, 99, 235, .05));
+    border-color: rgba(37, 99, 235, .35);
+}
+
+.qui-addBrick__item .thumb {
+    width: 100%;
+    aspect-ratio: 3/2;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #f1f5f9;
+    position: relative;
+}
+
+.qui-addBrick__item .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: inherit;
+}
+
+.qui-addBrick__item .meta {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.qui-addBrick__item .name {
+    font-weight: bold;
+}
+
+.qui-addBrick__item .desc {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.25;
+    margin-top: 0.25em;
+}
+
+/**
+ * Recommended brick
+ */
+.qui-addBrick__item[data-recommended="1"]:hover {
+    background-color: #fffae0;
+    border-color: #efe5b4;
+}
+
+.qui-addBrick__item[data-recommended="1"]:hover .desc {
+    color: #000000cc;
+}
+
+/* active */
+.qui-addBrick__item[data-recommended="1"][aria-current="true"] {
+    background: linear-gradient(180deg, #ffebb0, #f9f2cf);
+    border-color: #f5d638;
+}
+
+.qui-addBrick__item[data-recommended="1"][aria-current="true"] .desc {
+    color: #000000cc;
+}
+
+/**
+ * Deprecated
+ */
+.qui-addBrick__list[data-show-deprecated="0"] [data-deprecated="1"] {
+    display: none !important
+}
+
+.qui-addBrick__item[data-deprecated="1"]:hover {
+    background-color: #fff9f9;
+    border-color: #ffcbcb;
+}
+
+.qui-addBrick__item[data-deprecated="1"]:hover .desc {
+    color: #000000cc;
+}
+
+
+.qui-addBrick__item[data-deprecated="1"][aria-current="true"] {
+    background: linear-gradient(180deg, #ffd0d0, #fae8e8);
+    border-color: #f1a6a6;
+}
+
+.qui-addBrick__item[data-deprecated="1"][aria-current="true"] .desc {
+    color: #000000cc;
+}
+
+
+/**
+ * Empty - no item found
+ */
+.qui-addBrick-empty {
+    font-size: 1.25rem;
+    font-weight: normal;
+    opacity: 0.4;
+    color: var(--muted);
+    padding: 1rem;
+    pointer-events: none;
+}
+
+.qui-addBrick-empty .inner {
+    width: min(250px, 100%);
+    margin-inline: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 3rem;
+}
+
+.qui-addBrick-empty .fa {
+    opacity: 0.25;
+    font-size: 5rem;
+}
+
+/**
+ * Aside footer
+ */
+.qui-addBrick__asideFooter {
+    padding: 0.5rem calc(var(--aside-inline-padding) - 10px);
+    border-top: 1px solid var(--line);
+}
+
+.qui-addBrick__asideFooter .toggle {
+    color: var(--muted);
+    display: flex;
+    gap: 0.5em;
+    font-size: 12px;
+    align-items: center;
+    user-select: none;
+}
+
+/**
+ * Main
+ */
+.qui-addBrick__main {
+    border-right: 1px solid var(--line);
+    background: #fbfcff;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.qui-addBrick__main .brickDetails {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.qui-addBrick__main .brickDetails__top {
+    padding: 3rem 3rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: baseline;
+}
+
+.qui-addBrick__main .brickDetails__content {
+    padding: 0 3rem 2rem;
+    overflow: auto;
+}
+
+.qui-addBrick__main .brickDetails__top .title {
+    margin-bottom: 0.5em;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.qui-addBrick__main .brickDetails-top__action {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.qui-addBrick__main .brickDetails__hero {
+    aspect-ratio: 3/2;
+    border-radius: 1rem;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    background: #f1f5f9;
+}
+
+.qui-addBrick__main .brickDetails__hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: inherit;
+}
+
+.qui-addBrick__main .section {
+    margin-top: 1.5rem;
+}
+
+.qui-addBrick__main .section-label {
+    font-size: clamp(12px, 0.875rem, 1rem);
+    color: #8fa1bb;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.qui-addBrick__main [data-name="details-section-package"] {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.qui-addBrick__main [data-name="detail-control"] {
+    font-family: monospace;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #888;
+    letter-spacing: 1px;
+    background: #f3f3f3;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+}

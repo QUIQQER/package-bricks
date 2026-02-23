@@ -10,15 +10,13 @@ use QUI;
 
 /**
  * Class SimpleGoogleMaps
- *
- * @package quiqqer/bricks
  */
 class SimpleGoogleMaps extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -34,11 +32,6 @@ class SimpleGoogleMaps extends QUI\Control
         parent::__construct($attributes);
     }
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();

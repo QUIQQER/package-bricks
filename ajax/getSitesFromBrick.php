@@ -10,12 +10,16 @@
 
 use QUI\Projects\Site;
 
-QUI::$Ajax->registerFunction(
+QUI::getAjax()->registerFunction(
     'package_quiqqer_bricks_ajax_getSitesFromBrick',
     function ($brickId, $options) {
         $options = json_decode($options, true);
         $Bricks = QUI\Bricks\Manager::init();
-        $Brick = $Bricks->getBrickById($brickId);
+        $Brick = $Bricks?->getBrickById($brickId);
+
+        if (!$Brick) {
+            return (new QUI\Utils\Grid())->parseResult([], 0);
+        }
 
         $sites = $Bricks->getSitesByBrick($Brick);
         $result = array_map(function ($Site) {

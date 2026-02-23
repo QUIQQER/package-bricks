@@ -36,7 +36,7 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
          * event: on import
          */
         $onImport: function () {
-            var Wrapper = new Element('span', {
+            const Wrapper = new Element('span', {
                 id: 'ToggleMobileSlidesSettingWrapper'
             });
 
@@ -66,20 +66,18 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
             this.toggleMobileSlidesSettingVisibility();
         },
 
-
         /**
          * Returns the setting-section containing a mobileslides-settings
          *
          * @return {HTMLElement | null}
          .*/
         getMobileSlidesSettingElement: function () {
-            var SlideSettingsElement = this.getElm().getParent('table').getElement('[name="mobileslides"]');
+            const SlideSettingsElement = this.getElm().getParent('table').getElement('[name="mobileslides"]');
 
             if (SlideSettingsElement) {
                 return SlideSettingsElement.getParent('label');
             }
         },
-
 
         /**
          * Hides the mobileslides-setting-section (CSS "visibility" and "display")
@@ -95,7 +93,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
             });
         },
 
-
         /**
          * Shows the mobileslides-setting-section (CSS "visibility" and "display")
          */
@@ -109,7 +106,6 @@ define('package/quiqqer/bricks/bin/Controls/Slider/ToggleMobileSlidesSetting', [
                 display: null
             });
         },
-
 
         /**
          * Toggles the mobileslides-setting-section visibility (CSS "visibility" and "display")

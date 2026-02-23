@@ -32,10 +32,7 @@ use function trim;
 
 /**
  * Class Brick
- * A Brick from the Brickmanager
- *
- * @author  www.pcsg.de (Henning Leutz)
- * @package quiqqer/bricks
+ * A Brick from the Brick-Manager
  */
 class Brick extends QUI\QDOM
 {
@@ -44,7 +41,7 @@ class Brick extends QUI\QDOM
      *
      * @var int|bool
      */
-    protected int|bool $id = false;
+    protected int | bool $id = false;
 
     /**
      * internal unique ID
@@ -55,14 +52,14 @@ class Brick extends QUI\QDOM
     /**
      * Brick settings
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected array $settings = [];
 
     /**
      * Fields can be overwritten by another user
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected array $customfields = [];
 
@@ -74,9 +71,9 @@ class Brick extends QUI\QDOM
     protected ?Control $Control = null;
 
     /**
-     * List of extra css classes
+     * List of extra CSS classes
      *
-     * @var array
+     * @var array<string>
      */
     protected array $cssClasses = [];
 
@@ -88,7 +85,7 @@ class Brick extends QUI\QDOM
     /**
      * Constructor
      *
-     * @param array $params - brick params
+     * @param array<string, mixed> $params - brick params
      * @throws QUI\Exception
      */
     public function __construct(array $params = [])
@@ -107,6 +104,7 @@ class Brick extends QUI\QDOM
             'classes' => '',
             'frontendTitle' => '',
             'hasContent' => 1,
+            'recommended' => 0,
             'cacheable' => 1, // if the brick is cacheable or not
             'deprecated' => 0
         ];
@@ -149,9 +147,9 @@ class Brick extends QUI\QDOM
         $Control = $this->getControl();
         $Manager = Manager::init();
 
-        $availableSettings = $Manager->getAvailableBrickSettingsByBrickType(
-            $this->getAttribute('type')
-        );
+        $availableSettings = $Manager?->getAvailableBrickSettingsByBrickType(
+            (string)$this->getAttribute('type')
+        ) ?? [];
 
         foreach ($availableSettings as $entry) {
             $this->settings[$entry['name']] = false;
@@ -209,7 +207,8 @@ class Brick extends QUI\QDOM
         $BricksManager = QUI\Bricks\Manager::init();
         $type = $this->getAttribute('type');
 
-        $brick = array_filter($BricksManager->getAvailableBricks(), function ($brick) use ($type) {
+        $brickList = $BricksManager?->getAvailableBricks() ?? [];
+        $brick = array_filter($brickList, function ($brick) use ($type) {
             if (!isset($brick['control'])) {
                 return false;
             }
@@ -264,7 +263,7 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * Check, if control can be created
+     * Check if control can be created
      *
      * @return QUI\Bricks\Brick
      * @throws QUI\Exception
@@ -450,10 +449,10 @@ class Brick extends QUI\QDOM
     /**
      * Return the internal control
      *
-     * @return Control|bool|null
+     * @return Control|false|null
      * @throws QUI\Exception
      */
-    protected function getControl(): Control|bool|null
+    protected function getControl(): Control | false | null
     {
         if ($this->Control) {
             return $this->Control;
@@ -462,7 +461,7 @@ class Brick extends QUI\QDOM
         $Ctrl = $this->getAttribute('type');
 
         if ($Ctrl === 'content') {
-            return true;
+            return false;
         }
 
         if (!is_callable($Ctrl) && !class_exists($Ctrl)) {
@@ -471,19 +470,34 @@ class Brick extends QUI\QDOM
 
         $Site = $this->getAttribute('Site');
 
-        if ($Site instanceof QUI\Projects\Site) {
+        if ($Site instanceof QUI\Projects\Site && is_string($Ctrl)) {
             $Project = $Site->getProject();
+            $BricksManager = QUI\Bricks\Manager::init();
 
-            $Ctrl = QUI\Bricks\Manager::init()->getAlternateClass(
+            if ($BricksManager === null) {
+                return false;
+            }
+
+            $template = $Project->getAttribute('template');
+
+            $Ctrl = $BricksManager->getAlternateClass(
                 $Ctrl,
-                $Project->getAttribute('template')
+                is_string($template) ? $template : false
             );
+        }
+
+        if (!is_string($Ctrl)) {
+            return false;
         }
 
         /* @var $Control Control */
         $Control = new $Ctrl(
             array_merge($this->getSettings(), $this->getAttributes())
         );
+
+        if (!($Control instanceof Control)) {
+            return false;
+        }
 
         $Control->setAttribute('height', $this->getAttribute('height'));
         $Control->setAttribute('width', $this->getAttribute('width'));
@@ -493,11 +507,6 @@ class Brick extends QUI\QDOM
             $Control->setAttribute('Site', $this->getAttribute('Site'));
         } else {
             $Control->setAttribute('Site', QUI::getRewrite()->getSite());
-        }
-
-
-        if (!($Control instanceof Control)) {
-            return false;
         }
 
         $this->Control = $Control;
@@ -512,7 +521,7 @@ class Brick extends QUI\QDOM
     /**
      * Return the brick settings
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getSettings(): array
     {
@@ -524,7 +533,7 @@ class Brick extends QUI\QDOM
     /**
      * Set brick settings
      *
-     * @param array $settings - list of settings
+     * @param array<string, mixed> $settings - list of settings
      *
      * @return void
      */
@@ -543,11 +552,11 @@ class Brick extends QUI\QDOM
     /**
      * Return the setting of the brick
      *
-     * @param String $name - Name of the setting
+     * @param string $name - Name of the setting
      *
-     * @return boolean|string|array
+     * @return bool|string|array<string, mixed>
      */
-    public function getSetting(string $name): bool|array|string
+    public function getSetting(string $name): bool | array | string
     {
         if ($name === 'classes') {
             return $this->getCSSClasses();
@@ -593,7 +602,7 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function getAttributes(): array
     {
@@ -604,9 +613,7 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * This fields can be overwritten by another user
-     *
-     * @return array
+     * @return array<string>
      */
     public function getCustomFields(): array
     {
@@ -616,18 +623,14 @@ class Brick extends QUI\QDOM
     /**
      * Add an extra CSS Class to the control
      *
-     * @param array|string $cssClass - Name of the CSS Class
+     * @param array<string> $cssClass - Name of the CSS Class
      *
      * @return void
      */
-    public function addCSSClass(array|string $cssClass): void
+    public function addCSSClass(array | string $cssClass): void
     {
         if (is_array($cssClass)) {
             $cssClass = implode(' ', $cssClass);
-        }
-
-        if (!is_string($cssClass)) {
-            return;
         }
 
         if (empty($cssClass)) {
@@ -648,7 +651,7 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * Remove all css classes
+     * Remove all CSS classes
      */
     public function clearCSSClasses(): void
     {
@@ -656,9 +659,9 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * Return all css classes
+     * Return all CSS classes
      *
-     * @return array
+     * @return array<string>
      */
     public function getCSSClasses(): array
     {
@@ -666,7 +669,7 @@ class Brick extends QUI\QDOM
     }
 
     /**
-     * Match pattern against the css classes
+     * Match pattern against the CSS classes
      *
      * @param string $pattern - The shell wildcard pattern.
      *

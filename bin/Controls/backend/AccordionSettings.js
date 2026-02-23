@@ -11,7 +11,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/AccordionSettings', [
 ], function (QUIFormList, QUIControls, QUILocale, Mustache, template) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
     return new Class({
 
@@ -75,18 +75,18 @@ define('package/quiqqer/bricks/bin/Controls/backend/AccordionSettings', [
          * @returns {Promise}
          */
         $executeParsing: function (Node) {
-            var self = this;
+            const self = this;
 
             return QUIControls.parse(Node).then(function () {
                 // Element is fully parsed so we can finally show it
                 Node.getElements('.quiqqer-bricks-accordion-entry').show();
                 self.getElm().addClass('qui-controls-formlist-accordion');
 
-                var inputEditors = Node.getElements('[data-qui="controls/editors/Input"]').map(function (InnerNode) {
+                const inputEditors = Node.getElements('[data-qui="controls/editors/Input"]').map(function (InnerNode) {
                     return QUI.Controls.getById(InnerNode.get('data-quiid'));
                 });
 
-                for (var i = 0, len = inputEditors.length; i < len; i++) {
+                for (let i = 0, len = inputEditors.length; i < len; i++) {
                     if (inputEditors[i]) {
                         inputEditors[i].setProject(self.$Project);
                     }

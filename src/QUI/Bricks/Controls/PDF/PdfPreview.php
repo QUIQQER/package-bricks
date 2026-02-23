@@ -6,6 +6,9 @@ use QUI;
 
 class PdfPreview extends QUI\Control
 {
+    /**
+     * @param array<array<string, mixed>> $attributes
+     */
     public function __construct(array $attributes = [])
     {
         $this->setAttributes([

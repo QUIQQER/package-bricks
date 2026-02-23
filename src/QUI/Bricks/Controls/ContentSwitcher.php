@@ -14,15 +14,13 @@ use function json_decode;
 
 /**
  * Class ContentSwitcher
- *
- * @package quiqqer/bricks
  */
 class ContentSwitcher extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -40,11 +38,6 @@ class ContentSwitcher extends QUI\Control
         );
     }
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
