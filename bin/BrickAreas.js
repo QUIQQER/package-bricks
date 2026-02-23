@@ -48,7 +48,7 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
          * @return {HTMLElement}
          */
         create: function () {
-            var self = this;
+            const self = this;
 
             this.$Elm = new Element('div', {
                 'class': 'quiqqer-bricks-brickareas',
@@ -75,7 +75,7 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
                             projectLang: self.getAttribute('projectLang'),
                             events: {
                                 onSubmit: function (Win, areas) {
-                                    for (var i = 0, len = areas.length; i < len; i++) {
+                                    for (let i = 0, len = areas.length; i < len; i++) {
                                         self.addArea(areas[i]);
                                     }
                                 }
@@ -85,7 +85,7 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
                 }
             }).inject(this.$Buttons);
 
-            var areas = this.getAttribute('areas');
+            const areas = this.getAttribute('areas');
 
             if (areas) {
                 areas.map(function (area) {
@@ -108,11 +108,11 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
                 return;
             }
 
-            var self = this;
+            const self = this;
 
             this.$areas[area] = true;
 
-            var BrickNode = new Element('div', {
+            const BrickNode = new Element('div', {
                 'class': 'quiqqer-bricks-brickareas-area',
                 html: '<span class="fa fa-spinner fa-spin"></span>',
                 'data-area': area
@@ -123,9 +123,9 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
                 this.getAttribute('projectName'),
                 this.getAttribute('projectLang')
             ).then(function (list) {
-                var name = this.get('data-area');
+                const name = this.get('data-area');
 
-                var title = list.filter(function (Entry) {
+                let title = list.filter(function (Entry) {
                     return Entry.name === name;
                 }).map(function (Entry) {
                     return Entry.title;
@@ -140,7 +140,7 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
                     title = title[0];
                 }
 
-                var Loader = this.getElement('.fa');
+                const Loader = this.getElement('.fa');
 
                 Loader.removeClass('fa');
                 Loader.removeClass('fa-spinner');
@@ -156,7 +156,7 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
                 },
                 events: {
                     click: function () {
-                        var area = BrickNode.get('data-area');
+                        const area = BrickNode.get('data-area');
 
                         if (self.$areas[area]) {
                             delete self.$areas[area];
@@ -174,9 +174,9 @@ define('package/quiqqer/bricks/bin/BrickAreas', [
          * @return {Array}
          */
         getAreas: function () {
-            var result = [];
+            const result = [];
 
-            for (var area in this.$areas) {
+            for (const area in this.$areas) {
                 if (this.$areas.hasOwnProperty(area)) {
                     result.push(area);
                 }

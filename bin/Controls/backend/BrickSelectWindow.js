@@ -7,7 +7,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickSelectWindow', [
 ], function (QUI, QUIConfirm, QUILocale) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
     return new Class({
 
@@ -46,7 +46,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickSelectWindow', [
          * @param Win
          */
         $onOpen: function (Win) {
-            var self = this;
+            const self = this;
 
             Win.Loader.show();
             Win.getContent().set('html', '');

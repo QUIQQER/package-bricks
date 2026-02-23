@@ -17,18 +17,16 @@ use function json_decode;
  * Class AbstractPromoslider
  * Abstact parent class for all sliders
  * Slide handling for the all sliders
- *
- * @package QUI\Bricks\Controls
  */
 class AbstractPromoslider extends QUI\Control
 {
     /**
-     * @var array
+     * @var array<int, array<string, mixed>>
      */
     protected array $mobileSlides = [];
 
     /**
-     * @var array
+     * @var array<int, array<string, mixed>>
      */
     protected array $desktopSlides = [];
 

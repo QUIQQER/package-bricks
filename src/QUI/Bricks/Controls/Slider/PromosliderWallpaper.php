@@ -14,15 +14,13 @@ use function dirname;
 
 /**
  * Class Promoslider
- *
- * @package QUI\Bricks\Controls
  */
 class PromosliderWallpaper extends AbstractPromoslider
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<array<string, mixed>> $attributes
      */
     public function __construct(array $attributes = [])
     {

@@ -1,7 +1,3 @@
-/**
- * @module package/quiqqer/bricks/bin/Controls/ContentSwitcher
- * @author www.pcsg.de (Henning Leutz)
- */
 define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
 
     'qui/controls/elements/FormList',
@@ -13,12 +9,12 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
 ], function (QUIFormList, QUIControls, QUILocale) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
     return new Class({
 
         Extends: QUIFormList,
-        Type   : 'package/quiqqer/bricks/bin/Controls/ContentSwitcher',
+        Type: 'package/quiqqer/bricks/bin/Controls/ContentSwitcher',
 
         Binds: [
             '$onParsed'
@@ -33,7 +29,7 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
 
             this.setAttributes({
                 buttonText: QUILocale.get(lg, 'contentSwitcher.entries.button.text'),
-                entry     : '<div class="quiqqer-bricks-ContentSwitcher-entry" style="display: none;">' +
+                entry: '<div class="quiqqer-bricks-ContentSwitcher-entry" style="display: none;">' +
                     '<label class="entry-image">' +
                     '<span class="entry-title">' +
                     QUILocale.get(lg, 'contentSwitcher.entries.entry.picture') +
@@ -63,7 +59,7 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
          */
         $onImport: function () {
             // look if some value exist
-            var value = this.getElm().value;
+            let value = this.getElm().value;
 
             if (value === '') {
                 this.parent();
@@ -77,7 +73,7 @@ define('package/quiqqer/bricks/bin/Controls/ContentSwitcher', [
                 return;
             }
 
-            for (var i = 0, len = value.length; i < len; i++) {
+            for (let i = 0, len = value.length; i < len; i++) {
                 if (typeof value[i].content !== 'undefined') {
                     value[i]['content-switcher-content'] = value[i].content;
                 }

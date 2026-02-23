@@ -11,14 +11,13 @@ use QUI\Database\Exception;
 
 /**
  * Class Slider
- * @package QUI\Bricks\Controls\Children
  */
 class Slider extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<array<string, mixed>> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -45,11 +44,6 @@ class Slider extends QUI\Control
         ]);
     }
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
@@ -110,7 +104,7 @@ class Slider extends QUI\Control
     }
 
     /**
-     * Return the control css
+     * Return the control CSS
      *
      * @return string
      */
@@ -123,7 +117,7 @@ class Slider extends QUI\Control
      * Return the children
      *
      * @param int $start
-     * @return array
+     * @return array<int, QUI\Projects\Site>
      * @throws Exception
      * @throws \Exception
      */

@@ -36,10 +36,10 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
         },
 
         /**
-         * event : on import
+         * event: on import
          */
         $onImport: function () {
-            var Elm = this.getElm();
+            const Elm = this.getElm();
 
             this.$More = Elm.getElement('.button');
 
@@ -54,13 +54,13 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
         },
 
         /**
-         * Show next row
+         * Show the next row
          *
          * @return {Promise}
          */
         next: function () {
             return new Promise(function (resolve) {
-                var self = this,
+                const self = this,
                     size = this.$More.getSize();
 
                 this.$More.addClass('disabled');
@@ -76,18 +76,18 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
                             width: size.x
                         });
 
-                        var oldButtonText = self.$More.get('text');
+                        const oldButtonText = self.$More.get('text');
 
                         self.$More.set('html', '<span class="fa fa-spinner fa-spin"></span>');
                         self.$More.setStyle('color', null);
                         self.$More.addClass('loading');
 
                         self.$getNextChildren().then(function (result) {
-                            var Container = new Element('div', {
+                            const Container = new Element('div', {
                                 html: result
                             });
 
-                            var Rows = Container.getElements(
+                            const Rows = Container.getElements(
                                 '.quiqqer-bricks-children-infinite-row'
                             );
 
@@ -116,14 +116,14 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
                             });
 
 
-                            var height = Rows[0].getSize().y;
+                            const height = Rows[0].getSize().y;
 
                             Rows.setStyles({
                                 height: 0,
                                 position: null
                             });
 
-                            var childrenCount = Rows.getLast().getElements(
+                            const childrenCount = Rows.getLast().getElements(
                                 '.quiqqer-bricks-children-infinite-child'
                             ).length;
 
@@ -178,7 +178,7 @@ define('package/quiqqer/bricks/bin/Controls/Children/Infinite', [
         $getNextChildren: function () {
             return new Promise(function (resolve) {
 
-                var Rows = this.getElm().getElements(
+                const Rows = this.getElm().getElements(
                     '.quiqqer-bricks-children-infinite-row'
                 );
 

@@ -94,16 +94,16 @@
         {if $createPrivacyPolicyLink}
         <script>
             {literal}(function() {{/literal}
-                var projectName = "{$projectName}";
-                var projectLang = "{$projectLang}";
-                var siteId      = "{$siteId}";
+                const projectName = "{$projectName}";
+                const projectLang = "{$projectLang}";
+                const siteId      = "{$siteId}";
 
                 {literal}
                 require([
                     'package/quiqqer/controls/bin/site/Window',
                     'Locale'
                 ], function (QUISiteWindow, QUILocale) {
-                    var Links = document.getElement('label[for="qui-contact-privacypolicy"]').getParent().getElements('a');
+                    const Links = document.getElement('label[for="qui-contact-privacypolicy"]').getParent().getElements('a');
 
                     if (!Links.length) {
                         return;

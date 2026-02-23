@@ -93,7 +93,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                 return;
             }
 
-            var self = this;
+            const self = this;
 
             this.Loader.show();
 
@@ -128,9 +128,9 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                 return ControlUtils.parse(self.getElm());
             }).then(function () {
 
-                var i, len, Control;
+                let i, len, Control;
 
-                var Project = self.getAttribute('Site').getProject(),
+                const Project = self.getAttribute('Site').getProject(),
                     controls = self.getElm().getElements('[data-quiid]');
 
                 for (i = 0, len = controls.length; i < len; i++) {
@@ -170,7 +170,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
          * Opens the brick panel
          */
         openBrick: function () {
-            var brickId = this.getAttribute('brickId'),
+            let brickId = this.getAttribute('brickId'),
                 projectName = '',
                 projectLang = '';
 
@@ -184,7 +184,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                     'package/quiqqer/bricks/bin/BrickEdit',
                     'utils/Panels'
                 ], function (BrickEdit, PanelUtils) {
-                    var Panel = new BrickEdit({
+                    const Panel = new BrickEdit({
                         '#id': 'brick-edit-' + brickId,
                         id: brickId,
                         projectName: projectName,

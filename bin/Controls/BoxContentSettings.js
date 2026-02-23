@@ -26,7 +26,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
 ) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
     return new Class({
 
@@ -75,9 +75,9 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
             }).wraps(this.$Input);
 
             // grid and sizes
-            var size = this.$Elm.getSize();
+            const size = this.$Elm.getSize();
 
-            var Desktop = new Element('div', {
+            const Desktop = new Element('div', {
                 styles: {
                     width: size.x
                 }
@@ -171,7 +171,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
 
             this.$Grid.addEvents({
                 onClick: function () {
-                    var buttons = this.$Grid.getButtons(),
+                    const buttons = this.$Grid.getButtons(),
 
                         Edit = buttons.filter(function (Btn) {
                             return Btn.getAttribute('name') === 'edit';
@@ -226,7 +226,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
             }
 
             // get cell number
-            var row = Caller.getElm().getParent('li').get('data-row');
+            const row = Caller.getElm().getParent('li').get('data-row');
 
             this.$data[row].isDisabled = Caller.getStatus();
             this.update();
@@ -238,7 +238,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
          * @return {Promise}
          */
         resize: function () {
-            var size = this.getElm().getSize();
+            const size = this.getElm().getSize();
 
             return this.$Grid.setWidth(size.x).then(function () {
                 this.$Grid.resize();
@@ -249,8 +249,8 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
          * refresh the display
          */
         refresh: function () {
-            var i, len, entry, insert;
-            var data = [];
+            let i, len, entry, insert;
+            const data = [];
 
             for (i = 0, len = this.$data.length; i < len; i++) {
                 entry = this.$data[i];
@@ -282,7 +282,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
                 data: data
             });
 
-            var buttons = this.$Grid.getButtons(),
+            const buttons = this.$Grid.getButtons(),
 
                 Edit = buttons.filter(function (Btn) {
                     return Btn.getAttribute('name') === 'edit';
@@ -319,7 +319,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
          * @param {Object} params
          */
         add: function (params) {
-            var entry = {
+            const entry = {
                 title: '',
                 text: '',
                 isDisabled: 0
@@ -354,7 +354,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
                 return;
             }
 
-            var entry = {
+            const entry = {
                 title: '',
                 text: '',
                 isDisabled: 0
@@ -384,13 +384,13 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
          * @param {number|array} index
          */
         del: function (index) {
-            var newList = [];
+            const newList = [];
 
             if (typeOf(index) !== 'array') {
                 index = [index];
             }
 
-            for (var i = 0, len = this.$data.length; i < len; i++) {
+            for (let i = 0, len = this.$data.length; i < len; i++) {
                 if (!index.contains(i)) {
                     newList.push(this.$data[i]);
                 }
@@ -407,7 +407,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
         setProject: function (Project) {
             this.setAttribute('project', Project);
 
-            var controls = QUI.Controls.getControlsInElement(this.getElm());
+            const controls = QUI.Controls.getControlsInElement(this.getElm());
 
             controls.each(function (Control) {
                 if (Control === this) {
@@ -424,10 +424,10 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
          * Refresh the data sorting in dependence of the grid
          */
         $refreshSorting: function () {
-            var gridData = this.$Grid.getData(),
+            const gridData = this.$Grid.getData(),
                 data = [];
 
-            for (var i = 0, len = gridData.length; i < len; i++) {
+            for (let i = 0, len = gridData.length; i < len; i++) {
                 data.push({
                     isDisabled: parseInt(gridData[i].isDisabled),
                     title: gridData[i].title,
@@ -463,7 +463,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
                 },
                 events: {
                     onSubmit: function () {
-                        var selected = this.$Grid.getSelectedIndices();
+                        const selected = this.$Grid.getSelectedIndices();
 
                         this.$Grid.deleteRows(selected);
                         this.del(selected);
@@ -479,7 +479,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
          * @retrun {Promise}
          */
         $openEditDialog: function () {
-            var self = this,
+            let self = this,
                 data = this.$Grid.getSelectedData(),
                 index = this.$Grid.getSelectedIndices();
 
@@ -495,11 +495,11 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
                 Dialog.addEvent('onSubmit', function () {
                     Dialog.Loader.show();
 
-                    var Content = Dialog.getContent();
-                    var Form = Content.getElement('form');
+                    const Content = Dialog.getContent();
+                    const Form = Content.getElement('form');
 
-                    var title = Form.elements.title;
-                    var text = Form.elements.text;
+                    const title = Form.elements.title;
+                    const text = Form.elements.text;
 
                     self.edit(index, {
                         title: title.value,
@@ -513,11 +513,11 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
 
                 Dialog.addEvent('onOpenAfterCreate', function () {
 
-                    var Content = Dialog.getContent();
-                    var Form = Content.getElement('form');
+                    const Content = Dialog.getContent();
+                    const Form = Content.getElement('form');
 
-                    var title = Form.elements.title;
-                    var text = Form.elements.text;
+                    const title = Form.elements.title;
+                    const text = Form.elements.text;
 
                     if (data.isDisabled) {
                         Dialog.IsDisabledSwitch.on();
@@ -549,17 +549,17 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
          * @return {Promise}
          */
         $openAddDialog: function () {
-            var self = this;
+            const self = this;
 
             return this.$createDialog().then(function (Dialog) {
                 Dialog.addEvent('onSubmit', function () {
                     Dialog.Loader.show();
 
-                    var Content = Dialog.getContent();
-                    var Form = Content.getElement('form');
+                    const Content = Dialog.getContent();
+                    const Form = Content.getElement('form');
 
-                    var title = Form.elements.title;
-                    var text = Form.elements.text;
+                    const title = Form.elements.title;
+                    const text = Form.elements.text;
 
                     self.add({
                         title: title.value,
@@ -580,10 +580,10 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
          * @return {Promise}
          */
         $createDialog: function () {
-            var self = this;
+            const self = this;
 
             return new Promise(function (resolve) {
-                var Dialog = new QUIConfirm({
+                const Dialog = new QUIConfirm({
                     title: QUILocale.get(lg, 'control.boxContent.entries.add.title'),
                     icon: 'fa fa-edit',
                     maxWidth: 800,
@@ -597,7 +597,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
                             Win.getContent().set('html', '');
 
 
-                            var prefix = 'control.boxContent.entries.',
+                            const prefix = 'control.boxContent.entries.',
                                 Container = new Element('div', {
                                     html: Mustache.render(templateEntry, {
                                         fieldIsDisabled: QUILocale.get(lg, prefix + 'disable'),
@@ -607,7 +607,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
                                     'class': 'quiqqer-bricks-boxContent-settings'
                                 }).inject(Win.getContent());
 
-                            var Text = Container.getElement('.field-text');
+                            const Text = Container.getElement('.field-text');
 
                             Text.getParent().setStyles({
                                 height: 100
@@ -626,7 +626,7 @@ define('package/quiqqer/bricks/bin/Controls/BoxContentSettings', [
                             QUI.parse(Container).then(function () {
                                 return ControlsUtils.parse(Container);
                             }).then(function () {
-                                var controls = QUI.Controls.getControlsInElement(Container),
+                                const controls = QUI.Controls.getControlsInElement(Container),
                                     project = self.getAttribute('project');
 
                                 controls.each(function (Control) {

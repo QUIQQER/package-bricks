@@ -10,15 +10,13 @@ use QUI;
 
 /**
  * Class Banner
- *
- * @package quiqqer/bricks
  */
 class Banner extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -37,9 +35,6 @@ class Banner extends QUI\Control
         );
     }
 
-    /**
-    * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();

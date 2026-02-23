@@ -20,7 +20,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 ], function (QUI, QUIControl, QUIButton, QUIPopup, QUIAlert, QUIConfirm, QUIList, Bricks, QUILocale, QUIAjax, Sortables) {
     "use strict";
 
-    var lg = 'quiqqer/bricks';
+    const lg = 'quiqqer/bricks';
 
     return new Class({
 
@@ -96,7 +96,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * @return {HTMLElement}
          */
         create: function () {
-            var self = this,
+            const self = this,
                 title = this.getAttribute('title');
 
             this.$Elm = new Element('div', {
@@ -109,7 +109,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             });
 
             // Elements
-            var Buttons = this.$Elm.getElement(
+            const Buttons = this.$Elm.getElement(
                 '.quiqqer-bricks-site-category-area-buttons'
             );
 
@@ -197,7 +197,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * Refresh the area display
          */
         refresh: function () {
-            var self = this,
+            const self = this,
                 size = this.$List.getComputedSize(),
                 titleSize = this.$Title.getComputedSize();
 
@@ -223,9 +223,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * event : on inject
          */
         $onInject: function () {
-            var self = this;
+            const self = this;
 
-            var Loader = new Element('div', {
+            const Loader = new Element('div', {
                 'class': 'quiqqer-bricks-site-category-area-loader',
                 html: '<span class="fa fa-spinner fa-spin"></span>',
                 styles: {
@@ -246,7 +246,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                     self.addBrickById(brickId);
                 });
 
-                var promises = [];
+                const promises = [];
 
                 self.$onLoadBrickData.each(function (brickData) {
                     promises.push(self.addBrick(brickData));
@@ -278,7 +278,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * @return {*|Promise}
          */
         $refreshAvailableBricks: function () {
-            var self = this,
+            const self = this,
                 Site = this.getAttribute('Site'),
                 Project = Site.getProject();
 
@@ -308,7 +308,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * Deactivate the area
          */
         deactivate: function () {
-            var self = this,
+            const self = this,
                 data = this.getData();
 
             if (data.length && !("deactivate" in data[0])) {
@@ -359,7 +359,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                     return;
                 }
 
-                var BrickNode = this.addBrickById(brickData.brickId);
+                const BrickNode = this.addBrickById(brickData.brickId);
 
                 if (!BrickNode) {
                     reject();
@@ -387,7 +387,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 return false;
             }
 
-            var found = this.$availableBricks.filter(function (Item) {
+            const found = this.$availableBricks.filter(function (Item) {
                 return parseInt(Item.id) === brickId;
             });
 
@@ -395,7 +395,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 return false;
             }
 
-            var BrickNode = this.createNewBrick();
+            const BrickNode = this.createNewBrick();
 
             BrickNode.getElement('select').set('value', brickId);
             BrickNode.getElement('select').set('disabled', true);
@@ -418,11 +418,11 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * Add a new brick to the area
          */
         createNewBrick: function () {
-            var i, len, Select;
+            let i, len, Select;
 
-            var self = this;
+            const self = this;
 
-            var Elm = new Element('li', {
+            const Elm = new Element('li', {
                 'class': 'quiqqer-bricks-site-category-area-brick',
                 html: '<select></select><div class="btn-wrapper" data-name="btn-container"></div>',
                 id: String.uniqueID()
@@ -448,7 +448,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 icon: 'fa fa-gear',
                 events: {
                     onClick: function (Btn) {
-                        var Elm = Btn.getElm(),
+                        const Elm = Btn.getElm(),
                             Parent = Elm.getParent('.quiqqer-bricks-site-category-area-brick'),
                             Select = Parent.getElement('select');
 
@@ -490,9 +490,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 }];
             }
 
-            var i, len, uid, custom, brickId;
+            let i, len, uid, custom, brickId;
 
-            var data = [],
+            const data = [],
                 bricks = this.$Elm.getElements('select');
 
             for (i = 0, len = bricks.length; i < len; i++) {
@@ -523,13 +523,13 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * Switch the sortable on
          */
         sortable: function () {
-            var Elm = this.getElm(),
+            const Elm = this.getElm(),
                 elements = Elm.getElements(
                     '.quiqqer-bricks-site-category-area-brick'
                 );
 
             elements.each(function (Brick) {
-                var i, len, buttons, Button;
+                let i, len, buttons, Button;
 
                 buttons = Brick.getElements('.qui-button');
 
@@ -541,7 +541,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                     }
                 }
 
-                var Select = Brick.getElement('select'),
+                const Select = Brick.getElement('select'),
                     Option = Select.getElement('option[value="' + Select.value + '"]');
 
                 new Element('div', {
@@ -559,13 +559,13 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                     transition: 'elastic:out'
                 },
                 clone: function (event) {
-                    var Target = event.target;
+                    let Target = event.target;
 
                     if (Target.nodeName !== 'LI') {
                         Target = Target.getParent('li');
                     }
 
-                    var size = Target.getSize(),
+                    const size = Target.getSize(),
                         pos = Target.getPosition(Target.getParent('ul'));
 
                     return new Element('div', {
@@ -580,7 +580,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 },
 
                 onStart: function (element) {
-                    var Ul = element.getParent('ul');
+                    const Ul = element.getParent('ul');
 
                     element.addClass('quiqqer-bricks-site-category-area-dd-active');
 
@@ -592,7 +592,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 },
 
                 onComplete: function (element) {
-                    var Ul = element.getParent('ul');
+                    const Ul = element.getParent('ul');
 
                     element.removeClass('quiqqer-bricks-site-category-area-dd-active');
 
@@ -609,7 +609,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * Switch the sortable off
          */
         unsortable: function () {
-            var Elm = this.getElm(),
+            const Elm = this.getElm(),
                 elements = Elm.getElements(
                     '.quiqqer-bricks-site-category-area-brick'
                 );
@@ -618,7 +618,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             Elm.getElements('.quiqqer-bricks-site-category-area-placeholder').destroy();
 
             elements.each(function (Brick) {
-                var i, len, buttons, Button;
+                let i, len, buttons, Button;
 
                 buttons = Brick.getElements('.qui-button');
 
@@ -638,7 +638,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * @param {Function} [callback]
          */
         openButtons: function (callback) {
-            var self = this;
+            const self = this;
 
             this.$AddButton.hide();
 
@@ -648,8 +648,8 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 overflow: 'hidden'
             });
 
-            var width = this.$ExtraBtns.getChildren().map(function (Elm) {
-                var width = Elm.getSize().x;
+            let width = this.$ExtraBtns.getChildren().map(function (Elm) {
+                let width = Elm.getSize().x;
 
                 width = width + Elm.getStyle('margin-left').toInt();
                 width = width + Elm.getStyle('margin-right').toInt();
@@ -687,7 +687,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * * @param {Function} callback
          */
         closeButtons: function (callback) {
-            var self = this;
+            const self = this;
 
             this.$FXExtraBtns.style({
                 overflow: 'hidden',
@@ -859,7 +859,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                         List.inject(Content);
 
-                        for (var i = 0, len = self.$availableBricks.length; i < len; i++) {
+                        for (let i = 0, len = self.$availableBricks.length; i < len; i++) {
                             items.push({
                                 brickId: self.$availableBricks[i].id,
                                 icon: 'fa fa-th',
@@ -978,7 +978,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 maxWidth: 450,
                 events: {
                     onSubmit: function () {
-                        var brickId = BrickElement.get('id');
+                        const brickId = BrickElement.get('id');
 
                         if (brickId in this.$brickCustomData) {
                             delete this.$brickCustomData[brickId];
@@ -998,7 +998,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * @param {HTMLElement} Select
          */
         openBrickSettingDialog: function (Select) {
-            var self = this;
+            const self = this;
 
             new QUIConfirm({
                 title: QUILocale.get(lg, 'site.area.window.settings.title'),
@@ -1017,12 +1017,12 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 },
                 events: {
                     onOpen: function (Win) {
-                        var buttons = Win.$Buttons.getElements('button');
+                        const buttons = Win.$Buttons.getElements('button');
 
                         buttons.setStyle('float', 'right');
                         buttons.set('disabled', true);
 
-                        var EditButton = new QUIButton({
+                        const EditButton = new QUIButton({
                             textimage: 'fa fa-edit',
                             text: QUILocale.get(lg, 'brick.sheet.edit.title'),
                             disabled: true
@@ -1031,14 +1031,14 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                         require([
                             'package/quiqqer/bricks/bin/Site/BrickEdit'
                         ], function (BrickEdit) {
-                            var brickId = Select.getParent().get('id');
-                            var custom = '';
+                            let brickId = Select.getParent().get('id');
+                            let custom = '';
 
                             if (brickId in self.$brickCustomData) {
                                 custom = self.$brickCustomData[brickId].customfields;
                             }
 
-                            var Edit = new BrickEdit({
+                            const Edit = new BrickEdit({
                                 brickId: Select.value,
                                 Site: self.getAttribute('Site'),
                                 customfields: JSON.decode(custom),
@@ -1070,7 +1070,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
                         require(['qui/utils/Form'], function (QUIFormUtils) {
 
-                            var Form = Win.getContent().getElement('form'),
+                            const Form = Win.getContent().getElement('form'),
                                 data = QUIFormUtils.getFormData(Form),
                                 brickId = Select.getParent().get('id');
 
@@ -1109,7 +1109,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
          * Opens the settings dialog of the area
          */
         openSettingsDialog: function () {
-            var self = this;
+            const self = this;
 
             new QUIConfirm({
                 title: QUILocale.get(lg, 'area.window.settings.title'),
@@ -1119,7 +1119,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 autoclose: false,
                 events: {
                     onOpen: function (Win) {
-                        var Content = Win.getContent();
+                        const Content = Win.getContent();
 
                         Content.set(
                             'html',
@@ -1132,14 +1132,14 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                             '</form>'
                         );
 
-                        var Form = Win.getContent().getElement('form'),
+                        const Form = Win.getContent().getElement('form'),
                             elms = Form.elements;
 
                         elms.deactivate.checked = self.getAttribute('deactivate');
                     },
 
                     onSubmit: function (Win) {
-                        var Form = Win.getContent().getElement('form');
+                        const Form = Win.getContent().getElement('form');
 
                         Win.close();
 

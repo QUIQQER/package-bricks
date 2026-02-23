@@ -10,15 +10,13 @@ use QUI;
 
 /**
  * Class BoxContentAdvanced
- *
- * @package quiqqer/bricks
  */
 class BoxContentAdvanced extends QUI\Control
 {
     /**
      * constructor
      *
-     * @param array $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -38,9 +36,6 @@ class BoxContentAdvanced extends QUI\Control
         );
     }
 
-    /**
-     * @see \QUI\Control::create()
-     */
     public function getBody(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
