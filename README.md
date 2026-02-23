@@ -64,6 +64,8 @@ consistent and high-quality:
   - **Additional images (mockups)**: Screenshots are fine.
 - **Image format**: All images should use a 3:2 aspect ratio and preferably not
   exceed 900x600 pixels.
+- Use the recommended attribute in the `<brick ... recommended="1">` tag if the brick is easy to use 
+  and recommended for new users.
 
 More information about how to provide a brick and mockups:
 https://dev.quiqqer.com/quiqqer/package-bricks/-/wikis/dev/bricks
