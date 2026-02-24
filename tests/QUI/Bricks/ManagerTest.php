@@ -79,12 +79,13 @@ XML
 
     public function testAvailableBricksAndSettingsFromXml(): void
     {
+        $brickType = '\\Vendor\\Control\\' . md5((string)mt_rand());
         $xmlFile = $this->tmpDir . '/bricks.xml';
-        file_put_contents($xmlFile, <<<'XML'
+        file_put_contents($xmlFile, str_replace('__BRICK_TYPE__', $brickType, <<<'XML'
 <?xml version="1.0"?>
 <quiqqer>
   <bricks>
-    <brick control="\\Vendor\\Control" name="hero">
+    <brick control="__BRICK_TYPE__" name="hero">
       <title><locale group="g" var="title"/></title>
       <description><locale group="g" var="description"/></description>
       <settings>
@@ -99,7 +100,7 @@ XML
   </bricks>
 </quiqqer>
 XML
-        );
+        ));
 
         $Manager = new class ($xmlFile) extends Manager {
             public function __construct(private string $xmlFile)
@@ -119,7 +120,7 @@ XML
         $controls = array_map(static fn(array $entry): string => (string)$entry['control'], $bricks);
         $this->assertContains('content', $controls);
 
-        $settings = $Manager->getAvailableBrickSettingsByBrickType('\\Vendor\\Control');
+        $settings = $Manager->getAvailableBrickSettingsByBrickType($brickType);
         $this->assertNotEmpty($settings);
 
         $settingNames = array_map(static fn(array $entry): string => (string)$entry['name'], $settings);
@@ -127,5 +128,6 @@ XML
         $this->assertContains('height', $settingNames);
         $this->assertContains('classes', $settingNames);
         $this->assertContains('globalSetting', $settingNames);
+        $this->assertContains('specificSetting', $settingNames);
     }
 }
