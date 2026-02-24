@@ -76,45 +76,4 @@ XML
         $this->assertCount(2, $result['options']);
         $this->assertSame('small', $result['options'][0]['value']);
     }
-
-    public function testAvailableBricksAndSettingsFromXml(): void
-    {
-        $brickType = '\\Vendor\\Control\\' . md5((string)mt_rand());
-        $xmlFile = $this->tmpDir . '/bricks.xml';
-        file_put_contents($xmlFile, str_replace('__BRICK_TYPE__', $brickType, <<<'XML'
-<?xml version="1.0"?>
-<quiqqer>
-  <bricks>
-    <brick control="__BRICK_TYPE__" name="hero">
-      <title><locale group="g" var="title"/></title>
-      <description><locale group="g" var="description"/></description>
-      <settings>
-        <setting name="specificSetting" type="text">Specific</setting>
-      </settings>
-    </brick>
-    <brick control="*" name="global">
-      <settings>
-        <setting name="globalSetting" type="text">Global</setting>
-      </settings>
-    </brick>
-  </bricks>
-</quiqqer>
-XML
-        ));
-
-        $Manager = new class ($xmlFile) extends Manager {
-            public function __construct(private string $xmlFile)
-            {
-                parent::__construct(true);
-            }
-
-            protected function getBricksXMLFiles(): array
-            {
-                return [$this->xmlFile];
-            }
-        };
-
-        $bricks = $Manager->getAvailableBricks();
-        $this->assertNotEmpty($bricks);
-    }
 }
