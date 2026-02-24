@@ -53,7 +53,7 @@ class ManagerTest extends TestCase
   <option value="large">Large</option>
 </setting>
 XML
-);
+        );
 
         $node = $doc->getElementsByTagName('setting')->item(0);
         $this->assertNotNull($node);
@@ -99,7 +99,7 @@ XML
   </bricks>
 </quiqqer>
 XML
-);
+        );
 
         $Manager = new class ($xmlFile) extends Manager {
             public function __construct(private string $xmlFile)

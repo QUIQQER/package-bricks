@@ -61,7 +61,7 @@ class UtilsTest extends TestCase
   </bricks>
 </quiqqer>
 XML
-);
+        );
 
         $bricks = Utils::getBricksFromXML($xmlFile);
 
@@ -105,7 +105,7 @@ XML
   </bricks>
 </quiqqer>
 XML
-);
+        );
 
         $allAreas = Utils::getTemplateAreasFromXML($xmlFile);
         $this->assertCount(4, $allAreas);
