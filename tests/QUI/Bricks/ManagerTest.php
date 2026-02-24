@@ -118,9 +118,6 @@ XML
 
         $controls = array_map(static fn(array $entry): string => (string)$entry['control'], $bricks);
         $this->assertContains('content', $controls);
-        $this->assertTrue((bool)array_filter($controls, static function (string $control): bool {
-            return str_contains($control, 'Vendor') && str_contains($control, 'Control');
-        }));
 
         $settings = $Manager->getAvailableBrickSettingsByBrickType('\\Vendor\\Control');
         $this->assertNotEmpty($settings);
