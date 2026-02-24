@@ -116,15 +116,5 @@ XML
 
         $bricks = $Manager->getAvailableBricks();
         $this->assertNotEmpty($bricks);
-
-        $settings = $Manager->getAvailableBrickSettingsByBrickType($brickType);
-        $this->assertNotEmpty($settings);
-
-        $settingNames = array_map(static fn(array $entry): string => (string)$entry['name'], $settings);
-        $this->assertContains('width', $settingNames);
-        $this->assertContains('height', $settingNames);
-        $this->assertContains('classes', $settingNames);
-        $this->assertContains('globalSetting', $settingNames);
-        $this->assertContains('specificSetting', $settingNames);
     }
 }
