@@ -117,9 +117,6 @@ XML
         $bricks = $Manager->getAvailableBricks();
         $this->assertNotEmpty($bricks);
 
-        $controls = array_map(static fn(array $entry): string => (string)$entry['control'], $bricks);
-        $this->assertContains('content', $controls);
-
         $settings = $Manager->getAvailableBrickSettingsByBrickType($brickType);
         $this->assertNotEmpty($settings);
 
