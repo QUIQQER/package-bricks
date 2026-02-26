@@ -471,7 +471,16 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                         'data-name': 'create-title',
                         placeholder: QUILocale.get(lg, 'addBrickWindow.overlay.create.input.placeholder')
                     }).inject(Dialog);
-                    
+
+                    TitleInput.addEvent('keydown', (event) => {
+                        if (event.key !== 'enter') {
+                            return;
+                        }
+
+                        event.preventDefault();
+                        this.createBrickFromOverlay();
+                    });
+
                     const Actions = new Element('div', {
                         'class': 'qui-addBrick-dialog__actions'
                     }).inject(Dialog);
