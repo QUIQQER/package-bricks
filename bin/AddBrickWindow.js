@@ -22,6 +22,7 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
             'onSearchInput',
             'onDeprecatedToggleChange',
             'onItemClick',
+            'onItemDblClick',
             'createOverlay',
             'openCreateOverlay',
             'openCreateFromDataOverlay',
@@ -470,7 +471,7 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                         'data-name': 'create-title',
                         placeholder: QUILocale.get(lg, 'addBrickWindow.overlay.create.input.placeholder')
                     }).inject(Dialog);
-
+                    
                     const Actions = new Element('div', {
                         'class': 'qui-addBrick-dialog__actions'
                     }).inject(Dialog);
@@ -1235,6 +1236,11 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
             this.renderDetails(Item.getAttribute('data-control'));
         },
 
+        onItemDblClick: function (event) {
+            this.onItemClick(event);
+            this.openCreateOverlay();
+        },
+
         /**
          * Window open hook.
          * Loads available bricks, builds view model, renders template and binds UI.
@@ -1381,7 +1387,10 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                 }
 
                 if (this.$BrickList) {
-                    this.$BrickList.getElements('[data-name="item"]').addEvent('click', this.onItemClick);
+                    const Items = this.$BrickList.getElements('[data-name="item"]');
+
+                    Items.addEvent('click', this.onItemClick);
+                    Items.addEvent('dblclick', this.onItemDblClick);
                 }
 
                 this.applyFilters();
