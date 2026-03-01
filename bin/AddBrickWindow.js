@@ -23,6 +23,7 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
             'onDeprecatedToggleChange',
             'onItemClick',
             'onItemDblClick',
+            'onKeyDown',
             'createOverlay',
             'openCreateOverlay',
             'openCreateFromDataOverlay',
@@ -85,9 +86,102 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
             this.$ActiveOverlay = null;
             this.$OverlayPreviousActiveElement = null;
 
+            this.$KeyboardBound = false;
+
             this.addEvents({
                 onOpen: this.$onOpen
             });
+        },
+
+        onKeyDown: function (event) {
+            if (!this.$Container || !this.$BrickList) {
+                return;
+            }
+
+            if (this.$ActiveOverlay) {
+                return;
+            }
+
+            if (!document.body.contains(this.$Container)) {
+                return;
+            }
+
+            if (event.key !== 'up' && event.key !== 'down' && event.key !== 'enter') {
+                return;
+            }
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            const visible = this.$BrickList.getElements('[data-name="item"]').filter((Item) => {
+                return Item.getStyle('display') !== 'none';
+            });
+
+            if (!visible.length) {
+                return;
+            }
+
+            let Current = this.$BrickList.getElement('[data-name="item"][aria-current="true"]');
+
+            if (!Current || Current.getStyle('display') === 'none') {
+                Current = visible[0];
+            }
+
+            if (event.key === 'enter') {
+                this.openCreateOverlay();
+                return;
+            }
+
+            const delta = event.key === 'down' ? 1 : -1;
+            let index = visible.indexOf(Current);
+
+            if (index === -1) {
+                index = 0;
+            }
+
+            index = Math.max(0, Math.min(visible.length - 1, index + delta));
+            const Next = visible[index];
+
+            if (!Next || Next === Current) {
+                return;
+            }
+
+            this.$BrickList.getElements('[data-name="item"][aria-current="true"]').each((Elm) => {
+                Elm.removeAttribute('aria-current');
+            });
+
+            Next.setAttribute('aria-current', 'true');
+            this.renderDetails(Next.getAttribute('data-control'));
+
+            if (typeof Next.scrollIntoView === 'function') {
+                Next.scrollIntoView({block: 'nearest'});
+            }
+        },
+
+        getCurrentBrickInfo: function () {
+            if (!this.$BrickList) {
+                return {
+                    control: '',
+                    title: ''
+                };
+            }
+
+            const Current = this.$BrickList.getElement('[data-name="item"][aria-current="true"]');
+            const control = Current ? (Current.getAttribute('data-control') || '') : '';
+
+            if (!control || !this.brickListViewData || !this.brickListViewData.length) {
+                return {
+                    control: control,
+                    title: ''
+                };
+            }
+
+            const data = this.brickListViewData.filter((brick) => brick.control === control)[0];
+
+            return {
+                control: control,
+                title: data ? (data.displayTitle || '') : ''
+            };
         },
 
         openCreateFromDataOverlay: function () {
@@ -262,6 +356,7 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                 asideInputPlaceholder: QUILocale.get(lg, 'addBrickWindow.aside.toolbar.input.placeholder'),
                 asideSelectTitle: QUILocale.get(lg, 'addBrickWindow.aside.toolbar.select.title'),
                 asideSelectOptionAll: QUILocale.get(lg, 'addBrickWindow.aside.toolbar.select.option.all'),
+                asideKeyboardNavigationText: QUILocale.get(lg, 'addBrickWindow.aside.toolbar.keyboardNavigationText'),
                 asideFooterToggleDeprecated: QUILocale.get(lg, 'addBrickWindow.aside.footer.toggle.deprecated.show'),
                 deprecatedText: QUILocale.get(lg, 'addBrickWindow.deprecated.badge'),
                 recommendedText: QUILocale.get(lg, 'addBrickWindow.recommendedText.badge'),
@@ -347,7 +442,7 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
             if (opts.description) {
                 new Element('div', {
                     'class': 'qui-addBrick-dialog__desc',
-                    text: opts.description
+                    html: opts.description
                 }).inject(Dialog);
             }
 
@@ -461,9 +556,35 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                 return;
             }
 
+            const Brick = this.getCurrentBrickInfo();
+
+            // if (Brick && (Brick.title || Brick.control)) {
+            //     desc = desc + '<br>' + (Brick.title ? Brick.title : Brick.control);
+            //
+            //     if (Brick.title && Brick.control) {
+            //         desc = desc + ' <span style="opacity:.65">(' + Brick.control + ')</span>';
+            //     }
+            // }
+
+            const descTitle = QUILocale.get(lg, 'addBrickWindow.overlay.create.desc.title');
+            const descLabelName = QUILocale.get(lg, 'addBrickWindow.overlay.create.desc.label.name');
+            const descLabelType = QUILocale.get(lg, 'addBrickWindow.overlay.create.desc.label.type');
+            const descHint = QUILocale.get(lg, 'addBrickWindow.overlay.create.desc');
+
+            let description = `
+            <p>${descTitle}</p>
+            <div class="brick-info">
+            <div class="brick-info__row"><span>${descLabelName}</span> <strong>${Brick.title}</strong></div>
+            <div class="brick-info__row"><span>${descLabelType}</span> <div><span class="badge badge-success-light">${Brick.control}</span></div></div>
+            </div>
+            <p>${descHint}</p>   
+            `;
+
+
+
             this.createOverlay({
                 title: QUILocale.get(lg, 'addBrickWindow.overlay.create.title'),
-                description: QUILocale.get(lg, 'addBrickWindow.overlay.create.desc'),
+                description: description,
                 backdropClosable: false,
                 build: (Dialog) => {
                     const TitleInput = new Element('input', {
@@ -1257,7 +1378,6 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
         $onOpen: function () {
             Bricks.getAvailableBricks().then((brickList) => {
                 this.brickList = brickList;
-                console.log(this.brickList)
 
                 const viewData = brickList.map((brick) => {
                     if (brick.control === 'content') {
@@ -1402,6 +1522,16 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
                     Items.addEvent('dblclick', this.onItemDblClick);
                 }
 
+                if (this.$BrickList) {
+                    this.$BrickList.getElements('[data-name="item"].qui-addBrick__item--kbd').each((Elm) => {
+                        Elm.removeClass('qui-addBrick__item--kbd');
+                    });
+                }
+
+                document.removeEvent('keydown', this.onKeyDown);
+                document.addEvent('keydown', this.onKeyDown);
+                this.$KeyboardBound = true;
+
                 this.applyFilters();
 
                 if (this.$SearchInput) {
@@ -1439,6 +1569,15 @@ define('package/quiqqer/bricks/bin/AddBrickWindow', [
             this.parent();
 
             this.Loader.show();
+        },
+
+        close: function () {
+            if (this.$KeyboardBound) {
+                document.removeEvent('keydown', this.onKeyDown);
+                this.$KeyboardBound = false;
+            }
+
+            this.parent();
         },
 
         /**

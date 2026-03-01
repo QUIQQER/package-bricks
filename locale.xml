@@ -1545,6 +1545,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Alle]]></de>
             <en><![CDATA[All]]></en>
         </locale>
+        <locale name="addBrickWindow.aside.toolbar.keyboardNavigationText">
+            <de><![CDATA[<span class="label">Navigieren mit </span>
+                    <kbd class="key" title="Pfeil hoch">↑</kbd>
+                    <kbd class="key" title="Pfeil runter">↓</kbd> |
+                    <kbd class="key" title="Enter">Enter</kbd>
+                    <span class="label">erstellt den ausgewählten Baustein</span>]]></de>
+            <en><![CDATA[<span class="label">Navigate with </span>
+                    <kbd class="key" title="Arrow up">↑</kbd>
+                    <kbd class="key" title="Arrow down">↓</kbd> |
+                    <kbd class="key" title="Enter">Enter</kbd>
+                    <span class="label">creates the selected brick</span>]]></en>
+        </locale>
         <locale name="addBrickWindow.deprecated.badge">
             <de><![CDATA[Deprecated]]></de>
             <en><![CDATA[Deprecated]]></en>
@@ -1562,12 +1574,12 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Hide deprecated bricks]]></en>
         </locale>
         <locale name="addBrickWindow.aside.toolbar.count.single">
-            <de><![CDATA[Baustein]]></de>
-            <en><![CDATA[Brick]]></en>
+            <de><![CDATA[Baustein gefunden]]></de>
+            <en><![CDATA[brick found]]></en>
         </locale>
         <locale name="addBrickWindow.aside.toolbar.count.multi">
-            <de><![CDATA[Bausteine]]></de>
-            <en><![CDATA[Bricks]]></en>
+            <de><![CDATA[Bausteine gefunden]]></de>
+            <en><![CDATA[Bricks found]]></en>
         </locale>
         <locale name="addBrickWindow.aside.list.empty">
             <de><![CDATA[Keine passenden Bausteine gefunden]]></de>
@@ -1604,6 +1616,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="addBrickWindow.overlay.create.title">
             <de><![CDATA[Baustein erstellen]]></de>
             <en><![CDATA[Create brick]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.desc.title">
+            <de><![CDATA[Du möchtest folgenden Baustein erstellen:]]></de>
+            <en><![CDATA[You are going to create the following brick:]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.desc.label.name">
+            <de><![CDATA[Name]]></de>
+            <en><![CDATA[Name]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.desc.label.type">
+            <de><![CDATA[Typ]]></de>
+            <en><![CDATA[Type]]></en>
         </locale>
         <locale name="addBrickWindow.overlay.create.desc">
             <de><![CDATA[Bitte gib einen eindeutigen Namen ein. Der Name darf noch nicht vergeben sein und sollte idealerweise beschreiben, was der Baustein macht.]]></de>

@@ -23,7 +23,16 @@
                     {{/packageList}}
                 </select>
             </div>
-            <div class="filterHint">
+            <div class="hint">
+                <div class="qui-addBrick__kbdLegend" aria-label="Tastatursteuerung">
+                    <span class="label">Navigieren mit </span>
+                    <kbd class="key" title="Pfeil hoch">↑</kbd>
+                    <kbd class="key" title="Pfeil runter">↓</kbd> |
+                    <kbd class="key" title="Enter">Enter</kbd>
+                    <span class="label">erstellt den ausgewählten Baustein</span>
+                </div>
+            </div>
+            <div class="hint">
                 <span data-name="brick-count"><strong>0</strong> Bricks</span>
                 <div data-name="selected-package"></div>
             </div>
@@ -75,7 +84,7 @@
                 <img id="dHero" data-name="detail-hero" alt="Hero Banner" src="/packages/quiqqer/bricks/bin/images/mockup-placeholder.svg">
             </div>
 
-            <div class="section">
+            <div class="section brickDetails__info">
                 <div class="section-label">{{detailsSectionInfo}}</div>
                 <div data-name="details-section-info">
                     <span class="badge badge-success-light" data-name="detail-package">quiqqer/bricks</span> <span data-name="detail-control"></span>
