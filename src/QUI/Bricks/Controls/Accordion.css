@@ -32,6 +32,7 @@
 .quiqqer-accordion-item-content {
     display: none;
     overflow: auto;
+    padding-block: 1rem;
 }
 
 .quiqqer-accordion-item[data-open="1"] .quiqqer-accordion-item-content {

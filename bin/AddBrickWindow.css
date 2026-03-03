@@ -146,7 +146,7 @@
     border-bottom: 1px solid var(--line);
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
 }
 
 .qui-addBrick__aside .toolbar {
@@ -218,7 +218,7 @@
     border-color: var(--input-borderColor--hover);
 }
 
-.qui-addBrick__aside .filterHint {
+.qui-addBrick__aside .hint {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -227,17 +227,48 @@
     gap: 10px;
 }
 
-.qui-addBrick__aside .filterHint [data-name="selected-package"] {
+.qui-addBrick__aside .hint [data-name="selected-package"] {
     display: inline-flex;
     align-items: center;
     justify-content: flex-end;
     min-height: 1.8em;
 }
 
-.qui-addBrick__aside .filterHint [data-name="selected-package"]:empty::before {
+.qui-addBrick__aside .hint [data-name="selected-package"]:empty::before {
     content: '';
     display: inline-block;
     height: 1.8em;
+}
+
+.qui-addBrick__kbdLegend {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.2;
+}
+
+.qui-addBrick__kbdLegend .key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2em;
+    height: 2em;
+    padding: 0 0.5em;
+    border: 1px solid var(--line);
+    border-bottom-color: color-mix(in srgb, var(--line), #000 12%);
+    border-radius: 0.5em;
+    background: #fff;
+    color: #334155;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+    font-size: 10px;
+    box-shadow: 0 1px 0 rgba(2, 6, 23, 0.06);
+}
+
+.qui-addBrick__kbdLegend .label {
+    color: var(--muted);
 }
 
 .qui-addBrick-container--overlay-open {
@@ -335,10 +366,25 @@
     margin-bottom: 2rem;
 }
 
+.qui-addBrick-dialog__desc .brick-info {
+    padding: 1em;
+    border-radius: 1em;
+    border: 1px solid #e8edfb;
+    margin-block: 1em;
+    background: #f7f9ff;
+    display: grid;
+    gap: 0.5em;
+}
+
+.qui-addBrick-dialog__desc .brick-info__row {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+}
+
 .qui-addBrick-dialog input[type="text"] {
     width: 100%;
     height: var(--input-height);
-    padding: 0 12px;
+    padding: 0 1rem;
     border-radius: var(--input-borderRadius);
     border: 1px solid var(--input-borderColor);
     background: #fff;
@@ -348,7 +394,7 @@
 
 .qui-addBrick-dialog textarea {
     width: 100%;
-    padding: 12px;
+    padding: 1rem;
     border-radius: var(--input-borderRadius);
     border: 1px solid var(--input-borderColor);
     background: #fff;
@@ -356,7 +402,7 @@
     color: var(--input-color);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
         "Liberation Mono", "Courier New", monospace;
-    font-size: 13px;
+    font-size: 1rem;
     line-height: 1.4;
     resize: vertical;
 }
