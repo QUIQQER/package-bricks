@@ -781,6 +781,10 @@ This content does not replace the block content. You can still place the brick t
             <pl><![CDATA[Dodawanie stron]]></pl>
         </locale>
 
+        <locale name="brick.panel.category.settings">
+            <de><![CDATA[Verwaltung & Einstellungen]]></de>
+            <en><![CDATA[Management & settings]]></en>
+        </locale>
         <locale name="brick.panel.category.usage">
             <de><![CDATA[Verwendung]]></de>
             <en><![CDATA[Usage]]></en>

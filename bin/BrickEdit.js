@@ -182,7 +182,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             this.addCategory({
                 name: 'extra',
                 icon: 'fa fa-gears',
-                text: QUILocale.get('quiqqer/system', 'settings'),
+                text: QUILocale.get(lg, 'brick.panel.category.settings'),
                 events: {
                     onClick: this.showExtras
                 }
