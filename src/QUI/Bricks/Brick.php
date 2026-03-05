@@ -472,6 +472,7 @@ class Brick extends QUI\QDOM
      * @return string
      *
      * @throws QUI\Exception
+     * @throws Exception
      */
     public function create(): string
     {
@@ -479,17 +480,6 @@ class Brick extends QUI\QDOM
         $settings = array_filter($settings, function ($entry) {
             return is_object($entry) === false;
         });
-
-        $customCSS = '';
-        $customJS = '';
-
-        if (isset($settings['customCSS']) && is_string($settings['customCSS'])) {
-            $customCSS = $this->getScopedCustomCSS($settings['customCSS']);
-        }
-
-        if (isset($settings['customJS']) && is_string($settings['customJS'])) {
-            $customJS = trim($settings['customJS']);
-        }
 
         $cacheName = Manager::getBrickCacheNamespace()
             . md5($this->getType())
@@ -565,14 +555,8 @@ class Brick extends QUI\QDOM
             ]);
 
             $result = $Engine->fetch(dirname(__FILE__) . '/Brick.html');
-
-            if ($customCSS !== '') {
-                $result = '<style>' . $customCSS . '</style>' . $result;
-            }
-
-            if ($customJS !== '') {
-                $result .= '<script>' . $customJS . '</script>';
-            }
+            $result = $this->extendCustomCSS($result);
+            $result = $this->extendCustomJs($result);
 
             QUI\Cache\Manager::set($cacheName, [
                 'html' => $result,
@@ -617,14 +601,9 @@ class Brick extends QUI\QDOM
         }
 
         $result = $Control->create();
+        $result = $this->extendCustomCSS($result);
+        $result = $this->extendCustomJs($result);
 
-        if ($customCSS !== '') {
-            $result = '<style>' . $customCSS . '</style>' . $result;
-        }
-
-        if ($customJS !== '') {
-            $result .= '<script>' . $customJS . '</script>';
-        }
         $cssFiles = $Control->getCSSFiles();
 
         QUI\Cache\Manager::set($cacheName, [
@@ -634,6 +613,81 @@ class Brick extends QUI\QDOM
         ]);
 
         return $result;
+    }
+
+    protected function extendCustomCSS(string $result = ''): string
+    {
+        $settings = $this->getSettings();
+        $css = '';
+        $customCSS = '';
+
+        if (isset($settings['customCSS']) && is_string($settings['customCSS'])) {
+            $customCSS = $this->getScopedCustomCSS($settings['customCSS']);
+        }
+
+        if (!empty($customCSS)) {
+            $css = '<style>' . $customCSS . '</style>';
+        }
+
+        return $css . $result;
+    }
+
+    protected function extendCustomJs(string $result = ''): string
+    {
+        $settings = $this->getSettings();
+        $customJS = '';
+        $extraJs = '';
+
+        if (isset($settings['customJS']) && is_string($settings['customJS'])) {
+            $customJS = trim($settings['customJS']);
+        }
+
+        if (!empty($customJS)) {
+            $extraJs = "
+            <script>
+              (function () {
+                const script = document.currentScript;
+                const prevEl = script.previousElementSibling;
+                const brickId = parseInt('$this->id', 10);
+        
+                if (!prevEl) return;
+                if (brickId !== parseInt(prevEl.dataset.brickid, 10)) return;
+                if (!prevEl?.dataset?.qui) return;
+                
+                new Promise((resolve) => {
+                    // Kein QUI-Kontext -> trotzdem Custom-JS ausführen
+                    if (!prevEl?.dataset?.qui) {
+                      resolve(null);
+                      return;
+                    }
+                
+                    if (prevEl.dataset.quiid) {
+                      resolve(QUI.Controls.getById(prevEl.dataset.quiid) || null);
+                      return;
+                    }
+                
+                    const onLoad = () => resolve(QUI.Controls.getById(prevEl.dataset.quiid) || null);
+                
+                    if (typeof prevEl.addEvent === 'function') {
+                      prevEl.addEvent('load', onLoad);
+                      return;
+                    }
+                
+                    prevEl.addEventListener('load', onLoad, { once: true });
+                  }).then((control) => {
+                    try {
+                      (function (prevEl, brickId, control) {
+                        $customJS
+                      }).call(control ?? undefined, prevEl, brickId, control);
+                    } catch (err) {
+                      console.error('Custom JS runtime error:', err);
+                    }
+                });
+              })();
+            </script>";
+        }
+
+        return $result . $extraJs;
     }
 
     /**
