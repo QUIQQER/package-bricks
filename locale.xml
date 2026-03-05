@@ -789,6 +789,18 @@ This content does not replace the block content. You can still place the brick t
             <de><![CDATA[Verwendung]]></de>
             <en><![CDATA[Usage]]></en>
         </locale>
+        <locale name="brick.panel.category.customCSS">
+            <de><![CDATA[Eigenes CSS]]></de>
+            <en><![CDATA[Custom CSS]]></en>
+        </locale>
+        <locale name="brick.panel.category.customJS">
+            <de><![CDATA[Eigenes JavaScript]]></de>
+            <en><![CDATA[Custom JavaScript]]></en>
+        </locale>
+        <locale name="brick.panel.category.customCSS.hint">
+            <de><![CDATA[<strong>Hinweis:</strong> Das CSS wird automatisch auf diesen Baustein begrenzt (scoped). Du kannst z.B. einfache Regeln wie <code>p { font-size: 1.5rem; }</code> verwenden. <code>@media</code> und <code>@supports</code> werden ebenfalls unterstützt.]]></de>
+            <en><![CDATA[<strong>Note:</strong> The CSS is automatically limited to this brick (scoped). You can use simple rules like <code>p { font-size: 1.5rem; }</code>. <code>@media</code> and <code>@supports</code> are supported as well.]]></en>
+        </locale>
         <locale name="brick.panel.usage.grid.url">
             <de><![CDATA[Seiten URL]]></de>
             <en><![CDATA[Site URL]]></en>

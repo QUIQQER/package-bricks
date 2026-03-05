@@ -25,6 +25,7 @@ use function preg_replace_callback;
 use function str_replace;
 use function trim;
 
+
 /**
  * Class Events
  */
