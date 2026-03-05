@@ -959,12 +959,23 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     }
 
                     if (setting.type !== 'select') {
-                        Value = new Element('input', {
-                            type: setting.type,
-                            name: setting.name,
-                            'class': setting.class,
-                            id: extraFieldId
-                        });
+                        if (setting.type === 'textarea') {
+                            Value = new Element('textarea', {
+                                name: setting.name,
+                                'class': setting.class,
+                                id: extraFieldId,
+                                styles: {
+                                    height: 300
+                                }
+                            });
+                        } else {
+                            Value = new Element('input', {
+                                type: setting.type,
+                                name: setting.name,
+                                'class': setting.class,
+                                id: extraFieldId
+                            });
+                        }
 
                         if (setting['data-qui'] !== '') {
                             Value.set('data-qui', setting['data-qui']);
