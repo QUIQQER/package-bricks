@@ -48,6 +48,12 @@
                         </option>
                         {/foreach}
                     </select>
+                    {else if $setting.type == 'textarea'}
+                    <textarea id="{$setting.name}"
+                           name="{$setting.name}"
+                           class="{$setting.class}"
+                           data-qui="{$setting.$dataQuiKey}"
+                    ></textarea>
                     {else if $setting.type == 'checkbox'}
                     <input type="checkbox"
                            id="{$setting.name}"
