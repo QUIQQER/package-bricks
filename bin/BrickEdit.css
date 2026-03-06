@@ -11,6 +11,33 @@
     width: 100%;
 }
 
+.quiqqer-bricks-container .custom-css-js-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.quiqqer-bricks-container .custom-css-js-wrapper form {
+    flex-grow: 1;
+}
+
+.quiqqer-bricks-container .custom-css-js-wrapper .hint {
+    font-size: 0.75rem;
+    opacity: 0.75;
+    line-height: 1.5;
+}
+
+.quiqqer-bricks-container .custom-css-js-wrapper .hint code {
+    background: #f7f7f7 none repeat scroll 0 0;
+    border: 2px solid #efefef;
+    border-radius: 0.35em;
+    font-size: 0.9em;
+    margin: 0 0.25em;
+    padding: 0.25em 0.65em;
+}
+
 .brick-edit-content {
     margin-bottom: 0;
 }
