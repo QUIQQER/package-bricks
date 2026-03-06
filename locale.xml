@@ -781,9 +781,29 @@ This content does not replace the block content. You can still place the brick t
             <pl><![CDATA[Dodawanie stron]]></pl>
         </locale>
 
+        <locale name="brick.panel.category.settings">
+            <de><![CDATA[Verwaltung & Einstellungen]]></de>
+            <en><![CDATA[Management & settings]]></en>
+        </locale>
         <locale name="brick.panel.category.usage">
             <de><![CDATA[Verwendung]]></de>
             <en><![CDATA[Usage]]></en>
+        </locale>
+        <locale name="brick.panel.category.customCSS">
+            <de><![CDATA[Eigenes CSS]]></de>
+            <en><![CDATA[Custom CSS]]></en>
+        </locale>
+        <locale name="brick.panel.category.customJS">
+            <de><![CDATA[Eigenes JavaScript]]></de>
+            <en><![CDATA[Custom JavaScript]]></en>
+        </locale>
+        <locale name="brick.panel.category.customCSS.hint">
+            <de><![CDATA[<strong>Hinweis:</strong><br>Dein CSS wird automatisch auf diesen Baustein begrenzt (scoped). Du kannst z.B. einfache Regeln wie <code>p { font-size: 1.5rem; }</code> verwenden. Diese wirken sich nicht auf andere Elemente außerhalb dieses Bausteins aus. Auch in <code>@media</code> und <code>@supports</code> verschachtelte CSS-Regeln werden unterstützt.<br>Mehr Informationen zur Nutzung von Custom CSS findest du hier: <a href="https://dev.quiqqer.com/quiqqer/bricks/-/wikis/home/Verwendung/Eigenes-CSS" target="_blank">Bausteine - Custom CSS</a>]]></de>
+            <en><![CDATA[<strong>Note:</strong><br>Your CSS is automatically limited to this brick (scoped). You can use simple rules like <code>p { font-size: 1.5rem; }</code>. They won’t affect other elements outside this brick. CSS rules nested in <code>@media</code> and <code>@supports</code> are supported as well.<br>More information about using Custom CSS can be found here: <a href="https://dev.quiqqer.com/quiqqer/bricks/-/wikis/home/Verwendung/Eigenes-CSS" target="_blank">Bricks - Custom CSS</a>]]></en>
+        </locale>
+        <locale name="brick.panel.category.customJS.hint">
+            <de><![CDATA[<strong>Hinweis:</strong><br>Custom JS ist für kleinere funktionale Erweiterungen gedacht. Wenn der Baustein ein JavaScript-Control mitliefert, läuft dein Code automatisch im passenden Kontext (Zugriff auf <code>this</code> und <code>brickId</code>). Beachte: Dein Code greift erst, sobald das Control geladen ist – sichtbare Änderungen können dadurch nachträglich erscheinen. <br>Mehr Informationen findest du hier: <a href="https://dev.quiqqer.com/quiqqer/bricks/-/wikis/home/Verwendung/Eigenes-JS" target="_blank">Bausteine - Custom JS</a>]]></de>
+            <en><![CDATA[<strong>Note:</strong><br>Custom JS is intended for small functional extensions. If the brick provides a JavaScript control, your code runs automatically in the correct context (access to <code>this</code> and <code>brickId</code>). Please note: your code will only run once the control is loaded, so visible changes may appear slightly later. <br>More information can be found here: <a href="https://dev.quiqqer.com/quiqqer/bricks/-/wikis/home/Verwendung/Eigenes-JS" target="_blank">Bricks - Custom JS</a>]]></en>
         </locale>
         <locale name="brick.panel.usage.grid.url">
             <de><![CDATA[Seiten URL]]></de>
@@ -1545,6 +1565,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Alle]]></de>
             <en><![CDATA[All]]></en>
         </locale>
+        <locale name="addBrickWindow.aside.toolbar.keyboardNavigationText">
+            <de><![CDATA[<span class="label">Navigieren mit </span>
+                    <kbd class="key" title="Pfeil hoch">↑</kbd>
+                    <kbd class="key" title="Pfeil runter">↓</kbd> |
+                    <kbd class="key" title="Enter">Enter</kbd>
+                    <span class="label">erstellt den ausgewählten Baustein</span>]]></de>
+            <en><![CDATA[<span class="label">Navigate with </span>
+                    <kbd class="key" title="Arrow up">↑</kbd>
+                    <kbd class="key" title="Arrow down">↓</kbd> |
+                    <kbd class="key" title="Enter">Enter</kbd>
+                    <span class="label">creates the selected brick</span>]]></en>
+        </locale>
         <locale name="addBrickWindow.deprecated.badge">
             <de><![CDATA[Deprecated]]></de>
             <en><![CDATA[Deprecated]]></en>
@@ -1562,12 +1594,12 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Hide deprecated bricks]]></en>
         </locale>
         <locale name="addBrickWindow.aside.toolbar.count.single">
-            <de><![CDATA[Baustein]]></de>
-            <en><![CDATA[Brick]]></en>
+            <de><![CDATA[Baustein gefunden]]></de>
+            <en><![CDATA[brick found]]></en>
         </locale>
         <locale name="addBrickWindow.aside.toolbar.count.multi">
-            <de><![CDATA[Bausteine]]></de>
-            <en><![CDATA[Bricks]]></en>
+            <de><![CDATA[Bausteine gefunden]]></de>
+            <en><![CDATA[Bricks found]]></en>
         </locale>
         <locale name="addBrickWindow.aside.list.empty">
             <de><![CDATA[Keine passenden Bausteine gefunden]]></de>
@@ -1604,6 +1636,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="addBrickWindow.overlay.create.title">
             <de><![CDATA[Baustein erstellen]]></de>
             <en><![CDATA[Create brick]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.desc.title">
+            <de><![CDATA[Du möchtest folgenden Baustein erstellen:]]></de>
+            <en><![CDATA[You are going to create the following brick:]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.desc.label.name">
+            <de><![CDATA[Name]]></de>
+            <en><![CDATA[Name]]></en>
+        </locale>
+        <locale name="addBrickWindow.overlay.create.desc.label.type">
+            <de><![CDATA[Typ]]></de>
+            <en><![CDATA[Type]]></en>
         </locale>
         <locale name="addBrickWindow.overlay.create.desc">
             <de><![CDATA[Bitte gib einen eindeutigen Namen ein. Der Name darf noch nicht vergeben sein und sollte idealerweise beschreiben, was der Baustein macht.]]></de>

@@ -161,6 +161,8 @@ class Brick extends QUI\QDOM
             $this->settings[$attribute] = false;
         }
 
+        $this->settings['customCSS'] = '';
+        $this->settings['customJS'] = '';
 
         // control default settings
         if (is_object($Control)) {
@@ -303,12 +305,174 @@ class Brick extends QUI\QDOM
         return md5($hash);
     }
 
+    protected function getScopedCustomCSS(string $css): string
+    {
+        $css = trim($css);
+
+        if ($css === '') {
+            return '';
+        }
+
+        if (!$this->id) {
+            return $css;
+        }
+
+        $scope = '[data-brickid="' . $this->id . '"]';
+
+        if (str_contains($css, $scope)) {
+            return $css;
+        }
+
+        $scopeRules = function (string $input) use (&$scopeRules, $scope): string {
+            $out = '';
+            $len = strlen($input);
+            $i = 0;
+
+            while ($i < $len) {
+                $ch = $input[$i];
+
+                if (ctype_space($ch)) {
+                    $out .= $ch;
+                    $i++;
+                    continue;
+                }
+
+                if ($ch === '/' && ($i + 1) < $len && $input[$i + 1] === '*') {
+                    $end = strpos($input, '*/', $i + 2);
+
+                    if ($end === false) {
+                        $out .= substr($input, $i);
+                        break;
+                    }
+
+                    $out .= substr($input, $i, $end + 2 - $i);
+                    $i = $end + 2;
+                    continue;
+                }
+
+                if ($ch === '@') {
+                    $start = $i;
+                    $bracePos = strpos($input, '{', $i);
+
+                    if ($bracePos === false) {
+                        $out .= substr($input, $i);
+                        break;
+                    }
+
+                    $header = trim(substr($input, $start, $bracePos - $start));
+                    $lowerHeader = strtolower($header);
+
+                    $depth = 0;
+                    $j = $bracePos;
+
+                    while ($j < $len) {
+                        if ($input[$j] === '{') {
+                            $depth++;
+                        } elseif ($input[$j] === '}') {
+                            $depth--;
+                            if ($depth === 0) {
+                                break;
+                            }
+                        }
+
+                        $j++;
+                    }
+
+                    if ($j >= $len) {
+                        $out .= substr($input, $i);
+                        break;
+                    }
+
+                    $blockContent = substr($input, $bracePos + 1, $j - $bracePos - 1);
+
+                    if (str_starts_with($lowerHeader, '@media') || str_starts_with($lowerHeader, '@supports')) {
+                        $out .= $header . '{' . $scopeRules($blockContent) . '}';
+                    } else {
+                        $out .= substr($input, $start, ($j + 1) - $start);
+                    }
+
+                    $i = $j + 1;
+                    continue;
+                }
+
+                $bracePos = strpos($input, '{', $i);
+
+                if ($bracePos === false) {
+                    $out .= substr($input, $i);
+                    break;
+                }
+
+                $selector = trim(substr($input, $i, $bracePos - $i));
+
+                $depth = 0;
+                $j = $bracePos;
+
+                while ($j < $len) {
+                    if ($input[$j] === '{') {
+                        $depth++;
+                    } elseif ($input[$j] === '}') {
+                        $depth--;
+                        if ($depth === 0) {
+                            break;
+                        }
+                    }
+
+                    $j++;
+                }
+
+                if ($j >= $len) {
+                    $out .= substr($input, $i);
+                    break;
+                }
+
+                $declarations = substr($input, $bracePos + 1, $j - $bracePos - 1);
+
+                if ($selector === '') {
+                    $out .= '{' . $declarations . '}';
+                    $i = $j + 1;
+                    continue;
+                }
+
+                if (preg_match('/(^|,)[\s]*(:root|html|body)\b/i', $selector)) {
+                    $out .= $selector . '{' . $declarations . '}';
+                    $i = $j + 1;
+                    continue;
+                }
+
+                $selectors = array_map('trim', explode(',', $selector));
+                $scopedSelectors = [];
+
+                foreach ($selectors as $sel) {
+                    if ($sel === '') {
+                        continue;
+                    }
+
+                    $scopedSelectors[] = $scope . ' ' . $sel;
+                }
+
+                if (empty($scopedSelectors)) {
+                    $out .= $selector . '{' . $declarations . '}';
+                    $i = $j + 1;
+                    continue;
+                }
+
+                $out .= implode(', ', $scopedSelectors) . '{' . $declarations . '}';
+                $i = $j + 1;
+            }
+
+            return $out;
+        };
+
+        return $scopeRules($css);
+    }
+
     /**
      * Return the HTML of the Brick
      *
      * @return string
      *
      * @throws QUI\Exception
+     * @throws Exception
      */
     public function create(): string
     {
@@ -391,6 +555,8 @@ class Brick extends QUI\QDOM
             ]);
 
             $result = $Engine->fetch(dirname(__FILE__) . '/Brick.html');
+            $result = $this->extendCustomCSS($result);
+            $result = $this->extendCustomJs($result);
 
             QUI\Cache\Manager::set($cacheName, [
                 'html' => $result,
@@ -435,6 +601,9 @@ class Brick extends QUI\QDOM
         }
 
         $result = $Control->create();
+        $result = $this->extendCustomCSS($result);
+        $result = $this->extendCustomJs($result);
+
         $cssFiles = $Control->getCSSFiles();
 
         QUI\Cache\Manager::set($cacheName, [
@@ -444,6 +613,81 @@ class Brick extends QUI\QDOM
         ]);
 
         return $result;
+    }
+
+    protected function extendCustomCSS(string $result = ''): string
+    {
+        $settings = $this->getSettings();
+        $css = '';
+        $customCSS = '';
+
+        if (isset($settings['customCSS']) && is_string($settings['customCSS'])) {
+            $customCSS = $this->getScopedCustomCSS($settings['customCSS']);
+        }
+
+        if (!empty($customCSS)) {
+            $css = '<style>' . $customCSS . '</style>';
+        }
+
+        return $css . $result;
+    }
+
+    protected function extendCustomJs(string $result = ''): string
+    {
+        $settings = $this->getSettings();
+        $customJS = '';
+        $extraJs = '';
+
+        if (isset($settings['customJS']) && is_string($settings['customJS'])) {
+            $customJS = trim($settings['customJS']);
+        }
+
+        if (!empty($customJS)) {
+            $extraJs = "
+            <script>
+              (function () {
+                const script = document.currentScript;
+                const prevEl = script.previousElementSibling;
+                const brickId = parseInt('$this->id', 10);
+        
+                if (!prevEl) return;
+                if (brickId !== parseInt(prevEl.dataset.brickid, 10)) return;
+                if (!prevEl?.dataset?.qui) return;
+                
+                new Promise((resolve) => {
+                    // Kein QUI-Kontext -> trotzdem Custom-JS ausführen
+                    if (!prevEl?.dataset?.qui) {
+                      resolve(null);
+                      return;
+                    }
+                
+                    if (prevEl.dataset.quiid) {
+                      resolve(QUI.Controls.getById(prevEl.dataset.quiid) || null);
+                      return;
+                    }
+                
+                    const onLoad = () => resolve(QUI.Controls.getById(prevEl.dataset.quiid) || null);
+                
+                    if (typeof prevEl.addEvent === 'function') {
+                      prevEl.addEvent('load', onLoad);
+                      return;
+                    }
+                
+                    prevEl.addEventListener('load', onLoad, { once: true });
+                  }).then((control) => {
+                    try {
+                      (function (prevEl, brickId, control) {
+                        $customJS
+                      }).call(control ?? undefined, prevEl, brickId, control);
+                    } catch (err) {
+                      console.error('Custom JS runtime error:', err);
+                    }
+                });
+              })();
+            </script>";
+        }
+
+        return $result . $extraJs;
     }
 
     /**
