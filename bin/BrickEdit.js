@@ -507,7 +507,7 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     const hint = QUILocale.get(lg, 'brick.panel.category.customCSS.hint');
 
                     self.$Container.set('html', `
-                    <div class="custom-css-wrapper"><form></form><div class="hint">${hint}</div></div>
+                    <div class="custom-css-js-wrapper"><form></form><div class="hint">${hint}</div></div>
                     `);
 
                     require(['package/quiqqer/bricks/bin/Controls/backend/CustomCSS'], function (CustomCSS) {
@@ -556,7 +556,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 return self.$hideCategory();
             }).then(function () {
                 return new Promise(function (resolve) {
-                    self.$Container.set('html', '<form></form>');
+                    const hint = QUILocale.get(lg, 'brick.panel.category.customJS.hint');
+
+                    self.$Container.set('html', `
+                    <div class="custom-css-js-wrapper"><form></form><div class="hint">${hint}</div></div>
+                    `);
 
                     require(['package/quiqqer/bricks/bin/Controls/backend/CustomJS'], function (CustomJS) {
                         const Form = self.getContent().getElement('form');
