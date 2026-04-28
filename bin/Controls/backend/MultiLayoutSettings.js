@@ -45,6 +45,21 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
         LINK_TARGET_SELF,
         LINK_TARGET_BLANK
     ];
+    const TILE_MIN_HEIGHT_KEINE = 'keine';
+    const TILE_MIN_HEIGHT_KOMPAKT = 'kompakt';
+    const TILE_MIN_HEIGHT_STANDARD = 'standard';
+    const TILE_MIN_HEIGHT_GROSS = 'gross';
+    const TILE_MIN_HEIGHT_SEHR_GROSS = 'sehr-gross';
+    const TILE_MIN_HEIGHT_MANUELL = 'manuell';
+    const DEFAULT_TILE_MIN_HEIGHT_PRESET = TILE_MIN_HEIGHT_STANDARD;
+    const TILE_MIN_HEIGHT_PRESETS = {
+        keine: '0px',
+        kompakt: '120px',
+        standard: '200px',
+        gross: '280px',
+        'sehr-gross': '360px',
+        manuell: null
+    };
     const DEFAULT_COLUMNS = 12;
     const MIN_SLOT_WIDTH = 2;
     const BREAKPOINTS = ['desktop', 'tablet', 'mobile'];
@@ -215,6 +230,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                     click: this.$openLayoutEditor.bind(this)
                 }
             }).inject(ActionGroup);
+
         },
 
         $renderContentCanvas: function () {
@@ -237,6 +253,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                     settingsVisibility: {
                         contentPadding: true,
                         verticalAlign: true,
+                        customMinHeight: true,
                         background: true,
                         backgroundColor: true,
                         link: true,
@@ -252,6 +269,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                     'class': 'quiqqer-bricks-multiLayout-settings-slotWrap',
                     styles: this.$getSlotGridStyles(slot)
                 }).inject(Grid);
+
+                Wrap.setStyle('minHeight', this.$resolveAreaTileMinHeight(this.$document, slot.id));
 
                 AreaControl.inject(Wrap);
 
@@ -427,6 +446,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                     settingsVisibility: {
                         contentPadding: false,
                         verticalAlign: false,
+                        customMinHeight: false,
                         background: false,
                         backgroundColor: false,
                         link: false,
@@ -1076,9 +1096,81 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                 backgroundColor: area.backgroundColor || '#000000',
                 backgroundColorOpacity: backgroundColorOpacity,
                 textColor: area.textColor ? area.textColor.toString().trim() : '',
+                customMinHeightEnabled: !!area.customMinHeightEnabled,
+                customMinHeightPreset: this.$normalizeTileMinHeightPreset(area.customMinHeightPreset),
+                customMinHeightValue: area.customMinHeightValue
+                    ? area.customMinHeightValue.toString().trim()
+                    : '',
                 link: link,
                 verticalAlign: verticalAlign
             };
+        },
+
+        $normalizeTileMinHeightPreset: function (preset) {
+            return Object.prototype.hasOwnProperty.call(TILE_MIN_HEIGHT_PRESETS, preset)
+                ? preset
+                : DEFAULT_TILE_MIN_HEIGHT_PRESET;
+        },
+
+        $resolveTileMinHeight: function (preset, value) {
+            preset = this.$normalizeTileMinHeightPreset(preset);
+
+            if (preset === TILE_MIN_HEIGHT_MANUELL) {
+                value = value ? value.toString().trim() : '';
+
+                if (value) {
+                    return value;
+                }
+
+                return TILE_MIN_HEIGHT_PRESETS[DEFAULT_TILE_MIN_HEIGHT_PRESET];
+            }
+
+            return TILE_MIN_HEIGHT_PRESETS[preset];
+        },
+
+        $resolveAreaTileMinHeight: function (documentData, slotId) {
+            documentData = documentData || this.$document;
+
+            const area = documentData.areas && documentData.areas[slotId]
+                ? documentData.areas[slotId]
+                : null;
+
+            if (area && area.customMinHeightEnabled) {
+                const customValue = this.$resolveCustomTileMinHeight(area);
+
+                if (customValue) {
+                    return customValue;
+                }
+            }
+
+            return this.$resolveTileMinHeight(
+                this.$getGlobalTileMinHeightPreset(),
+                this.$getGlobalTileMinHeightValue()
+            );
+        },
+
+        $getGlobalTileMinHeightPreset: function () {
+            const Field = document.body.getElement('[name="tileMinHeightPreset"]');
+
+            return this.$normalizeTileMinHeightPreset(Field ? Field.value : null);
+        },
+
+        $getGlobalTileMinHeightValue: function () {
+            const Field = document.body.getElement('[name="tileMinHeightValue"]');
+
+            return Field ? Field.value.toString().trim() : '';
+        },
+
+        $resolveCustomTileMinHeight: function (area) {
+            const preset = this.$normalizeTileMinHeightPreset(area.customMinHeightPreset);
+
+            if (preset === TILE_MIN_HEIGHT_MANUELL) {
+                return area.customMinHeightValue
+                    ? area.customMinHeightValue.toString().trim()
+                    : '';
+            }
+
+            return TILE_MIN_HEIGHT_PRESETS[preset];
         },
 
         $normalizeLink: function (link) {

@@ -3,16 +3,29 @@
      data-area-count="{$areaCount}"
      data-tablet-breakpoint-max="{$tabletBreakpointMax}"
      data-mobile-breakpoint-max="{$mobileBreakpointMax}"
+     {if $documentStyle}style="{$documentStyle}"{/if}
 >
     <div class="quiqqer-bricks-controls-multiLayout-grid{if empty($gridGapEnabled)} quiqqer-bricks-controls-multiLayout-grid--noGap{/if}"
          style="grid-template-columns: repeat({$desktopColumns}, minmax(0, 1fr));"
     >
         {foreach from=$areas item=area}
-            <section class="quiqqer-bricks-controls-multiLayout-area quiqqer-bricks-controls-multiLayout-area--{$area.mode} quiqqer-bricks-controls-multiLayout-area--align-{$area.verticalAlign}{if $areaBackgroundEnabled} is-surface-subtle-enabled{/if}{if $area.backgroundEnabled && $area.backgroundImage} is-background-enabled{/if}{if $area.backgroundColorEnabled} is-background-color-enabled{/if}"
+            <section class="quiqqer-bricks-controls-multiLayout-area quiqqer-bricks-controls-multiLayout-area--{$area.mode} quiqqer-bricks-controls-multiLayout-area--align-{$area.verticalAlign}{if $areaBackgroundEnabled} is-surface-subtle-enabled{/if}"
                     data-slot-id="{$area.slotId}"
                     {if $area.slotStyle}style="{$area.slotStyle}"{/if}>
+                {if $area.backgroundEnabled && $area.backgroundImage}
+                    <div class="quiqqer-bricks-controls-multiLayout-area__background" aria-hidden="true">
+                        {image
+                            src=$area.backgroundImage
+                            class="quiqqer-bricks-controls-multiLayout-area__backgroundMedia"
+                            width=4000
+                        }
+                    </div>
+                {/if}
+                {if $area.backgroundColorEnabled}
+                    <div class="quiqqer-bricks-controls-multiLayout-area__overlay" aria-hidden="true"></div>
+                {/if}
                 {if $area.link}
-                    <a class="quiqqer-bricks-controls-multiLayout-areaLink"
+                    <a class="quiqqer-bricks-controls-multiLayout-area__link"
                        href="{$area.link.href}"
                        {if $area.link.rel}rel="{$area.link.rel}"{/if}
                        {if $area.link.target}target="{$area.link.target}"{/if}
@@ -20,8 +33,16 @@
                        aria-label="{if $area.link.title}{$area.link.title}{else}{$area.title}{/if}"
                     ></a>
                 {/if}
-                <div class="quiqqer-bricks-controls-multiLayout-areaContent{if empty($area.contentPadding)} quiqqer-bricks-controls-multiLayout-areaContent--noPadding{/if}">
-                    {$area.contentHtml}
+                <div class="quiqqer-bricks-controls-multiLayout-area__content{if empty($area.contentPadding)} quiqqer-bricks-controls-multiLayout-area__content--noPadding{/if}">
+                    {if $area.mode == 'image' && $area.image}
+                        {image
+                            src=$area.image
+                            class="quiqqer-bricks-controls-multiLayout-area__image{if $area.imageFit === 'auto'} quiqqer-bricks-controls-multiLayout-area__image--auto{/if}"
+                            width=2000
+                        }
+                    {else}
+                        {$area.contentHtml}
+                    {/if}
                 </div>
             </section>
         {/foreach}

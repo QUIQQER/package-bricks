@@ -1905,6 +1905,36 @@
                 <setting name="gridGapEnabled" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.multiLayout.gridGapEnabled"/>
                 </setting>
+
+                <setting name="tileMinHeightPreset" type="select">
+                    <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight"/>
+
+                    <option value="keine">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.keine"/>
+                    </option>
+                    <option value="kompakt">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.kompakt"/>
+                    </option>
+                    <option value="standard" default="1">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.standard"/>
+                    </option>
+                    <option value="gross">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.gross"/>
+                    </option>
+                    <option value="sehr-gross">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.sehrGross"/>
+                    </option>
+                    <option value="manuell">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.manuell"/>
+                    </option>
+                </setting>
+
+                <setting name="tileMinHeightValue" type="text">
+                    <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.value"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.value.help"/>
+                    </description>
+                </setting>
             </settings>
 
             <window>

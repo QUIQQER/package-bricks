@@ -13,6 +13,7 @@ class MultiLayoutTest extends TestCase
 
         try {
             $Control = new $class([
+                'tileMinHeightPreset' => 'gross',
                 'layoutAreas' => json_encode([
                     'preset' => 'preset-2-equal',
                     'breakpoints' => [
@@ -42,12 +43,24 @@ class MultiLayoutTest extends TestCase
                         'slot-1' => [
                             'title' => 'Bereich 1',
                             'mode' => 'editor',
-                            'content' => '<p>Test</p>'
+                            'content' => '<p>Test</p>',
+                            'backgroundEnabled' => true,
+                            'backgroundImage' => '/assets/background.png',
+                            'backgroundImageFit' => 'cover',
+                            'backgroundImagePosition' => 'center top',
+                            'backgroundColorEnabled' => true,
+                            'backgroundColor' => '#112233',
+                            'backgroundColorOpacity' => 35,
+                            'customMinHeightEnabled' => true,
+                            'customMinHeightPreset' => 'manuell',
+                            'customMinHeightValue' => '420px'
                         ],
                         'slot-2' => [
                             'title' => 'Bereich 2',
-                            'mode' => 'editor',
-                            'content' => '<p>Test 2</p>'
+                            'mode' => 'image',
+                            'image' => '/assets/foreground.png',
+                            'imageFit' => 'contain',
+                            'imageMaxWidth' => '480px'
                         ]
                     ]
                 ], JSON_THROW_ON_ERROR)
@@ -63,6 +76,20 @@ class MultiLayoutTest extends TestCase
             $this->assertIsString($html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-tablet-column', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-mobile-column', $html);
+            $this->assertStringNotContainsString('--quiqqer-bricks-multiLayout-bg-image', $html);
+            $this->assertStringContainsString('quiqqer-bricks-controls-multiLayout-area__background', $html);
+            $this->assertStringContainsString('quiqqer-bricks-controls-multiLayout-area__backgroundMedia', $html);
+            $this->assertStringContainsString('quiqqer-bricks-controls-multiLayout-area__overlay', $html);
+            $this->assertStringContainsString('quiqqer-bricks-controls-multiLayout-area__content', $html);
+            $this->assertStringContainsString('quiqqer-bricks-controls-multiLayout-area__image', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-fit: cover', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-position: center top', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-overlay-color: #112233', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-overlay-opacity: 0.35', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-fit: contain', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-max-width: 480px', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-tile-min-height: 280px', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-slot-min-height: 420px', $html);
             $this->assertStringContainsString('data-mobile-breakpoint-max="767"', $html);
         } catch (\Throwable) {
             $this->addToAssertionCount(1);

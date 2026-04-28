@@ -37,6 +37,15 @@ class MultiLayout extends QUI\Control
     protected const DEFAULT_COLUMNS = 12;
     protected const TABLET_BREAKPOINT_MAX = 1023;
     protected const MOBILE_BREAKPOINT_MAX = 767;
+    protected const DEFAULT_TILE_MIN_HEIGHT_PRESET = 'standard';
+    protected const TILE_MIN_HEIGHT_PRESETS = [
+        'keine' => '0px',
+        'kompakt' => '120px',
+        'standard' => '200px',
+        'gross' => '280px',
+        'sehr-gross' => '360px',
+        'manuell' => null
+    ];
     protected const LINK_REL_OPTIONS = [
         '',
         'nofollow',
@@ -221,6 +230,8 @@ class MultiLayout extends QUI\Control
             'layout' => self::getDefaultPresetId(),
             'areaBackgroundEnabled' => false,
             'gridGapEnabled' => true,
+            'tileMinHeightPreset' => self::DEFAULT_TILE_MIN_HEIGHT_PRESET,
+            'tileMinHeightValue' => '',
             'layoutAreas' => '[]'
         ]);
 
@@ -245,6 +256,7 @@ class MultiLayout extends QUI\Control
             'areas' => $areas,
             'areaCount' => count($areas),
             'desktopColumns' => $document['breakpoints']['desktop']['columns'],
+            'documentStyle' => $this->buildDocumentStyle($document),
             'tabletBreakpointMax' => self::TABLET_BREAKPOINT_MAX,
             'mobileBreakpointMax' => self::MOBILE_BREAKPOINT_MAX,
             'areaBackgroundEnabled' => !empty($this->getAttribute('areaBackgroundEnabled')),
@@ -571,6 +583,13 @@ class MultiLayout extends QUI\Control
             'textColor' => isset($area['textColor']) && is_string($area['textColor'])
                 ? trim($area['textColor'])
                 : '',
+            'customMinHeightEnabled' => !empty($area['customMinHeightEnabled']),
+            'customMinHeightPreset' => $this->normalizeTileMinHeightPreset(
+                $area['customMinHeightPreset'] ?? null
+            ),
+            'customMinHeightValue' => $this->normalizeTileMinHeightValue(
+                $area['customMinHeightValue'] ?? null
+            ),
             'link' => $link,
             'verticalAlign' => isset($area['verticalAlign']) && in_array($area['verticalAlign'], ['top', 'center', 'bottom'], true)
                 ? $area['verticalAlign']
@@ -716,19 +735,16 @@ class MultiLayout extends QUI\Control
         ];
 
         if (!empty($area['backgroundEnabled']) && !empty($area['backgroundImage'])) {
-            $style[] = '--quiqqer-bricks-multiLayout-bg-image: url(\''
-                . $this->escapeStyleValue((string)$area['backgroundImage'])
-                . '\')';
-            $style[] = '--quiqqer-bricks-multiLayout-bg-size: '
-                . $this->mapBackgroundSize((string)$area['backgroundImageFit']);
-            $style[] = '--quiqqer-bricks-multiLayout-bg-position: '
+            $style[] = '--quiqqer-bricks-multiLayout-background-fit: '
+                . $this->mapObjectFitValue((string)$area['backgroundImageFit']);
+            $style[] = '--quiqqer-bricks-multiLayout-background-position: '
                 . $this->escapeStyleValue((string)$area['backgroundImagePosition']);
         }
 
         if (!empty($area['backgroundColorEnabled'])) {
-            $style[] = '--quiqqer-bricks-multiLayout-background-color: '
+            $style[] = '--quiqqer-bricks-multiLayout-background-overlay-color: '
                 . $this->escapeStyleValue((string)$area['backgroundColor']);
-            $style[] = '--quiqqer-bricks-multiLayout-background-color-opacity: '
+            $style[] = '--quiqqer-bricks-multiLayout-background-overlay-opacity: '
                 . ((int)$area['backgroundColorOpacity'] / 100);
         }
 
@@ -737,7 +753,39 @@ class MultiLayout extends QUI\Control
                 . $this->escapeStyleValue((string)$area['textColor']);
         }
 
+        if (!empty($area['image'])) {
+            $style[] = '--quiqqer-bricks-multiLayout-image-fit: '
+                . $this->mapObjectFitValue((string)$area['imageFit']);
+            $style[] = '--quiqqer-bricks-multiLayout-image-max-width: '
+                . $this->escapeStyleValue(
+                    !empty($area['imageMaxWidth']) ? (string)$area['imageMaxWidth'] : '100%'
+                );
+        }
+
+        if (!empty($area['customMinHeightEnabled'])) {
+            $customMinHeight = $this->resolveCustomTileMinHeightValue($area);
+
+            if ($customMinHeight !== '') {
+                $style[] = '--quiqqer-bricks-multiLayout-slot-min-height: '
+                    . $this->escapeStyleValue($customMinHeight);
+            }
+        }
+
         return implode('; ', $style);
+    }
+
+    /**
+     * @param array<string, mixed> $document
+     */
+    protected function buildDocumentStyle(array $document): string
+    {
+        $tileMinHeight = $this->resolveTileMinHeightValue(
+            (string)$this->getAttribute('tileMinHeightPreset'),
+            (string)$this->getAttribute('tileMinHeightValue')
+        );
+
+        return '--quiqqer-bricks-multiLayout-tile-min-height: '
+            . $this->escapeStyleValue($tileMinHeight);
     }
 
     /**
@@ -771,13 +819,57 @@ class MultiLayout extends QUI\Control
         return null;
     }
 
-    protected function mapBackgroundSize(string $fit): string
+    protected function mapObjectFitValue(string $fit): string
     {
         return match ($fit) {
             'contain' => 'contain',
-            'auto' => 'auto',
             default => 'cover'
         };
+    }
+
+    protected function normalizeTileMinHeightPreset(mixed $preset): string
+    {
+        if (is_string($preset) && array_key_exists($preset, self::TILE_MIN_HEIGHT_PRESETS)) {
+            return $preset;
+        }
+
+        return self::DEFAULT_TILE_MIN_HEIGHT_PRESET;
+    }
+
+    protected function normalizeTileMinHeightValue(mixed $value): string
+    {
+        return is_string($value) ? trim($value) : '';
+    }
+
+    protected function resolveTileMinHeightValue(string $preset, string $manualValue): string
+    {
+        $preset = $this->normalizeTileMinHeightPreset($preset);
+
+        if ($preset === 'manuell') {
+            $manualValue = $this->normalizeTileMinHeightValue($manualValue);
+
+            if ($manualValue !== '') {
+                return $manualValue;
+            }
+
+            return (string)self::TILE_MIN_HEIGHT_PRESETS[self::DEFAULT_TILE_MIN_HEIGHT_PRESET];
+        }
+
+        return (string)self::TILE_MIN_HEIGHT_PRESETS[$preset];
+    }
+
+    /**
+     * @param array<string, mixed> $area
+     */
+    protected function resolveCustomTileMinHeightValue(array $area): string
+    {
+        $preset = $this->normalizeTileMinHeightPreset($area['customMinHeightPreset'] ?? null);
+
+        if ($preset === 'manuell') {
+            return $this->normalizeTileMinHeightValue($area['customMinHeightValue'] ?? null);
+        }
+
+        return (string)self::TILE_MIN_HEIGHT_PRESETS[$preset];
     }
 
     /**
@@ -787,7 +879,7 @@ class MultiLayout extends QUI\Control
     {
         return match ($area['mode']) {
             'brick' => $this->renderBrickContent((int)$area['brickId']),
-            'image' => $this->renderImageContent($area),
+            'image' => '',
             default => (string)$area['content']
         };
     }
@@ -805,32 +897,6 @@ class MultiLayout extends QUI\Control
         } catch (Exception) {
             return '';
         }
-    }
-
-    /**
-     * @param array<string, mixed> $area
-     */
-    protected function renderImageContent(array $area): string
-    {
-        if (empty($area['image'])) {
-            return '';
-        }
-
-        $classes = [
-            'quiqqer-bricks-controls-multiLayout-areaImage',
-            'quiqqer-bricks-controls-multiLayout-areaImage--' . $area['imageFit']
-        ];
-
-        $style = '';
-
-        if (!empty($area['imageMaxWidth'])) {
-            $style = ' style="max-width: ' . htmlspecialchars((string)$area['imageMaxWidth']) . ';"';
-        }
-
-        return '<img class="' . implode(' ', $classes)
-            . '" src="' . htmlspecialchars((string)$area['image'], ENT_QUOTES)
-            . '" alt="' . htmlspecialchars((string)$area['title'], ENT_QUOTES)
-            . '"' . $style . ' />';
     }
 
     protected function escapeStyleValue(string $value): string

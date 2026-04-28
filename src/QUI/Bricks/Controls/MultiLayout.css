@@ -6,7 +6,7 @@
     display: grid;
     gap: 1.5rem;
     grid-auto-flow: row dense;
-    grid-auto-rows: minmax(180px, auto);
+    grid-auto-rows: minmax(0, auto);
 }
 
 .quiqqer-bricks-controls-multiLayout-grid--noGap {
@@ -14,11 +14,12 @@
 }
 
 .quiqqer-bricks-controls-multiLayout-area {
-    --quiqqer-bricks-multiLayout-bg-image: none;
-    --quiqqer-bricks-multiLayout-bg-size: cover;
-    --quiqqer-bricks-multiLayout-bg-position: center center;
-    --quiqqer-bricks-multiLayout-background-color: #000000;
-    --quiqqer-bricks-multiLayout-background-color-opacity: 0;
+    --quiqqer-bricks-multiLayout-background-fit: cover;
+    --quiqqer-bricks-multiLayout-background-position: center center;
+    --quiqqer-bricks-multiLayout-background-overlay-color: #000000;
+    --quiqqer-bricks-multiLayout-background-overlay-opacity: 0;
+    --quiqqer-bricks-multiLayout-image-fit: cover;
+    --quiqqer-bricks-multiLayout-image-max-width: 100%;
     --quiqqer-bricks-multiLayout-text-color: inherit;
     --quiqqer-bricks-multiLayout-desktop-column: auto;
     --quiqqer-bricks-multiLayout-desktop-row: auto;
@@ -31,7 +32,10 @@
     display: flex;
     grid-column: var(--quiqqer-bricks-multiLayout-desktop-column);
     grid-row: var(--quiqqer-bricks-multiLayout-desktop-row);
-    min-height: 280px;
+    min-height: var(
+        --quiqqer-bricks-multiLayout-slot-min-height,
+        var(--quiqqer-bricks-multiLayout-tile-min-height, 200px)
+    );
     min-width: 0;
     overflow: hidden;
     position: relative;
@@ -45,37 +49,28 @@
     background: var(--qui-colors-surface-subtle);
 }
 
-.quiqqer-bricks-controls-multiLayout-area::before,
-.quiqqer-bricks-controls-multiLayout-area::after {
-    content: '';
+.quiqqer-bricks-controls-multiLayout-area__background,
+.quiqqer-bricks-controls-multiLayout-area__overlay {
     inset: 0;
     pointer-events: none;
     position: absolute;
     z-index: 0;
 }
 
-.quiqqer-bricks-controls-multiLayout-area::before {
-    background-image: var(--quiqqer-bricks-multiLayout-bg-image);
-    background-position: var(--quiqqer-bricks-multiLayout-bg-position);
-    background-repeat: no-repeat;
-    background-size: var(--quiqqer-bricks-multiLayout-bg-size);
-    opacity: 0;
+.quiqqer-bricks-controls-multiLayout-area__backgroundMedia {
+    display: block;
+    height: 100%;
+    object-fit: var(--quiqqer-bricks-multiLayout-background-fit);
+    object-position: var(--quiqqer-bricks-multiLayout-background-position);
+    width: 100%;
 }
 
-.quiqqer-bricks-controls-multiLayout-area.is-background-enabled::before {
-    opacity: 1;
+.quiqqer-bricks-controls-multiLayout-area__overlay {
+    background: var(--quiqqer-bricks-multiLayout-background-overlay-color);
+    opacity: var(--quiqqer-bricks-multiLayout-background-overlay-opacity);
 }
 
-.quiqqer-bricks-controls-multiLayout-area::after {
-    background: var(--quiqqer-bricks-multiLayout-background-color);
-    opacity: 0;
-}
-
-.quiqqer-bricks-controls-multiLayout-area.is-background-color-enabled::after {
-    opacity: var(--quiqqer-bricks-multiLayout-background-color-opacity);
-}
-
-.quiqqer-bricks-controls-multiLayout-areaContent {
+.quiqqer-bricks-controls-multiLayout-area__content {
     color: var(--quiqqer-bricks-multiLayout-text-color);
     display: flex;
     flex: 1;
@@ -84,65 +79,57 @@
     padding: 1.5rem;
     position: relative;
     width: 100%;
+    z-index: 2;
 }
 
-.quiqqer-bricks-controls-multiLayout-areaLink {
+.quiqqer-bricks-controls-multiLayout-area--image .quiqqer-bricks-controls-multiLayout-area__content {
+    align-items: center;
+}
+
+.quiqqer-bricks-controls-multiLayout-area__link {
     inset: 0;
     position: absolute;
     z-index: 1;
 }
 
-.quiqqer-bricks-controls-multiLayout-areaContent a,
-.quiqqer-bricks-controls-multiLayout-areaContent button,
-.quiqqer-bricks-controls-multiLayout-areaContent input,
-.quiqqer-bricks-controls-multiLayout-areaContent select,
-.quiqqer-bricks-controls-multiLayout-areaContent textarea,
-.quiqqer-bricks-controls-multiLayout-areaContent [role="button"] {
+.quiqqer-bricks-controls-multiLayout-area__content a,
+.quiqqer-bricks-controls-multiLayout-area__content button,
+.quiqqer-bricks-controls-multiLayout-area__content input,
+.quiqqer-bricks-controls-multiLayout-area__content select,
+.quiqqer-bricks-controls-multiLayout-area__content textarea,
+.quiqqer-bricks-controls-multiLayout-area__content [role="button"] {
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
-.quiqqer-bricks-controls-multiLayout-areaContent--noPadding {
+.quiqqer-bricks-controls-multiLayout-area__content--noPadding {
     padding: 0;
 }
 
-.quiqqer-bricks-controls-multiLayout-area--align-top .quiqqer-bricks-controls-multiLayout-areaContent {
+.quiqqer-bricks-controls-multiLayout-area--align-top .quiqqer-bricks-controls-multiLayout-area__content {
     justify-content: flex-start;
 }
 
-.quiqqer-bricks-controls-multiLayout-area--align-center .quiqqer-bricks-controls-multiLayout-areaContent {
+.quiqqer-bricks-controls-multiLayout-area--align-center .quiqqer-bricks-controls-multiLayout-area__content {
     justify-content: center;
 }
 
-.quiqqer-bricks-controls-multiLayout-area--align-bottom .quiqqer-bricks-controls-multiLayout-areaContent {
+.quiqqer-bricks-controls-multiLayout-area--align-bottom .quiqqer-bricks-controls-multiLayout-area__content {
     justify-content: flex-end;
 }
 
-.quiqqer-bricks-controls-multiLayout-areaImage {
+.quiqqer-bricks-controls-multiLayout-area__image {
     display: block;
-    height: auto;
-    max-width: 100%;
-}
-
-.quiqqer-bricks-controls-multiLayout-area--image .quiqqer-bricks-controls-multiLayout-areaContent {
-    align-items: center;
-}
-
-.quiqqer-bricks-controls-multiLayout-areaImage--cover,
-.quiqqer-bricks-controls-multiLayout-areaImage--contain {
     height: 100%;
+    max-width: var(--quiqqer-bricks-multiLayout-image-max-width);
+    object-fit: var(--quiqqer-bricks-multiLayout-image-fit);
     width: 100%;
 }
 
-.quiqqer-bricks-controls-multiLayout-areaImage--cover {
-    object-fit: cover;
-}
-
-.quiqqer-bricks-controls-multiLayout-areaImage--contain {
+.quiqqer-bricks-controls-multiLayout-area__image--auto {
+    height: auto;
+    max-width: min(100%, var(--quiqqer-bricks-multiLayout-image-max-width));
     object-fit: contain;
-}
-
-.quiqqer-bricks-controls-multiLayout-areaImage--auto {
     width: auto;
 }
 
@@ -161,6 +148,5 @@
     .quiqqer-bricks-controls-multiLayout-area {
         grid-column: var(--quiqqer-bricks-multiLayout-mobile-column);
         grid-row: var(--quiqqer-bricks-multiLayout-mobile-row);
-        min-height: 0;
     }
 }

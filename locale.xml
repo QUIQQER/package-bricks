@@ -2816,6 +2816,42 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Abstand zwischen Bereichen]]></de>
             <en><![CDATA[Spacing between areas]]></en>
         </locale>
+        <locale name="brick.multiLayout.tileMinHeight">
+            <de><![CDATA[Mindesthöhe der Kacheln]]></de>
+            <en><![CDATA[Minimum height of tiles]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.kompakt">
+            <de><![CDATA[Kompakt]]></de>
+            <en><![CDATA[Compact]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.standard">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Standard]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.gross">
+            <de><![CDATA[Groß]]></de>
+            <en><![CDATA[Large]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.sehrGross">
+            <de><![CDATA[Sehr groß]]></de>
+            <en><![CDATA[Very large]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.manuell">
+            <de><![CDATA[Manuell]]></de>
+            <en><![CDATA[Manual]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.keine">
+            <de><![CDATA[Keine Mindesthöhe]]></de>
+            <en><![CDATA[No minimum height]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.value">
+            <de><![CDATA[Eigener Wert für Mindesthöhe]]></de>
+            <en><![CDATA[Custom minimum height value]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.value.help">
+            <de><![CDATA[Wird nur bei „Manuell“ verwendet, z. B. 240px, 18rem, 30vh]]></de>
+            <en><![CDATA[Used only for “Manual”, e.g. 240px, 18rem, 30vh]]></en>
+        </locale>
         <locale name="blockSlot.mode">
             <de><![CDATA[Modus]]></de>
             <en><![CDATA[Mode]]></en>
@@ -2855,6 +2891,50 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="blockSlot.verticalAlign.bottom">
             <de><![CDATA[Unten]]></de>
             <en><![CDATA[Bottom]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.section">
+            <de><![CDATA[Mindesthöhe]]></de>
+            <en><![CDATA[Minimum height]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.enabled">
+            <de><![CDATA[Eigene Mindesthöhe verwenden]]></de>
+            <en><![CDATA[Use custom minimum height]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.select">
+            <de><![CDATA[Mindesthöhe]]></de>
+            <en><![CDATA[Minimum height]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.value">
+            <de><![CDATA[Eigener Wert]]></de>
+            <en><![CDATA[Custom value]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.value.help">
+            <de><![CDATA[z. B. 240px, 18rem, 30vh]]></de>
+            <en><![CDATA[e.g. 240px, 18rem, 30vh]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.kompakt">
+            <de><![CDATA[Kompakt]]></de>
+            <en><![CDATA[Compact]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.standard">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Standard]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.gross">
+            <de><![CDATA[Groß]]></de>
+            <en><![CDATA[Large]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.sehrGross">
+            <de><![CDATA[Sehr groß]]></de>
+            <en><![CDATA[Very large]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.manuell">
+            <de><![CDATA[Manuell]]></de>
+            <en><![CDATA[Manual]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.keine">
+            <de><![CDATA[Keine Mindesthöhe]]></de>
+            <en><![CDATA[No minimum height]]></en>
         </locale>
         <locale name="blockSlot.editor.empty">
             <de><![CDATA[Noch kein Inhalt hinterlegt]]></de>

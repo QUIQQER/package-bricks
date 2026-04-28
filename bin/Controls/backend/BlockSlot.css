@@ -145,7 +145,6 @@
 
 .quiqqer-bricks-blockSlot-previewHtml {
     color: inherit;
-    flex: 1;
     font-size: 0.98rem;
     line-height: 1.6;
     overflow: hidden;
@@ -153,6 +152,25 @@
     position: relative;
     /*max-height: 100px;*/
     /*mask-image: linear-gradient(to bottom, black 80%, transparent)*/
+}
+
+.quiqqer-bricks-blockSlot-previewContent {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.quiqqer-bricks-blockSlot-previewContent--alignTop {
+    justify-content: flex-start;
+}
+
+.quiqqer-bricks-blockSlot-previewContent--alignCenter {
+    justify-content: center;
+}
+
+.quiqqer-bricks-blockSlot-previewContent--alignBottom {
+    justify-content: flex-end;
 }
 
 .quiqqer-bricks-blockSlot-previewHtml > *:first-child {

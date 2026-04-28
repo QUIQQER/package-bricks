@@ -24,6 +24,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
     const DEFAULT_SETTINGS_VISIBILITY = {
         contentPadding: true,
         verticalAlign: true,
+        customMinHeight: true,
         background: true,
         backgroundColor: true,
         textColor: true,
@@ -38,7 +39,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
     const BACKGROUND_POSITION_BOTTOM = 'center bottom';
     const BACKGROUND_POSITION_LEFT = 'left center';
     const BACKGROUND_POSITION_RIGHT = 'right center';
+    const VERTICAL_ALIGN_TOP = 'top';
     const VERTICAL_ALIGN_CENTER = 'center';
+    const VERTICAL_ALIGN_BOTTOM = 'bottom';
     const LINK_TARGET_SELF = '_self';
     const LINK_TARGET_BLANK = '_blank';
     const LINK_REL_OPTIONS = [
@@ -54,6 +57,21 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
         LINK_TARGET_SELF,
         LINK_TARGET_BLANK
     ];
+    const TILE_MIN_HEIGHT_KEINE = 'keine';
+    const TILE_MIN_HEIGHT_KOMPAKT = 'kompakt';
+    const TILE_MIN_HEIGHT_STANDARD = 'standard';
+    const TILE_MIN_HEIGHT_GROSS = 'gross';
+    const TILE_MIN_HEIGHT_SEHR_GROSS = 'sehr-gross';
+    const TILE_MIN_HEIGHT_MANUELL = 'manuell';
+    const DEFAULT_TILE_MIN_HEIGHT_PRESET = TILE_MIN_HEIGHT_STANDARD;
+    const TILE_MIN_HEIGHT_PRESETS = {
+        keine: '0px',
+        kompakt: '120px',
+        standard: '200px',
+        gross: '280px',
+        'sehr-gross': '360px',
+        manuell: null
+    };
 
     return new Class({
 
@@ -416,10 +434,29 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 return;
             }
 
+            const PreviewContent = new Element('div', {
+                'class': 'quiqqer-bricks-blockSlot-previewContent '
+                    + this.$getPreviewVerticalAlignClass(area)
+            }).inject(PreviewButton);
+
             new Element('div', {
                 'class': 'quiqqer-bricks-blockSlot-previewHtml',
                 html: area.content
-            }).inject(PreviewButton);
+            }).inject(PreviewContent);
+        },
+
+        $getPreviewVerticalAlignClass: function (area) {
+            switch (area.verticalAlign) {
+                case VERTICAL_ALIGN_TOP:
+                    return 'quiqqer-bricks-blockSlot-previewContent--alignTop';
+
+                case VERTICAL_ALIGN_BOTTOM:
+                    return 'quiqqer-bricks-blockSlot-previewContent--alignBottom';
+
+                case VERTICAL_ALIGN_CENTER:
+                default:
+                    return 'quiqqer-bricks-blockSlot-previewContent--alignCenter';
+            }
         },
 
         $fillBrickPreview: function (PreviewButton, area) {
@@ -684,6 +721,12 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             );
                         }
 
+                        let CustomMinHeightSettings = null;
+
+                        if (this.$isSettingVisible('customMinHeight')) {
+                            CustomMinHeightSettings = this.$createPopupCustomMinHeightSettings(Form, area);
+                        }
+
                         let BackgroundOptions = null;
                         let BackgroundEnabledField = null;
 
@@ -736,6 +779,25 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             ImageSettings.setStyle('display', mode === MODE_IMAGE ? '' : 'none');
                         };
 
+                        const toggleCustomMinHeightSettings = function () {
+                            if (!CustomMinHeightSettings) {
+                                return;
+                            }
+
+                            CustomMinHeightSettings.options.setStyle(
+                                'display',
+                                CustomMinHeightSettings.enabledField.checked ? '' : 'none'
+                            );
+
+                            CustomMinHeightSettings.manualField.setStyle(
+                                'display',
+                                CustomMinHeightSettings.enabledField.checked
+                                    && CustomMinHeightSettings.presetField.value === TILE_MIN_HEIGHT_MANUELL
+                                    ? ''
+                                    : 'none'
+                            );
+                        };
+
                         const toggleBackgroundSettings = function () {
                             if (!BackgroundOptions || !BackgroundEnabledField) {
                                 return;
@@ -784,6 +846,17 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             ModeField.addEvent('change', toggleImageSettings);
                         }
 
+                        if (CustomMinHeightSettings) {
+                            CustomMinHeightSettings.enabledField.addEvent(
+                                'change',
+                                toggleCustomMinHeightSettings
+                            );
+                            CustomMinHeightSettings.presetField.addEvent(
+                                'change',
+                                toggleCustomMinHeightSettings
+                            );
+                        }
+
                         if (BackgroundEnabledField) {
                             BackgroundEnabledField.addEvent('change', toggleBackgroundSettings);
                         }
@@ -801,6 +874,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         }
 
                         toggleImageSettings();
+                        toggleCustomMinHeightSettings();
                         toggleBackgroundSettings();
                         toggleOverlaySettings();
                         toggleTextColorSettings();
@@ -819,6 +893,15 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         const modeField = Content.getElement('select[data-name="mode"]');
                         const contentPaddingField = Content.getElement('input[data-name="contentPadding"]');
                         const verticalAlignField = Content.getElement('select[data-name="verticalAlign"]');
+                        const customMinHeightEnabledField = Content.getElement(
+                            'input[data-name="customMinHeightEnabled"]'
+                        );
+                        const customMinHeightPresetField = Content.getElement(
+                            'select[data-name="customMinHeightPreset"]'
+                        );
+                        const customMinHeightValueField = Content.getElement(
+                            'input[data-name="customMinHeightValue"]'
+                        );
                         const imageFitField = Content.getElement('select[data-name="imageFit"]');
                         const imageMaxWidthField = Content.getElement('input[data-name="imageMaxWidth"]');
                         const backgroundEnabledField = Content.getElement('input[data-name="backgroundEnabled"]');
@@ -855,6 +938,20 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             area.verticalAlign = verticalAlignField
                                 ? verticalAlignField.value
                                 : VERTICAL_ALIGN_CENTER;
+                        }
+
+                        if (this.$isSettingVisible('customMinHeight')) {
+                            area.customMinHeightEnabled = !!(
+                                customMinHeightEnabledField && customMinHeightEnabledField.checked
+                            );
+                            area.customMinHeightPreset = this.$normalizeTileMinHeightPreset(
+                                customMinHeightPresetField
+                                    ? customMinHeightPresetField.value
+                                    : area.customMinHeightPreset
+                            );
+                            area.customMinHeightValue = customMinHeightValueField
+                                ? customMinHeightValueField.value.trim()
+                                : '';
                         }
 
                         if (this.$isSettingVisible('image')) {
@@ -1239,6 +1336,48 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             return Section;
         },
 
+        $createPopupCustomMinHeightSettings: function (Parent, area) {
+            const Section = this.$createPopupSection(
+                Parent,
+                this.$getLocale('customMinHeight.section')
+            );
+            const EnabledField = this.$createPopupCheckboxField(
+                Section,
+                this.$getLocale('customMinHeight.enabled'),
+                !!area.customMinHeightEnabled,
+                'customMinHeightEnabled'
+            );
+            const Options = new Element('div', {
+                'class': 'quiqqer-bricks-blockSlot-popupSectionBody'
+            }).inject(Section);
+            const PresetField = this.$createPopupSelectField(
+                Options,
+                this.$getLocale('customMinHeight.select'),
+                this.$getTileMinHeightOptions(),
+                this.$normalizeTileMinHeightPreset(area.customMinHeightPreset),
+                'data-name',
+                'customMinHeightPreset'
+            );
+            const ManualField = this.$createPopupInputField(Options, {
+                label: this.$getLocale('customMinHeight.value'),
+                type: 'text',
+                value: area.customMinHeightValue || '',
+                name: 'customMinHeightValue'
+            });
+
+            new Element('div', {
+                'class': 'quiqqer-bricks-blockSlot-popupHint',
+                text: this.$getLocale('customMinHeight.value.help')
+            }).inject(ManualField);
+
+            return {
+                enabledField: EnabledField,
+                options: Options,
+                presetField: PresetField,
+                manualField: ManualField
+            };
+        },
+
         $createPopupSection: function (Parent, title) {
             const Section = new Element('div', {
                 'class': 'quiqqer-bricks-blockSlot-popupSection'
@@ -1443,6 +1582,41 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 target: target,
                 title: link.title ? link.title.toString().trim() : ''
             };
+        },
+
+        $normalizeTileMinHeightPreset: function (preset) {
+            return Object.prototype.hasOwnProperty.call(TILE_MIN_HEIGHT_PRESETS, preset)
+                ? preset
+                : DEFAULT_TILE_MIN_HEIGHT_PRESET;
+        },
+
+        $getTileMinHeightOptions: function () {
+            return [
+                {
+                    value: TILE_MIN_HEIGHT_KEINE,
+                    text: this.$getLocale('customMinHeight.option.keine')
+                },
+                {
+                    value: TILE_MIN_HEIGHT_KOMPAKT,
+                    text: this.$getLocale('customMinHeight.option.kompakt')
+                },
+                {
+                    value: TILE_MIN_HEIGHT_STANDARD,
+                    text: this.$getLocale('customMinHeight.option.standard')
+                },
+                {
+                    value: TILE_MIN_HEIGHT_GROSS,
+                    text: this.$getLocale('customMinHeight.option.gross')
+                },
+                {
+                    value: TILE_MIN_HEIGHT_SEHR_GROSS,
+                    text: this.$getLocale('customMinHeight.option.sehrGross')
+                },
+                {
+                    value: TILE_MIN_HEIGHT_MANUELL,
+                    text: this.$getLocale('customMinHeight.option.manuell')
+                }
+            ];
         },
 
         $canRemoveAreaContent: function (area) {
