@@ -1,0 +1,28 @@
+.quiqqer-accordion-list--simple {
+    --accordion-columns-gap: 1rem;
+    --accordion-items-gap: 0.75rem;
+}
+
+.quiqqer-accordion-item--simple .quiqqer-accordion-item-header {
+    align-items: flex-start;
+    cursor: pointer;
+    display: flex;
+    font-size: var(--accordion-header-font-size, 1rem);
+    font-weight: var(--accordion-header-font-weight, 400);
+    margin: 0;
+    padding: 0;
+}
+
+.quiqqer-accordion-item--simple .quiqqer-accordion-item-header-icon {
+    margin-top: 0.1em;
+}
+
+.quiqqer-accordion-list--icon-left .quiqqer-accordion-item--simple .quiqqer-accordion-item-header-icon {
+    margin-left: 0;
+    margin-right: 0.75rem;
+    order: -1;
+}
+
+.quiqqer-accordion-item--simple .quiqqer-accordion-item-content {
+    padding: 0.75rem 0 0;
+}

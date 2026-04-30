@@ -1948,6 +1948,65 @@
             </description>
 
             <settings>
+                <setting name="template" type="select">
+                    <locale group="quiqqer/bricks" var="brick.accordion.template"/>
+
+                    <option value="default">
+                        <locale group="quiqqer/bricks" var="brick.accordion.template.default"/>
+                    </option>
+                    <option value="simple">
+                        <locale group="quiqqer/bricks" var="brick.accordion.template.simple"/>
+                    </option>
+                    <option value="boxOutline">
+                        <locale group="quiqqer/bricks" var="brick.accordion.template.boxOutline"/>
+                    </option>
+                    <option value="boxFill">
+                        <locale group="quiqqer/bricks" var="brick.accordion.template.boxFill"/>
+                    </option>
+                    <option value="boxFillSubtle">
+                        <locale group="quiqqer/bricks" var="brick.accordion.template.boxFillSubtle"/>
+                    </option>
+                    <option value="softCard">
+                        <locale group="quiqqer/bricks" var="brick.accordion.template.softCard"/>
+                    </option>
+                    <option value="softCardFill">
+                        <locale group="quiqqer/bricks" var="brick.accordion.template.softCardFill"/>
+                    </option>
+                </setting>
+
+                <setting name="columns" type="select">
+                    <locale group="quiqqer/bricks" var="brick.accordion.columns"/>
+
+                    <option value="1">
+                        <locale group="quiqqer/bricks" var="brick.accordion.columns.1"/>
+                    </option>
+                    <option value="2">
+                        <locale group="quiqqer/bricks" var="brick.accordion.columns.2"/>
+                    </option>
+                </setting>
+
+                <setting name="iconPosition" type="select">
+                    <locale group="quiqqer/bricks" var="brick.accordion.iconPosition"/>
+
+                    <option value="right">
+                        <locale group="quiqqer/bricks" var="brick.accordion.iconPosition.right"/>
+                    </option>
+                    <option value="left">
+                        <locale group="quiqqer/bricks" var="brick.accordion.iconPosition.left"/>
+                    </option>
+                </setting>
+
+                <setting name="iconStyle" type="select">
+                    <locale group="quiqqer/bricks" var="brick.accordion.iconStyle"/>
+
+                    <option value="angle">
+                        <locale group="quiqqer/bricks" var="brick.accordion.iconStyle.angle"/>
+                    </option>
+                    <option value="plus">
+                        <locale group="quiqqer/bricks" var="brick.accordion.iconStyle.plus"/>
+                    </option>
+                </setting>
+
                 <setting name="stayOpen" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.accordion.stayOpen"/>
 

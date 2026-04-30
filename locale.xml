@@ -3069,6 +3069,74 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
                 <![CDATA[Baustein mit ausklappbaren Elementen. Es kann zum Bauen der Hilfe oder FAQ Einträge benutzt werden.]]></de>
             <en><![CDATA[Brick with fold-out elements. It can be used to build help or FAQ entries.]]></en>
         </locale>
+        <locale name="brick.accordion.template">
+            <de><![CDATA[Layout]]></de>
+            <en><![CDATA[Template]]></en>
+        </locale>
+        <locale name="brick.accordion.template.default">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Default]]></en>
+        </locale>
+        <locale name="brick.accordion.template.simple">
+            <de><![CDATA[Einfach]]></de>
+            <en><![CDATA[Simple]]></en>
+        </locale>
+        <locale name="brick.accordion.template.boxOutline">
+            <de><![CDATA[Box Outline]]></de>
+            <en><![CDATA[Box Outline]]></en>
+        </locale>
+        <locale name="brick.accordion.template.boxFill">
+            <de><![CDATA[Box Fill]]></de>
+            <en><![CDATA[Box Fill]]></en>
+        </locale>
+        <locale name="brick.accordion.template.boxFillSubtle">
+            <de><![CDATA[Box Fill Subtle]]></de>
+            <en><![CDATA[Box Fill Subtle]]></en>
+        </locale>
+        <locale name="brick.accordion.template.softCard">
+            <de><![CDATA[Soft Card]]></de>
+            <en><![CDATA[Soft Card]]></en>
+        </locale>
+        <locale name="brick.accordion.template.softCardFill">
+            <de><![CDATA[Soft Card Fill]]></de>
+            <en><![CDATA[Soft Card Fill]]></en>
+        </locale>
+        <locale name="brick.accordion.columns">
+            <de><![CDATA[Spalten]]></de>
+            <en><![CDATA[Columns]]></en>
+        </locale>
+        <locale name="brick.accordion.columns.1">
+            <de><![CDATA[1 Spalte]]></de>
+            <en><![CDATA[1 column]]></en>
+        </locale>
+        <locale name="brick.accordion.columns.2">
+            <de><![CDATA[2 Spalten]]></de>
+            <en><![CDATA[2 columns]]></en>
+        </locale>
+        <locale name="brick.accordion.iconPosition">
+            <de><![CDATA[Icon-Position]]></de>
+            <en><![CDATA[Icon position]]></en>
+        </locale>
+        <locale name="brick.accordion.iconPosition.right">
+            <de><![CDATA[Rechts]]></de>
+            <en><![CDATA[Right]]></en>
+        </locale>
+        <locale name="brick.accordion.iconPosition.left">
+            <de><![CDATA[Links]]></de>
+            <en><![CDATA[Left]]></en>
+        </locale>
+        <locale name="brick.accordion.iconStyle">
+            <de><![CDATA[Icon-Stil]]></de>
+            <en><![CDATA[Icon style]]></en>
+        </locale>
+        <locale name="brick.accordion.iconStyle.angle">
+            <de><![CDATA[Chevron]]></de>
+            <en><![CDATA[Chevron]]></en>
+        </locale>
+        <locale name="brick.accordion.iconStyle.plus">
+            <de><![CDATA[Plus]]></de>
+            <en><![CDATA[Plus]]></en>
+        </locale>
         <locale name="brick.accordion.stayOpen">
             <de><![CDATA[Einträge bleiben auf]]></de>
             <en><![CDATA[Entries stay open]]></en>

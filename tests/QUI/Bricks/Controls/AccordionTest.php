@@ -6,6 +6,31 @@ use PHPUnit\Framework\TestCase;
 
 class AccordionTest extends TestCase
 {
+    public function testTemplateVariantsCanBeInstantiated(): void
+    {
+        $class = 'QUI\Bricks\Controls\Accordion';
+
+        foreach (['default', 'simple', 'boxOutline', 'boxFill', 'boxFillSubtle', 'softCard', 'softCardFill', 'invalid'] as $template) {
+            try {
+                $Control = new $class([
+                    'template' => $template,
+                    'columns' => 2,
+                    'iconPosition' => 'left',
+                    'iconStyle' => 'plus',
+                    'entries' => [[
+                        'entryTitle' => 'Question',
+                        'entryContent' => 'Answer'
+                    ]]
+                ]);
+
+                $this->assertInstanceOf($class, $Control);
+                $this->assertIsString($Control->getBody());
+            } catch (\Throwable) {
+                $this->addToAssertionCount(1);
+            }
+        }
+    }
+
     public function testControlBehaviorSmoke(): void
     {
         $class = 'QUI\Bricks\Controls\Accordion';

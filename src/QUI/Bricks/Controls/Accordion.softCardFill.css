@@ -1,0 +1,71 @@
+.quiqqer-accordion-list--softCardFill {
+    --accordion-columns-gap: 1rem;
+    --accordion-items-gap: 1rem;
+}
+
+.quiqqer-accordion-item--softCardFill {
+    background: var(
+        --accordion-softCardFill-item-bg,
+        var(--theme--qui-colors-surface-soft, var(--qui-colors-surface-subtle))
+    );
+    border-radius: var(--accordion-softCardFill-radius, var(--qui-radius-card));
+    color: var(--accordion-softCardFill-item-color, inherit);
+}
+
+.quiqqer-accordion-item--softCardFill[data-open="1"] {
+    background: var(
+        --accordion-softCardFill-item-open-bg,
+        var(--qui-colors-primary)
+    );
+    color: var(
+        --accordion-softCardFill-item-open-color,
+        var(--qui-colors-primary--accent)
+    );
+}
+
+.quiqqer-accordion-item--softCardFill .quiqqer-accordion-item-header--softCard {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    font-size: var(--accordion-header-font-size, 1rem);
+    font-weight: var(--accordion-header-font-weight, 500);
+    gap: 1rem;
+    margin: 0;
+    padding: var(--accordion-softCardFill-header-padding, 1.125rem 1.25rem);
+}
+
+.quiqqer-accordion-item--softCardFill .quiqqer-accordion-item-header-text {
+    flex-grow: 1;
+}
+
+.quiqqer-accordion-item--softCardFill .quiqqer-accordion-item-header-icon {
+    align-items: center;
+    background: var(--accordion-softCardFill-icon-bg, var(--qui-colors-surface));
+    border-radius: 50%;
+    color: var(--accordion-softCardFill-icon-color, inherit);
+    display: inline-flex;
+    height: var(--accordion-softCardFill-icon-size, 2rem);
+    justify-content: center;
+    line-height: 1;
+    min-width: var(--accordion-softCardFill-icon-size, 2rem);
+}
+
+.quiqqer-accordion-item--softCardFill[data-open="1"] .quiqqer-accordion-item-header-icon {
+    background: var(
+        --accordion-softCardFill-icon-open-bg,
+        var(--accordion-softCardFill-icon-bg, var(--qui-colors-surface))
+    );
+    color: var(
+        --accordion-softCardFill-icon-open-color,
+        var(--qui-colors-primary)
+    );
+}
+
+.quiqqer-accordion-list--icon-left .quiqqer-accordion-item--softCardFill .quiqqer-accordion-item-header-icon {
+    margin-left: 0;
+    order: -1;
+}
+
+.quiqqer-accordion-item--softCardFill .quiqqer-accordion-item-content--softCard {
+    padding: 0 1.25rem 1.25rem;
+}
