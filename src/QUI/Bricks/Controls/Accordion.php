@@ -6,6 +6,8 @@ use Exception;
 use QUI;
 use Seld\JsonLint\JsonParser;
 
+use function array_filter;
+use function array_values;
 use function is_array;
 use function in_array;
 use function str_replace;
@@ -83,6 +85,7 @@ class Accordion extends QUI\Control
             $entries = [];
         }
 
+        $entries = $this->filterDisabledEntries($entries);
         $template = $this->getTemplateName();
         $columns = $this->getColumns();
         $iconPosition = $this->getIconPosition();
@@ -129,6 +132,22 @@ class Accordion extends QUI\Control
             $this->entries = $this->getAttribute('entries');
         }
 
+        if (is_string($this->entries)) {
+            try {
+                $this->entries = (new JsonParser())->parse(
+                    str_replace("\n", "", $this->entries),
+                    JsonParser::PARSE_TO_ASSOC
+                );
+            } catch (Exception $Exception) {
+                QUI\System\Log::writeException($Exception);
+                $this->entries = [];
+            }
+        }
+
+        if (is_array($this->entries)) {
+            $this->entries = $this->filterDisabledEntries($this->entries);
+        }
+
         if (empty($this->entries)) {
             return '';
         }
@@ -159,7 +178,7 @@ class Accordion extends QUI\Control
                 'boxFill',
                 'boxFillSubtle',
                 'softCard',
-                'softCardFill'
+                'softCardAccentFill'
             ], true)
         ) {
             return 'default';
@@ -193,7 +212,7 @@ class Accordion extends QUI\Control
         return match ($template) {
             'boxOutlineAccent', 'boxOutlineTextColor' => 'Accordion.boxOutline',
             'boxFillSubtle' => 'Accordion.boxFill',
-            'softCardFill' => 'Accordion.softCard',
+            'softCardAccentFill' => 'Accordion.softCard',
             'simple' => 'Accordion.default',
             default => 'Accordion.' . $template
         };
@@ -258,5 +277,20 @@ class Accordion extends QUI\Control
             array_slice($preparedEntries, 0, $splitAt),
             array_slice($preparedEntries, $splitAt)
         ];
+    }
+
+    /**
+     * @param array<int|string, mixed> $entries
+     * @return array<int|string, mixed>
+     */
+    protected function filterDisabledEntries(array $entries): array
+    {
+        return array_values(array_filter($entries, function ($entry) {
+            if (!is_array($entry) || !isset($entry['disabled'])) {
+                return true;
+            }
+
+            return !in_array($entry['disabled'], [true, 1, '1'], true);
+        }));
     }
 }

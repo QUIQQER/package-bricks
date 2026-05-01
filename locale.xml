@@ -3105,9 +3105,9 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Karte]]></de>
             <en><![CDATA[Soft Card]]></en>
         </locale>
-        <locale name="brick.accordion.template.softCardFill">
-            <de><![CDATA[Karte gefüllt]]></de>
-            <en><![CDATA[Soft Card Fill]]></en>
+        <locale name="brick.accordion.template.softCardAccentFill">
+            <de><![CDATA[Karte gefüllt mit Akzentfarbe]]></de>
+            <en><![CDATA[Soft Card Accent Fill]]></en>
         </locale>
         <locale name="brick.accordion.columns">
             <de><![CDATA[Spalten]]></de>
@@ -3169,6 +3169,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Akkordeon-Elemente]]></de>
             <en><![CDATA[Accordion items]]></en>
         </locale>
+        <locale name="brick.accordion.category.entries">
+            <de><![CDATA[Akkordeon-Elemente]]></de>
+            <en><![CDATA[Accordion items]]></en>
+        </locale>
         <locale name="bricks.accordion.settings.addButton">
             <de><![CDATA[Element hinzufügen]]></de>
             <en><![CDATA[Add items]]></en>
@@ -3176,6 +3180,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.accordion.settings.title">
             <de><![CDATA[Titel]]></de>
             <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="brick.accordion.settings.disabled">
+            <de><![CDATA[Eintrag deaktivieren]]></de>
+            <en><![CDATA[Disable entry]]></en>
+        </locale>
+        <locale name="brick.accordion.settings.disabled.short">
+            <de><![CDATA[Deaktiviert]]></de>
+            <en><![CDATA[Disabled]]></en>
         </locale>
         <locale name="brick.accordion.settings.content">
             <de><![CDATA[Inhalt]]></de>

@@ -1,10 +1,39 @@
-<div class="quiqqer-bricks-accordion-entry" style="display: none;">
-    <label>
-        <span class="entry-title">{{title}}</span>
-        <input type="text" name="entryTitle" />
-    </label>
-    <label>
-        <span class="entry-title">{{content}}</span>
-        <input name="entryContent" class="field-container-field field-description" data-qui="controls/editors/Input"/>
-    </label>
-</div>
+<form name="quiqqer-bricks-accordion-settings-entry"
+      class="quiqqer-bricks-accordion-settings-entry-form"
+>
+    <table class="data-table data-table-flexbox">
+        <tbody>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        {{disabled}}
+                    </span>
+                    <span id="disabledWrapper" class="field-container-field"></span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        {{title}}
+                    </span>
+                    <input type="text" name="entryTitle" class="field-container-field"/>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        {{content}}
+                    </span>
+                    <input name="entryContent" class="field-container-field field-entryContent"
+                           data-qui="controls/editors/Input"/>
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>

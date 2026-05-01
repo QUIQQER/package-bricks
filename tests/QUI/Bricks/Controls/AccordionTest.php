@@ -10,7 +10,7 @@ class AccordionTest extends TestCase
     {
         $class = 'QUI\Bricks\Controls\Accordion';
 
-        foreach (['default', 'simple', 'boxOutline', 'boxOutlineAccent', 'boxOutlineTextColor', 'boxFill', 'boxFillSubtle', 'softCard', 'softCardFill', 'invalid'] as $template) {
+        foreach (['default', 'simple', 'boxOutline', 'boxOutlineAccent', 'boxOutlineTextColor', 'boxFill', 'boxFillSubtle', 'softCard', 'softCardAccentFill', 'invalid'] as $template) {
             try {
                 $Control = new $class([
                     'template' => $template,
@@ -87,5 +87,28 @@ class AccordionTest extends TestCase
                 $this->addToAssertionCount(1);
             }
         }
+    }
+
+    public function testDisabledEntriesAreNotRendered(): void
+    {
+        $Control = new \QUI\Bricks\Controls\Accordion([
+            'entries' => [[
+                'entryTitle' => 'Visible question',
+                'entryContent' => 'Visible answer',
+                'disabled' => 0
+            ], [
+                'entryTitle' => 'Hidden question',
+                'entryContent' => 'Hidden answer',
+                'disabled' => 1
+            ]]
+        ]);
+
+        $body = $Control->getBody();
+        $schema = $Control->createJSONLDFAQSchemaCode();
+
+        $this->assertStringContainsString('Visible question', $body);
+        $this->assertStringNotContainsString('Hidden question', $body);
+        $this->assertStringContainsString('Visible question', $schema);
+        $this->assertStringNotContainsString('Hidden question', $schema);
     }
 }

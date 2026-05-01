@@ -1975,8 +1975,8 @@
                     <option value="softCard">
                         <locale group="quiqqer/bricks" var="brick.accordion.template.softCard"/>
                     </option>
-                    <option value="softCardFill">
-                        <locale group="quiqqer/bricks" var="brick.accordion.template.softCardFill"/>
+                    <option value="softCardAccentFill">
+                        <locale group="quiqqer/bricks" var="brick.accordion.template.softCardAccentFill"/>
                     </option>
                 </setting>
 
@@ -2032,7 +2032,8 @@
                     </description>
                 </setting>
 
-                <setting name="entries" data-qui="package/quiqqer/bricks/bin/Controls/backend/AccordionSettings">
+                <setting name="entries" type="hidden"
+                         data-qui="package/quiqqer/bricks/bin/Controls/backend/AccordionSettings">
                     <locale group="quiqqer/bricks" var="brick.accordion.entries"/>
                 </setting>
 
@@ -2043,6 +2044,30 @@
                     </description>
                 </setting>
             </settings>
+
+            <window>
+                <categories>
+                    <category name="accordion-entries" index="35">
+                        <text>
+                            <locale group="quiqqer/bricks" var="brick.accordion.category.entries"/>
+                        </text>
+                        <image>fa fa-list-alt</image>
+
+                        <settings name="accordion-entries">
+                            <title>
+                                <locale group="quiqqer/bricks" var="brick.accordion.entries"/>
+                            </title>
+
+                            <input conf="entries" type="hidden" label="false"
+                                   data-qui="package/quiqqer/bricks/bin/Controls/backend/AccordionSettings">
+                                <text>
+                                    <locale group="quiqqer/bricks" var="brick.accordion.entries"/>
+                                </text>
+                            </input>
+                        </settings>
+                    </category>
+                </categories>
+            </window>
         </brick>
 
         <brick control="\QUI\Bricks\Controls\PDF\PdfPreview">
