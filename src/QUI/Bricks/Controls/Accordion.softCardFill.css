@@ -10,6 +10,9 @@
     );
     border-radius: var(--accordion-softCardFill-radius, var(--qui-radius-card));
     color: var(--accordion-softCardFill-item-color, inherit);
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
 .quiqqer-accordion-item--softCardFill[data-open="1"] {
@@ -48,6 +51,9 @@
     justify-content: center;
     line-height: 1;
     min-width: var(--accordion-softCardFill-icon-size, 2rem);
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
 .quiqqer-accordion-item--softCardFill[data-open="1"] .quiqqer-accordion-item-header-icon {

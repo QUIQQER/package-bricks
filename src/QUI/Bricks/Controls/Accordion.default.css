@@ -4,7 +4,9 @@
 }
 
 .quiqqer-accordion-item {
-    border-bottom: 1px solid #ddd;
+    border-bottom: var(--accordion-border-width, var(--qui-border-width))
+        var(--accordion-border-style, var(--qui-border-style))
+        var(--accordion-border-color, var(--qui-border-color));
 }
 
 .quiqqer-accordion-item-header {

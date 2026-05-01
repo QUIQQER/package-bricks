@@ -1,11 +1,11 @@
-.quiqqer-accordion-list--boxOutline {
+.quiqqer-accordion-list--boxOutlineTextColor {
     --accordion-columns-gap: 1rem;
     --accordion-items-gap: 1rem;
 }
 
-.quiqqer-accordion-item--boxOutline .quiqqer-accordion-item-header--box {
+.quiqqer-accordion-item--boxOutlineTextColor .quiqqer-accordion-item-header--box {
     align-items: center;
-    border: 1px solid var(--qui-border-color);
+    border: 1px solid currentColor;
     border-radius: var(--qui-border-radius, 1rem);
     cursor: pointer;
     display: flex;
@@ -16,15 +16,15 @@
     padding: 0.75rem 1.25rem;
 }
 
-.quiqqer-accordion-item--boxOutline .quiqqer-accordion-item-header-text {
+.quiqqer-accordion-item--boxOutlineTextColor .quiqqer-accordion-item-header-text {
     flex-grow: 1
 }
 
-.quiqqer-accordion-list--icon-left .quiqqer-accordion-item--boxOutline .quiqqer-accordion-item-header-icon {
+.quiqqer-accordion-list--icon-left .quiqqer-accordion-item--boxOutlineTextColor .quiqqer-accordion-item-header-icon {
     margin-left: 0;
     order: -1;
 }
 
-.quiqqer-accordion-item--boxOutline .quiqqer-accordion-item-content--box {
+.quiqqer-accordion-item--boxOutlineTextColor .quiqqer-accordion-item-content--box {
     padding: 1.25rem 0;
 }

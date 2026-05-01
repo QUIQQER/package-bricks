@@ -1960,6 +1960,12 @@
                     <option value="boxOutline">
                         <locale group="quiqqer/bricks" var="brick.accordion.template.boxOutline"/>
                     </option>
+                    <option value="boxOutlineAccent">
+                        <locale group="quiqqer/bricks" var="brick.accordion.template.boxOutlineAccent"/>
+                    </option>
+                    <option value="boxOutlineTextColor">
+                        <locale group="quiqqer/bricks" var="brick.accordion.template.boxOutlineTextColor"/>
+                    </option>
                     <option value="boxFill">
                         <locale group="quiqqer/bricks" var="brick.accordion.template.boxFill"/>
                     </option>

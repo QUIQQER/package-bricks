@@ -9,8 +9,6 @@
     display: flex;
     font-size: var(--accordion-header-font-size, 1rem);
     font-weight: var(--accordion-header-font-weight, 400);
-    margin: 0;
-    padding: 0;
 }
 
 .quiqqer-accordion-item--simple .quiqqer-accordion-item-header-icon {

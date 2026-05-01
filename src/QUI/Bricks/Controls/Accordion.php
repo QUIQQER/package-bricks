@@ -154,6 +154,8 @@ class Accordion extends QUI\Control
                 'default',
                 'simple',
                 'boxOutline',
+                'boxOutlineAccent',
+                'boxOutlineTextColor',
                 'boxFill',
                 'boxFillSubtle',
                 'softCard',
@@ -189,6 +191,7 @@ class Accordion extends QUI\Control
     protected function getResolvedTemplateFile(string $template): string
     {
         return match ($template) {
+            'boxOutlineAccent', 'boxOutlineTextColor' => 'Accordion.boxOutline',
             'boxFillSubtle' => 'Accordion.boxFill',
             'softCardFill' => 'Accordion.softCard',
             'simple' => 'Accordion.default',

@@ -86,6 +86,7 @@ define('package/quiqqer/bricks/bin/Controls/Accordion', [
                 });
             }
 
+            Item.setAttribute('data-open', '1');
             ContentWrapper.setStyle('height', 0);
             Content.setStyle('display', 'block');
 
@@ -97,17 +98,19 @@ define('package/quiqqer/bricks/bin/Controls/Accordion', [
                 callback: function () {
                     ContentWrapper.setStyle('height', null);
                     Content.setStyle('display', null);
-                    Item.setAttribute('data-open', '1');
                 }
             });
         },
 
         close: function (ContentWrapper, Content, Item) {
+            Item.setAttribute('data-open', '0');
+            Content.setStyle('display', 'block');
+
             moofx(ContentWrapper).animate({
                 height: 0
             }, {
                 callback: function () {
-                    Item.setAttribute('data-open', '0');
+                    Content.setStyle('display', null);
                 }
             });
         },

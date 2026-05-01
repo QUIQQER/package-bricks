@@ -3078,27 +3078,35 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Default]]></en>
         </locale>
         <locale name="brick.accordion.template.simple">
-            <de><![CDATA[Einfach]]></de>
+            <de><![CDATA[Einfach (für eigene Gestaltung)]]></de>
             <en><![CDATA[Simple]]></en>
         </locale>
         <locale name="brick.accordion.template.boxOutline">
-            <de><![CDATA[Box Outline]]></de>
+            <de><![CDATA[Umrandet (Outline)]]></de>
             <en><![CDATA[Box Outline]]></en>
         </locale>
+        <locale name="brick.accordion.template.boxOutlineAccent">
+            <de><![CDATA[Umrandet Akzent (Outline)]]></de>
+            <en><![CDATA[Box Outline Accent]]></en>
+        </locale>
+        <locale name="brick.accordion.template.boxOutlineTextColor">
+            <de><![CDATA[Umrandet Textfarbe (Outline)]]></de>
+            <en><![CDATA[Box Outline Text Color]]></en>
+        </locale>
         <locale name="brick.accordion.template.boxFill">
-            <de><![CDATA[Box Fill]]></de>
+            <de><![CDATA[Gefüllt]]></de>
             <en><![CDATA[Box Fill]]></en>
         </locale>
         <locale name="brick.accordion.template.boxFillSubtle">
-            <de><![CDATA[Box Fill Subtle]]></de>
+            <de><![CDATA[Gefüllt dezent]]></de>
             <en><![CDATA[Box Fill Subtle]]></en>
         </locale>
         <locale name="brick.accordion.template.softCard">
-            <de><![CDATA[Soft Card]]></de>
+            <de><![CDATA[Karte]]></de>
             <en><![CDATA[Soft Card]]></en>
         </locale>
         <locale name="brick.accordion.template.softCardFill">
-            <de><![CDATA[Soft Card Fill]]></de>
+            <de><![CDATA[Karte gefüllt]]></de>
             <en><![CDATA[Soft Card Fill]]></en>
         </locale>
         <locale name="brick.accordion.columns">

@@ -7,7 +7,9 @@
     align-items: center;
     color: var(--qui-colors-primary--accent);
     background: var(--qui-colors-primary);
-    border: 1px solid var(--qui-colors-primary);
+    border: var(--accordion-boxFill-border-width, var(--qui-border-width))
+        var(--accordion-boxFill-border-style, var(--qui-border-style))
+        var(--accordion-boxFill-border-color, var(--qui-colors-primary));
     border-radius: var(--qui-border-radius, 1rem);
     cursor: pointer;
     display: flex;
