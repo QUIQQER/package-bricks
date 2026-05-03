@@ -1947,37 +1947,15 @@
                 <locale group="quiqqer/bricks" var="brick.accordion.description"/>
             </description>
 
-            <settings>
-                <setting name="template" type="select">
-                    <locale group="quiqqer/bricks" var="brick.accordion.template"/>
+            <mockups>
+                <mockup src="/packages/quiqqer/bricks/bin/images/mockups/accordion-mockup-900x600.png" type="preview"/>
+                <mockup src="/packages/quiqqer/bricks/bin/images/mockups/accordion-thumbnail-100x80.png" type="thumbnail"/>
+            </mockups>
 
-                    <option value="default">
-                        <locale group="quiqqer/bricks" var="brick.accordion.template.default"/>
-                    </option>
-                    <option value="simple">
-                        <locale group="quiqqer/bricks" var="brick.accordion.template.simple"/>
-                    </option>
-                    <option value="boxOutline">
-                        <locale group="quiqqer/bricks" var="brick.accordion.template.boxOutline"/>
-                    </option>
-                    <option value="boxOutlineAccent">
-                        <locale group="quiqqer/bricks" var="brick.accordion.template.boxOutlineAccent"/>
-                    </option>
-                    <option value="boxOutlineTextColor">
-                        <locale group="quiqqer/bricks" var="brick.accordion.template.boxOutlineTextColor"/>
-                    </option>
-                    <option value="boxFill">
-                        <locale group="quiqqer/bricks" var="brick.accordion.template.boxFill"/>
-                    </option>
-                    <option value="boxFillSubtle">
-                        <locale group="quiqqer/bricks" var="brick.accordion.template.boxFillSubtle"/>
-                    </option>
-                    <option value="softCard">
-                        <locale group="quiqqer/bricks" var="brick.accordion.template.softCard"/>
-                    </option>
-                    <option value="softCardAccentFill">
-                        <locale group="quiqqer/bricks" var="brick.accordion.template.softCardAccentFill"/>
-                    </option>
+            <settings>
+                <setting name="template" type="hidden"
+                         data-qui="package/quiqqer/bricks/bin/Controls/backend/AccordionLayoutSelect">
+                    <locale group="quiqqer/bricks" var="brick.accordion.template"/>
                 </setting>
 
                 <setting name="columns" type="select">
@@ -2025,16 +2003,11 @@
                     <locale group="quiqqer/bricks" var="brick.accordion.openFirst"/>
                 </setting>
 
-                <setting name="listMaxWidth" type="number" min="0" max="1920">
+                <setting name="listMaxWidth" type="text">
                     <locale group="quiqqer/bricks" var="brick.accordion.listMaxWidth"/>
                     <description>
                         <locale group="quiqqer/bricks" var="brick.accordion.listMaxWidth.desc"/>
                     </description>
-                </setting>
-
-                <setting name="entries" type="hidden"
-                         data-qui="package/quiqqer/bricks/bin/Controls/backend/AccordionSettings">
-                    <locale group="quiqqer/bricks" var="brick.accordion.entries"/>
                 </setting>
 
                 <setting name="useFaqStructuredData" type="checkbox">

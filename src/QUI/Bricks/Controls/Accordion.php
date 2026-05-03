@@ -10,7 +10,9 @@ use function array_filter;
 use function array_values;
 use function is_array;
 use function in_array;
+use function preg_match;
 use function str_replace;
+use function trim;
 
 /**
  * Class Accordion
@@ -45,7 +47,7 @@ class Accordion extends QUI\Control
             'iconStyle' => 'angle',
             'stayOpen' => false, // if true make accordion items stay open when another item is opened
             'openFirst' => false, // the first entry is initially opened
-            'listMaxWidth' => 0, // positive numbers only, 0 disabled this option.
+            'listMaxWidth' => '', // empty or 0 disables this option.
             'entries' => [],
             'useFaqStructuredData' => false
         ]);
@@ -64,11 +66,7 @@ class Accordion extends QUI\Control
             $this->setJavaScriptControlOption('stayopen', $this->getAttribute('stayOpen'));
         }
 
-        $maxWidth = false;
-
-        if (intval($this->getAttribute('listMaxWidth')) > 0) {
-            $maxWidth = intval($this->getAttribute('listMaxWidth'));
-        }
+        $maxWidth = $this->getNormalizedListMaxWidth();
 
         if (is_string($entries)) {
             $entries = str_replace("\n", "", $entries);
@@ -175,7 +173,7 @@ class Accordion extends QUI\Control
                 'boxOutline',
                 'boxOutlineAccent',
                 'boxOutlineTextColor',
-                'boxFill',
+                'boxFillAccent',
                 'boxFillSubtle',
                 'softCard',
                 'softCardAccentFill'
@@ -207,11 +205,30 @@ class Accordion extends QUI\Control
         return (int)$this->getAttribute('columns') === 2 ? 2 : 1;
     }
 
+    protected function getNormalizedListMaxWidth(): string|false
+    {
+        $listMaxWidth = trim((string)$this->getAttribute('listMaxWidth'));
+
+        if ($listMaxWidth === '' || $listMaxWidth === '0') {
+            return false;
+        }
+
+        if (str_contains($listMaxWidth, ';') || str_contains($listMaxWidth, '{') || str_contains($listMaxWidth, '}')) {
+            return false;
+        }
+
+        if (preg_match('/^\d+$/', $listMaxWidth)) {
+            return $listMaxWidth . 'px';
+        }
+
+        return $listMaxWidth;
+    }
+
     protected function getResolvedTemplateFile(string $template): string
     {
         return match ($template) {
             'boxOutlineAccent', 'boxOutlineTextColor' => 'Accordion.boxOutline',
-            'boxFillSubtle' => 'Accordion.boxFill',
+            'boxFillSubtle' => 'Accordion.boxFillAccent',
             'softCardAccentFill' => 'Accordion.softCard',
             'simple' => 'Accordion.default',
             default => 'Accordion.' . $template

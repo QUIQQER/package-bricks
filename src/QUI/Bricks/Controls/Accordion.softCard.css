@@ -4,23 +4,14 @@
 }
 
 .quiqqer-accordion-item--softCard {
-    background: var(
-        --accordion-softCard-item-bg,
-        var(--theme--qui-colors-surface-soft, var(--qui-colors-surface-subtle))
-    );
+    background: var(--accordion-softCard-item-bg, var(--theme--qui-colors-surface-soft, var(--qui-colors-surface-subtle)));
     border-radius: var(--accordion-softCard-radius, var(--qui-radius-card));
     color: var(--accordion-softCard-item-color, inherit);
 }
 
 .quiqqer-accordion-item--softCard[data-open="1"] {
-    background: var(
-        --accordion-softCard-item-open-bg,
-        var(--accordion-softCard-item-bg, var(--theme--qui-colors-surface-soft, var(--qui-colors-surface-subtle)))
-    );
-    color: var(
-        --accordion-softCard-item-open-color,
-        var(--accordion-softCard-item-color, inherit)
-    );
+    background: var(--accordion-softCard-item-open-bg, var(--accordion-softCard-item-bg, var(--theme--qui-colors-surface-soft, var(--qui-colors-surface-subtle))));
+    color: var(--accordion-softCard-item-open-color, var(--accordion-softCard-item-color, inherit));
 }
 
 .quiqqer-accordion-item--softCard .quiqqer-accordion-item-header--softCard {

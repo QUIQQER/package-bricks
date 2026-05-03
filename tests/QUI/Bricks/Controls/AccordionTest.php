@@ -10,7 +10,8 @@ class AccordionTest extends TestCase
     {
         $class = 'QUI\Bricks\Controls\Accordion';
 
-        foreach (['default', 'simple', 'boxOutline', 'boxOutlineAccent', 'boxOutlineTextColor', 'boxFill', 'boxFillSubtle', 'softCard', 'softCardAccentFill', 'invalid'] as $template) {
+
+        foreach (['default', 'simple', 'boxOutline', 'boxOutlineAccent', 'boxOutlineTextColor', 'boxFillAccent', 'boxFillSubtle', 'softCard', 'softCardAccentFill', 'invalid'] as $template) {
             try {
                 $Control = new $class([
                     'template' => $template,
@@ -110,5 +111,36 @@ class AccordionTest extends TestCase
         $this->assertStringNotContainsString('Hidden question', $body);
         $this->assertStringContainsString('Visible question', $schema);
         $this->assertStringNotContainsString('Hidden question', $schema);
+    }
+
+
+    public function testListMaxWidthSupportsNumbersAndCssValues(): void
+    {
+        $entries = [[
+            'entryTitle' => 'Question',
+            'entryContent' => 'Answer'
+        ]];
+
+        $NumericControl = new \QUI\Bricks\Controls\Accordion([
+            'entries' => $entries,
+            'listMaxWidth' => '800'
+        ]);
+
+        $CssValueControl = new \QUI\Bricks\Controls\Accordion([
+            'entries' => $entries,
+            'listMaxWidth' => 'clamp(20rem, 50vw, 60rem)'
+        ]);
+
+        $DisabledControl = new \QUI\Bricks\Controls\Accordion([
+            'entries' => $entries,
+            'listMaxWidth' => '0'
+        ]);
+
+        $this->assertStringContainsString('--quiqqer-accordion-list-maxWidth: 800px;', $NumericControl->getBody());
+        $this->assertStringContainsString(
+            '--quiqqer-accordion-list-maxWidth: clamp(20rem, 50vw, 60rem);',
+            $CssValueControl->getBody()
+        );
+        $this->assertStringNotContainsString('--quiqqer-accordion-list-maxWidth:', $DisabledControl->getBody());
     }
 }

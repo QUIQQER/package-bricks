@@ -4,26 +4,17 @@
 }
 
 .quiqqer-accordion-item--softCardAccentFill {
-    background: var(
-        --accordion-softCardAccentFill-item-bg,
-        var(--theme--qui-colors-surface-soft, var(--qui-colors-surface-subtle))
-    );
+    background: var(--accordion-softCardAccentFill-item-bg, var(--theme--qui-colors-surface-soft, var(--qui-colors-surface-subtle)));
     border-radius: var(--accordion-softCardAccentFill-radius, var(--qui-radius-card));
     color: var(--accordion-softCardAccentFill-item-color, inherit);
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .quiqqer-accordion-item--softCardAccentFill[data-open="1"] {
-    background: var(
-        --accordion-softCardAccentFill-item-open-bg,
-        var(--qui-colors-primary)
-    );
-    color: var(
-        --accordion-softCardAccentFill-item-open-color,
-        var(--qui-colors-primary--accent)
-    );
+    --_bg-color: var(--accordion-softCardAccentFill-item-open-bg, var(--qui-colors-primary));
+
+    background: var(--_bg-color);
+    color: var(--accordion-softCardAccentFill-item-open-color, var(--qui-colors-primary--accent));
 }
 
 .quiqqer-accordion-item--softCardAccentFill .quiqqer-accordion-item-header--softCard {
@@ -51,20 +42,12 @@
     justify-content: center;
     line-height: 1;
     min-width: var(--accordion-softCardAccentFill-icon-size, 2rem);
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .quiqqer-accordion-item--softCardAccentFill[data-open="1"] .quiqqer-accordion-item-header-icon {
-    background: var(
-        --accordion-softCardAccentFill-icon-open-bg,
-        var(--accordion-softCardAccentFill-icon-bg, var(--qui-colors-surface))
-    );
-    color: var(
-        --accordion-softCardAccentFill-icon-open-color,
-        var(--qui-colors-primary)
-    );
+    background: var(--accordion-softCardAccentFill-icon-open-bg, var(--accordion-softCardAccentFill-icon-bg, var(--qui-colors-surface)));
+    color: var(--accordion-softCardAccentFill-icon-open-color, var(--qui-colors-primary));
 }
 
 .quiqqer-accordion-list--icon-left .quiqqer-accordion-item--softCardAccentFill .quiqqer-accordion-item-header-icon {
@@ -74,4 +57,5 @@
 
 .quiqqer-accordion-item--softCardAccentFill .quiqqer-accordion-item-content--softCard {
     padding: 0 1.25rem 1.25rem;
+    color: var(--accordion-softCardAccentFill-content-color, color-mix(in oklab, currentColor 85%, var(--_bg-color)));
 }
