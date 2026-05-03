@@ -1,0 +1,30 @@
+.quiqqer-accordion-list {
+    --accordion-columns-gap: 1rem;
+    --accordion-items-gap: 0;
+}
+
+.quiqqer-accordion-item {
+    border-bottom: var(--accordion-border-width, var(--qui-border-width)) var(--accordion-border-style, var(--qui-border-style)) var(--accordion-border-color, var(--qui-border-color));
+}
+
+.quiqqer-accordion-item-header {
+    align-items: flex-start;
+    cursor: pointer;
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: var(--spacing, 1rem);
+    padding-bottom: var(--spacing, 1rem);
+    font-size: var(--accordion-header-font-size, 1.125rem);
+    font-weight: var(--accordion-header-font-weight, 400);
+}
+
+.quiqqer-accordion-list--icon-left .quiqqer-accordion-item-header-icon {
+    margin-left: 0;
+    margin-right: 0.75rem;
+    order: -1;
+}
+
+.quiqqer-accordion-item-content {
+    padding-block: 1rem;
+}

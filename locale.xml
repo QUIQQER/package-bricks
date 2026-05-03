@@ -3066,8 +3066,84 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         </locale>
         <locale name="brick.accordion.description">
             <de>
-                <![CDATA[Baustein mit ausklappbaren Elementen. Es kann zum Bauen der Hilfe oder FAQ Einträge benutzt werden.]]></de>
+                <![CDATA[Mit diesem Baustein lassen sich Inhalte übersichtlich in aufklappbare Bereiche gliedern. Er eignet sich besonders für FAQ-Bereiche, Hilfeseiten oder andere Inhalte, die in einzelne Abschnitte mit Titel und Inhalt unterteilt werden sollen.<ul><li>Beliebig viele aufklappbare Einträge</li><li>Ideal für FAQs, Hilfe- und Informationsbereiche</li><li>Mehrere Layouts zur passenden Darstellung im Seitenkontext</li><li>Wahl zwischen ein- oder zweispaltiger Darstellung</li><li>Icon-Position und Icon-Stil anpassbar</li><li>Optional ersten Eintrag geöffnet starten oder mehrere Einträge gleichzeitig offen halten</li></ul>]]></de>
             <en><![CDATA[Brick with fold-out elements. It can be used to build help or FAQ entries.]]></en>
+        </locale>
+        <locale name="brick.accordion.template">
+            <de><![CDATA[Layout]]></de>
+            <en><![CDATA[Template]]></en>
+        </locale>
+        <locale name="brick.accordion.template.default">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Default]]></en>
+        </locale>
+        <locale name="brick.accordion.template.simple">
+            <de><![CDATA[Einfach]]></de>
+            <en><![CDATA[Simple]]></en>
+        </locale>
+        <locale name="brick.accordion.template.boxOutline">
+            <de><![CDATA[Umrandet]]></de>
+            <en><![CDATA[Outline]]></en>
+        </locale>
+        <locale name="brick.accordion.template.boxOutlineAccent">
+            <de><![CDATA[Umrandet Akzent]]></de>
+            <en><![CDATA[Outline Accent]]></en>
+        </locale>
+        <locale name="brick.accordion.template.boxOutlineTextColor">
+            <de><![CDATA[Umrandet Textfarbe]]></de>
+            <en><![CDATA[Outline Text]]></en>
+        </locale>
+        <locale name="brick.accordion.template.boxFillAccent">
+            <de><![CDATA[Gefüllt Akzent]]></de>
+            <en><![CDATA[Fill Accent]]></en>
+        </locale>
+        <locale name="brick.accordion.template.boxFillSubtle">
+            <de><![CDATA[Gefüllt dezent]]></de>
+            <en><![CDATA[Fill Subtle]]></en>
+        </locale>
+        <locale name="brick.accordion.template.softCard">
+            <de><![CDATA[Karte]]></de>
+            <en><![CDATA[Card]]></en>
+        </locale>
+        <locale name="brick.accordion.template.softCardAccentFill">
+            <de><![CDATA[Karte Akzent]]></de>
+            <en><![CDATA[Card Accent]]></en>
+        </locale>
+        <locale name="brick.accordion.columns">
+            <de><![CDATA[Spalten]]></de>
+            <en><![CDATA[Columns]]></en>
+        </locale>
+        <locale name="brick.accordion.columns.1">
+            <de><![CDATA[1 Spalte]]></de>
+            <en><![CDATA[1 column]]></en>
+        </locale>
+        <locale name="brick.accordion.columns.2">
+            <de><![CDATA[2 Spalten]]></de>
+            <en><![CDATA[2 columns]]></en>
+        </locale>
+        <locale name="brick.accordion.iconPosition">
+            <de><![CDATA[Icon-Position]]></de>
+            <en><![CDATA[Icon position]]></en>
+        </locale>
+        <locale name="brick.accordion.iconPosition.right">
+            <de><![CDATA[Rechts]]></de>
+            <en><![CDATA[Right]]></en>
+        </locale>
+        <locale name="brick.accordion.iconPosition.left">
+            <de><![CDATA[Links]]></de>
+            <en><![CDATA[Left]]></en>
+        </locale>
+        <locale name="brick.accordion.iconStyle">
+            <de><![CDATA[Icon-Stil]]></de>
+            <en><![CDATA[Icon style]]></en>
+        </locale>
+        <locale name="brick.accordion.iconStyle.angle">
+            <de><![CDATA[Chevron]]></de>
+            <en><![CDATA[Chevron]]></en>
+        </locale>
+        <locale name="brick.accordion.iconStyle.plus">
+            <de><![CDATA[Plus]]></de>
+            <en><![CDATA[Plus]]></en>
         </locale>
         <locale name="brick.accordion.stayOpen">
             <de><![CDATA[Einträge bleiben auf]]></de>
@@ -3082,14 +3158,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[The first entry is initial open]]></en>
         </locale>
         <locale name="brick.accordion.listMaxWidth">
-            <de><![CDATA[Maximalae Akkordeon Breite]]></de>
+            <de><![CDATA[Maximale Breite der Akkordeon-Liste]]></de>
             <en><![CDATA[Max accordion width]]></en>
         </locale>
         <locale name="brick.accordion.listMaxWidth.desc">
-            <de><![CDATA[Diese Einstellung betrifft nur die Liste mit Akkordeon-Elementen.]]></de>
+            <de><![CDATA[Zahlen werden als Pixel interpretiert. Andere gültige CSS-Werte wie 30rem oder clamp(...) werden unverändert übernommen. Leer oder 0 deaktiviert die Begrenzung.]]></de>
             <en><![CDATA[This setting affects only the list with accordion elements.]]></en>
         </locale>
         <locale name="brick.accordion.entries">
+            <de><![CDATA[Akkordeon-Elemente]]></de>
+            <en><![CDATA[Accordion items]]></en>
+        </locale>
+        <locale name="brick.accordion.category.entries">
             <de><![CDATA[Akkordeon-Elemente]]></de>
             <en><![CDATA[Accordion items]]></en>
         </locale>
@@ -3100,6 +3180,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.accordion.settings.title">
             <de><![CDATA[Titel]]></de>
             <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="brick.accordion.settings.disabled">
+            <de><![CDATA[Eintrag deaktivieren]]></de>
+            <en><![CDATA[Disable entry]]></en>
+        </locale>
+        <locale name="brick.accordion.settings.disabled.short">
+            <de><![CDATA[Deaktiviert]]></de>
+            <en><![CDATA[Disabled]]></en>
         </locale>
         <locale name="brick.accordion.settings.content">
             <de><![CDATA[Inhalt]]></de>
