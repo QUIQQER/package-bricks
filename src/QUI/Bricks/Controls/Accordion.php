@@ -25,7 +25,7 @@ class Accordion extends QUI\Control
      *   'entryContent' => string
      * ]
      *
-     * @var array<string, mixed>
+     * @var array<int, mixed>
      */
     protected array $entries = [];
 
@@ -125,26 +125,29 @@ class Accordion extends QUI\Control
     public function createJSONLDFAQSchemaCode(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
+        $entries = $this->entries;
 
-        if (empty($this->entries)) {
-            $this->entries = $this->getAttribute('entries');
+        if (empty($entries)) {
+            $entries = $this->getAttribute('entries');
         }
 
-        if (is_string($this->entries)) {
+        if (is_string($entries)) {
             try {
-                $this->entries = (new JsonParser())->parse(
-                    str_replace("\n", "", $this->entries),
+                $entries = (new JsonParser())->parse(
+                    str_replace("\n", "", $entries),
                     JsonParser::PARSE_TO_ASSOC
                 );
             } catch (Exception $Exception) {
                 QUI\System\Log::writeException($Exception);
-                $this->entries = [];
+                $entries = [];
             }
         }
 
-        if (is_array($this->entries)) {
-            $this->entries = $this->filterDisabledEntries($this->entries);
+        if (!is_array($entries)) {
+            $entries = [];
         }
+
+        $this->entries = $this->filterDisabledEntries($entries);
 
         if (empty($this->entries)) {
             return '';
@@ -298,7 +301,7 @@ class Accordion extends QUI\Control
 
     /**
      * @param array<int|string, mixed> $entries
-     * @return array<int|string, mixed>
+     * @return array<int, mixed>
      */
     protected function filterDisabledEntries(array $entries): array
     {
