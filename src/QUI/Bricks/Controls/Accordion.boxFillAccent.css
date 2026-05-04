@@ -1,18 +1,22 @@
 .quiqqer-accordion-list--boxFillAccent {
-    --accordion-columns-gap: 1rem;
-    --accordion-items-gap: 1rem;
+    --_items-gap: var(--quiqqer-bricks-accordion-items-gap, 1rem);
+    --_border-width: var(--quiqqer-bricks-accordion-boxFillAccent-border-width, var(--qui-border-width));
+    --_border-style: var(--quiqqer-bricks-accordion-boxFillAccent-border-style, var(--qui-border-style));
+    --_border-color: var(--quiqqer-bricks-accordion-boxFillAccent-border-color, var(--qui-colors-primary));
+    --_header-font-size: var(--quiqqer-bricks-accordion-header-font-size, 1.125rem);
+    --_header-font-weight: var(--quiqqer-bricks-accordion-header-font-weight, 500);
 }
 
 .quiqqer-accordion-item--boxFillAccent .quiqqer-accordion-item-header--box {
     align-items: center;
-    color: var(--qui-colors-primary--accent);
+    color: var(--qui-colors-primary-contrast, #fff);
     background: var(--qui-colors-primary);
-    border: var(--accordion-boxFillAccent-border-width, var(--qui-border-width)) var(--accordion-boxFillAccent-border-style, var(--qui-border-style)) var(--accordion-boxFillAccent-border-color, var(--qui-colors-primary));
+    border: var(--_border-width) var(--_border-style) var(--_border-color);
     border-radius: var(--qui-border-radius, 1rem);
     cursor: pointer;
     display: flex;
-    font-size: var(--accordion-header-font-size, 1.125rem);
-    font-weight: var(--accordion-header-font-weight, 500);
+    font-size: var(--_header-font-size);
+    font-weight: var(--_header-font-weight);
     gap: 1rem;
     margin: 0;
     padding: 0.75rem 1.25rem;

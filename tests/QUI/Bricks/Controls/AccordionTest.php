@@ -136,11 +136,14 @@ class AccordionTest extends TestCase
             'listMaxWidth' => '0'
         ]);
 
-        $this->assertStringContainsString('--quiqqer-accordion-list-maxWidth: 800px;', $NumericControl->getBody());
         $this->assertStringContainsString(
-            '--quiqqer-accordion-list-maxWidth: clamp(20rem, 50vw, 60rem);',
-            $CssValueControl->getBody()
+            '--_q-controlConf-list-maxWidth: 800px;',
+            $NumericControl->create()
         );
-        $this->assertStringNotContainsString('--quiqqer-accordion-list-maxWidth:', $DisabledControl->getBody());
+        $this->assertStringContainsString(
+            '--_q-controlConf-list-maxWidth: clamp(20rem, 50vw, 60rem);',
+            $CssValueControl->create()
+        );
+        $this->assertStringNotContainsString('--_q-controlConf-list-maxWidth:', $DisabledControl->create());
     }
 }

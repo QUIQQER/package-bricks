@@ -68,6 +68,10 @@ class Accordion extends QUI\Control
 
         $maxWidth = $this->getNormalizedListMaxWidth();
 
+        if ($maxWidth !== false) {
+            $this->setCustomVariable('list-maxWidth', $maxWidth);
+        }
+
         if (is_string($entries)) {
             $entries = str_replace("\n", "", $entries);
 
@@ -101,7 +105,6 @@ class Accordion extends QUI\Control
             'this' => $this,
             'columns' => $columns,
             'openFirst' => $this->getAttribute('openFirst'),
-            'listMaxWidth' => $maxWidth,
             'entries' => $this->entries,
             'entriesColumnLeft' => $entriesColumnLeft,
             'entriesColumnRight' => $entriesColumnRight,
@@ -225,6 +228,15 @@ class Accordion extends QUI\Control
         }
 
         return $listMaxWidth;
+    }
+
+    private function setCustomVariable(string $name, string $value): void
+    {
+        if ($name === '' || $value === '') {
+            return;
+        }
+
+        $this->setStyle('--_q-controlConf-' . $name, $value);
     }
 
     protected function getResolvedTemplateFile(string $template): string

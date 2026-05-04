@@ -1,6 +1,7 @@
 .quiqqer-accordion-list--boxOutlineTextColor {
-    --accordion-columns-gap: 1rem;
-    --accordion-items-gap: 1rem;
+    --_items-gap: var(--quiqqer-bricks-accordion-items-gap, 1rem);
+    --_header-font-size: var(--quiqqer-bricks-accordion-header-font-size, 1.125rem);
+    --_header-font-weight: var(--quiqqer-bricks-accordion-header-font-weight, 500);
 }
 
 .quiqqer-accordion-item--boxOutlineTextColor .quiqqer-accordion-item-header--box {
@@ -9,8 +10,8 @@
     border-radius: var(--qui-border-radius, 1rem);
     cursor: pointer;
     display: flex;
-    font-size: var(--accordion-header-font-size, 1.125rem);
-    font-weight: var(--accordion-header-font-weight, 500);
+    font-size: var(--_header-font-size);
+    font-weight: var(--_header-font-weight);
     gap: 1rem;
     margin: 0;
     padding: 0.75rem 1.25rem;

@@ -1,11 +1,3 @@
-<style>
-    {if $listMaxWidth}
-    .quiqqer-accordion-list--{$template} {
-        --quiqqer-accordion-list-maxWidth: {$listMaxWidth};
-    }
-    {/if}
-</style>
-
 {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
     <header class="control-header">
         <h1>{$this->getAttribute('frontendTitle')}</h1>
