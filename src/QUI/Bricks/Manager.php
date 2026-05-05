@@ -678,7 +678,8 @@ class Manager
             'type' => '',
             'class' => '',
             'data-qui' => '',
-            'options' => false
+            'options' => false,
+            'source' => 'default'
         ];
 
         $settings[] = [
@@ -687,7 +688,8 @@ class Manager
             'type' => '',
             'class' => '',
             'data-qui' => '',
-            'options' => false
+            'options' => false,
+            'source' => 'default'
         ];
 
         $settings[] = [
@@ -696,7 +698,8 @@ class Manager
             'type' => '',
             'class' => '',
             'data-qui' => '',
-            'options' => false
+            'options' => false,
+            'source' => 'default'
         ];
 
         $xmlFiles = $this->getBricksXMLFiles();
@@ -722,6 +725,32 @@ class Manager
             if ($Settings) {
                 foreach ($Settings as $Setting) {
                     $settings[] = $this->parseSettingToBrickArray($Setting);
+                }
+            }
+
+            $GlobalWindowSettings = $Path->query(
+                "//quiqqer/bricks/brick[@control='*']/window/categories/category/settings"
+            );
+
+            $WindowSettings = $Path->query(
+                "//quiqqer/bricks/brick[@control='$brickType']/window/categories/category/settings"
+            );
+
+            if ($GlobalWindowSettings) {
+                foreach ($GlobalWindowSettings as $WindowSetting) {
+                    $settings = array_merge(
+                        $settings,
+                        $this->parseWindowSettingToBrickArray($WindowSetting)
+                    );
+                }
+            }
+
+            if ($WindowSettings) {
+                foreach ($WindowSettings as $WindowSetting) {
+                    $settings = array_merge(
+                        $settings,
+                        $this->parseWindowSettingToBrickArray($WindowSetting)
+                    );
                 }
             }
         }
@@ -811,7 +840,114 @@ class Manager
             'class' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('class') : '',
             'data-qui' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('data-qui') : '',
             'options' => $options,
-            'data-attributes' => $dataAttributes
+            'data-attributes' => $dataAttributes,
+            'source' => 'settings'
+        ];
+    }
+
+    /**
+     * Parse a window settings node to flexible brick setting arrays.
+     *
+     * @param DOMNode|DOMElement|DOMNameSpaceNode $Setting
+     * @return array<int, array<string, mixed>>
+     */
+    protected function parseWindowSettingToBrickArray(
+        DOMNode | DOMElement | DOMNameSpaceNode $Setting
+    ): array {
+        if (!$Setting instanceof DOMNode) {
+            return [];
+        }
+
+        $settings = [];
+
+        foreach ($Setting->childNodes as $Child) {
+            if (!$Child instanceof DOMElement) {
+                continue;
+            }
+
+            if (!in_array($Child->nodeName, ['input', 'select', 'textarea', 'group', 'button'])) {
+                continue;
+            }
+
+            $field = $this->parseWindowFieldToBrickArray($Child, $Setting);
+
+            if (empty($field['name'])) {
+                continue;
+            }
+
+            $settings[] = $field;
+        }
+
+        return $settings;
+    }
+
+    /**
+     * Parse a single window field to a flexible brick setting array.
+     *
+     * @param DOMElement $Field
+     * @param DOMNode|DOMElement|DOMNameSpaceNode $ParentSetting
+     * @return array<string, mixed>
+     */
+    protected function parseWindowFieldToBrickArray(
+        DOMElement $Field,
+        DOMNode | DOMElement | DOMNameSpaceNode $ParentSetting
+    ): array {
+        $text = '';
+
+        $TextNodes = $Field->getElementsByTagName('text');
+
+        if ($TextNodes->length) {
+            $text = QUI\Utils\DOM::getTextFromNode($TextNodes->item(0), false);
+        }
+
+        if (empty($text) && method_exists($ParentSetting, 'getElementsByTagName')) {
+            $Title = $ParentSetting->getElementsByTagName('title');
+
+            if ($Title->length) {
+                $text = QUI\Utils\DOM::getTextFromNode($Title->item(0), false);
+            }
+        }
+
+        $DescriptionNodes = $Field->getElementsByTagName('description');
+        $description = '';
+
+        if ($DescriptionNodes->length) {
+            $description = QUI\Utils\DOM::getTextFromNode($DescriptionNodes->item(0), false);
+        }
+        $options = null;
+        $dataAttributes = [];
+
+        if ($Field->nodeName === 'select') {
+            foreach ($Field->getElementsByTagName('option') as $Option) {
+                $options[] = [
+                    'value' => $Option->getAttribute('value'),
+                    'text' => QUI\Utils\DOM::getTextFromNode($Option, false)
+                ];
+            }
+        }
+
+        foreach ($Field->attributes as $attribute) {
+            if ($attribute->nodeName === 'data-qui') {
+                continue;
+            }
+
+            if (str_contains($attribute->nodeName, 'data-')) {
+                $dataAttributes[$attribute->nodeName] = trim($attribute->nodeValue ?? '');
+            }
+        }
+
+        return [
+            'name' => $Field->getAttribute('conf'),
+            'text' => $text,
+            'description' => $description,
+            'type' => $Field->nodeName === 'input'
+                ? $Field->getAttribute('type')
+                : $Field->nodeName,
+            'class' => $Field->getAttribute('class'),
+            'data-qui' => $Field->getAttribute('data-qui'),
+            'options' => $options,
+            'data-attributes' => $dataAttributes,
+            'source' => 'window'
         ];
     }
 

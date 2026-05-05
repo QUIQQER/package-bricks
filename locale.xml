@@ -939,6 +939,10 @@ This content does not replace the block content. You can still place the brick t
             <de><![CDATA[Gruppen]]></de>
             <en><![CDATA[Groups]]></en>
         </locale>
+        <locale name="site.area.window.settings.section.custom">
+            <de><![CDATA[Seiten-spezifische flexible Einstellungen]]></de>
+            <en><![CDATA[Page-specific flexible settings]]></en>
+        </locale>
 
 
         <!-- Tour Data -->

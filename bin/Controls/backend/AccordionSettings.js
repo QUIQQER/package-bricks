@@ -69,8 +69,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/AccordionSettings', [
             const size = this.$getAvailableSize();
 
             this.$Elm.setStyles({
-                height: size.y,
-                width: size.x
+                height: size.y
             });
 
             this.$Desktop = new Element('div', {
@@ -169,6 +168,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/AccordionSettings', [
             });
 
             this.$parseInputValue();
+            this.resize();
             QUI.addEvent('resize', this.resize);
         },
 
@@ -267,8 +267,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/AccordionSettings', [
             const size = this.$getAvailableSize();
 
             this.$Elm.setStyles({
-                height: size.y,
-                width: size.x
+                height: size.y
             });
 
             this.$Desktop.setStyles({
