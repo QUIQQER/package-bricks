@@ -467,12 +467,13 @@ define('package/quiqqer/bricks/bin/Controls/backend/AccordionSettings', [
             index = index[0];
 
             return this.$createDialog().then(function (Dialog) {
+                const self = this;
                 Dialog.addEvent('onSubmit', function () {
                     Dialog.Loader.show();
 
                     const Form = Dialog.getContent().getElement('form');
 
-                    this.edit(index, {
+                    self.edit(index, {
                         disabled: Dialog.DisabledSwitch.getStatus() ? 1 : 0,
                         entryTitle: Form.elements.entryTitle.value,
                         entryContent: Form.elements.entryContent.value
@@ -494,7 +495,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/AccordionSettings', [
                     Form.elements.entryContent.value = data.entryContent || '';
                     Form.elements.entryTitle.fireEvent('change');
                     Form.elements.entryContent.fireEvent('change');
-                });
+                }.bind(this));
 
                 Dialog.setAttribute('title', QUILocale.get('quiqqer/core', 'edit'));
                 Dialog.open();
