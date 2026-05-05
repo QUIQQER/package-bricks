@@ -25,7 +25,7 @@ class Accordion extends QUI\Control
      *   'entryContent' => string
      * ]
      *
-     * @var array<string, mixed>
+     * @var array<int, mixed>
      */
     protected array $entries = [];
 
@@ -68,6 +68,10 @@ class Accordion extends QUI\Control
 
         $maxWidth = $this->getNormalizedListMaxWidth();
 
+        if ($maxWidth !== false) {
+            $this->setCustomVariable('list-maxWidth', $maxWidth);
+        }
+
         if (is_string($entries)) {
             $entries = str_replace("\n", "", $entries);
 
@@ -101,7 +105,6 @@ class Accordion extends QUI\Control
             'this' => $this,
             'columns' => $columns,
             'openFirst' => $this->getAttribute('openFirst'),
-            'listMaxWidth' => $maxWidth,
             'entries' => $this->entries,
             'entriesColumnLeft' => $entriesColumnLeft,
             'entriesColumnRight' => $entriesColumnRight,
@@ -125,26 +128,29 @@ class Accordion extends QUI\Control
     public function createJSONLDFAQSchemaCode(): string
     {
         $Engine = QUI::getTemplateManager()->getEngine();
+        $entries = $this->entries;
 
-        if (empty($this->entries)) {
-            $this->entries = $this->getAttribute('entries');
+        if (empty($entries)) {
+            $entries = $this->getAttribute('entries');
         }
 
-        if (is_string($this->entries)) {
+        if (is_string($entries)) {
             try {
-                $this->entries = (new JsonParser())->parse(
-                    str_replace("\n", "", $this->entries),
+                $entries = (new JsonParser())->parse(
+                    str_replace("\n", "", $entries),
                     JsonParser::PARSE_TO_ASSOC
                 );
             } catch (Exception $Exception) {
                 QUI\System\Log::writeException($Exception);
-                $this->entries = [];
+                $entries = [];
             }
         }
 
-        if (is_array($this->entries)) {
-            $this->entries = $this->filterDisabledEntries($this->entries);
+        if (!is_array($entries)) {
+            $entries = [];
         }
+
+        $this->entries = $this->filterDisabledEntries($entries);
 
         if (empty($this->entries)) {
             return '';
@@ -224,6 +230,15 @@ class Accordion extends QUI\Control
         return $listMaxWidth;
     }
 
+    private function setCustomVariable(string $name, string $value): void
+    {
+        if ($name === '' || $value === '') {
+            return;
+        }
+
+        $this->setStyle('--_q-controlConf-' . $name, $value);
+    }
+
     protected function getResolvedTemplateFile(string $template): string
     {
         return match ($template) {
@@ -298,7 +313,7 @@ class Accordion extends QUI\Control
 
     /**
      * @param array<int|string, mixed> $entries
-     * @return array<int|string, mixed>
+     * @return array<int, mixed>
      */
     protected function filterDisabledEntries(array $entries): array
     {
