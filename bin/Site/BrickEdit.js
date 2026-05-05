@@ -25,8 +25,12 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
             '$onInject',
             '$brickSettingsPromise',
             '$onVisibilityChange',
+            '$getFlexibleSettings',
+            '$resizeControls',
+            'refreshLayout',
             'openBrick',
-            'openBrickInPanel'
+            'openBrickInPanel',
+            'getDialogSettingsMeta'
         ],
 
         options: {
@@ -53,9 +57,21 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
              * @type {Promise<unknown>}
              */
             this.$brickSettingsPromise = this.getBrickSettings().then((result) => {
-                if (result.customfields && result.customfields.length > 0) {
+                result.flexibleSettings = this.$getFlexibleSettings(
+                    result.customfields,
+                    result.availableSettings
+                );
+
+                if (result.flexibleSettings.length > 0) {
                     this.setAttribute('hasCustomFields', true);
                 }
+
+                if (result.flexibleSettings.some((setting) => {
+                    return setting.source === 'window' || !!setting['data-qui'];
+                })) {
+                    this.setAttribute('hasComplexCustomFields', true);
+                }
+
                 return result;
             });
 
@@ -106,8 +122,7 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                 return Template.get('bin/Site/BrickEdit', false, {
                     'package': 'quiqqer/bricks',
                     params: JSON.encode({
-                        customfields: result.customfields,
-                        availableSettings: result.availableSettings
+                        flexibleSettings: result.flexibleSettings
                     })
                 });
 
@@ -149,11 +164,31 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                     self.$onVisibilityChange();
                 }
 
+                self.$resizeControls(controls);
                 self.Loader.hide();
             }).catch(function (err) {
                 self.Loader.hide();
                 console.error(err);
             });
+        },
+
+        /**
+         * Return the enabled flexible settings for the current brick.
+         *
+         * @param {Array} customfields
+         * @param {Array} availableSettings
+         * @returns {Array}
+         */
+        $getFlexibleSettings: function (customfields, availableSettings) {
+            if (!Array.isArray(customfields) || !Array.isArray(availableSettings)) {
+                return [];
+            }
+
+            return customfields.map((fieldName) => {
+                return availableSettings.find((setting) => {
+                    return setting.name === fieldName;
+                });
+            }).filter(Boolean);
         },
 
         /**
@@ -195,6 +230,37 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
                 'display',
                 Visibility.value === 'groups' ? '' : 'none'
             );
+        },
+
+        /**
+         * Resize parsed controls after the layout has settled.
+         *
+         * @param {Elements|Array} controls
+         */
+        $resizeControls: function (controls) {
+            const resizeControls = function () {
+                for (let i = 0, len = controls.length; i < len; i++) {
+                    const Control = QUI.Controls.getById(controls[i].get('data-quiid'));
+
+                    if (Control && "resize" in Control && typeOf(Control.resize) === 'function') {
+                        Control.resize();
+
+                    }
+                }
+            };
+
+            window.setTimeout(resizeControls, 0);
+            window.setTimeout(resizeControls, 150);
+        },
+
+        refreshLayout: function () {
+            const Elm = this.getElm();
+
+            if (!Elm) {
+                return;
+            }
+
+            this.$resizeControls(Elm.getElements('[data-quiid]'));
         },
 
         /**
@@ -272,6 +338,25 @@ define('package/quiqqer/bricks/bin/Site/BrickEdit', [
         hasCustomFields: function () {
             return this.$brickSettingsPromise.then(() => {
                 return this.getAttribute('hasCustomFields');
+            });
+        },
+
+        /**
+         * Return recommended popup dimensions based on the enabled flexible settings.
+         *
+         * @returns {Promise<{hasCustomFields: boolean, hasComplexCustomFields: boolean, maxWidth: number, maxHeight: number}>}
+         */
+        getDialogSettingsMeta: function () {
+            return this.$brickSettingsPromise.then(() => {
+                const hasCustomFields = !!this.getAttribute('hasCustomFields');
+                const hasComplexCustomFields = !!this.getAttribute('hasComplexCustomFields');
+
+                return {
+                    hasCustomFields: hasCustomFields,
+                    hasComplexCustomFields: hasComplexCustomFields,
+                    maxWidth: hasComplexCustomFields ? 980 : 860,
+                    maxHeight: hasComplexCustomFields ? 900 : 760
+                };
             });
         }
     });
