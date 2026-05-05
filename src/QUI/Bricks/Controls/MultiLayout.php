@@ -228,7 +228,7 @@ class MultiLayout extends QUI\Control
         $this->setAttributes([
             'class' => 'quiqqer-bricks-controls-multiLayout',
             'layout' => self::getDefaultPresetId(),
-            'areaBackgroundEnabled' => false,
+            'areaBackgroundEnabled' => true,
             'gridGapEnabled' => true,
             'tileMinHeightPreset' => self::DEFAULT_TILE_MIN_HEIGHT_PRESET,
             'tileMinHeightValue' => '',
