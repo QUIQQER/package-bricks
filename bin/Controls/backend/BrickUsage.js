@@ -4,10 +4,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
     'qui/controls/Control',
     'controls/grid/Grid',
     'utils/Panels',
+    'utils/Site',
     'Locale',
     'Ajax'
 
-], function (QUI, QUIControl, Grid, PanelUtils, QUILocale, QUIAjax) {
+], function (QUI, QUIControl, Grid, PanelUtils, SiteUtils, QUILocale, QUIAjax) {
     "use strict";
 
     return new Class({
@@ -17,7 +18,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
 
         Binds: [
             '$onInject',
-            '$dblClick'
+            '$dblClick',
+            '$openFrontendSite',
+            '$createFrontendButton'
         ],
 
         options: {
@@ -82,6 +85,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
                     dataIndex: 'url',
                     dataType: 'string',
                     width: 300
+                }, {
+                    header: '&nbsp;',
+                    dataIndex: 'openFrontend',
+                    dataType: 'node',
+                    width: 250
                 }],
                 onrefresh: this.refresh
             });
@@ -103,6 +111,12 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
 
             return new Promise(function (resolve) {
                 QUIAjax.get('package_quiqqer_bricks_ajax_getSitesFromBrick', function (result) {
+                    result.data = result.data.map(function (entry) {
+                        entry.openFrontend = self.$createFrontendButton(entry);
+
+                        return entry;
+                    });
+
                     self.$Grid.setData(result);
                     self.fireEvent('refresh', [this]);
 
@@ -159,6 +173,40 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
                 selected[0].lang,
                 selected[0].id
             );
+        },
+
+        /**
+         * Open site in frontend
+         *
+         * @param {Object} Button
+         */
+        $openFrontendSite: function (Button) {
+            SiteUtils.openSite(
+                Button.project,
+                Button.lang,
+                Button.id
+            );
+        },
+
+        /**
+         * Create frontend button node for grid row
+         *
+         * @param {Object} entry
+         * @return {HTMLButtonElement}
+         */
+        $createFrontendButton: function (entry) {
+            return new Element('button', {
+                type: 'button',
+                'class': 'btn btn-light',
+                html: 'Seite im Browser öffnen <span class="fa fa-external-link"></span>',
+                title: 'Seite im Browser öffnen',
+                events: {
+                    click: function (event) {
+                        event.stop();
+                        this.$openFrontendSite(entry);
+                    }.bind(this)
+                }
+            });
         }
     });
 });

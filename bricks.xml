@@ -2020,7 +2020,50 @@
                 <locale group="quiqqer/bricks" var="brick.accordion.description"/>
             </description>
 
+            <mockups>
+                <mockup src="/packages/quiqqer/bricks/bin/images/mockups/accordion-mockup-900x600.png" type="preview"/>
+                <mockup src="/packages/quiqqer/bricks/bin/images/mockups/accordion-thumbnail-100x80.png" type="thumbnail"/>
+            </mockups>
+
             <settings>
+                <setting name="template" type="hidden"
+                         data-qui="package/quiqqer/bricks/bin/Controls/backend/AccordionLayoutSelect">
+                    <locale group="quiqqer/bricks" var="brick.accordion.template"/>
+                </setting>
+
+                <setting name="columns" type="select">
+                    <locale group="quiqqer/bricks" var="brick.accordion.columns"/>
+
+                    <option value="1">
+                        <locale group="quiqqer/bricks" var="brick.accordion.columns.1"/>
+                    </option>
+                    <option value="2">
+                        <locale group="quiqqer/bricks" var="brick.accordion.columns.2"/>
+                    </option>
+                </setting>
+
+                <setting name="iconPosition" type="select">
+                    <locale group="quiqqer/bricks" var="brick.accordion.iconPosition"/>
+
+                    <option value="right">
+                        <locale group="quiqqer/bricks" var="brick.accordion.iconPosition.right"/>
+                    </option>
+                    <option value="left">
+                        <locale group="quiqqer/bricks" var="brick.accordion.iconPosition.left"/>
+                    </option>
+                </setting>
+
+                <setting name="iconStyle" type="select">
+                    <locale group="quiqqer/bricks" var="brick.accordion.iconStyle"/>
+
+                    <option value="angle">
+                        <locale group="quiqqer/bricks" var="brick.accordion.iconStyle.angle"/>
+                    </option>
+                    <option value="plus">
+                        <locale group="quiqqer/bricks" var="brick.accordion.iconStyle.plus"/>
+                    </option>
+                </setting>
+
                 <setting name="stayOpen" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.accordion.stayOpen"/>
 
@@ -2033,15 +2076,11 @@
                     <locale group="quiqqer/bricks" var="brick.accordion.openFirst"/>
                 </setting>
 
-                <setting name="listMaxWidth" type="number" min="0" max="1920">
+                <setting name="listMaxWidth" type="text">
                     <locale group="quiqqer/bricks" var="brick.accordion.listMaxWidth"/>
                     <description>
                         <locale group="quiqqer/bricks" var="brick.accordion.listMaxWidth.desc"/>
                     </description>
-                </setting>
-
-                <setting name="entries" data-qui="package/quiqqer/bricks/bin/Controls/backend/AccordionSettings">
-                    <locale group="quiqqer/bricks" var="brick.accordion.entries"/>
                 </setting>
 
                 <setting name="useFaqStructuredData" type="checkbox">
@@ -2051,6 +2090,30 @@
                     </description>
                 </setting>
             </settings>
+
+            <window>
+                <categories>
+                    <category name="accordion-entries" index="35">
+                        <text>
+                            <locale group="quiqqer/bricks" var="brick.accordion.category.entries"/>
+                        </text>
+                        <image>fa fa-list-alt</image>
+
+                        <settings name="accordion-entries">
+                            <title>
+                                <locale group="quiqqer/bricks" var="brick.accordion.entries"/>
+                            </title>
+
+                            <input conf="entries" type="hidden" label="false"
+                                   data-qui="package/quiqqer/bricks/bin/Controls/backend/AccordionSettings">
+                                <text>
+                                    <locale group="quiqqer/bricks" var="brick.accordion.entries"/>
+                                </text>
+                            </input>
+                        </settings>
+                    </category>
+                </categories>
+            </window>
         </brick>
 
         <brick control="\QUI\Bricks\Controls\PDF\PdfPreview">

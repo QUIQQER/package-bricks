@@ -1,0 +1,31 @@
+.quiqqer-accordion-list--boxOutlineTextColor {
+    --_items-gap: var(--quiqqer-bricks-accordion-items-gap, 1rem);
+    --_header-font-size: var(--quiqqer-bricks-accordion-header-font-size, 1.125rem);
+    --_header-font-weight: var(--quiqqer-bricks-accordion-header-font-weight, 500);
+}
+
+.quiqqer-accordion-item--boxOutlineTextColor .quiqqer-accordion-item-header--box {
+    align-items: center;
+    border: 1px solid currentColor;
+    border-radius: var(--qui-border-radius, 1rem);
+    cursor: pointer;
+    display: flex;
+    font-size: var(--_header-font-size);
+    font-weight: var(--_header-font-weight);
+    gap: 1rem;
+    margin: 0;
+    padding: 0.75rem 1.25rem;
+}
+
+.quiqqer-accordion-item--boxOutlineTextColor .quiqqer-accordion-item-header-text {
+    flex-grow: 1
+}
+
+.quiqqer-accordion-list--icon-left .quiqqer-accordion-item--boxOutlineTextColor .quiqqer-accordion-item-header-icon {
+    margin-left: 0;
+    order: -1;
+}
+
+.quiqqer-accordion-item--boxOutlineTextColor .quiqqer-accordion-item-content--box {
+    padding: 1.25rem 0;
+}

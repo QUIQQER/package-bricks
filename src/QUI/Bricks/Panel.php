@@ -105,6 +105,7 @@ class Panel extends QUI\Utils\Singleton
         // locale
         foreach ($categories as $key => $category) {
             if (isset($category['text']) && is_array($category['text'])) {
+
                 $categories[$key]['text'] = QUI::getLocale()->get(
                     $category['text'][0],
                     $category['text'][1]
@@ -112,11 +113,18 @@ class Panel extends QUI\Utils\Singleton
             }
 
             if (isset($category['title']) && is_array($category['title'])) {
+                $categories[$key]['text'] = QUI::getLocale()->get(
+                    $category['title'][0],
+                    $category['title'][1]
+                );
+
                 $categories[$key]['title'] = QUI::getLocale()->get(
                     $category['title'][0],
                     $category['title'][1]
                 );
             }
+
+
 
             if (empty($categories[$key]['text']) && !empty($categories[$key]['title'])) {
                 $categories[$key]['text'] = $categories[$key]['title'];
