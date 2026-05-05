@@ -826,7 +826,11 @@ class Manager
             $Description = $Setting->getElementsByTagName('description');
 
             if ($Description->length) {
-                $description = QUI\Utils\DOM::getTextFromNode($Description->item(0), false);
+                $DescriptionNode = $Description->item(0);
+
+                if ($DescriptionNode instanceof DOMNode) {
+                    $description = QUI\Utils\DOM::getTextFromNode($DescriptionNode, false);
+                }
             }
         }
 
@@ -897,14 +901,22 @@ class Manager
         $TextNodes = $Field->getElementsByTagName('text');
 
         if ($TextNodes->length) {
-            $text = QUI\Utils\DOM::getTextFromNode($TextNodes->item(0), false);
+            $TextNode = $TextNodes->item(0);
+
+            if ($TextNode instanceof DOMNode) {
+                $text = QUI\Utils\DOM::getTextFromNode($TextNode, false);
+            }
         }
 
         if (empty($text) && method_exists($ParentSetting, 'getElementsByTagName')) {
             $Title = $ParentSetting->getElementsByTagName('title');
 
             if ($Title->length) {
-                $text = QUI\Utils\DOM::getTextFromNode($Title->item(0), false);
+                $TitleNode = $Title->item(0);
+
+                if ($TitleNode instanceof DOMNode) {
+                    $text = QUI\Utils\DOM::getTextFromNode($TitleNode, false);
+                }
             }
         }
 
@@ -912,7 +924,11 @@ class Manager
         $description = '';
 
         if ($DescriptionNodes->length) {
-            $description = QUI\Utils\DOM::getTextFromNode($DescriptionNodes->item(0), false);
+            $DescriptionNode = $DescriptionNodes->item(0);
+
+            if ($DescriptionNode instanceof DOMNode) {
+                $description = QUI\Utils\DOM::getTextFromNode($DescriptionNode, false);
+            }
         }
         $options = null;
         $dataAttributes = [];
