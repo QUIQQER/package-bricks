@@ -89,7 +89,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
                     header: '&nbsp;',
                     dataIndex: 'openFrontend',
                     dataType: 'node',
-                    width: 200
+                    width: 250
                 }],
                 onrefresh: this.refresh
             });
