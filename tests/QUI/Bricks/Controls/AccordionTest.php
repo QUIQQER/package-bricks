@@ -137,11 +137,11 @@ class AccordionTest extends TestCase
         ]);
 
         $this->assertStringContainsString(
-            '--_q-controlConf-list-maxWidth: 800px;',
+            '--_q-controlConf-list-maxWidth:800px',
             $NumericControl->create()
         );
         $this->assertStringContainsString(
-            '--_q-controlConf-list-maxWidth: clamp(20rem, 50vw, 60rem);',
+            '--_q-controlConf-list-maxWidth:clamp(20rem, 50vw, 60rem)',
             $CssValueControl->create()
         );
         $this->assertStringNotContainsString('--_q-controlConf-list-maxWidth:', $DisabledControl->create());
