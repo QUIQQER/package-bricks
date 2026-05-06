@@ -127,7 +127,6 @@ class Accordion extends QUI\Control
      */
     public function createJSONLDFAQSchemaCode(): string
     {
-        $Engine = QUI::getTemplateManager()->getEngine();
         $entries = $this->entries;
 
         if (empty($entries)) {
@@ -156,12 +155,43 @@ class Accordion extends QUI\Control
             return '';
         }
 
-        $Engine->assign([
-            'this' => $this,
-            'entries' => $this->entries
-        ]);
+        $mainEntity = array_values(array_filter(array_map(function ($entry) {
+            if (!is_array($entry)) {
+                return null;
+            }
 
-        return $Engine->fetch(dirname(__FILE__) . '/Accordion.JSON-LD-Schema.html');
+            $question = $this->normalizeFAQSchemaText($entry['entryTitle'] ?? null);
+            $answer = $this->normalizeFAQSchemaText($entry['entryContent'] ?? null);
+
+            if ($question === '' || $answer === '') {
+                return null;
+            }
+
+            return [
+                '@type' => 'Question',
+                'name' => $question,
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => $answer
+                ]
+            ];
+        }, $this->entries)));
+
+        if (empty($mainEntity)) {
+            return '';
+        }
+
+        $schema = json_encode([
+            '@context' => 'https://schema.org',
+            '@type' => 'FAQPage',
+            'mainEntity' => $mainEntity
+        ], JSON_UNESCAPED_UNICODE);
+
+        if (!is_string($schema) || $schema === '') {
+            return '';
+        }
+
+        return '<script type="application/ld+json">' . $schema . '</script>';
     }
 
     protected function getTemplateName(): string
@@ -324,5 +354,18 @@ class Accordion extends QUI\Control
 
             return !in_array($entry['disabled'], [true, 1, '1'], true);
         }));
+    }
+
+    protected function normalizeFAQSchemaText(mixed $value): string
+    {
+        if (!is_string($value) || $value === '') {
+            return '';
+        }
+
+        $text = strip_tags($value);
+        $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $text = preg_replace('/\s+/u', ' ', $text);
+
+        return trim((string)$text);
     }
 }
