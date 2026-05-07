@@ -1,63 +1,71 @@
 <form>
     {assign var=dataQuiKey value="data-qui"}
 
-    <table class="data-table brick-site-edit">
-        <tbody>
-        <tr class="odd">
-            <td>
-                <label for="inheritance">
-                    {locale group="quiqqer/bricks" var="site.area.window.settings.setting.inheritance"}
-                </label>
-            </td>
-            <td>
-                <input type="checkbox" name="inheritance" id="inheritance" />
-            </td>
-        </tr>
+    <div class="brick-site-edit-section">
+        <table class="data-table brick-site-edit">
+            <tbody>
+            <tr class="odd">
+                <td>
+                    <label for="inheritance">
+                        {locale group="quiqqer/bricks" var="site.area.window.settings.setting.inheritance"}
+                    </label>
+                </td>
+                <td>
+                    <input type="checkbox" name="inheritance" id="inheritance" />
+                </td>
+            </tr>
 
-        <tr class="even">
-            <td>
-                <label for="visibility">
-                    {locale group="quiqqer/bricks" var="site.area.window.settings.setting.visibility"}
-                </label>
-            </td>
-            <td>
-                <select name="visibility" id="visibility" style="width: 100%;">
-                    <option value="always">
-                        {locale group="quiqqer/bricks" var="site.area.window.settings.setting.visibility.always"}
-                    </option>
-                    <option value="guest">
-                        {locale group="quiqqer/bricks" var="site.area.window.settings.setting.visibility.guest"}
-                    </option>
-                    <option value="authenticated">
-                        {locale group="quiqqer/bricks" var="site.area.window.settings.setting.visibility.authenticated"}
-                    </option>
-                    <option value="groups">
-                        {locale group="quiqqer/bricks" var="site.area.window.settings.setting.visibility.groups"}
-                    </option>
-                </select>
-            </td>
-        </tr>
+            <tr class="even">
+                <td>
+                    <label for="visibility">
+                        {locale group="quiqqer/bricks" var="site.area.window.settings.setting.visibility"}
+                    </label>
+                </td>
+                <td>
+                    <select name="visibility" id="visibility" style="width: 100%;">
+                        <option value="always">
+                            {locale group="quiqqer/bricks" var="site.area.window.settings.setting.visibility.always"}
+                        </option>
+                        <option value="guest">
+                            {locale group="quiqqer/bricks" var="site.area.window.settings.setting.visibility.guest"}
+                        </option>
+                        <option value="authenticated">
+                            {locale group="quiqqer/bricks" var="site.area.window.settings.setting.visibility.authenticated"}
+                        </option>
+                        <option value="groups">
+                            {locale group="quiqqer/bricks" var="site.area.window.settings.setting.visibility.groups"}
+                        </option>
+                    </select>
+                </td>
+            </tr>
 
-        <tr class="odd" data-name="visibility-groups-row">
-            <td>
-                <label for="visibilityGroups">
-                    {locale group="quiqqer/bricks" var="site.area.window.settings.setting.visibility.groups.label"}
-                </label>
-            </td>
-            <td>
-                <input type="hidden"
-                       name="visibilityGroups"
-                       id="visibilityGroups"
-                       class="groups"
-                />
-            </td>
-        </tr>
+            <tr class="odd" data-name="visibility-groups-row">
+                <td>
+                    <label for="visibilityGroups">
+                        {locale group="quiqqer/bricks" var="site.area.window.settings.setting.visibility.groups.label"}
+                    </label>
+                </td>
+                <td>
+                    <input type="hidden"
+                           name="visibilityGroups"
+                           id="visibilityGroups"
+                           class="groups"
+                    />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-        {if isset($params.customfields)}
-        {foreach $params.customfields as $key => $field}
+    {if isset($params.flexibleSettings) && $params.flexibleSettings|@count}
+    <div class="brick-site-edit-section">
+        <h3 class="brick-site-edit-section-title">
+            {locale group="quiqqer/bricks" var="site.area.window.settings.section.custom"}
+        </h3>
 
-            {foreach $params.availableSettings as $setting}
-            {if $setting.name == $field}
+        <table class="data-table brick-site-edit brick-site-edit-flexible">
+            <tbody>
+            {foreach $params.flexibleSettings as $setting}
             <tr class="{cycle values="even,odd"}">
                 <td>
                     <label for="{$setting.name}">
@@ -74,6 +82,12 @@
                     {if $setting.type == 'select'}
                     <select id="{$setting.name}"
                             name="{$setting.name}"
+                            {if isset($setting.$dataQuiKey) && $setting.$dataQuiKey}data-qui="{$setting.$dataQuiKey}"{/if}
+                            {if isset($setting['data-attributes'])}
+                            {foreach $setting['data-attributes'] as $attrName => $attrValue}
+                            {$attrName}="{$attrValue}"
+                            {/foreach}
+                            {/if}
                     >
                         {foreach $setting.options as $option}
                         <option value="{$option.value}">
@@ -91,31 +105,43 @@
                     <textarea id="{$setting.name}"
                            name="{$setting.name}"
                            class="{$setting.class}"
-                           data-qui="{$setting.$dataQuiKey}"
+                           {if isset($setting.$dataQuiKey) && $setting.$dataQuiKey}data-qui="{$setting.$dataQuiKey}"{/if}
+                           {if isset($setting['data-attributes'])}
+                           {foreach $setting['data-attributes'] as $attrName => $attrValue}
+                           {$attrName}="{$attrValue}"
+                           {/foreach}
+                           {/if}
                     ></textarea>
                     {else if $setting.type == 'checkbox'}
                     <input type="checkbox"
                            id="{$setting.name}"
                            name="{$setting.name}"
                            class="{$setting.class}"
-                           data-qui="{$setting.$dataQuiKey}"
+                           {if isset($setting.$dataQuiKey) && $setting.$dataQuiKey}data-qui="{$setting.$dataQuiKey}"{/if}
+                           {if isset($setting['data-attributes'])}
+                           {foreach $setting['data-attributes'] as $attrName => $attrValue}
+                           {$attrName}="{$attrValue}"
+                           {/foreach}
+                           {/if}
                     />
                     {else}
-                    <input type="text"
+                    <input type="{if $setting.type}{$setting.type}{else}text{/if}"
                            id="{$setting.name}"
                            name="{$setting.name}"
                            class="{$setting.class}"
-                           data-qui="{$setting.$dataQuiKey}"
+                           {if isset($setting.$dataQuiKey) && $setting.$dataQuiKey}data-qui="{$setting.$dataQuiKey}"{/if}
+                           {if isset($setting['data-attributes'])}
+                           {foreach $setting['data-attributes'] as $attrName => $attrValue}
+                           {$attrName}="{$attrValue}"
+                           {/foreach}
+                           {/if}
                     />
                     {/if}
                 </td>
             </tr>
-            {/if}
-
             {/foreach}
-        {/foreach}
-        {/if}
-
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+    {/if}
 </form>

@@ -1,0 +1,242 @@
+.quiqqer-bricks-accordionLayoutSelect {
+    display: block;
+    width: 100%;
+}
+
+.quiqqer-bricks-accordionLayoutSelect.is-disabled {
+    opacity: 0.6;
+}
+
+.quiqqer-bricks-accordionLayoutSelect-grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.quiqqer-bricks-accordionLayoutSelect-card {
+    --border-radius: 12px;
+    --border-color: #d7dce3;
+    --padding: 10px;
+
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.quiqqer-bricks-accordionLayoutSelect-card:hover,
+.quiqqer-bricks-accordionLayoutSelect-card:focus {
+    border-color: #7f8ea3;
+    box-shadow: 0 0 0 3px rgb(72 121 255 / 12%);
+    outline: none;
+}
+
+.quiqqer-bricks-accordionLayoutSelect-card.is-active {
+    border-color: #4879ff;
+    box-shadow: 0 0 0 3px rgb(72 121 255 / 18%);
+}
+
+.quiqqer-bricks-accordionLayoutSelect.is-disabled .quiqqer-bricks-accordionLayoutSelect-card {
+    cursor: default;
+}
+
+.quiqqer-bricks-accordionLayoutSelect-card:disabled {
+    pointer-events: none;
+}
+
+.quiqqer-bricks-accordionLayoutSelect-cardPreview {
+    align-items: stretch;
+    background: #fbfcfd;
+    border-bottom: 1px solid #edf0f4;
+    display: flex;
+    min-height: 118px;
+    padding: var(--padding);
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.quiqqer-bricks-accordionLayoutSelect-cardTitle {
+    background-color: #f9f9f9;
+    border-top: 1px solid var(--border-color);
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    color: #1d2733;
+    display: -webkit-box;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.35;
+    min-height: 48px;
+    overflow: hidden;
+    padding: var(--padding);
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+/**
+ * Skeleton preview
+ */
+.quiqqer-bricks-accordionLayoutSelect-skeleton {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: var(--gap, 8px)
+}
+
+.quiqqer-bricks-accordionLayoutSelect-skeletonItem {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    align-items: center;
+    border-radius: inherit;
+    display: flex;
+    gap: 8px;
+    padding: 9px;
+}
+
+.quiqqer-bricks-accordionLayoutSelect-skeletonLine {
+    background: #cfd6df;
+    border-radius: 999px;
+    height: 4px;
+    width: 100%;
+}
+
+.quiqqer-bricks-accordionLayoutSelect-skeletonLine.is-title {
+    width: 72%;
+    background-color: #a1a9b4;
+}
+
+.quiqqer-bricks-accordionLayoutSelect-skeletonLine.is-long {
+    width: 92%;
+}
+
+.quiqqer-bricks-accordionLayoutSelect-skeletonLine.is-short {
+    width: 58%;
+}
+
+.quiqqer-bricks-accordionLayoutSelect-skeletonIcon {
+    --icon-size: 12px;
+
+    background: #b8c2ce;
+    border-radius: 999px;
+    flex: 0 0 var(--icon-size);
+    height: var(--icon-size);
+    margin-left: auto;
+    width: var(--icon-size);
+}
+
+.quiqqer-bricks-accordionLayoutSelect-skeletonBody {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 6px 0;
+}
+
+/*+
+ * Layouts
+ */
+
+/* default */
+.is-default.quiqqer-bricks-accordionLayoutSelect-skeleton {
+    gap: 0;
+}
+
+.is-default .quiqqer-bricks-accordionLayoutSelect-skeletonItem {
+    border-radius: 0;
+    border-bottom: 1px solid #b8c6da
+}
+
+.is-default .quiqqer-bricks-accordionLayoutSelect-skeletonHeader,
+.is-default .quiqqer-bricks-accordionLayoutSelect-skeletonBody {
+    padding-inline: 0;
+}
+
+/* simple*/
+.is-simple.quiqqer-bricks-accordionLayoutSelect-skeleton {
+    gap: 0;
+}
+
+.is-simple .quiqqer-bricks-accordionLayoutSelect-skeletonItem {
+    border-left: 0;
+    border-radius: 0;
+    border-right: 0;
+    border-top: 0;
+}
+
+.is-simple .quiqqer-bricks-accordionLayoutSelect-skeletonHeader,
+.is-simple .quiqqer-bricks-accordionLayoutSelect-skeletonBody {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* outline */
+.is-outline .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    border: 1px solid #d7dce3;
+}
+
+/* outline accent */
+.is-outlineAccent .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    border: 1px solid var(--qui-colors-primary);
+}
+
+/* outline text color */
+.is-outlineTextColor .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    border: 1px solid #7f8ea3;
+}
+
+/* fill */
+.is-fill .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    background: var(--qui-colors-primary);
+}
+
+.is-fill .quiqqer-bricks-accordionLayoutSelect-skeletonHeader .quiqqer-bricks-accordionLayoutSelect-skeletonLine,
+.is-fill .quiqqer-bricks-accordionLayoutSelect-skeletonIcon {
+    background-color: var(--qui-colors-primary--accent, #fff);
+}
+
+/* fill subtle */
+.is-fillSubtle .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    background: #f2f4f8;
+}
+
+/* card */
+.is-card .quiqqer-bricks-accordionLayoutSelect-skeletonItem {
+    background-color: #f5f5f5;
+}
+
+.is-card .quiqqer-bricks-accordionLayoutSelect-skeletonBody {
+    padding-inline: 8px;
+    padding-bottom: 8px;
+}
+
+/* card accent */
+.is-cardAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child {
+    background-color: var(--qui-colors-primary);
+}
+
+.is-cardAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonLine,
+.is-cardAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonIcon {
+    background-color: var(--qui-colors-primary--accent, #fff);
+}
+
+.is-cardAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonBody .quiqqer-bricks-accordionLayoutSelect-skeletonLine {
+    background-color: color-mix(in srgb, var(--qui-colors-primary--accent, #fff), transparent 20%);
+}
+
+.is-cardAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem {
+    background-color: #f5f5f5;
+}
+
+.is-cardAccent .quiqqer-bricks-accordionLayoutSelect-skeletonBody {
+    padding-inline: 8px;
+    padding-bottom: 8px;
+}

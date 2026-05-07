@@ -1286,12 +1286,16 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                                 }
                             }).inject(Win.getContent());
 
-                            Edit.hasCustomFields().then((hasCustomFields) => {
-                                if (hasCustomFields) {
-                                    Win.setAttribute('maxWidth', 800);
-                                    Win.setAttribute('maxHeight', 800);
-                                    Win.resize();
+                            Edit.getDialogSettingsMeta().then((settingsMeta) => {
+                                if (settingsMeta.hasCustomFields) {
+                                    Win.setAttribute('maxWidth', settingsMeta.maxWidth);
+                                    Win.setAttribute('maxHeight', settingsMeta.maxHeight);
+                                    return Win.resize().then(() => {
+                                        Edit.refreshLayout();
+                                    });
                                 }
+
+                                Edit.refreshLayout();
                             });
 
                             // EditButton.addEvent('click', function () {

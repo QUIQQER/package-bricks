@@ -6,6 +6,32 @@ use PHPUnit\Framework\TestCase;
 
 class AccordionTest extends TestCase
 {
+    public function testTemplateVariantsCanBeInstantiated(): void
+    {
+        $class = 'QUI\Bricks\Controls\Accordion';
+
+
+        foreach (['default', 'simple', 'boxOutline', 'boxOutlineAccent', 'boxOutlineTextColor', 'boxFillAccent', 'boxFillSubtle', 'softCard', 'softCardAccentFill', 'invalid'] as $template) {
+            try {
+                $Control = new $class([
+                    'template' => $template,
+                    'columns' => 2,
+                    'iconPosition' => 'left',
+                    'iconStyle' => 'plus',
+                    'entries' => [[
+                        'entryTitle' => 'Question',
+                        'entryContent' => 'Answer'
+                    ]]
+                ]);
+
+                $this->assertInstanceOf($class, $Control);
+                $this->assertIsString($Control->getBody());
+            } catch (\Throwable) {
+                $this->addToAssertionCount(1);
+            }
+        }
+    }
+
     public function testControlBehaviorSmoke(): void
     {
         $class = 'QUI\Bricks\Controls\Accordion';
@@ -62,5 +88,62 @@ class AccordionTest extends TestCase
                 $this->addToAssertionCount(1);
             }
         }
+    }
+
+    public function testDisabledEntriesAreNotRendered(): void
+    {
+        $Control = new \QUI\Bricks\Controls\Accordion([
+            'entries' => [[
+                'entryTitle' => 'Visible question',
+                'entryContent' => 'Visible answer',
+                'disabled' => 0
+            ], [
+                'entryTitle' => 'Hidden question',
+                'entryContent' => 'Hidden answer',
+                'disabled' => 1
+            ]]
+        ]);
+
+        $body = $Control->getBody();
+        $schema = $Control->createJSONLDFAQSchemaCode();
+
+        $this->assertStringContainsString('Visible question', $body);
+        $this->assertStringNotContainsString('Hidden question', $body);
+        $this->assertStringContainsString('Visible question', $schema);
+        $this->assertStringNotContainsString('Hidden question', $schema);
+    }
+
+
+    public function testListMaxWidthSupportsNumbersAndCssValues(): void
+    {
+        $entries = [[
+            'entryTitle' => 'Question',
+            'entryContent' => 'Answer'
+        ]];
+
+        $NumericControl = new \QUI\Bricks\Controls\Accordion([
+            'entries' => $entries,
+            'listMaxWidth' => '800'
+        ]);
+
+        $CssValueControl = new \QUI\Bricks\Controls\Accordion([
+            'entries' => $entries,
+            'listMaxWidth' => 'clamp(20rem, 50vw, 60rem)'
+        ]);
+
+        $DisabledControl = new \QUI\Bricks\Controls\Accordion([
+            'entries' => $entries,
+            'listMaxWidth' => '0'
+        ]);
+
+        $this->assertStringContainsString(
+            '--_q-controlConf-list-maxWidth:800px',
+            $NumericControl->create()
+        );
+        $this->assertStringContainsString(
+            '--_q-controlConf-list-maxWidth:clamp(20rem, 50vw, 60rem)',
+            $CssValueControl->create()
+        );
+        $this->assertStringNotContainsString('--_q-controlConf-list-maxWidth:', $DisabledControl->create());
     }
 }

@@ -71,10 +71,113 @@ XML
         $this->assertSame('select', $result['type']);
         $this->assertSame('SizeControl', $result['class']);
         $this->assertSame('package/size', $result['data-qui']);
+        $this->assertSame('settings', $result['source']);
         $this->assertSame('foo', $result['data-attributes']['data-extra']);
         $this->assertSame('Size description', trim((string)$result['description']));
         $this->assertCount(2, $result['options']);
         $this->assertSame('small', $result['options'][0]['value']);
+    }
+
+    public function testParseWindowSettingToBrickArray(): void
+    {
+        $doc = new DOMDocument();
+        $doc->loadXML(<<<'XML'
+<settings name="accordion-entries">
+  <title>Entries</title>
+  <input conf="entries" type="hidden" label="false" data-qui="package/accordion" data-extra="foo">
+    <text>
+      <locale group="quiqqer/bricks" var="brick.accordion.entries"/>
+    </text>
+  </input>
+</settings>
+XML
+        );
+
+        $node = $doc->getElementsByTagName('settings')->item(0);
+        $this->assertNotNull($node);
+
+        $Manager = new class (true) extends Manager {
+            public function exposeParseWindowSettingToBrickArray(\DOMNode $Setting): array
+            {
+                return $this->parseWindowSettingToBrickArray($Setting);
+            }
+        };
+
+        $result = $Manager->exposeParseWindowSettingToBrickArray($node);
+
+        $this->assertCount(1, $result);
+        $this->assertSame('entries', $result[0]['name']);
+        $this->assertSame(
+            ['quiqqer/bricks', 'brick.accordion.entries'],
+            $result[0]['text']
+        );
+        $this->assertSame('hidden', $result[0]['type']);
+        $this->assertSame('package/accordion', $result[0]['data-qui']);
+        $this->assertSame('window', $result[0]['source']);
+        $this->assertSame('foo', $result[0]['data-attributes']['data-extra']);
+    }
+
+    public function testGetAvailableBrickSettingsIncludesWindowFieldsOnce(): void
+    {
+        $brickType = '\Vendor\Accordion' . md5((string)mt_rand());
+        $xmlFile = $this->tmpDir . '/bricks.xml';
+
+        file_put_contents($xmlFile, <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<quiqqer>
+    <bricks>
+        <brick control="{$brickType}">
+            <settings>
+                <setting name="template" type="select">
+                    <option value="default">Default</option>
+                </setting>
+            </settings>
+            <window>
+                <categories>
+                    <category name="accordion-entries" index="1">
+                        <settings name="accordion-entries">
+                            <title>Entries</title>
+                            <input conf="entries" type="hidden" data-qui="package/accordion">
+                                <text>Accordion entries</text>
+                            </input>
+                        </settings>
+                        <settings name="accordion-template">
+                            <title>Duplicate template</title>
+                            <input conf="template" type="text">
+                                <text>Template duplicate</text>
+                            </input>
+                        </settings>
+                    </category>
+                </categories>
+            </window>
+        </brick>
+    </bricks>
+</quiqqer>
+XML);
+
+        $Manager = new class ($xmlFile) extends Manager {
+            public function __construct(private readonly string $xmlFile)
+            {
+                parent::__construct(true);
+            }
+
+            protected function getBricksXMLFiles(): array
+            {
+                return [$this->xmlFile];
+            }
+        };
+
+        $result = $Manager->getAvailableBrickSettingsByBrickType($brickType);
+        $names = array_column($result, 'name');
+        $entries = array_values(array_filter($result, static function (array $setting) {
+            return $setting['name'] === 'entries';
+        }));
+
+        $this->assertContains('entries', $names);
+        $this->assertCount(1, array_keys($names, 'template', true));
+        $this->assertCount(1, $entries);
+        $this->assertSame('window', $entries[0]['source']);
+        $this->assertSame('package/accordion', $entries[0]['data-qui']);
     }
 
     public function testBrickVisibilityModeDefaultsToAlways(): void
