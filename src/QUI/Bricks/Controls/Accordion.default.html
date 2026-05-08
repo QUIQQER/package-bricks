@@ -27,7 +27,9 @@
                     {if isset($entry['entryContent'])}
                         <div class="quiqqer-accordion-item-content-wrapper">
                             <div class="quiqqer-accordion-item-content">
-                                {$entry['entryContent']}
+                                <div class="quiqqer-accordion-item-content-inner">
+                                    {$entry['entryContent']}
+                                </div>
                             </div>
                         </div>
                     {/if}
@@ -50,7 +52,7 @@
 
                     {if isset($entry['entryContent'])}
                         <div class="quiqqer-accordion-item-content-wrapper">
-                            <div class="quiqqer-accordion-item-content">
+                            <div class="quiqqer-accordion-item-content-inner">
                                 {$entry['entryContent']}
                             </div>
                         </div>

@@ -1,32 +1,11 @@
-.quiqqer-accordion-list--boxFillSubtle {
-    --_items-gap: var(--quiqqer-bricks-accordion-items-gap, 1rem);
-    --_header-font-size: var(--quiqqer-bricks-accordion-header-font-size, 1.125rem);
-    --_header-font-weight: var(--quiqqer-bricks-accordion-header-font-weight, 500);
-}
-
-.quiqqer-accordion-item--boxFillSubtle .quiqqer-accordion-item-header--box {
-    align-items: center;
+.quiqqer-accordion-item--boxFillSubtle .quiqqer-accordion-item-header {
     background: var(--qui-colors-surface-subtle);
-    border: 1px solid var(--qui-colors-surface-subtle);
-    border-radius: var(--qui-border-radius, 1rem);
-    cursor: pointer;
-    display: flex;
-    font-size: var(--_header-font-size);
-    font-weight: var(--_header-font-weight);
-    gap: 1rem;
-    margin: 0;
-    padding: 1.125rem 1.25rem;
 }
 
-.quiqqer-accordion-item--boxFillSubtle .quiqqer-accordion-item-header-text {
-    flex-grow: 1
+.quiqqer-accordion-item--boxFillSubtle .quiqqer-accordion-item-header:is(:hover, :focus-visible) {
+    background: color-mix(in oklab, var(--qui-colors-surface-subtle) 94%, black);
 }
 
-.quiqqer-accordion-list--icon-left .quiqqer-accordion-item--boxFillSubtle .quiqqer-accordion-item-header-icon {
-    margin-left: 0;
-    order: -1;
-}
-
-.quiqqer-accordion-item--boxFillSubtle .quiqqer-accordion-item-content--box {
-    padding: 1.25rem 0;
+.quiqqer-accordion-item--boxFillSubtle .quiqqer-accordion-item-content {
+    padding-top: 1rem;
 }

@@ -1,5 +1,4 @@
 .quiqqer-accordion-list--softCard {
-    --_items-gap: var(--quiqqer-bricks-accordion-items-gap, 1rem);
     --_item-bg: var(--quiqqer-bricks-accordion-softCard-item-bg, var(--qui-colors-surface-soft, var(--qui-colors-surface-subtle)));
     --_item-radius: var(--quiqqer-bricks-accordion-softCard-radius, var(--qui-radius-card));
     --_item-color: var(--quiqqer-bricks-accordion-softCard-item-color, inherit);
@@ -24,19 +23,8 @@
     color: var(--_item-open-color);
 }
 
-.quiqqer-accordion-item--softCard .quiqqer-accordion-item-header--softCard {
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    font-size: var(--_header-font-size);
-    font-weight: var(--_header-font-weight);
-    gap: 1rem;
-    margin: 0;
-    padding: var(--_header-padding);
-}
-
-.quiqqer-accordion-item--softCard .quiqqer-accordion-item-header-text {
-    flex-grow: 1;
+.quiqqer-accordion-item--softCard .quiqqer-accordion-item-header:is(:hover, :focus-visible) {
+    background: color-mix(in oklab, transparent 90%, currentColor);
 }
 
 .quiqqer-accordion-item--softCard .quiqqer-accordion-item-header-icon {
@@ -44,18 +32,13 @@
     background: var(--_icon-bg);
     border-radius: 50%;
     color: var(--_icon-color);
-    display: inline-flex;
+    display: flex;
     height: var(--_icon-size);
     justify-content: center;
     line-height: 1;
     min-width: var(--_icon-size);
 }
 
-.quiqqer-accordion-list--icon-left .quiqqer-accordion-item--softCard .quiqqer-accordion-item-header-icon {
-    margin-left: 0;
-    order: -1;
-}
-
-.quiqqer-accordion-item--softCard .quiqqer-accordion-item-content--softCard {
-    padding: 0 1.25rem 1.25rem;
+.quiqqer-accordion-item--softCard .quiqqer-accordion-item-content {
+    padding: 1rem;
 }
