@@ -1,0 +1,11 @@
+.quiqqer-accordion-item--boxFill .quiqqer-accordion-item-header {
+    background: var(--qui-colors-surface-subtle);
+}
+
+.quiqqer-accordion-item--boxFill .quiqqer-accordion-item-header:is(:hover, :focus-visible) {
+    background: color-mix(in oklab, var(--qui-colors-surface-subtle) 94%, black);
+}
+
+.quiqqer-accordion-item--boxFill .quiqqer-accordion-item-content {
+    padding-top: 1rem;
+}

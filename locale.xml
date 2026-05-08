@@ -3101,6 +3101,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Umrandet Textfarbe]]></de>
             <en><![CDATA[Outline Text]]></en>
         </locale>
+        <locale name="brick.accordion.template.boxFill">
+            <de><![CDATA[Gefüllt dezent]]></de>
+            <en><![CDATA[Fill Subtle]]></en>
+        </locale>
         <locale name="brick.accordion.template.boxFillAccent">
             <de><![CDATA[Gefüllt Akzent]]></de>
             <en><![CDATA[Fill Accent]]></en>
@@ -3109,15 +3113,11 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Gefüllt Akzent geöffnet]]></de>
             <en><![CDATA[Fill Accent Open]]></en>
         </locale>
-        <locale name="brick.accordion.template.boxFillSubtle">
-            <de><![CDATA[Gefüllt dezent]]></de>
-            <en><![CDATA[Fill Subtle]]></en>
-        </locale>
-        <locale name="brick.accordion.template.softCard">
+        <locale name="brick.accordion.template.card">
             <de><![CDATA[Karte]]></de>
             <en><![CDATA[Card]]></en>
         </locale>
-        <locale name="brick.accordion.template.softCardAccentFill">
+        <locale name="brick.accordion.template.cardFillAccent">
             <de><![CDATA[Karte Akzent]]></de>
             <en><![CDATA[Card Accent]]></en>
         </locale>

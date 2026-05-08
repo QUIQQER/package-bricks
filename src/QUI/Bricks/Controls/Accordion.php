@@ -210,11 +210,11 @@ class Accordion extends QUI\Control
                 'boxOutlineAccent',
                 'boxOutlineAccentOpen',
                 'boxOutlineTextColor',
+                'boxFill',
                 'boxFillAccent',
                 'boxFillAccentOpen',
-                'boxFillSubtle',
-                'softCard',
-                'softCardAccentFill'
+                'card',
+                'cardFillAccent'
             ], true)
         ) {
             return 'default';
@@ -275,8 +275,8 @@ class Accordion extends QUI\Control
     {
         return match ($template) {
             'boxOutlineAccent', 'boxOutlineAccentOpen', 'boxOutlineTextColor' => 'Accordion.boxOutline',
-            'boxFillAccentOpen', 'boxFillSubtle' => 'Accordion.boxFillAccent',
-            'softCardAccentFill' => 'Accordion.softCard',
+            'boxFillAccentOpen', 'boxFill' => 'Accordion.boxFillAccent',
+            'cardFillAccent' => 'Accordion.card',
             'simple' => 'Accordion.default',
             default => 'Accordion.' . $template
         };
