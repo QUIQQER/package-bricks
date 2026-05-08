@@ -3093,6 +3093,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Umrandet Akzent]]></de>
             <en><![CDATA[Outline Accent]]></en>
         </locale>
+        <locale name="brick.accordion.template.boxOutlineAccentOpen">
+            <de><![CDATA[Umrandet Akzent geöffnet]]></de>
+            <en><![CDATA[Outline Accent Open]]></en>
+        </locale>
         <locale name="brick.accordion.template.boxOutlineTextColor">
             <de><![CDATA[Umrandet Textfarbe]]></de>
             <en><![CDATA[Outline Text]]></en>
@@ -3100,6 +3104,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.accordion.template.boxFillAccent">
             <de><![CDATA[Gefüllt Akzent]]></de>
             <en><![CDATA[Fill Accent]]></en>
+        </locale>
+        <locale name="brick.accordion.template.boxFillAccentOpen">
+            <de><![CDATA[Gefüllt Akzent geöffnet]]></de>
+            <en><![CDATA[Fill Accent Open]]></en>
         </locale>
         <locale name="brick.accordion.template.boxFillSubtle">
             <de><![CDATA[Gefüllt dezent]]></de>

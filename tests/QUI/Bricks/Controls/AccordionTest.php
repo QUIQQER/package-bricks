@@ -11,7 +11,7 @@ class AccordionTest extends TestCase
         $class = 'QUI\Bricks\Controls\Accordion';
 
 
-        foreach (['default', 'simple', 'boxOutline', 'boxOutlineAccent', 'boxOutlineTextColor', 'boxFillAccent', 'boxFillSubtle', 'softCard', 'softCardAccentFill', 'invalid'] as $template) {
+        foreach (['default', 'simple', 'boxOutline', 'boxOutlineAccent', 'boxOutlineAccentOpen', 'boxOutlineTextColor', 'boxFillAccent', 'boxFillAccentOpen', 'boxFillSubtle', 'softCard', 'softCardAccentFill', 'invalid'] as $template) {
             try {
                 $Control = new $class([
                     'template' => $template,

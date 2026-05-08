@@ -115,7 +115,7 @@ class Accordion extends QUI\Control
             'useFaqStructuredData' => $this->getAttribute('useFaqStructuredData')
         ]);
 
-        $this->addCSSFile(dirname(__FILE__) . '/Accordion.' . $template . '.css');
+        $this->addCSSFile(dirname(__FILE__) . '/' . $this->getResolvedCssFile($template) . '.css');
 
         return $Engine->fetch(dirname(__FILE__) . '/' . $this->getResolvedTemplateFile($template) . '.html');
     }
@@ -208,8 +208,10 @@ class Accordion extends QUI\Control
                 'simple',
                 'boxOutline',
                 'boxOutlineAccent',
+                'boxOutlineAccentOpen',
                 'boxOutlineTextColor',
                 'boxFillAccent',
+                'boxFillAccentOpen',
                 'boxFillSubtle',
                 'softCard',
                 'softCardAccentFill'
@@ -272,10 +274,19 @@ class Accordion extends QUI\Control
     protected function getResolvedTemplateFile(string $template): string
     {
         return match ($template) {
-            'boxOutlineAccent', 'boxOutlineTextColor' => 'Accordion.boxOutline',
-            'boxFillSubtle' => 'Accordion.boxFillAccent',
+            'boxOutlineAccent', 'boxOutlineAccentOpen', 'boxOutlineTextColor' => 'Accordion.boxOutline',
+            'boxFillAccentOpen', 'boxFillSubtle' => 'Accordion.boxFillAccent',
             'softCardAccentFill' => 'Accordion.softCard',
             'simple' => 'Accordion.default',
+            default => 'Accordion.' . $template
+        };
+    }
+
+    protected function getResolvedCssFile(string $template): string
+    {
+        return match ($template) {
+            'boxOutlineAccentOpen' => 'Accordion.boxOutlineAccent',
+            'boxFillAccentOpen' => 'Accordion.boxFillAccent',
             default => 'Accordion.' . $template
         };
     }

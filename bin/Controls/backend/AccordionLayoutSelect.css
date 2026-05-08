@@ -180,17 +180,26 @@
 
 /* outline */
 .is-outline .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
-    border: 1px solid #d7dce3;
+    border: 2px solid #d7dce3;
 }
 
 /* outline accent */
 .is-outlineAccent .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
-    border: 1px solid var(--qui-colors-primary);
+    border: 2px solid var(--qui-colors-primary);
+}
+
+/* outline accent open */
+.is-outlineAccentOpen .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    border: 2px solid #d7dce3;
+}
+
+.is-outlineAccentOpen .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    border-color: var(--qui-colors-primary);
 }
 
 /* outline text color */
 .is-outlineTextColor .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
-    border: 1px solid #7f8ea3;
+    border: 2px solid #7f8ea3;
 }
 
 /* fill */
@@ -200,6 +209,20 @@
 
 .is-fill .quiqqer-bricks-accordionLayoutSelect-skeletonHeader .quiqqer-bricks-accordionLayoutSelect-skeletonLine,
 .is-fill .quiqqer-bricks-accordionLayoutSelect-skeletonIcon {
+    background-color: var(--qui-colors-primary--accent, #fff);
+}
+
+/* fill accent open */
+.is-fillAccentOpen .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    background: #f2f4f8;
+}
+
+.is-fillAccentOpen .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    background: var(--qui-colors-primary);
+}
+
+.is-fillAccentOpen .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonHeader .quiqqer-bricks-accordionLayoutSelect-skeletonLine,
+.is-fillAccentOpen .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonIcon {
     background-color: var(--qui-colors-primary--accent, #fff);
 }
 

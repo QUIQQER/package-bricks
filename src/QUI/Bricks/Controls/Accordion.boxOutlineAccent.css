@@ -5,6 +5,13 @@
     --_header-font-weight: var(--quiqqer-bricks-accordion-header-font-weight, 500);
 }
 
+.quiqqer-accordion-list--boxOutlineAccentOpen {
+    --_items-gap: var(--quiqqer-bricks-accordion-items-gap, 1rem);
+    --_border-color: var(--quiqqer-bricks-accordion-boxOutlineAccent-border-color, var(--qui-colors-primary));
+    --_header-font-size: var(--quiqqer-bricks-accordion-header-font-size, 1.125rem);
+    --_header-font-weight: var(--quiqqer-bricks-accordion-header-font-weight, 500);
+}
+
 .quiqqer-accordion-item--boxOutlineAccent .quiqqer-accordion-item-header--box {
     align-items: center;
     border: 1px solid var(--_border-color);
@@ -22,11 +29,41 @@
     flex-grow: 1
 }
 
+.quiqqer-accordion-item--boxOutlineAccentOpen .quiqqer-accordion-item-header--box {
+    align-items: center;
+    border: 1px solid var(--qui-border-color);
+    border-radius: var(--qui-border-radius, 1rem);
+    cursor: pointer;
+    display: flex;
+    font-size: var(--_header-font-size);
+    font-weight: var(--_header-font-weight);
+    gap: 1rem;
+    margin: 0;
+    padding: 0.75rem 1.25rem;
+}
+
+.quiqqer-accordion-item--boxOutlineAccentOpen[data-open="1"] .quiqqer-accordion-item-header--box {
+    border-color: var(--_border-color);
+}
+
+.quiqqer-accordion-item--boxOutlineAccentOpen .quiqqer-accordion-item-header-text {
+    flex-grow: 1
+}
+
 .quiqqer-accordion-list--icon-left .quiqqer-accordion-item--boxOutlineAccent .quiqqer-accordion-item-header-icon {
     margin-left: 0;
     order: -1;
 }
 
+.quiqqer-accordion-list--icon-left .quiqqer-accordion-item--boxOutlineAccentOpen .quiqqer-accordion-item-header-icon {
+    margin-left: 0;
+    order: -1;
+}
+
 .quiqqer-accordion-item--boxOutlineAccent .quiqqer-accordion-item-content--box {
+    padding: 1.25rem 0;
+}
+
+.quiqqer-accordion-item--boxOutlineAccentOpen .quiqqer-accordion-item-content--box {
     padding: 1.25rem 0;
 }

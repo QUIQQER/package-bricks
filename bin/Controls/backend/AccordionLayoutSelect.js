@@ -80,6 +80,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/AccordionLayoutSelect', [
                     title: QUILocale.get(lg, 'brick.accordion.template.boxOutlineAccent'),
                     preview: 'outlineAccent'
                 },
+                boxOutlineAccentOpen: {
+                    title: QUILocale.get(lg, 'brick.accordion.template.boxOutlineAccentOpen'),
+                    preview: 'outlineAccentOpen'
+                },
                 boxOutlineTextColor: {
                     title: QUILocale.get(lg, 'brick.accordion.template.boxOutlineTextColor'),
                     preview: 'outlineTextColor'
@@ -87,6 +91,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/AccordionLayoutSelect', [
                 boxFillAccent: {
                     title: QUILocale.get(lg, 'brick.accordion.template.boxFillAccent'),
                     preview: 'fill'
+                },
+                boxFillAccentOpen: {
+                    title: QUILocale.get(lg, 'brick.accordion.template.boxFillAccentOpen'),
+                    preview: 'fillAccentOpen'
                 },
                 boxFillSubtle: {
                     title: QUILocale.get(lg, 'brick.accordion.template.boxFillSubtle'),
