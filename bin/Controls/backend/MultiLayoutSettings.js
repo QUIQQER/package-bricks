@@ -6,12 +6,15 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
     'Locale',
     'Projects',
     'package/quiqqer/bricks/bin/Controls/backend/BlockSlot',
-    'package/quiqqer/bricks/bin/vendor/gridstack/GridStack',
+    URL_OPT_DIR + 'bin/quiqqer-asset/gridstack/gridstack/dist/gridstack-all.js',
 
+    'css!' + URL_OPT_DIR + 'bin/quiqqer-asset/gridstack/gridstack/dist/gridstack.min.css',
     'css!package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings.css'
 
-], function (QUIControl, QUIConfirm, QUIAjax, QUILocale, Projects, BlockSlot, GridStack) {
+], function (QUIControl, QUIConfirm, QUIAjax, QUILocale, Projects, BlockSlot, GridStackModule) {
     "use strict";
+
+    const GridStack = (GridStackModule && GridStackModule.GridStack) || window.GridStack || GridStackModule;
 
     const lg = 'quiqqer/bricks';
     const MODE_EDITOR = 'editor';
