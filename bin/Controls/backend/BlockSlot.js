@@ -271,10 +271,28 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 'class': 'quiqqer-bricks-blockSlot-layoutPreview'
             }).inject(this.$Elm);
 
-            new Element('div', {
-                'class': 'quiqqer-bricks-blockSlot-layoutPreviewLabel',
-                text: area.title || ''
+            const Label = new Element('div', {
+                'class': 'quiqqer-bricks-blockSlot-layoutPreviewLabel'
             }).inject(Preview);
+
+            const labelText = area.title || '';
+            const labelMatch = labelText.match(/^(.+?)\s+(\d+)\s*$/);
+
+            if (labelMatch) {
+                new Element('span', {
+                    'class': 'quiqqer-bricks-blockSlot-layoutPreviewLabelText',
+                    text: labelMatch[1]
+                }).inject(Label);
+
+                Label.appendText(' ');
+
+                new Element('span', {
+                    'class': 'quiqqer-bricks-blockSlot-layoutPreviewLabelNumber',
+                    text: labelMatch[2]
+                }).inject(Label);
+            } else {
+                Label.set('text', labelText);
+            }
 
             new Element('div', {
                 'class': 'quiqqer-bricks-blockSlot-layoutPreviewType',

@@ -293,7 +293,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                 }
 
                 this.$AreaControls.push(AreaControl);
-            }.bind(this));
+            }.bind(this)    );
         },
 
         $openLayoutEditor: function () {

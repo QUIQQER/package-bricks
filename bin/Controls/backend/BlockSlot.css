@@ -18,6 +18,7 @@
     overflow: hidden;
     padding: 0.75rem 0.75rem 3.5rem;
     position: relative;
+    container-type: inline-size;
 }
 
 .quiqqer-bricks-blockSlot-card.is-layoutMode.is-selected {
@@ -97,7 +98,7 @@
     justify-content: center;
     min-height: 0;
     pointer-events: none;
-    padding: 1.25rem;
+    padding: 1.25rem clamp(0.5rem, 7cqi, 1.25rem);
     text-align: center;
 }
 
@@ -125,14 +126,15 @@
 
 .quiqqer-bricks-blockSlot-layoutPreviewLabel {
     color: #1f2933;
-    font-size: 1.15rem;
+    font-size: clamp(0.9rem, 6cqi, 1.15rem);
     font-weight: 700;
     line-height: 1.35;
+    text-wrap: balance
 }
 
 .quiqqer-bricks-blockSlot-layoutPreviewType {
     color: #32557a;
-    font-size: 0.98rem;
+    font-size: clamp(0.75rem, 6cqi, 1rem);
     font-weight: 700;
 }
 
@@ -145,13 +147,11 @@
 
 .quiqqer-bricks-blockSlot-previewHtml {
     color: inherit;
-    font-size: 0.98rem;
+    font-size: clamp(0.75rem, 6cqi, 1rem);
     line-height: 1.6;
     overflow: hidden;
     pointer-events: none;
     position: relative;
-    /*max-height: 100px;*/
-    /*mask-image: linear-gradient(to bottom, black 80%, transparent)*/
 }
 
 .quiqqer-bricks-blockSlot-previewContent {
@@ -325,7 +325,6 @@
 .quiqqer-bricks-blockSlot-cardFooter {
     align-items: flex-start;
     display: flex;
-    width: 100%;
 }
 
 .quiqqer-bricks-blockSlot-cardInfo {
@@ -370,7 +369,7 @@
     color: #52606d;
     cursor: pointer;
     display: inline-flex;
-    font-size: 0.85rem;
+    font-size:  clamp(0.8rem, 6cqi, 0.85rem);
     font-weight: 600;
     gap: 0.45rem;
     padding: 0.45rem 0.55rem;
@@ -486,6 +485,13 @@
     color: #52606d;
     font-size: 0.82rem;
     line-height: 1.45;
+}
+
+@container (max-width: 80px) {
+    .quiqqer-bricks-blockSlot-layoutPreviewLabelText,
+    .quiqqer-bricks-blockSlot-cardAction--danger span:last-child {
+        display: none;
+    }
 }
 
 @media (max-width: 767px) {
