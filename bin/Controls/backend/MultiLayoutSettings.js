@@ -195,8 +195,19 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
         },
 
         $onSlotSelect: function (Control, slotId) {
+            if (this.$selectedSlotId === slotId) {
+                return;
+            }
+
             this.$selectedSlotId = slotId;
-            this.$renderLayoutEditor();
+
+            this.$AreaControls.forEach(function (AreaControl) {
+                if (typeof AreaControl.setSelected !== 'function') {
+                    return;
+                }
+
+                AreaControl.setSelected(AreaControl.getAttribute('slotId') === slotId);
+            });
         },
 
         $render: function () {
@@ -226,7 +237,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
 
             new Element('button', {
                 type: 'button',
-                'class': 'quiqqer-bricks-multiLayout-settings-button',
+                'class': 'btn quiqqer-bricks-multiLayout-settings-button',
                 html: '<span class="fa fa-columns"></span><span>'
                     + QUILocale.get(lg, 'brick.multiLayout.toolbar.editLayout') + '</span>',
                 events: {
@@ -294,7 +305,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                 icon: 'fa fa-columns',
                 title: QUILocale.get(lg, 'brick.multiLayout.editor.title'),
                 maxWidth: 1100,
-                maxHeight: 760,
+                maxHeight: 900,
                 information: QUILocale.get(lg, 'brick.multiLayout.editor.information'),
                 text: QUILocale.get(lg, 'brick.multiLayout.editor.text'),
                 events: {
@@ -368,12 +379,19 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             this.$renderLayoutPresetActions(PresetGroup);
 
             if (this.$layoutEditorView === LAYOUT_EDITOR_VIEW_LAYOUT) {
+                const breakpointIcons = {
+                    desktop: 'fa-solid fa-desktop',
+                    tablet: 'fa-solid fa-tablet-screen-button',
+                    mobile: 'fa-solid fa-mobile-screen-button'
+                };
+
                 BREAKPOINTS.forEach(function (breakpoint) {
                     new Element('button', {
                         type: 'button',
-                        'class': 'quiqqer-bricks-multiLayout-settings-breakpointButton'
+                        'class': 'btn quiqqer-bricks-multiLayout-settings-breakpointButton'
                             + (this.$layoutBreakpoint === breakpoint ? ' is-active' : ''),
-                        text: QUILocale.get(lg, 'brick.multiLayout.breakpoint.' + breakpoint),
+                        html: '<span class="' + breakpointIcons[breakpoint] + '"></span><span>'
+                            + QUILocale.get(lg, 'brick.multiLayout.breakpoint.' + breakpoint) + '</span>',
                         events: {
                             click: function () {
                                 if (this.$layoutBreakpoint === breakpoint) {
@@ -393,7 +411,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
 
                 new Element('button', {
                     type: 'button',
-                    'class': 'quiqqer-bricks-multiLayout-settings-button',
+                    'class': 'btn quiqqer-bricks-multiLayout-settings-button',
                     html: '<span class="fa fa-plus"></span><span>'
                         + QUILocale.get(lg, 'brick.multiLayout.toolbar.addSlot') + '</span>',
                     events: {
@@ -414,9 +432,53 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                 return;
             }
 
+            const DeviceFrame = new Element('div', {
+                'class': 'quiqqer-bricks-multiLayout-settings-deviceFrame'
+                    + ' quiqqer-bricks-multiLayout-settings-deviceFrame--' + this.$layoutBreakpoint
+            }).inject(this.$layoutCanvas);
+
+            if (this.$layoutBreakpoint === 'desktop') {
+                const BrowserBar = new Element('div', {
+                    'class': 'quiqqer-bricks-multiLayout-settings-browserBar'
+                }).inject(DeviceFrame);
+
+                const Dots = new Element('div', {
+                    'class': 'quiqqer-bricks-multiLayout-settings-browserDots'
+                }).inject(BrowserBar);
+
+                ['r', 'y', 'g'].forEach(function (color) {
+                    new Element('div', {
+                        'class': 'quiqqer-bricks-multiLayout-settings-browserDot'
+                            + ' quiqqer-bricks-multiLayout-settings-browserDot--' + color
+                    }).inject(Dots);
+                });
+
+                new Element('div', {
+                    'class': 'quiqqer-bricks-multiLayout-settings-browserUrl'
+                }).inject(BrowserBar);
+            }
+
             const GridWrap = new Element('div', {
                 'class': 'quiqqer-bricks-multiLayout-settings-layoutGridWrap'
-            }).inject(this.$layoutCanvas);
+            }).inject(DeviceFrame);
+
+            if (this.$layoutBreakpoint === 'tablet') {
+                new Element('div', {
+                    'class': 'quiqqer-bricks-multiLayout-settings-tabletNotch'
+                }).inject(DeviceFrame);
+
+                new Element('div', {
+                    'class': 'quiqqer-bricks-multiLayout-settings-tabletHomebar'
+                }).inject(DeviceFrame);
+            } else if (this.$layoutBreakpoint === 'mobile') {
+                new Element('div', {
+                    'class': 'quiqqer-bricks-multiLayout-settings-mobileIsland'
+                }).inject(DeviceFrame);
+
+                new Element('div', {
+                    'class': 'quiqqer-bricks-multiLayout-settings-mobileHomebar'
+                }).inject(DeviceFrame);
+            }
 
             this.$GridContainer = new Element('div', {
                 'class': 'quiqqer-bricks-multiLayout-settings-layoutGrid grid-stack'
@@ -480,7 +542,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
 
             new Element('button', {
                 type: 'button',
-                'class': 'quiqqer-bricks-multiLayout-settings-button',
+                'class': 'btn quiqqer-bricks-multiLayout-settings-button',
                 html: '<span class="fa fa-th-large"></span><span>'
                     + QUILocale.get(lg, 'brick.multiLayout.toolbar.choosePreset') + '</span>',
                 events: {
@@ -501,7 +563,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             if (this.$layoutEditorView === LAYOUT_EDITOR_VIEW_PRESETS) {
                 new Element('button', {
                     type: 'button',
-                    'class': 'quiqqer-bricks-multiLayout-settings-button',
+                    'class': 'btn quiqqer-bricks-multiLayout-settings-button',
                     html: '<span class="fa fa-arrow-left"></span><span>'
                         + QUILocale.get(lg, 'brick.multiLayout.toolbar.backToLayout') + '</span>',
                     events: {
