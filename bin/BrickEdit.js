@@ -911,17 +911,22 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
 
                         // flexible settings
-                        let i, len, data, description, Row;
+                        let i, len, data, description, label, Row;
                         const TBody = Content.getElement('.brick-table-flexible tbody');
 
                         for (i = 0, len = self.$availableSettings.length; i < len; i++) {
                             data = self.$availableSettings[i];
+                            label = data.text;
+
+                            if (typeOf(data.text) === 'array') {
+                                label = QUILocale.get(data.text[0], data.text[1]);
+                            }
 
                             Row = new Element('tr', {
                                 html: '<td>' +
                                     '<label class="field-container">' +
                                     '<span class="field-container-item">' +
-                                    QUILocale.get(data.text[0], data.text[1]) + '' +
+                                    label + '' +
                                     '</span>' +
                                     '<div class="field-container-field">' +
                                     '<input type="checkbox" name="flexible-' + data.name + '" />' +

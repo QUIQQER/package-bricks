@@ -1,0 +1,52 @@
+.quiqqer-accordion-list--cardFillAccent {
+    --_item-bg: var(--quiqqer-bricks-accordion-cardFillAccent-item-bg, var(--qui-colors-surface-soft, var(--qui-colors-surface-subtle)));
+    --_item-color: var(--quiqqer-bricks-accordion-cardFillAccent-item-color, inherit);
+    --_item-open-bg: var(--quiqqer-bricks-accordion-cardFillAccent-item-open-bg, var(--qui-colors-primary));
+    --_item-open-color: var(--quiqqer-bricks-accordion-cardFillAccent-item-open-color, var(--qui-colors-primary-contrast, #fff));
+    --_icon-bg: var(--quiqqer-bricks-accordion-cardFillAccent-icon-bg, var(--qui-colors-surface));
+    --_icon-color: var(--quiqqer-bricks-accordion-cardFillAccent-icon-color, inherit);
+    --_icon-size: var(--quiqqer-bricks-accordion-cardFillAccent-icon-size, 2rem);
+    --_icon-open-bg: var(--quiqqer-bricks-accordion-cardFillAccent-icon-open-bg, var(--_icon-bg));
+    --_icon-open-color: var(--quiqqer-bricks-accordion-cardFillAccent-icon-open-color, var(--qui-colors-primary));
+    --_content-color: var(--quiqqer-bricks-accordion-cardFillAccent-content-color, color-mix(in oklab, currentColor 85%, var(--_item-open-bg)));
+}
+
+.quiqqer-accordion-item--cardFillAccent {
+    background: var(--_item-bg);
+    border-radius: var(--_border-radius);
+    color: var(--_item-color);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.quiqqer-accordion-item--cardFillAccent[data-open="1"] {
+    background: var(--_item-open-bg);
+    color: var(--_item-open-color);
+}
+
+.quiqqer-accordion-item--cardFillAccent .quiqqer-accordion-item-header:is(:hover, :focus-visible) {
+    background: rgb(0 0 0 / 5%);
+}
+
+.quiqqer-accordion-item--cardFillAccent .quiqqer-accordion-item-header-icon {
+    align-items: center;
+    background: var(--_icon-bg);
+    border-radius: 50%;
+    color: var(--_icon-color);
+    display: inline-flex;
+    height: var(--_icon-size);
+    justify-content: center;
+    line-height: 1;
+    min-width: var(--_icon-size);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.quiqqer-accordion-item--cardFillAccent[data-open="1"] .quiqqer-accordion-item-header-icon {
+    background: var(--_icon-open-bg);
+    color: var(--_icon-open-color);
+}
+
+
+.quiqqer-accordion-item--cardFillAccent .quiqqer-accordion-item-content {
+    padding: 0 1.25rem 1.25rem;
+    color: var(--_content-color);
+}

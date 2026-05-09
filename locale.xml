@@ -939,6 +939,10 @@ This content does not replace the block content. You can still place the brick t
             <de><![CDATA[Gruppen]]></de>
             <en><![CDATA[Groups]]></en>
         </locale>
+        <locale name="site.area.window.settings.section.custom">
+            <de><![CDATA[Seiten-spezifische flexible Einstellungen]]></de>
+            <en><![CDATA[Page-specific flexible settings]]></en>
+        </locale>
 
 
         <!-- Tour Data -->
@@ -3921,23 +3925,31 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Umrandet Akzent]]></de>
             <en><![CDATA[Outline Accent]]></en>
         </locale>
+        <locale name="brick.accordion.template.boxOutlineAccentOpen">
+            <de><![CDATA[Umrandet Akzent geöffnet]]></de>
+            <en><![CDATA[Outline Accent Open]]></en>
+        </locale>
         <locale name="brick.accordion.template.boxOutlineTextColor">
             <de><![CDATA[Umrandet Textfarbe]]></de>
             <en><![CDATA[Outline Text]]></en>
+        </locale>
+        <locale name="brick.accordion.template.boxFill">
+            <de><![CDATA[Gefüllt dezent]]></de>
+            <en><![CDATA[Fill Subtle]]></en>
         </locale>
         <locale name="brick.accordion.template.boxFillAccent">
             <de><![CDATA[Gefüllt Akzent]]></de>
             <en><![CDATA[Fill Accent]]></en>
         </locale>
-        <locale name="brick.accordion.template.boxFillSubtle">
-            <de><![CDATA[Gefüllt dezent]]></de>
-            <en><![CDATA[Fill Subtle]]></en>
+        <locale name="brick.accordion.template.boxFillAccentOpen">
+            <de><![CDATA[Gefüllt Akzent geöffnet]]></de>
+            <en><![CDATA[Fill Accent Open]]></en>
         </locale>
-        <locale name="brick.accordion.template.softCard">
+        <locale name="brick.accordion.template.card">
             <de><![CDATA[Karte]]></de>
             <en><![CDATA[Card]]></en>
         </locale>
-        <locale name="brick.accordion.template.softCardAccentFill">
+        <locale name="brick.accordion.template.cardFillAccent">
             <de><![CDATA[Karte Akzent]]></de>
             <en><![CDATA[Card Accent]]></en>
         </locale>

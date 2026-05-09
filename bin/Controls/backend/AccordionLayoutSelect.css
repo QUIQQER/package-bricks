@@ -180,32 +180,55 @@
 
 /* outline */
 .is-outline .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
-    border: 1px solid #d7dce3;
+    border: 2px solid #d7dce3;
 }
 
 /* outline accent */
 .is-outlineAccent .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
-    border: 1px solid var(--qui-colors-primary);
+    border: 2px solid var(--qui-colors-primary);
+}
+
+/* outline accent open */
+.is-outlineAccentOpen .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    border: 2px solid #d7dce3;
+}
+
+.is-outlineAccentOpen .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    border-color: var(--qui-colors-primary);
 }
 
 /* outline text color */
 .is-outlineTextColor .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
-    border: 1px solid #7f8ea3;
+    border: 2px solid #7f8ea3;
 }
 
-/* fill */
-.is-fill .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+/* boxFill (subtle) */
+.is-boxFill .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    background: #f2f4f8;
+}
+
+/* boxFillAccent */
+.is-boxFillAccent .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
     background: var(--qui-colors-primary);
 }
 
-.is-fill .quiqqer-bricks-accordionLayoutSelect-skeletonHeader .quiqqer-bricks-accordionLayoutSelect-skeletonLine,
-.is-fill .quiqqer-bricks-accordionLayoutSelect-skeletonIcon {
+.is-boxFillAccent .quiqqer-bricks-accordionLayoutSelect-skeletonHeader .quiqqer-bricks-accordionLayoutSelect-skeletonLine,
+.is-boxFillAccent .quiqqer-bricks-accordionLayoutSelect-skeletonIcon {
     background-color: var(--qui-colors-primary--accent, #fff);
 }
 
-/* fill subtle */
-.is-fillSubtle .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+/* boxFillAccent open */
+.is-boxFillAccentOpen .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
     background: #f2f4f8;
+}
+
+.is-boxFillAccentOpen .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonHeader {
+    background: var(--qui-colors-primary);
+}
+
+.is-boxFillAccentOpen .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonHeader .quiqqer-bricks-accordionLayoutSelect-skeletonLine,
+.is-boxFillAccentOpen .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonIcon {
+    background-color: var(--qui-colors-primary--accent, #fff);
 }
 
 /* card */
@@ -218,25 +241,25 @@
     padding-bottom: 8px;
 }
 
-/* card accent */
-.is-cardAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child {
+/* card fill accent */
+.is-cardFillAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child {
     background-color: var(--qui-colors-primary);
 }
 
-.is-cardAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonLine,
-.is-cardAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonIcon {
+.is-cardFillAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonLine,
+.is-cardFillAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonIcon {
     background-color: var(--qui-colors-primary--accent, #fff);
 }
 
-.is-cardAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonBody .quiqqer-bricks-accordionLayoutSelect-skeletonLine {
+.is-cardFillAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem:first-child .quiqqer-bricks-accordionLayoutSelect-skeletonBody .quiqqer-bricks-accordionLayoutSelect-skeletonLine {
     background-color: color-mix(in srgb, var(--qui-colors-primary--accent, #fff), transparent 20%);
 }
 
-.is-cardAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem {
+.is-cardFillAccent .quiqqer-bricks-accordionLayoutSelect-skeletonItem {
     background-color: #f5f5f5;
 }
 
-.is-cardAccent .quiqqer-bricks-accordionLayoutSelect-skeletonBody {
+.is-cardFillAccent .quiqqer-bricks-accordionLayoutSelect-skeletonBody {
     padding-inline: 8px;
     padding-bottom: 8px;
 }
