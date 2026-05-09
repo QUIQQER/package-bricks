@@ -2808,6 +2808,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Layout 12]]></de>
             <en><![CDATA[Layout 12]]></en>
         </locale>
+        <locale name="brick.multiLayout.layout.13">
+            <de><![CDATA[Layout 13]]></de>
+            <en><![CDATA[Layout 13]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.14">
+            <de><![CDATA[Layout 14]]></de>
+            <en><![CDATA[Layout 14]]></en>
+        </locale>
         <locale name="brick.multiLayout.areas">
             <de><![CDATA[Bereiche]]></de>
             <en><![CDATA[Areas]]></en>

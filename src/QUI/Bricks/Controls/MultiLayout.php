@@ -190,10 +190,22 @@ class MultiLayout extends QUI\Control
                 ['id' => 'slot-3', 'x' => 6, 'y' => 1, 'w' => 6, 'h' => 1]
             ]
         ],
-        'preset-left-tall-right-stack' => [
-            'id' => 'preset-left-tall-right-stack',
+        'preset-top-2-bottom-full' => [
+            'id' => 'preset-top-2-bottom-full',
             'sort' => 110,
             'labelKey' => 'brick.multiLayout.layout.11',
+            'columns' => self::DEFAULT_COLUMNS,
+            'defaultSlotWidth' => 6,
+            'slots' => [
+                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 6, 'h' => 1],
+                ['id' => 'slot-2', 'x' => 6, 'y' => 0, 'w' => 6, 'h' => 1],
+                ['id' => 'slot-3', 'x' => 0, 'y' => 1, 'w' => 12, 'h' => 1]
+            ]
+        ],
+        'preset-left-tall-right-stack' => [
+            'id' => 'preset-left-tall-right-stack',
+            'sort' => 120,
+            'labelKey' => 'brick.multiLayout.layout.12',
             'columns' => self::DEFAULT_COLUMNS,
             'defaultSlotWidth' => 6,
             'slots' => [
@@ -202,10 +214,22 @@ class MultiLayout extends QUI\Control
                 ['id' => 'slot-3', 'x' => 6, 'y' => 1, 'w' => 6, 'h' => 1]
             ]
         ],
+        'preset-right-tall-left-stack' => [
+            'id' => 'preset-right-tall-left-stack',
+            'sort' => 130,
+            'labelKey' => 'brick.multiLayout.layout.13',
+            'columns' => self::DEFAULT_COLUMNS,
+            'defaultSlotWidth' => 6,
+            'slots' => [
+                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 6, 'h' => 1],
+                ['id' => 'slot-2', 'x' => 0, 'y' => 1, 'w' => 6, 'h' => 1],
+                ['id' => 'slot-3', 'x' => 6, 'y' => 0, 'w' => 6, 'h' => 2]
+            ]
+        ],
         'preset-center-tall-side-stacks' => [
             'id' => 'preset-center-tall-side-stacks',
-            'sort' => 120,
-            'labelKey' => 'brick.multiLayout.layout.12',
+            'sort' => 140,
+            'labelKey' => 'brick.multiLayout.layout.14',
             'columns' => self::DEFAULT_COLUMNS,
             'defaultSlotWidth' => 3,
             'slots' => [
