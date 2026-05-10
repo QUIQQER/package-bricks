@@ -691,7 +691,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 title: this.$getLocale('settings.popup.title', {
                     title: area.title
                 }),
-                maxWidth: 520,
+                maxWidth: 800,
                 maxHeight: 700,
                 events: {
                     onOpen: function (Win) {
@@ -704,11 +704,19 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             'class': 'quiqqer-bricks-blockSlot-popupForm'
                         }).inject(Content);
 
-                        const ModeField = this.$createPopupModeField(Form, activeMode);
+                        const LeftCol = new Element('div', {
+                            'class': 'quiqqer-bricks-blockSlot-popupForm-col quiqqer-bricks-blockSlot-popupForm-col--left'
+                        }).inject(Form);
+
+                        const RightCol = new Element('div', {
+                            'class': 'quiqqer-bricks-blockSlot-popupForm-col quiqqer-bricks-blockSlot-popupForm-col--right'
+                        }).inject(Form);
+
+                        const ModeField = this.$createPopupModeField(LeftCol, activeMode);
 
                         if (this.$isSettingVisible('contentPadding')) {
                             this.$createPopupCheckboxField(
-                                Form,
+                                LeftCol,
                                 this.$getLocale('contentPadding'),
                                 area.contentPadding,
                                 'contentPadding'
@@ -717,7 +725,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
 
                         if (this.$isSettingVisible('verticalAlign')) {
                             this.$createPopupSelectField(
-                                Form,
+                                LeftCol,
                                 this.$getLocale('verticalAlign'),
                                 [
                                     {
@@ -742,14 +750,14 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         let CustomMinHeightSettings = null;
 
                         if (this.$isSettingVisible('customMinHeight')) {
-                            CustomMinHeightSettings = this.$createPopupCustomMinHeightSettings(Form, area);
+                            CustomMinHeightSettings = this.$createPopupCustomMinHeightSettings(LeftCol, area);
                         }
 
                         let BackgroundOptions = null;
                         let BackgroundEnabledField = null;
 
                         if (this.$isSettingVisible('background')) {
-                            const Background = this.$createPopupBackgroundSettings(Form, area);
+                            const Background = this.$createPopupBackgroundSettings(RightCol, area);
                             BackgroundOptions = Background.options;
                             BackgroundEnabledField = Background.enabledField;
                         }
@@ -758,7 +766,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         let BackgroundColorEnabledField = null;
 
                         if (this.$isSettingVisible('backgroundColor')) {
-                            const Overlay = this.$createPopupBackgroundColorSettings(Form, area);
+                            const Overlay = this.$createPopupBackgroundColorSettings(RightCol, area);
                             OverlayOptions = Overlay.options;
                             BackgroundColorEnabledField = Overlay.enabledField;
                         }
@@ -767,7 +775,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         let TextColorEnabledField = null;
 
                         if (this.$isSettingVisible('textColor')) {
-                            const TextColor = this.$createPopupTextColorSettings(Form, area);
+                            const TextColor = this.$createPopupTextColorSettings(RightCol, area);
                             TextColorOptions = TextColor.options;
                             TextColorEnabledField = TextColor.enabledField;
                         }
@@ -776,7 +784,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         let LinkEnabledField = null;
 
                         if (this.$isSettingVisible('link')) {
-                            const Link = this.$createPopupLinkSettings(Form, area);
+                            const Link = this.$createPopupLinkSettings(LeftCol, area);
                             LinkOptions = Link.options;
                             LinkEnabledField = Link.enabledField;
                         }
@@ -784,7 +792,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         let ImageSettings = null;
 
                         if (this.$isSettingVisible('image')) {
-                            ImageSettings = this.$createPopupImageSettings(Form, area);
+                            ImageSettings = this.$createPopupImageSettings(LeftCol, area);
                         }
 
                         const toggleImageSettings = function () {

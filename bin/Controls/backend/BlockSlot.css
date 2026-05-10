@@ -394,9 +394,23 @@
 }
 
 .quiqqer-bricks-blockSlot-popupForm {
+    align-items: start;
+    display: grid;
+    gap: 1rem 1.5rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+.quiqqer-bricks-blockSlot-popupForm-col {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    min-width: 0;
+}
+
+@media (max-width: 600px) {
+    .quiqqer-bricks-blockSlot-popupForm {
+        grid-template-columns: 1fr;
+    }
 }
 
 .quiqqer-bricks-blockSlot-popupField {
