@@ -1902,30 +1902,46 @@
                     <locale group="quiqqer/bricks" var="brick.multiLayout.areaBackgroundEnabled"/>
                 </setting>
 
-                <setting name="gridGapEnabled" type="checkbox">
-                    <locale group="quiqqer/bricks" var="brick.multiLayout.gridGapEnabled"/>
+                <setting name="gridGapPreset" type="select">
+                    <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap"/>
+
+                    <option value="none">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.none"/>
+                    </option>
+                    <option value="small">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.small"/>
+                    </option>
+                    <option value="normal" default="1">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.normal"/>
+                    </option>
+                    <option value="large">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.large"/>
+                    </option>
+                    <option value="extraLarge">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.extraLarge"/>
+                    </option>
                 </setting>
 
                 <setting name="tileMinHeightPreset" type="select">
                     <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight"/>
 
-                    <option value="keine">
-                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.keine"/>
+                    <option value="none">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.none"/>
                     </option>
-                    <option value="kompakt">
-                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.kompakt"/>
+                    <option value="compact">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.compact"/>
                     </option>
                     <option value="standard" default="1">
                         <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.standard"/>
                     </option>
-                    <option value="gross">
-                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.gross"/>
+                    <option value="large">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.large"/>
                     </option>
-                    <option value="sehr-gross">
-                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.sehrGross"/>
+                    <option value="extraLarge">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.extraLarge"/>
                     </option>
-                    <option value="manuell">
-                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.manuell"/>
+                    <option value="manual">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.manual"/>
                     </option>
                 </setting>
 

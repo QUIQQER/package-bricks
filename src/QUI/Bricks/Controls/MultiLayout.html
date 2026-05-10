@@ -5,7 +5,7 @@
      data-mobile-breakpoint-max="{$mobileBreakpointMax}"
      {if $documentStyle}style="{$documentStyle}"{/if}
 >
-    <div class="quiqqer-bricks-controls-multiLayout-grid{if empty($gridGapEnabled)} quiqqer-bricks-controls-multiLayout-grid--noGap{/if}"
+    <div class="quiqqer-bricks-controls-multiLayout-grid"
          style="grid-template-columns: repeat({$desktopColumns}, minmax(0, 1fr));"
     >
         {foreach from=$areas item=area}

@@ -13,7 +13,7 @@ class MultiLayoutTest extends TestCase
 
         try {
             $Control = new $class([
-                'tileMinHeightPreset' => 'gross',
+                'tileMinHeightPreset' => 'large',
                 'layoutAreas' => json_encode([
                     'preset' => 'preset-2-equal',
                     'breakpoints' => [
@@ -52,7 +52,7 @@ class MultiLayoutTest extends TestCase
                             'backgroundColor' => '#112233',
                             'backgroundColorOpacity' => 35,
                             'customMinHeightEnabled' => true,
-                            'customMinHeightPreset' => 'manuell',
+                            'customMinHeightPreset' => 'manual',
                             'customMinHeightValue' => '420px'
                         ],
                         'slot-2' => [
@@ -60,7 +60,7 @@ class MultiLayoutTest extends TestCase
                             'mode' => 'image',
                             'image' => '/assets/foreground.png',
                             'imageFit' => 'contain',
-                            'imageMaxWidth' => '480px'
+                            'imageWidth' => '480px'
                         ]
                     ]
                 ], JSON_THROW_ON_ERROR)
@@ -87,7 +87,7 @@ class MultiLayoutTest extends TestCase
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-overlay-color: #112233', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-overlay-opacity: 0.35', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-fit: contain', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-max-width: 480px', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-width: 480px', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-tile-min-height: 280px', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-slot-min-height: 420px', $html);
             $this->assertStringContainsString('data-mobile-breakpoint-max="767"', $html);

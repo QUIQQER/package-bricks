@@ -2824,15 +2824,39 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Hintergrundfarbe für Bereiche verwenden]]></de>
             <en><![CDATA[Use background color for areas]]></en>
         </locale>
-        <locale name="brick.multiLayout.gridGapEnabled">
-            <de><![CDATA[Abstand zwischen Bereichen]]></de>
-            <en><![CDATA[Spacing between areas]]></en>
+        <locale name="brick.multiLayout.gridGap">
+            <de><![CDATA[Abstand zwischen Kacheln]]></de>
+            <en><![CDATA[Spacing between tiles]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridGap.option.none">
+            <de><![CDATA[Kein Abstand]]></de>
+            <en><![CDATA[No spacing]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridGap.option.small">
+            <de><![CDATA[Klein]]></de>
+            <en><![CDATA[Small]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridGap.option.normal">
+            <de><![CDATA[Normal]]></de>
+            <en><![CDATA[Normal]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridGap.option.large">
+            <de><![CDATA[Groß]]></de>
+            <en><![CDATA[Large]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridGap.option.extraLarge">
+            <de><![CDATA[Extra groß]]></de>
+            <en><![CDATA[Extra large]]></en>
         </locale>
         <locale name="brick.multiLayout.tileMinHeight">
             <de><![CDATA[Mindesthöhe der Kacheln]]></de>
             <en><![CDATA[Minimum height of tiles]]></en>
         </locale>
-        <locale name="brick.multiLayout.tileMinHeight.option.kompakt">
+        <locale name="brick.multiLayout.tileMinHeight.option.none">
+            <de><![CDATA[Keine Mindesthöhe]]></de>
+            <en><![CDATA[No minimum height]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.compact">
             <de><![CDATA[Kompakt]]></de>
             <en><![CDATA[Compact]]></en>
         </locale>
@@ -2840,21 +2864,17 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Standard]]></de>
             <en><![CDATA[Standard]]></en>
         </locale>
-        <locale name="brick.multiLayout.tileMinHeight.option.gross">
+        <locale name="brick.multiLayout.tileMinHeight.option.large">
             <de><![CDATA[Groß]]></de>
             <en><![CDATA[Large]]></en>
         </locale>
-        <locale name="brick.multiLayout.tileMinHeight.option.sehrGross">
-            <de><![CDATA[Sehr groß]]></de>
-            <en><![CDATA[Very large]]></en>
+        <locale name="brick.multiLayout.tileMinHeight.option.extraLarge">
+            <de><![CDATA[Extra groß]]></de>
+            <en><![CDATA[Extra large]]></en>
         </locale>
-        <locale name="brick.multiLayout.tileMinHeight.option.manuell">
+        <locale name="brick.multiLayout.tileMinHeight.option.manual">
             <de><![CDATA[Manuell]]></de>
             <en><![CDATA[Manual]]></en>
-        </locale>
-        <locale name="brick.multiLayout.tileMinHeight.option.keine">
-            <de><![CDATA[Keine Mindesthöhe]]></de>
-            <en><![CDATA[No minimum height]]></en>
         </locale>
         <locale name="brick.multiLayout.tileMinHeight.value">
             <de><![CDATA[Eigener Wert für Mindesthöhe]]></de>
@@ -2924,7 +2944,11 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[z. B. 240px, 18rem, 30vh]]></de>
             <en><![CDATA[e.g. 240px, 18rem, 30vh]]></en>
         </locale>
-        <locale name="blockSlot.customMinHeight.option.kompakt">
+        <locale name="blockSlot.customMinHeight.option.none">
+            <de><![CDATA[Keine Mindesthöhe]]></de>
+            <en><![CDATA[No minimum height]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.compact">
             <de><![CDATA[Kompakt]]></de>
             <en><![CDATA[Compact]]></en>
         </locale>
@@ -2932,21 +2956,17 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Standard]]></de>
             <en><![CDATA[Standard]]></en>
         </locale>
-        <locale name="blockSlot.customMinHeight.option.gross">
+        <locale name="blockSlot.customMinHeight.option.large">
             <de><![CDATA[Groß]]></de>
             <en><![CDATA[Large]]></en>
         </locale>
-        <locale name="blockSlot.customMinHeight.option.sehrGross">
-            <de><![CDATA[Sehr groß]]></de>
-            <en><![CDATA[Very large]]></en>
+        <locale name="blockSlot.customMinHeight.option.extraLarge">
+            <de><![CDATA[Extra groß]]></de>
+            <en><![CDATA[Extra large]]></en>
         </locale>
-        <locale name="blockSlot.customMinHeight.option.manuell">
+        <locale name="blockSlot.customMinHeight.option.manual">
             <de><![CDATA[Manuell]]></de>
             <en><![CDATA[Manual]]></en>
-        </locale>
-        <locale name="blockSlot.customMinHeight.option.keine">
-            <de><![CDATA[Keine Mindesthöhe]]></de>
-            <en><![CDATA[No minimum height]]></en>
         </locale>
         <locale name="blockSlot.editor.empty">
             <de><![CDATA[Noch kein Inhalt hinterlegt]]></de>
@@ -2984,13 +3004,61 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Bild]]></de>
             <en><![CDATA[Image]]></en>
         </locale>
-        <locale name="blockSlot.image.maxWidth">
-            <de><![CDATA[Maximale Breite]]></de>
-            <en><![CDATA[Maximum width]]></en>
+        <locale name="blockSlot.image.width">
+            <de><![CDATA[Breite]]></de>
+            <en><![CDATA[Width]]></en>
         </locale>
-        <locale name="blockSlot.image.maxWidth.help">
-            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = keine Begrenzung]]></de>
-            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = no limit]]></en>
+        <locale name="blockSlot.image.width.help">
+            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = automatisch]]></de>
+            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = automatic]]></en>
+        </locale>
+        <locale name="blockSlot.image.height">
+            <de><![CDATA[Höhe]]></de>
+            <en><![CDATA[Height]]></en>
+        </locale>
+        <locale name="blockSlot.image.height.help">
+            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = automatisch]]></de>
+            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = automatic]]></en>
+        </locale>
+        <locale name="blockSlot.image.position">
+            <de><![CDATA[Bildposition]]></de>
+            <en><![CDATA[Image position]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.leftTop">
+            <de><![CDATA[Oben links]]></de>
+            <en><![CDATA[Top left]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.centerTop">
+            <de><![CDATA[Oben mittig]]></de>
+            <en><![CDATA[Top center]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.rightTop">
+            <de><![CDATA[Oben rechts]]></de>
+            <en><![CDATA[Top right]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.leftCenter">
+            <de><![CDATA[Mittig links]]></de>
+            <en><![CDATA[Center left]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.center">
+            <de><![CDATA[Mittig]]></de>
+            <en><![CDATA[Center]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.rightCenter">
+            <de><![CDATA[Mittig rechts]]></de>
+            <en><![CDATA[Center right]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.leftBottom">
+            <de><![CDATA[Unten links]]></de>
+            <en><![CDATA[Bottom left]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.centerBottom">
+            <de><![CDATA[Unten mittig]]></de>
+            <en><![CDATA[Bottom center]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.rightBottom">
+            <de><![CDATA[Unten rechts]]></de>
+            <en><![CDATA[Bottom right]]></en>
         </locale>
         <locale name="blockSlot.background.section">
             <de><![CDATA[Hintergrundbild]]></de>
@@ -3024,25 +3092,41 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Position]]></de>
             <en><![CDATA[Position]]></en>
         </locale>
+        <locale name="blockSlot.background.position.leftTop">
+            <de><![CDATA[Oben links]]></de>
+            <en><![CDATA[Top left]]></en>
+        </locale>
+        <locale name="blockSlot.background.position.centerTop">
+            <de><![CDATA[Oben mittig]]></de>
+            <en><![CDATA[Top center]]></en>
+        </locale>
+        <locale name="blockSlot.background.position.rightTop">
+            <de><![CDATA[Oben rechts]]></de>
+            <en><![CDATA[Top right]]></en>
+        </locale>
+        <locale name="blockSlot.background.position.leftCenter">
+            <de><![CDATA[Mittig links]]></de>
+            <en><![CDATA[Center left]]></en>
+        </locale>
         <locale name="blockSlot.background.position.center">
-            <de><![CDATA[Mitte]]></de>
+            <de><![CDATA[Mittig]]></de>
             <en><![CDATA[Center]]></en>
         </locale>
-        <locale name="blockSlot.background.position.top">
-            <de><![CDATA[Oben]]></de>
-            <en><![CDATA[Top]]></en>
+        <locale name="blockSlot.background.position.rightCenter">
+            <de><![CDATA[Mittig rechts]]></de>
+            <en><![CDATA[Center right]]></en>
         </locale>
-        <locale name="blockSlot.background.position.bottom">
-            <de><![CDATA[Unten]]></de>
-            <en><![CDATA[Bottom]]></en>
+        <locale name="blockSlot.background.position.leftBottom">
+            <de><![CDATA[Unten links]]></de>
+            <en><![CDATA[Bottom left]]></en>
         </locale>
-        <locale name="blockSlot.background.position.left">
-            <de><![CDATA[Links]]></de>
-            <en><![CDATA[Left]]></en>
+        <locale name="blockSlot.background.position.centerBottom">
+            <de><![CDATA[Unten mittig]]></de>
+            <en><![CDATA[Bottom center]]></en>
         </locale>
-        <locale name="blockSlot.background.position.right">
-            <de><![CDATA[Rechts]]></de>
-            <en><![CDATA[Right]]></en>
+        <locale name="blockSlot.background.position.rightBottom">
+            <de><![CDATA[Unten rechts]]></de>
+            <en><![CDATA[Bottom right]]></en>
         </locale>
         <locale name="blockSlot.backgroundColor.section">
             <de><![CDATA[Hintergrundfarbe (Overlay)]]></de>
@@ -3264,13 +3348,13 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Bild]]></de>
             <en><![CDATA[Image]]></en>
         </locale>
-        <locale name="brick.multiLayout.image.maxWidth">
-            <de><![CDATA[Maximale Breite]]></de>
-            <en><![CDATA[Maximum width]]></en>
+        <locale name="brick.multiLayout.image.width">
+            <de><![CDATA[Breite]]></de>
+            <en><![CDATA[Width]]></en>
         </locale>
-        <locale name="brick.multiLayout.image.maxWidth.help">
-            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = keine Begrenzung]]></de>
-            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = no limit]]></en>
+        <locale name="brick.multiLayout.image.width.help">
+            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = automatisch]]></de>
+            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = automatic]]></en>
         </locale>
         <locale name="brick.multiLayout.background.section">
             <de><![CDATA[Hintergrundbild]]></de>

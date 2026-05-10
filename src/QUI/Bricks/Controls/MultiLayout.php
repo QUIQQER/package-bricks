@@ -39,12 +39,20 @@ class MultiLayout extends QUI\Control
     protected const MOBILE_BREAKPOINT_MAX = 767;
     protected const DEFAULT_TILE_MIN_HEIGHT_PRESET = 'standard';
     protected const TILE_MIN_HEIGHT_PRESETS = [
-        'keine' => '0px',
-        'kompakt' => '120px',
-        'standard' => '200px',
-        'gross' => '280px',
-        'sehr-gross' => '360px',
-        'manuell' => null
+        'none'       => '0px',
+        'compact'    => '120px',
+        'standard'   => '200px',
+        'large'      => '280px',
+        'extraLarge' => '360px',
+        'manual'     => null
+    ];
+    protected const DEFAULT_GRID_GAP_PRESET = 'normal';
+    protected const GRID_GAP_PRESETS = [
+        'none'       => '0',
+        'small'      => 'clamp(0.5rem, 1.5cqi, 1rem)',
+        'normal'     => 'clamp(0.75rem, 2cqi, 1.5rem)',
+        'large'      => 'clamp(1rem, 4cqi, 2.5rem)',
+        'extraLarge' => 'clamp(1.25rem, 6cqi, 4rem)',
     ];
     protected const LINK_REL_OPTIONS = [
         '',
@@ -253,7 +261,7 @@ class MultiLayout extends QUI\Control
             'class' => 'quiqqer-bricks-controls-multiLayout',
             'layout' => self::getDefaultPresetId(),
             'areaBackgroundEnabled' => true,
-            'gridGapEnabled' => true,
+            'gridGapPreset' => self::DEFAULT_GRID_GAP_PRESET,
             'tileMinHeightPreset' => self::DEFAULT_TILE_MIN_HEIGHT_PRESET,
             'tileMinHeightValue' => '',
             'layoutAreas' => '[]'
@@ -273,6 +281,12 @@ class MultiLayout extends QUI\Control
 
         $this->addCSSFile(dirname(__FILE__) . '/MultiLayout.css');
 
+        $gapPreset = $this->getAttribute('gridGapPreset');
+        if (!is_string($gapPreset) || !array_key_exists($gapPreset, self::GRID_GAP_PRESETS)) {
+            $gapPreset = self::DEFAULT_GRID_GAP_PRESET;
+        }
+        $this->setCustomVariable('gridGap', self::GRID_GAP_PRESETS[$gapPreset]);
+
         $Engine = QUI::getTemplateManager()->getEngine();
         $Engine->assign([
             'this' => $this,
@@ -284,7 +298,6 @@ class MultiLayout extends QUI\Control
             'tabletBreakpointMax' => self::TABLET_BREAKPOINT_MAX,
             'mobileBreakpointMax' => self::MOBILE_BREAKPOINT_MAX,
             'areaBackgroundEnabled' => !empty($this->getAttribute('areaBackgroundEnabled')),
-            'gridGapEnabled' => !empty($this->getAttribute('gridGapEnabled'))
         ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/MultiLayout.html');
@@ -583,9 +596,20 @@ class MultiLayout extends QUI\Control
             'imageFit' => isset($area['imageFit']) && in_array($area['imageFit'], ['auto', 'cover', 'contain'], true)
                 ? $area['imageFit']
                 : 'auto',
-            'imageMaxWidth' => isset($area['imageMaxWidth']) && is_string($area['imageMaxWidth'])
-                ? trim($area['imageMaxWidth'])
+            'imageWidth' => isset($area['imageWidth']) && is_string($area['imageWidth'])
+                ? trim($area['imageWidth'])
                 : '',
+            'imageHeight' => isset($area['imageHeight']) && is_string($area['imageHeight'])
+                ? trim($area['imageHeight'])
+                : '',
+            'imagePosition' => isset($area['imagePosition']) &&
+                in_array($area['imagePosition'], [
+                    'left top', 'center top', 'right top',
+                    'left center', 'center center', 'right center',
+                    'left bottom', 'center bottom', 'right bottom'
+                ], true)
+                ? $area['imagePosition']
+                : 'center center',
             'backgroundEnabled' => !empty($area['backgroundEnabled']),
             'backgroundImage' => isset($area['backgroundImage']) && is_string($area['backgroundImage'])
                 ? $area['backgroundImage']
@@ -594,7 +618,11 @@ class MultiLayout extends QUI\Control
                 ? $area['backgroundImageFit']
                 : 'cover',
             'backgroundImagePosition' => isset($area['backgroundImagePosition']) &&
-                in_array($area['backgroundImagePosition'], ['center center', 'center top', 'center bottom', 'left center', 'right center'], true)
+                in_array($area['backgroundImagePosition'], [
+                    'left top', 'center top', 'right top',
+                    'left center', 'center center', 'right center',
+                    'left bottom', 'center bottom', 'right bottom'
+                ], true)
                 ? $area['backgroundImagePosition']
                 : 'center center',
             'backgroundColorEnabled' => !empty($area['backgroundColorEnabled']),
@@ -780,10 +808,21 @@ class MultiLayout extends QUI\Control
         if (!empty($area['image'])) {
             $style[] = '--quiqqer-bricks-multiLayout-image-fit: '
                 . $this->mapObjectFitValue((string)$area['imageFit']);
-            $style[] = '--quiqqer-bricks-multiLayout-image-max-width: '
-                . $this->escapeStyleValue(
-                    !empty($area['imageMaxWidth']) ? (string)$area['imageMaxWidth'] : '100%'
-                );
+
+            if (!empty($area['imageWidth'])) {
+                $style[] = '--quiqqer-bricks-multiLayout-image-width: '
+                    . $this->escapeStyleValue((string)$area['imageWidth']);
+            }
+
+            if (!empty($area['imageHeight'])) {
+                $style[] = '--quiqqer-bricks-multiLayout-image-height: '
+                    . $this->escapeStyleValue((string)$area['imageHeight']);
+            }
+
+            if (!empty($area['imagePosition'])) {
+                $style[] = '--quiqqer-bricks-multiLayout-image-position: '
+                    . $this->escapeStyleValue((string)$area['imagePosition']);
+            }
         }
 
         if (!empty($area['customMinHeightEnabled'])) {
@@ -869,7 +908,7 @@ class MultiLayout extends QUI\Control
     {
         $preset = $this->normalizeTileMinHeightPreset($preset);
 
-        if ($preset === 'manuell') {
+        if ($preset === 'manual') {
             $manualValue = $this->normalizeTileMinHeightValue($manualValue);
 
             if ($manualValue !== '') {
@@ -889,7 +928,7 @@ class MultiLayout extends QUI\Control
     {
         $preset = $this->normalizeTileMinHeightPreset($area['customMinHeightPreset'] ?? null);
 
-        if ($preset === 'manuell') {
+        if ($preset === 'manual') {
             return $this->normalizeTileMinHeightValue($area['customMinHeightValue'] ?? null);
         }
 
@@ -930,5 +969,14 @@ class MultiLayout extends QUI\Control
             ["\\\\", "\\'", '', ''],
             trim($value)
         );
+    }
+
+    private function setCustomVariable(string $name, string $value): void
+    {
+        if ($name === '' || $value === '') {
+            return;
+        }
+
+        $this->setStyle('--_q-controlConf-' . $name, $value);
     }
 }

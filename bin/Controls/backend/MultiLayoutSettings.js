@@ -25,11 +25,26 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
     const IMAGE_FIT_AUTO = 'auto';
     const IMAGE_FIT_COVER = 'cover';
     const IMAGE_FIT_CONTAIN = 'contain';
-    const BACKGROUND_POSITION_CENTER = 'center center';
+    const BACKGROUND_POSITION_LEFT_TOP = 'left top';
     const BACKGROUND_POSITION_TOP = 'center top';
-    const BACKGROUND_POSITION_BOTTOM = 'center bottom';
+    const BACKGROUND_POSITION_RIGHT_TOP = 'right top';
     const BACKGROUND_POSITION_LEFT = 'left center';
+    const BACKGROUND_POSITION_CENTER = 'center center';
     const BACKGROUND_POSITION_RIGHT = 'right center';
+    const BACKGROUND_POSITION_LEFT_BOTTOM = 'left bottom';
+    const BACKGROUND_POSITION_BOTTOM = 'center bottom';
+    const BACKGROUND_POSITION_RIGHT_BOTTOM = 'right bottom';
+    const BACKGROUND_POSITION_VALUES = [
+        BACKGROUND_POSITION_LEFT_TOP,
+        BACKGROUND_POSITION_TOP,
+        BACKGROUND_POSITION_RIGHT_TOP,
+        BACKGROUND_POSITION_LEFT,
+        BACKGROUND_POSITION_CENTER,
+        BACKGROUND_POSITION_RIGHT,
+        BACKGROUND_POSITION_LEFT_BOTTOM,
+        BACKGROUND_POSITION_BOTTOM,
+        BACKGROUND_POSITION_RIGHT_BOTTOM
+    ];
     const VERTICAL_ALIGN_TOP = 'top';
     const VERTICAL_ALIGN_CENTER = 'center';
     const VERTICAL_ALIGN_BOTTOM = 'bottom';
@@ -48,20 +63,20 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
         LINK_TARGET_SELF,
         LINK_TARGET_BLANK
     ];
-    const TILE_MIN_HEIGHT_KEINE = 'keine';
-    const TILE_MIN_HEIGHT_KOMPAKT = 'kompakt';
+    const TILE_MIN_HEIGHT_NONE = 'none';
+    const TILE_MIN_HEIGHT_COMPACT = 'compact';
     const TILE_MIN_HEIGHT_STANDARD = 'standard';
-    const TILE_MIN_HEIGHT_GROSS = 'gross';
-    const TILE_MIN_HEIGHT_SEHR_GROSS = 'sehr-gross';
-    const TILE_MIN_HEIGHT_MANUELL = 'manuell';
+    const TILE_MIN_HEIGHT_LARGE = 'large';
+    const TILE_MIN_HEIGHT_EXTRA_LARGE = 'extraLarge';
+    const TILE_MIN_HEIGHT_MANUAL = 'manual';
     const DEFAULT_TILE_MIN_HEIGHT_PRESET = TILE_MIN_HEIGHT_STANDARD;
     const TILE_MIN_HEIGHT_PRESETS = {
-        keine: '0px',
-        kompakt: '120px',
+        none: '0px',
+        compact: '120px',
         standard: '200px',
-        gross: '280px',
-        'sehr-gross': '360px',
-        manuell: null
+        large: '280px',
+        extraLarge: '360px',
+        manual: null
     };
     const DEFAULT_COLUMNS = 12;
     const MIN_SLOT_WIDTH = 2;
@@ -1118,16 +1133,14 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
 
             let backgroundImagePosition = area.backgroundImagePosition;
 
-            if (
-                [
-                    BACKGROUND_POSITION_CENTER,
-                    BACKGROUND_POSITION_TOP,
-                    BACKGROUND_POSITION_BOTTOM,
-                    BACKGROUND_POSITION_LEFT,
-                    BACKGROUND_POSITION_RIGHT
-                ].indexOf(backgroundImagePosition) === -1
-            ) {
+            if (BACKGROUND_POSITION_VALUES.indexOf(backgroundImagePosition) === -1) {
                 backgroundImagePosition = BACKGROUND_POSITION_CENTER;
+            }
+
+            let imagePosition = area.imagePosition;
+
+            if (BACKGROUND_POSITION_VALUES.indexOf(imagePosition) === -1) {
+                imagePosition = BACKGROUND_POSITION_CENTER;
             }
 
             let backgroundColorOpacity = parseInt(area.backgroundColorOpacity, 10);
@@ -1152,7 +1165,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                 brickType: area.brickType || '',
                 image: area.image || '',
                 imageFit: imageFit,
-                imageMaxWidth: area.imageMaxWidth ? area.imageMaxWidth.toString().trim() : '',
+                imageWidth: area.imageWidth ? area.imageWidth.toString().trim() : '',
+                imageHeight: area.imageHeight ? area.imageHeight.toString().trim() : '',
+                imagePosition: imagePosition,
                 backgroundEnabled: !!area.backgroundEnabled,
                 backgroundImage: area.backgroundImage || '',
                 backgroundImageFit: backgroundImageFit,
@@ -1180,7 +1195,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
         $resolveTileMinHeight: function (preset, value) {
             preset = this.$normalizeTileMinHeightPreset(preset);
 
-            if (preset === TILE_MIN_HEIGHT_MANUELL) {
+            if (preset === TILE_MIN_HEIGHT_MANUAL) {
                 value = value ? value.toString().trim() : '';
 
                 if (value) {
@@ -1229,7 +1244,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
         $resolveCustomTileMinHeight: function (area) {
             const preset = this.$normalizeTileMinHeightPreset(area.customMinHeightPreset);
 
-            if (preset === TILE_MIN_HEIGHT_MANUELL) {
+            if (preset === TILE_MIN_HEIGHT_MANUAL) {
                 return area.customMinHeightValue
                     ? area.customMinHeightValue.toString().trim()
                     : '';
