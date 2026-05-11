@@ -319,7 +319,7 @@ class MultiLayout extends QUI\Control
     /**
      * @return array<string, mixed>
      */
-    protected function normalizeLayoutDocument(mixed $value, mixed $layout): array
+    protected function normalizeLayoutDocument(mixed $value, mixed $layout, bool $allowSubLayout = true): array
     {
         $decoded = $this->parseDocumentValue($value);
 
@@ -367,7 +367,8 @@ class MultiLayout extends QUI\Control
                 isset($areasSource[$slot['id']]) && is_array($areasSource[$slot['id']])
                     ? $areasSource[$slot['id']]
                     : [],
-                $index
+                $index,
+                $allowSubLayout
             );
         }
 
@@ -485,6 +486,19 @@ class MultiLayout extends QUI\Control
 
         usort($normalized, [$this, 'compareSlots']);
 
+        if ($this->hasOverlappingSlots($normalized)) {
+            $normalized = [];
+
+            foreach ($desktopSlots as $index => $desktopSlot) {
+                $slot = $fallbackSlots[$index] ?? $desktopSlot;
+                $slot = $this->normalizeSlot($slot, (int)$index, self::DEFAULT_COLUMNS, self::DEFAULT_COLUMNS);
+                $slot['id'] = $desktopSlot['id'];
+                $normalized[] = $slot;
+            }
+
+            usort($normalized, [$this, 'compareSlots']);
+        }
+
         return $normalized;
     }
 
@@ -576,17 +590,21 @@ class MultiLayout extends QUI\Control
      * @param array<string, mixed> $area
      * @return array<string, mixed>
      */
-    protected function normalizeAreaData(array $area, int $index): array
+    protected function normalizeAreaData(array $area, int $index, bool $allowSubLayout = true): array
     {
         $link = $this->normalizeAreaLink($area['link'] ?? null);
+        $allowedModes = $allowSubLayout
+            ? ['editor', 'brick', 'image', 'subLayout']
+            : ['editor', 'brick', 'image'];
+        $mode = isset($area['mode']) && in_array($area['mode'], $allowedModes, true)
+            ? $area['mode']
+            : 'editor';
 
-        return [
+        $normalized = [
             'title' => isset($area['title']) && is_string($area['title'])
                 ? $area['title']
                 : 'Bereich ' . ($index + 1),
-            'mode' => isset($area['mode']) && in_array($area['mode'], ['editor', 'brick', 'image'], true)
-                ? $area['mode']
-                : 'editor',
+            'mode' => $mode,
             'contentPaddingPreset' => isset($area['contentPaddingPreset'])
                 && is_string($area['contentPaddingPreset'])
                 && array_key_exists($area['contentPaddingPreset'], self::CONTENT_PADDING_PRESETS)
@@ -657,8 +675,26 @@ class MultiLayout extends QUI\Control
             'link' => $link,
             'verticalAlign' => isset($area['verticalAlign']) && in_array($area['verticalAlign'], ['top', 'center', 'bottom'], true)
                 ? $area['verticalAlign']
-                : 'center'
+                : 'center',
+            'subLayoutAreaBackgroundEnabled' => array_key_exists('subLayoutAreaBackgroundEnabled', $area)
+                ? !empty($area['subLayoutAreaBackgroundEnabled'])
+                : !empty($this->getAttribute('areaBackgroundEnabled')),
+            'subLayoutGridGapPreset' => isset($area['subLayoutGridGapPreset'])
+                && is_string($area['subLayoutGridGapPreset'])
+                && array_key_exists($area['subLayoutGridGapPreset'], self::GRID_GAP_PRESETS)
+                    ? $area['subLayoutGridGapPreset']
+                    : self::DEFAULT_GRID_GAP_PRESET
         ];
+
+        if ($mode === 'subLayout') {
+            $normalized['subLayoutDocument'] = $this->normalizeLayoutDocument(
+                $area['subLayoutDocument'] ?? [],
+                self::getDefaultPresetId(),
+                false
+            );
+        }
+
+        return $normalized;
     }
 
     /**
@@ -676,6 +712,36 @@ class MultiLayout extends QUI\Control
         }
 
         return (int)$slotA['y'] <=> (int)$slotB['y'];
+    }
+
+    /**
+     * @param array<int, array<string, int|string>> $slots
+     */
+    protected function hasOverlappingSlots(array $slots): bool
+    {
+        $count = count($slots);
+
+        for ($i = 0; $i < $count; $i++) {
+            $slotA = $slots[$i];
+            $ax1 = (int)$slotA['x'];
+            $ay1 = (int)$slotA['y'];
+            $ax2 = $ax1 + (int)$slotA['w'];
+            $ay2 = $ay1 + (int)$slotA['h'];
+
+            for ($j = $i + 1; $j < $count; $j++) {
+                $slotB = $slots[$j];
+                $bx1 = (int)$slotB['x'];
+                $by1 = (int)$slotB['y'];
+                $bx2 = $bx1 + (int)$slotB['w'];
+                $by2 = $by1 + (int)$slotB['h'];
+
+                if (!($ay1 >= $by2 || $ay2 <= $by1 || $ax2 <= $bx1 || $ax1 >= $bx2)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -704,6 +770,14 @@ class MultiLayout extends QUI\Control
      */
     protected function prepareArea(array $area): array
     {
+        if ($area['mode'] === 'subLayout') {
+            $area['subLayoutAreas'] = $this->prepareAreas($area['subLayoutDocument']);
+            $area['subLayoutDesktopColumns'] = $area['subLayoutDocument']['breakpoints']['desktop']['columns']
+                ?? self::DEFAULT_COLUMNS;
+            $area['subLayoutGridGap'] = self::GRID_GAP_PRESETS[$area['subLayoutGridGapPreset']]
+                ?? self::GRID_GAP_PRESETS[self::DEFAULT_GRID_GAP_PRESET];
+        }
+
         $area['contentHtml'] = $this->renderAreaContent($area);
         $area['link'] = $this->prepareAreaLink($area['link'] ?? null);
 
@@ -967,6 +1041,7 @@ class MultiLayout extends QUI\Control
         return match ($area['mode']) {
             'brick' => $this->renderBrickContent((int)$area['brickId']),
             'image' => '',
+            'subLayout' => '',
             default => (string)$area['content']
         };
     }

@@ -187,7 +187,7 @@ class Accordion extends QUI\Control
             'mainEntity' => $mainEntity
         ], JSON_UNESCAPED_UNICODE);
 
-        if (!is_string($schema) || $schema === '') {
+        if ($schema === false) {
             return '';
         }
 

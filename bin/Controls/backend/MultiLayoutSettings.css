@@ -149,6 +149,10 @@
     min-width: 0;
 }
 
+.quiqqer-bricks-multiLayout-settings-slotWrap.is-surface-subtle-enabled .quiqqer-bricks-blockSlot-preview {
+    background-color: var(--qui-colors-surface-subtle, #f5f7fa);
+}
+
 .quiqqer-bricks-multiLayout-settings-layoutGrid {
     background: linear-gradient(180deg, #f9fbfd 0%, #f3f6fa 100%);
     border: 1px solid #d9dfe7;

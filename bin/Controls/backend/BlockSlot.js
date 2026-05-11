@@ -18,9 +18,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
     const MODE_EDITOR = 'editor';
     const MODE_BRICK = 'brick';
     const MODE_IMAGE = 'image';
+    const MODE_SUB_LAYOUT = 'subLayout';
     const INTERACTION_CONTENT = 'content';
     const INTERACTION_LAYOUT = 'layout';
     const DEFAULT_ALLOWED_MODES = [MODE_EDITOR, MODE_BRICK, MODE_IMAGE];
+    const AVAILABLE_MODES = [MODE_EDITOR, MODE_BRICK, MODE_IMAGE, MODE_SUB_LAYOUT];
     const DEFAULT_SETTINGS_VISIBILITY = {
         contentPaddingPreset: true,
         verticalAlign: true,
@@ -78,6 +80,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
     };
     const CONTENT_PADDING_PRESETS = ['none', 'small', 'normal', 'large', 'extraLarge'];
     const DEFAULT_CONTENT_PADDING_PRESET = 'normal';
+    const GRID_GAP_PRESETS = ['none', 'small', 'normal', 'large', 'extraLarge'];
+    const DEFAULT_GRID_GAP_PRESET = 'normal';
 
     return new Class({
 
@@ -355,6 +359,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                     this.$fillImagePreview(PreviewButton, area);
                     break;
 
+                case MODE_SUB_LAYOUT:
+                    this.$fillSubLayoutPreview(PreviewButton);
+                    break;
+
                 case MODE_EDITOR:
                 default:
                     this.$fillEditorPreview(PreviewButton, area);
@@ -562,6 +570,14 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             }
         },
 
+        $fillSubLayoutPreview: function (PreviewButton) {
+            this.$createPlaceholder(
+                PreviewButton,
+                'fa fa-columns',
+                this.$getLocale('subLayout.title')
+            );
+        },
+
         $createPlaceholder: function (Parent, iconClass, text) {
             const Placeholder = new Element('div', {
                 'class': 'quiqqer-bricks-blockSlot-previewPlaceholder'
@@ -589,6 +605,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
 
                 case MODE_IMAGE:
                     this.$openImageSelect();
+                    break;
+
+                case MODE_SUB_LAYOUT:
+                    this.fireEvent('editSubLayout', [this, this.$area, this.$slotId]);
                     break;
 
                 case MODE_EDITOR:
@@ -819,6 +839,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             ImageSettings = this.$createPopupImageSettings(LeftCol, area);
                         }
 
+                        const SubLayoutSettings = this.$createPopupSubLayoutSettings(LeftCol, area);
+
                         const toggleImageSettings = function () {
                             if (!ImageSettings) {
                                 return;
@@ -827,6 +849,12 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             const mode = ModeField ? ModeField.value : activeMode;
 
                             ImageSettings.section.setStyle('display', mode === MODE_IMAGE ? '' : 'none');
+                        };
+
+                        const toggleSubLayoutSettings = function () {
+                            const mode = ModeField ? ModeField.value : activeMode;
+
+                            SubLayoutSettings.section.setStyle('display', mode === MODE_SUB_LAYOUT ? '' : 'none');
                         };
 
                         const toggleImageOptions = function () {
@@ -916,6 +944,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
 
                         if (ModeField) {
                             ModeField.addEvent('change', toggleImageSettings);
+                            ModeField.addEvent('change', toggleSubLayoutSettings);
                         }
 
                         if (ImageSettings) {
@@ -954,6 +983,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         }
 
                         toggleImageSettings();
+                        toggleSubLayoutSettings();
                         toggleImageOptions();
                         toggleCustomMinHeightSettings();
                         toggleBackgroundSettings();
@@ -1014,6 +1044,12 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         const linkRelField = Content.getElement('select[data-name="linkRel"]');
                         const linkTargetField = Content.getElement('select[data-name="linkTarget"]');
                         const linkTitleField = Content.getElement('input[data-name="linkTitle"]');
+                        const subLayoutAreaBackgroundEnabledField = Content.getElement(
+                            'input[data-name="subLayoutAreaBackgroundEnabled"]'
+                        );
+                        const subLayoutGridGapPresetField = Content.getElement(
+                            'select[data-name="subLayoutGridGapPreset"]'
+                        );
                         const backgroundOverlayOpacity = backgroundOverlayOpacityField
                             ? parseInt(backgroundOverlayOpacityField.value, 10)
                             : area.backgroundOverlayOpacity;
@@ -1102,6 +1138,16 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                                     : null
                             );
                         }
+
+                        area.subLayoutAreaBackgroundEnabled = !!(
+                            subLayoutAreaBackgroundEnabledField
+                            && subLayoutAreaBackgroundEnabledField.checked
+                        );
+                        area.subLayoutGridGapPreset = this.$normalizeGridGapPreset(
+                            subLayoutGridGapPresetField
+                                ? subLayoutGridGapPresetField.value
+                                : area.subLayoutGridGapPreset
+                        );
 
                         this.$onChange();
                     }.bind(this)
@@ -1465,6 +1511,33 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             };
         },
 
+        $createPopupSubLayoutSettings: function (Parent, area) {
+            const Section = this.$createPopupSection(
+                Parent,
+                this.$getLocale('subLayout.section')
+            );
+
+            this.$createPopupCheckboxField(
+                Section,
+                QUILocale.get(lg, 'brick.multiLayout.areaBackgroundEnabled'),
+                area.subLayoutAreaBackgroundEnabled !== false,
+                'subLayoutAreaBackgroundEnabled'
+            );
+
+            this.$createPopupSelectField(
+                Section,
+                QUILocale.get(lg, 'brick.multiLayout.gridGap'),
+                this.$getGridGapOptions(),
+                this.$normalizeGridGapPreset(area.subLayoutGridGapPreset),
+                'data-name',
+                'subLayoutGridGapPreset'
+            );
+
+            return {
+                section: Section
+            };
+        },
+
         $getPositionOptions: function (localePrefix) {
             const self = this;
             const entries = [
@@ -1776,6 +1849,21 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 : DEFAULT_CONTENT_PADDING_PRESET;
         },
 
+        $normalizeGridGapPreset: function (preset) {
+            return GRID_GAP_PRESETS.indexOf(preset) !== -1
+                ? preset
+                : DEFAULT_GRID_GAP_PRESET;
+        },
+
+        $getGridGapOptions: function () {
+            return GRID_GAP_PRESETS.map(function (preset) {
+                return {
+                    value: preset,
+                    text: QUILocale.get(lg, 'brick.multiLayout.gridGap.option.' + preset)
+                };
+            });
+        },
+
         $getContentPaddingPresetOptions: function () {
             const self = this;
 
@@ -1858,6 +1946,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 case MODE_IMAGE:
                     return this.$getLocale('mode.image');
 
+                case MODE_SUB_LAYOUT:
+                    return this.$getLocale('mode.subLayout');
+
                 case MODE_EDITOR:
                 default:
                     return this.$getLocale('mode.editor');
@@ -1884,6 +1975,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
 
                 case MODE_IMAGE:
                     return this.$getLocale('quickEdit.image');
+
+                case MODE_SUB_LAYOUT:
+                    return this.$getLocale('quickEdit.subLayout');
 
                 case MODE_EDITOR:
                 default:
@@ -1945,7 +2039,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             const modes = [];
 
             allowedModes.forEach(function (mode) {
-                if (DEFAULT_ALLOWED_MODES.indexOf(mode) === -1 || modes.indexOf(mode) !== -1) {
+                if (AVAILABLE_MODES.indexOf(mode) === -1 || modes.indexOf(mode) !== -1) {
                     return;
                 }
 

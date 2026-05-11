@@ -1,5 +1,5 @@
 .quiqqer-bricks-controls-multiLayout {
-    container-type: inline-size;
+    container: multi-layout / inline-size;
     min-height: 1px;
 }
 
@@ -81,6 +81,23 @@
     align-items: center;
 }
 
+.quiqqer-bricks-controls-multiLayout-area--subLayout .quiqqer-bricks-controls-multiLayout-area__content {
+    container: sub-layout / inline-size;
+}
+
+.quiqqer-bricks-controls-multiLayout-subGrid {
+    display: grid;
+    gap: var(--quiqqer-bricks-multiLayout-sub-gap, var(--_q-controlConf-gridGap, clamp(0.75rem, 4cqi, 1.5rem)));
+    grid-auto-flow: row dense;
+    grid-auto-rows: minmax(0, auto);
+    height: 100%;
+    width: 100%;
+}
+
+.quiqqer-bricks-controls-multiLayout-subArea {
+    min-height: var(--quiqqer-bricks-multiLayout-slot-min-height, 0);
+}
+
 .quiqqer-bricks-controls-multiLayout-area__contentInner {
     width: 100%;
 }
@@ -159,21 +176,41 @@
     width: var(--quiqqer-bricks-multiLayout-image-width, auto);
 }
 
-/* Tablet: container narrower than 60rem (~960px) */
-@container (max-width: 60rem) and (min-width: 40rem) {
+/* Tablet: main layout container narrower than 60rem (~960px) */
+@container multi-layout (max-width: 60rem) and (min-width: 40rem) {
     .quiqqer-bricks-controls-multiLayout-area {
         grid-column: var(--quiqqer-bricks-multiLayout-tablet-column);
         grid-row: var(--quiqqer-bricks-multiLayout-tablet-row);
     }
 }
 
-/* Mobile: container narrower than 40rem (~640px) */
-@container (max-width: 40rem) {
+/* Mobile: main layout container narrower than 40rem (~640px) */
+@container multi-layout (max-width: 40rem) {
     .quiqqer-bricks-controls-multiLayout-grid {
         grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
     }
 
     .quiqqer-bricks-controls-multiLayout-area {
+        grid-column: var(--quiqqer-bricks-multiLayout-mobile-column);
+        grid-row: var(--quiqqer-bricks-multiLayout-mobile-row);
+    }
+}
+
+/* Tablet: sub-layout container narrower than 40rem (~640px) */
+@container sub-layout (max-width: 40rem) and (min-width: 30rem) {
+    .quiqqer-bricks-controls-multiLayout-subArea {
+        grid-column: var(--quiqqer-bricks-multiLayout-tablet-column);
+        grid-row: var(--quiqqer-bricks-multiLayout-tablet-row);
+    }
+}
+
+/* Mobile: sub-layout container narrower than 30rem (~480px) */
+@container sub-layout (max-width: 30rem) {
+    .quiqqer-bricks-controls-multiLayout-subGrid {
+        grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    }
+
+    .quiqqer-bricks-controls-multiLayout-subArea {
         grid-column: var(--quiqqer-bricks-multiLayout-mobile-column);
         grid-row: var(--quiqqer-bricks-multiLayout-mobile-row);
     }

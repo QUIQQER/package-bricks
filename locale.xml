@@ -2904,6 +2904,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Bild]]></de>
             <en><![CDATA[Image]]></en>
         </locale>
+        <locale name="blockSlot.mode.subLayout">
+            <de><![CDATA[Sublayout]]></de>
+            <en><![CDATA[Sub-layout]]></en>
+        </locale>
         <locale name="blockSlot.mobileOrder">
             <de><![CDATA[Mobile-Reihenfolge]]></de>
             <en><![CDATA[Mobile order]]></en>
@@ -2987,6 +2991,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="blockSlot.image.empty">
             <de><![CDATA[Noch kein Bild ausgewählt]]></de>
             <en><![CDATA[No image selected]]></en>
+        </locale>
+        <locale name="blockSlot.subLayout.title">
+            <de><![CDATA[Sublayout]]></de>
+            <en><![CDATA[Sub-layout]]></en>
+        </locale>
+        <locale name="blockSlot.subLayout.section">
+            <de><![CDATA[Sublayout]]></de>
+            <en><![CDATA[Sub-layout]]></en>
         </locale>
         <locale name="blockSlot.image.fit">
             <de><![CDATA[Darstellungsart]]></de>
@@ -3267,6 +3279,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="blockSlot.quickEdit.image">
             <de><![CDATA[Zum Bildauswählen klicken]]></de>
             <en><![CDATA[Click to choose image]]></en>
+        </locale>
+        <locale name="blockSlot.quickEdit.subLayout">
+            <de><![CDATA[Sublayout bearbeiten]]></de>
+            <en><![CDATA[Edit sub-layout]]></en>
         </locale>
         <locale name="blockSlot.settings.button">
             <de><![CDATA[Einstellungen]]></de>
@@ -3635,6 +3651,30 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="brick.multiLayout.editor.breakpointHint">
             <de><![CDATA[Desktop ist die Hauptansicht. Tablet übernimmt standardmäßig Desktop, Mobile startet gestapelt mit 12 Spalten Breite pro Slot.]]></de>
             <en><![CDATA[Desktop is the primary view. Tablet starts from desktop, mobile starts stacked with each slot spanning 12 columns.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.subLayout.editor.title">
+            <de><![CDATA[Sublayout bearbeiten]]></de>
+            <en><![CDATA[Edit sub-layout]]></en>
+        </locale>
+        <locale name="brick.multiLayout.subLayout.editor.text">
+            <de><![CDATA[Das Sublayout gehört direkt zu diesem Slot und wird nicht als eigener Baustein gespeichert.]]></de>
+            <en><![CDATA[The sub-layout belongs directly to this slot and is not saved as a separate brick.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.subLayout.editor.information">
+            <de><![CDATA[Im Sublayout sind nur Editor, Bild und Baustein erlaubt. Weitere Sublayouts sind hier nicht möglich.]]></de>
+            <en><![CDATA[Only editor, image and brick are available inside a sub-layout. Further sub-layouts are not available here.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.subLayout.editor.hint">
+            <de><![CDATA[Bearbeite die Inhalte des Sublayouts oder wechsle zur Layout-Ansicht für Desktop, Tablet und Mobile.]]></de>
+            <en><![CDATA[Edit the sub-layout content or switch to the layout view for desktop, tablet and mobile.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.subLayout.toolbar.editContent">
+            <de><![CDATA[Inhalte bearbeiten]]></de>
+            <en><![CDATA[Edit content]]></en>
+        </locale>
+        <locale name="brick.multiLayout.subLayout.toolbar.editLayout">
+            <de><![CDATA[Layout bearbeiten]]></de>
+            <en><![CDATA[Edit layout]]></en>
         </locale>
         <locale name="brick.multiLayout.breakpoint.desktop">
             <de><![CDATA[Desktop]]></de>

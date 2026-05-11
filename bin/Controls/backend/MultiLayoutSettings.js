@@ -20,6 +20,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
     const MODE_EDITOR = 'editor';
     const MODE_BRICK = 'brick';
     const MODE_IMAGE = 'image';
+    const MODE_SUB_LAYOUT = 'subLayout';
     const EDIT_MODE_CONTENT = 'content';
     const EDIT_MODE_LAYOUT = 'layout';
     const IMAGE_FIT_AUTO = 'auto';
@@ -82,8 +83,16 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
     };
     const DEFAULT_COLUMNS = 12;
     const MIN_SLOT_WIDTH = 2;
+    const GRID_GAP_PRESET_VALUES = {
+        none: '0',
+        small: '0.5rem',
+        normal: '0.85rem',
+        large: '1.25rem',
+        extraLarge: '1.75rem'
+    };
     const BREAKPOINTS = ['desktop', 'tablet', 'mobile'];
     const AJAX_GET_PRESETS = 'package_quiqqer_bricks_ajax_getMultiLayoutPresets';
+    const LAYOUT_EDITOR_VIEW_CONTENT = 'content';
     const LAYOUT_EDITOR_VIEW_LAYOUT = 'layout';
     const LAYOUT_EDITOR_VIEW_PRESETS = 'presets';
 
@@ -96,7 +105,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             '$onImport',
             '$onAreaChange',
             '$onSlotRemove',
-            '$onSlotSelect'
+            '$onSlotSelect',
+            '$onSubLayoutEdit'
         ],
 
         initialize: function (options) {
@@ -121,6 +131,14 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             this.$layoutToolbar = null;
             this.$layoutCanvas = null;
             this.$layoutEditorView = LAYOUT_EDITOR_VIEW_LAYOUT;
+            this.$subLayoutWindow = null;
+            this.$subLayoutSlotId = '';
+            this.$subLayoutSelectedSlotId = '';
+            this.$subLayoutDraft = null;
+            this.$subLayoutBreakpoint = 'desktop';
+            this.$subLayoutEditorView = LAYOUT_EDITOR_VIEW_CONTENT;
+            this.$gridDocument = null;
+            this.$gridBreakpoint = '';
 
             this.addEvents({
                 onImport: this.$onImport
@@ -227,6 +245,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             });
         },
 
+        $onSubLayoutEdit: function (Control, area, slotId) {
+            this.$openSubLayoutEditor(slotId);
+        },
+
         $render: function () {
             if (!this.$Container) {
                 return;
@@ -279,7 +301,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                     slotId: slot.id,
                     index: index,
                     interactionMode: EDIT_MODE_CONTENT,
-                    allowedModes: [MODE_EDITOR, MODE_BRICK, MODE_IMAGE],
+                    allowedModes: [MODE_EDITOR, MODE_BRICK, MODE_IMAGE, MODE_SUB_LAYOUT],
                     allowModeSwitch: true,
                     settingsVisibility: {
                         contentPaddingPreset: true,
@@ -292,7 +314,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                         image: true
                     },
                     events: {
-                        change: this.$onAreaChange
+                        change: this.$onAreaChange,
+                        editSubLayout: this.$onSubLayoutEdit
                     }
                 });
 
@@ -311,6 +334,300 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
 
                 this.$AreaControls.push(AreaControl);
             }.bind(this)    );
+        },
+
+        $openSubLayoutEditor: function (slotId) {
+            const index = this.$getSlotIndex(slotId);
+            const area = this.$document.areas[slotId]
+                ? this.$normalizeArea(this.$document.areas[slotId], index, slotId)
+                : this.$normalizeArea({mode: MODE_SUB_LAYOUT}, index, slotId);
+
+            area.mode = MODE_SUB_LAYOUT;
+            area.subLayoutDocument = this.$normalizeDocument(area.subLayoutDocument, false);
+            this.$subLayoutSlotId = slotId;
+            this.$subLayoutDraft = this.$cloneDocument(area.subLayoutDocument);
+            this.$subLayoutBreakpoint = this.$subLayoutBreakpoint || 'desktop';
+            this.$subLayoutEditorView = LAYOUT_EDITOR_VIEW_CONTENT;
+            this.$subLayoutSelectedSlotId = this.$getBreakpointSlots('desktop', this.$subLayoutDraft).length
+                ? this.$getBreakpointSlots('desktop', this.$subLayoutDraft)[0].id
+                : '';
+
+            new QUIConfirm({
+                icon: 'fa fa-columns',
+                title: QUILocale.get(lg, 'brick.multiLayout.subLayout.editor.title'),
+                maxWidth: 1100,
+                maxHeight: 900,
+                information: QUILocale.get(lg, 'brick.multiLayout.subLayout.editor.information'),
+                text: QUILocale.get(lg, 'brick.multiLayout.subLayout.editor.text'),
+                events: {
+                    onOpen: function (Win) {
+                        this.$subLayoutWindow = Win;
+                        this.$renderSubLayoutEditor();
+                    }.bind(this),
+                    onSubmit: function () {
+                        const mainIndex = this.$getSlotIndex(this.$subLayoutSlotId);
+                        const mainArea = this.$document.areas[this.$subLayoutSlotId] || {};
+
+                        mainArea.mode = MODE_SUB_LAYOUT;
+                        mainArea.subLayoutDocument = this.$normalizeDocument(this.$subLayoutDraft, false);
+                        this.$document.areas[this.$subLayoutSlotId] = this.$normalizeArea(
+                            mainArea,
+                            mainIndex,
+                            this.$subLayoutSlotId
+                        );
+                        this.$destroyGrid();
+                        this.$subLayoutWindow = null;
+                        this.$subLayoutSlotId = '';
+                        this.$subLayoutSelectedSlotId = '';
+                        this.$subLayoutDraft = null;
+                        this.$subLayoutEditorView = LAYOUT_EDITOR_VIEW_CONTENT;
+                        this.$render();
+                        this.$update();
+                    }.bind(this),
+                    onClose: function () {
+                        this.$destroyGrid();
+                        this.$subLayoutWindow = null;
+                        this.$subLayoutSlotId = '';
+                        this.$subLayoutSelectedSlotId = '';
+                        this.$subLayoutDraft = null;
+                        this.$subLayoutEditorView = LAYOUT_EDITOR_VIEW_CONTENT;
+                        this.$render();
+                    }.bind(this)
+                }
+            }).open();
+        },
+
+        $renderSubLayoutEditor: function () {
+            if (!this.$subLayoutWindow || !this.$subLayoutDraft) {
+                return;
+            }
+
+            const Content = this.$subLayoutWindow.getContent();
+
+            this.$destroyGrid();
+            this.$destroyAreaControls();
+            Content.set('html', '');
+            Content.addClass('quiqqer-bricks-multiLayout-settings-editorWindow');
+
+            const Header = new Element('div', {
+                'class': 'quiqqer-bricks-multiLayout-settings-editorHeader'
+            }).inject(Content);
+
+            new Element('div', {
+                'class': 'quiqqer-bricks-multiLayout-settings-editorHint',
+                text: QUILocale.get(lg, 'brick.multiLayout.subLayout.editor.hint')
+            }).inject(Header);
+
+            const Toolbar = new Element('div', {
+                'class': 'quiqqer-bricks-multiLayout-settings-editorToolbar'
+            }).inject(Header);
+
+            [
+                {
+                    view: LAYOUT_EDITOR_VIEW_CONTENT,
+                    icon: 'fa fa-pencil',
+                    label: QUILocale.get(lg, 'brick.multiLayout.subLayout.toolbar.editContent')
+                },
+                {
+                    view: LAYOUT_EDITOR_VIEW_LAYOUT,
+                    icon: 'fa fa-columns',
+                    label: QUILocale.get(lg, 'brick.multiLayout.subLayout.toolbar.editLayout')
+                }
+            ].forEach(function (entry) {
+                new Element('button', {
+                    type: 'button',
+                    'class': 'btn quiqqer-bricks-multiLayout-settings-breakpointButton'
+                        + (this.$subLayoutEditorView === entry.view ? ' is-active' : ''),
+                    html: '<span class="' + entry.icon + '"></span><span>' + entry.label + '</span>',
+                    events: {
+                        click: function () {
+                            this.$subLayoutEditorView = entry.view;
+                            this.$renderSubLayoutEditor();
+                        }.bind(this)
+                    }
+                }).inject(Toolbar);
+            }.bind(this));
+
+            if (this.$subLayoutEditorView === LAYOUT_EDITOR_VIEW_LAYOUT) {
+                const breakpointIcons = {
+                    desktop: 'fa-solid fa-desktop',
+                    tablet: 'fa-solid fa-tablet-screen-button',
+                    mobile: 'fa-solid fa-mobile-screen-button'
+                };
+
+                BREAKPOINTS.forEach(function (breakpoint) {
+                    new Element('button', {
+                        type: 'button',
+                        'class': 'btn quiqqer-bricks-multiLayout-settings-breakpointButton'
+                            + (this.$subLayoutBreakpoint === breakpoint ? ' is-active' : ''),
+                        html: '<span class="' + breakpointIcons[breakpoint] + '"></span><span>'
+                            + QUILocale.get(lg, 'brick.multiLayout.breakpoint.' + breakpoint) + '</span>',
+                        events: {
+                            click: function () {
+                                this.$subLayoutBreakpoint = breakpoint;
+                                this.$renderSubLayoutEditor();
+                            }.bind(this)
+                        }
+                    }).inject(Toolbar);
+                }.bind(this));
+
+                new Element('button', {
+                    type: 'button',
+                    'class': 'btn quiqqer-bricks-multiLayout-settings-button',
+                    html: '<span class="fa fa-plus"></span><span>'
+                        + QUILocale.get(lg, 'brick.multiLayout.toolbar.addSlot') + '</span>',
+                    events: {
+                        click: function () {
+                            this.$addSlotToDocument(this.$subLayoutDraft, false);
+                            const slots = this.$getBreakpointSlots('desktop', this.$subLayoutDraft);
+                            this.$subLayoutSelectedSlotId = slots.length ? slots[slots.length - 1].id : '';
+                            this.$renderSubLayoutEditor();
+                        }.bind(this)
+                    }
+                }).inject(Toolbar);
+            }
+
+            this.$layoutCanvas = new Element('div', {
+                'class': 'quiqqer-bricks-multiLayout-settings-editorCanvas'
+            }).inject(Content);
+
+            if (this.$subLayoutEditorView === LAYOUT_EDITOR_VIEW_LAYOUT) {
+                this.$renderSubLayoutLayoutView();
+                return;
+            }
+
+            this.$renderSubLayoutContentView();
+        },
+
+        $renderSubLayoutContentView: function () {
+            const Grid = new Element('div', {
+                'class': 'quiqqer-bricks-multiLayout-settings-contentGrid',
+                styles: {
+                    gridTemplateColumns: 'repeat('
+                        + this.$getBreakpointColumns('desktop', this.$subLayoutDraft)
+                        + ', minmax(0, 1fr))',
+                    gap: this.$getGridGapPreviewValue(
+                        this.$document.areas[this.$subLayoutSlotId]
+                            ? this.$document.areas[this.$subLayoutSlotId].subLayoutGridGapPreset
+                            : null
+                    )
+                }
+            }).inject(this.$layoutCanvas);
+
+            this.$getOrderedSlots('desktop', this.$subLayoutDraft).forEach(function (slot, index) {
+                const AreaControl = new BlockSlot({
+                    area: this.$subLayoutDraft.areas[slot.id],
+                    helperContainer: this.$HelperContainer,
+                    slotId: slot.id,
+                    index: index,
+                    interactionMode: EDIT_MODE_CONTENT,
+                    allowedModes: [MODE_EDITOR, MODE_BRICK, MODE_IMAGE],
+                    allowModeSwitch: true,
+                    settingsVisibility: {
+                        contentPaddingPreset: true,
+                        verticalAlign: true,
+                        customMinHeight: true,
+                        background: true,
+                        backgroundColor: true,
+                        link: true,
+                        textColor: true,
+                        image: true
+                    },
+                    events: {
+                        change: function (Control, area, slotId) {
+                            this.$subLayoutDraft.areas[slotId] = this.$normalizeArea(
+                                area,
+                                this.$getSlotIndexFromDocument(slotId, this.$subLayoutDraft),
+                                slotId,
+                                false
+                            );
+                        }.bind(this)
+                    }
+                });
+
+                const slotArea = this.$subLayoutDraft.areas[slot.id];
+                const Wrap = new Element('div', {
+                    'class': 'quiqqer-bricks-multiLayout-settings-slotWrap',
+                    styles: this.$getSlotGridStyles(slot)
+                }).inject(Grid);
+
+                if (this.$document.areas[this.$subLayoutSlotId]
+                    && this.$document.areas[this.$subLayoutSlotId].subLayoutAreaBackgroundEnabled !== false
+                    && slotArea
+                    && !slotArea.backgroundColorEnabled
+                ) {
+                    Wrap.addClass('is-surface-subtle-enabled');
+                }
+
+                Wrap.setStyle('minHeight', this.$resolveAreaTileMinHeight(this.$subLayoutDraft, slot.id));
+                AreaControl.inject(Wrap);
+
+                if (this.$Project) {
+                    AreaControl.setProject(this.$Project);
+                }
+
+                this.$AreaControls.push(AreaControl);
+            }.bind(this));
+        },
+
+        $renderSubLayoutLayoutView: function () {
+            const DeviceFrame = new Element('div', {
+                'class': 'quiqqer-bricks-multiLayout-settings-deviceFrame'
+                    + ' quiqqer-bricks-multiLayout-settings-deviceFrame--' + this.$subLayoutBreakpoint
+            }).inject(this.$layoutCanvas);
+
+            const GridWrap = new Element('div', {
+                'class': 'quiqqer-bricks-multiLayout-settings-layoutGridWrap'
+            }).inject(DeviceFrame);
+
+            this.$GridContainer = new Element('div', {
+                'class': 'quiqqer-bricks-multiLayout-settings-layoutGrid grid-stack'
+            }).inject(GridWrap);
+
+            this.$getOrderedSlots(this.$subLayoutBreakpoint, this.$subLayoutDraft).forEach(function (slot, index) {
+                const Item = new Element('div', {
+                    'class': 'grid-stack-item',
+                    'gs-id': slot.id,
+                    'gs-x': slot.x,
+                    'gs-y': slot.y,
+                    'gs-w': slot.w,
+                    'gs-h': slot.h,
+                    'gs-min-w': MIN_SLOT_WIDTH
+                }).inject(this.$GridContainer);
+
+                const ContentElm = new Element('div', {
+                    'class': 'grid-stack-item-content'
+                }).inject(Item);
+
+                const AreaControl = new BlockSlot({
+                    area: this.$subLayoutDraft.areas[slot.id],
+                    helperContainer: this.$HelperContainer,
+                    slotId: slot.id,
+                    index: index,
+                    interactionMode: EDIT_MODE_LAYOUT,
+                    selected: this.$subLayoutSelectedSlotId === slot.id,
+                    allowRemoveSlot: this.$getBreakpointSlots('desktop', this.$subLayoutDraft).length > 1,
+                    allowModeSwitch: false,
+                    events: {
+                        select: function (Control, slotId) {
+                            this.$subLayoutSelectedSlotId = slotId;
+                            this.$renderSubLayoutEditor();
+                        }.bind(this),
+                        removeSlot: function (Control, slotId) {
+                            this.$removeSlotFromDocument(this.$subLayoutDraft, slotId);
+                            this.$subLayoutSelectedSlotId = this.$getBreakpointSlots('desktop', this.$subLayoutDraft).length
+                                ? this.$getBreakpointSlots('desktop', this.$subLayoutDraft)[0].id
+                                : '';
+                            this.$renderSubLayoutEditor();
+                        }.bind(this)
+                    }
+                });
+
+                AreaControl.inject(ContentElm);
+                this.$AreaControls.push(AreaControl);
+            }.bind(this));
+
+            this.$initGrid(this.$subLayoutDraft, this.$subLayoutBreakpoint);
         },
 
         $openLayoutEditor: function () {
@@ -522,6 +839,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                     slotId: slot.id,
                     index: index,
                     interactionMode: EDIT_MODE_LAYOUT,
+                    allowedModes: [MODE_EDITOR, MODE_BRICK, MODE_IMAGE, MODE_SUB_LAYOUT],
                     selected: this.$selectedSlotId === slot.id,
                     allowRemoveSlot: this.$getBreakpointSlots('desktop', this.$layoutDraft).length > 1,
                     allowModeSwitch: false,
@@ -699,13 +1017,18 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             }
         },
 
-        $initGrid: function () {
+        $initGrid: function (documentData, breakpoint) {
             if (!this.$GridContainer || !GridStack) {
                 return;
             }
 
+            documentData = documentData || this.$layoutDraft;
+            breakpoint = breakpoint || this.$layoutBreakpoint;
+            this.$gridDocument = documentData;
+            this.$gridBreakpoint = breakpoint;
+
             this.$Grid = GridStack.init({
-                column: this.$getBreakpointColumns(this.$layoutBreakpoint, this.$layoutDraft),
+                column: this.$getBreakpointColumns(breakpoint, documentData),
                 cellHeight: 160,
                 disableOneColumnMode: true,
                 draggable: {
@@ -725,7 +1048,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
         },
 
         $syncSlotsFromGrid: function () {
-            if (!this.$GridContainer || !this.$layoutDraft) {
+            if (!this.$GridContainer || !this.$gridDocument || !this.$gridBreakpoint) {
                 return;
             }
 
@@ -745,7 +1068,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                 }, slots.length, DEFAULT_COLUMNS, DEFAULT_COLUMNS));
             }.bind(this));
 
-            this.$layoutDraft.breakpoints[this.$layoutBreakpoint].slots = slots.sort(this.$compareSlots);
+            this.$gridDocument.breakpoints[this.$gridBreakpoint].slots = slots.sort(this.$compareSlots);
         },
 
         $changePreset: function (presetId, options) {
@@ -839,6 +1162,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
 
             this.$Grid = null;
             this.$GridContainer = null;
+            this.$gridDocument = null;
+            this.$gridBreakpoint = '';
         },
 
         $destroyAreaControls: function () {
@@ -879,7 +1204,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             return JSON.decode(JSON.encode(documentData || {}));
         },
 
-        $normalizeDocument: function (value) {
+        $normalizeDocument: function (value, allowSubLayout) {
+            allowSubLayout = allowSubLayout !== false;
+
             const preset = this.$getPreset(this.$normalizeLayoutValue(
                 value && value.preset ? value.preset : null
             ));
@@ -922,7 +1249,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                         ? areasSource[slot.id]
                         : {},
                     index,
-                    slot.id
+                    slot.id,
+                    allowSubLayout
                 );
             }.bind(this));
 
@@ -1033,11 +1361,22 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                 }.bind(this));
             }
 
-            return desktopSlots.map(function (desktopSlot, index) {
+            const normalized = desktopSlots.map(function (desktopSlot, index) {
                 const sourceSlot = normalizedById[desktopSlot.id] || fallback[index] || desktopSlot;
                 const slot = this.$normalizeSlot(sourceSlot, index, DEFAULT_COLUMNS, DEFAULT_COLUMNS);
 
                 slot.id = desktopSlot.id;
+
+                return slot;
+            }.bind(this)).sort(this.$compareSlots);
+
+            if (!this.$hasOverlappingSlots(normalized)) {
+                return normalized;
+            }
+
+            return fallback.map(function (slot, index) {
+                slot = this.$normalizeSlot(slot || desktopSlots[index], index, DEFAULT_COLUMNS, DEFAULT_COLUMNS);
+                slot.id = desktopSlots[index].id;
 
                 return slot;
             }.bind(this)).sort(this.$compareSlots);
@@ -1106,12 +1445,16 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             };
         },
 
-        $normalizeArea: function (area, index) {
+        $normalizeArea: function (area, index, slotId, allowSubLayout) {
             area = typeOf(area) === 'object' ? area : {};
+            allowSubLayout = allowSubLayout !== false;
 
             let mode = area.mode;
+            const allowedModes = allowSubLayout
+                ? [MODE_EDITOR, MODE_BRICK, MODE_IMAGE, MODE_SUB_LAYOUT]
+                : [MODE_EDITOR, MODE_BRICK, MODE_IMAGE];
 
-            if ([MODE_EDITOR, MODE_BRICK, MODE_IMAGE].indexOf(mode) === -1) {
+            if (allowedModes.indexOf(mode) === -1) {
                 mode = MODE_EDITOR;
             }
 
@@ -1155,7 +1498,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
 
             const link = this.$normalizeLink(area.link);
 
-            return {
+            const normalized = {
                 title: area.title || QUILocale.get(lg, 'brick.multiLayout.area.label', {
                     number: index + 1
                 }),
@@ -1188,6 +1531,27 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                 link: link,
                 verticalAlign: verticalAlign
             };
+
+            if (mode === MODE_SUB_LAYOUT) {
+                normalized.subLayoutDocument = this.$normalizeDocument(area.subLayoutDocument, false);
+                normalized.subLayoutAreaBackgroundEnabled =
+                    area.subLayoutAreaBackgroundEnabled !== false;
+                normalized.subLayoutGridGapPreset = this.$normalizeGridGapPreset(
+                    area.subLayoutGridGapPreset
+                );
+            }
+
+            return normalized;
+        },
+
+        $normalizeGridGapPreset: function (preset) {
+            return ['none', 'small', 'normal', 'large', 'extraLarge'].indexOf(preset) !== -1
+                ? preset
+                : 'normal';
+        },
+
+        $getGridGapPreviewValue: function (preset) {
+            return GRID_GAP_PRESET_VALUES[this.$normalizeGridGapPreset(preset)];
         },
 
         $normalizeContentPaddingPreset: function (preset) {
@@ -1303,6 +1667,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                     (area.content && area.content.trim())
                     || area.brickId
                     || area.image
+                    || area.mode === MODE_SUB_LAYOUT
                 );
             }.bind(this));
         },
@@ -1385,6 +1750,30 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             return slotA.y - slotB.y;
         },
 
+        $hasOverlappingSlots: function (slots) {
+            for (let i = 0; i < slots.length; i++) {
+                const slotA = slots[i];
+                const ax1 = slotA.x;
+                const ay1 = slotA.y;
+                const ax2 = ax1 + slotA.w;
+                const ay2 = ay1 + slotA.h;
+
+                for (let j = i + 1; j < slots.length; j++) {
+                    const slotB = slots[j];
+                    const bx1 = slotB.x;
+                    const by1 = slotB.y;
+                    const bx2 = bx1 + slotB.w;
+                    const by2 = by1 + slotB.h;
+
+                    if (!(ay1 >= by2 || ay2 <= by1 || ax2 <= bx1 || ax1 >= bx2)) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        },
+
         $createUniqueSlotId: function (used) {
             let counter = 1;
             let slotId = 'slot-' + counter;
@@ -1455,7 +1844,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             });
         },
 
-        $addSlotToDocument: function (documentData) {
+        $addSlotToDocument: function (documentData, allowSubLayout) {
+            allowSubLayout = allowSubLayout !== false;
             const nextId = this.$createNextSlotId(documentData);
             const index = this.$getBreakpointSlots('desktop', documentData).length;
             const defaultSlotWidth = this.$getDefaultSlotWidth(documentData);
@@ -1492,7 +1882,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             documentData.breakpoints.desktop.slots.sort(this.$compareSlots);
             documentData.breakpoints.tablet.slots.sort(this.$compareSlots);
             documentData.breakpoints.mobile.slots.sort(this.$compareSlots);
-            documentData.areas[nextId] = this.$normalizeArea({}, index, nextId);
+            documentData.areas[nextId] = this.$normalizeArea({}, index, nextId, allowSubLayout);
             this.$selectedSlotId = nextId;
         },
 
@@ -1518,7 +1908,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
         },
 
         $getSlotIndex: function (slotId) {
-            const slots = this.$getOrderedSlots('desktop');
+            return this.$getSlotIndexFromDocument(slotId, this.$document);
+        },
+
+        $getSlotIndexFromDocument: function (slotId, documentData) {
+            const slots = this.$getOrderedSlots('desktop', documentData);
 
             for (let i = 0, len = slots.length; i < len; i++) {
                 if (slots[i].id === slotId) {
