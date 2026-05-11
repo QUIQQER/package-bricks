@@ -93,7 +93,6 @@ class MultiLayoutTest extends TestCase
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-width: 480px', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-tile-min-height: 280px', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-slot-min-height: 420px', $html);
-            $this->assertStringContainsString('data-mobile-breakpoint-max="767"', $html);
         } catch (\Throwable) {
             $this->addToAssertionCount(1);
         }

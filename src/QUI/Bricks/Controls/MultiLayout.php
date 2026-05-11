@@ -35,8 +35,6 @@ use function usort;
 class MultiLayout extends QUI\Control
 {
     protected const DEFAULT_COLUMNS = 12;
-    protected const TABLET_BREAKPOINT_MAX = 1023;
-    protected const MOBILE_BREAKPOINT_MAX = 767;
     protected const DEFAULT_TILE_MIN_HEIGHT_PRESET = 'standard';
     protected const TILE_MIN_HEIGHT_PRESETS = [
         'none'       => '0px',
@@ -303,8 +301,6 @@ class MultiLayout extends QUI\Control
             'areaCount' => count($areas),
             'desktopColumns' => $document['breakpoints']['desktop']['columns'],
             'documentStyle' => $this->buildDocumentStyle($document),
-            'tabletBreakpointMax' => self::TABLET_BREAKPOINT_MAX,
-            'mobileBreakpointMax' => self::MOBILE_BREAKPOINT_MAX,
             'areaBackgroundEnabled' => !empty($this->getAttribute('areaBackgroundEnabled')),
         ]);
 

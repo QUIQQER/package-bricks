@@ -11,8 +11,6 @@
 <div class="{$this->getAttribute('class')}"
      data-preset="{$layoutDocument.preset}"
      data-area-count="{$areaCount}"
-     data-tablet-breakpoint-max="{$tabletBreakpointMax}"
-     data-mobile-breakpoint-max="{$mobileBreakpointMax}"
      {if $documentStyle}style="{$documentStyle}"{/if}
 >
     <div class="quiqqer-bricks-controls-multiLayout-grid"
@@ -50,6 +48,10 @@
                             class="quiqqer-bricks-controls-multiLayout-area__image{if $area.imageFit === 'auto'} quiqqer-bricks-controls-multiLayout-area__image--auto{/if}"
                             width=2000
                         }
+                    {elseif $area.mode == 'editor'}
+                        <div class="quiqqer-bricks-controls-multiLayout-area__contentInner">
+                            {$area.contentHtml}
+                        </div>
                     {else}
                         {$area.contentHtml}
                     {/if}

@@ -749,7 +749,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                                 this.$getLocale('verticalAlign'),
                                 [
                                     {
-                                        value: 'top',
+                                        value: VERTICAL_ALIGN_TOP,
                                         text: this.$getLocale('verticalAlign.top')
                                     },
                                     {
@@ -757,7 +757,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                                         text: this.$getLocale('verticalAlign.center')
                                     },
                                     {
-                                        value: 'bottom',
+                                        value: VERTICAL_ALIGN_BOTTOM,
                                         text: this.$getLocale('verticalAlign.bottom')
                                     }
                                 ],
