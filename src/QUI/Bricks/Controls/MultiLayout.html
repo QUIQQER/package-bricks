@@ -1,3 +1,13 @@
+{if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+    <h1 class="control-header">{$this->getAttribute('frontendTitle')}</h1>
+{/if}
+
+{if $this->getAttribute('content') != ""}
+    <div class="control-content">
+        {$this->getAttribute('content')}
+    </div>
+{/if}
+
 <div class="{$this->getAttribute('class')}"
      data-preset="{$layoutDocument.preset}"
      data-area-count="{$areaCount}"
@@ -33,7 +43,7 @@
                        aria-label="{if $area.link.title}{$area.link.title}{else}{$area.title}{/if}"
                     ></a>
                 {/if}
-                <div class="quiqqer-bricks-controls-multiLayout-area__content{if empty($area.contentPadding)} quiqqer-bricks-controls-multiLayout-area__content--noPadding{/if}">
+                <div class="quiqqer-bricks-controls-multiLayout-area__content">
                     {if $area.mode == 'image' && $area.image}
                         {image
                             src=$area.image

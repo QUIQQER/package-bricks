@@ -2824,6 +2824,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Hintergrundfarbe für Bereiche verwenden]]></de>
             <en><![CDATA[Use background color for areas]]></en>
         </locale>
+        <locale name="brick.multiLayout.areaBackgroundEnabled.desc">
+            <de><![CDATA[Setzt eine einheitliche Hintergrundfarbe für alle Bereiche. Einzelne Bereiche können diese in den Bereichseinstellungen überschreiben.]]></de>
+            <en><![CDATA[Applies a uniform background color to all areas. Individual areas can override this in their own settings.]]></en>
+        </locale>
         <locale name="brick.multiLayout.gridGap">
             <de><![CDATA[Abstand zwischen Kacheln]]></de>
             <en><![CDATA[Spacing between tiles]]></en>
@@ -3129,22 +3133,30 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Bottom right]]></en>
         </locale>
         <locale name="blockSlot.backgroundColor.section">
-            <de><![CDATA[Hintergrundfarbe (Overlay)]]></de>
-            <en><![CDATA[Background color (overlay)]]></en>
+            <de><![CDATA[Hintergrundfarbe]]></de>
+            <en><![CDATA[Background color]]></en>
         </locale>
         <locale name="blockSlot.backgroundColor.enabled">
-            <de><![CDATA[Overlay verwenden]]></de>
-            <en><![CDATA[Use overlay]]></en>
-        </locale>
-        <locale name="blockSlot.backgroundColor.description">
-            <de><![CDATA[Definiert die Hintergrundfarbe über dem Hintergrundbild für diesen Bereich.]]></de>
-            <en><![CDATA[Defines the background color above the background image for this area.]]></en>
+            <de><![CDATA[Eigene Hintergrundfarbe verwenden]]></de>
+            <en><![CDATA[Use custom background color]]></en>
         </locale>
         <locale name="blockSlot.backgroundColor.color">
             <de><![CDATA[Farbe]]></de>
             <en><![CDATA[Color]]></en>
         </locale>
-        <locale name="blockSlot.backgroundColor.opacity">
+        <locale name="blockSlot.backgroundOverlay.enabled">
+            <de><![CDATA[Farb-Overlay verwenden]]></de>
+            <en><![CDATA[Use color overlay]]></en>
+        </locale>
+        <locale name="blockSlot.backgroundOverlay.description">
+            <de><![CDATA[Färbt das Hintergrundbild ein – z. B. um die Lesbarkeit von Text zu verbessern.]]></de>
+            <en><![CDATA[Tints the background image – e.g. to improve text legibility.]]></en>
+        </locale>
+        <locale name="blockSlot.backgroundOverlay.color">
+            <de><![CDATA[Farbe]]></de>
+            <en><![CDATA[Color]]></en>
+        </locale>
+        <locale name="blockSlot.backgroundOverlay.opacity">
             <de><![CDATA[Deckkraft]]></de>
             <en><![CDATA[Opacity]]></en>
         </locale>
@@ -3216,9 +3228,29 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Link-Titel]]></de>
             <en><![CDATA[Link title]]></en>
         </locale>
-        <locale name="blockSlot.contentPadding">
-            <de><![CDATA[Standard-Innenabstand verwenden]]></de>
-            <en><![CDATA[Use default inner spacing]]></en>
+        <locale name="blockSlot.contentPaddingPreset">
+            <de><![CDATA[Innenabstand]]></de>
+            <en><![CDATA[Inner spacing]]></en>
+        </locale>
+        <locale name="blockSlot.contentPaddingPreset.option.none">
+            <de><![CDATA[Kein Abstand]]></de>
+            <en><![CDATA[No spacing]]></en>
+        </locale>
+        <locale name="blockSlot.contentPaddingPreset.option.small">
+            <de><![CDATA[Klein]]></de>
+            <en><![CDATA[Small]]></en>
+        </locale>
+        <locale name="blockSlot.contentPaddingPreset.option.normal">
+            <de><![CDATA[Normal]]></de>
+            <en><![CDATA[Normal]]></en>
+        </locale>
+        <locale name="blockSlot.contentPaddingPreset.option.large">
+            <de><![CDATA[Groß]]></de>
+            <en><![CDATA[Large]]></en>
+        </locale>
+        <locale name="blockSlot.contentPaddingPreset.option.extraLarge">
+            <de><![CDATA[Extra groß]]></de>
+            <en><![CDATA[Extra large]]></en>
         </locale>
         <locale name="blockSlot.quickEdit.title">
             <de><![CDATA[[mode] schnell bearbeiten]]></de>
@@ -3247,6 +3279,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="blockSlot.remove.button">
             <de><![CDATA[Entfernen]]></de>
             <en><![CDATA[Remove]]></en>
+        </locale>
+        <locale name="blockSlot.remove.button.image">
+            <de><![CDATA[Bild löschen]]></de>
+            <en><![CDATA[Delete image]]></en>
+        </locale>
+        <locale name="blockSlot.remove.button.brick">
+            <de><![CDATA[Baustein löschen]]></de>
+            <en><![CDATA[Delete brick]]></en>
         </locale>
         <locale name="blockSlot.remove.popup.title">
             <de><![CDATA[Inhalt von [title] entfernen?]]></de>

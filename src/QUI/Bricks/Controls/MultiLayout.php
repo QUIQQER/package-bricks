@@ -54,6 +54,14 @@ class MultiLayout extends QUI\Control
         'large'      => 'clamp(1rem, 4cqi, 2.5rem)',
         'extraLarge' => 'clamp(1.25rem, 6cqi, 4rem)',
     ];
+    protected const DEFAULT_CONTENT_PADDING_PRESET = 'normal';
+    protected const CONTENT_PADDING_PRESETS = [
+        'none'       => '0',
+        'small'      => 'clamp(1rem, 1.5cqi, 1.5rem)',
+        'normal'     => 'clamp(1rem, 2cqi, 2rem)',
+        'large'      => 'clamp(1rem, 3.5cqi, 3rem)',
+        'extraLarge' => 'clamp(1rem, 5cqi, 5rem)',
+    ];
     protected const LINK_REL_OPTIONS = [
         '',
         'nofollow',
@@ -583,7 +591,11 @@ class MultiLayout extends QUI\Control
             'mode' => isset($area['mode']) && in_array($area['mode'], ['editor', 'brick', 'image'], true)
                 ? $area['mode']
                 : 'editor',
-            'contentPadding' => !isset($area['contentPadding']) || !empty($area['contentPadding']),
+            'contentPaddingPreset' => isset($area['contentPaddingPreset'])
+                && is_string($area['contentPaddingPreset'])
+                && array_key_exists($area['contentPaddingPreset'], self::CONTENT_PADDING_PRESETS)
+                    ? $area['contentPaddingPreset']
+                    : self::DEFAULT_CONTENT_PADDING_PRESET,
             'content' => isset($area['content']) && is_string($area['content']) ? $area['content'] : '',
             'brickId' => isset($area['brickId']) ? (int)$area['brickId'] : 0,
             'brickTitle' => isset($area['brickTitle']) && is_string($area['brickTitle'])
@@ -625,13 +637,17 @@ class MultiLayout extends QUI\Control
                 ], true)
                 ? $area['backgroundImagePosition']
                 : 'center center',
+            'backgroundOverlayEnabled' => !empty($area['backgroundOverlayEnabled']),
+            'backgroundOverlayColor' => isset($area['backgroundOverlayColor']) && is_string($area['backgroundOverlayColor'])
+                ? $area['backgroundOverlayColor']
+                : '#000000',
+            'backgroundOverlayOpacity' => isset($area['backgroundOverlayOpacity']) && is_numeric($area['backgroundOverlayOpacity'])
+                ? max(0, min(100, (int)$area['backgroundOverlayOpacity']))
+                : 100,
             'backgroundColorEnabled' => !empty($area['backgroundColorEnabled']),
             'backgroundColor' => isset($area['backgroundColor']) && is_string($area['backgroundColor'])
                 ? $area['backgroundColor']
                 : '#000000',
-            'backgroundColorOpacity' => isset($area['backgroundColorOpacity']) && is_numeric($area['backgroundColorOpacity'])
-                ? max(0, min(100, (int)$area['backgroundColorOpacity']))
-                : 100,
             'textColor' => isset($area['textColor']) && is_string($area['textColor'])
                 ? trim($area['textColor'])
                 : '',
@@ -777,13 +793,20 @@ class MultiLayout extends QUI\Control
             return '';
         }
 
+        $paddingPreset = isset($area['contentPaddingPreset'])
+            && is_string($area['contentPaddingPreset'])
+            && array_key_exists($area['contentPaddingPreset'], self::CONTENT_PADDING_PRESETS)
+                ? $area['contentPaddingPreset']
+                : self::DEFAULT_CONTENT_PADDING_PRESET;
+
         $style = [
             '--quiqqer-bricks-multiLayout-desktop-column: ' . $this->buildGridLineValue($desktopSlot),
             '--quiqqer-bricks-multiLayout-desktop-row: ' . $this->buildGridRowValue($desktopSlot),
             '--quiqqer-bricks-multiLayout-tablet-column: ' . $this->buildGridLineValue($tabletSlot),
             '--quiqqer-bricks-multiLayout-tablet-row: ' . $this->buildGridRowValue($tabletSlot),
             '--quiqqer-bricks-multiLayout-mobile-column: ' . $this->buildGridLineValue($mobileSlot),
-            '--quiqqer-bricks-multiLayout-mobile-row: ' . $this->buildGridRowValue($mobileSlot)
+            '--quiqqer-bricks-multiLayout-mobile-row: ' . $this->buildGridRowValue($mobileSlot),
+            '--quiqqer-bricks-multiLayout-content-padding: ' . self::CONTENT_PADDING_PRESETS[$paddingPreset]
         ];
 
         if (!empty($area['backgroundEnabled']) && !empty($area['backgroundImage'])) {
@@ -793,11 +816,16 @@ class MultiLayout extends QUI\Control
                 . $this->escapeStyleValue((string)$area['backgroundImagePosition']);
         }
 
-        if (!empty($area['backgroundColorEnabled'])) {
+        if (!empty($area['backgroundOverlayEnabled'])) {
             $style[] = '--quiqqer-bricks-multiLayout-background-overlay-color: '
-                . $this->escapeStyleValue((string)$area['backgroundColor']);
+                . $this->escapeStyleValue((string)$area['backgroundOverlayColor']);
             $style[] = '--quiqqer-bricks-multiLayout-background-overlay-opacity: '
-                . ((int)$area['backgroundColorOpacity'] / 100);
+                . ((int)$area['backgroundOverlayOpacity'] / 100);
+        }
+
+        if (!empty($area['backgroundColorEnabled']) && !empty($area['backgroundColor'])) {
+            $style[] = '--quiqqer-bricks-multiLayout-area-background: '
+                . $this->escapeStyleValue((string)$area['backgroundColor']);
         }
 
         if (!empty($area['textColor'])) {

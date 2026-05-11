@@ -48,9 +48,11 @@ class MultiLayoutTest extends TestCase
                             'backgroundImage' => '/assets/background.png',
                             'backgroundImageFit' => 'cover',
                             'backgroundImagePosition' => 'center top',
+                            'backgroundOverlayEnabled' => true,
+                            'backgroundOverlayColor' => '#112233',
+                            'backgroundOverlayOpacity' => 35,
                             'backgroundColorEnabled' => true,
-                            'backgroundColor' => '#112233',
-                            'backgroundColorOpacity' => 35,
+                            'backgroundColor' => '#445566',
                             'customMinHeightEnabled' => true,
                             'customMinHeightPreset' => 'manual',
                             'customMinHeightValue' => '420px'
@@ -86,6 +88,7 @@ class MultiLayoutTest extends TestCase
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-position: center top', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-overlay-color: #112233', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-overlay-opacity: 0.35', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-area-background: #445566', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-fit: contain', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-width: 480px', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-tile-min-height: 280px', $html);

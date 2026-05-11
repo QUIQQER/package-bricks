@@ -27,7 +27,7 @@
     --quiqqer-bricks-multiLayout-mobile-column: var(--quiqqer-bricks-multiLayout-tablet-column);
     --quiqqer-bricks-multiLayout-mobile-row: var(--quiqqer-bricks-multiLayout-tablet-row);
     align-items: stretch;
-    background: transparent;
+    background: var(--quiqqer-bricks-multiLayout-area-background, transparent);
     display: flex;
     grid-column: var(--quiqqer-bricks-multiLayout-desktop-column);
     grid-row: var(--quiqqer-bricks-multiLayout-desktop-row);
@@ -45,7 +45,7 @@
 }
 
 .quiqqer-bricks-controls-multiLayout-area.is-surface-subtle-enabled {
-    background: var(--qui-colors-surface-subtle);
+    --quiqqer-bricks-multiLayout-area-background: var(--qui-colors-surface-subtle);
 }
 
 .quiqqer-bricks-controls-multiLayout-area__background,
@@ -75,7 +75,7 @@
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    padding: 1.5rem;
+    padding: var(--quiqqer-bricks-multiLayout-content-padding, clamp(1rem, 2cqi, 2rem));
     position: relative;
     width: 100%;
     z-index: 2;
@@ -99,10 +99,6 @@
 .quiqqer-bricks-controls-multiLayout-area__content [role="button"] {
     position: relative;
     z-index: 3;
-}
-
-.quiqqer-bricks-controls-multiLayout-area__content--noPadding {
-    padding: 0;
 }
 
 .quiqqer-bricks-controls-multiLayout-area--image .quiqqer-bricks-controls-multiLayout-area__content > picture {

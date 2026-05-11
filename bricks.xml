@@ -1900,6 +1900,9 @@
             <settings>
                 <setting name="areaBackgroundEnabled" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.multiLayout.areaBackgroundEnabled"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.areaBackgroundEnabled.desc"/>
+                    </description>
                 </setting>
 
                 <setting name="gridGapPreset" type="select">

@@ -22,7 +22,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
     const INTERACTION_LAYOUT = 'layout';
     const DEFAULT_ALLOWED_MODES = [MODE_EDITOR, MODE_BRICK, MODE_IMAGE];
     const DEFAULT_SETTINGS_VISIBILITY = {
-        contentPadding: true,
+        contentPaddingPreset: true,
         verticalAlign: true,
         customMinHeight: true,
         background: true,
@@ -76,6 +76,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
         extraLarge: '360px',
         manual: null
     };
+    const CONTENT_PADDING_PRESETS = ['none', 'small', 'normal', 'large', 'extraLarge'];
+    const DEFAULT_CONTENT_PADDING_PRESET = 'normal';
 
     return new Class({
 
@@ -251,13 +253,14 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             }).inject(Actions);
 
             if (this.$canRemoveAreaContent(area)) {
+                const removeLabel = this.$getRemoveButtonLabel(this.$getActiveMode(area));
+
                 new Element('button', {
                     type: 'button',
                     'class': 'quiqqer-bricks-blockSlot-cardAction '
                         + 'quiqqer-bricks-blockSlot-cardAction--danger',
-                    html: '<span class="fa fa-times"></span><span>' +
-                        this.$getLocale('remove.button') + '</span>',
-                    title: this.$getLocale('remove.button'),
+                    html: '<span class="fa fa-times"></span><span>' + removeLabel + '</span>',
+                    title: removeLabel,
                     events: {
                         click: this.$confirmRemoveAreaContent.bind(this)
                     }
@@ -371,7 +374,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             const backgroundImage = area.backgroundEnabled && area.backgroundImage
                 ? 'url("' + area.backgroundImage.replace(/"/g, '\\"') + '")'
                 : '';
-            const backgroundOverlay = this.$getPreviewBackgroundOverlay(area);
+            const overlay = this.$getPreviewOverlay(area);
             const styles = {
                 backgroundColor: '',
                 backgroundImage: '',
@@ -381,24 +384,24 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 color: area.textColor || ''
             };
 
+            if (area.backgroundColorEnabled && area.backgroundColor) {
+                styles.backgroundColor = area.backgroundColor;
+            }
+
             if (backgroundImage) {
-                styles.backgroundImage = backgroundOverlay
-                    ? backgroundOverlay + ', ' + backgroundImage
+                styles.backgroundImage = overlay
+                    ? overlay + ', ' + backgroundImage
                     : backgroundImage;
                 styles.backgroundPosition = area.backgroundImagePosition || BACKGROUND_POSITION_CENTER;
                 styles.backgroundRepeat = 'no-repeat';
                 styles.backgroundSize = area.backgroundImageFit || IMAGE_FIT_COVER;
             }
 
-            if (area.backgroundColorEnabled && area.backgroundColor && !backgroundImage) {
-                styles.backgroundColor = this.$getPreviewBackgroundColor(area);
-            }
-
             PreviewButton.setStyles(styles);
         },
 
-        $getPreviewBackgroundOverlay: function (area) {
-            const color = this.$getPreviewBackgroundColor(area);
+        $getPreviewOverlay: function (area) {
+            const color = this.$getPreviewOverlayColor(area);
 
             if (!color) {
                 return '';
@@ -407,14 +410,14 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             return 'linear-gradient(' + color + ', ' + color + ')';
         },
 
-        $getPreviewBackgroundColor: function (area) {
-            const color = area.backgroundColor || '';
+        $getPreviewOverlayColor: function (area) {
+            const color = area.backgroundOverlayColor || '';
 
-            if (!color || !area.backgroundColorEnabled) {
+            if (!color || !area.backgroundOverlayEnabled) {
                 return '';
             }
 
-            const opacity = Math.max(0, Math.min(100, parseInt(area.backgroundColorOpacity, 10) || 0));
+            const opacity = Math.max(0, Math.min(100, parseInt(area.backgroundOverlayOpacity, 10) || 0));
 
             if (opacity >= 100) {
                 return color;
@@ -729,12 +732,14 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
 
                         const ModeField = this.$createPopupModeField(LeftCol, activeMode);
 
-                        if (this.$isSettingVisible('contentPadding')) {
-                            this.$createPopupCheckboxField(
+                        if (this.$isSettingVisible('contentPaddingPreset')) {
+                            this.$createPopupSelectField(
                                 LeftCol,
-                                this.$getLocale('contentPadding'),
-                                area.contentPadding,
-                                'contentPadding'
+                                this.$getLocale('contentPaddingPreset'),
+                                this.$getContentPaddingPresetOptions(),
+                                this.$normalizeContentPaddingPreset(area.contentPaddingPreset),
+                                'data-name',
+                                'contentPaddingPreset'
                             );
                         }
 
@@ -770,20 +775,24 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
 
                         let BackgroundOptions = null;
                         let BackgroundEnabledField = null;
+                        let OverlayOptions = null;
+                        let OverlayEnabledField = null;
 
                         if (this.$isSettingVisible('background')) {
                             const Background = this.$createPopupBackgroundSettings(RightCol, area);
                             BackgroundOptions = Background.options;
                             BackgroundEnabledField = Background.enabledField;
+                            OverlayOptions = Background.overlayOptions;
+                            OverlayEnabledField = Background.overlayEnabledField;
                         }
 
-                        let OverlayOptions = null;
+                        let BackgroundColorOptions = null;
                         let BackgroundColorEnabledField = null;
 
                         if (this.$isSettingVisible('backgroundColor')) {
-                            const Overlay = this.$createPopupBackgroundColorSettings(RightCol, area);
-                            OverlayOptions = Overlay.options;
-                            BackgroundColorEnabledField = Overlay.enabledField;
+                            const BgColor = this.$createPopupBackgroundColorSettings(RightCol, area);
+                            BackgroundColorOptions = BgColor.options;
+                            BackgroundColorEnabledField = BgColor.enabledField;
                         }
 
                         let TextColorOptions = null;
@@ -862,11 +871,22 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         };
 
                         const toggleOverlaySettings = function () {
-                            if (!OverlayOptions || !BackgroundColorEnabledField) {
+                            if (!OverlayOptions || !OverlayEnabledField) {
                                 return;
                             }
 
                             OverlayOptions.setStyle(
+                                'display',
+                                OverlayEnabledField.checked ? '' : 'none'
+                            );
+                        };
+
+                        const toggleBackgroundColorSettings = function () {
+                            if (!BackgroundColorOptions || !BackgroundColorEnabledField) {
+                                return;
+                            }
+
+                            BackgroundColorOptions.setStyle(
                                 'display',
                                 BackgroundColorEnabledField.checked ? '' : 'none'
                             );
@@ -917,8 +937,12 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             BackgroundEnabledField.addEvent('change', toggleBackgroundSettings);
                         }
 
+                        if (OverlayEnabledField) {
+                            OverlayEnabledField.addEvent('change', toggleOverlaySettings);
+                        }
+
                         if (BackgroundColorEnabledField) {
-                            BackgroundColorEnabledField.addEvent('change', toggleOverlaySettings);
+                            BackgroundColorEnabledField.addEvent('change', toggleBackgroundColorSettings);
                         }
 
                         if (TextColorEnabledField) {
@@ -934,6 +958,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         toggleCustomMinHeightSettings();
                         toggleBackgroundSettings();
                         toggleOverlaySettings();
+                        toggleBackgroundColorSettings();
                         toggleTextColorSettings();
                         toggleLinkSettings();
 
@@ -948,7 +973,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                     onSubmit: function (Win) {
                         const Content = Win.getContent();
                         const modeField = Content.getElement('select[data-name="mode"]');
-                        const contentPaddingField = Content.getElement('input[data-name="contentPadding"]');
+                        const contentPaddingPresetField = Content.getElement('select[data-name="contentPaddingPreset"]');
                         const verticalAlignField = Content.getElement('select[data-name="verticalAlign"]');
                         const customMinHeightEnabledField = Content.getElement(
                             'input[data-name="customMinHeightEnabled"]'
@@ -969,13 +994,19 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         const backgroundImagePositionField = Content.getElement(
                             'select[data-name="backgroundImagePosition"]'
                         );
+                        const backgroundOverlayEnabledField = Content.getElement(
+                            'input[data-name="backgroundOverlayEnabled"]'
+                        );
+                        const backgroundOverlayColorField = Content.getElement(
+                            'input[data-name="backgroundOverlayColor"]'
+                        );
+                        const backgroundOverlayOpacityField = Content.getElement(
+                            'input[data-name="backgroundOverlayOpacity"]'
+                        );
                         const backgroundColorEnabledField = Content.getElement(
                             'input[data-name="backgroundColorEnabled"]'
                         );
                         const backgroundColorField = Content.getElement('input[data-name="backgroundColor"]');
-                        const backgroundColorOpacityField = Content.getElement(
-                            'input[data-name="backgroundColorOpacity"]'
-                        );
                         const textColorEnabledField = Content.getElement('input[data-name="textColorEnabled"]');
                         const textColorField = Content.getElement('input[data-name="textColor"]');
                         const linkEnabledField = Content.getElement('input[data-name="linkEnabled"]');
@@ -983,14 +1014,16 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         const linkRelField = Content.getElement('select[data-name="linkRel"]');
                         const linkTargetField = Content.getElement('select[data-name="linkTarget"]');
                         const linkTitleField = Content.getElement('input[data-name="linkTitle"]');
-                        const backgroundColorOpacity = backgroundColorOpacityField
-                            ? parseInt(backgroundColorOpacityField.value, 10)
-                            : area.backgroundColorOpacity;
+                        const backgroundOverlayOpacity = backgroundOverlayOpacityField
+                            ? parseInt(backgroundOverlayOpacityField.value, 10)
+                            : area.backgroundOverlayOpacity;
 
                         area.mode = this.$normalizeMode(modeField ? modeField.value : area.mode);
 
-                        if (this.$isSettingVisible('contentPadding')) {
-                            area.contentPadding = !!(contentPaddingField && contentPaddingField.checked);
+                        if (this.$isSettingVisible('contentPaddingPreset')) {
+                            area.contentPaddingPreset = this.$normalizeContentPaddingPreset(
+                                contentPaddingPresetField ? contentPaddingPresetField.value : null
+                            );
                         }
 
                         if (this.$isSettingVisible('verticalAlign')) {
@@ -1031,6 +1064,15 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             area.backgroundImagePosition = backgroundImagePositionField
                                 ? backgroundImagePositionField.value
                                 : BACKGROUND_POSITION_CENTER;
+                            area.backgroundOverlayEnabled = !!(
+                                backgroundOverlayEnabledField && backgroundOverlayEnabledField.checked
+                            );
+                            area.backgroundOverlayColor = backgroundOverlayColorField
+                                ? backgroundOverlayColorField.value.trim()
+                                : '';
+                            area.backgroundOverlayOpacity = isNaN(backgroundOverlayOpacity)
+                                ? 100
+                                : Math.max(0, Math.min(100, backgroundOverlayOpacity));
                         }
 
                         if (this.$isSettingVisible('backgroundColor')) {
@@ -1040,9 +1082,6 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             area.backgroundColor = backgroundColorField
                                 ? backgroundColorField.value.trim()
                                 : '';
-                            area.backgroundColorOpacity = isNaN(backgroundColorOpacity)
-                                ? 100
-                                : Math.max(0, Math.min(100, backgroundColorOpacity));
                         }
 
                         if (this.$isSettingVisible('textColor')) {
@@ -1166,9 +1205,42 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 'backgroundImagePosition'
             );
 
+            const OverlayEnabledField = this.$createPopupCheckboxField(
+                Options,
+                this.$getLocale('backgroundOverlay.enabled'),
+                area.backgroundOverlayEnabled,
+                'backgroundOverlayEnabled'
+            );
+
+            const OverlayOptions = new Element('div', {
+                'class': 'quiqqer-bricks-blockSlot-popupSectionBody'
+            }).inject(Options);
+
+            new Element('div', {
+                'class': 'quiqqer-bricks-blockSlot-popupHint',
+                text: this.$getLocale('backgroundOverlay.description')
+            }).inject(OverlayOptions);
+
+            this.$createPopupColorField(OverlayOptions, {
+                label: this.$getLocale('backgroundOverlay.color'),
+                value: area.backgroundOverlayColor,
+                name: 'backgroundOverlayColor'
+            });
+
+            this.$createPopupRangeField(OverlayOptions, {
+                label: this.$getLocale('backgroundOverlay.opacity'),
+                value: area.backgroundOverlayOpacity,
+                name: 'backgroundOverlayOpacity',
+                min: 0,
+                max: 100,
+                step: 1
+            });
+
             return {
                 enabledField: EnabledField,
-                options: Options
+                options: Options,
+                overlayEnabledField: OverlayEnabledField,
+                overlayOptions: OverlayOptions
             };
         },
 
@@ -1185,11 +1257,6 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 'backgroundColorEnabled'
             );
 
-            new Element('div', {
-                'class': 'quiqqer-bricks-blockSlot-popupHint',
-                text: this.$getLocale('backgroundColor.description')
-            }).inject(Section);
-
             const Options = new Element('div', {
                 'class': 'quiqqer-bricks-blockSlot-popupSectionBody'
             }).inject(Section);
@@ -1198,15 +1265,6 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 label: this.$getLocale('backgroundColor.color'),
                 value: area.backgroundColor,
                 name: 'backgroundColor'
-            });
-
-            this.$createPopupRangeField(Options, {
-                label: this.$getLocale('backgroundColor.opacity'),
-                value: area.backgroundColorOpacity,
-                name: 'backgroundColorOpacity',
-                min: 0,
-                max: 100,
-                step: 1
             });
 
             return {
@@ -1712,6 +1770,23 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             ];
         },
 
+        $normalizeContentPaddingPreset: function (preset) {
+            return CONTENT_PADDING_PRESETS.indexOf(preset) !== -1
+                ? preset
+                : DEFAULT_CONTENT_PADDING_PRESET;
+        },
+
+        $getContentPaddingPresetOptions: function () {
+            const self = this;
+
+            return CONTENT_PADDING_PRESETS.map(function (preset) {
+                return {
+                    value: preset,
+                    text: self.$getLocale('contentPaddingPreset.option.' + preset)
+                };
+            });
+        },
+
         $canRemoveAreaContent: function (area) {
             switch (this.$getActiveMode(area)) {
                 case MODE_BRICK:
@@ -1786,6 +1861,19 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 case MODE_EDITOR:
                 default:
                     return this.$getLocale('mode.editor');
+            }
+        },
+
+        $getRemoveButtonLabel: function (mode) {
+            switch (mode) {
+                case MODE_BRICK:
+                    return this.$getLocale('remove.button.brick');
+
+                case MODE_IMAGE:
+                    return this.$getLocale('remove.button.image');
+
+                default:
+                    return this.$getLocale('remove.button');
             }
         },
 

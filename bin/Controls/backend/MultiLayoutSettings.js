@@ -70,6 +70,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
     const TILE_MIN_HEIGHT_EXTRA_LARGE = 'extraLarge';
     const TILE_MIN_HEIGHT_MANUAL = 'manual';
     const DEFAULT_TILE_MIN_HEIGHT_PRESET = TILE_MIN_HEIGHT_STANDARD;
+    const CONTENT_PADDING_PRESETS = ['none', 'small', 'normal', 'large', 'extraLarge'];
+    const DEFAULT_CONTENT_PADDING_PRESET = 'normal';
     const TILE_MIN_HEIGHT_PRESETS = {
         none: '0px',
         compact: '120px',
@@ -280,7 +282,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                     allowedModes: [MODE_EDITOR, MODE_BRICK, MODE_IMAGE],
                     allowModeSwitch: true,
                     settingsVisibility: {
-                        contentPadding: true,
+                        contentPaddingPreset: true,
                         verticalAlign: true,
                         customMinHeight: true,
                         background: true,
@@ -524,7 +526,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                     allowRemoveSlot: this.$getBreakpointSlots('desktop', this.$layoutDraft).length > 1,
                     allowModeSwitch: false,
                     settingsVisibility: {
-                        contentPadding: false,
+                        contentPaddingPreset: false,
                         verticalAlign: false,
                         customMinHeight: false,
                         background: false,
@@ -1143,13 +1145,13 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                 imagePosition = BACKGROUND_POSITION_CENTER;
             }
 
-            let backgroundColorOpacity = parseInt(area.backgroundColorOpacity, 10);
+            let backgroundOverlayOpacity = parseInt(area.backgroundOverlayOpacity, 10);
 
-            if (isNaN(backgroundColorOpacity)) {
-                backgroundColorOpacity = 100;
+            if (isNaN(backgroundOverlayOpacity)) {
+                backgroundOverlayOpacity = 100;
             }
 
-            backgroundColorOpacity = Math.max(0, Math.min(100, backgroundColorOpacity));
+            backgroundOverlayOpacity = Math.max(0, Math.min(100, backgroundOverlayOpacity));
 
             const link = this.$normalizeLink(area.link);
 
@@ -1158,7 +1160,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                     number: index + 1
                 }),
                 mode: mode,
-                contentPadding: area.contentPadding !== false,
+                contentPaddingPreset: this.$normalizeContentPaddingPreset(area.contentPaddingPreset),
                 content: area.content || '',
                 brickId: area.brickId ? parseInt(area.brickId, 10) || 0 : 0,
                 brickTitle: area.brickTitle || '',
@@ -1172,9 +1174,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                 backgroundImage: area.backgroundImage || '',
                 backgroundImageFit: backgroundImageFit,
                 backgroundImagePosition: backgroundImagePosition,
+                backgroundOverlayEnabled: !!area.backgroundOverlayEnabled,
+                backgroundOverlayColor: area.backgroundOverlayColor || '#000000',
+                backgroundOverlayOpacity: backgroundOverlayOpacity,
                 backgroundColorEnabled: !!area.backgroundColorEnabled,
                 backgroundColor: area.backgroundColor || '#000000',
-                backgroundColorOpacity: backgroundColorOpacity,
                 textColor: area.textColor ? area.textColor.toString().trim() : '',
                 customMinHeightEnabled: !!area.customMinHeightEnabled,
                 customMinHeightPreset: this.$normalizeTileMinHeightPreset(area.customMinHeightPreset),
@@ -1184,6 +1188,12 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                 link: link,
                 verticalAlign: verticalAlign
             };
+        },
+
+        $normalizeContentPaddingPreset: function (preset) {
+            return CONTENT_PADDING_PRESETS.indexOf(preset) !== -1
+                ? preset
+                : DEFAULT_CONTENT_PADDING_PRESET;
         },
 
         $normalizeTileMinHeightPreset: function (preset) {
