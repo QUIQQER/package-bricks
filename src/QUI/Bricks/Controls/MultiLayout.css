@@ -31,12 +31,8 @@
     display: flex;
     grid-column: var(--quiqqer-bricks-multiLayout-desktop-column);
     grid-row: var(--quiqqer-bricks-multiLayout-desktop-row);
-    min-height: var(
-        --quiqqer-bricks-multiLayout-slot-min-height,
-        var(--quiqqer-bricks-multiLayout-tile-min-height, 200px)
-    );
+    min-height: var(--quiqqer-bricks-multiLayout-slot-min-height, var(--quiqqer-bricks-multiLayout-tile-min-height, 200px));
     min-width: 0;
-    overflow: hidden;
     position: relative;
 }
 
@@ -133,6 +129,21 @@
     align-items: flex-end;
 }
 
+/**
+  * Test
+  *
+  * Do not set overflow on the quiqqer-bricks-controls-multiLayout-area element
+  * Work with border radius.
+  */
+.quiqqer-bricks-controls-multiLayout-area__background,
+.quiqqer-bricks-controls-multiLayout-area__overlay,
+.quiqqer-bricks-controls-multiLayout-area__background > picture,
+.quiqqer-bricks-controls-multiLayout-area__backgroundMedia,
+.quiqqer-bricks-controls-multiLayout-area--image .quiqqer-bricks-controls-multiLayout-area__content,
+.quiqqer-bricks-controls-multiLayout-area--image picture,
+.quiqqer-bricks-controls-multiLayout-area__image {
+    border-radius: inherit;
+}
 
 .quiqqer-bricks-controls-multiLayout-area__image:not(.quiqqer-bricks-controls-multiLayout-area__image--auto) {
     display: block;
