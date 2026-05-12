@@ -622,11 +622,11 @@ class MultiLayout extends QUI\Control
             'imageFit' => isset($area['imageFit']) && in_array($area['imageFit'], ['auto', 'cover', 'contain'], true)
                 ? $area['imageFit']
                 : 'auto',
-            'imageWidth' => isset($area['imageWidth']) && is_string($area['imageWidth'])
-                ? trim($area['imageWidth'])
+            'imageWidth' => isset($area['imageWidth']) && (is_string($area['imageWidth']) || is_numeric($area['imageWidth']))
+                ? trim((string)$area['imageWidth'])
                 : '',
-            'imageHeight' => isset($area['imageHeight']) && is_string($area['imageHeight'])
-                ? trim($area['imageHeight'])
+            'imageHeight' => isset($area['imageHeight']) && (is_string($area['imageHeight']) || is_numeric($area['imageHeight']))
+                ? trim((string)$area['imageHeight'])
                 : '',
             'imagePosition' => isset($area['imagePosition']) &&
                 in_array($area['imagePosition'], [
@@ -673,7 +673,7 @@ class MultiLayout extends QUI\Control
                 $area['customMinHeightValue'] ?? null
             ),
             'link' => $link,
-            'verticalAlign' => isset($area['verticalAlign']) && in_array($area['verticalAlign'], ['top', 'center', 'bottom'], true)
+            'verticalAlign' => isset($area['verticalAlign']) && in_array($area['verticalAlign'], ['top', 'center', 'bottom', 'stretch'], true)
                 ? $area['verticalAlign']
                 : 'center',
             'subLayoutAreaBackgroundEnabled' => array_key_exists('subLayoutAreaBackgroundEnabled', $area)
@@ -909,12 +909,16 @@ class MultiLayout extends QUI\Control
 
             if (!empty($area['imageWidth'])) {
                 $style[] = '--quiqqer-bricks-multiLayout-image-width: '
-                    . $this->escapeStyleValue((string)$area['imageWidth']);
+                    . $this->escapeStyleValue(
+                        $this->normalizeCssSizeValue((string)$area['imageWidth'])
+                    );
             }
 
             if (!empty($area['imageHeight'])) {
                 $style[] = '--quiqqer-bricks-multiLayout-image-height: '
-                    . $this->escapeStyleValue((string)$area['imageHeight']);
+                    . $this->escapeStyleValue(
+                        $this->normalizeCssSizeValue((string)$area['imageHeight'])
+                    );
             }
 
             if (!empty($area['imagePosition'])) {
@@ -999,7 +1003,26 @@ class MultiLayout extends QUI\Control
 
     protected function normalizeTileMinHeightValue(mixed $value): string
     {
-        return is_string($value) ? trim($value) : '';
+        return is_string($value) || is_numeric($value) ? trim((string)$value) : '';
+    }
+
+    protected function normalizeCssSizeValue(mixed $value): string
+    {
+        if (!is_string($value) && !is_numeric($value)) {
+            return '';
+        }
+
+        $value = trim((string)$value);
+
+        if ($value === '') {
+            return '';
+        }
+
+        if (preg_match('/^-?\d+(?:\.\d+)?$/', $value)) {
+            return $value . 'px';
+        }
+
+        return $value;
     }
 
     protected function resolveTileMinHeightValue(string $preset, string $manualValue): string
@@ -1007,7 +1030,7 @@ class MultiLayout extends QUI\Control
         $preset = $this->normalizeTileMinHeightPreset($preset);
 
         if ($preset === 'manual') {
-            $manualValue = $this->normalizeTileMinHeightValue($manualValue);
+            $manualValue = $this->normalizeCssSizeValue($manualValue);
 
             if ($manualValue !== '') {
                 return $manualValue;
@@ -1027,7 +1050,7 @@ class MultiLayout extends QUI\Control
         $preset = $this->normalizeTileMinHeightPreset($area['customMinHeightPreset'] ?? null);
 
         if ($preset === 'manual') {
-            return $this->normalizeTileMinHeightValue($area['customMinHeightValue'] ?? null);
+            return $this->normalizeCssSizeValue($area['customMinHeightValue'] ?? null);
         }
 
         return (string)self::TILE_MIN_HEIGHT_PRESETS[$preset];

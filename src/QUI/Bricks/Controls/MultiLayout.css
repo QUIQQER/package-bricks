@@ -66,11 +66,13 @@
 }
 
 .quiqqer-bricks-controls-multiLayout-area__content {
+    align-items: center;
     color: var(--quiqqer-bricks-multiLayout-text-color);
-    display: flex;
+    /*display: flex;*/
+    display: grid;
     flex: 1;
-    flex-direction: column;
-    justify-content: center;
+    /*flex-direction: column;*/
+    /*justify-content: center;*/
     padding: var(--quiqqer-bricks-multiLayout-content-padding, clamp(1rem, 2cqi, 2rem));
     position: relative;
     width: 100%;
@@ -141,15 +143,22 @@
 
 
 .quiqqer-bricks-controls-multiLayout-area--align-top .quiqqer-bricks-controls-multiLayout-area__content {
-    justify-content: flex-start;
+    /*justify-content: flex-start;*/
+    align-items: start;
 }
 
 .quiqqer-bricks-controls-multiLayout-area--align-center .quiqqer-bricks-controls-multiLayout-area__content {
-    justify-content: center;
+    /*justify-content: center;*/
+    align-items: center;
 }
 
 .quiqqer-bricks-controls-multiLayout-area--align-bottom .quiqqer-bricks-controls-multiLayout-area__content {
-    justify-content: flex-end;
+    /*justify-content: flex-end;*/
+    align-items: end;
+}
+
+.quiqqer-bricks-controls-multiLayout-area--align-stretch .quiqqer-bricks-controls-multiLayout-area__content {
+    align-items: stretch;
 }
 
 .quiqqer-bricks-controls-multiLayout-area--image.quiqqer-bricks-controls-multiLayout-area--align-top .quiqqer-bricks-controls-multiLayout-area__content > picture {
@@ -190,16 +199,16 @@
     width: var(--quiqqer-bricks-multiLayout-image-width, auto);
 }
 
-/* Tablet: main layout container narrower than 60rem (~960px) */
-@container multi-layout (max-width: 60rem) and (min-width: 40rem) {
+/* Tablet: main layout container narrower than 64rem (~1024px) */
+@container multi-layout (max-width: 64rem) and (min-width: 48rem) {
     .quiqqer-bricks-controls-multiLayout-area {
         grid-column: var(--quiqqer-bricks-multiLayout-tablet-column);
         grid-row: var(--quiqqer-bricks-multiLayout-tablet-row);
     }
 }
 
-/* Mobile: main layout container narrower than 40rem (~640px) */
-@container multi-layout (max-width: 40rem) {
+/* Mobile: main layout container narrower than 40rem (~768px) */
+@container multi-layout (max-width: 48rem) {
     .quiqqer-bricks-controls-multiLayout-grid {
         grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
     }

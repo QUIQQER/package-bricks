@@ -54,7 +54,7 @@ class MultiLayoutTest extends TestCase
                             'backgroundColor' => '#445566',
                             'customMinHeightEnabled' => true,
                             'customMinHeightPreset' => 'manual',
-                            'customMinHeightValue' => '420px',
+                            'customMinHeightValue' => '420',
                             'subLayoutAreaBackgroundEnabled' => false,
                             'subLayoutGridGapPreset' => 'large',
                             'subLayoutDocument' => [
@@ -102,7 +102,8 @@ class MultiLayoutTest extends TestCase
                             'mode' => 'image',
                             'image' => '/assets/foreground.png',
                             'imageFit' => 'contain',
-                            'imageWidth' => '480px'
+                            'imageWidth' => '480',
+                            'imageHeight' => '320'
                         ]
                     ]
                 ], JSON_THROW_ON_ERROR)
@@ -137,6 +138,7 @@ class MultiLayoutTest extends TestCase
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-area-background: #445566', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-fit: contain', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-width: 480px', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-height: 320px', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-tile-min-height: 280px', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-slot-min-height: 420px', $html);
         } catch (\Throwable) {

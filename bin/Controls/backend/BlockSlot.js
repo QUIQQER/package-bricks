@@ -48,6 +48,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
     const VERTICAL_ALIGN_TOP = 'top';
     const VERTICAL_ALIGN_CENTER = 'center';
     const VERTICAL_ALIGN_BOTTOM = 'bottom';
+    const VERTICAL_ALIGN_STRETCH = 'stretch';
     const LINK_TARGET_SELF = '_self';
     const LINK_TARGET_BLANK = '_blank';
     const LINK_REL_OPTIONS = [
@@ -486,6 +487,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 case VERTICAL_ALIGN_BOTTOM:
                     return 'quiqqer-bricks-blockSlot-previewContent--alignBottom';
 
+                case VERTICAL_ALIGN_STRETCH:
+                    return 'quiqqer-bricks-blockSlot-previewContent--alignStretch';
+
                 case VERTICAL_ALIGN_CENTER:
                 default:
                     return 'quiqqer-bricks-blockSlot-previewContent--alignCenter';
@@ -540,11 +544,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             const wrapStyles = {};
 
             if (area.imageWidth) {
-                wrapStyles.maxWidth = area.imageWidth;
+                wrapStyles.maxWidth = this.$normalizeCssSizeValue(area.imageWidth);
             }
 
             if (area.imageHeight) {
-                wrapStyles.maxHeight = area.imageHeight;
+                wrapStyles.maxHeight = this.$normalizeCssSizeValue(area.imageHeight);
             }
 
             const Wrap = new Element('div', {
@@ -779,6 +783,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                                     {
                                         value: VERTICAL_ALIGN_BOTTOM,
                                         text: this.$getLocale('verticalAlign.bottom')
+                                    },
+                                    {
+                                        value: VERTICAL_ALIGN_STRETCH,
+                                        text: this.$getLocale('verticalAlign.stretch')
                                     }
                                 ],
                                 area.verticalAlign,
@@ -1806,6 +1814,24 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 target: target,
                 title: link.title ? link.title.toString().trim() : ''
             };
+        },
+
+        $normalizeCssSizeValue: function (value) {
+            if (value === null || value === undefined) {
+                return '';
+            }
+
+            value = value.toString().trim();
+
+            if (value === '') {
+                return '';
+            }
+
+            if (/^-?\d+(?:\.\d+)?$/.test(value)) {
+                return value + 'px';
+            }
+
+            return value;
         },
 
         $normalizeTileMinHeightPreset: function (preset) {

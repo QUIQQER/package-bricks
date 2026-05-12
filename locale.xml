@@ -2885,8 +2885,8 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Custom minimum height value]]></en>
         </locale>
         <locale name="brick.multiLayout.tileMinHeight.value.help">
-            <de><![CDATA[Wird nur bei „Manuell“ verwendet, z. B. 240px, 18rem, 30vh]]></de>
-            <en><![CDATA[Used only for “Manual”, e.g. 240px, 18rem, 30vh]]></en>
+            <de><![CDATA[Wird nur bei „Manuell“ verwendet, z. B. 240px, 18rem, 30vh; Zahlen ohne Einheit werden als px interpretiert]]></de>
+            <en><![CDATA[Used only for “Manual”, e.g. 240px, 18rem, 30vh; numbers without a unit are interpreted as px]]></en>
         </locale>
         <locale name="blockSlot.mode">
             <de><![CDATA[Modus]]></de>
@@ -2932,6 +2932,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Unten]]></de>
             <en><![CDATA[Bottom]]></en>
         </locale>
+        <locale name="blockSlot.verticalAlign.stretch">
+            <de><![CDATA[Volle Höhe]]></de>
+            <en><![CDATA[Full height]]></en>
+        </locale>
         <locale name="blockSlot.customMinHeight.section">
             <de><![CDATA[Mindesthöhe]]></de>
             <en><![CDATA[Minimum height]]></en>
@@ -2949,8 +2953,8 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Custom value]]></en>
         </locale>
         <locale name="blockSlot.customMinHeight.value.help">
-            <de><![CDATA[z. B. 240px, 18rem, 30vh]]></de>
-            <en><![CDATA[e.g. 240px, 18rem, 30vh]]></en>
+            <de><![CDATA[z. B. 240px, 18rem, 30vh; Zahlen ohne Einheit werden als px interpretiert]]></de>
+            <en><![CDATA[e.g. 240px, 18rem, 30vh; numbers without a unit are interpreted as px]]></en>
         </locale>
         <locale name="blockSlot.customMinHeight.option.none">
             <de><![CDATA[Keine Mindesthöhe]]></de>
@@ -3025,16 +3029,16 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Width]]></en>
         </locale>
         <locale name="blockSlot.image.width.help">
-            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = automatisch]]></de>
-            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = automatic]]></en>
+            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = automatisch; Zahlen ohne Einheit werden als px interpretiert]]></de>
+            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = automatic; numbers without a unit are interpreted as px]]></en>
         </locale>
         <locale name="blockSlot.image.height">
             <de><![CDATA[Höhe]]></de>
             <en><![CDATA[Height]]></en>
         </locale>
         <locale name="blockSlot.image.height.help">
-            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = automatisch]]></de>
-            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = automatic]]></en>
+            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = automatisch; Zahlen ohne Einheit werden als px interpretiert]]></de>
+            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = automatic; numbers without a unit are interpreted as px]]></en>
         </locale>
         <locale name="blockSlot.image.position">
             <de><![CDATA[Bildposition]]></de>
@@ -3360,6 +3364,10 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Unten]]></de>
             <en><![CDATA[Bottom]]></en>
         </locale>
+        <locale name="brick.multiLayout.verticalAlign.stretch">
+            <de><![CDATA[Volle Höhe]]></de>
+            <en><![CDATA[Full height]]></en>
+        </locale>
         <locale name="brick.multiLayout.editorContent">
             <de><![CDATA[Inhalt]]></de>
             <en><![CDATA[Content]]></en>
@@ -3409,8 +3417,8 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Width]]></en>
         </locale>
         <locale name="brick.multiLayout.image.width.help">
-            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = automatisch]]></de>
-            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = automatic]]></en>
+            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = automatisch; Zahlen ohne Einheit werden als px interpretiert]]></de>
+            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = automatic; numbers without a unit are interpreted as px]]></en>
         </locale>
         <locale name="brick.multiLayout.background.section">
             <de><![CDATA[Hintergrundbild]]></de>

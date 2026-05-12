@@ -49,6 +49,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
     const VERTICAL_ALIGN_TOP = 'top';
     const VERTICAL_ALIGN_CENTER = 'center';
     const VERTICAL_ALIGN_BOTTOM = 'bottom';
+    const VERTICAL_ALIGN_STRETCH = 'stretch';
     const LINK_TARGET_SELF = '_self';
     const LINK_TARGET_BLANK = '_blank';
     const LINK_REL_OPTIONS = [
@@ -1466,7 +1467,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
 
             let verticalAlign = area.verticalAlign;
 
-            if ([VERTICAL_ALIGN_TOP, VERTICAL_ALIGN_CENTER, VERTICAL_ALIGN_BOTTOM].indexOf(verticalAlign) === -1) {
+            if ([VERTICAL_ALIGN_TOP, VERTICAL_ALIGN_CENTER, VERTICAL_ALIGN_BOTTOM, VERTICAL_ALIGN_STRETCH].indexOf(verticalAlign) === -1) {
                 verticalAlign = VERTICAL_ALIGN_CENTER;
             }
 
@@ -1550,6 +1551,24 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
                 : 'normal';
         },
 
+        $normalizeCssSizeValue: function (value) {
+            if (value === null || value === undefined) {
+                return '';
+            }
+
+            value = value.toString().trim();
+
+            if (value === '') {
+                return '';
+            }
+
+            if (/^-?\d+(?:\.\d+)?$/.test(value)) {
+                return value + 'px';
+            }
+
+            return value;
+        },
+
         $getGridGapPreviewValue: function (preset) {
             return GRID_GAP_PRESET_VALUES[this.$normalizeGridGapPreset(preset)];
         },
@@ -1570,7 +1589,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             preset = this.$normalizeTileMinHeightPreset(preset);
 
             if (preset === TILE_MIN_HEIGHT_MANUAL) {
-                value = value ? value.toString().trim() : '';
+                value = this.$normalizeCssSizeValue(value);
 
                 if (value) {
                     return value;
@@ -1619,9 +1638,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings', [
             const preset = this.$normalizeTileMinHeightPreset(area.customMinHeightPreset);
 
             if (preset === TILE_MIN_HEIGHT_MANUAL) {
-                return area.customMinHeightValue
-                    ? area.customMinHeightValue.toString().trim()
-                    : '';
+                return this.$normalizeCssSizeValue(
+                    area.customMinHeightValue
+                        ? area.customMinHeightValue.toString().trim()
+                        : ''
+                );
             }
 
             return TILE_MIN_HEIGHT_PRESETS[preset];
