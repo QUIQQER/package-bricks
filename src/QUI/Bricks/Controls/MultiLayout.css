@@ -74,7 +74,6 @@
     padding: var(--quiqqer-bricks-multiLayout-content-padding, clamp(1rem, 2cqi, 2rem));
     position: relative;
     width: 100%;
-    z-index: 2;
 }
 
 .quiqqer-bricks-controls-multiLayout-area--image .quiqqer-bricks-controls-multiLayout-area__content {
@@ -105,17 +104,32 @@
 .quiqqer-bricks-controls-multiLayout-area__link {
     inset: 0;
     position: absolute;
-    z-index: 1;
+    z-index: 5;
 }
+
+/* hover effect for images, when url is set */
+.quiqqer-bricks-controls-multiLayout-area--image .quiqqer-bricks-controls-multiLayout-area__link + .quiqqer-bricks-controls-multiLayout-area__content > picture {
+    overflow: hidden;
+}
+
+.quiqqer-bricks-controls-multiLayout-area--image .quiqqer-bricks-controls-multiLayout-area__link + .quiqqer-bricks-controls-multiLayout-area__content .quiqqer-bricks-controls-multiLayout-area__image {
+    transition: var(--qui-transition-duration, 0.3s) scale var(--qui-transition-timing-function, ease);
+}
+
+.quiqqer-bricks-controls-multiLayout-area--image .quiqqer-bricks-controls-multiLayout-area__link:hover + .quiqqer-bricks-controls-multiLayout-area__content .quiqqer-bricks-controls-multiLayout-area__image {
+    scale: 1.05;
+}
+/* END hover effect for images, when url is set */
 
 .quiqqer-bricks-controls-multiLayout-area__content a,
 .quiqqer-bricks-controls-multiLayout-area__content button,
+.quiqqer-bricks-controls-multiLayout-area__content .btn,
 .quiqqer-bricks-controls-multiLayout-area__content input,
 .quiqqer-bricks-controls-multiLayout-area__content select,
 .quiqqer-bricks-controls-multiLayout-area__content textarea,
 .quiqqer-bricks-controls-multiLayout-area__content [role="button"] {
     position: relative;
-    z-index: 3;
+    z-index: 10;
 }
 
 .quiqqer-bricks-controls-multiLayout-area--image .quiqqer-bricks-controls-multiLayout-area__content > picture {
