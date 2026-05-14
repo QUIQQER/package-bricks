@@ -31,6 +31,10 @@
             <de><![CDATA[Bausteine]]></de>
             <en><![CDATA[Bricks]]></en>
         </locale>
+        <locale name="permission.quiqqer.bricks.mcp">
+            <de><![CDATA[Darf Bausteine per MCP verwenden.]]></de>
+            <en><![CDATA[Can edit bricks via MCP.]]></en>
+        </locale>
         <locale name="permission.quiqqer.bricks.assign">
             <de><![CDATA[Darf Bausteine Seiten zuweisen.]]></de>
             <en><![CDATA[Can assign blocks to pages.]]></en>
