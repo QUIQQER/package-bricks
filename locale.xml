@@ -15,6 +15,11 @@
             ]]></en>
         </locale>
 
+        <locale name="brick.deprecated">
+            <de><![CDATA[Dieser Brick ist deprecated und sollte nicht mehr genutzt werden. Beachte das in neueren Version dieser Brick nicht mehr einwandfrei funktionieren kann.]]></de>
+            <en><![CDATA[This brick is deprecated and should not be used anymore. Note that in newer versions this brick may not work properly.]]></en>
+        </locale>
+
         <locale name="brickFullWidth">
             <de><![CDATA[Volle Breite erlauben]]></de>
             <en><![CDATA[Allow full size]]></en>
@@ -30,6 +35,10 @@
         <locale name="permission.quiqqer.bricks._header">
             <de><![CDATA[Bausteine]]></de>
             <en><![CDATA[Bricks]]></en>
+        </locale>
+        <locale name="permission.quiqqer.bricks.mcp">
+            <de><![CDATA[Darf Bausteine per MCP verwenden.]]></de>
+            <en><![CDATA[Can edit bricks via MCP.]]></en>
         </locale>
         <locale name="permission.quiqqer.bricks.assign">
             <de><![CDATA[Darf Bausteine Seiten zuweisen.]]></de>
@@ -964,16 +973,6 @@ This content does not replace the block content. You can still place the brick t
             Error in brick type. The block type is not permitted and is therefore not saved.
             ]]></en>
         </locale>
-        <locale name="brick.deprecated">
-            <de><![CDATA[
-            Dieser Brick ist deprecated und sollte nicht mehr genutzt werden.
-            Beachte das in neueren Version dieser Brick nicht mehr einwandfrei funktionieren kann.
-            ]]></de>
-            <en><![CDATA[
-            This brick is deprecated and should not be used anymore.
-            Note that in newer versions this brick may not work properly.
-            ]]></en>
-        </locale>
     </groups>
     <groups name="quiqqer/bricks" datatype="js">
         <locale name="brick.type">
@@ -1186,6 +1185,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="manager.grid.status.inactive">
             <de><![CDATA[Baustein ist deaktiviert]]></de>
             <en><![CDATA[Brick is disabled]]></en>
+        </locale>
+        <locale name="manager.grid.missingControl.badge">
+            <de><![CDATA[Nicht verfügbar]]></de>
+            <en><![CDATA[Unavailable]]></en>
+        </locale>
+        <locale name="manager.grid.missingControl.info">
+            <de><![CDATA[Dieser Baustein ist im System nicht verfügbar. Möglicherweise fehlt das zugehörige Paket.]]></de>
+            <en><![CDATA[This brick is not available in the system. The corresponding package may be missing.]]></en>
         </locale>
 
         <locale name="manager.window.delete.title">
