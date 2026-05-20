@@ -1,0 +1,97 @@
+<div class="quiqqer-bricks-layout{if $layoutClass} {$layoutClass}{/if}"
+     {if $documentStyle}style="{$documentStyle}"{/if}
+>
+    <div class="quiqqer-bricks-layout__grid"
+         style="grid-template-columns: repeat({$desktopColumns}, minmax(0, 1fr));"
+    >
+        {foreach from=$areas item=area}
+            <section class="quiqqer-bricks-layout__area quiqqer-bricks-layout__area--{$area.mode} quiqqer-bricks-layout__area--align-{$area.verticalAlign}{if $areaBackgroundEnabled} is-surface-subtle-enabled{/if}"
+                    data-slot-id="{$area.slotId}"
+                    {if $area.slotStyle}style="{$area.slotStyle}"{/if}>
+                {if $area.backgroundEnabled && $area.backgroundImage}
+                    <div class="quiqqer-bricks-layout__background" aria-hidden="true">
+                        {image
+                            src=$area.backgroundImage
+                            class="quiqqer-bricks-layout__backgroundMedia"
+                            width=4000
+                        }
+                    </div>
+                {/if}
+                {if $area.backgroundColorEnabled}
+                    <div class="quiqqer-bricks-layout__overlay" aria-hidden="true"></div>
+                {/if}
+                {if $area.link && $area.mode != 'subLayout'}
+                    <a class="quiqqer-bricks-layout__link"
+                       href="{$area.link.href}"
+                       {if $area.link.rel}rel="{$area.link.rel}"{/if}
+                       {if $area.link.target}target="{$area.link.target}"{/if}
+                       {if $area.link.title}title="{$area.link.title}"{/if}
+                       aria-label="{if $area.link.title}{$area.link.title}{else}{$area.title}{/if}"
+                    ></a>
+                {/if}
+                <div class="quiqqer-bricks-layout__content">
+                    {if $area.mode == 'image' && $area.image}
+                        {image
+                            src=$area.image
+                            class="quiqqer-bricks-layout__image{if $area.imageFit === 'auto'} quiqqer-bricks-layout__image--auto{/if}"
+                            width=2000
+                        }
+                    {elseif $area.mode == 'editor'}
+                        <div class="quiqqer-bricks-layout__contentInner">
+                            {$area.contentHtml}
+                        </div>
+                    {elseif $area.mode == 'subLayout'}
+                        <div class="quiqqer-bricks-layout__subGrid"
+                             style="grid-template-columns: repeat({$area.subLayoutDesktopColumns}, minmax(0, 1fr)); --quiqqer-bricks-multiLayout-sub-gap: {$area.subLayoutGridGap};"
+                        >
+                            {foreach from=$area.subLayoutAreas item=subArea}
+                                <section class="quiqqer-bricks-layout__area quiqqer-bricks-layout__subArea quiqqer-bricks-layout__area--{$subArea.mode} quiqqer-bricks-layout__area--align-{$subArea.verticalAlign}{if $area.subLayoutAreaBackgroundEnabled} is-surface-subtle-enabled{/if}"
+                                         data-slot-id="{$subArea.slotId}"
+                                         {if $subArea.slotStyle}style="{$subArea.slotStyle}"{/if}>
+                                    {if $subArea.backgroundEnabled && $subArea.backgroundImage}
+                                        <div class="quiqqer-bricks-layout__background" aria-hidden="true">
+                                            {image
+                                                src=$subArea.backgroundImage
+                                                class="quiqqer-bricks-layout__backgroundMedia"
+                                                width=4000
+                                            }
+                                        </div>
+                                    {/if}
+                                    {if $subArea.backgroundColorEnabled}
+                                        <div class="quiqqer-bricks-layout__overlay" aria-hidden="true"></div>
+                                    {/if}
+                                    {if $subArea.link}
+                                        <a class="quiqqer-bricks-layout__link"
+                                           href="{$subArea.link.href}"
+                                           {if $subArea.link.rel}rel="{$subArea.link.rel}"{/if}
+                                           {if $subArea.link.target}target="{$subArea.link.target}"{/if}
+                                           {if $subArea.link.title}title="{$subArea.link.title}"{/if}
+                                           aria-label="{if $subArea.link.title}{$subArea.link.title}{else}{$subArea.title}{/if}"
+                                        ></a>
+                                    {/if}
+                                    <div class="quiqqer-bricks-layout__content">
+                                        {if $subArea.mode == 'image' && $subArea.image}
+                                            {image
+                                                src=$subArea.image
+                                                class="quiqqer-bricks-layout__image{if $subArea.imageFit === 'auto'} quiqqer-bricks-layout__image--auto{/if}"
+                                                width=2000
+                                            }
+                                        {elseif $subArea.mode == 'editor'}
+                                            <div class="quiqqer-bricks-layout__contentInner">
+                                                {$subArea.contentHtml}
+                                            </div>
+                                        {else}
+                                            {$subArea.contentHtml}
+                                        {/if}
+                                    </div>
+                                </section>
+                            {/foreach}
+                        </div>
+                    {else}
+                        {$area.contentHtml}
+                    {/if}
+                </div>
+            </section>
+        {/foreach}
+    </div>
+</div>

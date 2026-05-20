@@ -9,6 +9,9 @@ namespace QUI\Bricks\Controls;
 use Exception;
 use QUI;
 use QUI\Bricks\Manager;
+use QUI\Bricks\Layout\Document;
+use QUI\Bricks\Layout\Presets;
+use QUI\Bricks\Layout\Renderer;
 use QUI\Projects\Site\Utils as SiteUtils;
 
 use function array_key_exists;
@@ -73,190 +76,6 @@ class MultiLayout extends QUI\Control
         '_self',
         '_blank'
     ];
-    protected const PRESETS = [
-        'preset-2-equal' => [
-            'id' => 'preset-2-equal',
-            'sort' => 10,
-            'labelKey' => 'brick.multiLayout.layout.1',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 6,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 6, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 6, 'y' => 0, 'w' => 6, 'h' => 1]
-            ]
-        ],
-        'preset-2-left-narrow' => [
-            'id' => 'preset-2-left-narrow',
-            'sort' => 20,
-            'labelKey' => 'brick.multiLayout.layout.2',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 6,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 4, 'y' => 0, 'w' => 8, 'h' => 1]
-            ]
-        ],
-        'preset-2-right-narrow' => [
-            'id' => 'preset-2-right-narrow',
-            'sort' => 30,
-            'labelKey' => 'brick.multiLayout.layout.3',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 6,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 8, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 8, 'y' => 0, 'w' => 4, 'h' => 1]
-            ]
-        ],
-        'preset-4-equal' => [
-            'id' => 'preset-4-equal',
-            'sort' => 40,
-            'labelKey' => 'brick.multiLayout.layout.4',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 6,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 6, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 6, 'y' => 0, 'w' => 6, 'h' => 1],
-                ['id' => 'slot-3', 'x' => 0, 'y' => 1, 'w' => 6, 'h' => 1],
-                ['id' => 'slot-4', 'x' => 6, 'y' => 1, 'w' => 6, 'h' => 1]
-            ]
-        ],
-        'preset-4-offset-a' => [
-            'id' => 'preset-4-offset-a',
-            'sort' => 50,
-            'labelKey' => 'brick.multiLayout.layout.5',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 6,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 4, 'y' => 0, 'w' => 8, 'h' => 1],
-                ['id' => 'slot-3', 'x' => 0, 'y' => 1, 'w' => 8, 'h' => 1],
-                ['id' => 'slot-4', 'x' => 8, 'y' => 1, 'w' => 4, 'h' => 1]
-            ]
-        ],
-        'preset-4-offset-b' => [
-            'id' => 'preset-4-offset-b',
-            'sort' => 60,
-            'labelKey' => 'brick.multiLayout.layout.6',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 6,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 8, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 8, 'y' => 0, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-3', 'x' => 0, 'y' => 1, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-4', 'x' => 4, 'y' => 1, 'w' => 8, 'h' => 1]
-            ]
-        ],
-        'preset-3x2-equal' => [
-            'id' => 'preset-3x2-equal',
-            'sort' => 70,
-            'labelKey' => 'brick.multiLayout.layout.7',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 4,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 4, 'y' => 0, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-3', 'x' => 8, 'y' => 0, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-4', 'x' => 0, 'y' => 1, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-5', 'x' => 4, 'y' => 1, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-6', 'x' => 8, 'y' => 1, 'w' => 4, 'h' => 1]
-            ]
-        ],
-        'preset-3x2-alternating' => [
-            'id' => 'preset-3x2-alternating',
-            'sort' => 80,
-            'labelKey' => 'brick.multiLayout.layout.8',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 4,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 3, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 3, 'y' => 0, 'w' => 6, 'h' => 1],
-                ['id' => 'slot-3', 'x' => 9, 'y' => 0, 'w' => 3, 'h' => 1],
-                ['id' => 'slot-4', 'x' => 0, 'y' => 1, 'w' => 6, 'h' => 1],
-                ['id' => 'slot-5', 'x' => 6, 'y' => 1, 'w' => 3, 'h' => 1],
-                ['id' => 'slot-6', 'x' => 9, 'y' => 1, 'w' => 3, 'h' => 1]
-            ]
-        ],
-        'preset-3rows-middle-full' => [
-            'id' => 'preset-3rows-middle-full',
-            'sort' => 90,
-            'labelKey' => 'brick.multiLayout.layout.9',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 4,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 4, 'y' => 0, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-3', 'x' => 8, 'y' => 0, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-4', 'x' => 0, 'y' => 1, 'w' => 12, 'h' => 1],
-                ['id' => 'slot-5', 'x' => 0, 'y' => 2, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-6', 'x' => 4, 'y' => 2, 'w' => 4, 'h' => 1],
-                ['id' => 'slot-7', 'x' => 8, 'y' => 2, 'w' => 4, 'h' => 1]
-            ]
-        ],
-        'preset-top-full-bottom-2' => [
-            'id' => 'preset-top-full-bottom-2',
-            'sort' => 100,
-            'labelKey' => 'brick.multiLayout.layout.10',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 6,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 12, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 0, 'y' => 1, 'w' => 6, 'h' => 1],
-                ['id' => 'slot-3', 'x' => 6, 'y' => 1, 'w' => 6, 'h' => 1]
-            ]
-        ],
-        'preset-top-2-bottom-full' => [
-            'id' => 'preset-top-2-bottom-full',
-            'sort' => 110,
-            'labelKey' => 'brick.multiLayout.layout.11',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 6,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 6, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 6, 'y' => 0, 'w' => 6, 'h' => 1],
-                ['id' => 'slot-3', 'x' => 0, 'y' => 1, 'w' => 12, 'h' => 1]
-            ]
-        ],
-        'preset-left-tall-right-stack' => [
-            'id' => 'preset-left-tall-right-stack',
-            'sort' => 120,
-            'labelKey' => 'brick.multiLayout.layout.12',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 6,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 6, 'h' => 2],
-                ['id' => 'slot-2', 'x' => 6, 'y' => 0, 'w' => 6, 'h' => 1],
-                ['id' => 'slot-3', 'x' => 6, 'y' => 1, 'w' => 6, 'h' => 1]
-            ]
-        ],
-        'preset-right-tall-left-stack' => [
-            'id' => 'preset-right-tall-left-stack',
-            'sort' => 130,
-            'labelKey' => 'brick.multiLayout.layout.13',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 6,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 6, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 0, 'y' => 1, 'w' => 6, 'h' => 1],
-                ['id' => 'slot-3', 'x' => 6, 'y' => 0, 'w' => 6, 'h' => 2]
-            ]
-        ],
-        'preset-center-tall-side-stacks' => [
-            'id' => 'preset-center-tall-side-stacks',
-            'sort' => 140,
-            'labelKey' => 'brick.multiLayout.layout.14',
-            'columns' => self::DEFAULT_COLUMNS,
-            'defaultSlotWidth' => 3,
-            'slots' => [
-                ['id' => 'slot-1', 'x' => 0, 'y' => 0, 'w' => 3, 'h' => 1],
-                ['id' => 'slot-2', 'x' => 0, 'y' => 1, 'w' => 3, 'h' => 1],
-                ['id' => 'slot-3', 'x' => 0, 'y' => 2, 'w' => 3, 'h' => 1],
-                ['id' => 'slot-4', 'x' => 3, 'y' => 0, 'w' => 6, 'h' => 3],
-                ['id' => 'slot-5', 'x' => 9, 'y' => 0, 'w' => 3, 'h' => 1],
-                ['id' => 'slot-6', 'x' => 9, 'y' => 1, 'w' => 3, 'h' => 1],
-                ['id' => 'slot-7', 'x' => 9, 'y' => 2, 'w' => 3, 'h' => 1]
-            ]
-        ]
-    ];
 
     /**
      * @param array<string, mixed> $attributes
@@ -265,7 +84,7 @@ class MultiLayout extends QUI\Control
     {
         $this->setAttributes([
             'class' => 'quiqqer-bricks-controls-multiLayout',
-            'layout' => self::getDefaultPresetId(),
+            'layout' => Presets::getDefaultPresetId(),
             'areaBackgroundEnabled' => true,
             'gridGapPreset' => self::DEFAULT_GRID_GAP_PRESET,
             'tileMinHeightPreset' => self::DEFAULT_TILE_MIN_HEIGHT_PRESET,
@@ -285,7 +104,7 @@ class MultiLayout extends QUI\Control
 
         $areas = $this->prepareAreas($document);
 
-        $this->addCSSFile(dirname(__FILE__) . '/MultiLayout.css');
+        $this->addCSSFile(dirname(__FILE__, 2) . '/Layout/Layout.css');
 
         $gapPreset = $this->getAttribute('gridGapPreset');
         if (!is_string($gapPreset) || !array_key_exists($gapPreset, self::GRID_GAP_PRESETS)) {
@@ -293,15 +112,19 @@ class MultiLayout extends QUI\Control
         }
         $this->setCustomVariable('gridGap', self::GRID_GAP_PRESETS[$gapPreset]);
 
+        $layoutHtml = (new Renderer())->render(
+            $this,
+            $document,
+            $areas,
+            $this->buildDocumentStyle($document),
+            'quiqqer-bricks-controls-multiLayout',
+            !empty($this->getAttribute('areaBackgroundEnabled'))
+        );
+
         $Engine = QUI::getTemplateManager()->getEngine();
         $Engine->assign([
             'this' => $this,
-            'layoutDocument' => $document,
-            'areas' => $areas,
-            'areaCount' => count($areas),
-            'desktopColumns' => $document['breakpoints']['desktop']['columns'],
-            'documentStyle' => $this->buildDocumentStyle($document),
-            'areaBackgroundEnabled' => !empty($this->getAttribute('areaBackgroundEnabled')),
+            'layoutHtml' => $layoutHtml
         ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/MultiLayout.html');
@@ -309,11 +132,7 @@ class MultiLayout extends QUI\Control
 
     protected function normalizeLayout(mixed $layout): string
     {
-        if (is_string($layout) && array_key_exists($layout, self::PRESETS)) {
-            return $layout;
-        }
-
-        return self::getDefaultPresetId();
+        return Document::normalizePresetId($layout);
     }
 
     /**
@@ -406,12 +225,12 @@ class MultiLayout extends QUI\Control
      */
     protected function getPresetDefinition(string $preset): array
     {
-        return self::PRESETS[$preset] ?? self::PRESETS[self::getDefaultPresetId()];
+        return Document::getPresetDefinition($preset);
     }
 
     protected static function getDefaultPresetId(): string
     {
-        return 'preset-2-equal';
+        return Presets::getDefaultPresetId();
     }
 
     /**
@@ -419,7 +238,7 @@ class MultiLayout extends QUI\Control
      */
     public static function getPresets(): array
     {
-        return self::PRESETS;
+        return Presets::getPresets();
     }
 
     /**

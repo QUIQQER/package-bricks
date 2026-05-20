@@ -100,6 +100,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             index: 0,
             interactionMode: INTERACTION_CONTENT,
             allowedModes: DEFAULT_ALLOWED_MODES,
+            fixedMode: '',
             allowModeSwitch: true,
             settingsVisibility: null,
             selected: false,
@@ -115,6 +116,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             this.$index = this.getAttribute('index') || 0;
             this.$Project = null;
             this.$allowedModes = this.$normalizeAllowedModes(this.getAttribute('allowedModes'));
+            this.$fixedMode = this.$normalizeFixedMode(this.getAttribute('fixedMode'));
             this.$allowModeSwitch = this.getAttribute('allowModeSwitch') !== false;
             this.$settingsVisibility = this.$normalizeSettingsVisibility(
                 this.getAttribute('settingsVisibility')
@@ -2092,9 +2094,17 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
         },
 
         $normalizeMode: function (mode) {
+            if (this.$fixedMode) {
+                return this.$fixedMode;
+            }
+
             return this.$allowedModes.indexOf(mode) !== -1
                 ? mode
                 : this.$allowedModes[0];
+        },
+
+        $normalizeFixedMode: function (mode) {
+            return this.$allowedModes.indexOf(mode) !== -1 ? mode : '';
         },
 
         $normalizeInteractionMode: function (mode) {
@@ -2118,7 +2128,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
         },
 
         $shouldShowModeField: function () {
-            return this.$allowModeSwitch && this.$allowedModes.length > 1;
+            return !this.$fixedMode && this.$allowModeSwitch && this.$allowedModes.length > 1;
         },
 
         $getModeOptions: function () {

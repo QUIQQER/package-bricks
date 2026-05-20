@@ -1,0 +1,240 @@
+.quiqqer-bricks-layout {
+    container: multi-layout / inline-size;
+    min-height: 1px;
+}
+
+.quiqqer-bricks-layout__grid {
+    display: grid;
+    gap: var(--_q-controlConf-gridGap, clamp(0.75rem, 4cqi, 1.5rem));
+    grid-auto-flow: row dense;
+    grid-auto-rows: minmax(0, auto);
+}
+
+.quiqqer-bricks-layout__area {
+    --quiqqer-bricks-multiLayout-background-fit: cover;
+    --quiqqer-bricks-multiLayout-background-position: center center;
+    --quiqqer-bricks-multiLayout-background-overlay-color: #000000;
+    --quiqqer-bricks-multiLayout-background-overlay-opacity: 0;
+    --quiqqer-bricks-multiLayout-image-fit: cover;
+    --quiqqer-bricks-multiLayout-image-width: 100%;
+    --quiqqer-bricks-multiLayout-image-height: none;
+    --quiqqer-bricks-multiLayout-image-position: center center;
+    --quiqqer-bricks-multiLayout-text-color: inherit;
+    --quiqqer-bricks-multiLayout-desktop-column: auto;
+    --quiqqer-bricks-multiLayout-desktop-row: auto;
+    --quiqqer-bricks-multiLayout-tablet-column: var(--quiqqer-bricks-multiLayout-desktop-column);
+    --quiqqer-bricks-multiLayout-tablet-row: var(--quiqqer-bricks-multiLayout-desktop-row);
+    --quiqqer-bricks-multiLayout-mobile-column: var(--quiqqer-bricks-multiLayout-tablet-column);
+    --quiqqer-bricks-multiLayout-mobile-row: var(--quiqqer-bricks-multiLayout-tablet-row);
+    align-items: stretch;
+    background: var(--quiqqer-bricks-multiLayout-area-background, transparent);
+    display: flex;
+    grid-column: var(--quiqqer-bricks-multiLayout-desktop-column);
+    grid-row: var(--quiqqer-bricks-multiLayout-desktop-row);
+    min-height: var(--quiqqer-bricks-multiLayout-slot-min-height, var(--quiqqer-bricks-multiLayout-tile-min-height, 200px));
+    min-width: 0;
+    position: relative;
+}
+
+.quiqqer-bricks-layout__grid:not(.quiqqer-bricks-layout__grid--noGap) .quiqqer-bricks-layout__area {
+    border-radius: var(--qui-radius-card);
+}
+
+.quiqqer-bricks-layout__area.is-surface-subtle-enabled {
+    --quiqqer-bricks-multiLayout-area-background: var(--qui-colors-surface-subtle);
+}
+
+.quiqqer-bricks-layout__background,
+.quiqqer-bricks-layout__overlay {
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+}
+
+.quiqqer-bricks-layout__backgroundMedia {
+    display: block;
+    height: 100%;
+    object-fit: var(--quiqqer-bricks-multiLayout-background-fit);
+    object-position: var(--quiqqer-bricks-multiLayout-background-position);
+    width: 100%;
+}
+
+.quiqqer-bricks-layout__overlay {
+    background: var(--quiqqer-bricks-multiLayout-background-overlay-color);
+    opacity: var(--quiqqer-bricks-multiLayout-background-overlay-opacity);
+}
+
+.quiqqer-bricks-layout__content {
+    align-items: center;
+    color: var(--quiqqer-bricks-multiLayout-text-color);
+    /*display: flex;*/
+    display: grid;
+    flex: 1;
+    /*flex-direction: column;*/
+    /*justify-content: center;*/
+    padding: var(--quiqqer-bricks-multiLayout-content-padding, clamp(1rem, 2cqi, 2rem));
+    position: relative;
+    width: 100%;
+}
+
+.quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__content {
+    align-items: center;
+}
+
+.quiqqer-bricks-layout__area--subLayout .quiqqer-bricks-layout__content {
+    container: sub-layout / inline-size;
+}
+
+.quiqqer-bricks-layout__subGrid {
+    display: grid;
+    gap: var(--quiqqer-bricks-multiLayout-sub-gap, var(--_q-controlConf-gridGap, clamp(0.75rem, 4cqi, 1.5rem)));
+    grid-auto-flow: row dense;
+    grid-auto-rows: minmax(0, auto);
+    height: 100%;
+    width: 100%;
+}
+
+.quiqqer-bricks-layout__subArea {
+    min-height: var(--quiqqer-bricks-multiLayout-slot-min-height, 0);
+}
+
+.quiqqer-bricks-layout__contentInner {
+    width: 100%;
+}
+
+.quiqqer-bricks-layout__link {
+    inset: 0;
+    position: absolute;
+    z-index: 5;
+}
+
+/* hover effect for images, when url is set */
+.quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__link + .quiqqer-bricks-layout__content > picture {
+    overflow: hidden;
+}
+
+.quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__link + .quiqqer-bricks-layout__content .quiqqer-bricks-layout__image {
+    transition: var(--qui-transition-duration, 0.3s) scale var(--qui-transition-timing-function, ease);
+}
+
+.quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__link:hover + .quiqqer-bricks-layout__content .quiqqer-bricks-layout__image {
+    scale: 1.05;
+}
+/* END hover effect for images, when url is set */
+
+.quiqqer-bricks-layout__content a,
+.quiqqer-bricks-layout__content button,
+.quiqqer-bricks-layout__content .btn,
+.quiqqer-bricks-layout__content input,
+.quiqqer-bricks-layout__content select,
+.quiqqer-bricks-layout__content textarea,
+.quiqqer-bricks-layout__content [role="button"] {
+    position: relative;
+    z-index: 10;
+}
+
+.quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__content > picture {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.quiqqer-bricks-layout__area--align-top .quiqqer-bricks-layout__content {
+    /*justify-content: flex-start;*/
+    align-items: start;
+}
+
+.quiqqer-bricks-layout__area--align-center .quiqqer-bricks-layout__content {
+    /*justify-content: center;*/
+    align-items: center;
+}
+
+.quiqqer-bricks-layout__area--align-bottom .quiqqer-bricks-layout__content {
+    /*justify-content: flex-end;*/
+    align-items: end;
+}
+
+.quiqqer-bricks-layout__area--align-stretch .quiqqer-bricks-layout__content {
+    align-items: stretch;
+}
+
+.quiqqer-bricks-layout__area--image.quiqqer-bricks-layout__area--align-top .quiqqer-bricks-layout__content > picture {
+    align-items: flex-start;
+}
+
+.quiqqer-bricks-layout__area--image.quiqqer-bricks-layout__area--align-center .quiqqer-bricks-layout__content > picture {
+    align-items: center;
+}
+
+.quiqqer-bricks-layout__area--image.quiqqer-bricks-layout__area--align-bottom .quiqqer-bricks-layout__content > picture {
+    align-items: flex-end;
+}
+
+/**
+  * Test
+  *
+  * Do not set overflow on the quiqqer-bricks-layout__area element
+  * Work with border radius.
+  */
+.quiqqer-bricks-layout__background,
+.quiqqer-bricks-layout__overlay,
+.quiqqer-bricks-layout__background > picture,
+.quiqqer-bricks-layout__backgroundMedia,
+.quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__content,
+.quiqqer-bricks-layout__area--image picture,
+.quiqqer-bricks-layout__image {
+    border-radius: inherit;
+}
+
+.quiqqer-bricks-layout__image:not(.quiqqer-bricks-layout__image--auto) {
+    display: block;
+    height: var(--quiqqer-bricks-multiLayout-image-height, auto);
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: var(--quiqqer-bricks-multiLayout-image-fit);
+    object-position: var(--quiqqer-bricks-multiLayout-image-position);
+    width: var(--quiqqer-bricks-multiLayout-image-width, auto);
+}
+
+/* Tablet: main layout container narrower than 64rem (~1024px) */
+@container multi-layout (max-width: 64rem) and (min-width: 48rem) {
+    .quiqqer-bricks-layout__area {
+        grid-column: var(--quiqqer-bricks-multiLayout-tablet-column);
+        grid-row: var(--quiqqer-bricks-multiLayout-tablet-row);
+    }
+}
+
+/* Mobile: main layout container narrower than 40rem (~768px) */
+@container multi-layout (max-width: 48rem) {
+    .quiqqer-bricks-layout__grid {
+        grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    }
+
+    .quiqqer-bricks-layout__area {
+        grid-column: var(--quiqqer-bricks-multiLayout-mobile-column);
+        grid-row: var(--quiqqer-bricks-multiLayout-mobile-row);
+    }
+}
+
+/* Tablet: sub-layout container narrower than 40rem (~640px) */
+@container sub-layout (max-width: 40rem) and (min-width: 30rem) {
+    .quiqqer-bricks-layout__subArea {
+        grid-column: var(--quiqqer-bricks-multiLayout-tablet-column);
+        grid-row: var(--quiqqer-bricks-multiLayout-tablet-row);
+    }
+}
+
+/* Mobile: sub-layout container narrower than 30rem (~480px) */
+@container sub-layout (max-width: 30rem) {
+    .quiqqer-bricks-layout__subGrid {
+        grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    }
+
+    .quiqqer-bricks-layout__subArea {
+        grid-column: var(--quiqqer-bricks-multiLayout-mobile-column);
+        grid-row: var(--quiqqer-bricks-multiLayout-mobile-row);
+    }
+}
