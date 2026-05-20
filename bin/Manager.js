@@ -84,12 +84,48 @@ define('package/quiqqer/bricks/bin/Manager', [
 
             Bricks.getBricksFromProject(project, lang).then(function (result) {
                 result = result.map(function (entry) {
+                    const isActive = parseInt(entry.active);
+                    const isMissingControl = parseInt(entry.missingControl);
+                    const deprecatedInfo = QUILocale.get(lg, 'brick.deprecated').trim();
+                    const missingControlInfo = QUILocale.get(lg, 'manager.grid.missingControl.info');
+                    const TitleDisplay = new Element('span', {
+                        'class': 'quiqqer-bricks-manager-title'
+                    });
+
+                    new Element('span', {
+                        'class': 'quiqqer-bricks-manager-title-text',
+                        text: entry.title || ''
+                    }).inject(TitleDisplay);
+
+                    if (parseInt(entry.deprecated)) {
+                        new Element('span', {
+                            'class': 'badge badge-sm badge-error quiqqer-bricks-manager-title-badge',
+                            text: QUILocale.get(lg, 'addBrickWindow.deprecated.badge'),
+                            title: deprecatedInfo
+                        }).inject(TitleDisplay);
+                    }
+
+                    if (isMissingControl) {
+                        TitleDisplay.set('title', missingControlInfo);
+
+                        new Element('span', {
+                            'class': 'badge badge-sm badge-warning quiqqer-bricks-manager-title-badge',
+                            text: QUILocale.get(lg, 'manager.grid.missingControl.badge'),
+                            title: missingControlInfo
+                        }).inject(TitleDisplay);
+                    }
+
                     entry.activeDisplay = new Element('span', {
-                        'class': parseInt(entry.active) ? 'fa fa-check' : 'fa fa-ban',
-                        title: parseInt(entry.active)
+                        'class': isActive ? 'fa fa-check' : 'fa fa-ban',
+                        title: isActive
                             ? QUILocale.get(lg, 'manager.grid.status.active')
                             : QUILocale.get(lg, 'manager.grid.status.inactive')
                     });
+                    entry.titleDisplay = TitleDisplay;
+
+                    if (!isActive) {
+                        entry.className = 'quiqqer-bricks-manager-row--inactive';
+                    }
 
                     return entry;
                 });
@@ -122,7 +158,10 @@ define('package/quiqqer/bricks/bin/Manager', [
                 AddButton = this.getButtons('brick-add'),
                 EditButton = this.getButtons('brick-edit'),
                 CopyButton = this.getButtons('brick-copy'),
-                DelButton = this.getButtons('brick-delete');
+                DelButton = this.getButtons('brick-delete'),
+                hasMissingControl = selected.some(function (entry) {
+                    return parseInt(entry.missingControl);
+                });
 
             if (!selected.length) {
                 AddButton.enable();
@@ -136,6 +175,12 @@ define('package/quiqqer/bricks/bin/Manager', [
             DelButton.enable();
 
             if (selected.length === 1) {
+                if (hasMissingControl) {
+                    EditButton.disable();
+                    CopyButton.disable();
+                    return;
+                }
+
                 EditButton.enable();
                 CopyButton.enable();
             }
@@ -278,8 +323,8 @@ define('package/quiqqer/bricks/bin/Manager', [
                     },
                     {
                         header: QUILocale.get('quiqqer/core', 'title'),
-                        dataIndex: 'title',
-                        dataType: 'string',
+                        dataIndex: 'titleDisplay',
+                        dataType: 'node',
                         width: 350
                     },
                     {
@@ -374,6 +419,10 @@ define('package/quiqqer/bricks/bin/Manager', [
          * event : dbl click
          */
         $onDblClick: function () {
+            if (parseInt(this.$Grid.getSelectedData()[0].missingControl)) {
+                return;
+            }
+
             this.editBrick(
                 this.$Grid.getSelectedData()[0].id
             );
@@ -738,6 +787,12 @@ define('package/quiqqer/bricks/bin/Manager', [
          * @param {Number} brickId
          */
         editBrick: function (brickId) {
+            const selected = this.$Grid.getSelectedData()[0];
+
+            if (selected && parseInt(selected.id) === parseInt(brickId) && parseInt(selected.missingControl)) {
+                return;
+            }
+
             require([
                 'package/quiqqer/bricks/bin/BrickEdit',
                 'utils/Panels'
