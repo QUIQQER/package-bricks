@@ -40,10 +40,13 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             '$saveAssignedBricks',
             '$syncBrickLabel',
             '$syncBrickLabels',
+            '$getBrickData',
             '$getBrickCustomFields',
+            '$getBrickStateBadges',
             '$getBrickStatusBadges',
             '$getBrickVisibilityGroupIds',
             '$preloadBrickVisibilityGroupNames',
+            '$renderBrickStateBadges',
             '$renderBrickStatusBadges',
             '$onInject',
             '$onDestroy',
@@ -555,12 +558,13 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                 html: '<select></select>' +
                     '<div class="quiqqer-bricks-site-category-area-brick-display" data-name="brick-display">' +
                     '   <div class="quiqqer-bricks-site-category-area-brick-meta">' +
-                    // '       <div class="quiqqer-bricks-site-category-area-brick-headline">' +
-                    '           <span class="quiqqer-bricks-site-category-area-brick-title" data-name="brick-title"></span>' +
-                    '           <span class="badge badge-warning badge-sm" data-name="brick-badge"></span>' +
+                    '           <span class="quiqqer-bricks-site-category-area-brick-title" data-name="brick-title">' +
+                    '               <span class="quiqqer-bricks-site-category-area-brick-id" data-name="brick-id"></span>' +
+                    '               <span class="quiqqer-bricks-site-category-area-brick-titleText" data-name="brick-title-text"></span>' +
+                    '           </span>' +
+                    '           <div class="quiqqer-bricks-site-category-area-brick-state" data-name="brick-state"></div>' +
                     '           <div class="quiqqer-bricks-site-category-area-brick-status" data-name="brick-status"></div>' +
                     '       </div>' +
-                    // '   </div>' +
                     '</div>' +
                     '<div class="btn-wrapper" data-name="btn-container"></div>',
                 id: String.uniqueID()
@@ -639,33 +643,48 @@ define('package/quiqqer/bricks/bin/Site/Area', [
             }
 
             const Title = BrickRow.getElement('[data-name="brick-title"]');
-            const Badge = BrickRow.getElement('[data-name="brick-badge"]');
+            const TitleId = BrickRow.getElement('[data-name="brick-id"]');
+            const TitleText = BrickRow.getElement('[data-name="brick-title-text"]');
             const Meta = BrickRow.getElement('.quiqqer-bricks-site-category-area-brick-meta');
             const Option = Select.options[Select.selectedIndex];
 
-            if (!Title || !Badge || !Meta || !Option) {
+            if (!Title || !TitleId || !TitleText || !Meta || !Option) {
                 return;
             }
 
             const isActive = parseInt(Option.getAttribute('data-active')) === 1;
             const brickId = BrickRow.get('id');
+            const brickData = this.$getBrickData(Option.value);
             const customFields = this.$getBrickCustomFields(brickId);
 
-            Title.set('text', Option.text);
-            Badge.set('text', QUILocale.get(lg, 'site.area.badge.disabled'));
-
-            Badge.setStyle('display', isActive ? 'none' : 'inline-flex');
+            TitleId.set('text', '#' + Option.value + ' ·');
+            TitleText.set('text', Option.text);
             BrickRow[isActive ? 'removeClass' : 'addClass'](
                 'quiqqer-bricks-site-category-area-brick--inactive'
             );
 
-            this.$renderBrickStatusBadges(BrickRow, Meta, customFields);
+            this.$renderBrickStateBadges(BrickRow, isActive, brickData);
+            this.$renderBrickStatusBadges(BrickRow, Meta, customFields, brickData);
 
             const Placeholder = BrickRow.getElement('.quiqqer-bricks-site-category-area-placeholder');
 
             if (Placeholder) {
                 Placeholder.set('html', BrickRow.getElement('[data-name="brick-display"]').get('html'));
             }
+        },
+
+        /**
+         * @param {number|string} brickId
+         * @returns {Object}
+         */
+        $getBrickData: function (brickId) {
+            brickId = parseInt(brickId);
+
+            const found = this.$availableBricks.filter(function (Item) {
+                return parseInt(Item.id) === brickId;
+            });
+
+            return found.length ? found[0] : {};
         },
 
         /**
@@ -695,28 +714,66 @@ define('package/quiqqer/bricks/bin/Site/Area', [
         },
 
         /**
-         * @param {Object} customFields
+         * @param {boolean} isActive
+         * @param {Object} brickData
          * @returns {Array}
          */
-        $getBrickStatusBadges: function (customFields) {
+        $getBrickStateBadges: function (isActive, brickData) {
+            const badges = [];
+
+            if (!isActive) {
+                badges.push({
+                    badgeClass: 'badge badge-warning badge-sm',
+                    text: QUILocale.get(lg, 'site.area.badge.disabled')
+                });
+            }
+
+            if (parseInt(brickData.deprecated)) {
+                badges.push({
+                    badgeClass: 'badge badge-error badge-sm',
+                    text: QUILocale.get(lg, 'addBrickWindow.deprecated.badge'),
+                    title: QUILocale.get(lg, 'brick.deprecated').trim()
+                });
+            }
+
+            if (parseInt(brickData.missingControl)) {
+                badges.push({
+                    badgeClass: 'badge badge-warning badge-sm',
+                    text: QUILocale.get(lg, 'manager.grid.missingControl.badge'),
+                    title: QUILocale.get(lg, 'manager.grid.missingControl.info')
+                });
+            }
+
+            return badges;
+        },
+
+        /**
+         * @param {Object} customFields
+         * @param {Object} brickData
+         * @returns {Array}
+         */
+        $getBrickStatusBadges: function (customFields, brickData) {
             const badges = [];
 
             if (customFields.inheritance) {
-                badges.push(
-                    QUILocale.get(lg, 'site.area.badge.inheritance')
-                );
+                badges.push({
+                    badgeClass: 'badge badge-dark-light badge-sm quiqqer-bricks-site-category-area-statusBadge',
+                    text: QUILocale.get(lg, 'site.area.badge.inheritance')
+                });
             }
 
             if (customFields.visibility === 'guest') {
-                badges.push(
-                    QUILocale.get(lg, 'site.area.badge.visibility.guest')
-                );
+                badges.push({
+                    badgeClass: 'badge badge-dark-light badge-sm quiqqer-bricks-site-category-area-statusBadge',
+                    text: QUILocale.get(lg, 'site.area.badge.visibility.guest')
+                });
             }
 
             if (customFields.visibility === 'authenticated') {
-                badges.push(
-                    QUILocale.get(lg, 'site.area.badge.visibility.authenticated')
-                );
+                badges.push({
+                    badgeClass: 'badge badge-dark-light badge-sm quiqqer-bricks-site-category-area-statusBadge',
+                    text: QUILocale.get(lg, 'site.area.badge.visibility.authenticated')
+                });
             }
 
             return badges;
@@ -785,12 +842,44 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
         /**
          * @param {HTMLElement} BrickRow
+         * @param {boolean} isActive
+         * @param {Object} brickData
+         */
+        $renderBrickStateBadges: function (BrickRow, isActive, brickData) {
+            let State = BrickRow.getElement('[data-name="brick-state"]');
+            const badges = this.$getBrickStateBadges(isActive, brickData);
+
+            if (!State) {
+                return;
+            }
+
+            State.empty();
+
+            if (!badges.length) {
+                State.setStyle('display', 'none');
+                return;
+            }
+
+            State.setStyle('display', 'flex');
+
+            badges.forEach(function (entry) {
+                new Element('span', {
+                    'class': entry.badgeClass,
+                    text: entry.text,
+                    title: entry.title || ''
+                }).inject(State);
+            });
+        },
+
+        /**
+         * @param {HTMLElement} BrickRow
          * @param {HTMLElement} Meta
          * @param {Object} customFields
+         * @param {Object} brickData
          */
-        $renderBrickStatusBadges: function (BrickRow, Meta, customFields) {
+        $renderBrickStatusBadges: function (BrickRow, Meta, customFields, brickData) {
             let Status = BrickRow.getElement('[data-name="brick-status"]');
-            const badges = this.$getBrickStatusBadges(customFields);
+            const badges = this.$getBrickStatusBadges(customFields, brickData);
             const groupIds = this.$getBrickVisibilityGroupIds(customFields);
 
             if (Status) {
@@ -809,8 +898,9 @@ define('package/quiqqer/bricks/bin/Site/Area', [
 
             badges.forEach(function (entry) {
                 new Element('span', {
-                    'class': 'badge badge-dark-light badge-sm quiqqer-bricks-site-category-area-statusBadge',
-                    text: entry
+                    'class': entry.badgeClass,
+                    text: entry.text,
+                    title: entry.title || ''
                 }).inject(Status);
             });
 
@@ -836,7 +926,7 @@ define('package/quiqqer/bricks/bin/Site/Area', [
                         return;
                     }
 
-                    this.$renderBrickStatusBadges(CurrentBrickRow, CurrentMeta, customFields);
+                    this.$renderBrickStatusBadges(CurrentBrickRow, CurrentMeta, customFields, brickData);
                 });
 
                 return;

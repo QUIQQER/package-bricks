@@ -80,13 +80,22 @@
 }
 
 .quiqqer-bricks-site-category-area-brick-title {
+    align-items: baseline;
+    display: inline-flex;
     flex: 0 1 auto;
+    gap: 0.35rem;
+}
+
+.quiqqer-bricks-site-category-area-brick-id {
+    color: #8f98a3;
+    font-size: 0.9em;
 }
 
 .quiqqer-bricks-site-category-area-brick--inactive .quiqqer-bricks-site-category-area-brick-title {
     color: #aab0b6;
 }
 
+.quiqqer-bricks-site-category-area-brick-state,
 .quiqqer-bricks-site-category-area-brick-status {
     display: flex;
     flex-wrap: wrap;
