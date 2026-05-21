@@ -28,21 +28,14 @@ QUI::getAjax()->registerFunction(
             }
         };
 
+        /** @var QUI\Bricks\Manager $BrickManager */
         $BrickManager = QUI\Bricks\Manager::init();
 
-        if (!$BrickManager) {
-            return [
-                'attributes' => [],
-                'settings' => [],
-                'customfields' => [],
-                'availableSettings' => []
-            ];
-        }
-
-        $Brick = $BrickManager->getBrickById($brickId);
         $availableBricks = $BrickManager->getAvailableBricks();
 
-        if (!$Brick) {
+        try {
+            $Brick = $BrickManager->getBrickById((int)$brickId);
+        } catch (Exception) {
             return [
                 'attributes' => [],
                 'settings' => [],
