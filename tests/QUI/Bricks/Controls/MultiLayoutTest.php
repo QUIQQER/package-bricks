@@ -55,6 +55,7 @@ class MultiLayoutTest extends TestCase
                             'customMinHeightEnabled' => true,
                             'customMinHeightPreset' => 'manual',
                             'customMinHeightValue' => '420',
+                            'customCssClasses' => 'hero-area, hero-area--primary',
                             'subLayoutAreaBackgroundEnabled' => false,
                             'subLayoutGridGapPreset' => 'large',
                             'subLayoutDocument' => [
@@ -91,6 +92,7 @@ class MultiLayoutTest extends TestCase
                                     'slot-2' => [
                                         'title' => 'Innen 2',
                                         'mode' => 'image',
+                                        'customCssClasses' => 'inner-image',
                                         'image' => '/assets/inner.png',
                                         'imageFit' => 'cover'
                                     ]
@@ -141,6 +143,8 @@ class MultiLayoutTest extends TestCase
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-height: 320px', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-tile-min-height: 280px', $html);
             $this->assertStringContainsString('--quiqqer-bricks-multiLayout-slot-min-height: 420px', $html);
+            $this->assertStringContainsString('hero-area hero-area--primary', $html);
+            $this->assertStringContainsString('inner-image', $html);
         } catch (\Throwable) {
             $this->addToAssertionCount(1);
         }

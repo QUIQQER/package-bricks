@@ -363,6 +363,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
                         contentPaddingPreset: true,
                         verticalAlign: true,
                         customMinHeight: true,
+                        customCssClasses: true,
                         background: true,
                         backgroundColor: true,
                         link: true,
@@ -586,6 +587,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
                         contentPaddingPreset: true,
                         verticalAlign: true,
                         customMinHeight: true,
+                        customCssClasses: true,
                         background: true,
                         backgroundColor: true,
                         link: true,
@@ -1598,6 +1600,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
                 customMinHeightValue: area.customMinHeightValue
                     ? area.customMinHeightValue.toString().trim()
                     : '',
+                customCssClasses: this.$normalizeCustomCssClasses(area.customCssClasses),
                 link: link,
                 verticalAlign: verticalAlign
             };
@@ -1618,6 +1621,18 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
             return ['none', 'small', 'normal', 'large', 'extraLarge'].indexOf(preset) !== -1
                 ? preset
                 : 'normal';
+        },
+
+        $normalizeCustomCssClasses: function (value) {
+            if (value === null || value === undefined) {
+                return '';
+            }
+
+            return value.toString().split(',').map(function (entry) {
+                return entry.trim();
+            }).filter(function (entry) {
+                return entry !== '';
+            }).join(', ');
         },
 
         $normalizeCssSizeValue: function (value) {

@@ -5,7 +5,7 @@
          style="grid-template-columns: repeat({$desktopColumns}, minmax(0, 1fr));"
     >
         {foreach from=$areas item=area}
-            <section class="quiqqer-bricks-layout__area quiqqer-bricks-layout__area--{$area.mode} quiqqer-bricks-layout__area--align-{$area.verticalAlign}{if $areaBackgroundEnabled} is-surface-subtle-enabled{/if}"
+            <section class="quiqqer-bricks-layout__area quiqqer-bricks-layout__area--{$area.mode} quiqqer-bricks-layout__area--align-{$area.verticalAlign}{if $areaBackgroundEnabled} is-surface-subtle-enabled{/if}{if $area.customCssClassAttribute} {$area.customCssClassAttribute}{/if}"
                     data-slot-id="{$area.slotId}"
                     {if $area.slotStyle}style="{$area.slotStyle}"{/if}>
                 {if $area.backgroundEnabled && $area.backgroundImage}
@@ -45,7 +45,7 @@
                              style="grid-template-columns: repeat({$area.subLayoutDesktopColumns}, minmax(0, 1fr)); --quiqqer-bricks-multiLayout-sub-gap: {$area.subLayoutGridGap};"
                         >
                             {foreach from=$area.subLayoutAreas item=subArea}
-                                <section class="quiqqer-bricks-layout__area quiqqer-bricks-layout__subArea quiqqer-bricks-layout__area--{$subArea.mode} quiqqer-bricks-layout__area--align-{$subArea.verticalAlign}{if $area.subLayoutAreaBackgroundEnabled} is-surface-subtle-enabled{/if}"
+                                <section class="quiqqer-bricks-layout__area quiqqer-bricks-layout__subArea quiqqer-bricks-layout__area--{$subArea.mode} quiqqer-bricks-layout__area--align-{$subArea.verticalAlign}{if $area.subLayoutAreaBackgroundEnabled} is-surface-subtle-enabled{/if}{if $subArea.customCssClassAttribute} {$subArea.customCssClassAttribute}{/if}"
                                          data-slot-id="{$subArea.slotId}"
                                          {if $subArea.slotStyle}style="{$subArea.slotStyle}"{/if}>
                                     {if $subArea.backgroundEnabled && $subArea.backgroundImage}

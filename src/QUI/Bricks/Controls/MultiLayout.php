@@ -491,6 +491,9 @@ class MultiLayout extends QUI\Control
             'customMinHeightValue' => $this->normalizeTileMinHeightValue(
                 $area['customMinHeightValue'] ?? null
             ),
+            'customCssClasses' => $this->normalizeCustomCssClasses(
+                $area['customCssClasses'] ?? null
+            ),
             'link' => $link,
             'verticalAlign' => isset($area['verticalAlign']) && in_array($area['verticalAlign'], ['top', 'center', 'bottom', 'stretch'], true)
                 ? $area['verticalAlign']
@@ -598,6 +601,9 @@ class MultiLayout extends QUI\Control
         }
 
         $area['contentHtml'] = $this->renderAreaContent($area);
+        $area['customCssClassAttribute'] = $this->buildCustomCssClassAttribute(
+            $area['customCssClasses'] ?? ''
+        );
         $area['link'] = $this->prepareAreaLink($area['link'] ?? null);
 
         return $area;
@@ -825,6 +831,20 @@ class MultiLayout extends QUI\Control
         return is_string($value) || is_numeric($value) ? trim((string)$value) : '';
     }
 
+    protected function normalizeCustomCssClasses(mixed $value): string
+    {
+        if (!is_string($value) && !is_numeric($value)) {
+            return '';
+        }
+
+        $parts = preg_split('/\s*,\s*/', trim((string)$value)) ?: [];
+        $parts = array_filter($parts, static function ($part) {
+            return $part !== '';
+        });
+
+        return implode(', ', $parts);
+    }
+
     protected function normalizeCssSizeValue(mixed $value): string
     {
         if (!is_string($value) && !is_numeric($value)) {
@@ -873,6 +893,26 @@ class MultiLayout extends QUI\Control
         }
 
         return (string)self::TILE_MIN_HEIGHT_PRESETS[$preset];
+    }
+
+    protected function buildCustomCssClassAttribute(mixed $value): string
+    {
+        $normalized = $this->normalizeCustomCssClasses($value);
+
+        if ($normalized === '') {
+            return '';
+        }
+
+        $classes = preg_split('/\s*,\s*/', $normalized) ?: [];
+        $classes = array_filter($classes, static function ($className) {
+            return $className !== '';
+        });
+
+        if ($classes === []) {
+            return '';
+        }
+
+        return htmlspecialchars(implode(' ', $classes), ENT_QUOTES);
     }
 
     /**

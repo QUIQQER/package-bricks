@@ -27,6 +27,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
         contentPaddingPreset: true,
         verticalAlign: true,
         customMinHeight: true,
+        customCssClasses: true,
         background: true,
         backgroundColor: true,
         textColor: true,
@@ -736,7 +737,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                     title: area.title
                 }),
                 maxWidth: 800,
-                maxHeight: 700,
+                maxHeight: 850,
                 events: {
                     onOpen: function (Win) {
                         const Content = Win.getContent();
@@ -801,6 +802,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
 
                         if (this.$isSettingVisible('customMinHeight')) {
                             CustomMinHeightSettings = this.$createPopupCustomMinHeightSettings(LeftCol, area);
+                        }
+
+                        if (this.$isSettingVisible('customCssClasses')) {
+                            this.$createPopupCustomCssSettings(LeftCol, area);
                         }
 
                         let BackgroundOptions = null;
@@ -1024,6 +1029,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         const customMinHeightValueField = Content.getElement(
                             'input[data-name="customMinHeightValue"]'
                         );
+                        const customCssClassesField = Content.getElement(
+                            'input[data-name="customCssClasses"]'
+                        );
                         const imageFitField = Content.getElement('select[data-name="imageFit"]');
                         const imageWidthField = Content.getElement('input[data-name="imageWidth"]');
                         const imageHeightField = Content.getElement('input[data-name="imageHeight"]');
@@ -1090,6 +1098,14 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             area.customMinHeightValue = customMinHeightValueField
                                 ? customMinHeightValueField.value.trim()
                                 : '';
+                        }
+
+                        if (this.$isSettingVisible('customCssClasses')) {
+                            area.customCssClasses = this.$normalizeCustomCssClasses(
+                                customCssClassesField
+                                    ? customCssClassesField.value
+                                    : area.customCssClasses
+                            );
                         }
 
                         if (this.$isSettingVisible('image')) {
@@ -1612,6 +1628,29 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             };
         },
 
+        $createPopupCustomCssSettings: function (Parent, area) {
+            const Section = this.$createPopupSection(
+                Parent,
+                this.$getLocale('customCss.section')
+            );
+
+            const Field = this.$createPopupInputField(Section, {
+                label: this.$getLocale('customCss.classes'),
+                type: 'text',
+                value: this.$normalizeCustomCssClasses(area.customCssClasses),
+                name: 'customCssClasses'
+            });
+
+            new Element('div', {
+                'class': 'quiqqer-bricks-blockSlot-popupHint',
+                text: this.$getLocale('customCss.help')
+            }).inject(Field);
+
+            return {
+                section: Section
+            };
+        },
+
         $createPopupSection: function (Parent, title) {
             const Section = new Element('div', {
                 'class': 'quiqqer-bricks-blockSlot-popupSection'
@@ -1816,6 +1855,18 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 target: target,
                 title: link.title ? link.title.toString().trim() : ''
             };
+        },
+
+        $normalizeCustomCssClasses: function (value) {
+            if (value === null || value === undefined) {
+                return '';
+            }
+
+            return value.toString().split(',').map(function (entry) {
+                return entry.trim();
+            }).filter(function (entry) {
+                return entry !== '';
+            }).join(', ');
         },
 
         $normalizeCssSizeValue: function (value) {

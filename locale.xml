@@ -2963,6 +2963,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[z. B. 240px, 18rem, 30vh; Zahlen ohne Einheit werden als px interpretiert]]></de>
             <en><![CDATA[e.g. 240px, 18rem, 30vh; numbers without a unit are interpreted as px]]></en>
         </locale>
+        <locale name="blockSlot.customCss.section">
+            <de><![CDATA[Eigenes CSS]]></de>
+            <en><![CDATA[Custom CSS]]></en>
+        </locale>
+        <locale name="blockSlot.customCss.classes">
+            <de><![CDATA[CSS-Klassen]]></de>
+            <en><![CDATA[CSS classes]]></en>
+        </locale>
+        <locale name="blockSlot.customCss.help">
+            <de><![CDATA[Mehrere Klassen kommasepariert eingeben, z. B. klasse-a, klasse-b]]></de>
+            <en><![CDATA[Enter multiple classes separated by commas, e.g. class-a, class-b]]></en>
+        </locale>
         <locale name="blockSlot.customMinHeight.option.none">
             <de><![CDATA[Keine Mindesthöhe]]></de>
             <en><![CDATA[No minimum height]]></en>
