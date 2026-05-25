@@ -1897,6 +1897,11 @@
                 <locale group="quiqqer/bricks" var="brick.multiLayout.description"/>
             </description>
 
+            <mockups>
+                <mockup src="/packages/quiqqer/bricks/bin/images/mockups/multiLayout-mockup-900x600.png" type="preview"/>
+                <mockup src="/packages/quiqqer/bricks/bin/images/mockups/multiLayout-thumbnail-100x80.png" type="thumbnail"/>
+            </mockups>
+
             <settings>
                 <setting name="areaBackgroundEnabled" type="checkbox">
                     <locale group="quiqqer/bricks" var="brick.multiLayout.areaBackgroundEnabled"/>

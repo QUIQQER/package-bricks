@@ -2744,28 +2744,34 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <en><![CDATA[Entries]]></en>
         </locale>
         <locale name="brick.multiLayout.title">
-            <de><![CDATA[MultiLayout]]></de>
-            <en><![CDATA[MultiLayout]]></en>
+            <de><![CDATA[Flexibles Layout]]></de>
+            <en><![CDATA[Flexible Layout]]></en>
         </locale>
         <locale name="brick.multiLayout.description">
-            <de><![CDATA[<p>Mit diesem Baustein baust du flexible Layouts aus mehreren frei belegbaren Bereichen auf. So kombinierst du Inhalte, Bilder und andere Bausteine in einem gemeinsamen, responsiven Raster.</p>
+            <de><![CDATA[<p>Mit diesem Baustein gestaltest du Seitenbereiche so frei, wie es dein Inhalt verlangt. Du kombinierst Texte, Bilder, Buttons und weitere Bausteine in einem flexiblen Raster, das sich deinem Aufbau anpasst.</p>
+<p>Ob kompakter Teaser, großzügige Content-Fläche oder modularer Abschnitt mit mehreren Schwerpunkten: Das MultiLayout gibt dir die passende Struktur dafür. So entsteht ein individuelles Layout, ohne dass du dich an starre Vorgaben halten musst.</p>
 <ul>
-    <li><strong>Verschiedene Layout-Vorlagen:</strong> Starte mit unterschiedlichen Presets und passe die Anordnung an deinen Inhalt an.</li>
-    <li><strong>Bereiche individuell befüllbar:</strong> Jeder Bereich kann wahlweise Text, ein Bild oder einen anderen Baustein enthalten.</li>
-    <li><strong>Responsive anpassbar:</strong> Desktop, Tablet und Mobile lassen sich passend zur Ausgabe strukturieren.</li>
-    <li><strong>Mobile-Reihenfolge steuerbar:</strong> Lege fest, in welcher Reihenfolge die Bereiche auf kleinen Geräten angezeigt werden.</li>
-    <li><strong>Visuell flexibel:</strong> Pro Bereich sind unter anderem Ausrichtung, Hintergrundbild, Overlay, Hintergrundfarbe und Textfarbe konfigurierbar.</li>
-    <li><strong>Auch für komplexe Seitenbereiche geeignet:</strong> Ideal für Teaser-Zonen, Bild-Text-Kombinationen, Bento-Layouts oder modulare Content-Abschnitte.</li>
-</ul>]]></de>
-            <en><![CDATA[<p>Use this brick to build flexible layouts from multiple freely assignable areas. It lets you combine content, images and other bricks inside one shared responsive grid.</p>
+    <li><strong>Flexible Layout-Vorlagen:</strong> Starte mit einem Preset und passe die Anordnung an deinen Inhalt an.</li>
+    <li><strong>Frei belegbare Bereiche:</strong> Jeder Bereich kann individuell mit Text, Bild, Button oder weiteren Bausteinen gefüllt werden.</li>
+    <li><strong>Sublayouts möglich:</strong> Bei Bedarf lassen sich in einzelnen Bereichen weitere Layout-Strukturen anlegen, um Inhalte noch feiner zu gliedern.</li>
+    <li><strong>Responsive steuerbar:</strong> Für Desktop, Tablet und Mobile lässt sich die Struktur passend zur Ausgabe aufbauen.</li>
+    <li><strong>Mobile-Reihenfolge definierbar:</strong> Lege fest, in welcher Reihenfolge Inhalte auf kleinen Geräten erscheinen.</li>
+    <li><strong>Visuell vielseitig:</strong> Ausrichtung, Hintergrundbild, Overlay, Farben und Abstände lassen sich pro Bereich flexibel einstellen.</li>
+    <li><strong>Für viele Einsatzzwecke geeignet:</strong> Ideal für Teaser-Zonen, Bild-Text-Kombinationen, Bento-Layouts und modulare Inhaltsbereiche.</li>
+</ul>
+<p>Damit baust du vom einfachen Aufmacher bis zum komplexen Seitenabschnitt sehr unterschiedliche Layouts in nur einem Baustein. Und das alles direkt im Editor, ohne selbst Code schreiben zu müssen.</p>]]></de>
+            <en><![CDATA[<p>This brick gives you the freedom to build page sections around your content instead of forcing your content into a rigid structure. Combine text, images, buttons and other bricks inside a flexible grid that adapts to your layout needs.</p>
+<p>Whether you need a compact teaser, a spacious content section or a modular area with multiple focal points, MultiLayout gives you the right foundation. That makes it easy to create individual layouts without being locked into fixed patterns.</p>
 <ul>
-    <li><strong>Various layout presets:</strong> Start with different presets and adapt the arrangement to your content.</li>
-    <li><strong>Areas can be filled individually:</strong> Each area can contain text, an image or another brick.</li>
-    <li><strong>Responsive by design:</strong> Structure the layout for desktop, tablet and mobile as needed.</li>
-    <li><strong>Controllable mobile order:</strong> Define the order in which areas appear on smaller devices.</li>
-    <li><strong>Visually flexible:</strong> Each area can be configured with alignment, background image, overlay, background color and text color.</li>
-    <li><strong>Suitable for complex page sections:</strong> Ideal for teaser zones, image-text combinations, bento layouts or modular content sections.</li>
-</ul>]]></en>
+    <li><strong>Flexible layout presets:</strong> Start with a preset and adapt the arrangement to your content.</li>
+    <li><strong>Freely assignable areas:</strong> Each area can be filled with text, images, buttons or other bricks.</li>
+    <li><strong>Supports sublayouts:</strong> If needed, individual areas can contain additional layout structures for even more granular content arrangements.</li>
+    <li><strong>Responsive control:</strong> Build the structure for desktop, tablet and mobile exactly as needed.</li>
+    <li><strong>Custom mobile order:</strong> Decide in which order content appears on smaller devices.</li>
+    <li><strong>Versatile styling options:</strong> Alignment, background image, overlay, colors and spacing can be configured per area.</li>
+    <li><strong>Useful for many scenarios:</strong> Ideal for teaser zones, image-text combinations, bento layouts and modular content sections.</li>
+</ul>
+<p>That allows you to create everything from simple highlights to complex page sections with a single brick. And you can do it directly in the editor without writing code yourself.</p>]]></en>
         </locale>
         <locale name="brick.multiLayout.layout.1">
             <de><![CDATA[Layout 1]]></de>
