@@ -1221,12 +1221,15 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
         $createExtraData: function () {
             return new Promise(function (resolve, reject) {
                 const TableExtra = this.$Elm.getElement('table.brick-edit-extra-header'),
-                    TableBody = TableExtra.getElement('tbody');
+                    TableBody = TableExtra.getElement('tbody'),
+                    extraSettings = (this.$availableSettings || []).filter(function (setting) {
+                        return setting.source !== 'window';
+                    });
 
                 TableBody.getElement('[name="frontendTitle"]').value =
                     this.getAttribute('data').attributes.frontendTitle;
 
-                if (!this.$availableSettings || !this.$availableSettings.length) {
+                if (!extraSettings.length) {
                     TableExtra.setStyle('display', 'none');
 
                     new Element('div', {
@@ -1247,8 +1250,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     Form = this.getContent().getElement('form');
 
                 // extra settings
-                for (i = 0, len = this.$availableSettings.length; i < len; i++) {
-                    setting = this.$availableSettings[i];
+                for (i = 0, len = extraSettings.length; i < len; i++) {
+                    setting = extraSettings[i];
                     extraFieldId = 'extraField_' + id + '_' + i;
                     dataAttributes = setting['data-attributes'];
 

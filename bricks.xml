@@ -1889,7 +1889,7 @@
             </settings>
         </brick>
 
-        <brick control="\QUI\Bricks\Controls\MultiLayout">
+        <brick control="\QUI\Bricks\Controls\MultiLayout" recommended="1">
             <title>
                 <locale group="quiqqer/bricks" var="brick.multiLayout.title"/>
             </title>
