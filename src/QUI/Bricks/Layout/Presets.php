@@ -236,10 +236,6 @@ class Presets
         $presets = self::CORE_PRESETS;
 
         foreach ($customPresets as $id => $preset) {
-            if (!is_array($preset)) {
-                continue;
-            }
-
             $presetId = self::normalizeCustomPresetId(
                 isset($preset['id']) && is_string($preset['id']) ? $preset['id'] : (string)$id,
                 $namespace
