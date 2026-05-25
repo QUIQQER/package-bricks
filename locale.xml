@@ -2845,29 +2845,37 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Abstand zwischen Kacheln]]></de>
             <en><![CDATA[Spacing between tiles]]></en>
         </locale>
+        <locale name="brick.multiLayout.gridGap.desc">
+            <de><![CDATA[Steuert den freien Raum zwischen den Kacheln. Kleine Werte wirken kompakter, große Werte luftiger. Die Stufen sind responsiv und passen sich der verfügbaren Breite an: Kein Abstand = 0, Klein = dezent, Normal = ausgewogen, Groß = luftig, Extra groß = sehr luftig.]]></de>
+            <en><![CDATA[Controls the free space between tiles. Smaller values feel more compact, larger values create more breathing room. The presets are responsive and adapt to the available width: No spacing = 0, Small = subtle, Normal = balanced, Large = airy, Extra large = very airy.]]></en>
+        </locale>
         <locale name="brick.multiLayout.gridGap.option.none">
             <de><![CDATA[Kein Abstand]]></de>
             <en><![CDATA[No spacing]]></en>
         </locale>
         <locale name="brick.multiLayout.gridGap.option.small">
-            <de><![CDATA[Klein]]></de>
-            <en><![CDATA[Small]]></en>
+            <de><![CDATA[Klein (dezent)]]></de>
+            <en><![CDATA[Small (subtle)]]></en>
         </locale>
         <locale name="brick.multiLayout.gridGap.option.normal">
-            <de><![CDATA[Normal]]></de>
-            <en><![CDATA[Normal]]></en>
+            <de><![CDATA[Normal (ausgewogen)]]></de>
+            <en><![CDATA[Normal (balanced)]]></en>
         </locale>
         <locale name="brick.multiLayout.gridGap.option.large">
-            <de><![CDATA[Groß]]></de>
-            <en><![CDATA[Large]]></en>
+            <de><![CDATA[Groß (luftig)]]></de>
+            <en><![CDATA[Large (airy)]]></en>
         </locale>
         <locale name="brick.multiLayout.gridGap.option.extraLarge">
-            <de><![CDATA[Extra groß]]></de>
-            <en><![CDATA[Extra large]]></en>
+            <de><![CDATA[Extra groß (sehr luftig)]]></de>
+            <en><![CDATA[Extra large (very airy)]]></en>
         </locale>
         <locale name="brick.multiLayout.tileMinHeight">
             <de><![CDATA[Mindesthöhe der Kacheln]]></de>
             <en><![CDATA[Minimum height of tiles]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.desc">
+            <de><![CDATA[Legt die kleinste Höhe jeder Kachel fest. Das hilft, Kacheln trotz unterschiedlich langer Inhalte ruhiger und gleichmäßiger wirken zu lassen. Keine Mindesthöhe richtet sich nur nach dem Inhalt, Manuell erlaubt einen eigenen CSS-Wert wie 240px, 18rem oder 30vh.]]></de>
+            <en><![CDATA[Defines the minimum height of each tile. This helps tiles look calmer and more even when their content lengths differ. No minimum height follows the content only, while Manual allows a custom CSS value such as 240px, 18rem or 30vh.]]></en>
         </locale>
         <locale name="brick.multiLayout.tileMinHeight.option.none">
             <de><![CDATA[Keine Mindesthöhe]]></de>
