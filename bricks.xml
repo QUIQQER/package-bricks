@@ -1889,6 +1889,109 @@
             </settings>
         </brick>
 
+        <brick control="\QUI\Bricks\Controls\MultiLayout">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.multiLayout.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.multiLayout.description"/>
+            </description>
+
+            <mockups>
+                <mockup src="/packages/quiqqer/bricks/bin/images/mockups/multiLayout-mockup-900x600.png" type="preview"/>
+                <mockup src="/packages/quiqqer/bricks/bin/images/mockups/multiLayout-thumbnail-100x80.png" type="thumbnail"/>
+            </mockups>
+
+            <settings>
+                <setting name="areaBackgroundEnabled" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.multiLayout.areaBackgroundEnabled"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.areaBackgroundEnabled.desc"/>
+                    </description>
+                </setting>
+
+                <setting name="gridGapPreset" type="select">
+                    <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.desc"/>
+                    </description>
+
+                    <option value="none">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.none"/>
+                    </option>
+                    <option value="small">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.small"/>
+                    </option>
+                    <option value="normal" default="1">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.normal"/>
+                    </option>
+                    <option value="large">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.large"/>
+                    </option>
+                    <option value="extraLarge">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.extraLarge"/>
+                    </option>
+                </setting>
+
+                <setting name="tileMinHeightPreset" type="select">
+                    <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.desc"/>
+                    </description>
+
+                    <option value="none">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.none"/>
+                    </option>
+                    <option value="compact">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.compact"/>
+                    </option>
+                    <option value="standard" default="1">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.standard"/>
+                    </option>
+                    <option value="large">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.large"/>
+                    </option>
+                    <option value="extraLarge">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.extraLarge"/>
+                    </option>
+                    <option value="manual">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.option.manual"/>
+                    </option>
+                </setting>
+
+                <setting name="tileMinHeightValue" type="text">
+                    <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.value"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.tileMinHeight.value.help"/>
+                    </description>
+                </setting>
+            </settings>
+
+            <window>
+                <categories>
+                    <category name="areas" index="35">
+                        <text>
+                            <locale group="quiqqer/bricks" var="brick.multiLayout.areas"/>
+                        </text>
+                        <image>fa fa-th-large</image>
+
+                        <settings name="areas">
+                            <title>
+                                <locale group="quiqqer/bricks" var="brick.multiLayout.areas"/>
+                            </title>
+
+                            <input conf="layoutAreas" type="hidden" label="false"
+                                   data-qui="package/quiqqer/bricks/bin/Controls/backend/MultiLayoutSettings">
+                                <text>
+                                    <locale group="quiqqer/bricks" var="brick.multiLayout.areas"/>
+                                </text>
+                            </input>
+                        </settings>
+                    </category>
+                </categories>
+            </window>
+        </brick>
+
         <brick control="\QUI\Bricks\Controls\Buttons">
             <title>
                 <locale group="quiqqer/bricks" var="brick.buttons.title"/>

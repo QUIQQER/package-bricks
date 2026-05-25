@@ -1,0 +1,484 @@
+.quiqqer-bricks-multiLayout-settings {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.quiqqer-bricks-multiLayout-settings-helper {
+    display: none;
+}
+
+.quiqqer-bricks-multiLayout-settings-toolbar {
+    align-items: flex-end;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.quiqqer-bricks-multiLayout-settings-toolbarGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+}
+
+/*.quiqqer-bricks-multiLayout-settings-editorPresetGroup {*/
+/*    flex: 1 1 15rem;*/
+/*    max-width: 22rem;*/
+/*}*/
+
+.quiqqer-bricks-multiLayout-settings-toolbarGroup--modes,
+.quiqqer-bricks-multiLayout-settings-toolbarGroup--actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.quiqqer-bricks-multiLayout-settings-toolbarLabel {
+    color: #52606d;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.quiqqer-bricks-multiLayout-settings-select,
+.quiqqer-bricks-multiLayout-settings-button,
+.quiqqer-bricks-multiLayout-settings-modeButton,
+.quiqqer-bricks-multiLayout-settings-presetCard {
+    border-radius: 0.6rem;
+    min-height: 2.6rem;
+}
+
+.quiqqer-bricks-multiLayout-settings-select {
+    background: #ffffff;
+    border: 1px solid #d9dfe7;
+    color: #253443;
+    padding: 0.6rem 0.9rem;
+    width: 100%;
+}
+
+.quiqqer-bricks-multiLayout-settings-button,
+.quiqqer-bricks-multiLayout-settings-modeButton {
+    background: #ffffff;
+    border: 1px solid #d9dfe7;
+    color: #253443;
+    padding: 0.6rem 0.9rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.quiqqer-bricks-multiLayout-settings-presetActions {
+    display: flex;
+    gap: 0.65rem;
+    min-width: 0;
+}
+
+.quiqqer-bricks-multiLayout-settings-presetCard {
+    background: #ffffff;
+    border: 1px solid #d9dfe7;
+    cursor: pointer;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.quiqqer-bricks-multiLayout-settings-presetGridWrap {
+    background: #f7f9fb;
+    border: 1px solid #d9dfe7;
+    border-radius: 1rem;
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    max-height: 540px;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.quiqqer-bricks-multiLayout-settings-presetCard {
+    min-height: 0;
+    padding: 0.65rem;
+}
+
+.quiqqer-bricks-multiLayout-settings-presetPreview {
+    aspect-ratio: 12 / 7;
+    border-radius: 0.45rem;
+    display: grid;
+    gap: 0.5rem;
+    min-width: 0;
+    overflow: hidden;
+    padding: 0.18rem;
+    width: 100%;
+}
+
+.quiqqer-bricks-multiLayout-settings-presetPreviewSlot {
+    background: #c8d0d9;
+    border-radius: 0.3rem;
+    display: block;
+    min-width: 0;
+}
+
+.quiqqer-bricks-multiLayout-settings-modeButton.is-active,
+.quiqqer-bricks-multiLayout-settings-button:hover,
+.quiqqer-bricks-multiLayout-settings-button:focus,
+.quiqqer-bricks-multiLayout-settings-presetCard:hover,
+.quiqqer-bricks-multiLayout-settings-presetCard:focus,
+.quiqqer-bricks-multiLayout-settings-modeButton:hover,
+.quiqqer-bricks-multiLayout-settings-modeButton:focus {
+    border-color: #8eb3d8;
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.12);
+    outline: none;
+}
+
+.quiqqer-bricks-multiLayout-settings-presetCard.is-active {
+    background: #edf4fb;
+    border-color: #6b9ed2;
+    box-shadow: inset 0 0 0 1px #6b9ed2;
+}
+
+.quiqqer-bricks-multiLayout-settings-container {
+    display: grid;
+    gap: 1rem;
+}
+
+.quiqqer-bricks-multiLayout-settings-canvas {
+    min-width: 0;
+}
+
+.quiqqer-bricks-multiLayout-settings-contentGrid {
+    display: grid;
+    gap: 1rem;
+    grid-auto-rows: minmax(180px, auto);
+}
+
+.quiqqer-bricks-multiLayout-settings-slotWrap {
+    min-width: 0;
+}
+
+.quiqqer-bricks-multiLayout-settings-slotWrap.is-surface-subtle-enabled .quiqqer-bricks-blockSlot-preview {
+    background-color: var(--qui-colors-surface-subtle, #f5f7fa);
+}
+
+.quiqqer-bricks-multiLayout-settings-layoutGrid {
+    background: linear-gradient(180deg, #f9fbfd 0%, #f3f6fa 100%);
+    border: 1px solid #d9dfe7;
+    border-radius: 1rem;
+    min-height: 420px;
+    overflow: hidden;
+    padding: 0.75rem;
+    position: relative;
+    min-height: 100%;
+}
+
+.quiqqer-bricks-multiLayout-settings-layoutGrid::before {
+    background-image:
+        linear-gradient(
+            to right,
+            rgba(107, 158, 210, 0.14) 0,
+            rgba(107, 158, 210, 0.14) 1px,
+            transparent 1px,
+            transparent 100%
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(107, 158, 210, 0.12) 0,
+            rgba(107, 158, 210, 0.12) 1px,
+            transparent 1px,
+            transparent 100%
+        );
+    background-position: 0 0;
+    background-size: var(--gs-column-width, 80px) var(--gs-cell-height, 160px);
+    border-radius: inherit;
+    content: '';
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+}
+
+.quiqqer-bricks-multiLayout-settings-layoutGrid > .grid-stack-item,
+.quiqqer-bricks-multiLayout-settings-layoutGrid > .grid-stack-placeholder {
+    z-index: 1;
+}
+
+.quiqqer-bricks-multiLayout-settings-layoutGrid .grid-stack-item-content {
+    background: transparent;
+    inset: 0.4rem;
+    overflow: hidden;
+}
+
+.quiqqer-bricks-multiLayout-settings-layoutGrid .ui-resizable-handle {
+    background-image: none;
+    opacity: 0;
+}
+
+.quiqqer-bricks-multiLayout-settings-editorWindow {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.quiqqer-bricks-multiLayout-settings-editorHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.quiqqer-bricks-multiLayout-settings-editorHint {
+    color: #52606d;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.quiqqer-bricks-multiLayout-settings-editorToolbar {
+    align-items: flex-end;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.quiqqer-bricks-multiLayout-settings-editorActions {
+    display: flex;
+    margin-left: auto;
+}
+
+.quiqqer-bricks-multiLayout-settings-breakpointButton {
+    background: #f4f7fa;
+    border: 1px solid #d9dfe7;
+    border-radius: 999px;
+    color: #253443;
+    padding: 0.45rem 0.95rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.quiqqer-bricks-multiLayout-settings-breakpointButton.is-active,
+.quiqqer-bricks-multiLayout-settings-breakpointButton:hover,
+.quiqqer-bricks-multiLayout-settings-breakpointButton:focus {
+    background: #ffffff;
+    border-color: #8eb3d8;
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.12);
+    outline: none;
+}
+
+.quiqqer-bricks-multiLayout-settings-editorCanvas {
+    --qb-ml-frame-color: #1c1c1e;
+    --qb-ml-bar-bg: #2c2c2e;
+    --qb-ml-screen-bg: #f5f5f7;
+    --qb-ml-dot-r: #ff5f57;
+    --qb-ml-dot-y: #ffbd2e;
+    --qb-ml-dot-g: #28c840;
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.quiqqer-bricks-multiLayout-settings-deviceFrame {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-inline: auto;
+    min-width: 0;
+    width: 100%;
+}
+
+.quiqqer-bricks-multiLayout-settings-layoutGridWrap {
+    min-width: 0;
+}
+
+/* ── Desktop frame ── */
+.quiqqer-bricks-multiLayout-settings-deviceFrame--desktop {
+    background: var(--qb-ml-frame-color);
+    border-radius: 10px;
+    max-width: 1100px;
+    overflow: hidden;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.quiqqer-bricks-multiLayout-settings-deviceFrame--desktop .quiqqer-bricks-multiLayout-settings-layoutGridWrap {
+    background: var(--qb-ml-screen-bg);
+    padding-block: 1rem;
+    padding-inline: 4rem;
+    overflow: auto;
+    flex-grow: 1;
+}
+
+.quiqqer-bricks-multiLayout-settings-deviceFrame--desktop .quiqqer-bricks-multiLayout-settings-layoutGrid {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+.quiqqer-bricks-multiLayout-settings-browserBar {
+    align-items: center;
+    background: var(--qb-ml-bar-bg);
+    display: flex;
+    gap: 10px;
+    padding: 10px 14px;
+}
+
+.quiqqer-bricks-multiLayout-settings-browserDots {
+    display: flex;
+    gap: 6px;
+}
+
+.quiqqer-bricks-multiLayout-settings-browserDot {
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+}
+
+.quiqqer-bricks-multiLayout-settings-browserDot--r { background: var(--qb-ml-dot-r); }
+.quiqqer-bricks-multiLayout-settings-browserDot--y { background: var(--qb-ml-dot-y); }
+.quiqqer-bricks-multiLayout-settings-browserDot--g { background: var(--qb-ml-dot-g); }
+
+.quiqqer-bricks-multiLayout-settings-browserUrl {
+    background: #3a3a3c;
+    border-radius: 4px;
+    flex: 1;
+    height: 20px;
+    margin: 0 auto;
+    max-width: 260px;
+}
+
+/* ── Tablet frame ── */
+.quiqqer-bricks-multiLayout-settings-deviceFrame--tablet {
+    background: var(--qb-ml-frame-color);
+    border-radius: 22px;
+    max-width: 620px;
+    padding: 8px;
+    position: relative;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.quiqqer-bricks-multiLayout-settings-deviceFrame--tablet .quiqqer-bricks-multiLayout-settings-layoutGridWrap {
+    background: var(--qb-ml-screen-bg);
+    border-radius: 16px;
+    height: 100%;
+    overflow: auto;
+}
+
+.quiqqer-bricks-multiLayout-settings-deviceFrame--tablet .quiqqer-bricks-multiLayout-settings-layoutGrid {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+.quiqqer-bricks-multiLayout-settings-tabletNotch {
+    background: #3a3a3c;
+    border-radius: 50%;
+    height: 8px;
+    left: 50%;
+    position: absolute;
+    top: 18px;
+    transform: translateX(-50%);
+    width: 8px;
+    z-index: 2;
+}
+
+.quiqqer-bricks-multiLayout-settings-tabletHomebar {
+    background: #aaa;
+    border-radius: 2px;
+    bottom: 18px;
+    height: 4px;
+    left: 50%;
+    opacity: 0.5;
+    position: absolute;
+    transform: translateX(-50%);
+    width: 80px;
+    z-index: 2;
+}
+
+/* ── Mobile frame ── */
+.quiqqer-bricks-multiLayout-settings-deviceFrame--mobile {
+    background: var(--qb-ml-frame-color);
+    border-radius: 28px;
+    max-width: 460px;
+    padding: 6px;
+    position: relative;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.quiqqer-bricks-multiLayout-settings-deviceFrame--mobile .quiqqer-bricks-multiLayout-settings-layoutGridWrap {
+    background: var(--qb-ml-screen-bg);
+    border-radius: 22px;
+    padding-block: 1rem;
+    overflow: auto;
+    height: 100%;
+}
+
+.quiqqer-bricks-multiLayout-settings-deviceFrame--mobile .quiqqer-bricks-multiLayout-settings-layoutGrid {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+.quiqqer-bricks-multiLayout-settings-mobileIsland {
+    background: var(--qb-ml-frame-color);
+    border-radius: 20px;
+    height: 22px;
+    left: 50%;
+    position: absolute;
+    top: 16px;
+    transform: translateX(-50%);
+    width: 120px;
+    z-index: 2;
+}
+
+.quiqqer-bricks-multiLayout-settings-mobileHomebar {
+    background: #aaa;
+    border-radius: 3px;
+    bottom: 18px;
+    height: 4px;
+    left: 50%;
+    opacity: 0.6;
+    position: absolute;
+    transform: translateX(-50%);
+    width: 120px;
+    z-index: 2;
+}
+
+@media (max-width: 767px) {
+    .quiqqer-bricks-multiLayout-settings-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .quiqqer-bricks-multiLayout-settings-toolbarGroup,
+    .quiqqer-bricks-multiLayout-settings-toolbarGroup--modes,
+    .quiqqer-bricks-multiLayout-settings-toolbarGroup--actions,
+    .quiqqer-bricks-multiLayout-settings-editorPresetGroup,
+    .quiqqer-bricks-multiLayout-settings-presetActions {
+        max-width: none;
+        width: 100%;
+    }
+
+    .quiqqer-bricks-multiLayout-settings-editorToolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .quiqqer-bricks-multiLayout-settings-editorActions {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .quiqqer-bricks-multiLayout-settings-presetActions {
+        flex-direction: column;
+    }
+
+    .quiqqer-bricks-multiLayout-settings-presetGridWrap {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        max-height: 420px;
+    }
+
+    .quiqqer-bricks-multiLayout-settings-contentGrid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .quiqqer-bricks-multiLayout-settings-slotWrap {
+        grid-column: 1 / -1 !important;
+        grid-row: auto !important;
+    }
+}
