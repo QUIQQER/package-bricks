@@ -1,0 +1,13 @@
+{if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+    <h2 class="control-header">{$this->getAttribute('frontendTitle')}</h2>
+{/if}
+
+{if $this->getAttribute('content') != ""}
+    <div class="control-content">
+        {$this->getAttribute('content')}
+    </div>
+{/if}
+
+<div class="control-template">
+    {$layoutHtml}
+</div>

@@ -58,7 +58,8 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
             'del',
             '$normalizeCategoryData',
             '$onCategoryEnter',
-            '$onCategoryLeave'
+            '$onCategoryLeave',
+            '$sortCategoriesByIndex'
         ],
 
         options: {
