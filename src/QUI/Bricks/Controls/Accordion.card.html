@@ -1,7 +1,5 @@
 {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
-    <header class="control-header">
-        <h1>{$this->getAttribute('frontendTitle')}</h1>
-    </header>
+    <h2 class="control-header">{$this->getAttribute('frontendTitle')}</h2>
 {/if}
 
 {if $this->getAttribute('content') != ""}
