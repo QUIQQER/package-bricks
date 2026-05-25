@@ -15,6 +15,11 @@
             ]]></en>
         </locale>
 
+        <locale name="brick.deprecated">
+            <de><![CDATA[Dieser Brick ist deprecated und sollte nicht mehr genutzt werden. Beachte das in neueren Version dieser Brick nicht mehr einwandfrei funktionieren kann.]]></de>
+            <en><![CDATA[This brick is deprecated and should not be used anymore. Note that in newer versions this brick may not work properly.]]></en>
+        </locale>
+
         <locale name="brickFullWidth">
             <de><![CDATA[Volle Breite erlauben]]></de>
             <en><![CDATA[Allow full size]]></en>
@@ -30,6 +35,10 @@
         <locale name="permission.quiqqer.bricks._header">
             <de><![CDATA[Bausteine]]></de>
             <en><![CDATA[Bricks]]></en>
+        </locale>
+        <locale name="permission.quiqqer.bricks.mcp">
+            <de><![CDATA[Darf Bausteine per MCP verwenden.]]></de>
+            <en><![CDATA[Can edit bricks via MCP.]]></en>
         </locale>
         <locale name="permission.quiqqer.bricks.assign">
             <de><![CDATA[Darf Bausteine Seiten zuweisen.]]></de>
@@ -964,16 +973,6 @@ This content does not replace the block content. You can still place the brick t
             Error in brick type. The block type is not permitted and is therefore not saved.
             ]]></en>
         </locale>
-        <locale name="brick.deprecated">
-            <de><![CDATA[
-            Dieser Brick ist deprecated und sollte nicht mehr genutzt werden.
-            Beachte das in neueren Version dieser Brick nicht mehr einwandfrei funktionieren kann.
-            ]]></de>
-            <en><![CDATA[
-            This brick is deprecated and should not be used anymore.
-            Note that in newer versions this brick may not work properly.
-            ]]></en>
-        </locale>
     </groups>
     <groups name="quiqqer/bricks" datatype="js">
         <locale name="brick.type">
@@ -1186,6 +1185,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="manager.grid.status.inactive">
             <de><![CDATA[Baustein ist deaktiviert]]></de>
             <en><![CDATA[Brick is disabled]]></en>
+        </locale>
+        <locale name="manager.grid.missingControl.badge">
+            <de><![CDATA[Nicht verfügbar]]></de>
+            <en><![CDATA[Unavailable]]></en>
+        </locale>
+        <locale name="manager.grid.missingControl.info">
+            <de><![CDATA[Dieser Baustein ist im System nicht verfügbar. Möglicherweise fehlt das zugehörige Paket.]]></de>
+            <en><![CDATA[This brick is not available in the system. The corresponding package may be missing.]]></en>
         </locale>
 
         <locale name="manager.window.delete.title">
@@ -2736,6 +2743,1056 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Entries]]></de>
             <en><![CDATA[Entries]]></en>
         </locale>
+        <locale name="brick.multiLayout.title">
+            <de><![CDATA[Flexibles Layout]]></de>
+            <en><![CDATA[Flexible Layout]]></en>
+        </locale>
+        <locale name="brick.multiLayout.description">
+            <de><![CDATA[<p>Mit diesem Baustein gestaltest du Seitenbereiche so frei, wie es dein Inhalt verlangt. Du kombinierst Texte, Bilder, Buttons und weitere Bausteine in einem flexiblen Raster, das sich deinem Aufbau anpasst.</p>
+<p>Ob kompakter Teaser, großzügige Content-Fläche oder modularer Abschnitt mit mehreren Schwerpunkten: Das MultiLayout gibt dir die passende Struktur dafür. So entsteht ein individuelles Layout, ohne dass du dich an starre Vorgaben halten musst.</p>
+<ul>
+    <li><strong>Flexible Layout-Vorlagen:</strong> Starte mit einem Preset und passe die Anordnung an deinen Inhalt an.</li>
+    <li><strong>Frei belegbare Bereiche:</strong> Jeder Bereich kann individuell mit Text, Bild, Button oder weiteren Bausteinen gefüllt werden.</li>
+    <li><strong>Sublayouts möglich:</strong> Bei Bedarf lassen sich in einzelnen Bereichen weitere Layout-Strukturen anlegen, um Inhalte noch feiner zu gliedern.</li>
+    <li><strong>Responsive steuerbar:</strong> Für Desktop, Tablet und Mobile lässt sich die Struktur passend zur Ausgabe aufbauen.</li>
+    <li><strong>Mobile-Reihenfolge definierbar:</strong> Lege fest, in welcher Reihenfolge Inhalte auf kleinen Geräten erscheinen.</li>
+    <li><strong>Visuell vielseitig:</strong> Ausrichtung, Hintergrundbild, Overlay, Farben und Abstände lassen sich pro Bereich flexibel einstellen.</li>
+    <li><strong>Für viele Einsatzzwecke geeignet:</strong> Ideal für Teaser-Zonen, Bild-Text-Kombinationen, Bento-Layouts und modulare Inhaltsbereiche.</li>
+</ul>
+<p>Damit baust du vom einfachen Aufmacher bis zum komplexen Seitenabschnitt sehr unterschiedliche Layouts in nur einem Baustein. Und das alles direkt im Editor, ohne selbst Code schreiben zu müssen.</p>]]></de>
+            <en><![CDATA[<p>This brick gives you the freedom to build page sections around your content instead of forcing your content into a rigid structure. Combine text, images, buttons and other bricks inside a flexible grid that adapts to your layout needs.</p>
+<p>Whether you need a compact teaser, a spacious content section or a modular area with multiple focal points, MultiLayout gives you the right foundation. That makes it easy to create individual layouts without being locked into fixed patterns.</p>
+<ul>
+    <li><strong>Flexible layout presets:</strong> Start with a preset and adapt the arrangement to your content.</li>
+    <li><strong>Freely assignable areas:</strong> Each area can be filled with text, images, buttons or other bricks.</li>
+    <li><strong>Supports sublayouts:</strong> If needed, individual areas can contain additional layout structures for even more granular content arrangements.</li>
+    <li><strong>Responsive control:</strong> Build the structure for desktop, tablet and mobile exactly as needed.</li>
+    <li><strong>Custom mobile order:</strong> Decide in which order content appears on smaller devices.</li>
+    <li><strong>Versatile styling options:</strong> Alignment, background image, overlay, colors and spacing can be configured per area.</li>
+    <li><strong>Useful for many scenarios:</strong> Ideal for teaser zones, image-text combinations, bento layouts and modular content sections.</li>
+</ul>
+<p>That allows you to create everything from simple highlights to complex page sections with a single brick. And you can do it directly in the editor without writing code yourself.</p>]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.1">
+            <de><![CDATA[Layout 1]]></de>
+            <en><![CDATA[Layout 1]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.2">
+            <de><![CDATA[Layout 2]]></de>
+            <en><![CDATA[Layout 2]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.3">
+            <de><![CDATA[Layout 3]]></de>
+            <en><![CDATA[Layout 3]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.4">
+            <de><![CDATA[Layout 4]]></de>
+            <en><![CDATA[Layout 4]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.5">
+            <de><![CDATA[Layout 5]]></de>
+            <en><![CDATA[Layout 5]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.6">
+            <de><![CDATA[Layout 6]]></de>
+            <en><![CDATA[Layout 6]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.7">
+            <de><![CDATA[Layout 7]]></de>
+            <en><![CDATA[Layout 7]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.8">
+            <de><![CDATA[Layout 8]]></de>
+            <en><![CDATA[Layout 8]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.9">
+            <de><![CDATA[Layout 9]]></de>
+            <en><![CDATA[Layout 9]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.10">
+            <de><![CDATA[Layout 10]]></de>
+            <en><![CDATA[Layout 10]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.11">
+            <de><![CDATA[Layout 11]]></de>
+            <en><![CDATA[Layout 11]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.12">
+            <de><![CDATA[Layout 12]]></de>
+            <en><![CDATA[Layout 12]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.13">
+            <de><![CDATA[Layout 13]]></de>
+            <en><![CDATA[Layout 13]]></en>
+        </locale>
+        <locale name="brick.multiLayout.layout.14">
+            <de><![CDATA[Layout 14]]></de>
+            <en><![CDATA[Layout 14]]></en>
+        </locale>
+        <locale name="brick.multiLayout.areas">
+            <de><![CDATA[Bereiche]]></de>
+            <en><![CDATA[Areas]]></en>
+        </locale>
+        <locale name="brick.multiLayout.areaBackgroundEnabled">
+            <de><![CDATA[Hintergrundfarbe für Bereiche verwenden]]></de>
+            <en><![CDATA[Use background color for areas]]></en>
+        </locale>
+        <locale name="brick.multiLayout.areaBackgroundEnabled.desc">
+            <de><![CDATA[Setzt eine einheitliche Hintergrundfarbe für alle Bereiche. Einzelne Bereiche können diese in den Bereichseinstellungen überschreiben.]]></de>
+            <en><![CDATA[Applies a uniform background color to all areas. Individual areas can override this in their own settings.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridGap">
+            <de><![CDATA[Abstand zwischen Kacheln]]></de>
+            <en><![CDATA[Spacing between tiles]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridGap.desc">
+            <de><![CDATA[Steuert den freien Raum zwischen den Kacheln. Kleine Werte wirken kompakter, große Werte luftiger. Die Stufen sind responsiv und passen sich der verfügbaren Breite an: Kein Abstand = 0, Klein = dezent, Normal = ausgewogen, Groß = luftig, Extra groß = sehr luftig.]]></de>
+            <en><![CDATA[Controls the free space between tiles. Smaller values feel more compact, larger values create more breathing room. The presets are responsive and adapt to the available width: No spacing = 0, Small = subtle, Normal = balanced, Large = airy, Extra large = very airy.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridGap.option.none">
+            <de><![CDATA[Kein Abstand]]></de>
+            <en><![CDATA[No spacing]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridGap.option.small">
+            <de><![CDATA[Klein (dezent)]]></de>
+            <en><![CDATA[Small (subtle)]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridGap.option.normal">
+            <de><![CDATA[Normal (ausgewogen)]]></de>
+            <en><![CDATA[Normal (balanced)]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridGap.option.large">
+            <de><![CDATA[Groß (luftig)]]></de>
+            <en><![CDATA[Large (airy)]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridGap.option.extraLarge">
+            <de><![CDATA[Extra groß (sehr luftig)]]></de>
+            <en><![CDATA[Extra large (very airy)]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight">
+            <de><![CDATA[Mindesthöhe der Kacheln]]></de>
+            <en><![CDATA[Minimum height of tiles]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.desc">
+            <de><![CDATA[Legt die kleinste Höhe jeder Kachel fest. Das hilft, Kacheln trotz unterschiedlich langer Inhalte ruhiger und gleichmäßiger wirken zu lassen. Keine Mindesthöhe richtet sich nur nach dem Inhalt, Manuell erlaubt einen eigenen CSS-Wert wie 240px, 18rem oder 30vh.]]></de>
+            <en><![CDATA[Defines the minimum height of each tile. This helps tiles look calmer and more even when their content lengths differ. No minimum height follows the content only, while Manual allows a custom CSS value such as 240px, 18rem or 30vh.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.none">
+            <de><![CDATA[Keine Mindesthöhe]]></de>
+            <en><![CDATA[No minimum height]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.compact">
+            <de><![CDATA[Kompakt]]></de>
+            <en><![CDATA[Compact]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.standard">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Standard]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.large">
+            <de><![CDATA[Groß]]></de>
+            <en><![CDATA[Large]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.extraLarge">
+            <de><![CDATA[Extra groß]]></de>
+            <en><![CDATA[Extra large]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.option.manual">
+            <de><![CDATA[Manuell]]></de>
+            <en><![CDATA[Manual]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.value">
+            <de><![CDATA[Eigener Wert für Mindesthöhe]]></de>
+            <en><![CDATA[Custom minimum height value]]></en>
+        </locale>
+        <locale name="brick.multiLayout.tileMinHeight.value.help">
+            <de><![CDATA[Wird nur bei „Manuell“ verwendet, z. B. 240px, 18rem, 30vh; Zahlen ohne Einheit werden als px interpretiert]]></de>
+            <en><![CDATA[Used only for “Manual”, e.g. 240px, 18rem, 30vh; numbers without a unit are interpreted as px]]></en>
+        </locale>
+        <locale name="blockSlot.mode">
+            <de><![CDATA[Modus]]></de>
+            <en><![CDATA[Mode]]></en>
+        </locale>
+        <locale name="blockSlot.mode.editor">
+            <de><![CDATA[Editor]]></de>
+            <en><![CDATA[Editor]]></en>
+        </locale>
+        <locale name="blockSlot.mode.brick">
+            <de><![CDATA[Baustein]]></de>
+            <en><![CDATA[Brick]]></en>
+        </locale>
+        <locale name="blockSlot.mode.image">
+            <de><![CDATA[Bild]]></de>
+            <en><![CDATA[Image]]></en>
+        </locale>
+        <locale name="blockSlot.mode.subLayout">
+            <de><![CDATA[Sublayout]]></de>
+            <en><![CDATA[Sub-layout]]></en>
+        </locale>
+        <locale name="blockSlot.mobileOrder">
+            <de><![CDATA[Mobile-Reihenfolge]]></de>
+            <en><![CDATA[Mobile order]]></en>
+        </locale>
+        <locale name="blockSlot.mobileOrder.info">
+            <de><![CDATA[Mobile-Reihenfolge: [number]]]></de>
+            <en><![CDATA[Mobile order: [number]]]></en>
+        </locale>
+        <locale name="blockSlot.verticalAlign">
+            <de><![CDATA[Vertikale Ausrichtung]]></de>
+            <en><![CDATA[Vertical alignment]]></en>
+        </locale>
+        <locale name="blockSlot.verticalAlign.top">
+            <de><![CDATA[Oben]]></de>
+            <en><![CDATA[Top]]></en>
+        </locale>
+        <locale name="blockSlot.verticalAlign.center">
+            <de><![CDATA[Mittig]]></de>
+            <en><![CDATA[Center]]></en>
+        </locale>
+        <locale name="blockSlot.verticalAlign.bottom">
+            <de><![CDATA[Unten]]></de>
+            <en><![CDATA[Bottom]]></en>
+        </locale>
+        <locale name="blockSlot.verticalAlign.stretch">
+            <de><![CDATA[Volle Höhe]]></de>
+            <en><![CDATA[Full height]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.section">
+            <de><![CDATA[Mindesthöhe]]></de>
+            <en><![CDATA[Minimum height]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.enabled">
+            <de><![CDATA[Eigene Mindesthöhe verwenden]]></de>
+            <en><![CDATA[Use custom minimum height]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.select">
+            <de><![CDATA[Mindesthöhe]]></de>
+            <en><![CDATA[Minimum height]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.value">
+            <de><![CDATA[Eigener Wert]]></de>
+            <en><![CDATA[Custom value]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.value.help">
+            <de><![CDATA[z. B. 240px, 18rem, 30vh; Zahlen ohne Einheit werden als px interpretiert]]></de>
+            <en><![CDATA[e.g. 240px, 18rem, 30vh; numbers without a unit are interpreted as px]]></en>
+        </locale>
+        <locale name="blockSlot.customCss.section">
+            <de><![CDATA[Eigenes CSS]]></de>
+            <en><![CDATA[Custom CSS]]></en>
+        </locale>
+        <locale name="blockSlot.customCss.classes">
+            <de><![CDATA[CSS-Klassen]]></de>
+            <en><![CDATA[CSS classes]]></en>
+        </locale>
+        <locale name="blockSlot.customCss.help">
+            <de><![CDATA[Mehrere Klassen kommasepariert eingeben, z. B. klasse-a, klasse-b]]></de>
+            <en><![CDATA[Enter multiple classes separated by commas, e.g. class-a, class-b]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.none">
+            <de><![CDATA[Keine Mindesthöhe]]></de>
+            <en><![CDATA[No minimum height]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.compact">
+            <de><![CDATA[Kompakt]]></de>
+            <en><![CDATA[Compact]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.standard">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Standard]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.large">
+            <de><![CDATA[Groß]]></de>
+            <en><![CDATA[Large]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.extraLarge">
+            <de><![CDATA[Extra groß]]></de>
+            <en><![CDATA[Extra large]]></en>
+        </locale>
+        <locale name="blockSlot.customMinHeight.option.manual">
+            <de><![CDATA[Manuell]]></de>
+            <en><![CDATA[Manual]]></en>
+        </locale>
+        <locale name="blockSlot.editor.empty">
+            <de><![CDATA[Noch kein Inhalt hinterlegt]]></de>
+            <en><![CDATA[No content yet]]></en>
+        </locale>
+        <locale name="blockSlot.brick.empty">
+            <de><![CDATA[Kein Baustein ausgewählt]]></de>
+            <en><![CDATA[No brick selected]]></en>
+        </locale>
+        <locale name="blockSlot.brick.untitled">
+            <de><![CDATA[Baustein ohne Titel]]></de>
+            <en><![CDATA[Untitled brick]]></en>
+        </locale>
+        <locale name="blockSlot.image.empty">
+            <de><![CDATA[Noch kein Bild ausgewählt]]></de>
+            <en><![CDATA[No image selected]]></en>
+        </locale>
+        <locale name="blockSlot.subLayout.title">
+            <de><![CDATA[Sublayout]]></de>
+            <en><![CDATA[Sub-layout]]></en>
+        </locale>
+        <locale name="blockSlot.subLayout.section">
+            <de><![CDATA[Sublayout]]></de>
+            <en><![CDATA[Sub-layout]]></en>
+        </locale>
+        <locale name="blockSlot.subLayout.tileMinHeight">
+            <de><![CDATA[Mindesthöhe für Kacheln]]></de>
+            <en><![CDATA[Minimum tile height]]></en>
+        </locale>
+        <locale name="blockSlot.subLayout.tileMinHeight.value">
+            <de><![CDATA[Eigener Wert]]></de>
+            <en><![CDATA[Custom value]]></en>
+        </locale>
+        <locale name="blockSlot.subLayout.tileMinHeight.value.help">
+            <de><![CDATA[Zahl ohne Einheit wird als Pixel interpretiert, z. B. 240 oder 15rem.]]></de>
+            <en><![CDATA[Numbers without a unit are interpreted as pixels, e.g. 240 or 15rem.]]></en>
+        </locale>
+        <locale name="blockSlot.image.fit">
+            <de><![CDATA[Darstellungsart]]></de>
+            <en><![CDATA[Display mode]]></en>
+        </locale>
+        <locale name="blockSlot.image.fit.auto">
+            <de><![CDATA[Automatisch]]></de>
+            <en><![CDATA[Automatic]]></en>
+        </locale>
+        <locale name="blockSlot.image.fit.cover">
+            <de><![CDATA[Fläche füllen]]></de>
+            <en><![CDATA[Cover area]]></en>
+        </locale>
+        <locale name="blockSlot.image.fit.contain">
+            <de><![CDATA[Komplett anzeigen]]></de>
+            <en><![CDATA[Show complete]]></en>
+        </locale>
+        <locale name="blockSlot.image.section">
+            <de><![CDATA[Bild]]></de>
+            <en><![CDATA[Image]]></en>
+        </locale>
+        <locale name="blockSlot.image.width">
+            <de><![CDATA[Breite]]></de>
+            <en><![CDATA[Width]]></en>
+        </locale>
+        <locale name="blockSlot.image.width.help">
+            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = automatisch; Zahlen ohne Einheit werden als px interpretiert]]></de>
+            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = automatic; numbers without a unit are interpreted as px]]></en>
+        </locale>
+        <locale name="blockSlot.image.height">
+            <de><![CDATA[Höhe]]></de>
+            <en><![CDATA[Height]]></en>
+        </locale>
+        <locale name="blockSlot.image.height.help">
+            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = automatisch; Zahlen ohne Einheit werden als px interpretiert]]></de>
+            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = automatic; numbers without a unit are interpreted as px]]></en>
+        </locale>
+        <locale name="blockSlot.image.position">
+            <de><![CDATA[Bildposition]]></de>
+            <en><![CDATA[Image position]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.leftTop">
+            <de><![CDATA[Oben links]]></de>
+            <en><![CDATA[Top left]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.centerTop">
+            <de><![CDATA[Oben mittig]]></de>
+            <en><![CDATA[Top center]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.rightTop">
+            <de><![CDATA[Oben rechts]]></de>
+            <en><![CDATA[Top right]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.leftCenter">
+            <de><![CDATA[Mittig links]]></de>
+            <en><![CDATA[Center left]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.center">
+            <de><![CDATA[Mittig]]></de>
+            <en><![CDATA[Center]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.rightCenter">
+            <de><![CDATA[Mittig rechts]]></de>
+            <en><![CDATA[Center right]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.leftBottom">
+            <de><![CDATA[Unten links]]></de>
+            <en><![CDATA[Bottom left]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.centerBottom">
+            <de><![CDATA[Unten mittig]]></de>
+            <en><![CDATA[Bottom center]]></en>
+        </locale>
+        <locale name="blockSlot.image.position.rightBottom">
+            <de><![CDATA[Unten rechts]]></de>
+            <en><![CDATA[Bottom right]]></en>
+        </locale>
+        <locale name="blockSlot.background.section">
+            <de><![CDATA[Hintergrundbild]]></de>
+            <en><![CDATA[Background image]]></en>
+        </locale>
+        <locale name="blockSlot.background.enabled">
+            <de><![CDATA[Hintergrundbild verwenden]]></de>
+            <en><![CDATA[Use background image]]></en>
+        </locale>
+        <locale name="blockSlot.background.image">
+            <de><![CDATA[Hintergrundbild]]></de>
+            <en><![CDATA[Background image]]></en>
+        </locale>
+        <locale name="blockSlot.background.fit">
+            <de><![CDATA[Darstellung]]></de>
+            <en><![CDATA[Display mode]]></en>
+        </locale>
+        <locale name="blockSlot.background.fit.auto">
+            <de><![CDATA[Original]]></de>
+            <en><![CDATA[Original]]></en>
+        </locale>
+        <locale name="blockSlot.background.fit.cover">
+            <de><![CDATA[Fläche füllen]]></de>
+            <en><![CDATA[Cover area]]></en>
+        </locale>
+        <locale name="blockSlot.background.fit.contain">
+            <de><![CDATA[Komplett anzeigen]]></de>
+            <en><![CDATA[Show complete]]></en>
+        </locale>
+        <locale name="blockSlot.background.position">
+            <de><![CDATA[Position]]></de>
+            <en><![CDATA[Position]]></en>
+        </locale>
+        <locale name="blockSlot.background.position.leftTop">
+            <de><![CDATA[Oben links]]></de>
+            <en><![CDATA[Top left]]></en>
+        </locale>
+        <locale name="blockSlot.background.position.centerTop">
+            <de><![CDATA[Oben mittig]]></de>
+            <en><![CDATA[Top center]]></en>
+        </locale>
+        <locale name="blockSlot.background.position.rightTop">
+            <de><![CDATA[Oben rechts]]></de>
+            <en><![CDATA[Top right]]></en>
+        </locale>
+        <locale name="blockSlot.background.position.leftCenter">
+            <de><![CDATA[Mittig links]]></de>
+            <en><![CDATA[Center left]]></en>
+        </locale>
+        <locale name="blockSlot.background.position.center">
+            <de><![CDATA[Mittig]]></de>
+            <en><![CDATA[Center]]></en>
+        </locale>
+        <locale name="blockSlot.background.position.rightCenter">
+            <de><![CDATA[Mittig rechts]]></de>
+            <en><![CDATA[Center right]]></en>
+        </locale>
+        <locale name="blockSlot.background.position.leftBottom">
+            <de><![CDATA[Unten links]]></de>
+            <en><![CDATA[Bottom left]]></en>
+        </locale>
+        <locale name="blockSlot.background.position.centerBottom">
+            <de><![CDATA[Unten mittig]]></de>
+            <en><![CDATA[Bottom center]]></en>
+        </locale>
+        <locale name="blockSlot.background.position.rightBottom">
+            <de><![CDATA[Unten rechts]]></de>
+            <en><![CDATA[Bottom right]]></en>
+        </locale>
+        <locale name="blockSlot.backgroundColor.section">
+            <de><![CDATA[Hintergrundfarbe]]></de>
+            <en><![CDATA[Background color]]></en>
+        </locale>
+        <locale name="blockSlot.backgroundColor.enabled">
+            <de><![CDATA[Eigene Hintergrundfarbe verwenden]]></de>
+            <en><![CDATA[Use custom background color]]></en>
+        </locale>
+        <locale name="blockSlot.backgroundColor.color">
+            <de><![CDATA[Farbe]]></de>
+            <en><![CDATA[Color]]></en>
+        </locale>
+        <locale name="blockSlot.backgroundOverlay.enabled">
+            <de><![CDATA[Farb-Overlay verwenden]]></de>
+            <en><![CDATA[Use color overlay]]></en>
+        </locale>
+        <locale name="blockSlot.backgroundOverlay.description">
+            <de><![CDATA[Färbt das Hintergrundbild ein – z. B. um die Lesbarkeit von Text zu verbessern.]]></de>
+            <en><![CDATA[Tints the background image – e.g. to improve text legibility.]]></en>
+        </locale>
+        <locale name="blockSlot.backgroundOverlay.color">
+            <de><![CDATA[Farbe]]></de>
+            <en><![CDATA[Color]]></en>
+        </locale>
+        <locale name="blockSlot.backgroundOverlay.opacity">
+            <de><![CDATA[Deckkraft]]></de>
+            <en><![CDATA[Opacity]]></en>
+        </locale>
+        <locale name="blockSlot.textColor.section">
+            <de><![CDATA[Textfarbe]]></de>
+            <en><![CDATA[Text color]]></en>
+        </locale>
+        <locale name="blockSlot.textColor.enabled">
+            <de><![CDATA[Textfarbe verwenden]]></de>
+            <en><![CDATA[Use text color]]></en>
+        </locale>
+        <locale name="blockSlot.link.section">
+            <de><![CDATA[Link]]></de>
+            <en><![CDATA[Link]]></en>
+        </locale>
+        <locale name="blockSlot.link.enabled">
+            <de><![CDATA[Link für Kachel verwenden]]></de>
+            <en><![CDATA[Use link for tile]]></en>
+        </locale>
+        <locale name="blockSlot.link.href">
+            <de><![CDATA[Link setzen]]></de>
+            <en><![CDATA[Set link]]></en>
+        </locale>
+        <locale name="blockSlot.link.rel">
+            <de><![CDATA[Rel-Typ]]></de>
+            <en><![CDATA[Rel type]]></en>
+        </locale>
+        <locale name="blockSlot.link.rel.none">
+            <de><![CDATA[Kein rel-Attribut]]></de>
+            <en><![CDATA[No rel attribute]]></en>
+        </locale>
+        <locale name="blockSlot.link.rel.nofollow">
+            <de><![CDATA[nofollow]]></de>
+            <en><![CDATA[nofollow]]></en>
+        </locale>
+        <locale name="blockSlot.link.rel.noopener">
+            <de><![CDATA[noopener]]></de>
+            <en><![CDATA[noopener]]></en>
+        </locale>
+        <locale name="blockSlot.link.rel.noreferrer">
+            <de><![CDATA[noreferrer]]></de>
+            <en><![CDATA[noreferrer]]></en>
+        </locale>
+        <locale name="blockSlot.link.rel.noopenerNoreferrer">
+            <de><![CDATA[noopener noreferrer]]></de>
+            <en><![CDATA[noopener noreferrer]]></en>
+        </locale>
+        <locale name="blockSlot.link.rel.nofollowNoopenerNoreferrer">
+            <de><![CDATA[nofollow noopener noreferrer]]></de>
+            <en><![CDATA[nofollow noopener noreferrer]]></en>
+        </locale>
+        <locale name="blockSlot.link.target">
+            <de><![CDATA[Ziel]]></de>
+            <en><![CDATA[Target]]></en>
+        </locale>
+        <locale name="blockSlot.link.target.none">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Default]]></en>
+        </locale>
+        <locale name="blockSlot.link.target.self">
+            <de><![CDATA[Gleiches Fenster (_self)]]></de>
+            <en><![CDATA[Same window (_self)]]></en>
+        </locale>
+        <locale name="blockSlot.link.target.blank">
+            <de><![CDATA[Neuer Tab (_blank)]]></de>
+            <en><![CDATA[New tab (_blank)]]></en>
+        </locale>
+        <locale name="blockSlot.link.title">
+            <de><![CDATA[Link-Titel]]></de>
+            <en><![CDATA[Link title]]></en>
+        </locale>
+        <locale name="blockSlot.contentPaddingPreset">
+            <de><![CDATA[Innenabstand]]></de>
+            <en><![CDATA[Inner spacing]]></en>
+        </locale>
+        <locale name="blockSlot.contentPaddingPreset.option.none">
+            <de><![CDATA[Kein Abstand]]></de>
+            <en><![CDATA[No spacing]]></en>
+        </locale>
+        <locale name="blockSlot.contentPaddingPreset.option.small">
+            <de><![CDATA[Klein]]></de>
+            <en><![CDATA[Small]]></en>
+        </locale>
+        <locale name="blockSlot.contentPaddingPreset.option.normal">
+            <de><![CDATA[Normal]]></de>
+            <en><![CDATA[Normal]]></en>
+        </locale>
+        <locale name="blockSlot.contentPaddingPreset.option.large">
+            <de><![CDATA[Groß]]></de>
+            <en><![CDATA[Large]]></en>
+        </locale>
+        <locale name="blockSlot.contentPaddingPreset.option.extraLarge">
+            <de><![CDATA[Extra groß]]></de>
+            <en><![CDATA[Extra large]]></en>
+        </locale>
+        <locale name="blockSlot.quickEdit.title">
+            <de><![CDATA[[mode] schnell bearbeiten]]></de>
+            <en><![CDATA[Quick edit [mode]]]></en>
+        </locale>
+        <locale name="blockSlot.quickEdit.editor">
+            <de><![CDATA[Zum Bearbeiten klicken]]></de>
+            <en><![CDATA[Click to edit]]></en>
+        </locale>
+        <locale name="blockSlot.quickEdit.brick">
+            <de><![CDATA[Zum Auswählen klicken]]></de>
+            <en><![CDATA[Click to select]]></en>
+        </locale>
+        <locale name="blockSlot.quickEdit.image">
+            <de><![CDATA[Zum Bildauswählen klicken]]></de>
+            <en><![CDATA[Click to choose image]]></en>
+        </locale>
+        <locale name="blockSlot.quickEdit.subLayout">
+            <de><![CDATA[Sublayout bearbeiten]]></de>
+            <en><![CDATA[Edit sub-layout]]></en>
+        </locale>
+        <locale name="blockSlot.settings.button">
+            <de><![CDATA[Einstellungen]]></de>
+            <en><![CDATA[Settings]]></en>
+        </locale>
+        <locale name="blockSlot.settings.popup.title">
+            <de><![CDATA[Einstellungen für [title]]]></de>
+            <en><![CDATA[Settings for [title]]]></en>
+        </locale>
+        <locale name="blockSlot.remove.button">
+            <de><![CDATA[Entfernen]]></de>
+            <en><![CDATA[Remove]]></en>
+        </locale>
+        <locale name="blockSlot.remove.button.image">
+            <de><![CDATA[Bild löschen]]></de>
+            <en><![CDATA[Delete image]]></en>
+        </locale>
+        <locale name="blockSlot.remove.button.brick">
+            <de><![CDATA[Baustein löschen]]></de>
+            <en><![CDATA[Delete brick]]></en>
+        </locale>
+        <locale name="blockSlot.remove.popup.title">
+            <de><![CDATA[Inhalt von [title] entfernen?]]></de>
+            <en><![CDATA[Remove content from [title]?]]></en>
+        </locale>
+        <locale name="blockSlot.remove.popup.text">
+            <de><![CDATA[Soll der Inhalt vom Typ "[mode]" wirklich entfernt werden?]]></de>
+            <en><![CDATA[Do you really want to remove the content of type "[mode]"?]]></en>
+        </locale>
+        <locale name="blockSlot.remove.popup.information">
+            <de><![CDATA[Der Inhalt dieses Bereichs wird geleert. Einstellungen des Bereichs bleiben erhalten.]]></de>
+            <en><![CDATA[This area content will be cleared. The area settings will remain unchanged.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.area.label">
+            <de><![CDATA[Bereich [number]]]></de>
+            <en><![CDATA[Area [number]]]></en>
+        </locale>
+        <locale name="brick.multiLayout.mode">
+            <de><![CDATA[Modus]]></de>
+            <en><![CDATA[Mode]]></en>
+        </locale>
+        <locale name="brick.multiLayout.mode.editor">
+            <de><![CDATA[Editor]]></de>
+            <en><![CDATA[Editor]]></en>
+        </locale>
+        <locale name="brick.multiLayout.mode.brick">
+            <de><![CDATA[Baustein]]></de>
+            <en><![CDATA[Brick]]></en>
+        </locale>
+        <locale name="brick.multiLayout.mode.image">
+            <de><![CDATA[Bild]]></de>
+            <en><![CDATA[Image]]></en>
+        </locale>
+        <locale name="brick.multiLayout.mobileOrder">
+            <de><![CDATA[Mobile-Reihenfolge]]></de>
+            <en><![CDATA[Mobile order]]></en>
+        </locale>
+        <locale name="brick.multiLayout.mobileOrder.info">
+            <de><![CDATA[Mobile-Reihenfolge: [number]]]></de>
+            <en><![CDATA[Mobile order: [number]]]></en>
+        </locale>
+        <locale name="brick.multiLayout.verticalAlign">
+            <de><![CDATA[Vertikale Ausrichtung]]></de>
+            <en><![CDATA[Vertical alignment]]></en>
+        </locale>
+        <locale name="brick.multiLayout.verticalAlign.top">
+            <de><![CDATA[Oben]]></de>
+            <en><![CDATA[Top]]></en>
+        </locale>
+        <locale name="brick.multiLayout.verticalAlign.center">
+            <de><![CDATA[Mittig]]></de>
+            <en><![CDATA[Center]]></en>
+        </locale>
+        <locale name="brick.multiLayout.verticalAlign.bottom">
+            <de><![CDATA[Unten]]></de>
+            <en><![CDATA[Bottom]]></en>
+        </locale>
+        <locale name="brick.multiLayout.verticalAlign.stretch">
+            <de><![CDATA[Volle Höhe]]></de>
+            <en><![CDATA[Full height]]></en>
+        </locale>
+        <locale name="brick.multiLayout.editorContent">
+            <de><![CDATA[Inhalt]]></de>
+            <en><![CDATA[Content]]></en>
+        </locale>
+        <locale name="brick.multiLayout.editor.empty">
+            <de><![CDATA[Noch kein Inhalt hinterlegt]]></de>
+            <en><![CDATA[No content yet]]></en>
+        </locale>
+        <locale name="brick.multiLayout.brick.empty">
+            <de><![CDATA[Kein Baustein ausgewählt]]></de>
+            <en><![CDATA[No brick selected]]></en>
+        </locale>
+        <locale name="brick.multiLayout.brick.untitled">
+            <de><![CDATA[Baustein ohne Titel]]></de>
+            <en><![CDATA[Untitled brick]]></en>
+        </locale>
+        <locale name="brick.multiLayout.brick.select">
+            <de><![CDATA[Baustein auswählen]]></de>
+            <en><![CDATA[Select brick]]></en>
+        </locale>
+        <locale name="brick.multiLayout.image.empty">
+            <de><![CDATA[Noch kein Bild ausgewählt]]></de>
+            <en><![CDATA[No image selected]]></en>
+        </locale>
+        <locale name="brick.multiLayout.image.fit">
+            <de><![CDATA[Darstellungsart]]></de>
+            <en><![CDATA[Display mode]]></en>
+        </locale>
+        <locale name="brick.multiLayout.image.fit.auto">
+            <de><![CDATA[Automatisch]]></de>
+            <en><![CDATA[Automatic]]></en>
+        </locale>
+        <locale name="brick.multiLayout.image.fit.cover">
+            <de><![CDATA[Fläche füllen]]></de>
+            <en><![CDATA[Cover area]]></en>
+        </locale>
+        <locale name="brick.multiLayout.image.fit.contain">
+            <de><![CDATA[Komplett anzeigen]]></de>
+            <en><![CDATA[Show complete]]></en>
+        </locale>
+        <locale name="brick.multiLayout.image.section">
+            <de><![CDATA[Bild]]></de>
+            <en><![CDATA[Image]]></en>
+        </locale>
+        <locale name="brick.multiLayout.image.width">
+            <de><![CDATA[Breite]]></de>
+            <en><![CDATA[Width]]></en>
+        </locale>
+        <locale name="brick.multiLayout.image.width.help">
+            <de><![CDATA[z. B. 320px, 50%, 30rem; leer = automatisch; Zahlen ohne Einheit werden als px interpretiert]]></de>
+            <en><![CDATA[e.g. 320px, 50%, 30rem; empty = automatic; numbers without a unit are interpreted as px]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.section">
+            <de><![CDATA[Hintergrundbild]]></de>
+            <en><![CDATA[Background image]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.enabled">
+            <de><![CDATA[Hintergrundbild verwenden]]></de>
+            <en><![CDATA[Use background image]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.image">
+            <de><![CDATA[Hintergrundbild]]></de>
+            <en><![CDATA[Background image]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.fit">
+            <de><![CDATA[Darstellung]]></de>
+            <en><![CDATA[Display mode]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.fit.auto">
+            <de><![CDATA[Original]]></de>
+            <en><![CDATA[Original]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.fit.cover">
+            <de><![CDATA[Fläche füllen]]></de>
+            <en><![CDATA[Cover area]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.fit.contain">
+            <de><![CDATA[Komplett anzeigen]]></de>
+            <en><![CDATA[Show complete]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.position">
+            <de><![CDATA[Position]]></de>
+            <en><![CDATA[Position]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.position.center">
+            <de><![CDATA[Mitte]]></de>
+            <en><![CDATA[Center]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.position.top">
+            <de><![CDATA[Oben]]></de>
+            <en><![CDATA[Top]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.position.bottom">
+            <de><![CDATA[Unten]]></de>
+            <en><![CDATA[Bottom]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.position.left">
+            <de><![CDATA[Links]]></de>
+            <en><![CDATA[Left]]></en>
+        </locale>
+        <locale name="brick.multiLayout.background.position.right">
+            <de><![CDATA[Rechts]]></de>
+            <en><![CDATA[Right]]></en>
+        </locale>
+        <locale name="brick.multiLayout.backgroundColor.section">
+            <de><![CDATA[Hintergrundfarbe (Overlay)]]></de>
+            <en><![CDATA[Background color (overlay)]]></en>
+        </locale>
+        <locale name="brick.multiLayout.backgroundColor.enabled">
+            <de><![CDATA[Overlay verwenden]]></de>
+            <en><![CDATA[Use overlay]]></en>
+        </locale>
+        <locale name="brick.multiLayout.backgroundColor.description">
+            <de><![CDATA[Definiert die Hintergrundfarbe über dem Hintergrundbild für diesen Bereich.]]></de>
+            <en><![CDATA[Defines the background color above the background image for this area.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.backgroundColor.color">
+            <de><![CDATA[Farbe]]></de>
+            <en><![CDATA[Color]]></en>
+        </locale>
+        <locale name="brick.multiLayout.backgroundColor.opacity">
+            <de><![CDATA[Deckkraft]]></de>
+            <en><![CDATA[Opacity]]></en>
+        </locale>
+        <locale name="brick.multiLayout.textColor.section">
+            <de><![CDATA[Textfarbe]]></de>
+            <en><![CDATA[Text color]]></en>
+        </locale>
+        <locale name="brick.multiLayout.textColor.enabled">
+            <de><![CDATA[Textfarbe verwenden]]></de>
+            <en><![CDATA[Use text color]]></en>
+        </locale>
+        <locale name="brick.multiLayout.textColor">
+            <de><![CDATA[Textfarbe]]></de>
+            <en><![CDATA[Text color]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.section">
+            <de><![CDATA[Link]]></de>
+            <en><![CDATA[Link]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.enabled">
+            <de><![CDATA[Link für Kachel verwenden]]></de>
+            <en><![CDATA[Use link for tile]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.href">
+            <de><![CDATA[Link setzen]]></de>
+            <en><![CDATA[Set link]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.rel">
+            <de><![CDATA[Rel-Typ]]></de>
+            <en><![CDATA[Rel type]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.rel.none">
+            <de><![CDATA[Kein rel-Attribut]]></de>
+            <en><![CDATA[No rel attribute]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.rel.nofollow">
+            <de><![CDATA[nofollow]]></de>
+            <en><![CDATA[nofollow]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.rel.noopener">
+            <de><![CDATA[noopener]]></de>
+            <en><![CDATA[noopener]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.rel.noreferrer">
+            <de><![CDATA[noreferrer]]></de>
+            <en><![CDATA[noreferrer]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.rel.noopenerNoreferrer">
+            <de><![CDATA[noopener noreferrer]]></de>
+            <en><![CDATA[noopener noreferrer]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.rel.nofollowNoopenerNoreferrer">
+            <de><![CDATA[nofollow noopener noreferrer]]></de>
+            <en><![CDATA[nofollow noopener noreferrer]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.target">
+            <de><![CDATA[Ziel]]></de>
+            <en><![CDATA[Target]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.target.none">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Default]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.target.self">
+            <de><![CDATA[Gleiches Fenster (_self)]]></de>
+            <en><![CDATA[Same window (_self)]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.target.blank">
+            <de><![CDATA[Neuer Tab (_blank)]]></de>
+            <en><![CDATA[New tab (_blank)]]></en>
+        </locale>
+        <locale name="brick.multiLayout.link.title">
+            <de><![CDATA[Link-Titel]]></de>
+            <en><![CDATA[Link title]]></en>
+        </locale>
+        <locale name="brick.multiLayout.contentPadding">
+            <de><![CDATA[Standard-Innenabstand verwenden]]></de>
+            <en><![CDATA[Use default inner spacing]]></en>
+        </locale>
+        <locale name="brick.multiLayout.backgroundColor.badge">
+            <de><![CDATA[Farbfläche]]></de>
+            <en><![CDATA[Color layer]]></en>
+        </locale>
+        <locale name="brick.multiLayout.quickEdit.title">
+            <de><![CDATA[[mode] schnell bearbeiten]]></de>
+            <en><![CDATA[Quick edit [mode]]]></en>
+        </locale>
+        <locale name="brick.multiLayout.quickEdit.editor">
+            <de><![CDATA[Zum Bearbeiten klicken]]></de>
+            <en><![CDATA[Click to edit]]></en>
+        </locale>
+        <locale name="brick.multiLayout.quickEdit.brick">
+            <de><![CDATA[Zum Auswählen klicken]]></de>
+            <en><![CDATA[Click to select]]></en>
+        </locale>
+        <locale name="brick.multiLayout.quickEdit.image">
+            <de><![CDATA[Zum Bildauswählen klicken]]></de>
+            <en><![CDATA[Click to choose image]]></en>
+        </locale>
+        <locale name="brick.multiLayout.settings.button">
+            <de><![CDATA[Einstellungen]]></de>
+            <en><![CDATA[Settings]]></en>
+        </locale>
+        <locale name="brick.multiLayout.settings.popup.title">
+            <de><![CDATA[Einstellungen für [title]]]></de>
+            <en><![CDATA[Settings for [title]]]></en>
+        </locale>
+        <locale name="brick.multiLayout.remove.button">
+            <de><![CDATA[Entfernen]]></de>
+            <en><![CDATA[Remove]]></en>
+        </locale>
+        <locale name="brick.multiLayout.remove.popup.title">
+            <de><![CDATA[Inhalt von [title] entfernen?]]></de>
+            <en><![CDATA[Remove content from [title]?]]></en>
+        </locale>
+        <locale name="brick.multiLayout.remove.popup.text">
+            <de><![CDATA[Soll der Inhalt vom Typ "[mode]" wirklich entfernt werden?]]></de>
+            <en><![CDATA[Do you really want to remove the content of type "[mode]"?]]></en>
+        </locale>
+        <locale name="brick.multiLayout.remove.popup.information">
+            <de><![CDATA[Der Inhalt dieses Bereichs wird geleert. Einstellungen des Bereichs bleiben erhalten.]]></de>
+            <en><![CDATA[This area content will be cleared. The area settings will remain unchanged.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.toolbar.preset">
+            <de><![CDATA[Preset]]></de>
+            <en><![CDATA[Preset]]></en>
+        </locale>
+        <locale name="brick.multiLayout.toolbar.choosePreset">
+            <de><![CDATA[Layout Preset auswählen]]></de>
+            <en><![CDATA[Choose layout preset]]></en>
+        </locale>
+        <locale name="brick.multiLayout.toolbar.backToLayout">
+            <de><![CDATA[Zurück zum Layout]]></de>
+            <en><![CDATA[Back to layout]]></en>
+        </locale>
+        <locale name="brick.multiLayout.toolbar.editLayout">
+            <de><![CDATA[Layout bearbeiten]]></de>
+            <en><![CDATA[Edit layout]]></en>
+        </locale>
+        <locale name="brick.multiLayout.toolbar.mode">
+            <de><![CDATA[Bearbeitungsmodus]]></de>
+            <en><![CDATA[Edit mode]]></en>
+        </locale>
+        <locale name="brick.multiLayout.toolbar.mode.content">
+            <de><![CDATA[Inhalte bearbeiten]]></de>
+            <en><![CDATA[Edit content]]></en>
+        </locale>
+        <locale name="brick.multiLayout.toolbar.mode.layout">
+            <de><![CDATA[Layout bearbeiten]]></de>
+            <en><![CDATA[Edit layout]]></en>
+        </locale>
+        <locale name="brick.multiLayout.toolbar.addSlot">
+            <de><![CDATA[Slot hinzufügen]]></de>
+            <en><![CDATA[Add slot]]></en>
+        </locale>
+        <locale name="brick.multiLayout.editor.title">
+            <de><![CDATA[MultiLayout bearbeiten]]></de>
+            <en><![CDATA[Edit multi layout]]></en>
+        </locale>
+        <locale name="brick.multiLayout.editor.text">
+            <de><![CDATA[Desktop, Tablet und Mobile können separat angeordnet werden. Änderungen werden erst beim Speichern übernommen.]]></de>
+            <en><![CDATA[Desktop, tablet and mobile can be arranged separately. Changes are only applied after saving.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.editor.information">
+            <de><![CDATA[Tablet startet mit dem Desktop-Layout. Mobile startet gestapelt mit voller Breite, bleibt danach aber frei editierbar.]]></de>
+            <en><![CDATA[Tablet starts from the desktop layout. Mobile starts stacked at full width but stays fully editable afterwards.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.editor.breakpointHint">
+            <de><![CDATA[Desktop ist die Hauptansicht. Tablet übernimmt standardmäßig Desktop, Mobile startet gestapelt mit 12 Spalten Breite pro Slot.]]></de>
+            <en><![CDATA[Desktop is the primary view. Tablet starts from desktop, mobile starts stacked with each slot spanning 12 columns.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.subLayout.editor.title">
+            <de><![CDATA[Sublayout bearbeiten]]></de>
+            <en><![CDATA[Edit sub-layout]]></en>
+        </locale>
+        <locale name="brick.multiLayout.subLayout.editor.text">
+            <de><![CDATA[Das Sublayout gehört direkt zu diesem Slot und wird nicht als eigener Baustein gespeichert.]]></de>
+            <en><![CDATA[The sub-layout belongs directly to this slot and is not saved as a separate brick.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.subLayout.editor.information">
+            <de><![CDATA[Im Sublayout sind nur Editor, Bild und Baustein erlaubt. Weitere Sublayouts sind hier nicht möglich.]]></de>
+            <en><![CDATA[Only editor, image and brick are available inside a sub-layout. Further sub-layouts are not available here.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.subLayout.editor.hint">
+            <de><![CDATA[Bearbeite die Inhalte des Sublayouts oder wechsle zur Layout-Ansicht für Desktop, Tablet und Mobile.]]></de>
+            <en><![CDATA[Edit the sub-layout content or switch to the layout view for desktop, tablet and mobile.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.subLayout.toolbar.editContent">
+            <de><![CDATA[Inhalte bearbeiten]]></de>
+            <en><![CDATA[Edit content]]></en>
+        </locale>
+        <locale name="brick.multiLayout.subLayout.toolbar.editLayout">
+            <de><![CDATA[Layout bearbeiten]]></de>
+            <en><![CDATA[Edit layout]]></en>
+        </locale>
+        <locale name="brick.multiLayout.breakpoint.desktop">
+            <de><![CDATA[Desktop]]></de>
+            <en><![CDATA[Desktop]]></en>
+        </locale>
+        <locale name="brick.multiLayout.breakpoint.tablet">
+            <de><![CDATA[Tablet]]></de>
+            <en><![CDATA[Tablet]]></en>
+        </locale>
+        <locale name="brick.multiLayout.breakpoint.mobile">
+            <de><![CDATA[Mobile]]></de>
+            <en><![CDATA[Mobile]]></en>
+        </locale>
+        <locale name="brick.multiLayout.presetChange.title">
+            <de><![CDATA[Preset wechseln?]]></de>
+            <en><![CDATA[Change preset?]]></en>
+        </locale>
+        <locale name="brick.multiLayout.presetChange.text">
+            <de><![CDATA[Beim Wechsel wird die Desktop-Geometrie ersetzt. Bestehende Inhalte werden bestmöglich auf die neuen Slots übernommen.]]></de>
+            <en><![CDATA[Changing the preset replaces the desktop geometry. Existing content will be mapped to the new slots as best as possible.]]></en>
+        </locale>
+        <locale name="brick.multiLayout.presetChange.information">
+            <de><![CDATA[Nicht mehr zuordenbare Inhalte werden nur nach dieser Bestätigung verworfen.]]></de>
+            <en><![CDATA[Content that can no longer be mapped will only be discarded after this confirmation.]]></en>
+        </locale>
+        <locale name="blockSlot.interaction.content">
+            <de><![CDATA[Inhalt]]></de>
+            <en><![CDATA[Content]]></en>
+        </locale>
+        <locale name="blockSlot.interaction.layout">
+            <de><![CDATA[Layout]]></de>
+            <en><![CDATA[Layout]]></en>
+        </locale>
+        <locale name="blockSlot.layout.hint">
+            <de><![CDATA[Ziehen und Größe ändern im Layoutmodus.]]></de>
+            <en><![CDATA[Drag and resize in layout mode.]]></en>
+        </locale>
+        <locale name="blockSlot.layout.selected">
+            <de><![CDATA[Slot ausgewählt]]></de>
+            <en><![CDATA[Slot selected]]></en>
+        </locale>
+        <locale name="blockSlot.layout.idle">
+            <de><![CDATA[Für Layout-Aktionen klicken]]></de>
+            <en><![CDATA[Click for layout actions]]></en>
+        </locale>
+        <locale name="blockSlot.slot.label">
+            <de><![CDATA[ID: [id]]]></de>
+            <en><![CDATA[ID: [id]]]></en>
+        </locale>
+        <locale name="blockSlot.removeSlot.button">
+            <de><![CDATA[Slot entfernen]]></de>
+            <en><![CDATA[Remove slot]]></en>
+        </locale>
+        <locale name="blockSlot.removeSlot.popup.title">
+            <de><![CDATA[Slot [title] entfernen?]]></de>
+            <en><![CDATA[Remove slot [title]?]]></en>
+        </locale>
+        <locale name="blockSlot.removeSlot.popup.text">
+            <de><![CDATA[Der Slot und sein zugeordneter Inhalt werden entfernt.]]></de>
+            <en><![CDATA[The slot and its assigned content will be removed.]]></en>
+        </locale>
+        <locale name="blockSlot.removeSlot.popup.information">
+            <de><![CDATA[Diese Aktion betrifft die Layout-Geometrie und den Inhalt dieses Slots.]]></de>
+            <en><![CDATA[This action affects the layout geometry and the content of this slot.]]></en>
+        </locale>
         <locale name="quiqqer.bricks.textAndImageMultiple.create.isDisabled">
             <de><![CDATA[Einträge deaktivieren]]></de>
             <en><![CDATA[Deactivate entries]]></en>
@@ -3093,23 +4150,31 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Umrandet Akzent]]></de>
             <en><![CDATA[Outline Accent]]></en>
         </locale>
+        <locale name="brick.accordion.template.boxOutlineAccentOpen">
+            <de><![CDATA[Umrandet Akzent geöffnet]]></de>
+            <en><![CDATA[Outline Accent Open]]></en>
+        </locale>
         <locale name="brick.accordion.template.boxOutlineTextColor">
             <de><![CDATA[Umrandet Textfarbe]]></de>
             <en><![CDATA[Outline Text]]></en>
+        </locale>
+        <locale name="brick.accordion.template.boxFill">
+            <de><![CDATA[Gefüllt dezent]]></de>
+            <en><![CDATA[Fill Subtle]]></en>
         </locale>
         <locale name="brick.accordion.template.boxFillAccent">
             <de><![CDATA[Gefüllt Akzent]]></de>
             <en><![CDATA[Fill Accent]]></en>
         </locale>
-        <locale name="brick.accordion.template.boxFillSubtle">
-            <de><![CDATA[Gefüllt dezent]]></de>
-            <en><![CDATA[Fill Subtle]]></en>
+        <locale name="brick.accordion.template.boxFillAccentOpen">
+            <de><![CDATA[Gefüllt Akzent geöffnet]]></de>
+            <en><![CDATA[Fill Accent Open]]></en>
         </locale>
-        <locale name="brick.accordion.template.softCard">
+        <locale name="brick.accordion.template.card">
             <de><![CDATA[Karte]]></de>
             <en><![CDATA[Card]]></en>
         </locale>
-        <locale name="brick.accordion.template.softCardAccentFill">
+        <locale name="brick.accordion.template.cardFillAccent">
             <de><![CDATA[Karte Akzent]]></de>
             <en><![CDATA[Card Accent]]></en>
         </locale>

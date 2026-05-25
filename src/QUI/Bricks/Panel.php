@@ -123,8 +123,14 @@ class Panel extends QUI\Utils\Singleton
                 );
             }
 
-            if (empty($category['text']) && !empty($category['title'])) {
-                $categories[$key]['text'] = $category['title'];
+
+
+            if (empty($categories[$key]['text']) && !empty($categories[$key]['title'])) {
+                $categories[$key]['text'] = $categories[$key]['title'];
+            }
+
+            if (empty($categories[$key]['title']) && !empty($categories[$key]['text'])) {
+                $categories[$key]['title'] = $categories[$key]['text'];
             }
         }
 

@@ -1210,19 +1210,30 @@ class Manager
     {
         $result = [];
 
-        $list = QUI::getDataBase()->fetch([
-            'from' => $this->getTable(),
-            'where' => [
-                'project' => $Project->getName(),
-                'lang' => $Project->getLang()
-            ]
-        ]);
+        $list = $this->getBrickRecordsFromProject($Project);
 
         foreach ($list as $entry) {
             $result[] = $this->getBrickById($entry['id']);
         }
 
         return $result;
+    }
+
+    /**
+     * Return raw brick records for a project without creating Brick objects.
+     *
+     * @param Project $Project
+     * @return array<int, array<string, mixed>>
+     */
+    public function getBrickRecordsFromProject(Project $Project): array
+    {
+        return QUI::getDataBase()->fetch([
+            'from' => $this->getTable(),
+            'where' => [
+                'project' => $Project->getName(),
+                'lang' => $Project->getLang()
+            ]
+        ]);
     }
 
     /**

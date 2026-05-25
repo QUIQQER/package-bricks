@@ -1,0 +1,238 @@
+.quiqqer-bricks-layout {
+    --_tileMinHeight: var(--quiqqer-bricks-layout-tile-min-height, 200px);
+    container: multi-layout / inline-size;
+    min-height: 1px;
+}
+
+.quiqqer-bricks-layout__grid {
+    display: grid;
+    gap: var(--_q-controlConf-gridGap, clamp(0.75rem, 4cqi, 1.5rem));
+    grid-auto-flow: row dense;
+    grid-auto-rows: minmax(0, auto);
+}
+
+.quiqqer-bricks-layout__area {
+    --_bgFit: var(--quiqqer-bricks-layout-background-fit, cover);
+    --_bgPos: var(--quiqqer-bricks-layout-background-position, center center);
+    --_bgOverlayColor: var(--quiqqer-bricks-layout-background-overlay-color, #000000);
+    --_bgOverlayOpacity: var(--quiqqer-bricks-layout-background-overlay-opacity, 0);
+    --_imgFit: var(--quiqqer-bricks-layout-image-fit, cover);
+    --_imgWidth: var(--quiqqer-bricks-layout-image-width, 100%);
+    --_imgHeight: var(--quiqqer-bricks-layout-image-height, none);
+    --_imgPos: var(--quiqqer-bricks-layout-image-position, center center);
+    --_textColor: var(--quiqqer-bricks-layout-text-color, inherit);
+    --_colDesktop: var(--quiqqer-bricks-layout-desktop-column, auto);
+    --_rowDesktop: var(--quiqqer-bricks-layout-desktop-row, auto);
+    --_colTablet: var(--quiqqer-bricks-layout-tablet-column, var(--_colDesktop));
+    --_rowTablet: var(--quiqqer-bricks-layout-tablet-row, var(--_rowDesktop));
+    --_colMobile: var(--quiqqer-bricks-layout-mobile-column, var(--_colTablet));
+    --_rowMobile: var(--quiqqer-bricks-layout-mobile-row, var(--_rowTablet));
+    --_areaBg: var(--quiqqer-bricks-layout-area-background, transparent);
+    --_contentPadding: var(--quiqqer-bricks-layout-content-padding, clamp(1rem, 2cqi, 2rem));
+    --_slotMinHeight: var(--quiqqer-bricks-layout-slot-min-height, var(--_tileMinHeight, 200px));
+    align-items: stretch;
+    background: var(--_areaBg);
+    display: flex;
+    grid-column: var(--_colDesktop);
+    grid-row: var(--_rowDesktop);
+    min-height: var(--_slotMinHeight);
+    min-width: 0;
+    position: relative;
+}
+
+.quiqqer-bricks-layout__grid:not(.quiqqer-bricks-layout__grid--noGap) .quiqqer-bricks-layout__area {
+    border-radius: var(--qui-radius-card);
+}
+
+.quiqqer-bricks-layout__area.is-surface-subtle-enabled {
+    --quiqqer-bricks-layout-area-background: var(--qui-colors-surface-subtle);
+}
+
+.quiqqer-bricks-layout__area--subLayout {
+    container: sub-layout / inline-size;
+}
+
+.quiqqer-bricks-layout__background {
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+}
+
+.quiqqer-bricks-layout__background::after {
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+}
+
+.quiqqer-bricks-layout__backgroundMedia {
+    display: block;
+    height: 100%;
+    object-fit: var(--_bgFit);
+    object-position: var(--_bgPos);
+    width: 100%;
+}
+
+.quiqqer-bricks-layout__background--hasOverlay::after {
+    background: var(--_bgOverlayColor);
+    border-radius: inherit;
+    content: '';
+    opacity: var(--_bgOverlayOpacity);
+}
+
+.quiqqer-bricks-layout__content {
+    align-items: center;
+    color: var(--_textColor);
+    display: grid;
+    flex: 1;
+    padding: var(--_contentPadding);
+    position: relative;
+    width: 100%;
+}
+
+.quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__content {
+    align-items: center;
+}
+
+.quiqqer-bricks-layout__subGrid {
+    --_subGap: var(--quiqqer-bricks-layout-sub-gap, var(--_q-controlConf-gridGap, clamp(0.75rem, 4cqi, 1.5rem)));
+    --_tileMinHeight: var(--quiqqer-bricks-layout-tile-min-height, 200px);
+    display: grid;
+    gap: var(--_subGap);
+    grid-auto-flow: row dense;
+    grid-auto-rows: minmax(0, auto);
+    height: 100%;
+    width: 100%;
+}
+
+.quiqqer-bricks-layout__subArea {
+    min-height: var(--_slotMinHeight, 0);
+}
+
+.quiqqer-bricks-layout__contentInner {
+    width: 100%;
+}
+
+.quiqqer-bricks-layout__link {
+    inset: 0;
+    position: absolute;
+    z-index: 5;
+}
+
+/* hover effect for images, when url is set */
+.quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__link + .quiqqer-bricks-layout__content > picture {
+    overflow: hidden;
+}
+
+.quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__link + .quiqqer-bricks-layout__content .quiqqer-bricks-layout__image {
+    transition: var(--qui-transition-duration, 0.3s) scale var(--qui-transition-timing-function, ease);
+}
+
+.quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__link:hover + .quiqqer-bricks-layout__content .quiqqer-bricks-layout__image {
+    scale: 1.05;
+}
+/* END hover effect for images, when url is set */
+
+.quiqqer-bricks-layout__content a,
+.quiqqer-bricks-layout__content button,
+.quiqqer-bricks-layout__content .btn,
+.quiqqer-bricks-layout__content input,
+.quiqqer-bricks-layout__content select,
+.quiqqer-bricks-layout__content textarea,
+.quiqqer-bricks-layout__content [role="button"] {
+    position: relative;
+    z-index: 10;
+}
+
+.quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__content > picture {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.quiqqer-bricks-layout__area--align-top .quiqqer-bricks-layout__content {
+    align-items: start;
+}
+
+.quiqqer-bricks-layout__area--align-center .quiqqer-bricks-layout__content {
+    align-items: center;
+}
+
+.quiqqer-bricks-layout__area--align-bottom .quiqqer-bricks-layout__content {
+    align-items: end;
+}
+
+.quiqqer-bricks-layout__area--align-stretch .quiqqer-bricks-layout__content {
+    align-items: stretch;
+}
+
+.quiqqer-bricks-layout__area--image.quiqqer-bricks-layout__area--align-top .quiqqer-bricks-layout__content > picture {
+    align-items: flex-start;
+}
+
+.quiqqer-bricks-layout__area--image.quiqqer-bricks-layout__area--align-center .quiqqer-bricks-layout__content > picture {
+    align-items: center;
+}
+
+.quiqqer-bricks-layout__area--image.quiqqer-bricks-layout__area--align-bottom .quiqqer-bricks-layout__content > picture {
+    align-items: flex-end;
+}
+
+/**
+  * Do not set overflow on the quiqqer-bricks-layout__area element.
+  * User border radius.
+  */
+.quiqqer-bricks-layout__background,
+.quiqqer-bricks-layout__overlay,
+.quiqqer-bricks-layout__background > picture,
+.quiqqer-bricks-layout__backgroundMedia,
+.quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__content,
+.quiqqer-bricks-layout__area--image picture,
+.quiqqer-bricks-layout__image {
+    border-radius: inherit;
+}
+
+.quiqqer-bricks-layout__image:not(.quiqqer-bricks-layout__image--auto) {
+    display: block;
+    height: var(--_imgHeight, auto);
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: var(--_imgFit);
+    object-position: var(--_imgPos);
+    width: var(--_imgWidth, auto);
+}
+
+/* Tablet: main layout container */
+@container multi-layout (max-width: 960px) and (min-width: 768px) {
+    .quiqqer-bricks-layout__area {
+        grid-column: var(--_colTablet);
+        grid-row: var(--_rowTablet);
+    }
+}
+
+/* Mobile: main layout container */
+@container multi-layout (max-width: 767px) {
+    .quiqqer-bricks-layout__area {
+        grid-column: var(--_colMobile);
+        grid-row: var(--_rowMobile);
+    }
+}
+
+/* @todo sub-layout container query */
+/*!* Tablet: sub-layout container *!*/
+/*@container sub-layout (max-width: 640px) and (min-width: 480px) {*/
+/*    .quiqqer-bricks-layout__subArea {*/
+/*        grid-column: var(--_colTablet);*/
+/*        grid-row: var(--_rowTablet);*/
+/*    }*/
+/*}*/
+
+/*!* Mobile: sub-layout container *!*/
+/*@container sub-layout (max-width: 479px) {*/
+/*    .quiqqer-bricks-layout__subArea {*/
+/*        grid-column: var(--_colMobile);*/
+/*        grid-row: var(--_rowMobile);*/
+/*    }*/
+/*}*/
