@@ -58,6 +58,7 @@ class MultiLayoutTest extends TestCase
                             'customCssClasses' => 'hero-area, hero-area--primary',
                             'subLayoutAreaBackgroundEnabled' => false,
                             'subLayoutGridGapPreset' => 'large',
+                            'subLayoutTileMinHeightPreset' => 'compact',
                             'subLayoutDocument' => [
                                 'preset' => 'preset-2-equal',
                                 'breakpoints' => [
@@ -119,30 +120,30 @@ class MultiLayoutTest extends TestCase
         try {
             $html = $Control->getBody();
             $this->assertIsString($html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-tablet-column', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-mobile-column', $html);
-            $this->assertStringNotContainsString('--quiqqer-bricks-multiLayout-bg-image', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-tablet-column', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-mobile-column', $html);
+            $this->assertStringNotContainsString('--quiqqer-bricks-layout-bg-image', $html);
             $this->assertStringContainsString('quiqqer-bricks-layout__background', $html);
             $this->assertStringContainsString('quiqqer-bricks-layout__backgroundMedia', $html);
-            $this->assertStringContainsString('quiqqer-bricks-layout__overlay', $html);
             $this->assertStringContainsString('quiqqer-bricks-layout__content', $html);
             $this->assertStringContainsString('quiqqer-bricks-layout__image', $html);
             $this->assertStringContainsString('quiqqer-bricks-layout__area--subLayout', $html);
             $this->assertStringContainsString('quiqqer-bricks-layout__subGrid', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-sub-gap: clamp(1rem, 4cqi, 2.5rem)', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-tablet-row: 2 / span 1', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-sub-gap: clamp(1rem, 4cqi, 2.5rem)', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-tile-min-height: 120px', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-tablet-row: 2 / span 1', $html);
             $this->assertStringContainsString('Nested fallback', $html);
             $this->assertStringContainsString('/assets/inner.png', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-fit: cover', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-position: center top', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-overlay-color: #112233', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-background-overlay-opacity: 0.35', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-area-background: #445566', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-fit: contain', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-width: 480px', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-image-height: 320px', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-tile-min-height: 280px', $html);
-            $this->assertStringContainsString('--quiqqer-bricks-multiLayout-slot-min-height: 420px', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-background-fit: cover', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-background-position: center top', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-background-overlay-color: #112233', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-background-overlay-opacity: 0.35', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-area-background: #445566', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-image-fit: contain', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-image-width: 480px', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-image-height: 320px', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-tile-min-height: 280px', $html);
+            $this->assertStringContainsString('--quiqqer-bricks-layout-slot-min-height: 420px', $html);
             $this->assertStringContainsString('hero-area hero-area--primary', $html);
             $this->assertStringContainsString('inner-image', $html);
         } catch (\Throwable) {

@@ -505,7 +505,13 @@ class MultiLayout extends QUI\Control
                 && is_string($area['subLayoutGridGapPreset'])
                 && array_key_exists($area['subLayoutGridGapPreset'], self::GRID_GAP_PRESETS)
                     ? $area['subLayoutGridGapPreset']
-                    : self::DEFAULT_GRID_GAP_PRESET
+                    : self::DEFAULT_GRID_GAP_PRESET,
+            'subLayoutTileMinHeightPreset' => $this->normalizeTileMinHeightPreset(
+                $area['subLayoutTileMinHeightPreset'] ?? null
+            ),
+            'subLayoutTileMinHeightValue' => $this->normalizeTileMinHeightValue(
+                $area['subLayoutTileMinHeightValue'] ?? null
+            )
         ];
 
         if ($mode === 'subLayout') {
@@ -598,6 +604,10 @@ class MultiLayout extends QUI\Control
                 ?? self::DEFAULT_COLUMNS;
             $area['subLayoutGridGap'] = self::GRID_GAP_PRESETS[$area['subLayoutGridGapPreset']]
                 ?? self::GRID_GAP_PRESETS[self::DEFAULT_GRID_GAP_PRESET];
+            $area['subLayoutTileMinHeight'] = $this->resolveTileMinHeightValue(
+                (string)$area['subLayoutTileMinHeightPreset'],
+                (string)$area['subLayoutTileMinHeightValue']
+            );
         }
 
         $area['contentHtml'] = $this->renderAreaContent($area);
@@ -695,59 +705,59 @@ class MultiLayout extends QUI\Control
                 : self::DEFAULT_CONTENT_PADDING_PRESET;
 
         $style = [
-            '--quiqqer-bricks-multiLayout-desktop-column: ' . $this->buildGridLineValue($desktopSlot),
-            '--quiqqer-bricks-multiLayout-desktop-row: ' . $this->buildGridRowValue($desktopSlot),
-            '--quiqqer-bricks-multiLayout-tablet-column: ' . $this->buildGridLineValue($tabletSlot),
-            '--quiqqer-bricks-multiLayout-tablet-row: ' . $this->buildGridRowValue($tabletSlot),
-            '--quiqqer-bricks-multiLayout-mobile-column: ' . $this->buildGridLineValue($mobileSlot),
-            '--quiqqer-bricks-multiLayout-mobile-row: ' . $this->buildGridRowValue($mobileSlot),
-            '--quiqqer-bricks-multiLayout-content-padding: ' . self::CONTENT_PADDING_PRESETS[$paddingPreset]
+            '--quiqqer-bricks-layout-desktop-column: ' . $this->buildGridLineValue($desktopSlot),
+            '--quiqqer-bricks-layout-desktop-row: ' . $this->buildGridRowValue($desktopSlot),
+            '--quiqqer-bricks-layout-tablet-column: ' . $this->buildGridLineValue($tabletSlot),
+            '--quiqqer-bricks-layout-tablet-row: ' . $this->buildGridRowValue($tabletSlot),
+            '--quiqqer-bricks-layout-mobile-column: ' . $this->buildGridLineValue($mobileSlot),
+            '--quiqqer-bricks-layout-mobile-row: ' . $this->buildGridRowValue($mobileSlot),
+            '--quiqqer-bricks-layout-content-padding: ' . self::CONTENT_PADDING_PRESETS[$paddingPreset]
         ];
 
         if (!empty($area['backgroundEnabled']) && !empty($area['backgroundImage'])) {
-            $style[] = '--quiqqer-bricks-multiLayout-background-fit: '
+            $style[] = '--quiqqer-bricks-layout-background-fit: '
                 . $this->mapObjectFitValue((string)$area['backgroundImageFit']);
-            $style[] = '--quiqqer-bricks-multiLayout-background-position: '
+            $style[] = '--quiqqer-bricks-layout-background-position: '
                 . $this->escapeStyleValue((string)$area['backgroundImagePosition']);
         }
 
         if (!empty($area['backgroundOverlayEnabled'])) {
-            $style[] = '--quiqqer-bricks-multiLayout-background-overlay-color: '
+            $style[] = '--quiqqer-bricks-layout-background-overlay-color: '
                 . $this->escapeStyleValue((string)$area['backgroundOverlayColor']);
-            $style[] = '--quiqqer-bricks-multiLayout-background-overlay-opacity: '
+            $style[] = '--quiqqer-bricks-layout-background-overlay-opacity: '
                 . ((int)$area['backgroundOverlayOpacity'] / 100);
         }
 
         if (!empty($area['backgroundColorEnabled']) && !empty($area['backgroundColor'])) {
-            $style[] = '--quiqqer-bricks-multiLayout-area-background: '
+            $style[] = '--quiqqer-bricks-layout-area-background: '
                 . $this->escapeStyleValue((string)$area['backgroundColor']);
         }
 
         if (!empty($area['textColor'])) {
-            $style[] = '--quiqqer-bricks-multiLayout-text-color: '
+            $style[] = '--quiqqer-bricks-layout-text-color: '
                 . $this->escapeStyleValue((string)$area['textColor']);
         }
 
         if (!empty($area['image'])) {
-            $style[] = '--quiqqer-bricks-multiLayout-image-fit: '
+            $style[] = '--quiqqer-bricks-layout-image-fit: '
                 . $this->mapObjectFitValue((string)$area['imageFit']);
 
             if (!empty($area['imageWidth'])) {
-                $style[] = '--quiqqer-bricks-multiLayout-image-width: '
+                $style[] = '--quiqqer-bricks-layout-image-width: '
                     . $this->escapeStyleValue(
                         $this->normalizeCssSizeValue((string)$area['imageWidth'])
                     );
             }
 
             if (!empty($area['imageHeight'])) {
-                $style[] = '--quiqqer-bricks-multiLayout-image-height: '
+                $style[] = '--quiqqer-bricks-layout-image-height: '
                     . $this->escapeStyleValue(
                         $this->normalizeCssSizeValue((string)$area['imageHeight'])
                     );
             }
 
             if (!empty($area['imagePosition'])) {
-                $style[] = '--quiqqer-bricks-multiLayout-image-position: '
+                $style[] = '--quiqqer-bricks-layout-image-position: '
                     . $this->escapeStyleValue((string)$area['imagePosition']);
             }
         }
@@ -756,7 +766,7 @@ class MultiLayout extends QUI\Control
             $customMinHeight = $this->resolveCustomTileMinHeightValue($area);
 
             if ($customMinHeight !== '') {
-                $style[] = '--quiqqer-bricks-multiLayout-slot-min-height: '
+                $style[] = '--quiqqer-bricks-layout-slot-min-height: '
                     . $this->escapeStyleValue($customMinHeight);
             }
         }
@@ -774,7 +784,7 @@ class MultiLayout extends QUI\Control
             (string)$this->getAttribute('tileMinHeightValue')
         );
 
-        return '--quiqqer-bricks-multiLayout-tile-min-height: '
+        return '--quiqqer-bricks-layout-tile-min-height: '
             . $this->escapeStyleValue($tileMinHeight);
     }
 

@@ -1068,6 +1068,12 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         const subLayoutGridGapPresetField = Content.getElement(
                             'select[data-name="subLayoutGridGapPreset"]'
                         );
+                        const subLayoutTileMinHeightPresetField = Content.getElement(
+                            'select[data-name="subLayoutTileMinHeightPreset"]'
+                        );
+                        const subLayoutTileMinHeightValueField = Content.getElement(
+                            'input[data-name="subLayoutTileMinHeightValue"]'
+                        );
                         const backgroundOverlayOpacity = backgroundOverlayOpacityField
                             ? parseInt(backgroundOverlayOpacityField.value, 10)
                             : area.backgroundOverlayOpacity;
@@ -1174,6 +1180,14 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                                 ? subLayoutGridGapPresetField.value
                                 : area.subLayoutGridGapPreset
                         );
+                        area.subLayoutTileMinHeightPreset = this.$normalizeTileMinHeightPreset(
+                            subLayoutTileMinHeightPresetField
+                                ? subLayoutTileMinHeightPresetField.value
+                                : area.subLayoutTileMinHeightPreset
+                        );
+                        area.subLayoutTileMinHeightValue = subLayoutTileMinHeightValueField
+                            ? subLayoutTileMinHeightValueField.value.trim()
+                            : '';
 
                         this.$onChange();
                     }.bind(this)
@@ -1558,6 +1572,36 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 'data-name',
                 'subLayoutGridGapPreset'
             );
+
+            const TileMinHeightField = this.$createPopupSelectField(
+                Section,
+                this.$getLocale('subLayout.tileMinHeight'),
+                this.$getTileMinHeightOptions(),
+                this.$normalizeTileMinHeightPreset(area.subLayoutTileMinHeightPreset),
+                'data-name',
+                'subLayoutTileMinHeightPreset'
+            );
+            const TileMinHeightValueField = this.$createPopupInputField(Section, {
+                label: this.$getLocale('subLayout.tileMinHeight.value'),
+                type: 'text',
+                value: area.subLayoutTileMinHeightValue || '',
+                name: 'subLayoutTileMinHeightValue'
+            });
+
+            new Element('div', {
+                'class': 'quiqqer-bricks-blockSlot-popupHint',
+                text: this.$getLocale('subLayout.tileMinHeight.value.help')
+            }).inject(TileMinHeightValueField);
+
+            const toggleTileMinHeightValue = function () {
+                TileMinHeightValueField.setStyle(
+                    'display',
+                    TileMinHeightField.value === TILE_MIN_HEIGHT_MANUAL ? '' : 'none'
+                );
+            };
+
+            TileMinHeightField.addEvent('change', toggleTileMinHeightValue);
+            toggleTileMinHeightValue();
 
             return {
                 section: Section

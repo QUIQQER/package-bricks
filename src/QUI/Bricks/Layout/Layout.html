@@ -41,7 +41,7 @@
                         </div>
                     {elseif $area.mode == 'subLayout'}
                         <div class="quiqqer-bricks-layout__subGrid"
-                             style="grid-template-columns: repeat({$area.subLayoutDesktopColumns}, minmax(0, 1fr)); --quiqqer-bricks-multiLayout-sub-gap: {$area.subLayoutGridGap};"
+                             style="grid-template-columns: repeat({$area.subLayoutDesktopColumns}, minmax(0, 1fr)); --quiqqer-bricks-layout-sub-gap: {$area.subLayoutGridGap}; --quiqqer-bricks-layout-tile-min-height: {$area.subLayoutTileMinHeight};"
                         >
                             {foreach from=$area.subLayoutAreas item=subArea}
                                 <section class="quiqqer-bricks-layout__area quiqqer-bricks-layout__subArea quiqqer-bricks-layout__area--{$subArea.mode} quiqqer-bricks-layout__area--align-{$subArea.verticalAlign}{if $area.subLayoutAreaBackgroundEnabled} is-surface-subtle-enabled{/if}{if $subArea.customCssClassAttribute} {$subArea.customCssClassAttribute}{/if}"

@@ -3037,6 +3037,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Sublayout]]></de>
             <en><![CDATA[Sub-layout]]></en>
         </locale>
+        <locale name="blockSlot.subLayout.tileMinHeight">
+            <de><![CDATA[Mindesthöhe für Kacheln]]></de>
+            <en><![CDATA[Minimum tile height]]></en>
+        </locale>
+        <locale name="blockSlot.subLayout.tileMinHeight.value">
+            <de><![CDATA[Eigener Wert]]></de>
+            <en><![CDATA[Custom value]]></en>
+        </locale>
+        <locale name="blockSlot.subLayout.tileMinHeight.value.help">
+            <de><![CDATA[Zahl ohne Einheit wird als Pixel interpretiert, z. B. 240 oder 15rem.]]></de>
+            <en><![CDATA[Numbers without a unit are interpreted as pixels, e.g. 240 or 15rem.]]></en>
+        </locale>
         <locale name="blockSlot.image.fit">
             <de><![CDATA[Darstellungsart]]></de>
             <en><![CDATA[Display mode]]></en>

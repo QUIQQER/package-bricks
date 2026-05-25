@@ -622,7 +622,14 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
                     Wrap.addClass('is-surface-subtle-enabled');
                 }
 
-                Wrap.setStyle('minHeight', this.$resolveAreaTileMinHeight(this.$subLayoutDraft, slot.id));
+                Wrap.setStyle(
+                    'minHeight',
+                    this.$resolveAreaTileMinHeight(
+                        this.$subLayoutDraft,
+                        slot.id,
+                        this.$document.areas[this.$subLayoutSlotId]
+                    )
+                );
                 AreaControl.inject(Wrap);
 
                 if (this.$Project) {
@@ -1614,6 +1621,12 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
                 normalized.subLayoutGridGapPreset = this.$normalizeGridGapPreset(
                     area.subLayoutGridGapPreset
                 );
+                normalized.subLayoutTileMinHeightPreset = this.$normalizeTileMinHeightPreset(
+                    area.subLayoutTileMinHeightPreset
+                );
+                normalized.subLayoutTileMinHeightValue = area.subLayoutTileMinHeightValue
+                    ? area.subLayoutTileMinHeightValue.toString().trim()
+                    : '';
             }
 
             return normalized;
@@ -1687,7 +1700,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
             return TILE_MIN_HEIGHT_PRESETS[preset];
         },
 
-        $resolveAreaTileMinHeight: function (documentData, slotId) {
+        $resolveAreaTileMinHeight: function (documentData, slotId, rootArea) {
             documentData = documentData || this.$document;
 
             const area = documentData.areas && documentData.areas[slotId]
@@ -1700,6 +1713,13 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
                 if (customValue) {
                     return customValue;
                 }
+            }
+
+            if (rootArea && rootArea.subLayoutTileMinHeightPreset) {
+                return this.$resolveTileMinHeight(
+                    rootArea.subLayoutTileMinHeightPreset,
+                    rootArea.subLayoutTileMinHeightValue
+                );
             }
 
             return this.$resolveTileMinHeight(
