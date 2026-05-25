@@ -266,7 +266,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
                 Project = Projects.get(Project);
             }
 
-            this.$Project = typeOf(Project) === 'object' ? Project : null;
+            this.$Project = Project && typeof Project.getName === 'function'
+                ? Project
+                : null;
             this.$applyProjectToChildControls();
         },
 

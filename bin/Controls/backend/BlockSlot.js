@@ -2192,7 +2192,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
         },
 
         $normalizeProject: function (Project) {
-            if (typeOf(Project) === 'object' || typeOf(Project) === 'function') {
+            if (Project && typeof Project.getName === 'function') {
                 return Project;
             }
 
