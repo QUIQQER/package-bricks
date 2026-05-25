@@ -7,27 +7,26 @@
         {foreach from=$areas item=area}
             <section class="quiqqer-bricks-layout__area quiqqer-bricks-layout__area--{$area.mode} quiqqer-bricks-layout__area--align-{$area.verticalAlign}{if $areaBackgroundEnabled} is-surface-subtle-enabled{/if}{if $area.customCssClassAttribute} {$area.customCssClassAttribute}{/if}"
                     data-slot-id="{$area.slotId}"
-                    {if $area.slotStyle}style="{$area.slotStyle}"{/if}>
+                    {if $area.slotStyle}style="{$area.slotStyle}"{/if}
+            >
+                {if $area.link && $area.mode != 'subLayout'}
+                    <a class="quiqqer-bricks-layout__link"
+                       href="{$area.link.href}"
+                       {if $area.link.rel}rel="{$area.link.rel}"{/if}
+                            {if $area.link.target}target="{$area.link.target}"{/if}
+                            {if $area.link.title}title="{$area.link.title}"{/if}
+                       aria-label="{if $area.link.title}{$area.link.title}{else}{$area.title}{/if}"
+                    ></a>
+                {/if}
+
                 {if $area.backgroundEnabled && $area.backgroundImage}
-                    <div class="quiqqer-bricks-layout__background" aria-hidden="true">
+                    <div class="quiqqer-bricks-layout__background{if $area.backgroundOverlayEnabled} quiqqer-bricks-layout__background--hasOverlay{/if}" aria-hidden="true">
                         {image
                             src=$area.backgroundImage
                             class="quiqqer-bricks-layout__backgroundMedia"
                             width=4000
                         }
                     </div>
-                {/if}
-                {if $area.backgroundColorEnabled}
-                    <div class="quiqqer-bricks-layout__overlay" aria-hidden="true"></div>
-                {/if}
-                {if $area.link && $area.mode != 'subLayout'}
-                    <a class="quiqqer-bricks-layout__link"
-                       href="{$area.link.href}"
-                       {if $area.link.rel}rel="{$area.link.rel}"{/if}
-                       {if $area.link.target}target="{$area.link.target}"{/if}
-                       {if $area.link.title}title="{$area.link.title}"{/if}
-                       aria-label="{if $area.link.title}{$area.link.title}{else}{$area.title}{/if}"
-                    ></a>
                 {/if}
                 <div class="quiqqer-bricks-layout__content">
                     {if $area.mode == 'image' && $area.image}
@@ -49,16 +48,13 @@
                                          data-slot-id="{$subArea.slotId}"
                                          {if $subArea.slotStyle}style="{$subArea.slotStyle}"{/if}>
                                     {if $subArea.backgroundEnabled && $subArea.backgroundImage}
-                                        <div class="quiqqer-bricks-layout__background" aria-hidden="true">
+                                        <div class="quiqqer-bricks-layout__background{if $subArea.backgroundOverlayEnabled} quiqqer-bricks-layout__background--hasOverlay{/if}" aria-hidden="true">
                                             {image
                                                 src=$subArea.backgroundImage
                                                 class="quiqqer-bricks-layout__backgroundMedia"
                                                 width=4000
                                             }
                                         </div>
-                                    {/if}
-                                    {if $subArea.backgroundColorEnabled}
-                                        <div class="quiqqer-bricks-layout__overlay" aria-hidden="true"></div>
                                     {/if}
                                     {if $subArea.link}
                                         <a class="quiqqer-bricks-layout__link"

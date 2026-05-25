@@ -44,12 +44,21 @@
     --quiqqer-bricks-multiLayout-area-background: var(--qui-colors-surface-subtle);
 }
 
-.quiqqer-bricks-layout__background,
-.quiqqer-bricks-layout__overlay {
+.quiqqer-bricks-layout__area--subLayout {
+    container: sub-layout / inline-size;
+}
+
+.quiqqer-bricks-layout__background {
     inset: 0;
     pointer-events: none;
     position: absolute;
     z-index: 0;
+}
+
+.quiqqer-bricks-layout__background::after {
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
 }
 
 .quiqqer-bricks-layout__backgroundMedia {
@@ -60,19 +69,18 @@
     width: 100%;
 }
 
-.quiqqer-bricks-layout__overlay {
+.quiqqer-bricks-layout__background--hasOverlay::after {
     background: var(--quiqqer-bricks-multiLayout-background-overlay-color);
+    border-radius: inherit;
+    content: '';
     opacity: var(--quiqqer-bricks-multiLayout-background-overlay-opacity);
 }
 
 .quiqqer-bricks-layout__content {
     align-items: center;
     color: var(--quiqqer-bricks-multiLayout-text-color);
-    /*display: flex;*/
     display: grid;
     flex: 1;
-    /*flex-direction: column;*/
-    /*justify-content: center;*/
     padding: var(--quiqqer-bricks-multiLayout-content-padding, clamp(1rem, 2cqi, 2rem));
     position: relative;
     width: 100%;
@@ -80,10 +88,6 @@
 
 .quiqqer-bricks-layout__area--image .quiqqer-bricks-layout__content {
     align-items: center;
-}
-
-.quiqqer-bricks-layout__area--subLayout .quiqqer-bricks-layout__content {
-    container: sub-layout / inline-size;
 }
 
 .quiqqer-bricks-layout__subGrid {
@@ -143,17 +147,14 @@
 
 
 .quiqqer-bricks-layout__area--align-top .quiqqer-bricks-layout__content {
-    /*justify-content: flex-start;*/
     align-items: start;
 }
 
 .quiqqer-bricks-layout__area--align-center .quiqqer-bricks-layout__content {
-    /*justify-content: center;*/
     align-items: center;
 }
 
 .quiqqer-bricks-layout__area--align-bottom .quiqqer-bricks-layout__content {
-    /*justify-content: flex-end;*/
     align-items: end;
 }
 
@@ -174,10 +175,8 @@
 }
 
 /**
-  * Test
-  *
-  * Do not set overflow on the quiqqer-bricks-layout__area element
-  * Work with border radius.
+  * Do not set overflow on the quiqqer-bricks-layout__area element.
+  * User border radius.
   */
 .quiqqer-bricks-layout__background,
 .quiqqer-bricks-layout__overlay,
@@ -199,42 +198,35 @@
     width: var(--quiqqer-bricks-multiLayout-image-width, auto);
 }
 
-/* Tablet: main layout container narrower than 64rem (~1024px) */
-@container multi-layout (max-width: 64rem) and (min-width: 48rem) {
+/* Tablet: main layout container */
+@container multi-layout (max-width: 960px) and (min-width: 768px) {
     .quiqqer-bricks-layout__area {
         grid-column: var(--quiqqer-bricks-multiLayout-tablet-column);
         grid-row: var(--quiqqer-bricks-multiLayout-tablet-row);
     }
 }
 
-/* Mobile: main layout container narrower than 40rem (~768px) */
-@container multi-layout (max-width: 48rem) {
-    .quiqqer-bricks-layout__grid {
-        grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
-    }
-
+/* Mobile: main layout container */
+@container multi-layout (max-width: 767px) {
     .quiqqer-bricks-layout__area {
         grid-column: var(--quiqqer-bricks-multiLayout-mobile-column);
         grid-row: var(--quiqqer-bricks-multiLayout-mobile-row);
     }
 }
 
-/* Tablet: sub-layout container narrower than 40rem (~640px) */
-@container sub-layout (max-width: 40rem) and (min-width: 30rem) {
-    .quiqqer-bricks-layout__subArea {
-        grid-column: var(--quiqqer-bricks-multiLayout-tablet-column);
-        grid-row: var(--quiqqer-bricks-multiLayout-tablet-row);
-    }
-}
+/* @todo sub-layout container query */
+/*!* Tablet: sub-layout container *!*/
+/*@container sub-layout (max-width: 640px) and (min-width: 480px) {*/
+/*    .quiqqer-bricks-layout__subArea {*/
+/*        grid-column: var(--quiqqer-bricks-multiLayout-tablet-column);*/
+/*        grid-row: var(--quiqqer-bricks-multiLayout-tablet-row);*/
+/*    }*/
+/*}*/
 
-/* Mobile: sub-layout container narrower than 30rem (~480px) */
-@container sub-layout (max-width: 30rem) {
-    .quiqqer-bricks-layout__subGrid {
-        grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
-    }
-
-    .quiqqer-bricks-layout__subArea {
-        grid-column: var(--quiqqer-bricks-multiLayout-mobile-column);
-        grid-row: var(--quiqqer-bricks-multiLayout-mobile-row);
-    }
-}
+/*!* Mobile: sub-layout container *!*/
+/*@container sub-layout (max-width: 479px) {*/
+/*    .quiqqer-bricks-layout__subArea {*/
+/*        grid-column: var(--quiqqer-bricks-multiLayout-mobile-column);*/
+/*        grid-row: var(--quiqqer-bricks-multiLayout-mobile-row);*/
+/*    }*/
+/*}*/
