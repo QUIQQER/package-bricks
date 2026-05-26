@@ -19,7 +19,7 @@ QUI::getAjax()->registerFunction(
         $BrickManager = QUI\Bricks\Manager::init();
         $placeholderMockup = '/packages/quiqqer/bricks/bin/images/mockup-placeholder.svg';
 
-        $bricks = $BrickManager?->getBricksFromProject($Project) ?? [];
+        $bricks = $BrickManager?->getBrickRecordsFromProject($Project) ?? [];
         $availableBricks = $BrickManager?->getAvailableBricks() ?? [];
         $result = [];
         $availableByControl = [];
@@ -32,11 +32,10 @@ QUI::getAjax()->registerFunction(
             $availableByControl[$availableBrick['control']] = $availableBrick;
         }
 
-        foreach ($bricks as $Brick) {
-            /* @var $Brick QUI\Bricks\Brick */
-            $attributes = $Brick->getAttributes();
-            $type = $Brick->getAttribute('type');
+        foreach ($bricks as $attributes) {
+            $type = $attributes['type'] ?? '';
             $definitionData = $availableByControl[$type] ?? [];
+            $missingControl = $type !== 'content' && empty($definitionData);
 
             $mockup = $definitionData['mockup'] ?? $placeholderMockup;
             $thumbnail = $definitionData['thumbnail'] ?? $mockup;
@@ -44,13 +43,15 @@ QUI::getAjax()->registerFunction(
             $attributes['name'] = $definitionData['title'] ?? ($definitionData['name'] ?? '');
             $attributes['mockup'] = $mockup;
             $attributes['thumbnail'] = $thumbnail;
+            $attributes['deprecated'] = !empty($definitionData['deprecated']) || !empty($attributes['deprecated']) ? 1 : 0;
+            $attributes['missingControl'] = $missingControl ? 1 : 0;
 
             if (!$area) {
                 $result[] = $attributes;
                 continue;
             }
 
-            $areas = $Brick->getAttribute('areas');
+            $areas = $attributes['areas'] ?? '';
 
             if (str_contains($areas, ',' . $area . ',')) {
                 $result[] = $attributes;

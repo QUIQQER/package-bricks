@@ -1,8 +1,7 @@
 {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
-    <header class="control-header">
-        <h1>{$this->getAttribute('frontendTitle')}</h1>
-    </header>
+    <h2 class="control-header">{$this->getAttribute('frontendTitle')}</h2>
 {/if}
+
 
 {if $this->getAttribute('content') != ""}
     <div class="control-content">
@@ -27,7 +26,9 @@
                     {if isset($entry['entryContent'])}
                         <div class="quiqqer-accordion-item-content-wrapper">
                             <div class="quiqqer-accordion-item-content">
-                                {$entry['entryContent']}
+                                <div class="quiqqer-accordion-item-content-inner">
+                                    {$entry['entryContent']}
+                                </div>
                             </div>
                         </div>
                     {/if}
@@ -50,7 +51,7 @@
 
                     {if isset($entry['entryContent'])}
                         <div class="quiqqer-accordion-item-content-wrapper">
-                            <div class="quiqqer-accordion-item-content">
+                            <div class="quiqqer-accordion-item-content-inner">
                                 {$entry['entryContent']}
                             </div>
                         </div>

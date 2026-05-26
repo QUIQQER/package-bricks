@@ -43,3 +43,18 @@
     color: inherit;
     opacity: 1;
 }
+
+.quiqqer-bricks-manager-title {
+    align-items: center;
+    display: inline-flex;
+    gap: 0.5rem;
+}
+
+.quiqqer-bricks-manager-title-badge {
+    vertical-align: middle;
+}
+
+.quiqqer-bricks-manager-row--inactive {
+    color: #aab0b6;
+    color: color-mix(in oklab, currentColor, transparent 50%);
+}

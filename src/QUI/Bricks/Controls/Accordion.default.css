@@ -1,31 +1,14 @@
-.quiqqer-accordion-list {
-    --_border-width: var(--quiqqer-bricks-accordion-border-width, var(--qui-border-width));
-    --_border-style: var(--quiqqer-bricks-accordion-border-style, var(--qui-border-style));
-    --_border-color: var(--quiqqer-bricks-accordion-border-color, var(--qui-border-color));
-    --_header-font-size: var(--quiqqer-bricks-accordion-header-font-size, 1.125rem);
-    --_header-font-weight: var(--quiqqer-bricks-accordion-header-font-weight, 400);
+.quiqqer-accordion-list--default {
+    --_items-gap: 0;
+    --_header-padding-inline: 0;
 }
 
 .quiqqer-accordion-item {
     border-bottom: var(--_border-width) var(--_border-style) var(--_border-color);
 }
 
-.quiqqer-accordion-item-header {
-    align-items: flex-start;
-    cursor: pointer;
-    display: flex;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: var(--spacing, 1rem);
-    padding-bottom: var(--spacing, 1rem);
-    font-size: var(--_header-font-size);
-    font-weight: var(--_header-font-weight);
-}
-
-.quiqqer-accordion-list--icon-left .quiqqer-accordion-item-header-icon {
-    margin-left: 0;
-    margin-right: 0.75rem;
-    order: -1;
+.quiqqer-accordion-item-header:is(:hover, :focus-visible) {
+    background-color: color-mix(in oklab, transparent 84%, var(--qui-colors-surface-subtle));
 }
 
 .quiqqer-accordion-item-content {

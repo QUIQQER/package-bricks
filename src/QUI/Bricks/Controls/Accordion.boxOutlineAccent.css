@@ -1,32 +1,35 @@
-.quiqqer-accordion-list--boxOutlineAccent {
-    --_items-gap: var(--quiqqer-bricks-accordion-items-gap, 1rem);
-    --_border-color: var(--quiqqer-bricks-accordion-boxOutlineAccent-border-color, var(--qui-colors-primary));
-    --_header-font-size: var(--quiqqer-bricks-accordion-header-font-size, 1.125rem);
-    --_header-font-weight: var(--quiqqer-bricks-accordion-header-font-weight, 500);
+/* box outline accent */
+.quiqqer-accordion-item--boxOutlineAccent .quiqqer-accordion-item-header {
+    border: var(--_border-width) var(--_border-style) var(--qui-colors-primary);
 }
 
-.quiqqer-accordion-item--boxOutlineAccent .quiqqer-accordion-item-header--box {
-    align-items: center;
-    border: 1px solid var(--_border-color);
-    border-radius: var(--qui-border-radius, 1rem);
-    cursor: pointer;
-    display: flex;
-    font-size: var(--_header-font-size);
-    font-weight: var(--_header-font-weight);
-    gap: 1rem;
-    margin: 0;
-    padding: 0.75rem 1.25rem;
+.quiqqer-accordion-item--boxOutlineAccent .quiqqer-accordion-item-header:is(:hover, :focus-visible) {
+    background: color-mix(in oklab, transparent 90%, var(--qui-colors-primary));
+    /*border-color: currentColor;*/
 }
 
-.quiqqer-accordion-item--boxOutlineAccent .quiqqer-accordion-item-header-text {
-    flex-grow: 1
+.quiqqer-accordion-item--boxOutlineAccent .quiqqer-accordion-item-content {
+    padding-top: 1rem;
 }
 
-.quiqqer-accordion-list--icon-left .quiqqer-accordion-item--boxOutlineAccent .quiqqer-accordion-item-header-icon {
-    margin-left: 0;
-    order: -1;
+/* box outline accent only by opened item */
+.quiqqer-accordion-item--boxOutlineAccentOpen .quiqqer-accordion-item-header {
+    border: var(--_border-width) var(--_border-style) var(--qui-border-color);
 }
 
-.quiqqer-accordion-item--boxOutlineAccent .quiqqer-accordion-item-content--box {
-    padding: 1.25rem 0;
+.quiqqer-accordion-item--boxOutlineAccentOpen .quiqqer-accordion-item-header:is(:hover, :focus-visible) {
+    background: color-mix(in oklab, transparent 84%, var(--_border-color));
+}
+
+.quiqqer-accordion-item--boxOutlineAccentOpen .quiqqer-accordion-item-content {
+    padding-top: 1rem;
+}
+
+/* state open */
+.quiqqer-accordion-item--boxOutlineAccentOpen[data-open="1"] .quiqqer-accordion-item-header {
+    border-color: var(--qui-colors-primary);
+}
+
+.quiqqer-accordion-item--boxOutlineAccentOpen[data-open="1"] .quiqqer-accordion-item-header:is(:hover, :focus-visible) {
+    background: color-mix(in oklab, transparent 90%, var(--qui-colors-primary));
 }

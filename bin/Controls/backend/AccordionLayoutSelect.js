@@ -80,25 +80,33 @@ define('package/quiqqer/bricks/bin/Controls/backend/AccordionLayoutSelect', [
                     title: QUILocale.get(lg, 'brick.accordion.template.boxOutlineAccent'),
                     preview: 'outlineAccent'
                 },
+                boxOutlineAccentOpen: {
+                    title: QUILocale.get(lg, 'brick.accordion.template.boxOutlineAccentOpen'),
+                    preview: 'outlineAccentOpen'
+                },
                 boxOutlineTextColor: {
                     title: QUILocale.get(lg, 'brick.accordion.template.boxOutlineTextColor'),
                     preview: 'outlineTextColor'
                 },
+                boxFill: {
+                    title: QUILocale.get(lg, 'brick.accordion.template.boxFill'),
+                    preview: 'boxFill'
+                },
                 boxFillAccent: {
                     title: QUILocale.get(lg, 'brick.accordion.template.boxFillAccent'),
-                    preview: 'fill'
+                    preview: 'boxFillAccent'
                 },
-                boxFillSubtle: {
-                    title: QUILocale.get(lg, 'brick.accordion.template.boxFillSubtle'),
-                    preview: 'fillSubtle'
+                boxFillAccentOpen: {
+                    title: QUILocale.get(lg, 'brick.accordion.template.boxFillAccentOpen'),
+                    preview: 'boxFillAccentOpen'
                 },
-                softCard: {
-                    title: QUILocale.get(lg, 'brick.accordion.template.softCard'),
+                card: {
+                    title: QUILocale.get(lg, 'brick.accordion.template.card'),
                     preview: 'card'
                 },
-                softCardAccentFill: {
-                    title: QUILocale.get(lg, 'brick.accordion.template.softCardAccentFill'),
-                    preview: 'cardAccent'
+                cardFillAccent: {
+                    title: QUILocale.get(lg, 'brick.accordion.template.cardFillAccent'),
+                    preview: 'cardFillAccent'
                 }
             };
         },

@@ -28,10 +28,14 @@ QUI::getAjax()->registerFunction(
             }
         };
 
+        /** @var QUI\Bricks\Manager $BrickManager */
         $BrickManager = QUI\Bricks\Manager::init();
-        $Brick = $BrickManager?->getBrickById($brickId);
 
-        if (!$Brick) {
+        $availableBricks = $BrickManager->getAvailableBricks();
+
+        try {
+            $Brick = $BrickManager->getBrickById((int)$brickId);
+        } catch (Exception) {
             return [
                 'attributes' => [],
                 'settings' => [],
@@ -41,6 +45,23 @@ QUI::getAjax()->registerFunction(
         }
 
         $attributes = $Brick->getAttributes();
+        $availableByControl = [];
+
+        foreach ($availableBricks as $availableBrick) {
+            if (empty($availableBrick['control'])) {
+                continue;
+            }
+
+            $availableByControl[$availableBrick['control']] = $availableBrick;
+        }
+
+        $type = $attributes['type'] ?? '';
+        $definitionData = $availableByControl[$type] ?? [];
+        $missingControl = $type !== 'content' && empty($definitionData);
+
+        $attributes['systemName'] = $definitionData['name'] ?? '';
+        $attributes['deprecated'] = !empty($definitionData['deprecated']) || !empty($attributes['deprecated']) ? 1 : 0;
+        $attributes['missingControl'] = $missingControl ? 1 : 0;
         $attributes['c_user_display'] = $formatUserDisplay($Brick->getAttribute('c_user'));
         $attributes['e_user_display'] = $formatUserDisplay($Brick->getAttribute('e_user'));
 
