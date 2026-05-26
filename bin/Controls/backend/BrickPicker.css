@@ -201,10 +201,27 @@
 }
 
 .quiqqer-bricks-brickPicker-cardName {
+    align-items: baseline;
     color: #0f172a;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.35;
+}
+
+.quiqqer-bricks-brickPicker-cardId {
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.quiqqer-bricks-brickPicker-cardNameSep {
+    color: #cbd5e1;
+}
+
+.quiqqer-bricks-brickPicker-cardNameText {
+    color: inherit;
 }
 
 .quiqqer-bricks-brickPicker-cardBadges {

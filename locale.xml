@@ -1039,8 +1039,8 @@ This content does not replace the block content. You can still place the brick t
             <en><![CDATA[Add a Brick]]></en>
         </locale>
         <locale name="site.area.window.input.placeholder">
-            <de><![CDATA[Nach Titel oder Beschreibung filtern]]></de>
-            <en><![CDATA[Filter by title or description]]></en>
+            <de><![CDATA[Nach Titel, Beschreibung oder ID filtern]]></de>
+            <en><![CDATA[Filter by title, description or ID]]></en>
         </locale>
         <locale name="site.area.window.add.brickIsDisabled">
             <de><![CDATA[Deaktiviert]]></de>
