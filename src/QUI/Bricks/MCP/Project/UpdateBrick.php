@@ -19,7 +19,7 @@ class UpdateBrick extends AbstractTool
         $serverBuilder->addTool(
             function (
                 int $id,
-                array $attributes,
+                array | null $attributes = null,
                 array | null $settings = null,
                 array | null $customfields = null
             ): CallToolResult | array {
@@ -43,7 +43,7 @@ class UpdateBrick extends AbstractTool
                         'customfields' => $Brick->getCustomFields()
                     ];
 
-                    foreach ($attributes as $attribute => $value) {
+                    foreach ($attributes ?? [] as $attribute => $value) {
                         $saveData[$attribute] = $value;
                     }
 
@@ -70,7 +70,7 @@ class UpdateBrick extends AbstractTool
             inputSchema: [
                 'type' => 'object',
                 'additionalProperties' => false,
-                'required' => ['id', 'attributes'],
+                'required' => ['id'],
                 'properties' => [
                     'id' => ['type' => 'integer', 'description' => 'Brick ID.', 'minimum' => 1],
                     'attributes' => [
