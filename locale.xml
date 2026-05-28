@@ -842,6 +842,14 @@ This content does not replace the block content. You can still place the brick t
             <de><![CDATA[Seiten URL]]></de>
             <en><![CDATA[Site URL]]></en>
         </locale>
+        <locale name="brick.panel.usage.grid.editSite">
+            <de><![CDATA[Seite bearbeiten]]></de>
+            <en><![CDATA[Edit site]]></en>
+        </locale>
+        <locale name="brick.panel.usage.grid.openFrontend">
+            <de><![CDATA[Im Browser öffnen]]></de>
+            <en><![CDATA[Open in browser]]></en>
+        </locale>
 
         <locale name="pdfPreview.brick.title">
             <de><![CDATA[PDF Vorschau]]></de>
@@ -1039,8 +1047,8 @@ This content does not replace the block content. You can still place the brick t
             <en><![CDATA[Add a Brick]]></en>
         </locale>
         <locale name="site.area.window.input.placeholder">
-            <de><![CDATA[Nach Titel oder Beschreibung filtern]]></de>
-            <en><![CDATA[Filter by title or description]]></en>
+            <de><![CDATA[Nach Titel, Beschreibung oder ID filtern]]></de>
+            <en><![CDATA[Filter by title, description or ID]]></en>
         </locale>
         <locale name="site.area.window.add.brickIsDisabled">
             <de><![CDATA[Deaktiviert]]></de>

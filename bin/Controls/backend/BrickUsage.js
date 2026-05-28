@@ -18,9 +18,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
 
         Binds: [
             '$onInject',
-            '$dblClick',
+            '$openPanelSite',
             '$openFrontendSite',
-            '$createFrontendButton'
+            '$createActionButtons'
         ],
 
         options: {
@@ -87,15 +87,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
                     width: 300
                 }, {
                     header: '&nbsp;',
-                    dataIndex: 'openFrontend',
+                    dataIndex: 'actions',
                     dataType: 'node',
-                    width: 250
+                    width: 360
                 }],
                 onrefresh: this.refresh
-            });
-
-            this.$Grid.addEvents({
-                onDblClick: this.$dblClick
             });
 
             return this.$Elm;
@@ -112,7 +108,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
             return new Promise(function (resolve) {
                 QUIAjax.get('package_quiqqer_bricks_ajax_getSitesFromBrick', function (result) {
                     result.data = result.data.map(function (entry) {
-                        entry.openFrontend = self.$createFrontendButton(entry);
+                        entry.actions = self.$createActionButtons(entry);
 
                         return entry;
                     });
@@ -159,19 +155,13 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
         },
 
         /**
-         * grid dbl click
+         * Open site panel in backend
          */
-        $dblClick: function () {
-            const selected = this.$Grid.getSelectedData();
-
-            if (!selected.length) {
-                return;
-            }
-
+        $openPanelSite: function (entry) {
             PanelUtils.openSitePanel(
-                selected[0].project,
-                selected[0].lang,
-                selected[0].id
+                entry.project,
+                entry.lang,
+                entry.id
             );
         },
 
@@ -189,24 +179,50 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickUsage', [
         },
 
         /**
-         * Create frontend button node for grid row
+         * Create action buttons node for grid row
          *
          * @param {Object} entry
-         * @return {HTMLButtonElement}
+         * @return {HTMLDivElement}
          */
-        $createFrontendButton: function (entry) {
-            return new Element('button', {
+        $createActionButtons: function (entry) {
+            const Container = new Element('div', {
+                styles: {
+                    display: 'flex',
+                    gap: '0.5rem',
+                    'align-items': 'center',
+                    'flex-wrap': 'wrap'
+                }
+            });
+
+            new Element('button', {
+                type: 'button',
+                'class': 'btn btn-secondary',
+                html: QUILocale.get('quiqqer/bricks', 'brick.panel.usage.grid.editSite') +
+                    ' <span class="fa fa-edit"></span>',
+                title: QUILocale.get('quiqqer/bricks', 'brick.panel.usage.grid.editSite'),
+                events: {
+                    click: function (event) {
+                        event.stop();
+                        this.$openPanelSite(entry);
+                    }.bind(this)
+                }
+            }).inject(Container);
+
+            new Element('button', {
                 type: 'button',
                 'class': 'btn btn-light',
-                html: 'Seite im Browser öffnen <span class="fa fa-external-link"></span>',
-                title: 'Seite im Browser öffnen',
+                html: QUILocale.get('quiqqer/bricks', 'brick.panel.usage.grid.openFrontend') +
+                    ' <span class="fa fa-external-link"></span>',
+                title: QUILocale.get('quiqqer/bricks', 'brick.panel.usage.grid.openFrontend'),
                 events: {
                     click: function (event) {
                         event.stop();
                         this.$openFrontendSite(entry);
                     }.bind(this)
                 }
-            });
+            }).inject(Container);
+
+            return Container;
         }
     });
 });

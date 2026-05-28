@@ -387,10 +387,26 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
                     'class': 'quiqqer-bricks-brickPicker-cardBody'
                 }).inject(Card);
 
-                new Element('div', {
-                    'class': 'quiqqer-bricks-brickPicker-cardName',
-                    text: brick.displayTitle
+                const Name = new Element('div', {
+                    'class': 'quiqqer-bricks-brickPicker-cardName'
                 }).inject(Body);
+
+                if (brick.displayId) {
+                    new Element('span', {
+                        'class': 'quiqqer-bricks-brickPicker-cardId',
+                        text: brick.displayId
+                    }).inject(Name);
+
+                    new Element('span', {
+                        'class': 'quiqqer-bricks-brickPicker-cardNameSep',
+                        text: '·'
+                    }).inject(Name);
+                }
+
+                new Element('span', {
+                    'class': 'quiqqer-bricks-brickPicker-cardNameText',
+                    text: brick.displayTitle
+                }).inject(Name);
 
                 const Badges = new Element('div', {
                     'class': 'quiqqer-bricks-brickPicker-cardBadges'
@@ -418,6 +434,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
         },
 
         $getDisplayData: function (brick) {
+            const brickId = parseInt(brick.id, 10) || 0;
+            const displayId = brickId ? '#' + brickId : '';
             const instanceTitle = brick.title || brick.type || '';
             const brickTypeTitle = brick.name && typeof brick.name === 'object'
                 ? QUILocale.get(brick.name.group, brick.name.var)
@@ -450,13 +468,16 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
             }
 
             return {
-                id: brick.id,
+                id: brickId,
                 image: brick.mockup || brick.thumbnail || PLACEHOLDER_IMAGE,
+                displayId: displayId,
                 displayTitle: displayTitle,
                 displayDescription: displayDescription,
                 isActive: isActive,
                 badges: badges,
                 search: [
+                    brickId ? String(brickId) : '',
+                    displayId,
                     this.$toPlainText(displayTitle),
                     this.$toPlainText(brickTypeTitle),
                     displayDescription,
