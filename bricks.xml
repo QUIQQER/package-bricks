@@ -9,6 +9,85 @@
             <description>
                 <locale group="quiqqer/bricks" var="brick.control.breadcrumb.description"/>
             </description>
+
+            <mockups>
+                <mockup src="/packages/quiqqer/bricks/bin/images/mockups/breadcrumb-mockup-900x600.png" type="preview"/>
+                <mockup src="/packages/quiqqer/bricks/bin/images/mockups/breadcrumb-thumbnail-100x80.png" type="thumbnail"/>
+            </mockups>
+
+            <settings>
+                <setting name="showTitle" type="checkbox">
+                    <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.showTitle"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.showTitle.description"/>
+                    </description>
+                </setting>
+
+                <setting name="titleText" type="text">
+                    <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.titleText"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.titleText.description"/>
+                    </description>
+                </setting>
+
+                <setting name="firstItemText" type="text">
+                    <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.firstItemText"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.firstItemText.description"/>
+                    </description>
+                </setting>
+
+                <setting name="fontSize" type="select">
+                    <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.fontSize"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.fontSize.description"/>
+                    </description>
+
+                    <option value="xs">
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.fontSize.option.xs"/>
+                    </option>
+                    <option value="s" selected="selected">
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.fontSize.option.s"/>
+                    </option>
+                    <option value="normal">
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.fontSize.option.normal"/>
+                    </option>
+                    <option value="lg">
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.fontSize.option.lg"/>
+                    </option>
+                    <option value="xl">
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.fontSize.option.xl"/>
+                    </option>
+                </setting>
+
+                <setting name="separator" type="hidden"
+                         data-qui="package/quiqqer/bricks/bin/Controls/backend/BreadcrumbSeparatorSelect">
+                    <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.separator"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.separator.description"/>
+                    </description>
+                </setting>
+
+                <setting name="lastItemStyle" type="select">
+                    <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.lastItemStyle"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.lastItemStyle.description"/>
+                    </description>
+
+                    <option value="none" selected="selected">
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.lastItemStyle.option.none"/>
+                    </option>
+                    <option value="primary">
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.lastItemStyle.option.primary"/>
+                    </option>
+                    <option value="bold">
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.lastItemStyle.option.bold"/>
+                    </option>
+                    <option value="primary-bold">
+                        <locale group="quiqqer/bricks" var="brick.control.breadcrumb.setting.lastItemStyle.option.primaryBold"/>
+                    </option>
+                </setting>
+            </settings>
         </brick>
 
         <!-- simple contact form -->

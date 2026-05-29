@@ -1,0 +1,71 @@
+.quiqqer-bricks-breadcrumbSeparatorSelect {
+    display: block;
+    width: 100%;
+}
+
+.quiqqer-bricks-breadcrumbSeparatorSelect-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+
+.quiqqer-bricks-breadcrumbSeparatorSelect-card {
+    --border-color: #d7dce3;
+    --color-muted: #9a9a9a;
+    --radius: 12px;
+
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    color: #1d2733;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    min-height: 116px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+    width: 100%;
+}
+
+.quiqqer-bricks-breadcrumbSeparatorSelect-card:hover,
+.quiqqer-bricks-breadcrumbSeparatorSelect-card:focus {
+    border-color: #4879ff;
+    color: #4879ff;
+    outline: none;
+}
+
+.quiqqer-bricks-breadcrumbSeparatorSelect-card.is-active {
+    background: rgb(72 121 255 / 10%);
+    border-color: #4879ff;
+    color: #4879ff;
+}
+
+.quiqqer-bricks-breadcrumbSeparatorSelect-preview {
+    align-items: center;
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: center;
+    min-height: 72px;
+    padding: 16px 12px;
+}
+
+.quiqqer-bricks-breadcrumbSeparatorSelect-preview .fa,
+.quiqqer-bricks-breadcrumbSeparatorSelect-previewText {
+    font-size: 30px;
+    line-height: 1;
+    transform: translateY(-10px);
+}
+
+.quiqqer-bricks-breadcrumbSeparatorSelect-title {
+    font-size: 11px;
+    line-height: 1.35;
+    padding: 10px 8px;
+    color: var(--color-muted);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
