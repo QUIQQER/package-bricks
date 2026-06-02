@@ -77,6 +77,13 @@
     color: var(--brickPicker-muted);
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.quiqqer-bricks-brickPicker-shortcuts {
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.75rem;
 }
 
@@ -123,6 +130,23 @@
     font-size: 0.75rem;
 }
 
+.quiqqer-bricks-brickPicker-filterToggle {
+    align-items: center;
+    color: var(--brickPicker-muted);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 0.75rem;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    line-height: 1.25;
+    margin-left: auto;
+}
+
+.quiqqer-bricks-brickPicker-filterToggle input {
+    cursor: pointer;
+    margin: 0;
+}
+
 .quiqqer-bricks-brickPicker-grid {
     background: #fafafa;
     border-radius: 0.5rem;
@@ -157,10 +181,6 @@
     height: 100%;
 }
 
-.quiqqer-bricks-brickPicker-card--inactive {
-    filter: grayscale(0.5) opacity(0.6);
-}
-
 .quiqqer-bricks-brickPicker-card:hover {
     border-color: #cbd5e1;
     box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
@@ -183,6 +203,7 @@
     background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
     border-bottom: 1px solid var(--brickPicker-line);
     overflow: hidden;
+    position: relative;
 }
 
 .quiqqer-bricks-brickPicker-cardThumb img {
@@ -190,6 +211,13 @@
     height: 100%;
     object-fit: cover;
     width: 100%;
+}
+
+.quiqqer-bricks-brickPicker-cardStatusBadge {
+    position: absolute;
+    right: 0.75rem;
+    top: 0.75rem;
+    z-index: 1;
 }
 
 .quiqqer-bricks-brickPicker-cardBody {

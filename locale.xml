@@ -1190,6 +1190,10 @@ This content does not replace the block content. You can still place the brick t
             <de><![CDATA[Schließen]]></de>
             <en><![CDATA[Close]]></en>
         </locale>
+        <locale name="site.area.window.filter.showInactive">
+            <de><![CDATA[Deaktivierte Bausteine anzeigen]]></de>
+            <en><![CDATA[Show inactive bricks]]></en>
+        </locale>
         <locale name="site.area.window.delete.title">
             <de><![CDATA[Baustein löschen?]]></de>
             <en><![CDATA[Delete the Brick?]]></en>
