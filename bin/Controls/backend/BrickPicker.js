@@ -23,6 +23,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
             '$onInject',
             '$onProjectSelectLoad',
             '$ensureProjectSelection',
+            '$waitForInitialProjectSelection',
+            '$hasValidProjectSelection',
             'refresh',
             'setItems',
             'getValue',
@@ -53,6 +55,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
             this.$ActiveCard = null;
             this.$SelectedIds = [];
             this.$Items = [];
+            this.$waitingForInitialProjectSelection = false;
 
             this.addEvents({
                 onInject: this.$onInject
@@ -197,15 +200,54 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
 
         $onProjectSelectLoad: function () {
             this.$ensureProjectSelection();
-            this.refresh();
+
+            if (this.$hasValidProjectSelection()) {
+                this.refresh();
+                return;
+            }
+
+            this.$waitForInitialProjectSelection();
         },
 
         $onProjectChange: function () {
+            this.$waitingForInitialProjectSelection = false;
             this.refresh();
         },
 
         $usesProjectSelect: function () {
             return this.getAttribute('showProjectSelect') && !this.getAttribute('items');
+        },
+
+        $hasValidProjectSelection: function () {
+            const projectData = this.$getProjectData();
+
+            return !!(projectData.project && projectData.lang);
+        },
+
+        $waitForInitialProjectSelection: function () {
+            if (this.$waitingForInitialProjectSelection) {
+                return;
+            }
+
+            this.$waitingForInitialProjectSelection = true;
+
+            const check = function () {
+                if (!this.$waitingForInitialProjectSelection) {
+                    return;
+                }
+
+                this.$ensureProjectSelection();
+
+                if (this.$hasValidProjectSelection()) {
+                    this.$waitingForInitialProjectSelection = false;
+                    this.refresh();
+                    return;
+                }
+
+                window.requestAnimationFrame(check);
+            }.bind(this);
+
+            window.requestAnimationFrame(check);
         },
 
         $ensureProjectSelection: function () {
@@ -273,8 +315,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
             const projectData = this.$getProjectData();
 
             if (!projectData.project || !projectData.lang) {
-                this.setItems([]);
-                return Promise.resolve([]);
+                if (this.$usesProjectSelect()) {
+                    this.$waitForInitialProjectSelection();
+                }
+
+                return Promise.resolve(this.$Items);
             }
 
             if (this.$ProjectSelect) {
