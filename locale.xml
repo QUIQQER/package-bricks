@@ -74,12 +74,124 @@
             ]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.title">
-            <de><![CDATA[Breadcrumb]]></de>
+            <de><![CDATA[Pfadnavigation (Breadcrumb)]]></de>
             <en><![CDATA[Breadcrumb]]></en>
         </locale>
         <locale name="brick.control.breadcrumb.description">
-            <de><![CDATA[Eine "Sie sind hier"-Anzeigenleiste über dem Inhalt]]></de>
-            <en><![CDATA[A "You are here ..." list above the content]]></en>
+            <de><![CDATA[Mit diesem Baustein lässt sich der aktuelle Seitenpfad anzeigen und die Orientierung innerhalb der Website verbessern. Die Breadcrumb-Navigation eignet sich besonders für mehrstufige Seitenstrukturen, Unterseiten und umfangreiche Inhaltsbereiche.<ul><li>Zeigt den Navigationspfad bis zur aktuellen Seite</li><li>Verbessert Orientierung und Nutzerführung</li><li>Unterstützt verschiedene Trenner, Schriftgrößen und Hervorhebungen</li><li>Einleitungstext optional ein- oder ausblendbar</li><li>Auch bei langen Pfaden mobil und auf Desktop gut nutzbar</li></ul>]]></de>
+            <en><![CDATA[Displays the current page path and helps visitors navigate within the website. Ideal for multi-level page structures and larger content areas.]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.showTitle">
+            <de><![CDATA[Einleitungstext anzeigen]]></de>
+            <en><![CDATA[Show intro text]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.showTitle.description">
+            <de><![CDATA[Blendet den einleitenden Text vor der Breadcrumb-Navigation ein oder aus. Standard: aktiviert.]]></de>
+            <en><![CDATA[Shows or hides the introductory text before the breadcrumb navigation. Default: enabled.]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.titleText">
+            <de><![CDATA[Einleitungstext]]></de>
+            <en><![CDATA[Intro text]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.titleText.description">
+            <de><![CDATA[Eigener Einleitungstext vor der Breadcrumb-Navigation. Leer lassen, um den Standard-Locale-Text zu verwenden.]]></de>
+            <en><![CDATA[Custom introductory text before the breadcrumb navigation. Leave empty to use the default locale text.]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.firstItemText">
+            <de><![CDATA[Text für ersten Eintrag]]></de>
+            <en><![CDATA[Text for first entry]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.firstItemText.description">
+            <de><![CDATA[Ersetzt nur den sichtbaren Text des ersten Breadcrumb-Eintrags. URL und Ziel bleiben unverändert.]]></de>
+            <en><![CDATA[Replaces only the visible text of the first breadcrumb entry. URL and target remain unchanged.]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.fontSize">
+            <de><![CDATA[Schriftgröße]]></de>
+            <en><![CDATA[Font size]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.fontSize.description">
+            <de><![CDATA[Bestimmt die Größe von Einleitungstext und Breadcrumb-Einträgen. Standard: klein.]]></de>
+            <en><![CDATA[Defines the size of the intro text and breadcrumb entries. Default: small.]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.fontSize.option.xs">
+            <de><![CDATA[Extra klein]]></de>
+            <en><![CDATA[Extra small]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.fontSize.option.s">
+            <de><![CDATA[Klein]]></de>
+            <en><![CDATA[Small]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.fontSize.option.normal">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Default]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.fontSize.option.lg">
+            <de><![CDATA[Groß]]></de>
+            <en><![CDATA[Large]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.fontSize.option.xl">
+            <de><![CDATA[Extra groß]]></de>
+            <en><![CDATA[Extra large]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.separator">
+            <de><![CDATA[Trenner]]></de>
+            <en><![CDATA[Separator]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.separator.description">
+            <de><![CDATA[Legt fest, wie die einzelnen Breadcrumb-Einträge visuell voneinander getrennt werden. Standard: Winkel rechts.]]></de>
+            <en><![CDATA[Defines how individual breadcrumb entries are visually separated. Default: angle right.]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.separator.option.angleRight">
+            <de><![CDATA[Winkel rechts]]></de>
+            <en><![CDATA[Angle right]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.separator.option.chevronRight">
+            <de><![CDATA[Chevron rechts]]></de>
+            <en><![CDATA[Chevron right]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.separator.option.anglesRight">
+            <de><![CDATA[Doppelwinkel rechts]]></de>
+            <en><![CDATA[Double angle right]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.separator.option.caretRight">
+            <de><![CDATA[Caret rechts]]></de>
+            <en><![CDATA[Caret right]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.separator.option.slash">
+            <de><![CDATA[Schrägstrich]]></de>
+            <en><![CDATA[Slash]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.separator.option.bullet">
+            <de><![CDATA[Bullet]]></de>
+            <en><![CDATA[Bullet]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.separator.option.pipe">
+            <de><![CDATA[Pipe]]></de>
+            <en><![CDATA[Pipe]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.lastItemStyle">
+            <de><![CDATA[Letzten Eintrag hervorheben]]></de>
+            <en><![CDATA[Highlight last item]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.lastItemStyle.description">
+            <de><![CDATA[Steuert, ob und wie der aktuelle beziehungsweise letzte Breadcrumb-Eintrag optisch hervorgehoben wird. Standard: keine Hervorhebung.]]></de>
+            <en><![CDATA[Controls whether and how the current or last breadcrumb entry is visually highlighted. Default: no highlight.]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.lastItemStyle.option.none">
+            <de><![CDATA[Nicht hervorheben]]></de>
+            <en><![CDATA[Do not highlight]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.lastItemStyle.option.primary">
+            <de><![CDATA[Primärfarbe]]></de>
+            <en><![CDATA[Primary color]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.lastItemStyle.option.bold">
+            <de><![CDATA[Fett]]></de>
+            <en><![CDATA[Bold]]></en>
+        </locale>
+        <locale name="brick.control.breadcrumb.setting.lastItemStyle.option.primaryBold">
+            <de><![CDATA[Primärfarbe und fett]]></de>
+            <en><![CDATA[Primary color and bold]]></en>
         </locale>
         <locale name="brick.control.contact.title">
             <de><![CDATA[Einfaches Kontaktformular]]></de>
@@ -1077,6 +1189,10 @@ This content does not replace the block content. You can still place the brick t
         <locale name="site.area.window.shortcuts.close">
             <de><![CDATA[Schließen]]></de>
             <en><![CDATA[Close]]></en>
+        </locale>
+        <locale name="site.area.window.filter.showInactive">
+            <de><![CDATA[Deaktivierte Bausteine anzeigen]]></de>
+            <en><![CDATA[Show inactive bricks]]></en>
         </locale>
         <locale name="site.area.window.delete.title">
             <de><![CDATA[Baustein löschen?]]></de>

@@ -947,7 +947,14 @@ class MultiLayout extends QUI\Control
         try {
             $Brick = Manager::init()?->getBrickById($brickId);
 
-            return $Brick?->create() ?? '';
+            if (!$Brick) {
+                return '';
+            }
+
+            $result = $Brick->create();
+            $this->addCSSFiles($Brick->getCSSFiles());
+
+            return $result;
         } catch (Exception) {
             return '';
         }
