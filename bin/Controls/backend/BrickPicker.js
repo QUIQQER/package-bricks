@@ -13,6 +13,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
 
     const lg = 'quiqqer/bricks';
     const PLACEHOLDER_IMAGE = '/packages/quiqqer/bricks/bin/images/mockup-placeholder.svg';
+    const SHOW_INACTIVE_STORAGE_KEY = 'quiqqer-bricks-brickpicker-show-inactive';
 
     return new Class({
 
@@ -23,10 +24,13 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
             '$onInject',
             '$onProjectSelectLoad',
             '$ensureProjectSelection',
+            '$waitForInitialProjectSelection',
+            '$hasValidProjectSelection',
             'refresh',
             'setItems',
             'getValue',
             '$onSearchInput',
+            '$onShowInactiveChange',
             '$onKeyDown',
             '$onProjectChange'
         ],
@@ -49,10 +53,13 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
             this.$CounterNode = null;
             this.$Grid = null;
             this.$EmptyState = null;
+            this.$ShowInactiveCheckbox = null;
             this.$CardNodes = [];
             this.$ActiveCard = null;
             this.$SelectedIds = [];
             this.$Items = [];
+            this.$waitingForInitialProjectSelection = false;
+            this.$showInactive = this.$getStoredShowInactiveState();
 
             this.addEvents({
                 onInject: this.$onInject
@@ -119,6 +126,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
                 'aria-label': QUILocale.get(lg, 'site.area.window.shortcuts.label')
             }).inject(this.$Elm);
 
+            const ShortcutHints = new Element('div', {
+                'class': 'quiqqer-bricks-brickPicker-shortcuts'
+            }).inject(Hints);
+
             [
                 {
                     keys: ['Tab'],
@@ -137,7 +148,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
             ].forEach(function (entry) {
                 const Hint = new Element('div', {
                     'class': 'quiqqer-bricks-brickPicker-hint'
-                }).inject(Hints);
+                }).inject(ShortcutHints);
 
                 const Keys = new Element('div', {
                     'class': 'quiqqer-bricks-brickPicker-hintKeys',
@@ -162,6 +173,22 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
                     text: entry.label
                 }).inject(Hint);
             });
+
+            const Filters = new Element('label', {
+                'class': 'quiqqer-bricks-brickPicker-filterToggle'
+            }).inject(Hints);
+
+            this.$ShowInactiveCheckbox = new Element('input', {
+                type: 'checkbox',
+                checked: this.$showInactive,
+                events: {
+                    change: this.$onShowInactiveChange
+                }
+            }).inject(Filters);
+
+            new Element('span', {
+                text: QUILocale.get(lg, 'site.area.window.filter.showInactive')
+            }).inject(Filters);
 
             this.$Grid = new Element('div', {
                 'class': 'quiqqer-bricks-brickPicker-grid',
@@ -197,15 +224,54 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
 
         $onProjectSelectLoad: function () {
             this.$ensureProjectSelection();
-            this.refresh();
+
+            if (this.$hasValidProjectSelection()) {
+                this.refresh();
+                return;
+            }
+
+            this.$waitForInitialProjectSelection();
         },
 
         $onProjectChange: function () {
+            this.$waitingForInitialProjectSelection = false;
             this.refresh();
         },
 
         $usesProjectSelect: function () {
             return this.getAttribute('showProjectSelect') && !this.getAttribute('items');
+        },
+
+        $hasValidProjectSelection: function () {
+            const projectData = this.$getProjectData();
+
+            return !!(projectData.project && projectData.lang);
+        },
+
+        $waitForInitialProjectSelection: function () {
+            if (this.$waitingForInitialProjectSelection) {
+                return;
+            }
+
+            this.$waitingForInitialProjectSelection = true;
+
+            const check = function () {
+                if (!this.$waitingForInitialProjectSelection) {
+                    return;
+                }
+
+                this.$ensureProjectSelection();
+
+                if (this.$hasValidProjectSelection()) {
+                    this.$waitingForInitialProjectSelection = false;
+                    this.refresh();
+                    return;
+                }
+
+                window.requestAnimationFrame(check);
+            }.bind(this);
+
+            window.requestAnimationFrame(check);
         },
 
         $ensureProjectSelection: function () {
@@ -273,8 +339,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
             const projectData = this.$getProjectData();
 
             if (!projectData.project || !projectData.lang) {
-                this.setItems([]);
-                return Promise.resolve([]);
+                if (this.$usesProjectSelect()) {
+                    this.$waitForInitialProjectSelection();
+                }
+
+                return Promise.resolve(this.$Items);
             }
 
             if (this.$ProjectSelect) {
@@ -378,6 +447,13 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
                     'class': 'quiqqer-bricks-brickPicker-cardThumb'
                 }).inject(Card);
 
+                if (!brick.isActive) {
+                    new Element('span', {
+                        'class': 'quiqqer-bricks-brickPicker-cardStatusBadge badge badge-warning badge-sm',
+                        text: QUILocale.get(lg, 'site.area.window.add.brickIsDisabled')
+                    }).inject(Thumb);
+                }
+
                 new Element('img', {
                     src: brick.image,
                     alt: brick.displayTitle
@@ -460,13 +536,6 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
                 });
             }
 
-            if (!isActive) {
-                badges.push({
-                    className: 'badge badge-warning badge-sm',
-                    text: QUILocale.get(lg, 'site.area.window.add.brickIsDisabled')
-                });
-            }
-
             return {
                 id: brickId,
                 image: brick.mockup || brick.thumbnail || PLACEHOLDER_IMAGE,
@@ -507,7 +576,35 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
             return normalized.slice(0, maxLength - 1).trim() + '…';
         },
 
+        $getStoredShowInactiveState: function () {
+            try {
+                return window.localStorage.getItem(SHOW_INACTIVE_STORAGE_KEY) === '1';
+            } catch (error) {
+                return false;
+            }
+        },
+
+        $storeShowInactiveState: function () {
+            try {
+                window.localStorage.setItem(
+                    SHOW_INACTIVE_STORAGE_KEY,
+                    this.$showInactive ? '1' : '0'
+                );
+            } catch (error) {
+                // Ignore storage errors and keep the current in-memory state.
+            }
+        },
+
         $onSearchInput: function () {
+            this.$applyFilter();
+        },
+
+        $onShowInactiveChange: function () {
+            this.$showInactive = !!(
+                this.$ShowInactiveCheckbox && this.$ShowInactiveCheckbox.checked
+            );
+
+            this.$storeShowInactiveState();
             this.$applyFilter();
         },
 
@@ -520,7 +617,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
             let visibleCount = 0;
 
             this.$CardNodes.forEach(function (Card) {
-                const visible = !term || Card.getAttribute('data-search').indexOf(term) !== -1;
+                const matchesSearch = !term || Card.getAttribute('data-search').indexOf(term) !== -1;
+                const isInactive = Card.hasClass('quiqqer-bricks-brickPicker-card--inactive');
+                const visible = matchesSearch && (this.$showInactive || !isInactive);
 
                 Card.setStyle('display', visible ? null : 'none');
                 Card.setAttribute('aria-hidden', visible ? 'false' : 'true');
@@ -528,7 +627,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
                 if (visible) {
                     visibleCount++;
                 }
-            });
+            }, this);
 
             this.$CounterNode.set('text', '(' + visibleCount + ')');
             this.$EmptyState.setStyle('display', visibleCount ? 'none' : null);

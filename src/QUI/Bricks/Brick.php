@@ -493,11 +493,7 @@ class Brick extends QUI\QDOM
             return is_object($entry) === false;
         });
 
-        $cacheName = Manager::getBrickCacheNamespace()
-            . md5($this->getType())
-            . '/'
-            . $this->hash
-            . '/' . md5(serialize($settings));
+        $cacheName = $this->getCacheName($settings);
 
         if ($this->getAttribute('cacheable')) {
             try {
@@ -627,6 +623,50 @@ class Brick extends QUI\QDOM
         ]);
 
         return $result;
+    }
+
+    /**
+     * Return CSS files used by this brick.
+     *
+     * @return array<string>
+     */
+    public function getCSSFiles(): array
+    {
+        if ($this->Control instanceof Control) {
+            return $this->Control->getCSSFiles();
+        }
+
+        if (!$this->getAttribute('cacheable')) {
+            return [];
+        }
+
+        $settings = $this->getSettings();
+        $settings = array_filter($settings, function ($entry) {
+            return is_object($entry) === false;
+        });
+
+        try {
+            $data = QUI\Cache\Manager::get($this->getCacheName($settings));
+
+            if (isset($data['cssFiles']) && is_array($data['cssFiles'])) {
+                return $data['cssFiles'];
+            }
+        } catch (Exception) {
+        }
+
+        return [];
+    }
+
+    /**
+     * @param array<string, mixed> $settings
+     */
+    protected function getCacheName(array $settings): string
+    {
+        return Manager::getBrickCacheNamespace()
+            . md5($this->getType())
+            . '/'
+            . $this->hash
+            . '/' . md5(serialize($settings));
     }
 
     protected function extendCustomCSS(string $result = ''): string
