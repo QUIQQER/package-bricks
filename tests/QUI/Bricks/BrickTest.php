@@ -115,4 +115,84 @@ class BrickTest extends TestCase
 
         $this->assertSame('<style>p { color: red; }</style>', $result);
     }
+
+    public function testContentBrickRendersUniqueIdAsHtmlId(): void
+    {
+        $Brick = new Brick([
+            'id' => 123,
+            'uniqueId' => 'brick-uuid-123',
+            'type' => 'content',
+            'title' => 'Test'
+        ]);
+        $Brick->setAttribute('id', 123);
+
+        $html = $Brick->create();
+
+        $this->assertStringContainsString('id="brick-uuid-123"', $html);
+        $this->assertStringContainsString('data-brickid="123"', $html);
+    }
+
+    public function testCustomIdOverridesFrontendIdButKeepsUniqueIdForDataBrickUid(): void
+    {
+        $Brick = new Brick([
+            'id' => 123,
+            'uniqueId' => 'brick-uuid-123',
+            'type' => 'content',
+            'title' => 'Test',
+            'settings' => [
+                'customId' => 'Tracking-Anker'
+            ]
+        ]);
+        $Brick->setAttribute('id', 123);
+
+        $Control = new class extends \QUI\Control {
+            public function create(): string
+            {
+                return sprintf(
+                    '<div id="%s" data-brickuid="%s"></div>',
+                    $this->getAttribute('id'),
+                    $this->getAttribute('data-brickuid')
+                );
+            }
+        };
+
+        $ReflectionProperty = new \ReflectionProperty($Brick, 'Control');
+        $ReflectionProperty->setAccessible(true);
+        $ReflectionProperty->setValue($Brick, $Control);
+
+        $html = $Brick->create();
+
+        $this->assertStringContainsString('id="Tracking-Anker"', $html);
+        $this->assertStringContainsString('data-brickuid="brick-uuid-123"', $html);
+    }
+
+    public function testCustomIdIsSanitizedWhenLoadedFromSettings(): void
+    {
+        $Brick = new Brick([
+            'id' => 123,
+            'uniqueId' => 'brick-uuid-123',
+            'type' => 'content',
+            'settings' => [
+                'customId' => 'Mein Block / Tracking #1'
+            ]
+        ]);
+
+        $this->assertSame('Mein-Block-Tracking-1', $Brick->getSetting('customId'));
+        $this->assertSame('Mein-Block-Tracking-1', $Brick->getAttribute('frontendId'));
+    }
+
+    public function testEmptyCustomIdFallsBackToUniqueId(): void
+    {
+        $Brick = new Brick([
+            'id' => 123,
+            'uniqueId' => 'brick-uuid-123',
+            'type' => 'content',
+            'settings' => [
+                'customId' => '   '
+            ]
+        ]);
+
+        $this->assertSame('', $Brick->getSetting('customId'));
+        $this->assertSame('brick-uuid-123', $Brick->getAttribute('frontendId'));
+    }
 }
