@@ -115,4 +115,20 @@ class BrickTest extends TestCase
 
         $this->assertSame('<style>p { color: red; }</style>', $result);
     }
+
+    public function testContentBrickRendersUniqueIdAsHtmlId(): void
+    {
+        $Brick = new Brick([
+            'id' => 123,
+            'uniqueId' => 'brick-uuid-123',
+            'type' => 'content',
+            'title' => 'Test'
+        ]);
+        $Brick->setAttribute('id', 123);
+
+        $html = $Brick->create();
+
+        $this->assertStringContainsString('id="brick-uuid-123"', $html);
+        $this->assertStringContainsString('data-brickid="123"', $html);
+    }
 }

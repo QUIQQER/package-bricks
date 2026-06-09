@@ -631,6 +631,8 @@ class Manager
 
         $real[0]['Site'] = $Site;
 
+        $real[0]['uniqueId'] = $uid;
+
         $Original = new Brick($real[0]);
         $Original->setAttribute('id', $brickId);
 

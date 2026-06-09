@@ -128,6 +128,7 @@ class Brick extends QUI\QDOM
 
         if (isset($params['uniqueId'])) {
             $this->uniqueId = $params['uniqueId'];
+            $this->setAttribute('uniqueId', $params['uniqueId']);
         }
 
         if (isset($params['classes'])) {
@@ -602,6 +603,7 @@ class Brick extends QUI\QDOM
         }
 
         if ($this->uniqueId) {
+            $Control->setAttribute('id', $this->uniqueId);
             $Control->setAttribute('data-brickuid', $this->uniqueId);
         }
 
