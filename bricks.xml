@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quiqqer>
     <bricks>
+        <brick control="*">
+            <settings>
+                <setting name="customId" type="text">
+                    <locale group="quiqqer/bricks" var="brick.edit.customId"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.edit.customId.description"/>
+                    </description>
+                </setting>
+            </settings>
+        </brick>
+
         <!-- available standard bricks -->
         <brick control="\QUI\Controls\Breadcrumb" hasContent="0">
             <title>

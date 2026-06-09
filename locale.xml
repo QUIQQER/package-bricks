@@ -20,6 +20,15 @@
             <en><![CDATA[This brick is deprecated and should not be used anymore. Note that in newer versions this brick may not work properly.]]></en>
         </locale>
 
+        <locale name="brick.edit.customId">
+            <de><![CDATA[Eigene ID]]></de>
+            <en><![CDATA[Custom ID]]></en>
+        </locale>
+        <locale name="brick.edit.customId.description">
+            <de><![CDATA[Optionale eigene HTML-ID für diesen Baustein. Kann als Anker oder Anchor für direkte Links und Sprünge zu dieser Sektion verwendet werden und eignet sich auch für Tracking, CSS oder JavaScript. Der Wert sollte pro Seite eindeutig sein und wird beim Speichern URL-tauglich bereinigt.]]></de>
+            <en><![CDATA[Optional custom HTML ID for this brick. It can be used as an anchor for direct links and jumps to this section and is also suitable for tracking, CSS or JavaScript. The value should be unique per page and is sanitized for URL-safe usage when saved.]]></en>
+        </locale>
+
         <locale name="brickFullWidth">
             <de><![CDATA[Volle Breite erlauben]]></de>
             <en><![CDATA[Allow full size]]></en>
