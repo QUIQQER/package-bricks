@@ -15,6 +15,9 @@ use function in_array;
 use function is_array;
 use function is_string;
 use function json_decode;
+use function max;
+use function random_int;
+use function round;
 
 /**
  * Class CustomerReviewsFlow
@@ -29,10 +32,11 @@ class CustomerReviewsFlow extends QUI\Control
         $this->setAttributes([
             'rows' => 2,
             'animationDirection' => 'alternate',
-            'animationDuration' => 60,
+            'speed' => 'normal', // slow / normal / fast
+            'randomizeSpeed' => true,
+            'resumeDelay' => 6000, // ms to wait before resuming after a drag
             'gapDesktop' => 'normal',
             'gapMobile' => 'small',
-            'pauseOnHover' => true,
             'entries' => []
         ]);
 
@@ -96,10 +100,10 @@ class CustomerReviewsFlow extends QUI\Control
             $Strip = new ScrollingStrip([
                 'entries' => $scrollingEntries,
                 'animationDirection' => $direction,
-                'animationDuration' => $this->getAttribute('animationDuration'),
+                'speed' => $this->getRowSpeed(count($rowEntries)),
+                'resumeDelay' => $this->getAttribute('resumeDelay'),
                 'gapDesktop' => $this->getAttribute('gapDesktop'),
-                'gapMobile' => $this->getAttribute('gapMobile'),
-                'pauseOnHover' => $this->getAttribute('pauseOnHover')
+                'gapMobile' => $this->getAttribute('gapMobile')
             ]);
 
             $this->addCSSFiles($Strip->getCSSFiles());
@@ -153,6 +157,29 @@ class CustomerReviewsFlow extends QUI\Control
         }
 
         return $animationDirection;
+    }
+
+    /**
+     * Returns the scroll speed for a single row. The base speed is resolved
+     * from the "speed" attribute (preset name or numeric value). When more
+     * than one row is present and randomization is enabled, the speed is
+     * slightly varied per row so the rows do not move in lockstep.
+     *
+     * @param int $rowCount
+     * @return float
+     */
+    protected function getRowSpeed(int $rowCount): float
+    {
+        $base = ScrollingStrip::resolveSpeed($this->getAttribute('speed'));
+
+        if ($rowCount <= 1 || !$this->getAttribute('randomizeSpeed')) {
+            return $base;
+        }
+
+        $percent = random_int(10, 20) / 100;
+        $sign = random_int(0, 1) === 1 ? 1 : -1;
+
+        return round(max(0.1, $base + ($base * $percent * $sign)), 2);
     }
 
     /**
