@@ -14,6 +14,7 @@ use QUI\Bricks\MCP\AbstractTool;
 use Throwable;
 
 use function is_array;
+use function is_object;
 use function is_string;
 use function json_encode;
 
@@ -61,7 +62,7 @@ class SetSiteAreaBricks extends AbstractTool
                             }
 
                             if (isset($brick['customfields'])) {
-                                $entry['customfields'] = $brick['customfields'];
+                                $entry['customfields'] = self::normalizeCustomFields($brick['customfields']);
                             }
 
                             $areaBricks[] = $entry;
@@ -119,5 +120,30 @@ class SetSiteAreaBricks extends AbstractTool
                 ]
             ]
         );
+    }
+
+    /**
+     * Site brick customfields are persisted as JSON strings in quiqqer.bricks.areas.
+     *
+     * @param mixed $customFields
+     * @return string
+     */
+    private static function normalizeCustomFields(mixed $customFields): string
+    {
+        if ($customFields === null || $customFields === '') {
+            return '';
+        }
+
+        if (is_string($customFields)) {
+            return $customFields;
+        }
+
+        if (is_array($customFields) || is_object($customFields)) {
+            $encoded = json_encode($customFields);
+
+            return is_string($encoded) ? $encoded : "";
+        }
+
+        return '';
     }
 }
