@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quiqqer>
     <bricks>
+        <brick control="*">
+            <settings>
+                <setting name="customId" type="text">
+                    <locale group="quiqqer/bricks" var="brick.edit.customId"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="brick.edit.customId.description"/>
+                    </description>
+                </setting>
+            </settings>
+        </brick>
+
         <!-- available standard bricks -->
         <brick control="\QUI\Controls\Breadcrumb" hasContent="0">
             <title>
@@ -1031,15 +1042,36 @@
                     </description>
                 </setting>
 
-                <setting name="animationDuration" type="number" min="1">
+                <setting name="speed" type="select">
                     <locale group="quiqqer/slider"
-                            var="bricks.scrollingStrip.settings.animationDuration"
+                            var="bricks.scrollingStrip.settings.speed"
                     />
                     <description>
                         <locale group="quiqqer/slider"
-                                var="bricks.scrollingStrip.settings.animationDuration.desc"
+                                var="bricks.scrollingStrip.settings.speed.desc"
                         />
                     </description>
+                    <option value="slow">
+                        <locale group="quiqqer/slider" var="bricks.scrollingStrip.settings.speed.slow"/>
+                    </option>
+                    <option value="normal">
+                        <locale group="quiqqer/slider" var="bricks.scrollingStrip.settings.speed.normal"/>
+                    </option>
+                    <option value="fast">
+                        <locale group="quiqqer/slider" var="bricks.scrollingStrip.settings.speed.fast"/>
+                    </option>
+                    <defaultValue>normal</defaultValue>
+                </setting>
+                <setting name="randomizeSpeed" type="checkbox">
+                    <locale group="quiqqer/slider"
+                            var="bricks.scrollingStrip.settings.randomizeSpeed"
+                    />
+                    <description>
+                        <locale group="quiqqer/slider"
+                                var="bricks.scrollingStrip.settings.randomizeSpeed.desc"
+                        />
+                    </description>
+                    <defaultValue>1</defaultValue>
                 </setting>
 
                 <setting name="animationDirection" type="select">
@@ -1101,11 +1133,24 @@
                     </option>
                 </setting>
 
-                <setting name="pauseOnHover" type="checkbox">
-                    <locale group="quiqqer/slider" var="bricks.scrollingStrip.settings.pauseOnHover"/>
+                <setting name="resumeDelay" type="select">
+                    <locale group="quiqqer/slider" var="bricks.scrollingStrip.settings.resumeDelay"/>
                     <description>
-                        <locale group="quiqqer/slider" var="bricks.scrollingStrip.settings.pauseOnHover.desc"/>
+                        <locale group="quiqqer/slider" var="bricks.scrollingStrip.settings.resumeDelay.desc"/>
                     </description>
+                    <option value="0">
+                        <locale group="quiqqer/slider" var="bricks.scrollingStrip.settings.resumeDelay.immediate"/>
+                    </option>
+                    <option value="3000">
+                        <locale group="quiqqer/slider" var="bricks.scrollingStrip.settings.resumeDelay.short"/>
+                    </option>
+                    <option value="6000">
+                        <locale group="quiqqer/slider" var="bricks.scrollingStrip.settings.resumeDelay.medium"/>
+                    </option>
+                    <option value="10000">
+                        <locale group="quiqqer/slider" var="bricks.scrollingStrip.settings.resumeDelay.long"/>
+                    </option>
+                    <defaultValue>6000</defaultValue>
                 </setting>
 
                 <setting name="entries" type="hidden"

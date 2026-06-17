@@ -79,6 +79,7 @@ class Bricks implements ProviderInterface
         $results = [];
 
         foreach ($result as $row) {
+            $id = $row['id'];
             $project = $row['project'];
             $lang = $row['lang'];
             $title = $row['frontendTitle'] ?: $row['title'];
@@ -99,8 +100,8 @@ class Bricks implements ProviderInterface
             }
 
             $results[] = [
-                'id' => $project . '-' . $lang . '-' . $row['id'],
-                'title' => $title ?: ('Brick #' . $row['id']),
+                'id' => $project . '-' . $lang . '-' . $id,
+                'title' => $title ?: ('Brick #' . $id),
                 'description' => implode(' | ', $descriptionParts),
                 'icon' => 'fa fa-cubes',
                 'groupLabel' => QUI::getLocale()->get(

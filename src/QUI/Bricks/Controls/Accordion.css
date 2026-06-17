@@ -3,9 +3,9 @@
     --_items-gap: var(--quiqqer-bricks-accordion-items-gap, 1rem);
     --_column-min-width: var(--quiqqer-bricks-accordion-column-min-width, 300px);
     --_list-max-width: var(--quiqqer-bricks-accordion-list-maxWidth, var(--_q-controlConf-list-maxWidth, 100%));
-    --_border-width: var(--quiqqer-bricks-accordion-border-width, var(--qui-border-width));
-    --_border-style: var(--quiqqer-bricks-accordion-border-style, var(--qui-border-style));
-    --_border-color: var(--quiqqer-bricks-accordion-border-color, var(--qui-border-color));
+    --_border-width: var(--quiqqer-bricks-accordion-border-width, var(--qui-border-width, 1px));
+    --_border-style: var(--quiqqer-bricks-accordion-border-style, var(--qui-border-style, solid));
+    --_border-color: var(--quiqqer-bricks-accordion-border-color, var(--qui-border-color, inherit));
     --_border-radius: var(--quiqqer-bricks-accordion-border-radius, var(--qui-border-radius, 1rem));
     --_header-padding-block: var(--quiqqer-bricks-accordion-header-padding-block, 0.75rem);
     --_header-padding-inline: var(--quiqqer-bricks-accordion-header-padding-inline, 1rem);

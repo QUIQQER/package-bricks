@@ -9,6 +9,7 @@ namespace QUI\Bricks;
 use Exception;
 use QUI;
 use QUI\Control;
+use QUI\Projects\Site\Utils as SiteUtils;
 
 use function array_filter;
 use function array_flip;
@@ -128,6 +129,8 @@ class Brick extends QUI\QDOM
 
         if (isset($params['uniqueId'])) {
             $this->uniqueId = $params['uniqueId'];
+            $this->setAttribute('uniqueId', $params['uniqueId']);
+            $this->setAttribute('frontendId', $params['uniqueId']);
         }
 
         if (isset($params['classes'])) {
@@ -193,7 +196,7 @@ class Brick extends QUI\QDOM
             if (is_array($settings)) {
                 foreach ($this->settings as $key => $value) {
                     if (isset($settings[$key])) {
-                        $this->settings[$key] = $settings[$key];
+                        $this->settings[$key] = $this->normalizeSettingValue($key, $settings[$key]);
                     }
                 }
             }
@@ -234,6 +237,7 @@ class Brick extends QUI\QDOM
         }
 
         $this->hash = $this->createBrickHash();
+        $this->setAttribute('frontendId', $this->getFrontendId());
     }
 
     /**
@@ -601,6 +605,12 @@ class Brick extends QUI\QDOM
             $Control->setAttribute('data-brickid', $this->id);
         }
 
+        $frontendId = $this->getFrontendId();
+
+        if ($frontendId) {
+            $Control->setAttribute('id', $frontendId);
+        }
+
         if ($this->uniqueId) {
             $Control->setAttribute('data-brickuid', $this->uniqueId);
         }
@@ -900,11 +910,60 @@ class Brick extends QUI\QDOM
      */
     public function setSetting(string $name, mixed $value): void
     {
+        $value = $this->normalizeSettingValue($name, $value);
+
         $this->settings[$name] = $value;
+        $this->setAttribute('frontendId', $this->getFrontendId());
 
         if ($this->Control instanceof Control) {
             $this->Control->setAttribute($name, $value);
         }
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     * @return mixed
+     */
+    protected function normalizeSettingValue(string $name, mixed $value): mixed
+    {
+        if ($name !== 'customId') {
+            return $value;
+        }
+
+        if (!is_string($value)) {
+            return '';
+        }
+
+        $value = trim($value);
+
+        if ($value === '') {
+            return '';
+        }
+
+        return SiteUtils::clearUrl($value);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getFrontendId(): string
+    {
+        $customId = $this->getSetting('customId');
+
+        if (is_string($customId) && $customId !== '') {
+            return $customId;
+        }
+
+        if (is_string($this->uniqueId) && $this->uniqueId !== '') {
+            return $this->uniqueId;
+        }
+
+        if ($this->uniqueId) {
+            return (string)$this->uniqueId;
+        }
+
+        return '';
     }
 
     /**

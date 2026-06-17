@@ -31,6 +31,21 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
     "use strict";
 
     const lg = 'quiqqer/bricks';
+    const cleanupCustomId = function (value) {
+        const spaceChar = QUIQQER.Rewrite.URL_SPACE_CHARACTER;
+        const notAllowed = '.,:;#`!§$%&?<>=@"\'_][+/';
+        const reg = new RegExp('[' + notAllowed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ']', 'g');
+        const spaceReg = new RegExp(
+            spaceChar.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') +
+            spaceChar.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '+',
+            'g'
+        );
+
+        value = value.replace(reg, '');
+        value = value.replace(/ /g, spaceChar);
+
+        return value.replace(spaceReg, spaceChar);
+    };
 
     return new Class({
 
@@ -541,6 +556,12 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                     data.attributes = Object.merge(data.attributes, QUIFormUtils.getFormData(Form));
             }
 
+            if (Form && Form.getElement('[name="customId"]')) {
+                data.settings = data.settings || {};
+                data.settings.customId = Form.getElement('[name="customId"]').value;
+                delete data.attributes.customId;
+            }
+
             if (Form && Form.getElement('[name="frontendTitle"]')) {
                 data.attributes.frontendTitle = Form.getElement('[name="frontendTitle"]').value;
             }
@@ -920,6 +941,11 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                         for (i = 0, len = self.$availableSettings.length; i < len; i++) {
                             data = self.$availableSettings[i];
+
+                            if (data.name === 'customId') {
+                                continue;
+                            }
+
                             label = data.text;
 
                             if (typeOf(data.text) === 'array') {
@@ -1227,21 +1253,30 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                 const TableExtra = this.$Elm.getElement('table.brick-edit-extra-header'),
                     TableBody = TableExtra.getElement('tbody'),
                     extraSettings = (this.$availableSettings || []).filter(function (setting) {
-                        return setting.source !== 'window';
+                        return setting.source !== 'window' && setting.name !== 'customId';
                     });
 
                 TableBody.getElement('[name="frontendTitle"]').value =
                     this.getAttribute('data').attributes.frontendTitle;
 
-                if (!extraSettings.length) {
-                    TableExtra.setStyle('display', 'none');
+                const CustomIdInput = TableBody.getElement('[name="customId"]');
 
-                    new Element('div', {
-                        html: QUILocale.get(lg, 'window.brick.no.extra.settings')
-                    }).inject(TableExtra, 'before');
-
-                    resolve();
-                    return;
+                if (CustomIdInput) {
+                    CustomIdInput.value = this.getAttribute('data').settings.customId || '';
+                    CustomIdInput.addEvents({
+                        input: function () {
+                            this.value = cleanupCustomId(this.value);
+                        },
+                        keyup: function () {
+                            this.value = cleanupCustomId(this.value);
+                        },
+                        blur: function () {
+                            this.value = cleanupCustomId(this.value);
+                        },
+                        focus: function () {
+                            this.value = cleanupCustomId(this.value);
+                        }
+                    });
                 }
 
                 TableExtra.setStyle('display', null);
