@@ -520,20 +520,31 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
             const displayDescription = this.$toPreviewText(brick.description || '', 180);
             const displayType = brick.type || '';
             const isActive = parseInt(brick.active) === 1;
+            const isContentBrick = displayType === 'content';
+            const contentTypeLabel = isContentBrick
+                ? QUILocale.get(lg, 'brick.content.type.label')
+                : '';
             const badges = [];
 
-            if (brickTypeTitle && brickTypeTitle !== displayTitle) {
+            if (isContentBrick) {
                 badges.push({
                     className: 'badge badge-success-light badge-sm',
-                    text: brickTypeTitle
+                    text: contentTypeLabel
                 });
-            }
+            } else {
+                if (brickTypeTitle && brickTypeTitle !== displayTitle) {
+                    badges.push({
+                        className: 'badge badge-success-light badge-sm',
+                        text: brickTypeTitle
+                    });
+                }
 
-            if (displayType) {
-                badges.push({
-                    className: 'badge badge-light badge-sm',
-                    text: displayType
-                });
+                if (displayType) {
+                    badges.push({
+                        className: 'badge badge-light badge-sm',
+                        text: displayType
+                    });
+                }
             }
 
             return {
@@ -548,7 +559,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BrickPicker', [
                     brickId ? String(brickId) : '',
                     displayId,
                     this.$toPlainText(displayTitle),
-                    this.$toPlainText(brickTypeTitle),
+                    this.$toPlainText(isContentBrick ? contentTypeLabel : brickTypeTitle),
                     displayDescription,
                     displayType,
                     isActive ? '' : QUILocale.get(lg, 'site.area.window.add.brickIsDisabled')
