@@ -1376,6 +1376,9 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
 
                     Value.addClass('field-container-field');
 
+                    if (setting['data-qui'] !== '') {
+                        Value.set('data-qui', setting['data-qui']);
+                    }
 
                     for (c = 0, cLen = setting.options.length; c < cLen; c++) {
                         text = setting.options[c].text;

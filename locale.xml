@@ -74,6 +74,10 @@
             <de><![CDATA[Bausteine: Inhalt]]></de>
             <en><![CDATA[Bricks: Content]]></en>
         </locale>
+        <locale name="brick.content.type.label">
+            <de><![CDATA[Inhalt]]></de>
+            <en><![CDATA[Content]]></en>
+        </locale>
         <locale name="brick.content.description">
             <de><![CDATA[
             Ein Baustein mit Text-Editor, in welchem neben Text auch z.B Bilder eingefügt werden können
