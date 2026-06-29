@@ -3,49 +3,46 @@
 
     <global>
         <table name="bricks">
-            <field type="INT(3) NOT NULL AUTO_INCREMENT PRIMARY KEY">id</field>
-            <field type="VARCHAR(255)">project</field>
-            <field type="VARCHAR(2)">lang</field>
-            <field type="VARCHAR(255) NOT NULL">title</field>
-            <field type="TIMESTAMP NULL DEFAULT NULL">c_date</field>
-            <field type="TIMESTAMP NULL DEFAULT NULL">e_date</field>
-            <field type="VARCHAR(50) NULL">c_user</field>
-            <field type="VARCHAR(50) NULL">e_user</field>
-            <field type="TINYINT(1) NOT NULL DEFAULT 1">active</field>
-            <field type="VARCHAR(255) NULL">frontendTitle</field>
-            <field type="TEXT NOT NULL">description</field>
-            <field type="TEXT NULL">settings</field>
-            <field type="TEXT NULL">customfields</field>
-            <field type="VARCHAR(255) NULL">type</field>
-            <field type="TEXT NULL">content</field>
-            <field type="TEXT NULL">areas</field>
-            <field type="TEXT NULL">width</field>
-            <field type="TEXT NULL">height</field>
-            <field type="TEXT NULL">classes</field>
+            <field type="integer" autoincrement="true" primary="true">id</field>
+            <field type="string" length="255">project</field>
+            <field type="string" length="2">lang</field>
+            <field type="string" length="255">title</field>
+            <field type="datetime" nullable="true" default="NULL">c_date</field>
+            <field type="datetime" nullable="true" default="NULL">e_date</field>
+            <field type="string" length="50" nullable="true">c_user</field>
+            <field type="string" length="50" nullable="true">e_user</field>
+            <field type="boolean" default="1">active</field>
+            <field type="string" length="255" nullable="true">frontendTitle</field>
+            <field type="text">description</field>
+            <field type="text" nullable="true">settings</field>
+            <field type="text" nullable="true">customfields</field>
+            <field type="string" length="255" nullable="true">type</field>
+            <field type="text" nullable="true">content</field>
+            <field type="text" nullable="true">areas</field>
+            <field type="text" nullable="true">width</field>
+            <field type="text" nullable="true">height</field>
+            <field type="text" nullable="true">classes</field>
 
-            <primary>id</primary>
             <index>project</index>
             <index>lang</index>
         </table>
 
         <table name="bricksUID">
-            <field type="VARCHAR(80) NOT NULL PRIMARY KEY">uid</field>
-            <field type="INT(3)">brickId</field>
-            <field type="VARCHAR(255)">project</field>
-            <field type="VARCHAR(2)">lang</field>
-            <field type="BIGINT(20)">siteId</field>
-            <field type="LONGTEXT NULL">customfields</field>
-            <field type="LONGTEXT NULL">attributes</field>
-
-            <primary>uid</primary>
+            <field type="string" length="80" primary="true">uid</field>
+            <field type="integer">brickId</field>
+            <field type="string" length="255">project</field>
+            <field type="string" length="2">lang</field>
+            <field type="bigint">siteId</field>
+            <field type="longtext" nullable="true">customfields</field>
+            <field type="longtext" nullable="true">attributes</field>
         </table>
     </global>
 
     <projects>
         <table name="bricksCache" no-auto-update="1" no-site-reference="1">
-            <field type="BIGINT(20) NOT NULL">id</field>
-            <field type="VARCHAR(255) NOT NULL">area</field>
-            <field type="INT NULL">brick</field>
+            <field type="bigint">id</field>
+            <field type="string" length="255">area</field>
+            <field type="integer" nullable="true">brick</field>
 
             <index>id</index>
             <index>area</index>
