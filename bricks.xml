@@ -1697,49 +1697,49 @@
                         <locale group="quiqqer/sitetypes" var="list.template.mediaList"/>
                     </option>
                     <option value="imageTop">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.imageTop"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.imageTop"/>
                     </option>
                     <option value="imageTopBorder">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.imageTopBorder"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.imageTopBorder"/>
                     </option>
                     <option value="simpleArticleList">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.simpleArticleList"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.simpleArticleList"/>
                     </option>
                     <option value="advancedArticleList">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.advancedArticleList"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.advancedArticleList"/>
                     </option>
                     <option value="1er">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.1er"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.1er"/>
                     </option>
                     <option value="2er">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.2er"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.2er"/>
                     </option>
                     <option value="3er">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.3er"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.3er"/>
                     </option>
                     <option value="4er">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.4er"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.4er"/>
                     </option>
                     <option value="childrenList">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.childrenList"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.childrenList"/>
                     </option>
                     <option value="longFooter">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.longFooter"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.longFooter"/>
                     </option>
                     <option value="authorTop">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.authorTop"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.authorTop"/>
                     </option>
                     <option value="cardRows">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.cardRows"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.cardRows"/>
                     </option>
                     <option value="gallery">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.gallery"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.gallery"/>
                     </option>
                     <option value="galleryOverlay">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.galleryOverlay"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.galleryOverlay"/>
                     </option>
                     <option value="bigBanner">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.bigBanner"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.bigBanner"/>
                     </option>
                 </setting>
 
