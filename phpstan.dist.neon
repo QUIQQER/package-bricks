@@ -3,6 +3,9 @@ includes:
 
 parameters:
     level: 8
+    phpVersion:
+        min: 80200
+        max: 80509
     paths:
         - src
         - ajax

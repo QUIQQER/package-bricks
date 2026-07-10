@@ -12,37 +12,44 @@ if (!class_exists('QUI\Bricks\Manager')) {
     exit;
 }
 
-$tableManager = QUI::getDataBase()->table();
+$bricksTable = QUI\Bricks\Manager::getTable();
+$SchemaManager = QUI::getSchemaManager();
 
-if ($tableManager === null) {
+if (!$SchemaManager->tablesExist([$bricksTable])) {
     exit;
 }
 
-$bricksTable = QUI\Bricks\Manager::getTable();
-$columns = array_flip($tableManager->getColumns($bricksTable));
-$fields = [];
+$Table = $SchemaManager->introspectTable($bricksTable);
+$addedColumns = [];
 
-if (!isset($columns['c_date'])) {
-    $fields['c_date'] = 'TIMESTAMP NULL DEFAULT NULL';
+foreach (['c_date', 'e_date'] as $column) {
+    if (!$Table->hasColumn($column)) {
+        $addedColumns[] = new \Doctrine\DBAL\Schema\Column(
+            $column,
+            \Doctrine\DBAL\Types\Type::getType(\Doctrine\DBAL\Types\Types::DATETIME_MUTABLE),
+            ['notnull' => false, 'default' => null]
+        );
+    }
 }
 
-if (!isset($columns['e_date'])) {
-    $fields['e_date'] = 'TIMESTAMP NULL DEFAULT NULL';
+foreach (['c_user', 'e_user'] as $column) {
+    if (!$Table->hasColumn($column)) {
+        $addedColumns[] = new \Doctrine\DBAL\Schema\Column(
+            $column,
+            \Doctrine\DBAL\Types\Type::getType(\Doctrine\DBAL\Types\Types::STRING),
+            ['length' => 50, 'notnull' => false, 'default' => null]
+        );
+    }
 }
 
-if (!isset($columns['c_user'])) {
-    $fields['c_user'] = 'VARCHAR(50) NULL DEFAULT NULL';
-}
-
-if (!isset($columns['e_user'])) {
-    $fields['e_user'] = 'VARCHAR(50) NULL DEFAULT NULL';
-}
-
-if (empty($fields)) {
+if ($addedColumns === []) {
     echo 'Already executed' . PHP_EOL;
     exit;
 }
 
-$tableManager->addColumn($bricksTable, $fields);
+$SchemaManager->alterTable(new \Doctrine\DBAL\Schema\TableDiff(
+    $Table,
+    addedColumns: $addedColumns
+));
 
 echo 'Brick metadata columns added' . PHP_EOL;

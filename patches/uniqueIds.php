@@ -12,38 +12,43 @@ if (!class_exists('QUI\Bricks\Manager')) {
 $Bricks = QUI\Bricks\Manager::init();
 
 // database table
-$columns = QUI::getDataBase()->table()->getColumns($Bricks->getUIDTable());
-$columns = array_flip($columns);
+$SchemaManager = QUI::getSchemaManager();
+$uidTable = $Bricks->getUIDTable();
+$Table = $SchemaManager->introspectTable($uidTable);
 
-if (isset($columns['id'])) {
-    QUI::getDataBase()->table()->deleteColumn(
-        $Bricks->getUIDTable(),
-        'id'
-    );
+if ($Table->hasColumn('id')) {
+    $SchemaManager->alterTable(new \Doctrine\DBAL\Schema\TableDiff(
+        $Table,
+        droppedColumns: [$Table->getColumn('id')]
+    ));
 
     QUI::getPackage('quiqqer/bricks')->setup();
 }
 
 // if no bricks exists, we not need it
-$result = QUI::getDataBase()->fetch([
-    'count' => 'count',
-    'from' => $Bricks->getTable(),
-]);
+$QueryBuilder = QUI::getQueryBuilder();
+$brickCount = $QueryBuilder
+    ->select('COUNT(*)')
+    ->from(QUI\Utils\Doctrine::quoteIdentifier($Bricks->getTable()))
+    ->executeQuery()
+    ->fetchOne();
 
-if (!isset($result[0]) || !isset($result[0]['count']) || !$result[0]['count']) {
+if (!(int)$brickCount) {
     echo 'Patch is not needed. No Bricks available' . PHP_EOL;
 
     exit;
 }
 
 
-$result = QUI::getDataBase()->fetch([
-    'count' => 'count',
-    'from' => $Bricks->getUIDTable(),
-]);
+$QueryBuilder = QUI::getQueryBuilder();
+$uniqueBrickCount = $QueryBuilder
+    ->select('COUNT(*)')
+    ->from(QUI\Utils\Doctrine::quoteIdentifier($Bricks->getUIDTable()))
+    ->executeQuery()
+    ->fetchOne();
 
 // if unique ids already exist, the pages no longer have to be passed through
-if (isset($result[0]) && isset($result[0]['count']) && $result[0]['count']) {
+if ((int)$uniqueBrickCount) {
     echo 'Already executed' . PHP_EOL;
 
     exit;
@@ -107,9 +112,12 @@ foreach ($projects as $Project) {
 echo 'Bricks saving...';
 
 // alle bausteine speichern
-$bricks = QUI::getDataBase()->fetch([
-    'from' => $Bricks->getTable()
-]);
+$QueryBuilder = QUI::getQueryBuilder();
+$bricks = $QueryBuilder
+    ->select('*')
+    ->from(QUI\Utils\Doctrine::quoteIdentifier($Bricks->getTable()))
+    ->executeQuery()
+    ->fetchAllAssociative();
 
 foreach ($bricks as $brick) {
     try {
