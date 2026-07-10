@@ -2,17 +2,18 @@
 
 namespace QUI\Bricks\BackendSearch\Provider;
 
-use PDO;
 use QUI;
 use QUI\BackendSearch\ProviderInterface;
 use QUI\Bricks\Manager;
 use QUI\Exception;
 
+use function array_map;
 use function count;
 use function implode;
 use function in_array;
 use function is_array;
 use function json_encode;
+use function mb_strtolower;
 use function trim;
 
 class Bricks implements ProviderInterface
@@ -47,28 +48,44 @@ class Bricks implements ProviderInterface
             return [];
         }
 
-        $sql = 'SELECT id, project, lang, title, frontendTitle, description, type, content, settings, customfields'
-            . ' FROM ' . Manager::getTable()
-            . ' WHERE title LIKE :search'
-            . ' OR frontendTitle LIKE :search'
-            . ' OR description LIKE :search'
-            . ' OR type LIKE :search'
-            . ' OR content LIKE :search'
-            . ' OR settings LIKE :search'
-            . ' OR customfields LIKE :search'
-            . ' ORDER BY title ASC';
-
-        if (!empty($params['limit'])) {
-            $sql .= ' LIMIT ' . (int)$params['limit'];
-        }
-
-        $Stmt = QUI::getPDO()->prepare($sql);
-        $Stmt->bindValue(':search', '%' . $search . '%');
-
         try {
-            $Stmt->execute();
-            $result = $Stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (\Exception $Exception) {
+            $QueryBuilder = QUI::getQueryBuilder();
+            $searchFields = [
+                'title',
+                'frontendTitle',
+                'description',
+                'type',
+                'content',
+                'settings',
+                'customfields'
+            ];
+            $searchConditions = [];
+
+            foreach ($searchFields as $field) {
+                $searchConditions[] = $QueryBuilder->expr()->like(
+                    'LOWER(' . QUI\Utils\Doctrine::quoteIdentifier($field) . ')',
+                    ':search'
+                );
+            }
+
+            $QueryBuilder
+                ->select(
+                    ...array_map(
+                        static fn (string $field): string => QUI\Utils\Doctrine::quoteIdentifier($field),
+                        ['id', 'project', 'lang', ...$searchFields]
+                    )
+                )
+                ->from(QUI\Utils\Doctrine::quoteIdentifier(Manager::getTable()))
+                ->where($QueryBuilder->expr()->or(...$searchConditions))
+                ->setParameter('search', '%' . mb_strtolower($search) . '%')
+                ->orderBy(QUI\Utils\Doctrine::quoteIdentifier('title'), 'ASC');
+
+            if (!empty($params['limit'])) {
+                $QueryBuilder->setMaxResults((int)$params['limit']);
+            }
+
+            $result = $QueryBuilder->executeQuery()->fetchAllAssociative();
+        } catch (\Doctrine\DBAL\Exception $Exception) {
             QUI\System\Log::addError(
                 self::class . ' :: search -> ' . $Exception->getMessage()
             );

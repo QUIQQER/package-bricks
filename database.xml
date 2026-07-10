@@ -7,8 +7,8 @@
             <field type="string" length="255">project</field>
             <field type="string" length="2">lang</field>
             <field type="string" length="255">title</field>
-            <field type="datetime" nullable="true" default="NULL">c_date</field>
-            <field type="datetime" nullable="true" default="NULL">e_date</field>
+            <field type="datetime" nullable="true" default="null">c_date</field>
+            <field type="datetime" nullable="true" default="null">e_date</field>
             <field type="string" length="50" nullable="true">c_user</field>
             <field type="string" length="50" nullable="true">e_user</field>
             <field type="boolean" default="1">active</field>
@@ -23,8 +23,8 @@
             <field type="text" nullable="true">height</field>
             <field type="text" nullable="true">classes</field>
 
-            <index>project</index>
-            <index>lang</index>
+            <index>project,lang</index>
+            <index>project,lang,title</index>
         </table>
 
         <table name="bricksUID">
@@ -33,8 +33,11 @@
             <field type="string" length="255">project</field>
             <field type="string" length="2">lang</field>
             <field type="bigint">siteId</field>
-            <field type="longtext" nullable="true">customfields</field>
-            <field type="longtext" nullable="true">attributes</field>
+            <field type="text" nullable="true">customfields</field>
+            <field type="text" nullable="true">attributes</field>
+
+            <index>brickId,project,lang</index>
+            <index>project,lang,siteId</index>
         </table>
     </global>
 
@@ -44,8 +47,7 @@
             <field type="string" length="255">area</field>
             <field type="integer" nullable="true">brick</field>
 
-            <index>id</index>
-            <index>area</index>
+            <index>id,area</index>
         </table>
     </projects>
 

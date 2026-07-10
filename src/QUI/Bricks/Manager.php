@@ -18,6 +18,7 @@ use QUI\Projects\Site;
 use QUI\Utils\Text\XML;
 
 use function array_filter;
+use function array_fill_keys;
 use function array_flip;
 use function array_intersect;
 use function array_map;
@@ -169,17 +170,21 @@ class Manager
             'active' => (int)$Brick->getAttribute('active')
         ];
 
-        $result = QUI::getDataBase()->fetch([
-            'from' => $this->getTable(),
-            'where' => [
-                'title' => $insertData['title'],
-                'project' => $insertData['project'],
-                'lang' => $insertData['lang']
-            ],
-            'limit' => 1
-        ]);
+        $QueryBuilder = QUI::getQueryBuilder();
+        $existingBrickId = $QueryBuilder
+            ->select('id')
+            ->from(QUI\Utils\Doctrine::quoteIdentifier($this->getTable()))
+            ->where($QueryBuilder->expr()->eq('title', ':title'))
+            ->andWhere($QueryBuilder->expr()->eq('project', ':project'))
+            ->andWhere($QueryBuilder->expr()->eq('lang', ':lang'))
+            ->setParameter('title', $insertData['title'])
+            ->setParameter('project', $insertData['project'])
+            ->setParameter('lang', $insertData['lang'])
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchOne();
 
-        if (isset($result[0])) {
+        if ($existingBrickId !== false) {
             throw new QUI\Exception([
                 'quiqqer/bricks',
                 'exception.brick.title.already.exists',
@@ -206,9 +211,13 @@ class Manager
             $insertData['e_user'] = $SessionUser->getUUID();
         }
 
-        QUI::getDataBase()->insert($this->getTable(), $insertData);
+        $Connection = QUI::getDataBaseConnection();
+        $Connection->insert(
+            QUI\Utils\Doctrine::quoteIdentifier($this->getTable()),
+            self::quoteDatabaseColumns($insertData)
+        );
 
-        $brickId = QUI::getPDO()->lastInsertId();
+        $brickId = $Connection->lastInsertId();
 
         try {
             QUI::getEvents()->fireEvent('quiqqerBricksCreate', [$brickId]);
@@ -254,11 +263,11 @@ class Manager
             $customFields = json_encode($customFields);
         }
 
-        QUI::getDataBase()->update($this->getUIDTable(), [
-            'customfields' => $customFields
-        ], [
-            'uid' => $uid
-        ]);
+        QUI::getDataBaseConnection()->update(
+            QUI\Utils\Doctrine::quoteIdentifier($this->getUIDTable()),
+            self::quoteDatabaseColumns(['customfields' => $customFields]),
+            self::quoteDatabaseColumns(['uid' => $uid])
+        );
 
 
         return $uid;
@@ -279,14 +288,17 @@ class Manager
         $uuid = QUI\Utils\Uuid::get();
         $Brick = $this->getBrickById($brickId);
 
-        QUI::getDataBase()->insert($this->getUIDTable(), [
-            'uid' => $uuid,
-            'brickId' => $brickId,
-            'project' => $Project->getName(),
-            'lang' => $Project->getLang(),
-            'siteId' => $Site->getId(),
-            'attributes' => json_encode($Brick->getAttributes())
-        ]);
+        QUI::getDataBaseConnection()->insert(
+            QUI\Utils\Doctrine::quoteIdentifier($this->getUIDTable()),
+            self::quoteDatabaseColumns([
+                'uid' => $uuid,
+                'brickId' => $brickId,
+                'project' => $Project->getName(),
+                'lang' => $Project->getLang(),
+                'siteId' => $Site->getId(),
+                'attributes' => json_encode($Brick->getAttributes())
+            ])
+        );
 
         return $uuid;
     }
@@ -300,20 +312,22 @@ class Manager
     public function existsUniqueBrickId(string $uid): bool
     {
         try {
-            $result = QUI::getDataBase()->fetch([
-                'from' => $this->getUIDTable(),
-                'where' => [
-                    'uid' => $uid
-                ],
-                'limit' => 1
-            ]);
-        } catch (QUI\Database\Exception $Exception) {
+            $QueryBuilder = QUI::getQueryBuilder();
+            $result = $QueryBuilder
+                ->select('uid')
+                ->from(QUI\Utils\Doctrine::quoteIdentifier($this->getUIDTable()))
+                ->where($QueryBuilder->expr()->eq('uid', ':uid'))
+                ->setParameter('uid', $uid)
+                ->setMaxResults(1)
+                ->executeQuery()
+                ->fetchOne();
+        } catch (\Doctrine\DBAL\Exception $Exception) {
             QUI\System\Log::addError($Exception->getMessage());
 
             return false;
         }
 
-        return isset($result[0]);
+        return $result !== false;
     }
 
     /**
@@ -339,24 +353,28 @@ class Manager
 
         QUI::getEvents()->fireEvent('quiqqerBricksBrickDeleteBefore', [$Brick]);
 
-        QUI::getDataBase()->delete($this->getTable(), [
-            'id' => $brickId
-        ]);
+        QUI::getDataBaseConnection()->delete(
+            QUI\Utils\Doctrine::quoteIdentifier($this->getTable()),
+            self::quoteDatabaseColumns(['id' => $brickId])
+        );
 
         if (isset($this->bricks[$brickId])) {
             unset($this->bricks[$brickId]);
         }
 
-        $uniqueBrickIds = QUI::getDataBase()->fetch([
-            'select' => 'siteId, project, lang',
-            'from' => QUI\Bricks\Manager::getUIDTable(),
-            'where' => [
-                'brickId' => $brickId,
-                'project' => $Brick->getAttribute('project'),
-                'lang' => $Brick->getAttribute('lang')
-            ],
-            'group' => 'siteId, project, lang'
-        ]);
+        $QueryBuilder = QUI::getQueryBuilder();
+        $uniqueBrickIds = $QueryBuilder
+            ->select(QUI\Utils\Doctrine::quoteIdentifier('siteId'), 'project', 'lang')
+            ->from(QUI\Utils\Doctrine::quoteIdentifier(self::getUIDTable()))
+            ->where($QueryBuilder->expr()->eq(QUI\Utils\Doctrine::quoteIdentifier('brickId'), ':brickId'))
+            ->andWhere($QueryBuilder->expr()->eq('project', ':project'))
+            ->andWhere($QueryBuilder->expr()->eq('lang', ':lang'))
+            ->setParameter('brickId', $brickId)
+            ->setParameter('project', $Brick->getAttribute('project'))
+            ->setParameter('lang', $Brick->getAttribute('lang'))
+            ->groupBy(QUI\Utils\Doctrine::quoteIdentifier('siteId'), 'project', 'lang')
+            ->executeQuery()
+            ->fetchAllAssociative();
 
         // delete bricks in sites
         foreach ($uniqueBrickIds as $uniqueBrickId) {
@@ -374,11 +392,14 @@ class Manager
         }
 
         // delete unique ids
-        QUI::getDataBase()->delete(QUI\Bricks\Manager::getUIDTable(), [
-            'brickId' => $brickId,
-            'project' => $Brick->getAttribute('project'),
-            'lang' => $Brick->getAttribute('lang')
-        ]);
+        QUI::getDataBaseConnection()->delete(
+            QUI\Utils\Doctrine::quoteIdentifier(self::getUIDTable()),
+            self::quoteDatabaseColumns([
+                'brickId' => $brickId,
+                'project' => $Brick->getAttribute('project'),
+                'lang' => $Brick->getAttribute('lang')
+            ])
+        );
 
         QUI::getEvents()->fireEvent('quiqqerBricksBrickDeleteAfter', [$brickId]);
     }
@@ -567,19 +588,21 @@ class Manager
             return $this->bricks[$id];
         }
 
-        $data = QUI::getDataBase()->fetch([
-            'from' => $this->getTable(),
-            'where' => [
-                'id' => $id
-            ],
-            'limit' => 1
-        ]);
+        $QueryBuilder = QUI::getQueryBuilder();
+        $data = $QueryBuilder
+            ->select('*')
+            ->from(QUI\Utils\Doctrine::quoteIdentifier($this->getTable()))
+            ->where($QueryBuilder->expr()->eq('id', ':id'))
+            ->setParameter('id', $id)
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchAssociative();
 
-        if (!isset($data[0])) {
+        if ($data === false) {
             throw new QUI\Exception('Brick not found');
         }
 
-        $Brick = new Brick($data[0]);
+        $Brick = new Brick($data);
         $Brick->setAttribute('id', $id);
 
         $this->bricks[$id] = $Brick;
@@ -602,38 +625,44 @@ class Manager
             return $this->brickUIDs[$uid];
         }
 
-        $data = QUI::getDataBase()->fetch([
-            'from' => $this->getUIDTable(),
-            'where' => [
-                'uid' => $uid
-            ],
-            'limit' => 1
-        ]);
+        $QueryBuilder = QUI::getQueryBuilder();
+        $data = $QueryBuilder
+            ->select('*')
+            ->from(QUI\Utils\Doctrine::quoteIdentifier($this->getUIDTable()))
+            ->where($QueryBuilder->expr()->eq('uid', ':uid'))
+            ->setParameter('uid', $uid)
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchAssociative();
 
-        if (!isset($data[0])) {
+        if ($data === false) {
             throw new QUI\Exception('Brick not found');
         }
 
-        $data = $data[0];
         $brickId = $data['brickId'];
         $custom = $data['customfields'];
 
         $attributes = $data['attributes'];
         $attributes = json_decode($attributes, true);
 
-        $real = QUI::getDataBase()->fetch([
-            'from' => $this->getTable(),
-            'where' => [
-                'id' => (int)$brickId
-            ],
-            'limit' => 1
-        ]);
+        $QueryBuilder = QUI::getQueryBuilder();
+        $real = $QueryBuilder
+            ->select('*')
+            ->from(QUI\Utils\Doctrine::quoteIdentifier($this->getTable()))
+            ->where($QueryBuilder->expr()->eq('id', ':id'))
+            ->setParameter('id', (int)$brickId)
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchAssociative();
 
-        $real[0]['Site'] = $Site;
+        if ($real === false) {
+            throw new QUI\Exception('Brick not found');
+        }
 
-        $real[0]['uniqueId'] = $uid;
+        $real['Site'] = $Site;
+        $real['uniqueId'] = $uid;
 
-        $Original = new Brick($real[0]);
+        $Original = new Brick($real);
         $Original->setAttribute('id', $brickId);
 
         $Clone = clone $Original;
@@ -1229,13 +1258,17 @@ class Manager
      */
     public function getBrickRecordsFromProject(Project $Project): array
     {
-        return QUI::getDataBase()->fetch([
-            'from' => $this->getTable(),
-            'where' => [
-                'project' => $Project->getName(),
-                'lang' => $Project->getLang()
-            ]
-        ]);
+        $QueryBuilder = QUI::getQueryBuilder();
+
+        return $QueryBuilder
+            ->select('*')
+            ->from(QUI\Utils\Doctrine::quoteIdentifier($this->getTable()))
+            ->where($QueryBuilder->expr()->eq('project', ':project'))
+            ->andWhere($QueryBuilder->expr()->eq('lang', ':lang'))
+            ->setParameter('project', $Project->getName())
+            ->setParameter('lang', $Project->getLang())
+            ->executeQuery()
+            ->fetchAllAssociative();
     }
 
     /**
@@ -1253,18 +1286,21 @@ class Manager
             return false;
         }
 
-        $result = QUI::getDataBase()->fetch([
-            'select' => ['id'],
-            'from' => $this->getTable(),
-            'where' => [
-                'title' => $title,
-                'project' => $Project->getName(),
-                'lang' => $Project->getLang()
-            ],
-            'limit' => 1
-        ]);
+        $QueryBuilder = QUI::getQueryBuilder();
+        $result = $QueryBuilder
+            ->select('id')
+            ->from(QUI\Utils\Doctrine::quoteIdentifier($this->getTable()))
+            ->where($QueryBuilder->expr()->eq('title', ':title'))
+            ->andWhere($QueryBuilder->expr()->eq('project', ':project'))
+            ->andWhere($QueryBuilder->expr()->eq('lang', ':lang'))
+            ->setParameter('title', $title)
+            ->setParameter('project', $Project->getName())
+            ->setParameter('lang', $Project->getLang())
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchOne();
 
-        return isset($result[0]);
+        return $result !== false;
     }
 
 
@@ -1277,15 +1313,25 @@ class Manager
     public function getSitesByBrick(Brick $Brick): array
     {
         try {
-            $list = QUI::getDataBase()->fetch([
-                'select' => ['brickId', 'project', 'lang', 'siteId'],
-                'from' => $this->getUIDTable(),
-                'where' => [
-                    'project' => $Brick->getAttribute('project'),
-                    'lang' => $Brick->getAttribute('lang'),
-                    'brickId' => $Brick->getAttribute('id')
-                ]
-            ]);
+            $QueryBuilder = QUI::getQueryBuilder();
+            $list = $QueryBuilder
+                ->select(
+                    QUI\Utils\Doctrine::quoteIdentifier('brickId'),
+                    'project',
+                    'lang',
+                    QUI\Utils\Doctrine::quoteIdentifier('siteId')
+                )
+                ->from(QUI\Utils\Doctrine::quoteIdentifier($this->getUIDTable()))
+                ->where($QueryBuilder->expr()->eq('project', ':project'))
+                ->andWhere($QueryBuilder->expr()->eq('lang', ':lang'))
+                ->andWhere(
+                    $QueryBuilder->expr()->eq(QUI\Utils\Doctrine::quoteIdentifier('brickId'), ':brickId')
+                )
+                ->setParameter('project', $Brick->getAttribute('project'))
+                ->setParameter('lang', $Brick->getAttribute('lang'))
+                ->setParameter('brickId', $Brick->getAttribute('id'))
+                ->executeQuery()
+                ->fetchAllAssociative();
 
             $Project = QUI::getProject(
                 $Brick->getAttribute('project'),
@@ -1443,21 +1489,23 @@ class Manager
         $checkType($type);
 
         // check duplicated titles
-        $result = QUI::getDataBase()->fetch([
-            'from' => $this->getTable(),
-            'where' => [
-                'title' => $Brick->getAttribute('title'),
-                'project' => $Brick->getAttribute('project'),
-                'lang' => $Brick->getAttribute('lang'),
-                'id' => [
-                    'type' => 'NOT',
-                    'value' => (int)$brickId
-                ]
-            ],
-            'limit' => 1
-        ]);
+        $QueryBuilder = QUI::getQueryBuilder();
+        $existingBrickId = $QueryBuilder
+            ->select('id')
+            ->from(QUI\Utils\Doctrine::quoteIdentifier($this->getTable()))
+            ->where($QueryBuilder->expr()->eq('title', ':title'))
+            ->andWhere($QueryBuilder->expr()->eq('project', ':project'))
+            ->andWhere($QueryBuilder->expr()->eq('lang', ':lang'))
+            ->andWhere($QueryBuilder->expr()->neq('id', ':id'))
+            ->setParameter('title', $Brick->getAttribute('title'))
+            ->setParameter('project', $Brick->getAttribute('project'))
+            ->setParameter('lang', $Brick->getAttribute('lang'))
+            ->setParameter('id', (int)$brickId)
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchOne();
 
-        if (isset($result[0])) {
+        if ($existingBrickId !== false) {
             throw new QUI\Exception([
                 'quiqqer/bricks',
                 'exception.brick.title.already.exists',
@@ -1492,19 +1540,25 @@ class Manager
             $updateData['e_user'] = $SessionUser->getUUID();
         }
 
-        QUI::getDataBase()->update($this->getTable(), $updateData, [
-            'id' => (int)$brickId
-        ]);
+        QUI::getDataBaseConnection()->update(
+            QUI\Utils\Doctrine::quoteIdentifier($this->getTable()),
+            self::quoteDatabaseColumns($updateData),
+            self::quoteDatabaseColumns(['id' => (int)$brickId])
+        );
 
         // refresh all bricks with this id
-        $uniqueBricks = QUI::getDataBase()->fetch([
-            'from' => QUI\Bricks\Manager::getUIDTable(),
-            'where' => [
-                'project' => $Project->getName(),
-                'lang' => $Project->getLang(),
-                'brickId' => (int)$brickId
-            ]
-        ]);
+        $QueryBuilder = QUI::getQueryBuilder();
+        $uniqueBricks = $QueryBuilder
+            ->select('*')
+            ->from(QUI\Utils\Doctrine::quoteIdentifier(self::getUIDTable()))
+            ->where($QueryBuilder->expr()->eq('project', ':project'))
+            ->andWhere($QueryBuilder->expr()->eq('lang', ':lang'))
+            ->andWhere($QueryBuilder->expr()->eq(QUI\Utils\Doctrine::quoteIdentifier('brickId'), ':brickId'))
+            ->setParameter('project', $Project->getName())
+            ->setParameter('lang', $Project->getLang())
+            ->setParameter('brickId', (int)$brickId)
+            ->executeQuery()
+            ->fetchAllAssociative();
 
         foreach ($uniqueBricks as $uniqueBrick) {
             $customFieldsUniqueBrick = json_decode($uniqueBrick['customfields'], true);
@@ -1518,12 +1572,14 @@ class Manager
                 $customFieldsUniqueBrick = [];
             }
 
-            QUI::getDataBase()->update(QUI\Bricks\Manager::getUIDTable(), [
-                'customfields' => json_encode($customFieldsUniqueBrick),
-                'attributes' => json_encode($attributes)
-            ], [
-                'uid' => $uniqueBrick['uid']
-            ]);
+            QUI::getDataBaseConnection()->update(
+                QUI\Utils\Doctrine::quoteIdentifier(self::getUIDTable()),
+                self::quoteDatabaseColumns([
+                    'customfields' => json_encode($customFieldsUniqueBrick),
+                    'attributes' => json_encode($attributes)
+                ]),
+                self::quoteDatabaseColumns(['uid' => $uniqueBrick['uid']])
+            );
         }
 
         // clear project cache
@@ -1558,16 +1614,12 @@ class Manager
             return $this->tableColumns;
         }
 
-        $tableManager = QUI::getDataBase()->table();
-
-        if ($tableManager === null) {
-            $this->tableColumns = [];
-            return $this->tableColumns;
-        }
-
-        $this->tableColumns = array_flip(
-            $tableManager->getColumns($this->getTable())
+        $Table = QUI::getSchemaManager()->introspectTable($this->getTable());
+        $columnNames = array_map(
+            static fn (\Doctrine\DBAL\Schema\Column $Column): string => $Column->getName(),
+            $Table->getColumns()
         );
+        $this->tableColumns = array_fill_keys($columnNames, 1);
 
         return $this->tableColumns;
     }
@@ -1577,6 +1629,23 @@ class Manager
         $columns = $this->getBrickTableColumns();
 
         return isset($columns[$column]);
+    }
+
+    /**
+     * Quote trusted database column names for DBAL write operations.
+     *
+     * @param array<string, mixed> $data
+     * @return array<string, mixed>
+     */
+    protected static function quoteDatabaseColumns(array $data): array
+    {
+        $quotedData = [];
+
+        foreach ($data as $column => $value) {
+            $quotedData[QUI\Utils\Doctrine::quoteIdentifier($column)] = $value;
+        }
+
+        return $quotedData;
     }
 
     /**
@@ -1592,21 +1661,22 @@ class Manager
     {
         QUI\Permissions\Permission::checkPermission('quiqqer.bricks.create');
 
-        $result = QUI::getDataBase()->fetch([
-            'from' => $this->getTable(),
-            'where' => [
-                'id' => $brickId
-            ]
-        ]);
+        $QueryBuilder = QUI::getQueryBuilder();
+        $data = $QueryBuilder
+            ->select('*')
+            ->from(QUI\Utils\Doctrine::quoteIdentifier($this->getTable()))
+            ->where($QueryBuilder->expr()->eq('id', ':id'))
+            ->setParameter('id', $brickId)
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchAssociative();
 
-        if (!isset($result[0])) {
+        if ($data === false) {
             throw new QUI\Exception('Brick not found');
         }
 
         $allowed = ['project', 'lang', 'title', 'description'];
         $allowed = array_flip($allowed);
-        $data = $result[0];
-
         unset($data['id']);
 
         foreach ($params as $param => $value) {
@@ -1617,9 +1687,13 @@ class Manager
             $data[$param] = $value;
         }
 
-        QUI::getDataBase()->insert($this->getTable(), $data);
+        $Connection = QUI::getDataBaseConnection();
+        $Connection->insert(
+            QUI\Utils\Doctrine::quoteIdentifier($this->getTable()),
+            self::quoteDatabaseColumns($data)
+        );
 
-        return (int)QUI::getPDO()->lastInsertId();
+        return (int)$Connection->lastInsertId();
     }
 
     /**
@@ -1685,14 +1759,17 @@ class Manager
 
         foreach ($parentIds as $parentId) {
             try {
-                $bricks = QUI::getDataBase()->fetch([
-                    'from' => $projectCacheTable,
-                    'where' => [
-                        'id' => $parentId,
-                        'area' => $brickArea
-                    ]
-                ]);
-            } catch (QUI\Database\Exception $Exception) {
+                $QueryBuilder = QUI::getQueryBuilder();
+                $bricks = $QueryBuilder
+                    ->select('*')
+                    ->from(QUI\Utils\Doctrine::quoteIdentifier($projectCacheTable))
+                    ->where($QueryBuilder->expr()->eq('id', ':id'))
+                    ->andWhere($QueryBuilder->expr()->eq('area', ':area'))
+                    ->setParameter('id', $parentId)
+                    ->setParameter('area', $brickArea)
+                    ->executeQuery()
+                    ->fetchAllAssociative();
+            } catch (\Doctrine\DBAL\Exception $Exception) {
                 QUI\System\Log::addError($Exception->getMessage());
                 continue;
             }
