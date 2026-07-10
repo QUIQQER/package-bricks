@@ -643,7 +643,7 @@ class Brick extends QUI\QDOM
     public function getCSSFiles(): array
     {
         if ($this->Control instanceof Control) {
-            return array_values($this->Control->getCSSFiles());
+            return $this->normalizeCSSFiles($this->Control->getCSSFiles());
         }
 
         if (!$this->getAttribute('cacheable')) {
@@ -659,12 +659,29 @@ class Brick extends QUI\QDOM
             $data = QUI\Cache\Manager::get($this->getCacheName($settings));
 
             if (isset($data['cssFiles']) && is_array($data['cssFiles'])) {
-                return array_values(array_filter($data['cssFiles'], is_string(...)));
+                return $this->normalizeCSSFiles($data['cssFiles']);
             }
         } catch (Exception) {
         }
 
         return [];
+    }
+
+    /**
+     * @param array<mixed> $files
+     * @return list<string>
+     */
+    private function normalizeCSSFiles(array $files): array
+    {
+        $result = [];
+
+        foreach ($files as $file) {
+            if (is_string($file)) {
+                $result[] = $file;
+            }
+        }
+
+        return $result;
     }
 
     /**
