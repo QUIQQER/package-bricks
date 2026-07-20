@@ -1,23 +1,18 @@
-.brick-image {
-    height: 100%;
-    overflow: hidden;
-}
-
-.brick-image-picture-container {
+.quiqqer-bricks-controls-image__pictureContainer {
     text-align: center;
 }
 
-a.brick-image-link:hover {
+.quiqqer-bricks-controls-image__link:hover {
     outline: none;
     background: none;
     border: none;
     box-shadow: none;
 }
 
-a.brick-image-link {
+.quiqqer-bricks-controls-image__link {
     display: block;
 }
 
-.brick-image-picture {
+.quiqqer-bricks-controls-image__picture {
     max-width: 100%;
 }

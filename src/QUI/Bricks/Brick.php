@@ -638,12 +638,12 @@ class Brick extends QUI\QDOM
     /**
      * Return CSS files used by this brick.
      *
-     * @return array<string>
+     * @return list<string>
      */
     public function getCSSFiles(): array
     {
         if ($this->Control instanceof Control) {
-            return $this->Control->getCSSFiles();
+            return $this->normalizeCSSFiles($this->Control->getCSSFiles());
         }
 
         if (!$this->getAttribute('cacheable')) {
@@ -659,12 +659,29 @@ class Brick extends QUI\QDOM
             $data = QUI\Cache\Manager::get($this->getCacheName($settings));
 
             if (isset($data['cssFiles']) && is_array($data['cssFiles'])) {
-                return $data['cssFiles'];
+                return $this->normalizeCSSFiles($data['cssFiles']);
             }
         } catch (Exception) {
         }
 
         return [];
+    }
+
+    /**
+     * @param array<mixed> $files
+     * @return list<string>
+     */
+    private function normalizeCSSFiles(array $files): array
+    {
+        $result = [];
+
+        foreach ($files as $file) {
+            if (is_string($file)) {
+                $result[] = $file;
+            }
+        }
+
+        return $result;
     }
 
     /**

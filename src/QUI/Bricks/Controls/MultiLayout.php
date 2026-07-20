@@ -87,6 +87,8 @@ class MultiLayout extends QUI\Control
             'layout' => Presets::getDefaultPresetId(),
             'areaBackgroundEnabled' => true,
             'gridGapPreset' => self::DEFAULT_GRID_GAP_PRESET,
+            'gridRowGapPreset' => self::DEFAULT_GRID_GAP_PRESET,
+            'gridColumnGapPreset' => self::DEFAULT_GRID_GAP_PRESET,
             'tileMinHeightPreset' => self::DEFAULT_TILE_MIN_HEIGHT_PRESET,
             'tileMinHeightValue' => '',
             'layoutAreas' => '[]'
@@ -106,11 +108,21 @@ class MultiLayout extends QUI\Control
 
         $this->addCSSFile(dirname(__FILE__, 2) . '/Layout/Layout.css');
 
-        $gapPreset = $this->getAttribute('gridGapPreset');
-        if (!is_string($gapPreset) || !array_key_exists($gapPreset, self::GRID_GAP_PRESETS)) {
-            $gapPreset = self::DEFAULT_GRID_GAP_PRESET;
+        if ($this->getAttribute('gridGapPreset') === 'separate') {
+            $this->setCustomVariable(
+                'gridRowGap',
+                $this->getGridGapPresetValue($this->getAttribute('gridRowGapPreset'))
+            );
+            $this->setCustomVariable(
+                'gridColumnGap',
+                $this->getGridGapPresetValue($this->getAttribute('gridColumnGapPreset'))
+            );
+        } else {
+            $this->setCustomVariable(
+                'gridGap',
+                $this->getGridGapPresetValue($this->getAttribute('gridGapPreset'))
+            );
         }
-        $this->setCustomVariable('gridGap', self::GRID_GAP_PRESETS[$gapPreset]);
 
         $layoutHtml = (new Renderer())->render(
             $this,
@@ -967,6 +979,15 @@ class MultiLayout extends QUI\Control
             ["\\\\", "\\'", '', ''],
             trim($value)
         );
+    }
+
+    private function getGridGapPresetValue(mixed $preset): string
+    {
+        if (!is_string($preset) || !array_key_exists($preset, self::GRID_GAP_PRESETS)) {
+            $preset = self::DEFAULT_GRID_GAP_PRESET;
+        }
+
+        return self::GRID_GAP_PRESETS[$preset];
     }
 
     private function setCustomVariable(string $name, string $value): void

@@ -1171,12 +1171,55 @@
             </description>
 
             <settings>
-                <setting name="link" class="project-site">
+                <setting name="link" class="project-site" data-external="1">
                     <locale group="quiqqer/bricks" var="bricks.control.image.link"/>
+                </setting>
+
+                <setting name="linkTarget" type="select">
+                    <locale group="quiqqer/bricks" var="bricks.control.image.linkTarget"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="bricks.control.image.linkTarget.description"/>
+                    </description>
+                    <option value="" selected="selected">
+                        <locale group="quiqqer/bricks" var="bricks.control.image.linkTarget.sameWindow"/>
+                    </option>
+                    <option value="_blank">
+                        <locale group="quiqqer/bricks" var="bricks.control.image.linkTarget.newWindow"/>
+                    </option>
+                </setting>
+
+                <setting name="linkRel" type="select">
+                    <locale group="quiqqer/bricks" var="bricks.control.image.linkRel"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="bricks.control.image.linkRel.description"/>
+                    </description>
+                    <option value="" selected="selected">
+                        <locale group="quiqqer/bricks" var="bricks.control.image.linkRel.default"/>
+                    </option>
+                    <option value="nofollow">nofollow</option>
+                    <option value="sponsored">sponsored</option>
+                    <option value="ugc">ugc</option>
+                    <option value="noreferrer">noreferrer</option>
                 </setting>
 
                 <setting name="picture" class="media-image">
                     <locale group="quiqqer/bricks" var="bricks.control.image.picture"/>
+                </setting>
+
+                <setting name="altText" type="text">
+                    <locale group="quiqqer/bricks" var="bricks.control.image.altText"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="bricks.control.image.altText.description"/>
+                    </description>
+                    <defaultValue></defaultValue>
+                </setting>
+
+                <setting name="imageTitle" type="text">
+                    <locale group="quiqqer/bricks" var="bricks.control.image.imageTitle"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="bricks.control.image.imageTitle.description"/>
+                    </description>
+                    <defaultValue></defaultValue>
                 </setting>
             </settings>
         </brick>
@@ -1687,52 +1730,205 @@
                     </option>
                 </setting>
 
-                <setting name="template" type="select">
+                <setting name="template" type="select" default="cards"
+                         data-qui="package/quiqqer/core/bin/QUI/controls/settings/Dependency">
                     <locale group="quiqqer/bricks" var="brick.listTemplate"/>
+                    <option value="cards">
+                        <locale group="quiqqer/sitetypes" var="list.template.cards"/>
+                    </option>
+                    <option value="mediaList">
+                        <locale group="quiqqer/sitetypes" var="list.template.mediaList"/>
+                    </option>
                     <option value="imageTop">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.imageTop"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.imageTop"/>
                     </option>
                     <option value="imageTopBorder">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.imageTopBorder"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.imageTopBorder"/>
                     </option>
                     <option value="simpleArticleList">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.simpleArticleList"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.simpleArticleList"/>
                     </option>
                     <option value="advancedArticleList">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.advancedArticleList"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.advancedArticleList"/>
                     </option>
                     <option value="1er">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.1er"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.1er"/>
                     </option>
                     <option value="2er">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.2er"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.2er"/>
                     </option>
                     <option value="3er">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.3er"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.3er"/>
                     </option>
                     <option value="4er">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.4er"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.4er"/>
                     </option>
                     <option value="childrenList">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.childrenList"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.childrenList"/>
                     </option>
                     <option value="longFooter">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.longFooter"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.longFooter"/>
                     </option>
                     <option value="authorTop">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.authorTop"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.authorTop"/>
                     </option>
                     <option value="cardRows">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.cardRows"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.cardRows"/>
                     </option>
                     <option value="gallery">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.gallery"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.gallery"/>
                     </option>
                     <option value="galleryOverlay">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.galleryOverlay"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.galleryOverlay"/>
                     </option>
                     <option value="bigBanner">
-                        <locale group="quiqqer/bricks" var="brick.listTemplate.bigBanner"/>
+                        <locale group="quiqqer/sitetypes" var="list.template.bigBanner"/>
+                    </option>
+                </setting>
+
+                <setting name="cardLayout" type="select"
+                         data-dependency="template"
+                         data-dependency-options="cards">
+                    <locale group="quiqqer/sitetypes" var="list.settings.cards.layout"/>
+                    <option value="standard">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.layout.standard"/>
+                    </option>
+                </setting>
+
+                <setting name="cardColumns" type="select"
+                         data-dependency="template"
+                         data-dependency-options="cards">
+                    <locale group="quiqqer/sitetypes" var="list.settings.cards.columns"/>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </setting>
+
+                <setting name="cardColumnsTablet" type="select"
+                         data-dependency="template"
+                         data-dependency-options="cards">
+                    <locale group="quiqqer/sitetypes" var="list.settings.cards.columnsTablet"/>
+                    <option value=""></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </setting>
+
+                <setting name="cardColumnsMobile" type="select"
+                         data-dependency="template"
+                         data-dependency-options="cards">
+                    <locale group="quiqqer/sitetypes" var="list.settings.cards.columnsMobile"/>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </setting>
+
+                <setting name="cardImageFit" type="select"
+                         data-dependency="template"
+                         data-dependency-options="cards,mediaList">
+                    <locale group="quiqqer/sitetypes" var="list.settings.cards.imageFit"/>
+                    <option value="cover">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.imageFit.cover"/>
+                    </option>
+                    <option value="contain">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.imageFit.contain"/>
+                    </option>
+                </setting>
+
+                <setting name="cardAspectRatio" type="select" default="3/2"
+                         data-dependency="template"
+                         data-dependency-options="cards,mediaList">
+                    <locale group="quiqqer/sitetypes" var="list.settings.cards.aspectRatio"/>
+                    <option value="auto">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.aspectRatio.auto"/>
+                    </option>
+                    <option value="3/4">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.aspectRatio.3-4"/>
+                    </option>
+                    <option value="2/3">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.aspectRatio.2-3"/>
+                    </option>
+                    <option value="4/5">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.aspectRatio.4-5"/>
+                    </option>
+                    <option value="9/16">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.aspectRatio.9-16"/>
+                    </option>
+                    <option value="1/1">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.aspectRatio.1-1"/>
+                    </option>
+                    <option value="5/4">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.aspectRatio.5-4"/>
+                    </option>
+                    <option value="4/3">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.aspectRatio.4-3"/>
+                    </option>
+                    <option value="3/2">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.aspectRatio.3-2"/>
+                    </option>
+                    <option value="16/9">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.aspectRatio.16-9"/>
+                    </option>
+                </setting>
+
+                <setting name="cardGap" type="select"
+                         data-dependency="template"
+                         data-dependency-options="cards,mediaList,featuredCards">
+                    <locale group="quiqqer/sitetypes" var="list.settings.cards.gap"/>
+                    <option value="none">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.gap.none"/>
+                    </option>
+                    <option value="xs">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.gap.xs"/>
+                    </option>
+                    <option value="small">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.gap.small"/>
+                    </option>
+                    <option value="normal">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.gap.normal"/>
+                    </option>
+                    <option value="large">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.gap.large"/>
+                    </option>
+                    <option value="extraLarge">
+                        <locale group="quiqqer/sitetypes" var="list.settings.cards.gap.extraLarge"/>
+                    </option>
+                </setting>
+
+                <setting name="mediaImagePosition" type="select"
+                         data-dependency="template"
+                         data-dependency-options="mediaList">
+                    <locale group="quiqqer/sitetypes" var="list.settings.media.imagePosition"/>
+                    <option value="left">
+                        <locale group="quiqqer/sitetypes" var="list.settings.media.imagePosition.left"/>
+                    </option>
+                    <option value="right">
+                        <locale group="quiqqer/sitetypes" var="list.settings.media.imagePosition.right"/>
+                    </option>
+                    <option value="alternate">
+                        <locale group="quiqqer/sitetypes" var="list.settings.media.imagePosition.alternate"/>
+                    </option>
+                </setting>
+
+                <setting name="mediaImageWidth" type="select"
+                         data-dependency="template"
+                         data-dependency-options="mediaList">
+                    <locale group="quiqqer/sitetypes" var="list.settings.media.imageWidth"/>
+                    <option value="small">
+                        <locale group="quiqqer/sitetypes" var="list.settings.media.imageWidth.small"/>
+                    </option>
+                    <option value="normal">
+                        <locale group="quiqqer/sitetypes" var="list.settings.media.imageWidth.normal"/>
+                    </option>
+                    <option value="large">
+                        <locale group="quiqqer/sitetypes" var="list.settings.media.imageWidth.large"/>
                     </option>
                 </setting>
 
@@ -2034,7 +2230,8 @@
                     </description>
                 </setting>
 
-                <setting name="gridGapPreset" type="select">
+                <setting name="gridGapPreset" type="select"
+                         data-qui="package/quiqqer/core/bin/QUI/controls/settings/Dependency">
                     <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap"/>
                     <description>
                         <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.desc"/>
@@ -2055,6 +2252,55 @@
                     <option value="extraLarge">
                         <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.extraLarge"/>
                     </option>
+                    <option value="separate">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.separate"/>
+                    </option>
+                </setting>
+
+                <setting name="gridRowGapPreset" type="select"
+                         data-dependency="gridGapPreset"
+                         data-dependency-options="separate">
+                    <locale group="quiqqer/bricks" var="brick.multiLayout.gridRowGap"/>
+
+                    <option value="none">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.none"/>
+                    </option>
+                    <option value="small">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.small"/>
+                    </option>
+                    <option value="normal">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.normal"/>
+                    </option>
+                    <option value="large">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.large"/>
+                    </option>
+                    <option value="extraLarge">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.extraLarge"/>
+                    </option>
+                    <defaultValue>normal</defaultValue>
+                </setting>
+
+                <setting name="gridColumnGapPreset" type="select"
+                         data-dependency="gridGapPreset"
+                         data-dependency-options="separate">
+                    <locale group="quiqqer/bricks" var="brick.multiLayout.gridColumnGap"/>
+
+                    <option value="none">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.none"/>
+                    </option>
+                    <option value="small">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.small"/>
+                    </option>
+                    <option value="normal">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.normal"/>
+                    </option>
+                    <option value="large">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.large"/>
+                    </option>
+                    <option value="extraLarge">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.extraLarge"/>
+                    </option>
+                    <defaultValue>normal</defaultValue>
                 </setting>
 
                 <setting name="tileMinHeightPreset" type="select">

@@ -6,6 +6,59 @@ use PHPUnit\Framework\TestCase;
 
 class MultiLayoutTest extends TestCase
 {
+    public function testCommonGridGapRemainsUnchangedAndIgnoresAxisPresets(): void
+    {
+        $Control = new \QUI\Bricks\Controls\MultiLayout([
+            'gridGapPreset' => 'large',
+            'gridRowGapPreset' => 'none',
+            'gridColumnGapPreset' => 'extraLarge'
+        ]);
+
+        $html = $Control->create();
+
+        $this->assertStringContainsString(
+            '--_q-controlConf-gridGap:clamp(1rem, 4cqi, 2.5rem)',
+            $html
+        );
+        $this->assertStringNotContainsString('--_q-controlConf-gridRowGap:', $html);
+        $this->assertStringNotContainsString('--_q-controlConf-gridColumnGap:', $html);
+    }
+
+    public function testSeparateGridGapsUseAxisPresets(): void
+    {
+        $Control = new \QUI\Bricks\Controls\MultiLayout([
+            'gridGapPreset' => 'separate',
+            'gridRowGapPreset' => 'small',
+            'gridColumnGapPreset' => 'extraLarge'
+        ]);
+
+        $html = $Control->create();
+
+        $this->assertStringContainsString(
+            '--_q-controlConf-gridRowGap:clamp(0.5rem, 1.5cqi, 1rem)',
+            $html
+        );
+        $this->assertStringContainsString(
+            '--_q-controlConf-gridColumnGap:clamp(1.25rem, 6cqi, 4rem)',
+            $html
+        );
+        $this->assertStringNotContainsString('--_q-controlConf-gridGap:', $html);
+    }
+
+    public function testSeparateGridGapsFallBackToNormal(): void
+    {
+        $Control = new \QUI\Bricks\Controls\MultiLayout([
+            'gridGapPreset' => 'separate',
+            'gridColumnGapPreset' => 'invalid'
+        ]);
+
+        $html = $Control->create();
+        $normalGap = 'clamp(0.75rem, 2cqi, 1.5rem)';
+
+        $this->assertStringContainsString('--_q-controlConf-gridRowGap:' . $normalGap, $html);
+        $this->assertStringContainsString('--_q-controlConf-gridColumnGap:' . $normalGap, $html);
+    }
+
     public function testControlBehaviorSmoke(): void
     {
         $class = 'QUI\Bricks\Controls\MultiLayout';

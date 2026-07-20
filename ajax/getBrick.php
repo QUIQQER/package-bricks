@@ -28,6 +28,34 @@ QUI::getAjax()->registerFunction(
             }
         };
 
+        $translateAvailableSettings = static function (array $settings): array {
+            $Locale = QUI::getLocale();
+
+            foreach ($settings as $index => $setting) {
+                if (isset($setting['text'])) {
+                    $settings[$index]['text'] = $Locale->parseLocaleString($setting['text']);
+                }
+
+                if (isset($setting['description'])) {
+                    $settings[$index]['description'] = $Locale->parseLocaleString($setting['description']);
+                }
+
+                if (!empty($setting['options']) && is_array($setting['options'])) {
+                    foreach ($setting['options'] as $optionIndex => $option) {
+                        if (!isset($option['text'])) {
+                            continue;
+                        }
+
+                        $settings[$index]['options'][$optionIndex]['text'] = $Locale->parseLocaleString(
+                            $option['text']
+                        );
+                    }
+                }
+            }
+
+            return $settings;
+        };
+
         /** @var QUI\Bricks\Manager $BrickManager */
         $BrickManager = QUI\Bricks\Manager::init();
 
@@ -69,9 +97,9 @@ QUI::getAjax()->registerFunction(
             'attributes' => $attributes,
             'settings' => $Brick->getSettings(),
             'customfields' => $Brick->getCustomFields(),
-            'availableSettings' => $BrickManager->getAvailableBrickSettingsByBrickType(
+            'availableSettings' => $translateAvailableSettings($BrickManager->getAvailableBrickSettingsByBrickType(
                 (string)$Brick->getAttribute('type')
-            )
+            ))
         ];
     },
     ['brickId'],

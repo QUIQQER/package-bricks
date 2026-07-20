@@ -14,7 +14,6 @@ use Smarty_Internal_Template;
 use SmartyException;
 
 use function array_flip;
-use function array_map;
 use function explode;
 use function is_array;
 use function is_string;
@@ -71,6 +70,7 @@ class Events
 
         $uidTable = QUI\Bricks\Manager::getUIDTable();
         $availableUniqueIds = [];
+        $Connection = QUI::getDataBaseConnection();
 
         foreach ($projectAreas as $area) {
             if (!$area['inheritance']) {
@@ -88,17 +88,17 @@ class Events
             $bricks = $areas[$area['name']];
 
             // clear area and new data set
-            QUI::getDataBase()->delete($projectTable, [
-                'id' => $Site->getId(),
-                'area' => $area['name']
+            $Connection->delete(QUI\Utils\Doctrine::quoteIdentifier($projectTable), [
+                QUI\Utils\Doctrine::quoteIdentifier('id') => $Site->getId(),
+                QUI\Utils\Doctrine::quoteIdentifier('area') => $area['name']
             ]);
 
             // check if deactivated
             if (isset($bricks[0]['deactivate'])) {
-                QUI::getDataBase()->insert($projectTable, [
-                    'id' => $Site->getId(),
-                    'area' => $area['name'],
-                    'brick' => -1
+                $Connection->insert(QUI\Utils\Doctrine::quoteIdentifier($projectTable), [
+                    QUI\Utils\Doctrine::quoteIdentifier('id') => $Site->getId(),
+                    QUI\Utils\Doctrine::quoteIdentifier('area') => $area['name'],
+                    QUI\Utils\Doctrine::quoteIdentifier('brick') => -1
                 ]);
 
                 continue;
@@ -137,28 +137,27 @@ class Events
                     continue;
                 }
 
-                QUI::getDataBase()->insert($projectTable, [
-                    'id' => $Site->getId(),
-                    'area' => $area['name'],
-                    'brick' => (int)$brick['brickId']
+                $Connection->insert(QUI\Utils\Doctrine::quoteIdentifier($projectTable), [
+                    QUI\Utils\Doctrine::quoteIdentifier('id') => $Site->getId(),
+                    QUI\Utils\Doctrine::quoteIdentifier('area') => $area['name'],
+                    QUI\Utils\Doctrine::quoteIdentifier('brick') => (int)$brick['brickId']
                 ]);
             }
         }
 
         // cleanup unique ids
-        $uniquerIdsInDataBase = QUI::getDataBase()->fetch([
-            'select' => 'uid',
-            'from' => $uidTable,
-            'where' => [
-                'project' => $Project->getName(),
-                'lang' => $Project->getLang(),
-                'siteId' => $Site->getId()
-            ]
-        ]);
-
-        $uniquerIdsInDataBase = array_map(function ($uid) {
-            return $uid['uid'];
-        }, $uniquerIdsInDataBase);
+        $QueryBuilder = QUI::getQueryBuilder();
+        $uniquerIdsInDataBase = $QueryBuilder
+            ->select('uid')
+            ->from(QUI\Utils\Doctrine::quoteIdentifier($uidTable))
+            ->where($QueryBuilder->expr()->eq('project', ':project'))
+            ->andWhere($QueryBuilder->expr()->eq('lang', ':lang'))
+            ->andWhere($QueryBuilder->expr()->eq(QUI\Utils\Doctrine::quoteIdentifier('siteId'), ':siteId'))
+            ->setParameter('project', $Project->getName())
+            ->setParameter('lang', $Project->getLang())
+            ->setParameter('siteId', $Site->getId())
+            ->executeQuery()
+            ->fetchFirstColumn();
 
         $availableUniqueIds = array_flip($availableUniqueIds);
 
@@ -167,8 +166,8 @@ class Events
                 continue;
             }
 
-            QUI::getDataBase()->delete($uidTable, [
-                'uid' => $uid
+            $Connection->delete(QUI\Utils\Doctrine::quoteIdentifier($uidTable), [
+                QUI\Utils\Doctrine::quoteIdentifier('uid') => $uid
             ]);
         }
 
@@ -193,33 +192,34 @@ class Events
     {
         // delete uid entries
         try {
-            QUI::getDataBase()->delete(QUI\Bricks\Manager::getUIDTable(), [
-                'project' => $project
-            ]);
-        } catch (QUI\Exception $Exception) {
+            QUI::getDataBaseConnection()->delete(
+                QUI\Utils\Doctrine::quoteIdentifier(QUI\Bricks\Manager::getUIDTable()),
+                [
+                    QUI\Utils\Doctrine::quoteIdentifier('project') => $project
+                ]
+            );
+        } catch (\Doctrine\DBAL\Exception $Exception) {
             QUI\System\Log::addError($Exception->getMessage());
         }
 
 
         // delete project bricks
         try {
-            QUI::getDataBase()->delete(QUI\Bricks\Manager::getTable(), [
-                'project' => $project
-            ]);
-        } catch (QUI\Exception $Exception) {
+            QUI::getDataBaseConnection()->delete(
+                QUI\Utils\Doctrine::quoteIdentifier(QUI\Bricks\Manager::getTable()),
+                [
+                    QUI\Utils\Doctrine::quoteIdentifier('project') => $project
+                ]
+            );
+        } catch (\Doctrine\DBAL\Exception $Exception) {
             QUI\System\Log::addError($Exception->getMessage());
         }
 
 
         // delete bricks project tables
         // Mainproject_de_bricksCache
-        $Table = QUI::getDataBase()->table();
-
-        if ($Table === null) {
-            return;
-        }
-
-        $tables = $Table->getTables();
+        $SchemaManager = QUI::getSchemaManager();
+        $tables = $SchemaManager->listTableNames();
 
         foreach ($tables as $table) {
             if (!str_starts_with($table, $project)) {
@@ -230,7 +230,7 @@ class Events
                 continue;
             }
 
-            $Table->delete($table);
+            $SchemaManager->dropTable($table);
         }
     }
 
@@ -308,38 +308,46 @@ class Events
             return;
         }
 
+        $SchemaManager = QUI::getSchemaManager();
         $bricksTable = Manager::getTable();
-        $tableManager = QUI::getDataBase()->table();
 
-        if ($tableManager !== null) {
-            $columns = array_flip($tableManager->getColumns($bricksTable));
+        if ($SchemaManager->tablesExist([$bricksTable])) {
+            $Table = $SchemaManager->introspectTable($bricksTable);
+            $addedColumns = [];
 
-            if (!isset($columns['active'])) {
-                $tableManager->addColumn($bricksTable, [
-                    'active' => 'TINYINT(1) NOT NULL DEFAULT 1'
-                ]);
+            if (!$Table->hasColumn('active')) {
+                $addedColumns[] = new \Doctrine\DBAL\Schema\Column(
+                    'active',
+                    \Doctrine\DBAL\Types\Type::getType(\Doctrine\DBAL\Types\Types::BOOLEAN),
+                    ['notnull' => true, 'default' => 1]
+                );
             }
 
-            $metaFields = [];
-
-            if (!isset($columns['c_date'])) {
-                $metaFields['c_date'] = 'TIMESTAMP NULL DEFAULT NULL';
+            foreach (['c_date', 'e_date'] as $column) {
+                if (!$Table->hasColumn($column)) {
+                    $addedColumns[] = new \Doctrine\DBAL\Schema\Column(
+                        $column,
+                        \Doctrine\DBAL\Types\Type::getType(\Doctrine\DBAL\Types\Types::DATETIME_MUTABLE),
+                        ['notnull' => false, 'default' => null]
+                    );
+                }
             }
 
-            if (!isset($columns['e_date'])) {
-                $metaFields['e_date'] = 'TIMESTAMP NULL DEFAULT NULL';
+            foreach (['c_user', 'e_user'] as $column) {
+                if (!$Table->hasColumn($column)) {
+                    $addedColumns[] = new \Doctrine\DBAL\Schema\Column(
+                        $column,
+                        \Doctrine\DBAL\Types\Type::getType(\Doctrine\DBAL\Types\Types::STRING),
+                        ['length' => 50, 'notnull' => false, 'default' => null]
+                    );
+                }
             }
 
-            if (!isset($columns['c_user'])) {
-                $metaFields['c_user'] = 'VARCHAR(50) NULL DEFAULT NULL';
-            }
-
-            if (!isset($columns['e_user'])) {
-                $metaFields['e_user'] = 'VARCHAR(50) NULL DEFAULT NULL';
-            }
-
-            if (!empty($metaFields)) {
-                $tableManager->addColumn($bricksTable, $metaFields);
+            if ($addedColumns !== []) {
+                $SchemaManager->alterTable(new \Doctrine\DBAL\Schema\TableDiff(
+                    $Table,
+                    addedColumns: $addedColumns
+                ));
             }
         }
 
@@ -355,27 +363,22 @@ class Events
                 $Project
             );
 
-            $tableManager = QUI::getDataBase()->table();
-
-            if ($tableManager === null) {
-                continue;
-            }
-
-            if ($tableManager->exist($projectCacheTable) === false) {
+            if (!$SchemaManager->tablesExist([$projectCacheTable])) {
                 // at installation, ignore missing table
                 continue;
             }
 
             try {
-                // Only drop a composite primary key if it exists
-                if (
-                    $tableManager->issetPrimaryKey($projectCacheTable, 'id')
-                    && $tableManager->issetPrimaryKey($projectCacheTable, 'area')
-                ) {
-                    // The primary key no longer exists and should be removed
-                    QUI::getDataBase()->execSQL("ALTER TABLE `$projectCacheTable` DROP PRIMARY KEY;");
+                $Table = $SchemaManager->introspectTable($projectCacheTable);
+                $PrimaryKey = $Table->getPrimaryKey();
+
+                if ($PrimaryKey !== null) {
+                    $SchemaManager->alterTable(new \Doctrine\DBAL\Schema\TableDiff(
+                        $Table,
+                        droppedIndexes: [$PrimaryKey]
+                    ));
                 }
-            } catch (QUI\Exception $Exception) {
+            } catch (\Doctrine\DBAL\Exception $Exception) {
                 QUI\System\Log::addInfo($Exception->getMessage());
             }
         }
@@ -426,9 +429,15 @@ class Events
 
         try {
             $brickId = (int)$attributes['id'];
-            $Brick = Manager::init()?->getBrickById($brickId);
+            $Manager = Manager::init();
 
-            return QUI\Output::getInstance()->parse($Brick?->create());
+            if ($Manager === null) {
+                return $match[0];
+            }
+
+            $Brick = $Manager->getBrickById($brickId);
+
+            return QUI\Output::getInstance()->parse($Brick->create());
         } catch (Exception) {
         }
 

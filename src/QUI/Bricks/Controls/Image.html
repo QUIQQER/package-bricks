@@ -1,27 +1,57 @@
-{assign var=img value=$brickImage}
-{assign var=link value=$brickLink}
-<div class=" brick-image">
+{if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
+    <h2 class="control-header">{$this->getAttribute('frontendTitle')|escape:'html'}</h2>
+{/if}
 
-    {if $this->getAttribute('showTitle') && $this->getAttribute('frontendTitle')}
-    <header class="control-header">
-        <h1>{$this->getAttribute('frontendTitle')}</h1>
-    </header>
-    {/if}
-
-    {if $this->getAttribute('content') != ""}
+{if $this->getAttribute('content') != ""}
     <div class="control-content">
         {$this->getAttribute('content')}
     </div>
-    {/if}
+{/if}
 
-    <div class="brick-image-picture-container">
-        {if $link != ""}
-        <a class="brick-image-link" href="{$link}">
+{assign var=imageHtml value=''}
+
+{if $image != ''}
+    {if $altText != '' && $imageTitle != ''}
+        {image src=$image
+            class="quiqqer-bricks-controls-image__picture"
+            alt="{$altText|escape:'html'}"
+            title="{$imageTitle|escape:'html'}"
+            assign=imageHtml
+        }
+    {elseif $altText != ''}
+        {image src=$image
+            class="quiqqer-bricks-controls-image__picture"
+            alt="{$altText|escape:'html'}"
+            assign=imageHtml
+        }
+    {elseif $imageTitle != ''}
+        {image src=$image
+            class="quiqqer-bricks-controls-image__picture"
+            title="{$imageTitle|escape:'html'}"
+            assign=imageHtml
+        }
+    {else}
+        {image src=$image
+            class="quiqqer-bricks-controls-image__picture"
+            assign=imageHtml
+        }
+    {/if}
+{/if}
+
+{if $imageHtml != ''}
+    <div class="quiqqer-bricks-controls-image__pictureContainer">
+        {if $link != ''}
+            <a class="quiqqer-bricks-controls-image__link"
+               href="{$link|escape:'html'}"
+               {if $linkTarget != ''}target="{$linkTarget|escape:'html'}"{/if}
+               {if $linkRel != ''}rel="{$linkRel|escape:'html'}"{/if}
+            >
         {/if}
-        {image src=$img class="brick-image-picture"}
-        {if $link != ""}
-        </a>
+
+        {$imageHtml}
+
+        {if $link != ''}
+            </a>
         {/if}
     </div>
-
-</div>
+{/if}
