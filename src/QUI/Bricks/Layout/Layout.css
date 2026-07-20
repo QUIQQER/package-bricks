@@ -1,14 +1,18 @@
 .quiqqer-bricks-layout {
+    --_gridGap: var(--quiqqer-bricks-layout-grid-gap, var(--_q-controlConf-gridGap, clamp(0.75rem, 4cqi, 1.5rem)));
+    --_gridRowGap: var(--quiqqer-bricks-layout-grid-row-gap, var(--_q-controlConf-gridRowGap, var(--_gridGap)));
+    --_gridColumnGap: var(--quiqqer-bricks-layout-grid-column-gap, var(--_q-controlConf-gridColumnGap, var(--_gridGap)));
     --_tileMinHeight: var(--quiqqer-bricks-layout-tile-min-height, 200px);
     container: multi-layout / inline-size;
     min-height: 1px;
 }
 
 .quiqqer-bricks-layout__grid {
+    column-gap: var(--_gridColumnGap);
     display: grid;
-    gap: var(--_q-controlConf-gridGap, clamp(0.75rem, 4cqi, 1.5rem));
     grid-auto-flow: row dense;
     grid-auto-rows: minmax(0, auto);
+    row-gap: var(--_gridRowGap);
 }
 
 .quiqqer-bricks-layout__area {
