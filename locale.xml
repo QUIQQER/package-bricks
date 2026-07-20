@@ -2579,9 +2579,53 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Link]]></de>
             <en><![CDATA[Hyperlink]]></en>
         </locale>
+        <locale name="bricks.control.image.linkTarget">
+            <de><![CDATA[Linkziel]]></de>
+            <en><![CDATA[Link target]]></en>
+        </locale>
+        <locale name="bricks.control.image.linkTarget.description">
+            <de><![CDATA[Legt fest, ob der Link im selben oder in einem neuen Fenster geöffnet wird. Bei einem neuen Fenster wird automatisch „noopener“ ergänzt.]]></de>
+            <en><![CDATA[Defines whether the link opens in the same or a new window. “noopener” is added automatically for a new window.]]></en>
+        </locale>
+        <locale name="bricks.control.image.linkTarget.sameWindow">
+            <de><![CDATA[Im selben Fenster öffnen]]></de>
+            <en><![CDATA[Open in the same window]]></en>
+        </locale>
+        <locale name="bricks.control.image.linkTarget.newWindow">
+            <de><![CDATA[In einem neuen Fenster öffnen]]></de>
+            <en><![CDATA[Open in a new window]]></en>
+        </locale>
+        <locale name="bricks.control.image.linkRel">
+            <de><![CDATA[Linkbeziehung (rel)]]></de>
+            <en><![CDATA[Link relationship (rel)]]></en>
+        </locale>
+        <locale name="bricks.control.image.linkRel.description">
+            <de><![CDATA[Optionale Beziehung zwischen der aktuellen Seite und dem Linkziel.]]></de>
+            <en><![CDATA[Optional relationship between the current page and the link target.]]></en>
+        </locale>
+        <locale name="bricks.control.image.linkRel.default">
+            <de><![CDATA[Standard]]></de>
+            <en><![CDATA[Default]]></en>
+        </locale>
         <locale name="bricks.control.image.picture">
             <de><![CDATA[Bild auswählen]]></de>
             <en><![CDATA[Select image]]></en>
+        </locale>
+        <locale name="bricks.control.image.altText">
+            <de><![CDATA[Alternativtext]]></de>
+            <en><![CDATA[Alternative text]]></en>
+        </locale>
+        <locale name="bricks.control.image.altText.description">
+            <de><![CDATA[Optionaler Alternativtext für das Bild. Wenn das Feld leer bleibt, wird der Alternativtext des ausgewählten Mediums verwendet.]]></de>
+            <en><![CDATA[Optional alternative text for the image. If this field remains empty, the alternative text of the selected media item is used.]]></en>
+        </locale>
+        <locale name="bricks.control.image.imageTitle">
+            <de><![CDATA[Bildtitel]]></de>
+            <en><![CDATA[Image title]]></en>
+        </locale>
+        <locale name="bricks.control.image.imageTitle.description">
+            <de><![CDATA[Optionaler Titel für den Hover-Hinweis des Bildes. Wenn das Feld leer bleibt, wird der Titel des ausgewählten Mediums verwendet.]]></de>
+            <en><![CDATA[Optional title for the image hover hint. If this field remains empty, the title of the selected media item is used.]]></en>
         </locale>
 
         <!-- sites listing -->

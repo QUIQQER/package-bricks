@@ -1171,12 +1171,55 @@
             </description>
 
             <settings>
-                <setting name="link" class="project-site">
+                <setting name="link" class="project-site" data-external="1">
                     <locale group="quiqqer/bricks" var="bricks.control.image.link"/>
+                </setting>
+
+                <setting name="linkTarget" type="select">
+                    <locale group="quiqqer/bricks" var="bricks.control.image.linkTarget"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="bricks.control.image.linkTarget.description"/>
+                    </description>
+                    <option value="" selected="selected">
+                        <locale group="quiqqer/bricks" var="bricks.control.image.linkTarget.sameWindow"/>
+                    </option>
+                    <option value="_blank">
+                        <locale group="quiqqer/bricks" var="bricks.control.image.linkTarget.newWindow"/>
+                    </option>
+                </setting>
+
+                <setting name="linkRel" type="select">
+                    <locale group="quiqqer/bricks" var="bricks.control.image.linkRel"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="bricks.control.image.linkRel.description"/>
+                    </description>
+                    <option value="" selected="selected">
+                        <locale group="quiqqer/bricks" var="bricks.control.image.linkRel.default"/>
+                    </option>
+                    <option value="nofollow">nofollow</option>
+                    <option value="sponsored">sponsored</option>
+                    <option value="ugc">ugc</option>
+                    <option value="noreferrer">noreferrer</option>
                 </setting>
 
                 <setting name="picture" class="media-image">
                     <locale group="quiqqer/bricks" var="bricks.control.image.picture"/>
+                </setting>
+
+                <setting name="altText" type="text">
+                    <locale group="quiqqer/bricks" var="bricks.control.image.altText"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="bricks.control.image.altText.description"/>
+                    </description>
+                    <defaultValue></defaultValue>
+                </setting>
+
+                <setting name="imageTitle" type="text">
+                    <locale group="quiqqer/bricks" var="bricks.control.image.imageTitle"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="bricks.control.image.imageTitle.description"/>
+                    </description>
+                    <defaultValue></defaultValue>
                 </setting>
             </settings>
         </brick>
