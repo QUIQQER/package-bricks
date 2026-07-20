@@ -47,6 +47,21 @@ editing the corresponding files; their rules override legacy patterns found in o
 - Follow the package's existing `Bricks` or `Controls` namespace convention; both occur in QUIQQER.
 - Declare every reused package in `composer.json`. Do not assume an optional package is installed.
 
+## CSS Class Naming And BEM
+
+- Derive the control root class from vendor, package, namespace folders below the package namespace, and control name:
+  `vendor-package-folder-controlName`. For example, `QUI\Bricks\Controls\Image` in `quiqqer/bricks` uses
+  `quiqqer-bricks-controls-image`.
+- Set the root class through the PHP control's `class` attribute. Do not add a template wrapper only to carry the
+  control class; `QUI\Control::create()` already renders the outer element.
+- Use pragmatic BEM below that root: `root__element` for owned parts and `root--modifier` or `root__element--modifier`
+  for real variants. Keep compound element and modifier names in lower camel case, matching patterns such as
+  `quiqqer-bricks-layout__contentInner`.
+- Do not force shared framework classes such as `control-header`, `control-content`, state classes, or utility classes
+  into the control's BEM namespace.
+- Treat newer controls such as MultiLayout and `QUI\Bricks\Layout\Layout` as naming references. Do not copy legacy
+  short classes from older controls.
+
 ## Site And Project Context
 
 The bricks runtime normally sets the current `Site` object on the control before rendering it. Still use a
@@ -111,7 +126,7 @@ class FeatureGrid extends QUI\Control
     {
         $this->setAttributes([
             'nodeName' => 'section',
-            'class' => 'vendor-package-featureGrid',
+            'class' => 'vendor-package-bricks-featureGrid',
             'showTitle' => false,
             'gap' => 'normal'
         ]);
@@ -167,7 +182,7 @@ generic content only when the brick should support it. Do not add another outer 
     </div>
 {/if}
 
-<div class="control-template vendor-package-featureGrid__grid">
+<div class="control-template vendor-package-bricks-featureGrid__grid">
     {* Brick-specific output *}
 </div>
 ```
@@ -186,11 +201,11 @@ For every setting-backed style, implement all three layers from `quiqqer_fronten
 Bind these once to a short private variable on the control root, then use only the short variable:
 
 ```css
-.vendor-package-featureGrid {
+.vendor-package-bricks-featureGrid {
     --_gap: var(--vendor-package-featureGrid-gap, var(--_q-controlConf-gap, 1.5rem));
 }
 
-.vendor-package-featureGrid__grid {
+.vendor-package-bricks-featureGrid__grid {
     display: grid;
     gap: var(--_gap);
 }
@@ -389,6 +404,7 @@ needed for the task:
 ## Completion Checklist
 
 - Confirm the PSR-4 namespace, class path, `bricks.xml` control name, and declared package dependencies.
+- Confirm the PHP control owns the convention-based root class and its owned markup uses pragmatic BEM names.
 - Confirm XML defaults, PHP defaults, JavaScript defaults, and CSS fallbacks describe the same behavior.
 - Confirm every locale exists and is available to PHP or JavaScript where required.
 - Confirm scalar and structured settings are normalized in PHP, including invalid and legacy values.
