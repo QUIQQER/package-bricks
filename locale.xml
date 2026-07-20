@@ -2978,6 +2978,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Extra groß (sehr luftig)]]></de>
             <en><![CDATA[Extra large (very airy)]]></en>
         </locale>
+        <locale name="brick.multiLayout.gridGap.option.separate">
+            <de><![CDATA[Vertikal und horizontal getrennt]]></de>
+            <en><![CDATA[Separate vertical and horizontal spacing]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridRowGap">
+            <de><![CDATA[Vertikaler Abstand]]></de>
+            <en><![CDATA[Vertical spacing]]></en>
+        </locale>
+        <locale name="brick.multiLayout.gridColumnGap">
+            <de><![CDATA[Horizontaler Abstand]]></de>
+            <en><![CDATA[Horizontal spacing]]></en>
+        </locale>
         <locale name="brick.multiLayout.tileMinHeight">
             <de><![CDATA[Mindesthöhe der Kacheln]]></de>
             <en><![CDATA[Minimum height of tiles]]></en>

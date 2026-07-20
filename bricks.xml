@@ -2230,7 +2230,8 @@
                     </description>
                 </setting>
 
-                <setting name="gridGapPreset" type="select">
+                <setting name="gridGapPreset" type="select"
+                         data-qui="package/quiqqer/core/bin/QUI/controls/settings/Dependency">
                     <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap"/>
                     <description>
                         <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.desc"/>
@@ -2251,6 +2252,55 @@
                     <option value="extraLarge">
                         <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.extraLarge"/>
                     </option>
+                    <option value="separate">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.separate"/>
+                    </option>
+                </setting>
+
+                <setting name="gridRowGapPreset" type="select"
+                         data-dependency="gridGapPreset"
+                         data-dependency-options="separate">
+                    <locale group="quiqqer/bricks" var="brick.multiLayout.gridRowGap"/>
+
+                    <option value="none">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.none"/>
+                    </option>
+                    <option value="small">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.small"/>
+                    </option>
+                    <option value="normal">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.normal"/>
+                    </option>
+                    <option value="large">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.large"/>
+                    </option>
+                    <option value="extraLarge">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.extraLarge"/>
+                    </option>
+                    <defaultValue>normal</defaultValue>
+                </setting>
+
+                <setting name="gridColumnGapPreset" type="select"
+                         data-dependency="gridGapPreset"
+                         data-dependency-options="separate">
+                    <locale group="quiqqer/bricks" var="brick.multiLayout.gridColumnGap"/>
+
+                    <option value="none">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.none"/>
+                    </option>
+                    <option value="small">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.small"/>
+                    </option>
+                    <option value="normal">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.normal"/>
+                    </option>
+                    <option value="large">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.large"/>
+                    </option>
+                    <option value="extraLarge">
+                        <locale group="quiqqer/bricks" var="brick.multiLayout.gridGap.option.extraLarge"/>
+                    </option>
+                    <defaultValue>normal</defaultValue>
                 </setting>
 
                 <setting name="tileMinHeightPreset" type="select">
