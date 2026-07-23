@@ -1,2 +1,2 @@
 include:
-  - component: CI_SERVER_FQDN/quiqqer/stabilization/ci-cd-components/quiqqer-package-bundle/quiqqer-package-bundle@main
+  - component: $CI_SERVER_FQDN/quiqqer/stabilization/ci-cd-components/quiqqer-package-bundle/quiqqer-package-bundle@main
