@@ -15,7 +15,7 @@ QUI::getAjax()->registerFunction(
     function ($brickId, $options) {
         $options = json_decode($options, true);
         $Bricks = QUI\Bricks\Manager::init();
-        $Brick = $Bricks?->getBrickById($brickId);
+        $Brick = $Bricks?->getBrickByIdentifier($brickId);
 
         if (!$Brick) {
             return (new QUI\Utils\Grid())->parseResult([], 0);
