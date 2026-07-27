@@ -16,6 +16,7 @@ use QUI\ExceptionStack;
 use QUI\Projects\Project;
 use QUI\Projects\Site;
 use QUI\Utils\Text\XML;
+use Ramsey\Uuid\Uuid as RamseyUuid;
 
 use function array_filter;
 use function array_fill_keys;
@@ -28,6 +29,7 @@ use function array_unique;
 use function array_values;
 use function class_exists;
 use function count;
+use function ctype_digit;
 use function defined;
 use function explode;
 use function file_exists;
@@ -608,6 +610,26 @@ class Manager
         $this->bricks[$id] = $Brick;
 
         return $this->bricks[$id];
+    }
+
+    /**
+     * Get a Brick by its numeric ID or unique ID
+     *
+     * @throws QUI\Exception
+     */
+    public function getBrickByIdentifier(int | string $identifier): Brick
+    {
+        $identifier = (string)$identifier;
+
+        if (ctype_digit($identifier) && (int)$identifier > 0) {
+            return $this->getBrickById((int)$identifier);
+        }
+
+        if (RamseyUuid::isValid($identifier)) {
+            return $this->getBrickByUID($identifier);
+        }
+
+        throw new QUI\Exception('Invalid brick identifier');
     }
 
     /**

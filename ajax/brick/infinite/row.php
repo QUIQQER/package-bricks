@@ -18,9 +18,9 @@ QUI::getAjax()->registerFunction(
         $BrickManager = QUI\Bricks\Manager::init();
 
         if (!empty($brickUID)) {
-            $Brick = $BrickManager?->getBrickById($brickUID);
+            $Brick = $BrickManager?->getBrickByUID((string)$brickUID);
         } else {
-            $Brick = $BrickManager?->getBrickById($brickId);
+            $Brick = $BrickManager?->getBrickById((int)$brickId);
         }
 
         if (!$Brick) {

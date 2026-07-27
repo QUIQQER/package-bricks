@@ -45,7 +45,7 @@ class DatabaseAccessTest extends TestCase
         $this->Manager = new Manager(true);
         $suffix = bin2hex(random_bytes(8));
         $this->title = 'PHPUnit DBAL Needle ' . $suffix;
-        $this->uid = 'phpunit-bricks-' . $suffix;
+        $this->uid = QUI\Utils\Uuid::get();
 
         $Connection = QUI::getDataBaseConnection();
         $Connection->insert(QUI\Utils\Doctrine::quoteIdentifier(Manager::getTable()), [
@@ -121,6 +121,30 @@ class DatabaseAccessTest extends TestCase
         $recordIds = array_map(static fn (array $record): int => (int)$record['id'], $records);
 
         self::assertContains($this->brickId, $recordIds);
+    }
+
+    public function testManagerReadsBrickByNumericIdOrUuid(): void
+    {
+        self::assertSame(
+            $this->brickId,
+            $this->Manager->getBrickByIdentifier($this->brickId)->getAttribute('id')
+        );
+        self::assertSame(
+            $this->brickId,
+            $this->Manager->getBrickByIdentifier((string)$this->brickId)->getAttribute('id')
+        );
+        self::assertSame(
+            $this->brickId,
+            (int)$this->Manager->getBrickByIdentifier($this->uid)->getAttribute('id')
+        );
+    }
+
+    public function testManagerRejectsInvalidBrickIdentifier(): void
+    {
+        $this->expectException(QUI\Exception::class);
+        $this->expectExceptionMessage('Invalid brick identifier');
+
+        $this->Manager->getBrickByIdentifier('not-a-brick-identifier');
     }
 
     public function testBackendSearchUsesPortableCaseInsensitiveQueryAndLimit(): void
