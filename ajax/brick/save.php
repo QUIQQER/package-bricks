@@ -57,12 +57,7 @@ QUI::getAjax()->registerFunction(
         };
 
         $BrickManager = QUI\Bricks\Manager::init();
-        $data = json_decode($data, true);
-
-        $BrickManager?->saveBrick($brickId, $data);
-        $Brick = $BrickManager?->getBrickById($brickId);
-
-        if (!$Brick) {
+        if ($BrickManager === null) {
             return [
                 'attributes' => [],
                 'settings' => [],
@@ -70,6 +65,13 @@ QUI::getAjax()->registerFunction(
                 'availableSettings' => []
             ];
         }
+
+        $data = json_decode($data, true);
+        $Brick = $BrickManager->getBrickByIdentifier($brickId);
+        $brickId = (int)$Brick->getAttribute('id');
+
+        $BrickManager->saveBrick($brickId, $data);
+        $Brick = $BrickManager->getBrickById($brickId);
 
         $attributes = $Brick->getAttributes();
         $attributes['c_user_display'] = $formatUserDisplay($Brick->getAttribute('c_user'));
