@@ -3,9 +3,29 @@
 namespace QUITests\Bricks\Controls;
 
 use PHPUnit\Framework\TestCase;
+use QUI\Bricks\Controls\SimpleContact;
+use ReflectionMethod;
+use ReflectionNamedType;
+use ReflectionUnionType;
 
 class SimpleContactTest extends TestCase
 {
+    public function testPrivacyPolicySiteUsesConcreteSiteType(): void
+    {
+        $Method = new ReflectionMethod(SimpleContact::class, 'getPrivacyPolicySite');
+        $ReturnType = $Method->getReturnType();
+
+        $this->assertInstanceOf(ReflectionUnionType::class, $ReturnType);
+
+        $typeNames = array_map(
+            static fn(ReflectionNamedType $Type): string => $Type->getName(),
+            $ReturnType->getTypes()
+        );
+
+        $this->assertContains('false', $typeNames);
+        $this->assertContains('QUI\\Projects\\Site', $typeNames);
+    }
+
     public function testControlBehaviorSmoke(): void
     {
         $class = 'QUI\Bricks\Controls\SimpleContact';

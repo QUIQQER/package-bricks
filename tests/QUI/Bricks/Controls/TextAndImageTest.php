@@ -6,6 +6,56 @@ use PHPUnit\Framework\TestCase;
 
 class TextAndImageTest extends TestCase
 {
+    public function testImageLoadingSettingAndTemplateVariants(): void
+    {
+        $packageDir = dirname(__DIR__, 4);
+        $Document = new \DOMDocument();
+
+        $this->assertTrue($Document->load($packageDir . '/bricks.xml'));
+
+        $XPath = new \DOMXPath($Document);
+        $settings = $XPath->query(
+            '/quiqqer/bricks/brick[@control="\\QUI\\Bricks\\Controls\\TextAndImage"]' .
+            '/settings/setting[@name="imageLoading"]'
+        );
+
+        $this->assertNotFalse($settings);
+        $this->assertCount(1, $settings);
+        $this->assertSame('select', $settings->item(0)?->attributes?->getNamedItem('type')?->nodeValue);
+        $this->assertSame('lazy', $XPath->evaluate('string(defaultValue)', $settings->item(0)));
+        $this->assertSame(
+            ['lazy', 'eager'],
+            array_map(
+                static fn(\DOMNode $option): string => (string)$option->attributes?->getNamedItem('value')?->nodeValue,
+                iterator_to_array($XPath->query('option', $settings->item(0)) ?: [])
+            )
+        );
+
+        $template = file_get_contents(
+            $packageDir . '/src/QUI/Bricks/Controls/TextAndImage.html'
+        );
+
+        $this->assertIsString($template);
+        $this->assertStringContainsString("{if \$imageLoading == 'eager'}", $template);
+        $this->assertStringContainsString('loading="eager" fetchpriority="high"', $template);
+        $this->assertStringContainsString('loading="lazy"', $template);
+    }
+
+    public function testImageLoadingNormalization(): void
+    {
+        $Control = new class extends \QUI\Bricks\Controls\TextAndImage {
+            public function normalizeImageLoadingForTest(mixed $imageLoading): string
+            {
+                return $this->normalizeImageLoading($imageLoading);
+            }
+        };
+
+        $this->assertSame('lazy', $Control->normalizeImageLoadingForTest('lazy'));
+        $this->assertSame('eager', $Control->normalizeImageLoadingForTest('eager'));
+        $this->assertSame('lazy', $Control->normalizeImageLoadingForTest('invalid'));
+        $this->assertSame('lazy', $Control->normalizeImageLoadingForTest(null));
+    }
+
     public function testControlBehaviorSmoke(): void
     {
         $class = 'QUI\Bricks\Controls\TextAndImage';

@@ -2746,6 +2746,22 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Maximale Briete des Bildes]]></de>
             <en><![CDATA[Maximum image width]]></en>
         </locale>
+        <locale name="brick.textAndImage.imageLoading">
+            <de><![CDATA[Ladeverhalten des Bildes]]></de>
+            <en><![CDATA[Image loading behavior]]></en>
+        </locale>
+        <locale name="brick.textAndImage.imageLoading.desc">
+            <de><![CDATA[„Sofort“ nur für Hero- oder andere sichtbare Bilder am Seitenanfang verwenden.]]></de>
+            <en><![CDATA[Use “Eager” only for hero images or other images visible at the top of the page.]]></en>
+        </locale>
+        <locale name="brick.textAndImage.imageLoading.lazy">
+            <de><![CDATA[Verzögert (Lazy Loading)]]></de>
+            <en><![CDATA[Deferred (lazy loading)]]></en>
+        </locale>
+        <locale name="brick.textAndImage.imageLoading.eager">
+            <de><![CDATA[Sofort (hohe Priorität)]]></de>
+            <en><![CDATA[Eager (high priority)]]></en>
+        </locale>
         <locale name="brick.textAndImage.textPosition">
             <de><![CDATA[Text Position]]></de>
             <en><![CDATA[Text position]]></en>
