@@ -2013,6 +2013,25 @@
                     <locale group="quiqqer/bricks"
                             var="brick.textAndImage.maxImageWidth"/>
                 </setting>
+
+                <setting name="imageLoading" type="select">
+                    <locale group="quiqqer/bricks"
+                            var="brick.textAndImage.imageLoading"/>
+                    <description>
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.imageLoading.desc"/>
+                    </description>
+                    <option value="lazy">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.imageLoading.lazy"/>
+                    </option>
+                    <option value="eager">
+                        <locale group="quiqqer/bricks"
+                                var="brick.textAndImage.imageLoading.eager"/>
+                    </option>
+                    <defaultValue>lazy</defaultValue>
+                </setting>
+
                 <setting name="imageZoom" type="checkbox">
                     <locale group="quiqqer/bricks"
                             var="brick.textAndImage.imageZoom"/>

@@ -290,7 +290,7 @@ class SimpleContact extends QUI\Control
      *
      * @return QUI\Projects\Site|false
      */
-    protected function getPrivacyPolicySite(): bool | QUI\Projects\Site
+    protected function getPrivacyPolicySite(): false | QUI\Projects\Site
     {
         try {
             $Project = QUI::getRewrite()->getProject();
@@ -314,7 +314,13 @@ class SimpleContact extends QUI\Control
             return false;
         }
 
-        return current($result);
+        $PrivacyPolicySite = current($result);
+
+        if (!$PrivacyPolicySite instanceof QUI\Projects\Site) {
+            return false;
+        }
+
+        return $PrivacyPolicySite;
     }
 
     /**

@@ -13,6 +13,8 @@ use QUI;
  */
 class TextAndImage extends QUI\Control
 {
+    protected const IMAGE_LOADING_OPTIONS = ['lazy', 'eager'];
+
     /**
      * constructor
      *
@@ -27,6 +29,7 @@ class TextAndImage extends QUI\Control
             'imageRight' => false,
             'imageShadow' => false,
             'fullImageHeight' => false,
+            'imageLoading' => 'lazy',
             'textPosition' => 'top', // top, center, bottom
             'textImageRatio' => 50, // 30,35,40,45,50,55,60,65,70
             'imageZoom' => false
@@ -99,6 +102,9 @@ class TextAndImage extends QUI\Control
             'imageOnLeft' => $this->getAttribute('imageOnLeft'),
             'imageShadow' => $shadow,
             'fullImageHeight' => $fullImageHeight,
+            'imageLoading' => $this->normalizeImageLoading(
+                $this->getAttribute('imageLoading')
+            ),
             'imageAsBackground' => $this->getAttribute('imageAsBackground'),
             'textPosition' => $textPosition,
             'textWidthClass' => $textWidthClass,
@@ -107,5 +113,14 @@ class TextAndImage extends QUI\Control
         ]);
 
         return $Engine->fetch(dirname(__FILE__) . '/TextAndImage.html');
+    }
+
+    protected function normalizeImageLoading(mixed $imageLoading): string
+    {
+        if (!is_string($imageLoading) || !in_array($imageLoading, self::IMAGE_LOADING_OPTIONS, true)) {
+            return 'lazy';
+        }
+
+        return $imageLoading;
     }
 }
