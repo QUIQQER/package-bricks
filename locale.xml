@@ -4162,6 +4162,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Popup Höhe (px)]]></de>
             <en><![CDATA[Popup height (px)]]></en>
         </locale>
+        <locale name="quiqqer.bricks.buttons.settings.createPopup.openBrick.spacing">
+            <de><![CDATA[Abstand im Popup]]></de>
+            <en><![CDATA[Popup spacing]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.buttons.settings.createPopup.openBrick.spacingDesc">
+            <de><![CDATA[Standardmäßig aktiv. Deaktivieren, wenn der Baustein den Innenabstand des Popups selbst gestaltet (z. B. randlose Inhalte).]]></de>
+            <en><![CDATA[Enabled by default. Disable it when the brick handles the popup's inner spacing itself (for example edge-to-edge content).]]></en>
+        </locale>
         <locale name="quiqqer.bricks.buttons.settings.createPopup.href">
             <de><![CDATA[Link]]></de>
             <en><![CDATA[Link]]></en>

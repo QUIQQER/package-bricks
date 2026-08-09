@@ -105,6 +105,7 @@
                                class="quiqqer-bricks-buttons-settings-entry-openBrickId"
                                readonly
                                placeholder="ID"
+                               data-qui="package/quiqqer/core/bin/QUI/controls/settings/Dependency"
                             />
                             <button type="button" name="selectBrick" class="btn btn-light">
                                 {{fieldOpenBrickSelect}} <i class="fa-solid fa-cubes"></i>
@@ -132,6 +133,8 @@
                            type="number"
                            min="1"
                            step="1"
+                           data-dependency="openBrickId"
+                           data-dependency-options="*"
                     />
                 </label>
             </td>
@@ -145,8 +148,26 @@
                            type="number"
                            min="1"
                            step="1"
+                           data-dependency="openBrickId"
+                           data-dependency-options="*"
                     />
                 </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">{{fieldOpenBrickSpacing}}</span>
+                    <span class="field-container-field"
+                          data-dependency="openBrickId"
+                          data-dependency-options="*"
+                    >
+                        <input type="checkbox" name="openBrickSpacing" checked/>
+                    </span>
+                </label>
+                <div class="field-container-item-desc">
+                    {{fieldOpenBrickSpacingDesc}}
+                </div>
             </td>
         </tr>
         <tr>
@@ -160,7 +181,7 @@
                 </label>
             </td>
         </tr>
-        <tr>
+        <tr data-name="row-targetBlank">
             <td>
                 <label class="field-container">
                     <span class="field-container-item">{{fieldTargetBlank}}</span>

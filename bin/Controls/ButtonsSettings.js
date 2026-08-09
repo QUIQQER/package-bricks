@@ -188,6 +188,9 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                         dataIndex: 'openBrickWinHeight',
                         hidden: true
                     }, {
+                        dataIndex: 'openBrickSpacing',
+                        hidden: true
+                    }, {
                         dataIndex: 'targetBlank',
                         hidden: true
                     }, {
@@ -341,6 +344,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                 insert.openBrickTitle = this.$normalizeBrickTitle(entry.openBrickTitle);
                 insert.openBrickWinWidth = this.$normalizePopupDimension(entry.openBrickWinWidth);
                 insert.openBrickWinHeight = this.$normalizePopupDimension(entry.openBrickWinHeight);
+                insert.openBrickSpacing = this.$normalizeOpenBrickSpacing(entry.openBrickSpacing);
 
                 insert.isDisabledDisplay = new QUISwitch({
                     status: insert.isDisabled,
@@ -507,6 +511,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                         openBrickTitle: Form.elements.openBrickTitle.value,
                         openBrickWinWidth: Form.elements.openBrickWinWidth.value,
                         openBrickWinHeight: Form.elements.openBrickWinHeight.value,
+                        openBrickSpacing: Form.elements.openBrickSpacing.checked ? 1 : 0,
                         href: Form.elements.href.value,
                         targetBlank: Dialog.TargetBlankSwitch.getStatus(),
                         title: Form.elements.title.value,
@@ -565,8 +570,13 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                         Dialog.FullWidthSwitch.off();
                     }
 
+                    Form.elements.openBrickSpacing.checked =
+                        this.$normalizeOpenBrickSpacing(data.openBrickSpacing) === 1;
+
                     Form.elements.href.fireEvent('change');
                     Form.elements.iconClass.fireEvent('change');
+                    Form.elements.href.dispatchEvent(new Event('change'));
+                    Form.elements.openBrickId.dispatchEvent(new Event('change'));
                 }.bind(this));
 
                 Dialog.setAttribute('title', QUILocale.get(lg, 'quiqqer.bricks.entires.editdialog.title'));
@@ -592,6 +602,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                         openBrickTitle: Form.elements.openBrickTitle.value,
                         openBrickWinWidth: Form.elements.openBrickWinWidth.value,
                         openBrickWinHeight: Form.elements.openBrickWinHeight.value,
+                        openBrickSpacing: Form.elements.openBrickSpacing.checked ? 1 : 0,
                         href: Form.elements.href.value,
                         targetBlank: Dialog.TargetBlankSwitch.getStatus(),
                         title: Form.elements.title.value,
@@ -651,6 +662,8 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                                     fieldOpenBrickClear: QUILocale.get(lg, prefix + 'openBrick.clear'),
                                     fieldOpenBrickWinWidth: QUILocale.get(lg, prefix + 'openBrick.winWidth'),
                                     fieldOpenBrickWinHeight: QUILocale.get(lg, prefix + 'openBrick.winHeight'),
+                                    fieldOpenBrickSpacing: QUILocale.get(lg, prefix + 'openBrick.spacing'),
+                                    fieldOpenBrickSpacingDesc: QUILocale.get(lg, prefix + 'openBrick.spacingDesc'),
                                     fieldHref: QUILocale.get(lg, prefix + 'href'),
                                     fieldTargetBlank: QUILocale.get(lg, prefix + 'targetBlank'),
                                     fieldTitle: QUILocale.get(lg, prefix + 'title'),
@@ -700,7 +713,19 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                                     Form.elements.openBrickId.value = '';
                                     Form.elements.openBrickTitle.value = '';
                                     this.$setOpenBrickTitleDisplay(Form, '');
+                                    Form.elements.openBrickId.dispatchEvent(new Event('change'));
                                 }.bind(this));
+
+                                const TargetBlankRow = Container.querySelector('[data-name="row-targetBlank"]');
+
+                                const updateTargetBlankRow = function () {
+                                    const hasHref = Form.elements.href.value.trim() !== '';
+                                    TargetBlankRow.style.display = hasHref ? '' : 'none';
+                                };
+
+                                Form.elements.href.addEventListener('change', updateTargetBlankRow);
+                                Form.elements.href.addEventListener('input', updateTargetBlankRow);
+                                updateTargetBlankRow();
 
                                 this.$setOpenBrickTitleDisplay(
                                     Form,
@@ -753,6 +778,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                 openBrickTitle: this.$normalizeBrickTitle(entry.openBrickTitle),
                 openBrickWinWidth: this.$normalizePopupDimension(entry.openBrickWinWidth),
                 openBrickWinHeight: this.$normalizePopupDimension(entry.openBrickWinHeight),
+                openBrickSpacing: this.$normalizeOpenBrickSpacing(entry.openBrickSpacing),
                 href: entry.href || '',
                 targetBlank: this.$normalizeFlag(entry.targetBlank),
                 title: entry.title || '',
@@ -925,6 +951,15 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
             return '';
         },
 
+        $normalizeOpenBrickSpacing: function (value) {
+            // default enabled; only an explicit off value disables the spacing
+            if (value === 0 || value === '0' || value === false) {
+                return 0;
+            }
+
+            return 1;
+        },
+
         $setOpenBrickTitleDisplay: function (Form, title) {
             const displayElm = Form.getElement('[data-name="openBrickTitleDisplay"]');
 
@@ -967,6 +1002,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                             Form.elements.openBrickId.value = self.$normalizeBrickId(bricks[0].id);
                             Form.elements.openBrickTitle.value = self.$normalizeBrickTitle(bricks[0].title);
                             self.$setOpenBrickTitleDisplay(Form, Form.elements.openBrickTitle.value);
+                            Form.elements.openBrickId.dispatchEvent(new Event('change'));
                         }
                     }
                 }).open();
