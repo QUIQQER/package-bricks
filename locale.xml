@@ -4012,6 +4012,31 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
     <li><strong>Hide entry</strong>: the button is not rendered at all.</li>
 </ul>]]></en>
         </locale>
+        <!-- Button (single) -->
+        <locale name="brick.button.title">
+            <de><![CDATA[Button]]></de>
+            <en><![CDATA[Button]]></en>
+        </locale>
+        <locale name="brick.button.description">
+            <de><![CDATA[<p>Ein einzelner Button, den du komplett über die Einstellungen gestaltest und verlinkst. Anders als beim Brick "Buttons" werden Darstellung und Größe pro Button festgelegt.</p>
+
+<p><strong>Konfigurierbar</strong></p>
+<ul>
+    <li><strong>Darstellung</strong>: Button, nur Icon oder nur Icon (rund).</li>
+    <li><strong>Text und Icon</strong>: Beschriftung, optionales Symbol und dessen Position.</li>
+    <li><strong>Design und Größe</strong>: z. B. primär/sekundär sowie Standard, klein oder groß.</li>
+    <li><strong>Ziel</strong>: interne Seite bzw. externer Link – oder einen Baustein in einem Popup öffnen.</li>
+</ul>]]></de>
+            <en><![CDATA[<p>A single button that you fully style and link through its settings. Unlike the "Buttons" brick, display mode and size are set per button.</p>
+
+<p><strong>Configurable</strong></p>
+<ul>
+    <li><strong>Display mode</strong>: button, icon only or icon only (rounded).</li>
+    <li><strong>Text and icon</strong>: label, optional symbol and its position.</li>
+    <li><strong>Style and size</strong>: e.g. primary/secondary as well as default, small or large.</li>
+    <li><strong>Target</strong>: internal page or external link – or open a brick in a popup.</li>
+</ul>]]></en>
+        </locale>
         <locale name="brick.buttons.settings.displayMode">
             <de><![CDATA[Darstellung]]></de>
             <en><![CDATA[Display mode]]></en>
