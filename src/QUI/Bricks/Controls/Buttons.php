@@ -7,6 +7,7 @@
 namespace QUI\Bricks\Controls;
 
 use QUI;
+use QUI\Bricks\Utils;
 use QUI\Components\Controls\Button;
 
 /**
@@ -63,6 +64,7 @@ class Buttons extends QUI\Control
 
             $button['iconType'] = $button['iconType'] ?? 'fa';
             $button['size'] = !empty($button['size']) ? $button['size'] : $defaultSize;
+            $button['dataAttributes'] = Utils::dataAttributesFromEntries($button['dataAttributes'] ?? []);
 
             $Button = new Button(array_merge($button, [
                 'displayMode' => $displayMode,

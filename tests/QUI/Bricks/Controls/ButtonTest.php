@@ -25,6 +25,23 @@ class ButtonTest extends TestCase
         $this->assertStringNotContainsString('<strong>', $html);
     }
 
+    public function testDataAttributesFromEditorAreRenderedWithSinglePrefix(): void
+    {
+        $html = (new Button([
+            'text' => 'Track',
+            'dataAttributes' => json_encode([
+                ['name' => 'data-track-id', 'value' => '42'],
+                ['name' => 'data-label', 'value' => 'primary'],
+                ['name' => 'plain', 'value' => 'ignored'],
+            ]),
+        ]))->create();
+
+        $this->assertStringContainsString('data-track-id="42"', $html);
+        $this->assertStringContainsString('data-label="primary"', $html);
+        $this->assertStringNotContainsString('data-data-', $html);
+        $this->assertStringNotContainsString('ignored', $html);
+    }
+
     public function testDisplayModeIsAppliedPerButton(): void
     {
         $html = (new Button([
@@ -108,5 +125,11 @@ class ButtonTest extends TestCase
         );
 
         $this->assertCount(1, $XPath->query($base . '/settings/setting[@name="size"]') ?: []);
+
+        $dataAttributes = $XPath->query($base . '/settings/setting[@name="dataAttributes"]')?->item(0);
+        $this->assertSame(
+            'package/quiqqer/components/bin/Controls/DataAttributes',
+            $dataAttributes?->attributes?->getNamedItem('data-qui')?->nodeValue
+        );
     }
 }

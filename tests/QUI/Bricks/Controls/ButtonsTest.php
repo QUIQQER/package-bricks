@@ -30,6 +30,26 @@ class ButtonsTest extends TestCase
         $this->assertCount(1, $forwarded);
     }
 
+    public function testDataAttributesPerEntryAreRenderedOnEachButton(): void
+    {
+        $html = (new Buttons([
+            'buttons' => [
+                [
+                    'text' => 'Track',
+                    'dataAttributes' => [
+                        ['name' => 'data-track-id', 'value' => '42'],
+                        ['name' => 'plain', 'value' => 'ignored'],
+                    ],
+                ],
+                ['text' => 'Plain'],
+            ],
+        ]))->create();
+
+        $this->assertStringContainsString('data-track-id="42"', $html);
+        $this->assertStringNotContainsString('data-data-', $html);
+        $this->assertStringNotContainsString('ignored', $html);
+    }
+
     public function testNoButtonCssIsForwardedWithoutEntries(): void
     {
         $Brick = new Buttons(['buttons' => []]);

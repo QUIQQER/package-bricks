@@ -15,8 +15,14 @@ use QUI\Projects\Project;
 use QUI\Utils\Text\XML;
 
 use function file_exists;
+use function is_array;
+use function is_string;
+use function json_decode;
 use function md5;
 use function realpath;
+use function str_starts_with;
+use function strtolower;
+use function substr;
 use function trim;
 
 use const OPT_DIR;
@@ -482,5 +488,53 @@ class Utils
         QUI\Cache\Manager::set($cache, $attributes);
 
         return $attributes;
+    }
+
+    /**
+     * Convert the data-* attribute editor entries into the associative
+     * name/value map that QUI\Components\Controls\Button expects.
+     *
+     * The editor (package/quiqqer/components/bin/Controls/DataAttributes)
+     * stores a list of entries carrying the full attribute name, e.g.
+     * [['name' => 'data-foo', 'value' => 'bar'], ...]. The button component
+     * wants a map without the data- prefix (it prepends the prefix again on
+     * output), so the prefix is stripped here.
+     *
+     * @param mixed $entries Stored editor entries (list or JSON string)
+     * @return array<string, string> Associative data attribute map without prefix
+     */
+    public static function dataAttributesFromEntries(mixed $entries): array
+    {
+        if (is_string($entries)) {
+            $entries = json_decode($entries, true);
+        }
+
+        if (!is_array($entries)) {
+            return [];
+        }
+
+        $normalized = [];
+
+        foreach ($entries as $entry) {
+            if (!is_array($entry)) {
+                continue;
+            }
+
+            $name = strtolower(trim((string)($entry['name'] ?? '')));
+
+            if (!str_starts_with($name, 'data-')) {
+                continue;
+            }
+
+            $name = substr($name, 5);
+
+            if ($name === '') {
+                continue;
+            }
+
+            $normalized[$name] = (string)($entry['value'] ?? '');
+        }
+
+        return $normalized;
     }
 }

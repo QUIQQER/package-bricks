@@ -2596,6 +2596,16 @@
                         <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.identifierDesc"/>
                     </description>
                 </setting>
+
+                <setting name="dataAttributes" type="hidden"
+                         data-qui="package/quiqqer/components/bin/Controls/DataAttributes"
+                         data-qui-options-reserved="data-open-brick-id,data-win-width,data-win-height,data-win-spacing"
+                >
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.dataAttributes"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.dataAttributesDesc"/>
+                    </description>
+                </setting>
             </settings>
         </brick>
 

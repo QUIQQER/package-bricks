@@ -4119,6 +4119,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Wird im Frontend als <code>data-identifier</code> ausgegeben und kann z. B. für Matomo-Tracking verwendet werden. <br>Beispiel: <code>data-identifier="MEIN_WERT"</code>]]></de>
             <en><![CDATA[Rendered in the frontend as <code>data-identifier</code> and can be used, for example, for Matomo tracking. <br>Example: <code>data-identifier="MY_VALUE"</code>]]></en>
         </locale>
+        <locale name="quiqqer.bricks.buttons.settings.createPopup.dataAttributes">
+            <de><![CDATA[Zusätzliche Button-Attribute]]></de>
+            <en><![CDATA[Additional button attributes]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.buttons.settings.createPopup.dataAttributesDesc">
+            <de><![CDATA[Zusätzliche data-*-Attribute für den Button, z. B. für Tracking. Das Präfix data- wird automatisch ergänzt, Leerzeichen werden zu Bindestrichen. Reservierte Namen wie data-qui, data-name und data-identifier werden ignoriert.]]></de>
+            <en><![CDATA[Additional data-* attributes for the button, for example for tracking. The data- prefix is added automatically and spaces become hyphens. Reserved names such as data-qui, data-name and data-identifier are ignored.]]></en>
+        </locale>
         <locale name="quiqqer.bricks.buttons.settings.createPopup.iconClass">
             <de><![CDATA[FontAwesome Icon-Klasse]]></de>
             <en><![CDATA[FontAwesome icon class]]></en>

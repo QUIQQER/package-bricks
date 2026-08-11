@@ -217,6 +217,9 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                     }, {
                         dataIndex: 'customClass',
                         hidden: true
+                    }, {
+                        dataIndex: 'dataAttributes',
+                        hidden: true
                     }
                 ]
             });
@@ -333,7 +336,8 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                     title: entry.title || '',
                     ariaLabel: entry.ariaLabel || '',
                     onClick: entry.onClick || '',
-                    customClass: entry.customClass || ''
+                    customClass: entry.customClass || '',
+                    dataAttributes: JSON.stringify(this.$normalizeDataAttributes(entry.dataAttributes))
                 };
 
                 insert.isDisabled = this.$normalizeFlag(entry.isDisabled);
@@ -499,6 +503,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                     Dialog.Loader.show();
 
                     const Form = Dialog.getContent().getElement('form');
+                    const DataAttributes = this.$getDataAttributesControl(Dialog.getContent());
 
                     this.edit(index, {
                         text: Form.elements.text.value,
@@ -520,6 +525,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                         fullWidth: Dialog.FullWidthSwitch.getStatus(),
                         onClick: Form.elements.onClick.value,
                         customClass: Form.elements.customClass.value,
+                        dataAttributes: DataAttributes ? DataAttributes.getValue() : [],
                         isDisabled: Dialog.IsDisabledSwitch.getStatus()
                     });
 
@@ -545,6 +551,12 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                     Form.elements.ariaLabel.value = data.ariaLabel || '';
                     Form.elements.onClick.value = data.onClick || '';
                     Form.elements.customClass.value = data.customClass || '';
+
+                    const DataAttributes = this.$getDataAttributesControl(Dialog.getContent());
+
+                    if (DataAttributes) {
+                        DataAttributes.setValue(data.dataAttributes || []);
+                    }
 
                     if (this.$normalizeFlag(data.isDisabled)) {
                         Dialog.IsDisabledSwitch.on();
@@ -590,6 +602,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                     Dialog.Loader.show();
 
                     const Form = Dialog.getContent().getElement('form');
+                    const DataAttributes = this.$getDataAttributesControl(Dialog.getContent());
 
                     this.add({
                         text: Form.elements.text.value,
@@ -611,6 +624,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                         fullWidth: Dialog.FullWidthSwitch.getStatus(),
                         onClick: Form.elements.onClick.value,
                         customClass: Form.elements.customClass.value,
+                        dataAttributes: DataAttributes ? DataAttributes.getValue() : [],
                         isDisabled: Dialog.IsDisabledSwitch.getStatus()
                     });
 
@@ -671,7 +685,9 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                                     fieldDisabled: QUILocale.get(lg, prefix + 'disabled'),
                                     fieldFullWidth: QUILocale.get(lg, prefix + 'fullWidth'),
                                     fieldOnClick: QUILocale.get(lg, prefix + 'onClick'),
-                                    fieldCustomClass: QUILocale.get(lg, prefix + 'customClass')
+                                    fieldCustomClass: QUILocale.get(lg, prefix + 'customClass'),
+                                    fieldDataAttributes: QUILocale.get(lg, prefix + 'dataAttributes'),
+                                    fieldDataAttributesDesc: QUILocale.get(lg, prefix + 'dataAttributesDesc')
                                 }),
                                 'class': 'quiqqer-bricks-buttons-settings-entry'
                             }).inject(Win.getContent());
@@ -787,8 +803,56 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                 fullWidth: this.$normalizeFlag(entry.fullWidth),
                 onClick: entry.onClick || '',
                 customClass: entry.customClass || '',
+                dataAttributes: this.$normalizeDataAttributes(entry.dataAttributes),
                 isDisabled: this.$normalizeFlag(entry.isDisabled)
             };
+        },
+
+        $normalizeDataAttributes: function (attributes) {
+            if (typeof attributes === 'string') {
+                try {
+                    attributes = JSON.parse(attributes);
+                } catch (e) {
+                    attributes = [];
+                }
+            }
+
+            if (!Array.isArray(attributes)) {
+                return [];
+            }
+
+            const result = [];
+
+            attributes.forEach(function (attribute) {
+                if (!attribute || typeof attribute !== 'object') {
+                    return;
+                }
+
+                const name = (attribute.name || '').toString().trim();
+
+                if (name === '') {
+                    return;
+                }
+
+                result.push({
+                    name: name,
+                    value: (attribute.value || '').toString()
+                });
+            });
+
+            return result;
+        },
+
+        $getDataAttributesControl: function (scope) {
+            if (!scope) {
+                return null;
+            }
+
+            const controls = QUI.Controls.getControlsInElement(scope);
+
+            return controls.filter(function (Control) {
+                return Control.getType() === 'package/quiqqer/components/bin/Controls/DataAttributes';
+            })[0] || null;
         },
 
         $createPreviewNode: function (entry) {

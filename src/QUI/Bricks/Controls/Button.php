@@ -7,6 +7,7 @@
 namespace QUI\Bricks\Controls;
 
 use QUI;
+use QUI\Bricks\Utils;
 use QUI\Components\Controls\Button as ButtonComponent;
 
 use function trim;
@@ -48,6 +49,7 @@ class Button extends QUI\Control
             'disabled' => false,
             'fullWidth' => false,
             'onClick' => '',
+            'dataAttributes' => [],
         ]);
 
         parent::__construct($attributes);
@@ -99,6 +101,7 @@ class Button extends QUI\Control
             'disabled' => $this->getAttribute('disabled'),
             'fullWidth' => $this->getAttribute('fullWidth'),
             'onClick' => $this->getAttribute('onClick'),
+            'dataAttributes' => Utils::dataAttributesFromEntries($this->getAttribute('dataAttributes')),
         ]);
     }
 }
