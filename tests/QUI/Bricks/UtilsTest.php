@@ -139,4 +139,27 @@ XML
         $this->assertSame(1, $parsed['cacheable']);
         $this->assertSame(0, $parsed['deprecated']);
     }
+
+    public function testDataAttributesFromEntriesStripsPrefixAndSkipsInvalid(): void
+    {
+        $result = Utils::dataAttributesFromEntries([
+            ['name' => 'data-track-id', 'value' => '42'],
+            ['name' => 'DATA-Label', 'value' => 'primary'],
+            ['name' => 'plain', 'value' => 'ignored'],
+            ['name' => 'data-', 'value' => 'empty-suffix'],
+            'not-an-array',
+        ]);
+
+        $this->assertSame(['track-id' => '42', 'label' => 'primary'], $result);
+    }
+
+    public function testDataAttributesFromEntriesAcceptsJsonStringAndNonArray(): void
+    {
+        $this->assertSame(
+            ['x' => '1'],
+            Utils::dataAttributesFromEntries('[{"name":"data-x","value":"1"}]')
+        );
+        $this->assertSame([], Utils::dataAttributesFromEntries('not json'));
+        $this->assertSame([], Utils::dataAttributesFromEntries(null));
+    }
 }
