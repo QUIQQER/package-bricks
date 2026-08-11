@@ -466,8 +466,8 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
         $openDeleteDialog: function () {
             new QUIConfirm({
                 icon: 'fa fa-icon',
-                text: QUILocale.get(lg, 'quiqqer.bricks.entires.delete.text'),
-                information: QUILocale.get(lg, 'quiqqer.bricks.entires.delete.information'),
+                text: QUILocale.get(lg, 'quiqqer.bricks.buttons.delete.text'),
+                information: QUILocale.get(lg, 'quiqqer.bricks.buttons.delete.information'),
                 texticon: false,
                 maxWidth: 600,
                 maxHeight: 400,
@@ -591,7 +591,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                     Form.elements.openBrickId.dispatchEvent(new Event('change'));
                 }.bind(this));
 
-                Dialog.setAttribute('title', QUILocale.get(lg, 'quiqqer.bricks.entires.editdialog.title'));
+                Dialog.setAttribute('title', QUILocale.get(lg, 'quiqqer.bricks.buttons.editdialog.title'));
                 Dialog.open();
             }.bind(this));
         },
@@ -638,7 +638,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
         $createDialog: function () {
             return new Promise(function (resolve) {
                 const Dialog = new QUIConfirm({
-                    title: QUILocale.get(lg, 'quiqqer.bricks.entires.adddialog.title'),
+                    title: QUILocale.get(lg, 'quiqqer.bricks.buttons.adddialog.title'),
                     icon: 'fa fa-edit',
                     maxWidth: 800,
                     maxHeight: 800,
@@ -736,11 +736,14 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
 
                                 const updateTargetBlankRow = function () {
                                     const hasHref = Form.elements.href.value.trim() !== '';
-                                    TargetBlankRow.style.display = hasHref ? '' : 'none';
+                                    const brickId = parseInt(Form.elements.openBrickId.value, 10);
+                                    const hasBrick = !isNaN(brickId) && brickId > 0;
+                                    TargetBlankRow.style.display = (hasHref && !hasBrick) ? '' : 'none';
                                 };
 
                                 Form.elements.href.addEventListener('change', updateTargetBlankRow);
                                 Form.elements.href.addEventListener('input', updateTargetBlankRow);
+                                Form.elements.openBrickId.addEventListener('change', updateTargetBlankRow);
                                 updateTargetBlankRow();
 
                                 this.$setOpenBrickTitleDisplay(

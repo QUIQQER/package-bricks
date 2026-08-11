@@ -4297,6 +4297,22 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Der Eintrag kann nicht wiederhergestellt werden]]></de>
             <en><![CDATA[The entries can not be restored]]></en>
         </locale>
+        <locale name="quiqqer.bricks.buttons.adddialog.title">
+            <de><![CDATA[Button hinzufügen]]></de>
+            <en><![CDATA[Add Button]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.buttons.editdialog.title">
+            <de><![CDATA[Button bearbeiten]]></de>
+            <en><![CDATA[Edit Button]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.buttons.delete.text">
+            <de><![CDATA[Möchten Sie diesen Button wirklich entfernen?]]></de>
+            <en><![CDATA[Do you really want to remove this button?]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.buttons.delete.information">
+            <de><![CDATA[Der Button kann nicht wiederhergestellt werden]]></de>
+            <en><![CDATA[The button can not be restored]]></en>
+        </locale>
 
         <!-- Accordion -->
         <locale name="brick.accordion.title">

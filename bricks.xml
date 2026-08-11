@@ -2570,7 +2570,10 @@
                     <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.href"/>
                 </setting>
 
-                <setting name="targetBlank" type="checkbox">
+                <setting name="targetBlank" type="checkbox"
+                         data-dependency="openBrickId"
+                         data-dependency-options="!*"
+                >
                     <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.targetBlank"/>
                 </setting>
 
