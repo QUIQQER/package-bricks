@@ -2430,6 +2430,188 @@
             </settings>
         </brick>
 
+        <!-- Button (single) -->
+        <brick control="\QUI\Bricks\Controls\Button" hasContent="0">
+            <title>
+                <locale group="quiqqer/bricks" var="brick.button.title"/>
+            </title>
+            <description>
+                <locale group="quiqqer/bricks" var="brick.button.description"/>
+            </description>
+            <mockups>
+                <mockup src="/packages/quiqqer/bricks/bin/images/mockups/button-mockup-900x600.png" type="preview"/>
+                <mockup src="/packages/quiqqer/bricks/bin/images/mockups/button-thumbnail-100x80.png" type="thumbnail"/>
+            </mockups>
+
+            <settings>
+                <setting name="displayMode" type="select">
+                    <locale group="quiqqer/bricks" var="brick.buttons.settings.displayMode"/>
+
+                    <option value="button" default="1">
+                        <locale group="quiqqer/bricks" var="brick.buttons.settings.displayMode.button"/>
+                    </option>
+                    <option value="icon-only">
+                        <locale group="quiqqer/bricks" var="brick.buttons.settings.displayMode.iconOnly"/>
+                    </option>
+                    <option value="icon-only-rounded">
+                        <locale group="quiqqer/bricks" var="brick.buttons.settings.displayMode.iconOnlyRounded"/>
+                    </option>
+                </setting>
+
+                <setting name="text" type="text">
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.text"/>
+                </setting>
+
+                <setting name="iconClass" type="text"
+                         data-qui="controls/projects/project/media/Input"
+                         data-qui-options-cssclasses="1"
+                         data-qui-options-mediabutton="0"
+                >
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.iconClass"/>
+                </setting>
+
+                <setting name="iconPosition" type="select">
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.iconPosition"/>
+
+                    <option value="start" default="1">
+                        <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.iconPosition.start"/>
+                    </option>
+                    <option value="end">
+                        <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.iconPosition.end"/>
+                    </option>
+                </setting>
+
+                <setting name="btnType" type="select">
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.btnType"/>
+
+                    <option value="primary" default="1">primary</option>
+                    <option value="primary-outline">primary-outline</option>
+                    <option value="secondary">secondary</option>
+                    <option value="secondary-outline">secondary-outline</option>
+                    <option value="success">success</option>
+                    <option value="success-outline">success-outline</option>
+                    <option value="danger">danger</option>
+                    <option value="danger-outline">danger-outline</option>
+                    <option value="warning">warning</option>
+                    <option value="warning-outline">warning-outline</option>
+                    <option value="info">info</option>
+                    <option value="info-outline">info-outline</option>
+                    <option value="dark">dark</option>
+                    <option value="dark-outline">dark-outline</option>
+                    <option value="light">light</option>
+                    <option value="light-outline">light-outline</option>
+                    <option value="white">white</option>
+                    <option value="white-outline">white-outline</option>
+                    <option value="link">link</option>
+                    <option value="link-body">link-body</option>
+                </setting>
+
+                <setting name="size" type="select">
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.size"/>
+
+                    <option value="default" default="1">
+                        <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.size.default"/>
+                    </option>
+                    <option value="sm">
+                        <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.size.small"/>
+                    </option>
+                    <option value="lg">
+                        <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.size.large"/>
+                    </option>
+                </setting>
+
+                <setting name="customClass" type="text">
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.customClass"/>
+                </setting>
+
+                <setting name="fullWidth" type="checkbox">
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.fullWidth"/>
+                </setting>
+
+                <setting name="openBrickId" type="hidden"
+                         data-qui="package/quiqqer/bricks/bin/Controls/backend/BrickIdInput"
+                >
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.openBrick"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.openBrick.desc"/>
+                    </description>
+                </setting>
+
+                <setting name="openBrickWinWidth" type="number"
+                         data-dependency="openBrickId"
+                         data-dependency-options="*"
+                >
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.openBrick.winWidth"/>
+                </setting>
+
+                <setting name="openBrickWinHeight" type="number"
+                         data-dependency="openBrickId"
+                         data-dependency-options="*"
+                >
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.openBrick.winHeight"/>
+                </setting>
+
+                <setting name="openBrickSpacing" type="checkbox"
+                         data-dependency="openBrickId"
+                         data-dependency-options="*"
+                >
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.openBrick.spacing"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.openBrick.spacingDesc"/>
+                    </description>
+                </setting>
+
+                <setting name="href" type="text"
+                         data-qui="controls/projects/project/site/Input"
+                         data-external="1"
+                         data-dependency="openBrickId"
+                         data-dependency-options="!*"
+                >
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.href"/>
+                </setting>
+
+                <setting name="targetBlank" type="checkbox"
+                         data-dependency="openBrickId"
+                         data-dependency-options="!*"
+                >
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.targetBlank"/>
+                </setting>
+
+                <setting name="title" type="text">
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.title"/>
+                </setting>
+
+                <setting name="ariaLabel" type="text">
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.ariaLabel"/>
+                </setting>
+
+                <setting name="disabled" type="checkbox">
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.disabled"/>
+                </setting>
+
+                <setting name="onClick" type="text">
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.onClick"/>
+                </setting>
+
+                <setting name="identifier" type="text">
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.identifier"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.identifierDesc"/>
+                    </description>
+                </setting>
+
+                <setting name="dataAttributes" type="hidden"
+                         data-qui="package/quiqqer/components/bin/Controls/DataAttributes"
+                         data-qui-options-reserved="data-open-brick-id,data-win-width,data-win-height,data-win-spacing"
+                >
+                    <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.dataAttributes"/>
+                    <description>
+                        <locale group="quiqqer/bricks" var="quiqqer.bricks.buttons.settings.createPopup.dataAttributesDesc"/>
+                    </description>
+                </setting>
+            </settings>
+        </brick>
+
         <!-- Accordion -->
         <brick control="\QUI\Bricks\Controls\Accordion" recommended="1">
             <title>

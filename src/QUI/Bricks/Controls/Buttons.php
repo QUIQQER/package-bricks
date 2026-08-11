@@ -7,6 +7,7 @@
 namespace QUI\Bricks\Controls;
 
 use QUI;
+use QUI\Bricks\Utils;
 use QUI\Components\Controls\Button;
 
 /**
@@ -63,12 +64,20 @@ class Buttons extends QUI\Control
 
             $button['iconType'] = $button['iconType'] ?? 'fa';
             $button['size'] = !empty($button['size']) ? $button['size'] : $defaultSize;
+            $button['dataAttributes'] = Utils::dataAttributesFromEntries($button['dataAttributes'] ?? []);
 
             $Button = new Button(array_merge($button, [
                 'displayMode' => $displayMode,
             ]));
 
             $buttonControls[] = $Button;
+        }
+
+        // Forward the button component stylesheet to the brick instance so it
+        // is kept in the cached brick CSS list (all buttons share the same
+        // Button.css, so forwarding it once avoids duplicate entries).
+        if ($buttonControls !== []) {
+            $this->addCSSFiles($buttonControls[0]->getCSSFiles());
         }
 
         $Engine->assign([
