@@ -9,7 +9,6 @@ namespace QUI\Bricks\MCP\Project;
 use Mcp\Schema\Result\CallToolResult;
 use Mcp\Server\Builder;
 use QUI\AI\MCP\ToolHelper;
-use QUI\Bricks\Brick;
 use QUI\Bricks\MCP\AbstractTool;
 use Throwable;
 
@@ -27,25 +26,12 @@ class ListBricks extends AbstractTool
                 try {
                     self::checkBricksPermission();
 
-                    $Project = self::getProject($project, $lang);
-                    $bricks = self::getManager()->getBricksFromProject($Project);
-                    $bricks = self::applyLimit(
-                        array_map(
-                            static fn(Brick $Brick): array => self::parseBrick($Brick),
-                            $bricks
-                        ),
+                    return self::getBrickService()->listBricks(
+                        $project,
+                        $lang,
                         $limit,
                         $offset
                     );
-
-                    return [
-                        'project' => [
-                            'name' => $Project->getName(),
-                            'title' => $Project->getTitle(),
-                            'lang' => $Project->getLang()
-                        ],
-                        'bricks' => $bricks
-                    ];
                 } catch (Throwable $Exception) {
                     return ToolHelper::parseExceptionToResult($Exception);
                 }

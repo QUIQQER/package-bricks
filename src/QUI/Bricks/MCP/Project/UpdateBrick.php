@@ -21,45 +21,18 @@ class UpdateBrick extends AbstractTool
                 int $id,
                 array | null $attributes = null,
                 array | null $settings = null,
-                array | null $customfields = null
+                array | null $customfields = null,
+                array | null $classes = null
             ): CallToolResult | array {
                 try {
                     self::checkBricksPermission();
 
-                    $Manager = self::getManager();
-                    $Brick = $Manager->getBrickById($id);
-                    $saveData = [
-                        'title' => $Brick->getAttribute('title'),
-                        'description' => $Brick->getAttribute('description'),
-                        'content' => $Brick->getAttribute('content'),
-                        'type' => $Brick->getAttribute('type'),
-                        'active' => (int)$Brick->getAttribute('active'),
-                        'frontendTitle' => $Brick->getAttribute('frontendTitle'),
-                        'areas' => $Brick->getAttribute('areas'),
-                        'width' => $Brick->getAttribute('width'),
-                        'height' => $Brick->getAttribute('height'),
-                        'classes' => $Brick->getCSSClasses(),
-                        'settings' => $Brick->getSettings(),
-                        'customfields' => $Brick->getCustomFields()
-                    ];
-
-                    foreach ($attributes ?? [] as $attribute => $value) {
-                        $saveData[$attribute] = $value;
-                    }
-
-                    if ($settings !== null) {
-                        $saveData['settings'] = $settings;
-                    }
-
-                    if ($customfields !== null) {
-                        $saveData['customfields'] = $customfields;
-                    }
-
-                    $Manager->saveBrick($id, $saveData);
-
-                    return self::parseBrick(
-                        $Manager->getBrickById($id),
-                        true
+                    return self::getBrickService()->update(
+                        $id,
+                        $attributes ?? [],
+                        $settings,
+                        $customfields,
+                        $classes
                     );
                 } catch (Throwable $Exception) {
                     return ToolHelper::parseExceptionToResult($Exception);
@@ -79,7 +52,12 @@ class UpdateBrick extends AbstractTool
                         'additionalProperties' => true
                     ],
                     'settings' => ['type' => 'object', 'additionalProperties' => true],
-                    'customfields' => ['type' => 'array', 'items' => ['type' => 'string']]
+                    'customfields' => ['type' => 'array', 'items' => ['type' => 'string']],
+                    'classes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string'],
+                        'description' => 'CSS classes applied to the brick.'
+                    ]
                 ]
             ]
         );

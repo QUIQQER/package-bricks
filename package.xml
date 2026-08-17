@@ -36,6 +36,7 @@
             <desktopSearch src="\QUI\Bricks\BackendSearch\Provider\Bricks"/>
             <mcp src="\QUI\Bricks\MCP\Provider"/>
             <mcpSkill src="\QUI\Bricks\MCP\SkillProvider"/>
+            <rest src="\QUI\Bricks\Rest\Provider"/>
         </provider>
 
     </package>

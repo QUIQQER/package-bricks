@@ -27,20 +27,12 @@ class ListBrickTypes extends AbstractTool
                 try {
                     self::checkBricksPermission();
 
-                    $brickTypes = self::filterBrickTypes(
-                        self::getManager()->getAvailableBricks(),
+                    return self::getBrickService()->listBrickTypes(
                         $includeDeprecated === true,
-                        $query
-                    );
-
-                    $brickTypes = self::applyLimit($brickTypes, $limit, $offset);
-
-                    return array_map(
-                        static fn(array $brickType): array => self::parseBrickType(
-                            $brickType,
-                            $withSettings === true
-                        ),
-                        $brickTypes
+                        $withSettings === true,
+                        $query,
+                        $limit,
+                        $offset
                     );
                 } catch (Throwable $Exception) {
                     return ToolHelper::parseExceptionToResult($Exception);
