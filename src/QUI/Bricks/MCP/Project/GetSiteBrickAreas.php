@@ -12,8 +12,6 @@ use QUI\AI\MCP\ToolHelper;
 use QUI\Bricks\MCP\AbstractTool;
 use Throwable;
 
-use function is_array;
-
 class GetSiteBrickAreas extends AbstractTool
 {
     public function register(Builder $serverBuilder): void
@@ -29,43 +27,13 @@ class GetSiteBrickAreas extends AbstractTool
                 try {
                     self::checkBricksPermission();
 
-                    $Manager = self::getManager();
-                    $Site = self::getEditSite($project, $siteId, $lang);
-                    $areas = self::parseSiteBrickAreas($Site);
-
-                    if ($area !== null) {
-                        $areas = [
-                            $area => $areas[$area] ?? []
-                        ];
-                    }
-
-                    if ($withBrickData === true) {
-                        foreach ($areas as $areaName => $bricks) {
-                            if (!is_array($bricks)) {
-                                continue;
-                            }
-
-                            foreach ($bricks as $index => $brick) {
-                                if (!is_array($brick) || empty($brick['brickId'])) {
-                                    continue;
-                                }
-
-                                try {
-                                    $areas[$areaName][$index]['brick'] = self::parseBrick(
-                                        $Manager->getBrickById((int)$brick['brickId'])
-                                    );
-                                } catch (Throwable) {
-                                }
-                            }
-                        }
-                    }
-
-                    return [
-                        'project' => $Site->getProject()->getName(),
-                        'lang' => $Site->getProject()->getLang(),
-                        'siteId' => $Site->getId(),
-                        'areas' => $areas
-                    ];
+                    return self::getBrickService()->getSiteBrickAreas(
+                        $project,
+                        $siteId,
+                        $lang,
+                        $area,
+                        $withBrickData === true
+                    );
                 } catch (Throwable $Exception) {
                     return ToolHelper::parseExceptionToResult($Exception);
                 }

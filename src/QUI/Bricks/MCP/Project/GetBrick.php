@@ -24,10 +24,7 @@ class GetBrick extends AbstractTool
                 try {
                     self::checkBricksPermission();
 
-                    return self::parseBrick(
-                        self::getManager()->getBrickById($id),
-                        $withAttributes !== false
-                    );
+                    return self::getBrickService()->get($id, $withAttributes !== false);
                 } catch (Throwable $Exception) {
                     return ToolHelper::parseExceptionToResult($Exception);
                 }

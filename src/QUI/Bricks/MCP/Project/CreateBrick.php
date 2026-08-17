@@ -9,12 +9,8 @@ namespace QUI\Bricks\MCP\Project;
 use Mcp\Schema\Result\CallToolResult;
 use Mcp\Server\Builder;
 use QUI\AI\MCP\ToolHelper;
-use QUI\Bricks\Brick;
 use QUI\Bricks\MCP\AbstractTool;
 use Throwable;
-
-use function implode;
-use function is_array;
 
 class CreateBrick extends AbstractTool
 {
@@ -40,55 +36,33 @@ class CreateBrick extends AbstractTool
                 try {
                     self::checkBricksPermission();
 
-                    $Project = self::getProject($project, $lang);
-                    $Manager = self::getManager();
                     $brickData = [
+                        'project' => $project,
+                        'lang' => $lang,
                         'type' => $type,
                         'title' => $title,
                         'description' => $description ?? '',
-                        'active' => $active === false ? 0 : 1
+                        'active' => $active !== false
                     ];
 
-                    $brickId = $Manager->createBrickForProject(
-                        $Project,
-                        new Brick($brickData)
-                    );
-
-                    if (
-                        $content !== null
-                        || $frontendTitle !== null
-                        || $settings !== null
-                        || $areas !== null
-                        || $customfields !== null
-                        || $width !== null
-                        || $height !== null
-                        || $classes !== null
+                    foreach (
+                        [
+                            'content' => $content,
+                            'frontendTitle' => $frontendTitle,
+                            'settings' => $settings,
+                            'areas' => $areas,
+                            'customfields' => $customfields,
+                            'width' => $width,
+                            'height' => $height,
+                            'classes' => $classes
+                        ] as $field => $value
                     ) {
-                        $saveData = [
-                            'title' => $title,
-                            'description' => $description ?? '',
-                            'content' => $content ?? '',
-                            'type' => $type,
-                            'active' => $active === false ? 0 : 1,
-                            'frontendTitle' => $frontendTitle ?? '',
-                            'settings' => $settings ?? [],
-                            'customfields' => $customfields ?? [],
-                            'width' => $width ?? '',
-                            'height' => $height ?? '',
-                            'classes' => $classes ?? []
-                        ];
-
-                        if ($areas !== null) {
-                            $saveData['areas'] = is_array($areas) ? implode(',', $areas) : $areas;
+                        if ($value !== null) {
+                            $brickData[$field] = $value;
                         }
-
-                        $Manager->saveBrick($brickId, $saveData);
                     }
 
-                    return self::parseBrick(
-                        $Manager->getBrickById($brickId),
-                        true
-                    );
+                    return self::getBrickService()->create($brickData);
                 } catch (Throwable $Exception) {
                     return ToolHelper::parseExceptionToResult($Exception);
                 }

@@ -1,0 +1,710 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "QUIQQER Bricks REST API",
+    "description": "Create and manage bricks, inspect available brick types and areas, and assign bricks to site areas.",
+    "version": "2.0.0"
+  },
+  "paths": {
+    "/bricks/create": {
+      "post": {
+        "summary": "Create a brick",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBrickRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Brick created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/bricks/get": {
+      "get": {
+        "summary": "Get one brick",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/BrickId"
+          },
+          {
+            "in": "query",
+            "name": "withAttributes",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Brick data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/bricks/update": {
+      "patch": {
+        "summary": "Update a brick",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBrickRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated brick data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/bricks/delete": {
+      "delete": {
+        "summary": "Delete one or more bricks",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "minimum": 1
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "ids"
+                    ],
+                    "properties": {
+                      "ids": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                          "type": "integer",
+                          "minimum": 1
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deleted brick IDs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/bricks/types": {
+      "get": {
+        "summary": "List available brick types",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "includeDeprecated",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "in": "query",
+            "name": "withSettings",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available brick types",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/bricks/type": {
+      "get": {
+        "summary": "Get one brick type",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "control",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "withSettings",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Brick type data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/bricks/list": {
+      "get": {
+        "summary": "List bricks in a project",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Project"
+          },
+          {
+            "$ref": "#/components/parameters/Language"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project bricks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/bricks/areas": {
+      "get": {
+        "summary": "List available brick areas",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Project"
+          },
+          {
+            "$ref": "#/components/parameters/Language"
+          },
+          {
+            "in": "query",
+            "name": "layoutType",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "siteType",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available brick areas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/bricks/site-areas": {
+      "get": {
+        "summary": "Get brick assignments for a site",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Project"
+          },
+          {
+            "$ref": "#/components/parameters/Language"
+          },
+          {
+            "$ref": "#/components/parameters/SiteId"
+          },
+          {
+            "in": "query",
+            "name": "area",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "withBrickData",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Site brick assignments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      },
+      "put": {
+        "summary": "Set the brick assignment for one site area",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetSiteAreaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Saved site brick assignments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "BrickId": {
+        "in": "query",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "Project": {
+        "in": "query",
+        "name": "project",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Language": {
+        "in": "query",
+        "name": "lang",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "SiteId": {
+        "in": "query",
+        "name": "siteId",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "Limit": {
+        "in": "query",
+        "name": "limit",
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 50
+        }
+      },
+      "Offset": {
+        "in": "query",
+        "name": "offset",
+        "schema": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        }
+      }
+    },
+    "schemas": {
+      "CreateBrickRequest": {
+        "type": "object",
+        "required": [
+          "project",
+          "title"
+        ],
+        "properties": {
+          "project": {
+            "type": "string"
+          },
+          "lang": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "default": "content"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean",
+            "default": true
+          },
+          "frontendTitle": {
+            "type": "string"
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "areas": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "customfields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "classes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "width": {
+            "type": "string"
+          },
+          "height": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateBrickRequest": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "customfields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "classes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SetSiteAreaRequest": {
+        "type": "object",
+        "required": [
+          "project",
+          "siteId",
+          "area",
+          "bricks"
+        ],
+        "properties": {
+          "project": {
+            "type": "string"
+          },
+          "lang": {
+            "type": "string"
+          },
+          "siteId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "area": {
+            "type": "string"
+          },
+          "bricks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "brickId"
+              ],
+              "properties": {
+                "brickId": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "uid": {
+                  "type": "string"
+                },
+                "customfields": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "deactivate": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "ApiSuccess": {
+        "type": "object",
+        "required": [
+          "success",
+          "data"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {}
+              }
+            ]
+          }
+        }
+      },
+      "ApiError": {
+        "type": "object",
+        "required": [
+          "success",
+          "error"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Invalid request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ApiError"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Permission denied",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ApiError"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ApiError"
+            }
+          }
+        }
+      }
+    }
+  }
+}

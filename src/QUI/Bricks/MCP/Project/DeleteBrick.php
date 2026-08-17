@@ -23,23 +23,7 @@ class DeleteBrick extends AbstractTool
                 try {
                     self::checkBricksPermission();
 
-                    $Manager = self::getManager();
-                    $deleted = [];
-
-                    foreach ($ids as $id) {
-                        $brickId = (int)$id;
-
-                        if ($brickId < 1) {
-                            continue;
-                        }
-
-                        $Manager->deleteBrick($brickId);
-                        $deleted[] = $brickId;
-                    }
-
-                    return [
-                        'deleted' => $deleted
-                    ];
+                    return self::getBrickService()->delete($ids);
                 } catch (Throwable $Exception) {
                     return ToolHelper::parseExceptionToResult($Exception);
                 }
