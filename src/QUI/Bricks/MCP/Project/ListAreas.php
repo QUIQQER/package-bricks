@@ -26,23 +26,12 @@ class ListAreas extends AbstractTool
                 try {
                     self::checkBricksPermission();
 
-                    $Project = self::getProject($project, $lang);
-
-                    return [
-                        'project' => [
-                            'name' => $Project->getName(),
-                            'title' => $Project->getTitle(),
-                            'lang' => $Project->getLang()
-                        ],
-                        'areas' => array_map(
-                            static fn(array $area): array => self::parseArea($area),
-                            self::getManager()->getAreasByProject(
-                                $Project,
-                                $layoutType ?? false,
-                                $siteType ?? false
-                            )
-                        )
-                    ];
+                    return self::getBrickService()->listAreas(
+                        $project,
+                        $lang,
+                        $layoutType,
+                        $siteType
+                    );
                 } catch (Throwable $Exception) {
                     return ToolHelper::parseExceptionToResult($Exception);
                 }

@@ -15,6 +15,11 @@
             ]]></en>
         </locale>
 
+        <locale name="Provider.Rest.title">
+            <de><![CDATA[QUIQQER Bausteine REST API]]></de>
+            <en><![CDATA[QUIQQER Bricks REST API]]></en>
+        </locale>
+
         <locale name="brick.deprecated">
             <de><![CDATA[Dieser Brick ist deprecated und sollte nicht mehr genutzt werden. Beachte das in neueren Version dieser Brick nicht mehr einwandfrei funktionieren kann.]]></de>
             <en><![CDATA[This brick is deprecated and should not be used anymore. Note that in newer versions this brick may not work properly.]]></en>
@@ -48,6 +53,10 @@
         <locale name="permission.quiqqer.bricks.mcp">
             <de><![CDATA[Darf Bausteine per MCP verwenden.]]></de>
             <en><![CDATA[Can edit bricks via MCP.]]></en>
+        </locale>
+        <locale name="permission.quiqqer.bricks.rest">
+            <de><![CDATA[Darf Bausteine per REST API verwenden.]]></de>
+            <en><![CDATA[Can use bricks via the REST API.]]></en>
         </locale>
         <locale name="permission.quiqqer.bricks.assign">
             <de><![CDATA[Darf Bausteine Seiten zuweisen.]]></de>

@@ -29,8 +29,12 @@
         "quiqqer/components": "^1",
         "quiqqer-asset/gridstack": "^12"
     },
+    "replace": {
+        "quiqqer/bricks-rest": "*"
+    },
     "suggest": {
-        "quiqqer/gallery": "Present your photos, products and pictures in elaborate and beautiful galleries."
+        "quiqqer/gallery": "Present your photos, products and pictures in elaborate and beautiful galleries.",
+        "quiqqer/rest": "Manage bricks through the built-in REST API."
     },
     "autoload": {
         "psr-4": {
