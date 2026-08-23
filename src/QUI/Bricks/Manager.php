@@ -386,11 +386,8 @@ class Manager
             $Project = QUI::getProject($project, $lang);
             $Site = $Project->get($uniqueBrickId['siteId']);
             $Edit = $Site->getEdit();
-
-            if ($Edit) {
-                $Edit->load();
-                $Edit->save(QUI::getUsers()->getSystemUser());
-            }
+            $Edit->load();
+            $Edit->save(QUI::getUsers()->getSystemUser());
         }
 
         // delete unique ids
