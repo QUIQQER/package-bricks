@@ -99,7 +99,7 @@ class Accordion extends QUI\Control
             $entriesColumnRight
         ] = $this->prepareEntriesForRender($entries, $columns);
 
-        $this->setJavaScriptControlOption('rotateangle', $rotateAngle);
+        $this->setCustomVariable('rotate', $rotateAngle . 'deg');
 
         $Engine->assign([
             'this' => $this,
@@ -111,7 +111,6 @@ class Accordion extends QUI\Control
             'template' => $template,
             'iconPosition' => $iconPosition,
             'iconClass' => $this->getIconClass($iconStyle),
-            'rotateAngle' => $rotateAngle,
             'useFaqStructuredData' => $this->getAttribute('useFaqStructuredData')
         ]);
 

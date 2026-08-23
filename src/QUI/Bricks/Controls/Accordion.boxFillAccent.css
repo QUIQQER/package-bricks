@@ -21,12 +21,12 @@
     background: color-mix(in oklab, var(--qui-colors-surface-subtle) 94%, black);
 }
 
-.quiqqer-accordion-item--boxFillAccentOpen[data-open="1"] .quiqqer-accordion-item-header {
+.quiqqer-accordion-item--boxFillAccentOpen[open]:not(.quiqqer-accordion-item--closing) .quiqqer-accordion-item-header {
     background: var(--qui-colors-primary);
     color: var(--qui-colors-primary-contrast, #fff);
 }
 
-.quiqqer-accordion-item--boxFillAccentOpen[data-open="1"] .quiqqer-accordion-item-header:is(:hover, :focus-visible) {
+.quiqqer-accordion-item--boxFillAccentOpen[open]:not(.quiqqer-accordion-item--closing) .quiqqer-accordion-item-header:is(:hover, :focus-visible) {
     background: color-mix(in oklab, var(--qui-colors-primary) 88%, black);
 }
 
