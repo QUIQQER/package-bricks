@@ -598,7 +598,11 @@ class Brick extends QUI\QDOM
 
         // workaround wegen title bug
         // @todo backendTitle einführen und title als frontend Title nutzen (Versionssprung)
-        $Control->setAttribute('title', $this->getAttribute('frontendTitle'));
+        if ($this->getAttribute('frontendTitle')) {
+            $Control->setAttribute('title', $this->getAttribute('frontendTitle'));
+        } else {
+            $Control->removeAttribute('title');
+        }
 
         if ($this->id) {
             $Control->addCSSClass('brick-' . $this->id);
