@@ -50,6 +50,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
     const VERTICAL_ALIGN_CENTER = 'center';
     const VERTICAL_ALIGN_BOTTOM = 'bottom';
     const VERTICAL_ALIGN_STRETCH = 'stretch';
+    const VERTICAL_ALIGN_STICKY = 'sticky';
     const LINK_TARGET_SELF = '_self';
     const LINK_TARGET_BLANK = '_blank';
     const LINK_REL_OPTIONS = [
@@ -513,6 +514,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
 
         $getPreviewVerticalAlignClass: function (area) {
             switch (area.verticalAlign) {
+                case VERTICAL_ALIGN_STICKY:
                 case VERTICAL_ALIGN_TOP:
                     return 'quiqqer-bricks-blockSlot-previewContent--alignTop';
 
@@ -829,8 +831,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             );
                         }
 
+                        let VerticalAlignField = null;
+                        let StickyOffsetField = null;
+
                         if (this.$isSettingVisible('verticalAlign')) {
-                            this.$createPopupSelectField(
+                            VerticalAlignField = this.$createPopupSelectField(
                                 LeftCol,
                                 this.$getLocale('verticalAlign'),
                                 [
@@ -849,12 +854,28 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                                     {
                                         value: VERTICAL_ALIGN_STRETCH,
                                         text: this.$getLocale('verticalAlign.stretch')
+                                    },
+                                    {
+                                        value: VERTICAL_ALIGN_STICKY,
+                                        text: this.$getLocale('verticalAlign.sticky')
                                     }
                                 ],
                                 area.verticalAlign,
                                 'data-name',
                                 'verticalAlign'
                             );
+
+                            StickyOffsetField = this.$createPopupInputField(LeftCol, {
+                                label: this.$getLocale('stickyOffset'),
+                                type: 'text',
+                                value: area.stickyOffset || '',
+                                name: 'stickyOffset'
+                            });
+
+                            new Element('div', {
+                                'class': 'quiqqer-bricks-blockSlot-popupHint',
+                                text: this.$getLocale('stickyOffset.help')
+                            }).inject(StickyOffsetField);
                         }
 
                         let CustomMinHeightSettings = null;
@@ -942,6 +963,38 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             );
                         };
 
+                        // sticky only works in editor mode (only that mode
+                        // renders a .__contentInner to stick); offer + reveal
+                        // the offset field accordingly
+                        const toggleVerticalAlignSticky = function () {
+                            if (!VerticalAlignField) {
+                                return;
+                            }
+
+                            const modeIsEditor = (ModeField ? ModeField.value : activeMode) === MODE_EDITOR;
+                            const StickyOption = VerticalAlignField.getElement(
+                                'option[value="' + VERTICAL_ALIGN_STICKY + '"]'
+                            );
+
+                            if (StickyOption) {
+                                StickyOption.disabled = !modeIsEditor;
+                                StickyOption.setStyle('display', modeIsEditor ? '' : 'none');
+                            }
+
+                            if (!modeIsEditor && VerticalAlignField.value === VERTICAL_ALIGN_STICKY) {
+                                VerticalAlignField.value = VERTICAL_ALIGN_CENTER;
+                            }
+
+                            if (StickyOffsetField) {
+                                StickyOffsetField.setStyle(
+                                    'display',
+                                    modeIsEditor && VerticalAlignField.value === VERTICAL_ALIGN_STICKY
+                                        ? ''
+                                        : 'none'
+                                );
+                            }
+                        };
+
                         const toggleCustomMinHeightSettings = function () {
                             if (!CustomMinHeightSettings) {
                                 return;
@@ -1019,6 +1072,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         if (ModeField) {
                             ModeField.addEvent('change', toggleImageSettings);
                             ModeField.addEvent('change', toggleSubLayoutSettings);
+                            ModeField.addEvent('change', toggleVerticalAlignSticky);
+                        }
+
+                        if (VerticalAlignField) {
+                            VerticalAlignField.addEvent('change', toggleVerticalAlignSticky);
                         }
 
                         if (ImageSettings) {
@@ -1058,6 +1116,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
 
                         toggleImageSettings();
                         toggleSubLayoutSettings();
+                        toggleVerticalAlignSticky();
                         toggleImageOptions();
                         toggleCustomMinHeightSettings();
                         toggleBackgroundSettings();
@@ -1079,6 +1138,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         const modeField = Content.getElement('select[data-name="mode"]');
                         const contentPaddingPresetField = Content.getElement('select[data-name="contentPaddingPreset"]');
                         const verticalAlignField = Content.getElement('select[data-name="verticalAlign"]');
+                        const stickyOffsetField = Content.getElement('input[data-name="stickyOffset"]');
                         const customMinHeightEnabledField = Content.getElement(
                             'input[data-name="customMinHeightEnabled"]'
                         );
@@ -1149,6 +1209,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             area.verticalAlign = verticalAlignField
                                 ? verticalAlignField.value
                                 : VERTICAL_ALIGN_CENTER;
+                            area.stickyOffset = stickyOffsetField
+                                ? stickyOffsetField.value.trim()
+                                : '';
                         }
 
                         if (this.$isSettingVisible('customMinHeight')) {
