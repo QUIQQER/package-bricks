@@ -272,6 +272,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
             this.$applyProjectToChildControls();
         },
 
+        getProject: function () {
+            return this.$Project;
+        },
+
         $onAreaChange: function (Control, area, slotId) {
             this.$document.areas[slotId] = this.$normalizeArea(area, this.$getSlotIndex(slotId), slotId);
             this.$selectedSlotId = slotId;
@@ -355,6 +359,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
                 const AreaControl = new BlockSlot({
                     area: this.$document.areas[slot.id],
                     helperContainer: this.$HelperContainer,
+                    layoutControl: this,
                     slotId: slot.id,
                     index: index,
                     interactionMode: EDIT_MODE_CONTENT,
@@ -579,6 +584,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
                 const AreaControl = new BlockSlot({
                     area: this.$subLayoutDraft.areas[slot.id],
                     helperContainer: this.$HelperContainer,
+                    layoutControl: this,
                     slotId: slot.id,
                     index: index,
                     interactionMode: EDIT_MODE_CONTENT,

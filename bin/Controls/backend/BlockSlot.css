@@ -354,6 +354,18 @@
     width: 100%;
 }
 
+.quiqqer-bricks-blockSlot-card.is-contentMode .quiqqer-bricks-blockSlot-cardFooter {
+    container-type: inline-size;
+}
+
+.quiqqer-bricks-blockSlot-cardActionGroup {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-width: 0;
+}
+
 .quiqqer-bricks-blockSlot-card.is-layoutMode .quiqqer-bricks-blockSlot-cardFooter {
     bottom: 0.75rem;
     left: 0.75rem;
@@ -514,6 +526,30 @@
 @container (max-width: 80px) {
     .quiqqer-bricks-blockSlot-layoutPreviewLabelText,
     .quiqqer-bricks-blockSlot-cardAction--danger span:last-child {
+        display: none;
+    }
+}
+
+@container (max-width: 150px) {
+    .quiqqer-bricks-blockSlot-card.is-contentMode
+        .quiqqer-bricks-blockSlot-cardActions--count-1
+        .quiqqer-bricks-blockSlot-cardAction span:last-child {
+        display: none;
+    }
+}
+
+@container (max-width: 300px) {
+    .quiqqer-bricks-blockSlot-card.is-contentMode
+        .quiqqer-bricks-blockSlot-cardActions--count-2
+        .quiqqer-bricks-blockSlot-cardAction span:last-child {
+        display: none;
+    }
+}
+
+@container (max-width: 420px) {
+    .quiqqer-bricks-blockSlot-card.is-contentMode
+        .quiqqer-bricks-blockSlot-cardActions--count-3
+        .quiqqer-bricks-blockSlot-cardAction span:last-child {
         display: none;
     }
 }

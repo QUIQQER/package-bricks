@@ -3487,6 +3487,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Einstellungen für [title]]]></de>
             <en><![CDATA[Settings for [title]]]></en>
         </locale>
+        <locale name="blockSlot.edit.button">
+            <de><![CDATA[Bearbeiten]]></de>
+            <en><![CDATA[Edit]]></en>
+        </locale>
+        <locale name="blockSlot.edit.title">
+            <de><![CDATA[Baustein bearbeiten]]></de>
+            <en><![CDATA[Edit brick]]></en>
+        </locale>
         <locale name="blockSlot.remove.button">
             <de><![CDATA[Entfernen]]></de>
             <en><![CDATA[Remove]]></en>
