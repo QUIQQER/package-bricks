@@ -265,6 +265,39 @@ fallback. The config variable is placed on the outer control and inherits into t
   requirement.
 - Add optional `preview` and `thumbnail` mockups using the existing package path and image-size convention.
 
+### Descriptions For Editors And AI
+
+The brick `<description>` and each setting `<description>` are read by editors and by AI tools over
+MCP (`quiqqer_bricks_create_and_edit_blocks` inspects them to choose a brick and fill its settings).
+Write them for both audiences.
+
+- Brick description: a teaser, not a settings list. State what the brick is, when to use it
+  (concrete use cases), and what makes it distinctive. Keep it short and benefit-oriented; do not
+  enumerate every setting. Use `brick.multiLayout.description` as the length and format reference (a
+  short intro, a few benefit bullets, a closing sentence).
+- Setting description: add a `<description>` to every setting whose effect is not already
+  unambiguous from its label. This primarily helps AI choose the right value; editors benefit too.
+  Skip it only when the label is self-explanatory, for example a media-image picker labelled
+  "Background image".
+- When an option maps to a concrete frontend output, put that output in the option label, for
+  example `Default text ("Before")` instead of a bare `Default text`.
+
+```xml
+<setting name="gap" type="select">
+    <locale group="vendor/package" var="brick.featureGrid.gap"/>
+    <description>
+        <locale group="vendor/package" var="brick.featureGrid.gap.desc"/>
+    </description>
+    <option value="small">
+        <locale group="vendor/package" var="brick.featureGrid.gap.small"/>
+    </option>
+    <option value="normal">
+        <locale group="vendor/package" var="brick.featureGrid.gap.normal"/>
+    </option>
+    <defaultValue>normal</defaultValue>
+</setting>
+```
+
 ## Choose The Editor Integration
 
 Use the least complex editor surface that makes the setting understandable to editors.
@@ -272,6 +305,46 @@ Use the least complex editor surface that makes the setting understandable to ed
 ### Standard Setting
 
 Use an ordinary `<setting>` for a scalar value that is clear as a checkbox, input, or short select.
+
+### Conditional Setting
+
+Show or hide a dependent setting based on another setting's value with the core dependency control
+`package/quiqqer/core/bin/QUI/controls/settings/Dependency`. Attach it via `data-qui` to the
+controlling field; each dependent field declares its own condition:
+
+```xml
+<setting name="labelMode" type="select"
+         data-qui="package/quiqqer/core/bin/QUI/controls/settings/Dependency">
+    <locale group="vendor/package" var="brick.featureGrid.labelMode"/>
+    <option value="default">
+        <locale group="vendor/package" var="brick.featureGrid.labelMode.default"/>
+    </option>
+    <option value="custom">
+        <locale group="vendor/package" var="brick.featureGrid.labelMode.custom"/>
+    </option>
+    <option value="hidden">
+        <locale group="vendor/package" var="brick.featureGrid.labelMode.hidden"/>
+    </option>
+    <defaultValue>default</defaultValue>
+</setting>
+
+<setting name="labelText" type="text"
+         data-dependency="labelMode"
+         data-dependency-options="custom">
+    <locale group="vendor/package" var="brick.featureGrid.labelText"/>
+</setting>
+```
+
+- Put `data-dependency="<controllingName>"` on the dependent field and list the values that reveal
+  it in `data-dependency-options`. Use `valueA,valueB` for a positive list, `!valueA` to hide for a
+  value, or `*` / `!*` for "while filled" / "while empty". A checkbox counts as `1` or `0`.
+- The control scopes to the closest `form` or `table` and hides the closest `[data-dependency-row]`,
+  the closest `<tr>`, or the field itself.
+- Prefer an explicit mode select plus a dependent field over an empty-string sentinel to separate
+  "use the default" from "hidden". This is clearer for editors and for AI, and avoids ambiguous
+  empty values.
+- Normalize the resulting combination in PHP as well; the backend condition is UX, not a trust
+  boundary.
 
 ### Visual Setting Control
 
@@ -407,6 +480,8 @@ needed for the task:
 - Confirm the PHP control owns the convention-based root class and its owned markup uses pragmatic BEM names.
 - Confirm XML defaults, PHP defaults, JavaScript defaults, and CSS fallbacks describe the same behavior.
 - Confirm every locale exists and is available to PHP or JavaScript where required.
+- Confirm the brick description reads as a teaser for editors and AI, and every setting whose effect
+  is not obvious from its label carries a description.
 - Confirm scalar and structured settings are normalized in PHP, including invalid and legacy values.
 - Confirm required Site or Project context works both through brick rendering and direct control usage.
 - Confirm template output is escaped by context and deliberate HTML output has a documented trust boundary.

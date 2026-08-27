@@ -11,6 +11,8 @@
     --_header-padding-inline: var(--quiqqer-bricks-accordion-header-padding-inline, 1rem);
     --_header-font-size: var(--quiqqer-bricks-accordion-header-font-size, 1.125rem);
     --_header-font-weight: var(--quiqqer-bricks-accordion-header-font-weight, 400);
+    --_icon-rotate: var(--quiqqer-bricks-accordion-icon-rotate, var(--_q-controlConf-rotate, 180deg));
+    --_transition-duration: var(--quiqqer-bricks-accordion-transition-duration, 500ms);
 
     margin-left: auto;
     margin-right: auto;
@@ -40,10 +42,15 @@
     gap: 1rem;
     font-size: var(--_header-font-size);
     font-weight: var(--_header-font-weight);
+    list-style: none;
     margin-top: 0;
     margin-bottom: 0;
     padding: var(--_header-padding-block) var(--_header-padding-inline);
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.quiqqer-accordion-item-header::-webkit-details-marker {
+    display: none;
 }
 
 .quiqqer-accordion-item-header-text {
@@ -57,6 +64,16 @@
 .quiqqer-accordion-item-header-icon {
     line-height: inherit;
     margin-left: auto;
+    transition: transform var(--_transition-duration) ease;
+}
+
+/* "visually open" == [open]:not(--closing): while JS animates the collapse it
+   keeps [open] for the content but adds --closing, so every open-state style
+   (icon rotation here, header colors/borders in the variants) reverts right
+   away and fades out via its transition. Without JS --closing never appears,
+   so this behaves exactly like plain [open]. */
+.quiqqer-accordion-item[open]:not(.quiqqer-accordion-item--closing) .quiqqer-accordion-item-header-icon {
+    transform: rotate(var(--_icon-rotate));
 }
 
 .quiqqer-accordion-item-content-wrapper {
@@ -64,10 +81,11 @@
 }
 
 .quiqqer-accordion-item-content {
-    display: none;
     overflow: auto;
 }
 
-.quiqqer-accordion-item[data-open="1"] .quiqqer-accordion-item-content {
-    display: block;
+@media (prefers-reduced-motion: reduce) {
+    .quiqqer-accordion-item-header-icon {
+        transition: none;
+    }
 }

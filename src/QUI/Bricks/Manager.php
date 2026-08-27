@@ -386,11 +386,8 @@ class Manager
             $Project = QUI::getProject($project, $lang);
             $Site = $Project->get($uniqueBrickId['siteId']);
             $Edit = $Site->getEdit();
-
-            if ($Edit) {
-                $Edit->load();
-                $Edit->save(QUI::getUsers()->getSystemUser());
-            }
+            $Edit->load();
+            $Edit->save(QUI::getUsers()->getSystemUser());
         }
 
         // delete unique ids
@@ -895,6 +892,7 @@ class Manager
             'description' => $description,
             'type' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('type') : '',
             'class' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('class') : '',
+            'placeholder' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('placeholder') : '',
             'data-qui' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('data-qui') : '',
             'options' => $options,
             'data-attributes' => $dataAttributes,

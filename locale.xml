@@ -3103,6 +3103,18 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Volle Höhe]]></de>
             <en><![CDATA[Full height]]></en>
         </locale>
+        <locale name="blockSlot.verticalAlign.sticky">
+            <de><![CDATA[Fixiert (Sticky)]]></de>
+            <en><![CDATA[Sticky]]></en>
+        </locale>
+        <locale name="blockSlot.stickyOffset">
+            <de><![CDATA[Sticky-Abstand oben]]></de>
+            <en><![CDATA[Sticky offset (top)]]></en>
+        </locale>
+        <locale name="blockSlot.stickyOffset.help">
+            <de><![CDATA[Abstand von oben, wenn der Bereich fixiert ist. Leer = automatisch unterhalb der Navigation. z. B. 80px, 5rem, 6vh; Zahlen ohne Einheit werden als px interpretiert. Wirkt nur im Modus Editor und wenn ein höherer Nachbarbereich vorhanden ist.]]></de>
+            <en><![CDATA[Distance from the top while the area is sticky. Empty = automatically below the navigation. e.g. 80px, 5rem, 6vh; numbers without a unit are interpreted as px. Only takes effect in editor mode and when a taller neighbouring area exists.]]></en>
+        </locale>
         <locale name="blockSlot.customMinHeight.section">
             <de><![CDATA[Mindesthöhe]]></de>
             <en><![CDATA[Minimum height]]></en>
@@ -3486,6 +3498,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
         <locale name="blockSlot.settings.popup.title">
             <de><![CDATA[Einstellungen für [title]]]></de>
             <en><![CDATA[Settings for [title]]]></en>
+        </locale>
+        <locale name="blockSlot.edit.button">
+            <de><![CDATA[Bearbeiten]]></de>
+            <en><![CDATA[Edit]]></en>
+        </locale>
+        <locale name="blockSlot.edit.title">
+            <de><![CDATA[Baustein bearbeiten]]></de>
+            <en><![CDATA[Edit brick]]></en>
         </locale>
         <locale name="blockSlot.remove.button">
             <de><![CDATA[Entfernen]]></de>

@@ -18,7 +18,7 @@
     color: var(--_item-color);
 }
 
-.quiqqer-accordion-item--card[data-open="1"] {
+.quiqqer-accordion-item--card[open]:not(.quiqqer-accordion-item--closing) {
     background: var(--_item-open-bg);
     color: var(--_item-open-color);
 }

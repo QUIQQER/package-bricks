@@ -50,6 +50,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
     const VERTICAL_ALIGN_CENTER = 'center';
     const VERTICAL_ALIGN_BOTTOM = 'bottom';
     const VERTICAL_ALIGN_STRETCH = 'stretch';
+    const VERTICAL_ALIGN_STICKY = 'sticky';
     const LINK_TARGET_SELF = '_self';
     const LINK_TARGET_BLANK = '_blank';
     const LINK_REL_OPTIONS = [
@@ -272,6 +273,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
             this.$applyProjectToChildControls();
         },
 
+        getProject: function () {
+            return this.$Project;
+        },
+
         $onAreaChange: function (Control, area, slotId) {
             this.$document.areas[slotId] = this.$normalizeArea(area, this.$getSlotIndex(slotId), slotId);
             this.$selectedSlotId = slotId;
@@ -355,6 +360,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
                 const AreaControl = new BlockSlot({
                     area: this.$document.areas[slot.id],
                     helperContainer: this.$HelperContainer,
+                    layoutControl: this,
                     slotId: slot.id,
                     index: index,
                     interactionMode: EDIT_MODE_CONTENT,
@@ -579,6 +585,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
                 const AreaControl = new BlockSlot({
                     area: this.$subLayoutDraft.areas[slot.id],
                     helperContainer: this.$HelperContainer,
+                    layoutControl: this,
                     slotId: slot.id,
                     index: index,
                     interactionMode: EDIT_MODE_CONTENT,
@@ -1547,7 +1554,13 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
 
             let verticalAlign = area.verticalAlign;
 
-            if ([VERTICAL_ALIGN_TOP, VERTICAL_ALIGN_CENTER, VERTICAL_ALIGN_BOTTOM, VERTICAL_ALIGN_STRETCH].indexOf(verticalAlign) === -1) {
+            if ([
+                VERTICAL_ALIGN_TOP,
+                VERTICAL_ALIGN_CENTER,
+                VERTICAL_ALIGN_BOTTOM,
+                VERTICAL_ALIGN_STRETCH,
+                VERTICAL_ALIGN_STICKY
+            ].indexOf(verticalAlign) === -1) {
                 verticalAlign = VERTICAL_ALIGN_CENTER;
             }
 
@@ -1611,7 +1624,8 @@ define('package/quiqqer/bricks/bin/Controls/backend/LayoutSettings', [
                     : '',
                 customCssClasses: this.$normalizeCustomCssClasses(area.customCssClasses),
                 link: link,
-                verticalAlign: verticalAlign
+                verticalAlign: verticalAlign,
+                stickyOffset: this.$normalizeCssSizeValue(area.stickyOffset)
             };
 
             if (mode === MODE_SUB_LAYOUT) {

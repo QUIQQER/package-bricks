@@ -18,7 +18,7 @@
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.quiqqer-accordion-item--cardFillAccent[data-open="1"] {
+.quiqqer-accordion-item--cardFillAccent[open]:not(.quiqqer-accordion-item--closing) {
     background: var(--_item-open-bg);
     color: var(--_item-open-color);
 }
@@ -40,7 +40,7 @@
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.quiqqer-accordion-item--cardFillAccent[data-open="1"] .quiqqer-accordion-item-header-icon {
+.quiqqer-accordion-item--cardFillAccent[open]:not(.quiqqer-accordion-item--closing) .quiqqer-accordion-item-header-icon {
     background: var(--_icon-open-bg);
     color: var(--_icon-open-color);
 }

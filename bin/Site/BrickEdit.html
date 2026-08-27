@@ -105,6 +105,7 @@
                     <textarea id="{$setting.name}"
                            name="{$setting.name}"
                            class="{$setting.class}"
+                           {if isset($setting.placeholder) && $setting.placeholder}placeholder="{$setting.placeholder}"{/if}
                            {if isset($setting.$dataQuiKey) && $setting.$dataQuiKey}data-qui="{$setting.$dataQuiKey}"{/if}
                            {if isset($setting['data-attributes'])}
                            {foreach $setting['data-attributes'] as $attrName => $attrValue}
@@ -129,6 +130,7 @@
                            id="{$setting.name}"
                            name="{$setting.name}"
                            class="{$setting.class}"
+                           {if isset($setting.placeholder) && $setting.placeholder}placeholder="{$setting.placeholder}"{/if}
                            {if isset($setting.$dataQuiKey) && $setting.$dataQuiKey}data-qui="{$setting.$dataQuiKey}"{/if}
                            {if isset($setting['data-attributes'])}
                            {foreach $setting['data-attributes'] as $attrName => $attrValue}
