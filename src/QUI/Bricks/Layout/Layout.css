@@ -34,6 +34,7 @@
     --_areaBg: var(--quiqqer-bricks-layout-area-background, transparent);
     --_contentPadding: var(--quiqqer-bricks-layout-content-padding, clamp(1rem, 2cqi, 2rem));
     --_slotMinHeight: var(--quiqqer-bricks-layout-slot-min-height, var(--_tileMinHeight, 200px));
+    --_stickyTop: var(--quiqqer-bricks-layout-sticky-top, var(--qui-scroll-padding, var(--qui-nav-height, 0px)));
     align-items: stretch;
     background: var(--_areaBg);
     display: flex;
@@ -170,6 +171,22 @@
 
 .quiqqer-bricks-layout__area--align-stretch .quiqqer-bricks-layout__content {
     align-items: stretch;
+}
+
+/**
+ * Sticky: the area still fills its grid row (background stays full height),
+ * only the inner content wrapper sticks below the sticky navigation. Needs a
+ * taller neighbour in the same row band to have any travel; on a single-column
+ * layout it self-neutralises because the row is only as tall as its content.
+ * Editor mode only - other modes render no .__contentInner to stick.
+ */
+.quiqqer-bricks-layout__area--align-sticky .quiqqer-bricks-layout__content {
+    align-items: start;
+}
+
+.quiqqer-bricks-layout__area--align-sticky .quiqqer-bricks-layout__contentInner {
+    position: sticky;
+    top: var(--_stickyTop);
 }
 
 .quiqqer-bricks-layout__area--image.quiqqer-bricks-layout__area--align-top .quiqqer-bricks-layout__content > picture {

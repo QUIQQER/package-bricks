@@ -507,9 +507,11 @@ class MultiLayout extends QUI\Control
                 $area['customCssClasses'] ?? null
             ),
             'link' => $link,
-            'verticalAlign' => isset($area['verticalAlign']) && in_array($area['verticalAlign'], ['top', 'center', 'bottom', 'stretch'], true)
+            'verticalAlign' => isset($area['verticalAlign'])
+                && in_array($area['verticalAlign'], ['top', 'center', 'bottom', 'stretch', 'sticky'], true)
                 ? $area['verticalAlign']
                 : 'center',
+            'stickyOffset' => $this->normalizeCssSizeValue($area['stickyOffset'] ?? null),
             'subLayoutAreaBackgroundEnabled' => array_key_exists('subLayoutAreaBackgroundEnabled', $area)
                 ? !empty($area['subLayoutAreaBackgroundEnabled'])
                 : !empty($this->getAttribute('areaBackgroundEnabled')),
@@ -781,6 +783,13 @@ class MultiLayout extends QUI\Control
                 $style[] = '--quiqqer-bricks-layout-slot-min-height: '
                     . $this->escapeStyleValue($customMinHeight);
             }
+        }
+
+        // only emit an explicit offset when a value was entered ('0'/'0px'
+        // stay as-is); an empty field lets the CSS fall back to the nav offset
+        if (($area['verticalAlign'] ?? '') === 'sticky' && ($area['stickyOffset'] ?? '') !== '') {
+            $style[] = '--quiqqer-bricks-layout-sticky-top: '
+                . $this->escapeStyleValue((string)$area['stickyOffset']);
         }
 
         return implode('; ', $style);

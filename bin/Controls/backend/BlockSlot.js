@@ -50,6 +50,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
     const VERTICAL_ALIGN_CENTER = 'center';
     const VERTICAL_ALIGN_BOTTOM = 'bottom';
     const VERTICAL_ALIGN_STRETCH = 'stretch';
+    const VERTICAL_ALIGN_STICKY = 'sticky';
     const LINK_TARGET_SELF = '_self';
     const LINK_TARGET_BLANK = '_blank';
     const LINK_REL_OPTIONS = [
@@ -97,6 +98,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
         options: {
             area: null,
             helperContainer: null,
+            layoutControl: null,
             slotId: '',
             index: 0,
             interactionMode: INTERACTION_CONTENT,
@@ -113,6 +115,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
 
             this.$area = this.getAttribute('area') || {};
             this.$helperContainer = this.getAttribute('helperContainer') || null;
+            this.$layoutControl = this.getAttribute('layoutControl') || null;
             this.$slotId = this.getAttribute('slotId') || '';
             this.$index = this.getAttribute('index') || 0;
             this.$Project = null;
@@ -249,31 +252,58 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 'class': 'quiqqer-bricks-blockSlot-cardActions'
             }).inject(Footer);
 
+            const PrimaryActions = new Element('div', {
+                'class': 'quiqqer-bricks-blockSlot-cardActionGroup'
+            }).inject(Actions);
+
+            const settingsLabel = this.$getLocale('settings.button');
+
             new Element('button', {
                 type: 'button',
                 'class': 'quiqqer-bricks-blockSlot-cardAction',
-                html: '<span class="fa fa-cog"></span><span>' +
-                    this.$getLocale('settings.button') + '</span>',
-                title: this.$getLocale('settings.button'),
+                html: '<span class="fa fa-cog"></span><span>' + settingsLabel + '</span>',
+                title: settingsLabel,
+                'aria-label': settingsLabel,
                 events: {
                     click: this.$openSettingsPopup.bind(this)
                 }
-            }).inject(Actions);
+            }).inject(PrimaryActions);
+
+            if (activeMode === MODE_BRICK && area.brickId) {
+                const editLabel = this.$getLocale('edit.button');
+
+                new Element('button', {
+                    type: 'button',
+                    'class': 'quiqqer-bricks-blockSlot-cardAction',
+                    html: '<span class="fa fa-pencil"></span><span>' + editLabel + '</span>',
+                    title: this.$getLocale('edit.title'),
+                    'aria-label': this.$getLocale('edit.title'),
+                    events: {
+                        click: this.$openBrickEditWindow.bind(this)
+                    }
+                }).inject(PrimaryActions);
+            }
 
             if (this.$canRemoveAreaContent(area)) {
-                const removeLabel = this.$getRemoveButtonLabel(this.$getActiveMode(area));
+                const removeLabel = this.$getRemoveButtonLabel(activeMode);
 
                 new Element('button', {
                     type: 'button',
                     'class': 'quiqqer-bricks-blockSlot-cardAction '
                         + 'quiqqer-bricks-blockSlot-cardAction--danger',
-                    html: '<span class="fa fa-times"></span><span>' + removeLabel + '</span>',
+                    html: '<span class="fa fa-trash"></span><span>' + removeLabel + '</span>',
                     title: removeLabel,
+                    'aria-label': removeLabel,
                     events: {
                         click: this.$confirmRemoveAreaContent.bind(this)
                     }
                 }).inject(Actions);
             }
+
+            Actions.addClass(
+                'quiqqer-bricks-blockSlot-cardActions--count-'
+                + Actions.getElements('.quiqqer-bricks-blockSlot-cardAction').length
+            );
         },
 
         $renderLayoutMode: function (area, activeMode) {
@@ -484,6 +514,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
 
         $getPreviewVerticalAlignClass: function (area) {
             switch (area.verticalAlign) {
+                case VERTICAL_ALIGN_STICKY:
                 case VERTICAL_ALIGN_TOP:
                     return 'quiqqer-bricks-blockSlot-previewContent--alignTop';
 
@@ -644,8 +675,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                     return;
                 }
 
-                if (this.$Project && 'setProject' in Control) {
-                    Control.setProject(this.$Project);
+                const Project = this.$getEffectiveProject();
+
+                if (Project && 'setProject' in Control) {
+                    Control.setProject(Project);
                 }
 
                 Input.addEvent('change', function () {
@@ -681,6 +714,32 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
             }).open();
         },
 
+        $openBrickEditWindow: function () {
+            const brickId = this.$area.brickId;
+
+            if (!brickId) {
+                return;
+            }
+
+            let projectName = this.$getProjectName();
+            let projectLang = this.$getProjectLang();
+
+            if ((!projectName || !projectLang) && typeof QUIQQER_PROJECT !== 'undefined') {
+                projectName = projectName || QUIQQER_PROJECT.name;
+                projectLang = projectLang || QUIQQER_PROJECT.lang;
+            }
+
+            require([
+                'package/quiqqer/bricks/bin/Controls/backend/BrickEditWindow'
+            ], function (BrickEditWindow) {
+                new BrickEditWindow({
+                    brickId: brickId,
+                    projectName: projectName,
+                    projectLang: projectLang
+                }).open();
+            });
+        },
+
         $openImageSelect: function () {
             if (!this.$helperContainer) {
                 return;
@@ -702,8 +761,10 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                     return;
                 }
 
-                if (this.$Project && 'setProject' in Control) {
-                    Control.setProject(this.$Project);
+                const Project = this.$getEffectiveProject();
+
+                if (Project && 'setProject' in Control) {
+                    Control.setProject(Project);
                 }
 
                 if ('addEvent' in Control) {
@@ -770,8 +831,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             );
                         }
 
+                        let VerticalAlignField = null;
+                        let StickyOffsetField = null;
+
                         if (this.$isSettingVisible('verticalAlign')) {
-                            this.$createPopupSelectField(
+                            VerticalAlignField = this.$createPopupSelectField(
                                 LeftCol,
                                 this.$getLocale('verticalAlign'),
                                 [
@@ -790,12 +854,28 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                                     {
                                         value: VERTICAL_ALIGN_STRETCH,
                                         text: this.$getLocale('verticalAlign.stretch')
+                                    },
+                                    {
+                                        value: VERTICAL_ALIGN_STICKY,
+                                        text: this.$getLocale('verticalAlign.sticky')
                                     }
                                 ],
                                 area.verticalAlign,
                                 'data-name',
                                 'verticalAlign'
                             );
+
+                            StickyOffsetField = this.$createPopupInputField(LeftCol, {
+                                label: this.$getLocale('stickyOffset'),
+                                type: 'text',
+                                value: area.stickyOffset || '',
+                                name: 'stickyOffset'
+                            });
+
+                            new Element('div', {
+                                'class': 'quiqqer-bricks-blockSlot-popupHint',
+                                text: this.$getLocale('stickyOffset.help')
+                            }).inject(StickyOffsetField);
                         }
 
                         let CustomMinHeightSettings = null;
@@ -883,6 +963,38 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             );
                         };
 
+                        // sticky only works in editor mode (only that mode
+                        // renders a .__contentInner to stick); offer + reveal
+                        // the offset field accordingly
+                        const toggleVerticalAlignSticky = function () {
+                            if (!VerticalAlignField) {
+                                return;
+                            }
+
+                            const modeIsEditor = (ModeField ? ModeField.value : activeMode) === MODE_EDITOR;
+                            const StickyOption = VerticalAlignField.getElement(
+                                'option[value="' + VERTICAL_ALIGN_STICKY + '"]'
+                            );
+
+                            if (StickyOption) {
+                                StickyOption.disabled = !modeIsEditor;
+                                StickyOption.setStyle('display', modeIsEditor ? '' : 'none');
+                            }
+
+                            if (!modeIsEditor && VerticalAlignField.value === VERTICAL_ALIGN_STICKY) {
+                                VerticalAlignField.value = VERTICAL_ALIGN_CENTER;
+                            }
+
+                            if (StickyOffsetField) {
+                                StickyOffsetField.setStyle(
+                                    'display',
+                                    modeIsEditor && VerticalAlignField.value === VERTICAL_ALIGN_STICKY
+                                        ? ''
+                                        : 'none'
+                                );
+                            }
+                        };
+
                         const toggleCustomMinHeightSettings = function () {
                             if (!CustomMinHeightSettings) {
                                 return;
@@ -960,6 +1072,11 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         if (ModeField) {
                             ModeField.addEvent('change', toggleImageSettings);
                             ModeField.addEvent('change', toggleSubLayoutSettings);
+                            ModeField.addEvent('change', toggleVerticalAlignSticky);
+                        }
+
+                        if (VerticalAlignField) {
+                            VerticalAlignField.addEvent('change', toggleVerticalAlignSticky);
                         }
 
                         if (ImageSettings) {
@@ -999,6 +1116,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
 
                         toggleImageSettings();
                         toggleSubLayoutSettings();
+                        toggleVerticalAlignSticky();
                         toggleImageOptions();
                         toggleCustomMinHeightSettings();
                         toggleBackgroundSettings();
@@ -1020,6 +1138,7 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                         const modeField = Content.getElement('select[data-name="mode"]');
                         const contentPaddingPresetField = Content.getElement('select[data-name="contentPaddingPreset"]');
                         const verticalAlignField = Content.getElement('select[data-name="verticalAlign"]');
+                        const stickyOffsetField = Content.getElement('input[data-name="stickyOffset"]');
                         const customMinHeightEnabledField = Content.getElement(
                             'input[data-name="customMinHeightEnabled"]'
                         );
@@ -1090,6 +1209,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                             area.verticalAlign = verticalAlignField
                                 ? verticalAlignField.value
                                 : VERTICAL_ALIGN_CENTER;
+                            area.stickyOffset = stickyOffsetField
+                                ? stickyOffsetField.value.trim()
+                                : '';
                         }
 
                         if (this.$isSettingVisible('customMinHeight')) {
@@ -2109,7 +2231,9 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
         },
 
         $applyProjectToControls: function (Elm) {
-            if (!Elm || !this.$Project) {
+            const Project = this.$getEffectiveProject();
+
+            if (!Elm || !Project) {
                 return;
             }
 
@@ -2121,33 +2245,37 @@ define('package/quiqqer/bricks/bin/Controls/backend/BlockSlot', [
                 }
 
                 if ('setProject' in Control) {
-                    Control.setProject(this.$Project);
+                    Control.setProject(Project);
                 }
             }.bind(this));
         },
 
-        $getProjectName: function () {
-            if (!this.$hasProjectMethod('getName')) {
-                return '';
+        $getEffectiveProject: function () {
+            if (this.$Project && typeof this.$Project.getName === 'function') {
+                return this.$Project;
             }
 
-            return this.$Project.getName();
+            if (this.$layoutControl && typeof this.$layoutControl.getProject === 'function') {
+                const ContextProject = this.$layoutControl.getProject();
+
+                if (ContextProject && typeof ContextProject.getName === 'function') {
+                    return ContextProject;
+                }
+            }
+
+            return null;
+        },
+
+        $getProjectName: function () {
+            const Project = this.$getEffectiveProject();
+
+            return Project ? Project.getName() : '';
         },
 
         $getProjectLang: function () {
-            if (!this.$hasProjectMethod('getLang')) {
-                return '';
-            }
+            const Project = this.$getEffectiveProject();
 
-            return this.$Project.getLang();
-        },
-
-        $hasProjectMethod: function (method) {
-            return !!(
-                this.$Project
-                && (typeOf(this.$Project) === 'object' || typeOf(this.$Project) === 'function')
-                && typeof this.$Project[method] === 'function'
-            );
+            return Project && typeof Project.getLang === 'function' ? Project.getLang() : '';
         },
 
         $getLocale: function (name, data) {

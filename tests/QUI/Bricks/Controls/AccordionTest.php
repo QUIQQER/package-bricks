@@ -114,6 +114,44 @@ class AccordionTest extends TestCase
     }
 
 
+    public function testUsesNativeDetailsMarkup(): void
+    {
+        $Control = new \QUI\Bricks\Controls\Accordion([
+            'entries' => [[
+                'entryTitle' => 'Question',
+                'entryContent' => 'Answer'
+            ]]
+        ]);
+
+        $body = $Control->getBody();
+
+        $this->assertStringContainsString('<details', $body);
+        $this->assertStringContainsString('<summary', $body);
+        $this->assertStringNotContainsString('data-open', $body);
+        $this->assertStringNotContainsString('<header', $body);
+    }
+
+    public function testRotateAngleIsSetAsCssVariable(): void
+    {
+        $entries = [[
+            'entryTitle' => 'Question',
+            'entryContent' => 'Answer'
+        ]];
+
+        $AngleControl = new \QUI\Bricks\Controls\Accordion([
+            'entries' => $entries,
+            'iconStyle' => 'angle'
+        ]);
+
+        $PlusControl = new \QUI\Bricks\Controls\Accordion([
+            'entries' => $entries,
+            'iconStyle' => 'plus'
+        ]);
+
+        $this->assertStringContainsString('--_q-controlConf-rotate:180deg', $AngleControl->create());
+        $this->assertStringContainsString('--_q-controlConf-rotate:45deg', $PlusControl->create());
+    }
+
     public function testListMaxWidthSupportsNumbersAndCssValues(): void
     {
         $entries = [[

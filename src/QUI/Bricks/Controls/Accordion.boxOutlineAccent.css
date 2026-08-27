@@ -26,10 +26,10 @@
 }
 
 /* state open */
-.quiqqer-accordion-item--boxOutlineAccentOpen[data-open="1"] .quiqqer-accordion-item-header {
+.quiqqer-accordion-item--boxOutlineAccentOpen[open]:not(.quiqqer-accordion-item--closing) .quiqqer-accordion-item-header {
     border-color: var(--qui-colors-primary);
 }
 
-.quiqqer-accordion-item--boxOutlineAccentOpen[data-open="1"] .quiqqer-accordion-item-header:is(:hover, :focus-visible) {
+.quiqqer-accordion-item--boxOutlineAccentOpen[open]:not(.quiqqer-accordion-item--closing) .quiqqer-accordion-item-header:is(:hover, :focus-visible) {
     background: color-mix(in oklab, transparent 90%, var(--qui-colors-primary));
 }
