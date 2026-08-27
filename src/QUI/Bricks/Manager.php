@@ -892,6 +892,7 @@ class Manager
             'description' => $description,
             'type' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('type') : '',
             'class' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('class') : '',
+            'placeholder' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('placeholder') : '',
             'data-qui' => method_exists($Setting, 'getAttribute') ? $Setting->getAttribute('data-qui') : '',
             'options' => $options,
             'data-attributes' => $dataAttributes,

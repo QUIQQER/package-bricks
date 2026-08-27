@@ -1348,6 +1348,10 @@ define('package/quiqqer/bricks/bin/BrickEdit', [
                             }
                         }
 
+                        if (setting.placeholder) {
+                            Value.set('placeholder', setting.placeholder);
+                        }
+
                         if (Value.type === 'checkbox' ||
                             Value.type === 'radio' ||
                             Value.type === 'hidden') {
