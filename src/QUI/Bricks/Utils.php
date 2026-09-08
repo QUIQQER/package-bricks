@@ -16,9 +16,12 @@ use QUI\Utils\Text\XML;
 
 use function file_exists;
 use function is_array;
+use function is_bool;
+use function is_scalar;
 use function is_string;
 use function json_decode;
 use function md5;
+use function preg_match;
 use function realpath;
 use function str_starts_with;
 use function strtolower;
@@ -533,6 +536,55 @@ class Utils
             }
 
             $normalized[$name] = (string)($entry['value'] ?? '');
+        }
+
+        return $normalized;
+    }
+
+    /**
+     * Prefix that every externally supplied brick parameter carries as a brick
+     * setting. Brick::setSetting() writes straight through to the control, so
+     * an unprefixed passthrough would let a visitor overwrite real settings
+     * (a system prompt, a recipient address). With the prefix a collision is
+     * structurally impossible and a brick opts in by reading "param-<name>".
+     */
+    public const BRICK_PARAM_PREFIX = 'param-';
+
+    /**
+     * Normalise the brick parameters handed in by an untrusted client.
+     *
+     * Accepts the JSON string sent by BrickWindow (or an already decoded map)
+     * and returns a validated map keyed by the prefixed setting name. Only
+     * simple scalars survive; names follow the same rule as data attribute
+     * names, so nothing nested or markup-like can be smuggled in.
+     *
+     * @param mixed $brickParams Raw parameters (JSON string or array)
+     * @return array<string, string> Validated map, keys already prefixed
+     */
+    public static function brickParamsFromRequest(mixed $brickParams): array
+    {
+        if (is_string($brickParams)) {
+            $brickParams = json_decode($brickParams, true);
+        }
+
+        if (!is_array($brickParams)) {
+            return [];
+        }
+
+        $normalized = [];
+
+        foreach ($brickParams as $name => $value) {
+            $name = strtolower(trim((string)$name));
+
+            if ($name === '' || !preg_match('/^[a-z0-9][a-z0-9_-]*$/', $name)) {
+                continue;
+            }
+
+            if (!is_scalar($value) || is_bool($value)) {
+                continue;
+            }
+
+            $normalized[self::BRICK_PARAM_PREFIX . $name] = (string)$value;
         }
 
         return $normalized;

@@ -71,6 +71,46 @@ More information about how to provide a brick and mockups:
 https://dev.quiqqer.com/quiqqer/package-bricks/-/wikis/dev/bricks
 
 
+### Passing parameters to a brick opened in a popup
+
+A button that opens a brick in a popup can hand values over to that brick,
+for example which package the visitor just clicked. Editors fill the button
+setting *Attributes for the opened brick*; it is deliberately a second field
+next to the button's own data attributes, so the two never mix.
+
+The values travel as one JSON attribute and are applied by the render ajax:
+
+```html
+<button type="button"
+        data-qui="package/quiqqer/components/bin/Controls/Button/OpenBrick"
+        data-open-brick-id="233"
+        data-brick-params='{"context":"Package: Starter"}'>
+    Request
+</button>
+```
+
+The same works from JavaScript, through the `brickParams` option:
+
+```js
+new BrickWindow({
+    brickId: 233,
+    brickParams: {context: 'Package: Starter'}
+}).open();
+```
+
+**Every parameter is applied with the `param-` prefix** (see
+`Utils::brickParamsFromRequest()` and `Utils::BRICK_PARAM_PREFIX`). A brick
+reads `param-context`, never `context`. This is a security boundary, not a
+naming style: `Brick::setSetting()` writes straight through to the control, so
+an unprefixed passthrough would let a visitor overwrite real settings such as a
+prompt or a recipient address. A brick opts in by reading the prefixed name;
+one that reads nothing is unaffected.
+
+A render carrying parameters is **not cached**: the values come from the client
+and the brick cache is keyed by the settings hash, so caching would mint an
+entry per distinct value.
+
+
 Support
 -------
 

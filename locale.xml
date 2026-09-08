@@ -4156,6 +4156,14 @@ M&ouml;chten Sie die Bausteine aus der Bausteinzone entfernen?</p>]]></de>
             <de><![CDATA[Zusätzliche data-*-Attribute für den Button, z. B. für Tracking. Das Präfix data- wird automatisch ergänzt, Leerzeichen werden zu Bindestrichen. Reservierte Namen wie data-qui, data-name und data-identifier werden ignoriert.]]></de>
             <en><![CDATA[Additional data-* attributes for the button, for example for tracking. The data- prefix is added automatically and spaces become hyphens. Reserved names such as data-qui, data-name and data-identifier are ignored.]]></en>
         </locale>
+        <locale name="quiqqer.bricks.buttons.settings.createPopup.brickParams">
+            <de><![CDATA[Attribute für den geöffneten Baustein]]></de>
+            <en><![CDATA[Attributes for the opened brick]]></en>
+        </locale>
+        <locale name="quiqqer.bricks.buttons.settings.createPopup.brickParamsDesc">
+            <de><![CDATA[Werte, die an den im Popup geöffneten Baustein übergeben werden – anders als die Button-Attribute oben, die am Button selbst bleiben. Ob ein Baustein einen Wert auswertet, entscheidet der Baustein. Beispiel: <code>context</code> mit dem Wert <code>Paket: Starter · Variante: Kaufen</code>.]]></de>
+            <en><![CDATA[Values handed to the brick opened in the popup – unlike the button attributes above, which stay on the button itself. Whether a brick evaluates a value is up to that brick. Example: <code>context</code> with the value <code>Package: Starter · Variant: Buy</code>.]]></en>
+        </locale>
         <locale name="quiqqer.bricks.buttons.settings.createPopup.iconClass">
             <de><![CDATA[FontAwesome Icon-Klasse]]></de>
             <en><![CDATA[FontAwesome icon class]]></en>

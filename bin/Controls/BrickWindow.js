@@ -17,7 +17,11 @@ define('package/quiqqer/bricks/bin/Controls/BrickWindow', [
         ],
 
         options: {
-            brickId: false
+            brickId: false,
+            // parameters handed to the rendered brick, e.g. {context: '...'}.
+            // The server applies them prefixed, so they can never overwrite a
+            // brick setting; a brick opts in by reading the prefixed value.
+            brickParams: false
         },
 
         initialize: function (options) {
@@ -31,15 +35,23 @@ define('package/quiqqer/bricks/bin/Controls/BrickWindow', [
         $onOpen: function () {
             this.Loader.show();
 
+            const params = {
+                'package': 'quiqqer/bricks',
+                brickId: this.getAttribute('brickId')
+            };
+
+            const brickParams = this.getAttribute('brickParams');
+
+            if (brickParams && typeof brickParams === 'object') {
+                params.brickParams = JSON.stringify(brickParams);
+            }
+
             QUIAjax.get('package_quiqqer_bricks_ajax_brick_render', (html) => {
                 this.$Content.innerHTML = html;
                 QUI.parse(this.$Content).then(() => {
                     this.Loader.hide();
                 });
-            }, {
-                'package': 'quiqqer/bricks',
-                brickId: this.getAttribute('brickId')
-            });
+            }, params);
         }
     });
 });

@@ -50,6 +50,7 @@ class Button extends QUI\Control
             'fullWidth' => false,
             'onClick' => '',
             'dataAttributes' => [],
+            'brickParams' => [],
         ]);
 
         parent::__construct($attributes);
@@ -102,6 +103,7 @@ class Button extends QUI\Control
             'fullWidth' => $this->getAttribute('fullWidth'),
             'onClick' => $this->getAttribute('onClick'),
             'dataAttributes' => Utils::dataAttributesFromEntries($this->getAttribute('dataAttributes')),
+            'brickParams' => Utils::dataAttributesFromEntries($this->getAttribute('brickParams')),
         ]);
     }
 }
