@@ -220,6 +220,9 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                     }, {
                         dataIndex: 'dataAttributes',
                         hidden: true
+                    }, {
+                        dataIndex: 'brickParams',
+                        hidden: true
                     }
                 ]
             });
@@ -528,6 +531,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                         onClick: Form.elements.onClick.value,
                         customClass: Form.elements.customClass.value,
                         dataAttributes: DataAttributes ? DataAttributes.getValue() : [],
+                        brickParams: BrickParams ? BrickParams.getValue() : [],
                         isDisabled: Dialog.IsDisabledSwitch.getStatus()
                     });
 
@@ -819,6 +823,7 @@ define('package/quiqqer/bricks/bin/Controls/ButtonsSettings', [
                 onClick: entry.onClick || '',
                 customClass: entry.customClass || '',
                 dataAttributes: this.$normalizeDataAttributes(entry.dataAttributes),
+                brickParams: this.$normalizeDataAttributes(entry.brickParams),
                 isDisabled: this.$normalizeFlag(entry.isDisabled)
             };
         },

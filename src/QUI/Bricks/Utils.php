@@ -14,7 +14,11 @@ use QUI;
 use QUI\Projects\Project;
 use QUI\Utils\Text\XML;
 
+use function array_filter;
+use function array_values;
+use function explode;
 use function file_exists;
+use function in_array;
 use function is_array;
 use function is_bool;
 use function is_scalar;
@@ -24,6 +28,7 @@ use function md5;
 use function preg_match;
 use function realpath;
 use function str_starts_with;
+use function strlen;
 use function strtolower;
 use function substr;
 use function trim;
@@ -210,6 +215,16 @@ class Utils
             $recommended = 1;
         }
 
+        // optional, comma separated categories: they say what a brick is good
+        // for, so another package can offer a filtered choice of bricks
+        // without naming a control class. A brick without categories is the
+        // normal case and stays selectable everywhere.
+        $categories = [];
+
+        if (method_exists($Brick, 'getAttribute')) {
+            $categories = self::parseBrickCategories($Brick->getAttribute('category'));
+        }
+
         $title = [];
         $description = [];
 
@@ -323,6 +338,7 @@ class Utils
             'hasContent' => $hasContent,
             'cacheable' => $cacheable,
             'recommended' => $recommended,
+            'categories' => $categories,
             'name' => $name,
             'title' => $title,
             'description' => $description,
@@ -542,6 +558,66 @@ class Utils
     }
 
     /**
+     * Normalise the "category" attribute of a brick definition.
+     *
+     * Categories are a free vocabulary, written as a comma separated list, so
+     * a brick can belong to more than one. They are lowercased and trimmed;
+     * empty entries are dropped and every category appears once.
+     *
+     * @param mixed $category Raw attribute value
+     * @return array<int, string>
+     */
+    public static function parseBrickCategories(mixed $category): array
+    {
+        if (!is_string($category) || trim($category) === '') {
+            return [];
+        }
+
+        $categories = [];
+
+        foreach (explode(',', $category) as $entry) {
+            $entry = strtolower(trim($entry));
+
+            if ($entry === '' || in_array($entry, $categories, true)) {
+                continue;
+            }
+
+            $categories[] = $entry;
+        }
+
+        return $categories;
+    }
+
+    /**
+     * All available brick definitions that carry the given category.
+     *
+     * Answers "can this system do X at all", not "does this project already
+     * contain such a brick" - the definitions come from the installed
+     * packages, not from the project's bricks.
+     *
+     * @param string $category
+     * @return array<int, array<string, mixed>>
+     */
+    public static function getBrickDefinitionsByCategory(string $category): array
+    {
+        $category = strtolower(trim($category));
+
+        if ($category === '') {
+            return [];
+        }
+
+        $bricks = Manager::init()?->getAvailableBricks() ?? [];
+
+        return array_values(
+            array_filter($bricks, static function (array $brick) use ($category): bool {
+                return isset($brick['categories'])
+                    && is_array($brick['categories'])
+                    && in_array($category, $brick['categories'], true);
+            })
+        );
+    }
+
+    /**
      * Prefix that every externally supplied brick parameter carries as a brick
      * setting. Brick::setSetting() writes straight through to the control, so
      * an unprefixed passthrough would let a visitor overwrite real settings
@@ -557,6 +633,14 @@ class Utils
      * and returns a validated map keyed by the prefixed setting name. Only
      * simple scalars survive; names follow the same rule as data attribute
      * names, so nothing nested or markup-like can be smuggled in.
+     *
+     * Applying the prefix is idempotent: a name that already carries it is
+     * taken as is instead of being prefixed twice. A brick that hands its own
+     * parameters on to a nested brick holds them under the prefixed name and
+     * would otherwise produce "param-param-<name>" - silently wrong rather
+     * than rejected, because the doubled name passes the name rule. This
+     * opens no door: the result stays inside the reserved "param-" namespace,
+     * so a real setting remains unreachable either way.
      *
      * @param mixed $brickParams Raw parameters (JSON string or array)
      * @return array<string, string> Validated map, keys already prefixed
@@ -575,6 +659,10 @@ class Utils
 
         foreach ($brickParams as $name => $value) {
             $name = strtolower(trim((string)$name));
+
+            if (str_starts_with($name, self::BRICK_PARAM_PREFIX)) {
+                $name = substr($name, strlen(self::BRICK_PARAM_PREFIX));
+            }
 
             if ($name === '' || !preg_match('/^[a-z0-9][a-z0-9_-]*$/', $name)) {
                 continue;

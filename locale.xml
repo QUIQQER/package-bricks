@@ -1196,6 +1196,10 @@ This content does not replace the block content. You can still place the brick t
             <de><![CDATA[Keine passenden Bausteine gefunden.]]></de>
             <en><![CDATA[No matching bricks found.]]></en>
         </locale>
+        <locale name="brickPicker.results.emptyFiltered">
+            <de><![CDATA[Für diese Auswahl steht kein passender Baustein zur Verfügung. Lege zuerst einen passenden Baustein an.]]></de>
+            <en><![CDATA[No brick suitable for this selection is available. Create a suitable brick first.]]></en>
+        </locale>
         <locale name="site.area.window.shortcuts.label">
             <de><![CDATA[Tastaturkürzel]]></de>
             <en><![CDATA[Keyboard shortcuts]]></en>

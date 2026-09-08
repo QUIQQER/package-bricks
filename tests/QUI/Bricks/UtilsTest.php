@@ -140,6 +140,42 @@ XML
         $this->assertSame(0, $parsed['deprecated']);
     }
 
+    public function testParseAreaToArrayReadsCommaSeparatedCategories(): void
+    {
+        $doc = new DOMDocument();
+        $doc->loadXML('<root><brick category=" aiAgent , Chat ,, aiagent "/></root>');
+
+        $brick = $doc->getElementsByTagName('brick')->item(0);
+        $this->assertNotNull($brick);
+
+        $parsed = Utils::parseAreaToArray($brick, new DOMXPath($doc));
+
+        // lowercased, trimmed, empty entries dropped and no duplicates
+        $this->assertSame(['aiagent', 'chat'], $parsed['categories']);
+    }
+
+    public function testParseAreaToArrayHasNoCategoriesByDefault(): void
+    {
+        $doc = new DOMDocument();
+        $doc->loadXML('<root><brick/></root>');
+
+        $brick = $doc->getElementsByTagName('brick')->item(0);
+        $this->assertNotNull($brick);
+
+        $parsed = Utils::parseAreaToArray($brick, new DOMXPath($doc));
+
+        $this->assertSame([], $parsed['categories']);
+    }
+
+    public function testParseBrickCategoriesIgnoresUnusableInput(): void
+    {
+        $this->assertSame([], Utils::parseBrickCategories(''));
+        $this->assertSame([], Utils::parseBrickCategories('   '));
+        $this->assertSame([], Utils::parseBrickCategories(',,'));
+        $this->assertSame([], Utils::parseBrickCategories(null));
+        $this->assertSame([], Utils::parseBrickCategories(['aiAgent']));
+    }
+
     public function testDataAttributesFromEntriesStripsPrefixAndSkipsInvalid(): void
     {
         $result = Utils::dataAttributesFromEntries([
@@ -189,6 +225,35 @@ XML
             ],
             $result
         );
+    }
+
+    public function testBrickParamsFromRequestDoesNotDoubleAnExistingPrefix(): void
+    {
+        // a brick passing its own parameters on holds them prefixed; sending
+        // them as they are must not yield "param-param-context", which would
+        // pass the name rule and then arrive where nothing reads it
+        $result = Utils::brickParamsFromRequest([
+            'param-context' => 'Paket: Starter',
+            'kickoff' => 'always'
+        ]);
+
+        $this->assertSame([
+            'param-context' => 'Paket: Starter',
+            'param-kickoff' => 'always'
+        ], $result);
+    }
+
+    public function testBrickParamsFromRequestStillCannotReachASettingViaThePrefix(): void
+    {
+        // stripping the prefix must not become a way out of the namespace
+        $result = Utils::brickParamsFromRequest([
+            'param-' => 'empty name after the prefix',
+            'param-param-context' => 'doubled by the caller'
+        ]);
+
+        $this->assertSame([
+            'param-param-context' => 'doubled by the caller'
+        ], $result);
     }
 
     public function testBrickParamsFromRequestSkipsInvalidNamesAndValues(): void
