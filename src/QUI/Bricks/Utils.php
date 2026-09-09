@@ -178,6 +178,7 @@ class Utils
         $cacheable = 1;
         $deprecated = 0;
         $recommended = 0;
+        $supportsWindowAutoHeight = 0;
 
         if (
             method_exists($Brick, 'getAttribute')
@@ -213,6 +214,15 @@ class Utils
             && (int)$Brick->getAttribute('recommended') === 1
         ) {
             $recommended = 1;
+        }
+
+        if (
+            method_exists($Brick, 'getAttribute')
+            && method_exists($Brick, 'hasAttribute')
+            && $Brick->hasAttribute('supportsWindowAutoHeight')
+            && (int)$Brick->getAttribute('supportsWindowAutoHeight') === 1
+        ) {
+            $supportsWindowAutoHeight = 1;
         }
 
         // optional, comma separated categories: they say what a brick is good
@@ -338,6 +348,7 @@ class Utils
             'hasContent' => $hasContent,
             'cacheable' => $cacheable,
             'recommended' => $recommended,
+            'supportsWindowAutoHeight' => $supportsWindowAutoHeight,
             'categories' => $categories,
             'name' => $name,
             'title' => $title,
