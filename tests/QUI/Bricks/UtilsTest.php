@@ -50,7 +50,7 @@ class UtilsTest extends TestCase
 <quiqqer>
   <bricks>
     <brick control="*" name="ignored"/>
-    <brick control="\\Vendor\\Brick" name="hero" deprecated="1" hasContent="0" cacheable="0" recommended="1" inheritance="1" priority="10">
+    <brick control="\\Vendor\\Brick" name="hero" deprecated="1" hasContent="0" cacheable="0" recommended="1" supportsWindowAutoHeight="1" inheritance="1" priority="10">
       <title><locale group="g1" var="titleVar"/></title>
       <description><locale group="g1" var="descVar"/></description>
       <mockups>
@@ -72,6 +72,7 @@ XML
         $this->assertSame(0, $bricks[0]['hasContent']);
         $this->assertSame(0, $bricks[0]['cacheable']);
         $this->assertSame(1, $bricks[0]['recommended']);
+        $this->assertSame(1, $bricks[0]['supportsWindowAutoHeight']);
         $this->assertSame(1, $bricks[0]['deprecated']);
         $this->assertSame('/preview.png', $bricks[0]['mockup']);
         $this->assertSame('/thumb.png', $bricks[0]['thumbnail']);
@@ -138,6 +139,7 @@ XML
         $this->assertSame(1, $parsed['hasContent']);
         $this->assertSame(1, $parsed['cacheable']);
         $this->assertSame(0, $parsed['deprecated']);
+        $this->assertSame(0, $parsed['supportsWindowAutoHeight']);
     }
 
     public function testParseAreaToArrayReadsCommaSeparatedCategories(): void
